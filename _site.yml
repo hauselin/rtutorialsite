@@ -2,6 +2,7 @@ name: "rtutorials"
 title: "rtutorials"
 base_url: https://hausetutorials.netlify.com/
 repository_url: https://github.com/hauselin/rtutorialsite
+google_analytics: "UA-134721506-5"
 creative_commons: CC BY
 description: |
   rtutorials
