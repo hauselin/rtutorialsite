@@ -1358,16 +1358,16 @@ Tutorials
 <p>Use <code>library()</code> to load packages at the top of each R script.</p>
 <div class="layout-chunk" data-layout="l-body">
 <pre class="r"><code>
-library(tidyverse); library(data.table); library(dtplyr)</code></pre>
+library(tidyverse)
+library(data.table)
+library(dtplyr)</code></pre>
 </div>
 <h2 id="wide-vs.long-data-messy-vs.tidy-data">Wide vs. long data (messy vs. tidy data)</h2>
 <p>Manually create wide data</p>
 <div class="layout-chunk" data-layout="l-body">
 <pre class="r"><code>
-wide &lt;- data_frame(student = c(&quot;Andy&quot;, &quot;Mary&quot;),
-                   englishGrades = c(1, -2),
-                   mathGrades = englishGrades * 10,
-                   physicsGrades = mathGrades * 100)
+wide &lt;- data_frame(student = c(&quot;Andy&quot;, &quot;Mary&quot;), englishGrades = c(1, -2), mathGrades = englishGrades * 
+    10, physicsGrades = mathGrades * 100)
 wide</code></pre>
 <pre><code>
 # A tibble: 2 x 4
@@ -1379,9 +1379,9 @@ wide</code></pre>
 <p>Manually create equivalent long data</p>
 <div class="layout-chunk" data-layout="l-body">
 <pre class="r"><code>
-long &lt;- data_frame(student = rep(c(&quot;Andy&quot;, &quot;Mary&quot;), each = 3),
-                   class = rep(c(&quot;englishGrades&quot;, &quot;mathGrades&quot;, &quot;physicsGrades&quot;), times = 2),
-                   grades = c(1, 10, 1000, -2, -20, -2000))
+long &lt;- data_frame(student = rep(c(&quot;Andy&quot;, &quot;Mary&quot;), each = 3), class = rep(c(&quot;englishGrades&quot;, 
+    &quot;mathGrades&quot;, &quot;physicsGrades&quot;), times = 2), grades = c(1, 10, 1000, -2, -20, 
+    -2000))
 long</code></pre>
 <pre><code>
 # A tibble: 6 x 3
@@ -1397,7 +1397,7 @@ long</code></pre>
 <p>Compare wide vs long</p>
 <div class="layout-chunk" data-layout="l-body">
 <pre class="r"><code>
-wide # wide</code></pre>
+wide  # wide</code></pre>
 <pre><code>
 # A tibble: 2 x 4
   student englishGrades mathGrades physicsGrades
@@ -1407,7 +1407,7 @@ wide # wide</code></pre>
 </div>
 <div class="layout-chunk" data-layout="l-body">
 <pre class="r"><code>
-long # long</code></pre>
+long  # long</code></pre>
 <pre><code>
 # A tibble: 6 x 3
   student class         grades
@@ -1436,7 +1436,7 @@ melt(wide, id.vars = c(&quot;student&quot;))</code></pre>
 <p>Rename variables</p>
 <div class="layout-chunk" data-layout="l-body">
 <pre class="r"><code>
-melt(wide, id.vars = c(&quot;student&quot;), variable.name = &quot;cLaSs&quot;, value.name = &quot;gRaDeS&quot;) </code></pre>
+melt(wide, id.vars = c(&quot;student&quot;), variable.name = &quot;cLaSs&quot;, value.name = &quot;gRaDeS&quot;)</code></pre>
 <pre><code>
   student         cLaSs gRaDeS
 1    Andy englishGrades      1
@@ -1478,7 +1478,7 @@ long</code></pre>
 <p><code>gather()</code> is less flexible than <code>melt()</code></p>
 <div class="layout-chunk" data-layout="l-body">
 <pre class="r"><code>
-gather(wide, key = cLaSs, value = gRaDeS, -student) # remove the id column</code></pre>
+gather(wide, key = cLaSs, value = gRaDeS, -student)  # remove the id column</code></pre>
 <pre><code>
 # A tibble: 6 x 3
   student cLaSs         gRaDeS
@@ -1507,7 +1507,7 @@ dcast(long, student ~ class, value.var = &quot;grades&quot;)</code></pre>
 </div>
 <div class="layout-chunk" data-layout="l-body">
 <pre class="r"><code>
-wide # compare with dcast() output</code></pre>
+wide  # compare with dcast() output</code></pre>
 <pre><code>
 # A tibble: 2 x 4
   student englishGrades mathGrades physicsGrades
@@ -1529,7 +1529,7 @@ spread(long, key = class, value = grades)</code></pre>
 </div>
 <div class="layout-chunk" data-layout="l-body">
 <pre class="r"><code>
-wide # compare with spread() output</code></pre>
+wide  # compare with spread() output</code></pre>
 <pre><code>
 # A tibble: 2 x 4
   student englishGrades mathGrades physicsGrades
@@ -1549,7 +1549,7 @@ wide # compare with spread() output</code></pre>
 <h2 id="joiningbinding-data-rows">Joining/binding data (rows)</h2>
 <div class="layout-chunk" data-layout="l-body">
 <pre class="r"><code>
-wide # original data</code></pre>
+wide  # original data</code></pre>
 <pre><code>
 # A tibble: 2 x 4
   student englishGrades mathGrades physicsGrades
@@ -1559,10 +1559,8 @@ wide # original data</code></pre>
 </div>
 <div class="layout-chunk" data-layout="l-body">
 <pre class="r"><code>
-moreRows &lt;- data_frame(student = c(&quot;John&quot;, &quot;Jane&quot;),
-                       englishGrades = c(5, -5),
-                       mathGrades = englishGrades * 10,
-                       physicsGrades = mathGrades * NA)
+moreRows &lt;- data_frame(student = c(&quot;John&quot;, &quot;Jane&quot;), englishGrades = c(5, -5), mathGrades = englishGrades * 
+    10, physicsGrades = mathGrades * NA)
 moreRows</code></pre>
 <pre><code>
 # A tibble: 2 x 4
@@ -1598,9 +1596,8 @@ bind_rows(wide, moreRows)</code></pre>
 <p><code>bind_rows</code> has same effect as rbind() above, but much more efficient/flexible and binds even if column numbers don’t match (see below).</p>
 <div class="layout-chunk" data-layout="l-body">
 <pre class="r"><code>
-moreRows2 &lt;- data_frame(student = c(&quot;John&quot;, &quot;Jane&quot;),
-                       englishGrades = c(5, -5),
-                       mathGrades = englishGrades * 10)
+moreRows2 &lt;- data_frame(student = c(&quot;John&quot;, &quot;Jane&quot;), englishGrades = c(5, -5), mathGrades = englishGrades * 
+    10)
 moreRows2</code></pre>
 <pre><code>
 # A tibble: 2 x 3
@@ -1619,7 +1616,7 @@ wide</code></pre>
 1 Andy                1         10          1000
 2 Mary               -2        -20         -2000</code></pre>
 <pre class="r"><code>
-moreRows2 # one less column</code></pre>
+moreRows2  # one less column</code></pre>
 <pre><code>
 # A tibble: 2 x 3
   student englishGrades mathGrades
@@ -1629,13 +1626,13 @@ moreRows2 # one less column</code></pre>
 </div>
 <div class="layout-chunk" data-layout="l-body">
 <pre class="r"><code>
-rbind(wide, moreRows2) # error</code></pre>
+rbind(wide, moreRows2)  # error</code></pre>
 <pre><code>
 Error in rbind(deparse.level, ...): numbers of columns of arguments do not match</code></pre>
 </div>
 <div class="layout-chunk" data-layout="l-body">
 <pre class="r"><code>
-bind_rows(wide, moreRows2) # no error but fills with NA</code></pre>
+bind_rows(wide, moreRows2)  # no error but fills with NA</code></pre>
 <pre><code>
 # A tibble: 4 x 4
   student englishGrades mathGrades physicsGrades
@@ -1703,8 +1700,8 @@ wide2</code></pre>
 <p>Let’s say we know the gender and chemistry grades of each student…</p>
 <div class="layout-chunk" data-layout="l-body">
 <pre class="r"><code>
-extraInfo &lt;- data_frame(student = c(&quot;Jane&quot;, &quot;John&quot;, &quot;Mary&quot;, &quot;Andy&quot;),
-                        chemistryGrades = c(900, 901, 902, 903))
+extraInfo &lt;- data_frame(student = c(&quot;Jane&quot;, &quot;John&quot;, &quot;Mary&quot;, &quot;Andy&quot;), chemistryGrades = c(900, 
+    901, 902, 903))
 extraInfo</code></pre>
 <pre><code>
 # A tibble: 4 x 2
@@ -1745,8 +1742,7 @@ left_join(wide2, extraInfo)</code></pre>
 <p>What if we have missing/incomplete extra information?</p>
 <div class="layout-chunk" data-layout="l-body">
 <pre class="r"><code>
-extraInfo2 &lt;- data_frame(student = c(&quot;Jane&quot;, &quot;John&quot;),
-                        chemistryGrades = c(900, 901))
+extraInfo2 &lt;- data_frame(student = c(&quot;Jane&quot;, &quot;John&quot;), chemistryGrades = c(900, 901))
 extraInfo2</code></pre>
 <pre><code>
 # A tibble: 2 x 2
@@ -1772,11 +1768,11 @@ left_join(wide2, extraInfo2)</code></pre>
 <p>Also, the output class of join functions are not <code>data.table</code>! To convert class, use pipes!</p>
 <div class="layout-chunk" data-layout="l-body">
 <pre class="r"><code>
-class(left_join(wide2, extraInfo2)) # not data.table (no...)</code></pre>
+class(left_join(wide2, extraInfo2))  # not data.table (no...)</code></pre>
 <pre><code>
 [1] &quot;tbl_df&quot;     &quot;tbl&quot;        &quot;data.frame&quot;</code></pre>
 <pre class="r"><code>
-left_join(wide2, extraInfo2) %&gt;% tbl_dt() # convert to data.table</code></pre>
+left_join(wide2, extraInfo2) %&gt;% tbl_dt()  # convert to data.table</code></pre>
 <pre><code>
 Source: local data table [4 x 5]
 
@@ -1788,7 +1784,7 @@ Source: local data table [4 x 5]
 3 John                5         50            NA             901
 4 Jane               -5        -50            NA             900</code></pre>
 <pre class="r"><code>
-left_join(wide2, extraInfo2) %&gt;% tbl_dt() %&gt;% class() # check class (data.table! yea!)</code></pre>
+left_join(wide2, extraInfo2) %&gt;% tbl_dt() %&gt;% class()  # check class (data.table! yea!)</code></pre>
 <pre><code>
 [1] &quot;tbl_dt&quot;     &quot;tbl&quot;        &quot;data.table&quot; &quot;data.frame&quot;</code></pre>
 </div>
@@ -1928,7 +1924,7 @@ Source: local data table [16 x 4]
 16 Mary    chemistryGrades    NA            -2</code></pre>
 <pre class="r"><code>
 # remove englishGrades from long form data if necessary
-gradesLong_covariate2 &lt;- gradesLong_covariate[class != &quot;englishGrades&quot;] 
+gradesLong_covariate2 &lt;- gradesLong_covariate[class != &quot;englishGrades&quot;]
 gradesLong_covariate2</code></pre>
 <pre><code>
 Source: local data table [12 x 4]

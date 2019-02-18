@@ -1380,14 +1380,20 @@ Tutorials
 <p>Use <code>library()</code> to load packages at the top of each R script.</p>
 <div class="layout-chunk" data-layout="l-body">
 <pre class="r"><code>
-library(tidyverse); library(data.table); library(broom); library(dtplyr); 
-library(lme4); library(lmerTest); library(ggbeeswarm); library(cowplot)
+library(tidyverse)
+library(data.table)
+library(broom)
+library(dtplyr)
+library(lme4)
+library(lmerTest)
+library(ggbeeswarm)
+library(cowplot)
 library(hausekeep)</code></pre>
 </div>
 <h2 id="read-data-from-folderdirectory-into-r">Read data from folder/directory into R</h2>
 <div class="layout-chunk" data-layout="l-body">
 <pre class="r"><code>
-df1 &lt;- tbl_dt(fread(&quot;data/simpsonsParadox.csv&quot;)) # data.table
+df1 &lt;- tbl_dt(fread(&quot;data/simpsonsParadox.csv&quot;))  # data.table
 print(df1, n = Inf)</code></pre>
 <pre><code>
 Source: local data table [40 x 3]
@@ -1452,7 +1458,7 @@ $ class  &lt;chr&gt; &quot;a&quot;, &quot;a&quot;, &quot;a&quot;, &quot;a&quot;,
 <p>Use <code>ggplot</code> function (not <code>ggplot2</code>, which is the name of the library, not a function!). Plot iq on x-axis and grades on y-axis.</p>
 <div class="layout-chunk" data-layout="l-body">
 <pre class="r"><code>
-ggplot(data = df1, aes(x = iq, y = grades)) # see Plots panel (empty plot with correct axis labels)</code></pre>
+ggplot(data = df1, aes(x = iq, y = grades))  # see Plots panel (empty plot with correct axis labels)</code></pre>
 <p><img src="0003_ggplot_modelfitting_files/figure-html5/unnamed-chunk-2-1.png" width="624" /></p>
 </div>
 <h3 id="subsequent-layers-add-data-points-and-everything-else">Subsequent layers: add data points and everything else</h3>
@@ -1495,13 +1501,12 @@ plot1 # print plot</code></pre>
 <p>Save to Figures directory, assuming this directory/folder already exists. You can also change the width/height of your figure and dpi (resolution/quality) of your figure (journals usually expect around 300 dpi).</p>
 <div class="layout-chunk" data-layout="l-body">
 <pre class="r"><code>
-ggsave(plot1, &#39;./Figures/iq_grades.png&#39;, width = 10, heigth = 10, dpi = 100)</code></pre>
+ggsave(plot1, &quot;./Figures/iq_grades.png&quot;, width = 10, heigth = 10, dpi = 100)</code></pre>
 </div>
 <h2 id="add-line-of-best-fit">Add line of best fit</h2>
 <div class="layout-chunk" data-layout="l-body">
 <pre class="r"><code>
-plot1 + 
-    geom_smooth() # fit line to data (defaults loess smoothing)</code></pre>
+plot1 + geom_smooth()  # fit line to data (defaults loess smoothing)</code></pre>
 <p><img src="0003_ggplot_modelfitting_files/figure-html5/unnamed-chunk-8-1.png" width="624" /></p>
 </div>
 <p>Same as above</p>
@@ -1593,45 +1598,37 @@ plot2</code></pre>
 <p>Histogram</p>
 <div class="layout-chunk" data-layout="l-body">
 <pre class="r"><code>
-ggplot(df1, aes(iq)) +
-    geom_histogram()</code></pre>
+ggplot(df1, aes(iq)) + geom_histogram()</code></pre>
 <p><img src="0003_ggplot_modelfitting_files/figure-html5/unnamed-chunk-16-1.png" width="624" /></p>
 </div>
 <p>Specifying binwidth</p>
 <div class="layout-chunk" data-layout="l-body">
 <pre class="r"><code>
-ggplot(df1, aes(iq)) +
-    geom_histogram(binwidth = 5)</code></pre>
+ggplot(df1, aes(iq)) + geom_histogram(binwidth = 5)</code></pre>
 <p><img src="0003_ggplot_modelfitting_files/figure-html5/unnamed-chunk-17-1.png" width="624" /></p>
 </div>
 <p>Density plot</p>
 <div class="layout-chunk" data-layout="l-body">
 <pre class="r"><code>
-ggplot(df1, aes(iq)) +
-    geom_density()</code></pre>
+ggplot(df1, aes(iq)) + geom_density()</code></pre>
 <p><img src="0003_ggplot_modelfitting_files/figure-html5/unnamed-chunk-18-1.png" width="624" /></p>
 </div>
 <p>Boxplot for each class</p>
 <div class="layout-chunk" data-layout="l-body">
 <pre class="r"><code>
-ggplot(df1, aes(class, grades)) +
-    geom_boxplot()</code></pre>
+ggplot(df1, aes(class, grades)) + geom_boxplot()</code></pre>
 <p><img src="0003_ggplot_modelfitting_files/figure-html5/unnamed-chunk-19-1.png" width="624" /></p>
 </div>
 <p>Violinplot for each class</p>
 <div class="layout-chunk" data-layout="l-body">
 <pre class="r"><code>
-ggplot(df1, aes(class, grades)) +
-    geom_violin()</code></pre>
+ggplot(df1, aes(class, grades)) + geom_violin()</code></pre>
 <p><img src="0003_ggplot_modelfitting_files/figure-html5/unnamed-chunk-20-1.png" width="624" /></p>
 </div>
 <p>Layering and colouring plots</p>
 <div class="layout-chunk" data-layout="l-body">
 <pre class="r"><code>
-ggplot(df1, aes(class, grades, col = class)) +
-    geom_violin() +
-    geom_boxplot() +
-    geom_point()</code></pre>
+ggplot(df1, aes(class, grades, col = class)) + geom_violin() + geom_boxplot() + geom_point()</code></pre>
 <p><img src="0003_ggplot_modelfitting_files/figure-html5/unnamed-chunk-21-1.png" width="624" /></p>
 </div>
 <h2 id="distribution-of-points-with-geom_quasirandom">Distribution of points with <code>geom_quasirandom()</code></h2>
@@ -1639,14 +1636,13 @@ ggplot(df1, aes(class, grades, col = class)) +
 <p><code>geom_quasirandom()</code> extends <code>geom_point()</code> by showing the distribution information at the same time. It basically combines all the good things in <code>geom_boxplot</code>, <code>geom_violin</code>, <code>geom_point</code> and <code>geom_histogram</code>.</p>
 <div class="layout-chunk" data-layout="l-body">
 <pre class="r"><code>
-ggplot(df1, aes(class, grades, col = class)) +
-    geom_quasirandom()</code></pre>
+ggplot(df1, aes(class, grades, col = class)) + geom_quasirandom()</code></pre>
 <p><img src="0003_ggplot_modelfitting_files/figure-html5/unnamed-chunk-22-1.png" width="624" /></p>
 </div>
 <div class="layout-chunk" data-layout="l-body">
 <pre class="r"><code>
-df1$overallClass &lt;- &quot;one_class&quot; # create variable that assigns everyone to one class
-# df1[, overallClass := &quot;one_class&quot;] # data.table syntax for the line above</code></pre>
+df1$overallClass &lt;- &quot;one_class&quot;  # create variable that assigns everyone to one class
+# df1[, overallClass := &#39;one_class&#39;] # data.table syntax for the line above</code></pre>
 </div>
 <p><code>geom_quasirandom</code> shows distribution information!</p>
 <div class="layout-chunk" data-layout="l-body">
@@ -1787,7 +1783,7 @@ ggplot(df1, aes(iq, grades)) +
 <div class="layout-chunk" data-layout="l-body">
 <pre class="r"><code>
 modelLinear &lt;- lm(formula = iq ~ grades, data = df1)
-summary(modelLinear) # get model results and p values</code></pre>
+summary(modelLinear)  # get model results and p values</code></pre>
 <pre><code>
 Call:
 lm(formula = iq ~ grades, data = df1)
@@ -1807,7 +1803,7 @@ Residual standard error: 8.599 on 38 degrees of freedom
 Multiple R-squared:  0.2878,    Adjusted R-squared:  0.2691 
 F-statistic: 15.36 on 1 and 38 DF,  p-value: 0.0003592</code></pre>
 <pre class="r"><code>
-summaryh(modelLinear) # generates APA-formmatted results</code></pre>
+summaryh(modelLinear)  # generates APA-formmatted results</code></pre>
 <pre><code>
           term                                                  results
 1: (Intercept) b = 125.14, SE = 4.24, t(38) = 29.52, p &lt; .001, r = 0.98
@@ -1830,7 +1826,7 @@ ggplot(df1, aes(iq, grades, col = class)) +
 <div class="layout-chunk" data-layout="l-body">
 <pre class="r"><code>
 modelLinear_class &lt;- lm(iq ~ grades + class, data = df1)
-summary(modelLinear_class) # get model results and p values</code></pre>
+summary(modelLinear_class)  # get model results and p values</code></pre>
 <pre><code>
 Call:
 lm(formula = iq ~ grades + class, data = df1)
@@ -1871,11 +1867,11 @@ summaryh(modelLinear_class)</code></pre>
 <div class="layout-chunk" data-layout="l-body">
 <pre class="r"><code>
 df1$class &lt;- relevel(as.factor(df1$class), ref = &quot;d&quot;)
-levels(df1$class) # check reference levels (d is now the reference/first group)</code></pre>
+levels(df1$class)  # check reference levels (d is now the reference/first group)</code></pre>
 <pre><code>
 [1] &quot;d&quot; &quot;a&quot; &quot;b&quot; &quot;c&quot;</code></pre>
 <pre class="r"><code>
-summaryh(lm(iq ~ grades + class, data = df1)) # quickly fit model and look at outcome (no assignment to object)</code></pre>
+summaryh(lm(iq ~ grades + class, data = df1))  # quickly fit model and look at outcome (no assignment to object)</code></pre>
 <pre><code>
           term                                                   results
 1: (Intercept)  b = 118.96, SE = 1.54, t(35) = 77.41, p &lt; .001, r = 1.00
@@ -1934,24 +1930,24 @@ summaryh(modelLinear_interact)</code></pre>
 <p>R uses <code>1</code> to refer to the intercept</p>
 <div class="layout-chunk" data-layout="l-body">
 <pre class="r"><code>
-modelLinear_intercept &lt;- lm(iq ~ 1, data = df1) # mean iq
+modelLinear_intercept &lt;- lm(iq ~ 1, data = df1)  # mean iq
 summaryh(modelLinear_intercept)</code></pre>
 <pre><code>
           term                                                  results
 1: (Intercept) b = 109.41, SE = 1.59, t(39) = 68.80, p &lt; .001, r = 1.00</code></pre>
 <pre class="r"><code>
-df1[, mean(iq)] # matches the intercept term</code></pre>
+df1[, mean(iq)]  # matches the intercept term</code></pre>
 <pre><code>
 [1] 109.4077</code></pre>
 <pre class="r"><code>
-mean(df1$iq) # same as above</code></pre>
+mean(df1$iq)  # same as above</code></pre>
 <pre><code>
 [1] 109.4077</code></pre>
 </div>
 <p>Remove intercept from model (if you ever need to do so…) by specifying <code>-1</code></p>
 <div class="layout-chunk" data-layout="l-body">
 <pre class="r"><code>
-modelLinear_noIntercept &lt;- lm(iq ~ grades - 1, data = df1) # substract intercept
+modelLinear_noIntercept &lt;- lm(iq ~ grades - 1, data = df1)  # substract intercept
 summary(modelLinear_noIntercept)</code></pre>
 <pre><code>
 Call:
@@ -2021,19 +2017,19 @@ anova_classGender &lt;- aov(grades ~ class * gender, data = df1)
 summary(anova_classGender)</code></pre>
 <pre><code>
              Df Sum Sq Mean Sq F value   Pr(&gt;F)    
-class         3   5821  1940.4  10.078 7.92e-05 ***
-gender        1     76    76.1   0.396    0.534    
-class:gender  3   1163   387.6   2.013    0.132    
-Residuals    32   6161   192.5                     
+class         3   5821  1940.4   9.964 8.63e-05 ***
+gender        1    929   928.7   4.769   0.0364 *  
+class:gender  3    239    79.8   0.410   0.7471    
+Residuals    32   6232   194.7                     
 ---
 Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
 <pre class="r"><code>
 summaryh(anova_classGender)</code></pre>
 <pre><code>
-           term                              results
-1:        class F(3, 32) = 10.08, p &lt; .001, r = 0.70
-2:       gender  F(1, 32) = 0.40, p = .534, r = 0.11
-3: class:gender  F(3, 32) = 2.01, p = .132, r = 0.40</code></pre>
+           term                             results
+1:        class F(3, 32) = 9.96, p &lt; .001, r = 0.69
+2:       gender F(1, 32) = 4.77, p = .036, r = 0.36
+3: class:gender F(3, 32) = 0.41, p = .747, r = 0.19</code></pre>
 </div>
 <h3 id="specify-contrasts-resources">Specify contrasts resources</h3>
 <ul>
@@ -2069,23 +2065,23 @@ ttest_gender</code></pre>
     Welch Two Sample t-test
 
 data:  iq by gender
-t = -0.75948, df = 33.082, p-value = 0.4529
+t = 0.84989, df = 38, p-value = 0.4007
 alternative hypothesis: true difference in means is not equal to 0
 95 percent confidence interval:
- -9.054929  4.131854
+ -3.748999  9.174639
 sample estimates:
 mean in group female   mean in group male 
-            108.4231             110.8846 </code></pre>
+            110.7641             108.0513 </code></pre>
 <pre class="r"><code>
 summaryh(ttest_gender)</code></pre>
 <pre><code>
-                             results
-1: t(33) = −0.76, p = .453, r = 0.13</code></pre>
+                            results
+1: t(38) = 0.85, p = .401, r = 0.14</code></pre>
 </div>
 <p>class a vs. class d</p>
 <div class="layout-chunk" data-layout="l-body">
 <pre class="r"><code>
-ttest_classAD &lt;- t.test(iq ~ class, data = df1[class %in% c(&quot;a&quot;, &quot;d&quot;)]) # data.table subsetting
+ttest_classAD &lt;- t.test(iq ~ class, data = df1[class %in% c(&quot;a&quot;, &quot;d&quot;)])  # data.table subsetting
 ttest_classAD</code></pre>
 <pre><code>
     Welch Two Sample t-test
@@ -2099,7 +2095,7 @@ sample estimates:
 mean in group d mean in group a 
       122.37948        97.05641 </code></pre>
 <pre class="r"><code>
-summaryh(ttest_classAD, showTable = T) # show all other effect sizes</code></pre>
+summaryh(ttest_classAD, showTable = T)  # show all other effect sizes</code></pre>
 <pre><code>
 $results
                              results
@@ -2169,7 +2165,7 @@ summaryh(m_intercept)</code></pre>
 1: (Intercept) b = −100.73, SE = 74.13, t(27) = −1.36, p = .185, r = 0.25
 2:          iq      b = 1.41, SE = 0.66, t(31) = 2.13, p = .041, r = 0.36</code></pre>
 <pre class="r"><code>
-coef(m_intercept) # check coefficients for each class</code></pre>
+coef(m_intercept)  # check coefficients for each class</code></pre>
 <pre><code>
 $class
   (Intercept)       iq
@@ -2225,7 +2221,7 @@ summaryh(m_interceptSlope)</code></pre>
 1: (Intercept) b = −101.74, SE = 73.46, t(21) = −1.38, p = .181, r = 0.29
 2:          iq      b = 1.43, SE = 0.67, t(20) = 2.14, p = .045, r = 0.43</code></pre>
 <pre class="r"><code>
-coef(m_interceptSlope) # check coefficients for each class</code></pre>
+coef(m_interceptSlope)  # check coefficients for each class</code></pre>
 <pre><code>
 $class
   (Intercept)       iq
@@ -2277,7 +2273,7 @@ summaryh(m_slope)</code></pre>
 1: (Intercept) b = −102.58, SE = 72.90, t(32) = −1.41, p = .169, r = 0.24
 2:          iq      b = 1.45, SE = 0.69, t(28) = 2.11, p = .044, r = 0.37</code></pre>
 <pre class="r"><code>
-coef(m_slope) # check coefficients for each class</code></pre>
+coef(m_slope)  # check coefficients for each class</code></pre>
 <pre><code>
 $class
   (Intercept)       iq
@@ -2299,8 +2295,8 @@ attr(,&quot;class&quot;)
 <p>Let’s use a different dataset. <code>iris</code>, a famous dataset that comes with R. Type <code>?iris</code> in your console for more information about this dataset.</p>
 <div class="layout-chunk" data-layout="l-body">
 <pre class="r"><code>
-irisDT &lt;- tbl_dt(iris) # convert to data.table and tibble
-irisDT # wide form data</code></pre>
+irisDT &lt;- tbl_dt(iris)  # convert to data.table and tibble
+irisDT  # wide form data</code></pre>
 <pre><code>
 Source: local data table [150 x 5]
 
@@ -2334,9 +2330,9 @@ gather(irisDT, meaureLength, length, -Species) %&gt;% # convert from wide to lon
 </figure>
 <div class="layout-chunk" data-layout="l-body">
 <pre class="r"><code>
-outcome &lt;- cbind(irisDT$Sepal.Length, irisDT$Petal.Length) # cbind (column bind)
+outcome &lt;- cbind(irisDT$Sepal.Length, irisDT$Petal.Length)  # cbind (column bind)
 manova_results &lt;- manova(outcome ~ Species, data = iris)
-summary(manova_results) # manova results</code></pre>
+summary(manova_results)  # manova results</code></pre>
 <pre><code>
            Df Pillai approx F num Df den Df    Pr(&gt;F)    
 Species     2 0.9885   71.829      4    294 &lt; 2.2e-16 ***
@@ -2344,7 +2340,7 @@ Residuals 147
 ---
 Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
 <pre class="r"><code>
-summary.aov(manova_results) # see which outcome variables differ</code></pre>
+summary.aov(manova_results)  # see which outcome variables differ</code></pre>
 <pre><code>
  Response 1 :
              Df Sum Sq Mean Sq F value    Pr(&gt;F)    
@@ -2370,7 +2366,7 @@ Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&
 <p>Error bars for between- and within-subjects designs have to be calculated differently. There’s much debate on how to compute within-subjects this properly…</p>
 <div class="layout-chunk" data-layout="l-body">
 <pre class="r"><code>
-cw &lt;- tbl_dt(ChickWeight) # convert built-in ChickWeight data to data.table and tibble</code></pre>
+cw &lt;- tbl_dt(ChickWeight)  # convert built-in ChickWeight data to data.table and tibble</code></pre>
 </div>
 <p>data information</p>
 <ul>
@@ -2380,7 +2376,7 @@ cw &lt;- tbl_dt(ChickWeight) # convert built-in ChickWeight data to data.table a
 </ul>
 <div class="layout-chunk" data-layout="l-body">
 <pre class="r"><code>
-cw # weight of 50 chicks are different times, on different diets</code></pre>
+cw  # weight of 50 chicks are different times, on different diets</code></pre>
 <pre><code>
 Source: local data table [578 x 4]
 
@@ -2399,15 +2395,15 @@ Source: local data table [578 x 4]
 10    171    18 1     1    
 # ... with 568 more rows</code></pre>
 <pre class="r"><code>
-cw[, unique(Time)] # time points</code></pre>
+cw[, unique(Time)]  # time points</code></pre>
 <pre><code>
  [1]  0  2  4  6  8 10 12 14 16 18 20 21</code></pre>
 <pre class="r"><code>
-cw[, n_distinct(Chick)] # no. of Chicks</code></pre>
+cw[, n_distinct(Chick)]  # no. of Chicks</code></pre>
 <pre><code>
 [1] 50</code></pre>
 <pre class="r"><code>
-cw[, unique(Diet)] # Diets</code></pre>
+cw[, unique(Diet)]  # Diets</code></pre>
 <pre><code>
 [1] 1 2 3 4
 Levels: 1 2 3 4</code></pre>
@@ -2426,8 +2422,8 @@ ggplot(cw, aes(Diet, weight)) +
 <p>How does weight change over time (ignoring diet)? Each chick has multiple measurements of time, so we’ll use within-subjects error bars, which we have to calculate ourselves. Use <code>seWithin()</code> from the <code>hausekeep</code> package to compute within-subjects error bars.</p>
 <div class="layout-chunk" data-layout="l-body">
 <pre class="r"><code>
-cw_weight_withinEB &lt;- seWithin(data = cw, measurevar = c(&quot;weight&quot;), 
-                               withinvars = c(&quot;Time&quot;), idvar = &quot;Chick&quot;)</code></pre>
+cw_weight_withinEB &lt;- seWithin(data = cw, measurevar = c(&quot;weight&quot;), withinvars = c(&quot;Time&quot;), 
+    idvar = &quot;Chick&quot;)</code></pre>
 <pre><code>
 Confidence intervals: 0.95    Time  N    weight       sd       se        ci
  1:    0 50  41.06000 34.68062 4.904580  9.856123
@@ -2467,9 +2463,8 @@ ggplot(cw, aes(Time, weight)) +
 <p>Let’s investigate the effects of time (within-subjects) and diet (between-subjects) together.</p>
 <div class="layout-chunk" data-layout="l-body">
 <pre class="r"><code>
-cw_weight_mixed &lt;- seWithin(data = cw, measurevar = c(&quot;weight&quot;), 
-                            betweenvars = c(&quot;Diet&quot;), withinvars = c(&quot;Time&quot;), 
-                            idvar = &quot;Chick&quot;)</code></pre>
+cw_weight_mixed &lt;- seWithin(data = cw, measurevar = c(&quot;weight&quot;), betweenvars = c(&quot;Diet&quot;), 
+    withinvars = c(&quot;Time&quot;), idvar = &quot;Chick&quot;)</code></pre>
 <pre><code>
 Confidence intervals: 0.95    Diet Time  N    weight        sd        se        ci
  1:    1    0 20  41.40000 32.196088  7.199264 15.068233

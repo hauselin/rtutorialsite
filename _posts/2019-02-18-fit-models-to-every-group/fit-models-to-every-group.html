@@ -966,13 +966,14 @@
 <p>How to use <code>data.table</code> package and functionalities to fit a model to different groups in a dataset.</p>
 <div class="layout-chunk" data-layout="l-body">
 <pre class="r"><code>
-library(hausekeep); library(data.table) # load packages</code></pre>
+library(hausekeep)
+library(data.table)  # load packages</code></pre>
 </div>
 <p>Convert the built-in dataset <code>ChickWeight</code> to <code>data.table</code> class so we can leverage its extensive functionalities.</p>
 <div class="layout-chunk" data-layout="l-body">
 <pre class="r"><code>
-dt1 &lt;- data.table(ChickWeight) # convert builtin dataset to data.table class
-dt1 # print dataset</code></pre>
+dt1 &lt;- data.table(ChickWeight)  # convert builtin dataset to data.table class
+dt1  # print dataset</code></pre>
 <pre><code>
      weight Time Chick Diet
   1:     42    0     1    1
@@ -990,7 +991,7 @@ dt1 # print dataset</code></pre>
 <p>Let’s look at just the first 5 chicks (and to demo <code>data.table</code> synax; see my <code>data.table</code> tutorials). We then fit a linear regression <code>weight ~ Time</code> to the data from these 5 chicks, ignoring that the data came from 5 different chicks.</p>
 <div class="layout-chunk" data-layout="l-body">
 <pre class="r"><code>
-dt1[Chick &lt;= 5, ] # filter rows where Chick is &lt;= 5</code></pre>
+dt1[Chick &lt;= 5, ]  # filter rows where Chick is &lt;= 5</code></pre>
 <pre><code>
      weight Time Chick Diet
   1:     42    0     1    1
@@ -1032,7 +1033,7 @@ The correct way to fit this model is to account for the nested structure is to u
 <p>Show formatted output that can be copied-pasted into your APA manuscript.</p>
 <div class="layout-chunk" data-layout="l-body">
 <pre class="r"><code>
-summaryh(model) </code></pre>
+summaryh(model)</code></pre>
 <pre><code>
           term                                                 results
 1: (Intercept) b = 33.47, SE = 3.44, t(194) = 9.72, p &lt; .001, r = 0.57
@@ -1041,7 +1042,7 @@ summaryh(model) </code></pre>
 <p>Fit the same model within <code>data.table</code></p>
 <div class="layout-chunk" data-layout="l-body">
 <pre class="r"><code>
-dt1[Chick &lt;= 5, summaryh(lm(weight ~ Time))] # results are same as above</code></pre>
+dt1[Chick &lt;= 5, summaryh(lm(weight ~ Time))]  # results are same as above</code></pre>
 <pre><code>
           term                                                 results
 1: (Intercept) b = 33.47, SE = 3.44, t(194) = 9.72, p &lt; .001, r = 0.57
