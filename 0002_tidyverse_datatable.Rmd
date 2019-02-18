@@ -1,0 +1,756 @@
+---
+title: "tidyverse and data.table"
+description: R tidyverse and data.table packages basics
+output:
+    radix::radix_article:
+        toc: true
+        toc_depth: 3
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE,
+                      R.options = list(width = 80),
+                      tidy = TRUE,
+                      tidy.opts = list(width.cutoff = 80))
+```
+
+
+```{r wrap-hook, include=FALSE}
+# function that adds knitr parameter to control line width
+# https://github.com/yihui/knitr-examples/blob/master/077-wrap-output.Rmd
+library(knitr)
+hook_output = knit_hooks$get('output')
+knit_hooks$set(output = function(x, options) {
+  # this hook is used only when the linewidth option is not NULL
+  if (!is.null(n <- options$linewidth)) {
+    x = knitr:::split_lines(x)
+    # any lines wider than n should be wrapped
+    if (any(nchar(x) > n)) x = strwrap(x, width = n)
+    x = paste(x, collapse = '\n')
+  }
+  hook_output(x, options)
+})
+```
+
+## Loading frequently-used packages with `library()`
+
+I always load my frequently-used packages at the top of each script.
+
+```{r loading packages, results="hide", message=FALSE, warning=FALSE}
+library(tidyverse); library(data.table); library(broom); library(dtplyr); library(lme4); library(lmerTest); library(ggbeeswarm); library(cowplot)
+```
+
+## Reading data into R
+
+Read file in a directory and save the data as an object in the environment by using the assignment `<-` operator. 
+
+```{r read data, results="hide", message=FALSE, warning=FALSE}
+df1 <- read.csv("./data/sleep.csv") # base R read.csv() function
+# same as df1 <- read.csv("data/sleep.csv")
+# READ: assign the output read.csv("data/sleep.csv") into df1
+
+df2 <- fread("./data/sleep.csv") # fread() from library(data.table)
+# same as df2 <- fread("data/sleep.csv")
+
+# my favorite way of reading data: combining tbl_dt() and fread()
+df3 <- tbl_dt(fread("./data/sleep.csv")) # tbl_dt() from library(dtplyr)
+# same as df3 <- tbl_dt(fread("data/sleep.csv"))
+```
+
+The `.` in the file path simply refers to the current working directory, so it can be dropped. And `..` can be used to refer to the parent directory.
+
+## Comparing the outputs of read.csv(x), fread(x), and tbl_dt(fread(x))
+
+```{r}
+df1 # read.csv("./data/sleep.csv")
+class(df1) # read.csv("./data/sleep.csv")
+```
+
+```{r}
+df2 # fread("./data/sleep.csv") # fread() from library(data.table)
+class(df2) # fread("./data/sleep.csv") # fread() from library(data.table)
+```
+
+How's the output different from the one above?
+
+```{r}
+df3 # tbl_dt(fread("./data/sleep.csv")) # tbl_dt() from library(dtplyr)
+class(df3) # tbl_dt(fread("./data/sleep.csv")) # tbl_dt() from library(dtplyr)
+```
+
+How's the output different from the two outputs above?
+
+### Reading URLs and other formats
+
+Check out the csv (comma separated values) data [here](https://raw.githubusercontent.com/hauselin/RdataScience/master/data/sleep.csv). You can read data directly off a website.
+
+Most of these read functions can import/read different types of files (e.g., csv, txt, URLs) as long as the raw data are formatted properly (e.g., separated by commas, tabs). But if you're trying to read proprietary data formats (e.g., SPSS datasets, Excel sheets), you'll need to use other libraries (e.g., `readxl`, `foreign`) to read those data into R.
+
+```{r}
+df_url <- tbl_dt(fread("https://raw.githubusercontent.com/hauselin/RdataScience/master/data/sleep.csv"))
+df_url # print data to console; same dataset as tbl_dt(fread("./data/sleep.csv"))
+```
+
+## Summarizing objects
+
+You can summarize objects quickly by using `summary()`, `str()`, `glimpse()`, or `print(x, n)`.
+
+To view the first/last few items of an object, use `head()` or `tail()`.
+
+```{r}
+summary(df1) # we use summary() for many many other purposes
+str(df1) 
+glimpse(df1)
+head(df1)
+head(df3, n = 3) # what does this do?
+tail(df3, n = 2)
+print(df3, n = Inf) # Inf is infinte (so print all rows)
+```
+
+Use pipes `%>%` to summarize objects
+
+```{r}
+df3 %>% head(n = 2)
+df3 %>% head(2) # why does this work?
+df3 %>% print(Inf)
+df3 %>% summary() # does this work? why?
+```
+
+datatables and `dplyr`'s data_frame are much better because they tell us the class of each variable at the top when you print the object in the console. They also tell you the dimensions of your data.
+
+```{r}
+df3 # data_frame (dplyr) + data.table + tibble
+```
+
+## Using `$` and `[]` to extract elements using their names
+
+```{r} 
+names(df3)
+df3$extra # extracts column/variable as a vector
+df3$group
+df3$ID
+```
+
+```{r}
+myList <- list(a = -999, b = c(TRUE, FALSE, T, T), c = c('myAmazingList')) # create a list with named items a, b, c
+class(myList)
+names(myList) 
+myList # note the formatting/structure of a list ($ signs tell you how to extract items)
+myList$a
+myList$b # lists can store objects of different classes (unlike most other objects, which expect all items to be of same class)
+myList$c
+```
+
+```{r}
+df1['extra'] # same as df1$extra, but uses characters (in '') to extract elements
+```
+
+** BUT the syntax above only works for the `data.frame` class!**
+
+```{r, error=TRUE}
+df3['extra'] # fails!!!
+```
+
+If it's a `data.table` class, you do it differently (so know the classes of your objects)! More on `data.table` later on.
+
+```{r}
+df3[, extra] # df3[i, j] (i is row, and j is column)
+```
+
+## Writing/saving dataframes or datatables as csv files
+
+```{r}
+write.csv(df3, 'example1_df3.csv', row.names = F) # saves in your working directory
+```
+
+```{r, error=TRUE}
+write.csv(df3, './data/example2_df3.csv', row.names = F) # saves in your data directory (assumes data directory exists!)
+```
+
+`write.csv()` overwrites any existing files that have the same name and you can't recover the original file if you've overwritten it!
+
+## tidyverse: a collection of R packages
+
+[tidyverse:](https://www.tidyverse.org/packages/)
+
+>  The tidyverse is an opinionated collection of R packages designed for data science. All packages share an underlying design philosophy, grammar, and data structures. 
+
+Included packages: `ggplot2`, `dplyr`, `tidyr`, `stringr` etc. [see official website for documentation](https://www.tidyverse.org/packages/)
+
+```{r}
+library(tidyverse) # load tidyverse packages (I'm running this line here for educational purposes; there's actually no need for this because I've already loaded all my packages at the beginning of this script)
+```
+
+### Manipulating datasets with `dplyr` (a package in tidyverse)
+
+Read in data from a csv file (stored in "./data/simpsonsParadox.csv"). 
+
+* `fread()`: a function from `data.table` (fast-read, hence fread) that is **EXTREMELY** fast and powerful, and much better than `read.csv()` or `read.table()` from base R
+* `tbl_dt()`: converts data to a `tibble` class and `data.table` class
+
+```{r}
+df4 <- tbl_dt(fread("./data/simpsonsParadox.csv"))
+df4 # print table in console 
+class(df4) # note the different classes
+```
+
+Note the information at the top.
+
+* Source: local data table [40 x 3]: data.table and dimensions (40 rows, 3 columns)
+* A tibble: 40 x 3: tibble and dimensions
+* Below each variable/column name you see the class of each column (dbl is double/a number/numeric, chr is character)
+
+```{r}
+class(df4$iq)
+class(df4$grades)
+class(df4$class)
+```
+
+```{r}
+glimpse(df4) # have a glimpse of the data (quick summary of data)
+```
+
+```{r}
+print(df4, n = Inf) # tibbles are automatically truncated to facilitate printing; using print(df4, n = Inf) allows me to print Inf (infinite) rows
+```
+
+### Select columns/variables with `select()`
+
+Select with names
+
+```{r}
+select(df4, iq) # just prints the output to console without saving
+df4_iq <- select(df4, iq) # if you want to save as a new object
+df4_iq # print df4_iq
+```
+
+```{r}
+select(df4, class, grades)
+select(df4, iq, grades)
+```
+
+Select multiple columns in sequence with :
+
+```{r}
+select(df4, iq:class)
+```
+
+Select with numbers
+
+```{r}
+select(df4, 1, 3)
+select(df4, 1:3) # what does 1:3 do?
+```
+
+How can we reorder columns with `select()`?
+
+```{r}
+select(df4, 3:1) # column 3, then 2, then 1
+```
+
+Select with `starts_with()` or `ends_with()`
+
+```{r}
+select(df4, starts_with("c"))
+select(df4, starts_with("g"))
+select(df4, starts_with("g"), ends_with("s"))
+```
+
+Dropping columns with `-`
+
+```{r}
+select(df4, -grades) # what should you get?
+select(df4, -ends_with("s")) # what should you get?
+select(df4, -ends_with("s"), class, -1) # what should you get?
+```
+
+Renaming while selecting columns/variables
+
+```{r}
+select(df4, intelligence = iq) # select iq and rename it to intelligence
+```
+
+Other options for `select()` include `matches()`, `contains()`. For more information, see tutorial/vignette [here](https://cran.r-project.org/web/packages/dplyr/vignettes/dplyr.html). For official documentation, see [here](https://cran.r-project.org/web/packages/dplyr/dplyr.pdf). 
+
+### Select rows with `slice()`
+
+```{r}
+slice(df4, 1:5) # rows 1 to 5
+slice(df4, c(1, 3, 5, 7, 9)) # rows 1, 3, 5, 7, 9
+slice(df4, seq(1, 10, by = 2)) # same as above, but using sequence function (from 1 to 10, by/in steps of 2)
+slice(df4, -c(1:39)) # remove rows 1 to 39
+```
+
+### Filtering or subsetting data/rows with `filter()`
+
+While `select()` acts on columns, `filter()` acts on rows. It chooses/subsets rows based on criteria you specify.
+
+How many classes are there in this dataset? How many unique classes?
+
+```{r}
+df4$class
+unique(df4$class) # unique classes
+df4$class %>% unique() # same as above but with pipes
+```
+
+Filter rows that match one criterion
+
+```{r}
+filter(df4, class == "a") # how many rows of data do we have now?
+filter(df4, class == 'b') # R accepths single or double quotations
+df4_classA <- filter(df4, class == 'a') # to save filtered data as an object
+df4_classA
+```
+
+Filter rows that match multiple criteria
+
+```{r}
+filter(df4, class == c("a", "b")) 
+```
+
+Is anything wrong? Look at the output and compare with `filter(df4, class == "a")` and `filter(df4, class == "b")`. How many rows should you expect from `filter(df4, class == c("a", "b"))`? How many rows did you get?
+
+Here's how to do it properly. You use `%in%` if you want to match multiple criteria. `==` only works if you're matching by just ONE criterion
+
+```{r}
+filter(df4, class %in% c("a", "b")) # check number of rows of output
+```
+
+Filter by range
+
+```{r}
+filter(df4, iq > 120) # iq greater than 120
+filter(df4, iq >= 115) # iq greater than or equal to 120 (> and =, without space in between)
+filter(df4, grades < 20) # grades less than 20
+filter(df4, grades <= 30) # grades less than 30
+filter(df4, grades <= 30 & iq > 120) # the intelligent but lazy students
+```
+
+Filter through negating `!`
+
+```{r}
+filter(df4, class != "a") # class IS NOT "a" (! and =, without space in between)
+```
+
+How would you remove values that match "a" and "b"?
+
+```{r, error=TRUE}
+filter(df4, class !%in% c("a", "b")) # note RStudio underlies potential errors for you (like Microsoft Word highlighting typos and grammar errors)
+```
+
+Oops, what's wrong? 
+
+```{r}
+filter(df4, !class %in% c("a", "b")) # correct way to do it
+```
+
+#### Operators
+
+`==`, `%in%`, `%between%`, `>`, `>=`, `<`, `<=`, `!=` are operators. See [here](https://www.statmethods.net/management/operators.html) for more information. 
+
+### Rename variables/columns with `rename()`
+
+```{r}
+df4_renamed <- rename(df4, intelligence = iq, examGrades = grades, classroom = class) # rename(data, newname = oldname)
+df4_renamed
+glimpse(df4_renamed)
+names(df4_renamed)
+```
+
+### Create new columns/variables with `mutate()`
+
+```{r}
+mutate(df4, 
+       iqMeanCentered = iq - mean(iq, na.rm = T), # substract mean iq from each iq
+       gradesRound0dp = round(grades) # round grades
+       )
+```
+
+```{r}
+mutate(df4, studentNumber = 1:nrow(df4))
+```
+
+```{r}
+nrow(df4) # number of rows; ncol() gives you number of columns
+1:nrow(df4) # generate sequence of numbers from 1 to number of rows of dataset
+```
+
+```{r}
+mutate(df4, studentNumber = 1:nrow(df4)) %>% print(n = Inf)
+```
+
+### Sorting or arranging data rows with `arrange()`
+
+```{r}
+arrange(df4, iq) # ascending order of iq
+arrange(df4, iq, grades) # ascending order of iq then grades
+arrange(df4, desc(iq)) # descending order of iq
+arrange(df4, desc(class)) # descending order of class
+```
+
+`order()` is another function (base R function) people often use to arrange rows. See [here](https://www.statmethods.net/management/sorting.html) for more information.
+
+### Combining functions with pipes `%in%`
+
+```{r}
+df4 %>% print(n = Inf) # reminder what the dataset looks like
+```
+
+You can combine multiple functions with `%in%`. After adding each function/line, you can check your output before you add the next function/line. This way, you can build really complicated and long code/syntax without nesting functions!
+
+NOTE that comments # are placed AFTER the pipe symbol!
+
+```{r}
+df4 %>% 
+    mutate(gradesRound = round(grades), studentNo = 1:.N) %>% # round grades, add subject number: .N is a shortcut for nrow(df4)
+    select(-grades) %>% # remove original grades variable
+    select(studentNo, class, iq, gradesRound) %>%  # reorder columns
+    rename(intelligence = iq, examGrades = gradesRound, classroom = class) %>% # rename variables
+    filter(intelligence %between% c(90, 105)) # select only those with intelligence between 90 and 105
+```
+
+The code above doesn't save the output as an object. Below we save it as an object.
+
+```{r}
+df5 <- df4 %>% 
+    mutate(gradesRound = round(grades), studentNo = 1:.N) %>% # round grades, add subject number: .N is a shortcut for nrow(df4)
+    select(-grades) %>% # remove original grades variable
+    select(studentNo, class, iq, gradesRound) %>%  # reorder columns
+    rename(intelligence = iq, examGrades = gradesRound, classroom = class) %>% # rename variables
+    filter(intelligence %between% c(90, 105)) # select only those with intelligence between 90 and 105
+df5 # check output
+```
+
+You can even pipe the output to any other functions (e.g., plotting functions)
+
+```{r}
+df4 %>% 
+    mutate(gradesRound = round(grades), studentNo = 1:.N) %>% # round grades, add subject number: .N is a shortcut for nrow(df4)
+    select(-grades) %>% # remove original grades variable
+    select(studentNo, class, iq, gradesRound) %>%  # reorder columns
+    rename(intelligence = iq, examGrades = gradesRound, classroom = class) %>% # rename variables
+    filter(intelligence %between% c(80, 115)) %>% # select only those with intelligence between 80 and 115
+    ggplot(aes(x = intelligence, y = examGrades)) + # note the + sign! (ggplot uses + sign)
+    geom_point() + # add each data point
+    geom_smooth(method = 'lm', se = T) # fit regression line with standard error (se = TRUE)
+```
+
+Higher intelligence, worse grades? What's going on? We figure out why later on. And more on `ggplot2` package in future tutorials.
+
+### Compute summary statistics with `summarize()` or `summarise()`
+
+```{r}
+df5 %>% 
+    group_by(classroom) %>% # grouping by classroom
+    summarise(iqMean = mean(intelligence, na.rm = T))
+```
+
+```{r}
+df5 %>% 
+    group_by(classroom) %>% # grouping by classroom
+    summarize(iqClassMean = mean(intelligence, na.rm = T),
+              examGradesClassMean = mean(examGrades, na.rm = T))
+```
+
+Same code but with original dataset (dimensions: 40 x 3)
+
+```{r}
+df4 %>% 
+    group_by(class) %>% # grouping by class
+    summarise(iqClassMean = mean(iq, na.rm = T), 
+              examGradesClassMean = mean(grades, na.rm = T))
+```
+
+Group by multiple variables/conditions
+
+Randomly generate gender of student for each row of data with `sample()`
+
+```{r}
+sample(x = c("female", "male"), size = 40, replace = T) # what is this doing
+```
+
+```{r}
+df4$gender <- sample(x = c("female", "male"), size = 40, replace = T)
+# same as df4 <- mutate(df4, gender = sample(x = c("female", "male"), size = .N, replace = T))
+```
+
+Because the gender labels are generated randomly, you'll get different values each time you re-run the code.
+
+```{r}
+print(df4, n = Inf)
+```
+
+Compute mean for each class by gender
+
+```{r}
+df4 %>% 
+    group_by(class, gender) %>% # group by class then gender
+    summarise(iqClassMean = mean(iq, na.rm = T), 
+              examGradesClassMean = mean(grades, na.rm = T))
+    
+```
+
+## More `dplyr` and `tidyverse` information
+
+For much more information, see the following sites
+
+* [dplyr tutorial/vignette](https://cran.r-project.org/web/packages/dplyr/vignettes/dplyr.html)
+* [official dplyr documentation](https://cran.r-project.org/web/packages/dplyr/dplyr.pdf)
+* [tidyverse](https://www.tidyverse.org/)
+
+## Supercharging your workflow with data.table()
+
+While the syntax of `tidyverse` and `dplyr` functions are really easy to understand, they sometimes can be quite long-winded. Using pipes `%>%` makes your code readable, but is a bit long to read sometimes. Now we'll see how `data.table()` can shorten all that code while maintaining readability. Also, `data.table()` is MUCH faster, which is especially useful when dealing with bigger datasets (hundreds of MBs and GBs and even TBs).
+
+If you use `tbl_dt(fread('filename'))` to read your dataset into R, then your object is already a `data.table`. Check it with `class(objectName)`.
+
+```{r}
+df4
+class(df4)
+df1
+class(df1)
+```
+
+If your object isn't a `data.table`, you can convert it to one using `tbl_dt()` from the `dtplyr` package. `tbl_dt()` turns your dataset into `tibble` (tbl) and `data.table`.
+
+```{r}
+df1_dt <- tbl_dt(df1) # preferred approach, especially for datasets with many columns and rows
+class(df1_dt)
+setDT(df1) # setDT() also works (and works without reassignment: no need to use <-)
+class(df1) # but setDT() doesn't convert your dataset to a tibble class at the same time
+```
+
+### `data.table()` basics: [i, j, by]
+
+`data.table` use a special but extremely concise syntax that only works with objects that have the `data.table` class associated with them. If you try to use this special syntax on other classes, you'll screw up big time. So check your class or try to convert to or use `data.table()` whenever possible!
+
+data.table[i, j, by]
+
+* i: row (equivalent to `filter()` and `slice()`)
+* j: column (equivelent to `select()` and `summarize()` and `mutate()`)
+* by: group by (equivalent to `group_by()`)
+
+### Filter data.table via i
+
+```{r}
+print(df4, n = Inf) # remind yourself what your data look like
+class(df4) # is it a data.table?
+```
+
+Different ways to filter via i
+
+```{r}
+df4[i = gender == 'female',] # just female (j, by are NULL)
+df4[i = gender != 'female',] # not female 
+df4[gender != 'female',] # also works
+df4[grades > 85,] # also works
+# same as filter(df4, grades > 85), but much more concise
+df4[grades > 85] # also works
+df4[i = grades > 85] # also works
+df4[grades < 50 & iq > 120] # smart but (AND &) lazy people (grades < 50 AND iq > 120)
+df4[grades < 50 | iq > 120] # smart but OR lazy people (grades < 50 OR iq > 120)
+```
+
+Slice (select rows) with indices via i
+
+```{r}
+df4[1:3] # rows 1 to 3
+df4[35:.N] # rows 35 to last row
+```
+
+### Selecting columns via j
+
+```{r}
+df4[, j = grades] # vector
+df4[, grades] # same as above, but note the comma, which indicates j via position (i is before the first comma)
+class(df4[, grades]) # not a data.table!
+df4$grades # vector (same as above)
+class(df4$grades) # not a data.table!
+```
+
+How to select columns and keep them as data.table?
+
+```{r}
+df4[, .(grades)] # output looks like a table (tibble + local data table)
+class(df4[, .(grades)]) # still a data.table!
+```
+
+```{r}
+df4[, j = .(grades, gender, iq)] # select multiple columns
+df4[, .(grades,gender, iq)] # same as above and we often omit j =
+# select(df4, grades, gender, iq) # same as above but with select()
+df4[, grades:gender] # select grades to gender
+# select(df4, grades:gender) # same as above but with select()
+# df4[, .(grades:gender)] # this version doesn't work at the moment
+```
+
+```{r}
+df4[, c(2, 3, 4)] # via column index/number
+df4[, -c(2, 3, 4)] # via column index/number (minus/not columns 1, 3, 4)
+df4[, 1:3] # via column index/number (1 to 3)
+```
+
+Other ways to select columns
+
+```{r}
+df4[, "grades"] # 1 column (character)
+df4[, c("grades", "iq")] # multiple columns (characters)
+```
+
+Column names are stored in an object
+
+```{r, error=TRUE}
+colNames <- c("gender", "class")
+df4[, colNames] # doesn't work!
+df4[, ..colNames] # works! (special syntax)
+```
+
+### Chaining with `data.table` ("piping")
+
+```{r}
+df4[1:5, 1:3][grades < 80, ][iq > 95, ] # data.table chaining (or piping)
+df4[1:5, 1:3] %>% filter(grades < 80) %>% filter(iq > 95) # same result as above
+```
+
+### Summarize data via j
+
+```{r}
+df4[, j = .(iqGrandMean = mean(iq, na.rm = T))] # compute grand mean iq and rename variable as iqGrandMean
+df4[, .(iqGrandMean = mean(iq, na.rm = T))] # also works
+df4[, mean(iq, na.rm = T)] # also works, but no renaming and returns a vector (not a data.table!)
+```
+
+Compare output with `summary()`
+
+```{r}
+summary(df4) # check mean
+```
+
+What about other statistics and variables? Standard deviation?
+
+```{r}
+df4[, .(iqGrandMean = mean(iq, na.rm = T),
+        iqSD = sd(iq, na.rm = T),
+        gradesGrandMean = mean(grades, na.rm = T),
+        gradesSD = sd(grades, na.rm = T))]
+```
+
+Extra stuff...
+
+```{r}
+df4[, lm(formula = grades ~ iq)] # fit linear regression (lm), y predicted by x (grades predicted by iq) 
+lm(formula = grades ~ iq, data = df4) # standard way to fit regression models
+```
+
+Again, note the negative relationship between iq and grades. We'll explore why in future tutorials.
+
+The point here is to show how powerful `j` is in `data.table`. You can't use this syntax if your object is not a `data.table`.
+
+```{r}
+df4[, summary(lm(formula = grades ~ iq))] # more extensive output
+# summary(lm(formula = grades ~ iq, data = df4)) # standard way to fit regression models
+```
+
+Or you can use functions written by me to generate American Psychological Association formatted output. To use those functions, run `source("https://raw.githubusercontent.com/hauselin/Rcode/master/summaryh.R")` just once per script. After you've run this line of code, you'll have access to the `summaryh()` function. For more information, see [here](https://github.com/hauselin/Rcode).
+
+```{r}
+source("https://raw.githubusercontent.com/hauselin/Rcode/master/summaryh.R")
+df4[, summaryh(lm(formula = grades ~ iq))] # summaryh function gives you APA-format results and effect size estimates
+# summaryh(lm(formula = grades ~ iq, data = df4)) # standard way to fit regression models
+```
+
+### Compute summary statistics and apply functions to j by groups
+
+What if we want the mean iq and grades for each class? Here is where `data.table` is much more concise than `dplyr` and `tidyverse`.
+
+`data.table` syntax
+
+```{r}
+df4[, .(iqMean = mean(iq, na.rm = T)), by = class]
+df4[, .(iqMean = mean(iq, na.rm = T)), class] # also works
+```
+
+`dplyr` syntax
+
+```{r}
+df4 %>%
+    group_by(class) %>% 
+    summarize(iqMean = mean(iq, na.rm = T))
+```
+
+Summarize by class and gender
+
+```{r}
+df4[, .(iqMean = mean(iq, na.rm = T)), by = .(class, gender)]
+df4[, .(iqMean = mean(iq, na.rm = T)), keyby = .(gender, class)] # summarize and sort/arrange by class then gender
+```
+
+Summarize by booleans
+
+```{r}
+df4[, .(iqMean = mean(iq, na.rm = T)), by = .(gender == "male")]
+df4[, .(iqMean = mean(iq, na.rm = T)), by = .(gender == "male", class == "a")]
+```
+
+Combining pipes with `data.table` and `ggplot`
+
+```{r}
+df4[, .(iqMean = mean(iq, na.rm = T)), .(class, gender)] %>% # compute class/gender mean
+    ggplot(aes(class, iqMean, col = gender)) + # plot mean values
+    geom_point(position = position_dodge(0.5)) # plot points and dodge points to avoid overlapping
+```
+
+Extra cool stuff again...
+
+```{r}
+df4[, summaryh(lm(grades ~ iq))] # reminder: fit model to entire dataset (grades ~ iq) and use summaryh to summarize model results
+df4[, summaryh(lm(grades ~ iq)), by = class] # fit model to each class separately
+df4[, tidy(lm(grades ~ iq)), by = class] # another way to summarize model output
+```
+
+What we fit just one model to all the data (all 40 rows), what's the relationship between iq and grades? Positive or negative? 
+
+And what happens when we fit the model to each class separately, what's the relationship between iq and grades? Positive or negative? We'll explore these relationships in depth in future tutorials.
+
+### Creating new variables/columns and reassigning in data.tables with `:=` 
+
+```{r}
+df4[, class := toupper(class)] # convert to upper case
+df4[, class := tolower(class)] # convert to lower case
+df4[, sex := gender] # make a copy of column
+# same as df4$sex <- df4$gender
+df4[, sex := substr(sex, 1, 1)] # take only first character
+# same as df4$sex <- substr(df4$sex, 1, 1)
+df4[, iqCopy := iq]
+df4[iqCopy < 100, iqCopy := NA] # convert values less than 100 to NA
+df4[is.na(iqCopy)] # filter via i (show only rows where iqCopy is NA)
+```
+
+```{r, error=TRUE}
+df4[iqCopy == NA] # DOESN'T WORK!!! use is.na()
+```
+
+Remove columns with `NULL`
+
+```{r}
+df4[, iqCopy := NULL]
+# same as df4$iqCopy <- NULL
+df4[, sex := NULL]
+```
+
+### Renaming with `setnames()`
+
+You don't need to reassign with <- if you use `setnames()`!
+
+```{r}
+setnames(df4, "iq", "intelligence") # setnames(datatable, oldname, newname)
+setnames(df4, c("intelligence", "scores", "classroom", "sex")) # rename all variables
+```
+
+## More `data.table` information
+
+For more `data.table` information and tips and tricks, google for them...
+
+* [tutorial/vignette](https://cran.r-project.org/web/packages/data.table/vignettes/datatable-intro.html)
+* [official documentation](https://cran.r-project.org/web/packages/data.table/data.table.pdf)
+
