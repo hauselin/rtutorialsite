@@ -1371,38 +1371,16 @@ Articles
 <h2 id="setting-up-installing-r-packageslibraries-install.packages">Setting up: Installing R packages/libraries <code>install.packages()</code></h2>
 <p>Use the <code>install.packages()</code> function to install packages from CRAN (The Comprehensive R Archive Network), which hosts official releases of different packages (also known as libraries) written by R users (people like you and I can write these packages).</p>
 <p>Install packages once and you’ll have them on your computer. You only need to update them regularly in the future. No need to rerun <code>install.packages()</code> every time you want to use these packages.</p>
-<p>For more information, see <a href="https://github.com/hauselin/RDataScience">here</a>.</p>
-<p>Installing packages one by one.</p>
-<div class="layout-chunk" data-layout="l-body">
-<pre class="r"><code>
-# install one by one
-install.packages(&quot;tidyverse&quot;)
-install.packages(&quot;data.table&quot;)
-install.packages(&quot;broom&quot;)
-install.packages(&quot;dtplyr&quot;)
-install.packages(&quot;lme4&quot;)
-install.packages(&quot;lmerTest&quot;)
-install.packages(&quot;ggbeeswarm&quot;)
-install.packages(&quot;cowplot&quot;)
-install.packages(&quot;piecewiseSEM&quot;)
-install.packages(&quot;compute.es&quot;)
-install.packages(&quot;sjstats&quot;)
-install.packages(&quot;sjPlot&quot;)</code></pre>
-</div>
 <p>Or install packages all at once, calling <code>install.packages()</code> function just once, using the <code>c()</code> (combine/concatenate) to combine all your package names into one big vector (more on what vectors and classes are later).</p>
 <div class="layout-chunk" data-layout="l-body">
 <pre class="r"><code>
-install.packages(c(&quot;tidyverse&quot;, &quot;data.table&quot;, &quot;broom&quot;, &quot;dtplyr&quot;, 
-                   &quot;lme4&quot;, &quot;lmerTest&quot;, &quot;ggbeeswarm&quot;, &quot;cowplot&quot;, 
-                   &quot;piecewiseSEM&quot;, &quot;compute.es&quot;, &quot;sjstats&quot;, &quot;sjPlot&quot;))</code></pre>
+install.packages(c(&quot;tidyverse&quot;, &quot;data.table&quot;, &quot;dtplyr&quot;))</code></pre>
 </div>
 <h2 id="usingloading-r-packages-when-you-begin-a-new-rstudio-session-library">Using/loading R packages when you begin a new RStudio session <code>library()</code></h2>
 <p>Use <code>library()</code> to load packages and use semi-colon (;) to load multiple packages in the same line. I always load the packages below whenever I start a new RStudio session. Sometimes you’ll see people using <code>require()</code> instead of <code>library()</code>. Both works!</p>
 <div class="layout-chunk" data-layout="l-body">
 <pre class="r"><code>
-library(tidyverse); library(data.table); library(broom); 
-library(dtplyr); library(lme4); library(lmerTest); library(ggbeeswarm); 
-library(cowplot)</code></pre>
+library(tidyverse); library(data.table); library(dtplyr)</code></pre>
 </div>
 <h2 id="changing-r-default-option-settings">Changing R default option settings</h2>
 <p>I also strongly recommend changing a few default R options. Click on <strong>RStudio -&gt; Preferences -&gt; General Tab</strong> and (un)check the boxes below.</p>
@@ -1498,9 +1476,7 @@ Coefficients:
 <pre class="r"><code>
 class(mean)  </code></pre>
 <pre><code>
-[1] &quot;standardGeneric&quot;
-attr(,&quot;package&quot;)
-[1] &quot;methods&quot;</code></pre>
+[1] &quot;function&quot;</code></pre>
 </div>
 <p>Creating objects (specifically vectors) with the <code>&lt;-</code> assignment operator</p>
 <p>Keyboard shortcut for <code>&lt;-</code>: Alt -</p>

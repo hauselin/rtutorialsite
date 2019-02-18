@@ -47,32 +47,10 @@ Use the `install.packages()` function to install packages from CRAN (The Compreh
 
 Install packages once and you'll have them on your computer. You only need to update them regularly in the future. No need to rerun `install.packages()` every time you want to use these packages.
 
-For more information, see [here](https://github.com/hauselin/RDataScience).
-
-Installing packages one by one.
-
-```{r installing packages, eval=FALSE}
-# install one by one
-install.packages("tidyverse")
-install.packages("data.table")
-install.packages("broom")
-install.packages("dtplyr")
-install.packages("lme4")
-install.packages("lmerTest")
-install.packages("ggbeeswarm")
-install.packages("cowplot")
-install.packages("piecewiseSEM")
-install.packages("compute.es")
-install.packages("sjstats")
-install.packages("sjPlot")
-```
-
 Or install packages all at once, calling `install.packages()` function just once, using the `c()` (combine/concatenate) to combine all your package names into one big vector (more on what vectors and classes are later). 
 
 ```{r installing packages2, eval=FALSE}
-install.packages(c("tidyverse", "data.table", "broom", "dtplyr", 
-                   "lme4", "lmerTest", "ggbeeswarm", "cowplot", 
-                   "piecewiseSEM", "compute.es", "sjstats", "sjPlot"))
+install.packages(c("tidyverse", "data.table", "dtplyr"))
 ```
 
 ## Using/loading R packages when you begin a new RStudio session `library()`
@@ -80,9 +58,7 @@ install.packages(c("tidyverse", "data.table", "broom", "dtplyr",
 Use `library()` to load packages and use semi-colon (;) to load multiple packages in the same line. I always load the packages below whenever I start a new RStudio session. Sometimes you'll see people using `require()` instead of `library()`. Both works!
 
 ```{r loading packages, results="hide", message=FALSE, warning=FALSE}
-library(tidyverse); library(data.table); library(broom); 
-library(dtplyr); library(lme4); library(lmerTest); library(ggbeeswarm); 
-library(cowplot)
+library(tidyverse); library(data.table); library(dtplyr)
 ```
 
 ## Changing R default option settings
