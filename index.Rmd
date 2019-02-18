@@ -5,6 +5,10 @@ description: |
 site: radix::radix_website
 ---
 
+[hausekeep R package](https://hauselin.github.io/hausekeep/)
+
+[Effect size converter (Shiny app)](https://hause.shinyapps.io/shinyapp_effectsize/)
+
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = FALSE)
 
