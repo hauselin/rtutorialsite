@@ -32,6 +32,8 @@ knit_hooks$set(output = function(x, options) {
 })
 ```
 
+Get source code for this RMarkdown script [here](https://github.com/hauselin/rtutorialsite/blob/master/0000_install.Rmd).
+
 If you're new to R, follow the instructions below to install R and RStudio. Otherwise, check out my tutorials and posts. To download all the resources on this site, visit my [GitHub site](https://github.com/hauselin/rtutorialsite). Click the green **Clone or download** button at the top right of the page to download everything. The RMarkdown scripts used to generate all the tutorials and posts have filenames that end with **.Rmd**.
 
 ## Installing (or updating) R and RStudio

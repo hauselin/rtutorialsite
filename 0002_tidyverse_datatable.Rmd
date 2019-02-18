@@ -32,6 +32,8 @@ knit_hooks$set(output = function(x, options) {
 })
 ```
 
+Get source code for this RMarkdown script [here](https://github.com/hauselin/rtutorialsite/blob/master/0002_tidyverse_datatable.Rmd).
+
 ## Load packages/libraries
 
 Use `library()` to load packages at the top of each R script.

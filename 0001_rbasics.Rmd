@@ -32,6 +32,8 @@ knit_hooks$set(output = function(x, options) {
 })
 ```
 
+Get source code for this RMarkdown script [here](https://github.com/hauselin/rtutorialsite/blob/master/0001_rbasics.Rmd).
+
 ## What is data science?
 
 * Cleaning, wrangling, and munging data
