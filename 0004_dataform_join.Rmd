@@ -1,0 +1,339 @@
+---
+title: "long/wide form data and joining"
+description: What are long and wide (tidy vs. messy) forms and how to join different datasets.
+output:
+    radix::radix_article:
+        toc: true
+        toc_depth: 3
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE,
+                      R.options = list(width = 80),
+                      tidy = TRUE,
+                      tidy.opts = list(width.cutoff = 80))
+```
+
+
+```{r wrap-hook, include=FALSE}
+# function that adds knitr parameter to control line width
+# https://github.com/yihui/knitr-examples/blob/master/077-wrap-output.Rmd
+library(knitr)
+hook_output = knit_hooks$get('output')
+knit_hooks$set(output = function(x, options) {
+  # this hook is used only when the linewidth option is not NULL
+  if (!is.null(n <- options$linewidth)) {
+    x = knitr:::split_lines(x)
+    # any lines wider than n should be wrapped
+    if (any(nchar(x) > n)) x = strwrap(x, width = n)
+    x = paste(x, collapse = '\n')
+  }
+  hook_output(x, options)
+})
+```
+
+## Load packages/libraries
+
+Use `library()` to load packages at the top of each R script.
+
+```{r loading packages, results="hide", message=FALSE, warning=FALSE}
+library(tidyverse); library(data.table); library(dtplyr)
+```
+
+## Wide vs. long data (messy vs. tidy data)
+
+Manually create wide data
+
+```{r}
+wide <- data_frame(student = c("Andy", "Mary"),
+                   englishGrades = c(1, -2),
+                   mathGrades = englishGrades * 10,
+                   physicsGrades = mathGrades * 100)
+wide
+```
+
+Manually create equivalent long data
+
+```{r}
+long <- data_frame(student = rep(c("Andy", "Mary"), each = 3),
+                   class = rep(c("englishGrades", "mathGrades", "physicsGrades"), times = 2),
+                   grades = c(1, 10, 1000, -2, -20, -2000))
+long
+```
+
+Compare wide vs long
+
+```{r}
+wide # wide
+```
+
+```{r}
+long # long
+```
+
+## Wide to long with `melt()` (from `data.table`)
+
+There is a base R `melt()` function that is less powerful and slower than the `melt()` that comes with `data.table`. As long as you've loaded `data.table` with `library(data.table)`, you'll be using the more powerful version of `melt()`.
+
+```{r}
+melt(wide, id.vars = c("student"))
+```
+
+Rename variables
+
+```{r}
+melt(wide, id.vars = c("student"), variable.name = "cLaSs", value.name = "gRaDeS") 
+```
+
+Compare with the long form we created
+
+```{r}
+melt(wide, id.vars = c("student"), variable.name = "cLaSs", value.name = "gRaDeS") %>% 
+    arrange(student, cLaSs)
+```
+
+```{r}
+long
+```
+
+## Wide to long with `gather()` (from `tidyverse` and `tidyr`)
+
+`gather()` is less flexible than `melt()`
+
+```{r}
+gather(wide, key = cLaSs, value = gRaDeS, -student) # remove the id column
+```
+
+## Long to wide with `dcast()` (from `data.table`)
+
+There is a base R `dcast()` function that is less powerful and slower than the `dcast()` that comes with `data.table`. As long as you've loaded `data.table` with `library(data.table)`, you'll be using the more powerful version of `dcast()`.
+
+* left-side of formula ~: id variables (can be more than 1)
+* right-wide of formula ~: columns/variables to split by (can be more than 1)
+* value.var: which column has the values (can be more than 1)
+
+```{r}
+dcast(long, student ~ class, value.var = "grades")
+```
+
+```{r}
+wide # compare with dcast() output
+```
+
+## Long to wide with `spread()` (from `tidyverse` and `tidyr`)
+
+`spread()` is less flexible than `dcast()`
+
+```{r}
+spread(long, key = class, value = grades)
+```
+
+```{r}
+wide # compare with spread() output
+```
+
+Another example
+
+![Long to wide form](./attachments/long_to_wide.png)
+
+## Resources for converting data forms and reshaping
+
+* [reshaping and converting forms](http://seananderson.ca/2013/10/19/reshape/)
+* [tutorial/vignette](https://cran.r-project.org/web/packages/data.table/vignettes/datatable-reshape.html)
+
+## Joining/binding data (rows)
+
+```{r}
+wide # original data
+```
+
+```{r}
+moreRows <- data_frame(student = c("John", "Jane"),
+                       englishGrades = c(5, -5),
+                       mathGrades = englishGrades * 10,
+                       physicsGrades = mathGrades * NA)
+moreRows
+```
+
+```{r}
+rbind(wide, moreRows)
+```
+
+```{r}
+bind_rows(wide, moreRows)
+```
+
+`bind_rows` has same effect as rbind() above, but much more efficient/flexible and binds even if column numbers don't match (see below).
+
+```{r}
+moreRows2 <- data_frame(student = c("John", "Jane"),
+                       englishGrades = c(5, -5),
+                       mathGrades = englishGrades * 10)
+moreRows2
+```
+
+```{r}
+wide
+moreRows2 # one less column
+```
+
+```{r, error=TRUE}
+rbind(wide, moreRows2) # error
+```
+
+```{r}
+bind_rows(wide, moreRows2) # no error but fills with NA
+```
+
+## Joining/binding data (columns)
+
+Same with `rbind()`, you can use `cbind()` to join data by columns. And `bind_cols()` is much more efficient and flexible. 
+
+```{r}
+wide2 <- bind_rows(wide, moreRows2)
+wide2
+```
+
+```{r}
+columnsToBind <- data_frame(extraCol = c(999, NA, 999, NA))
+columnsToBind
+```
+
+```{r}
+bind_cols(wide2, columnsToBind)
+```
+
+## Joining data with `left_join()` (from `tidyverse`)
+
+Type `?left_join()` in your console to see all other types of joins. I use `left_join()` most frequently.
+
+Look at the data below. What if we have some information about each student in a separate dataframe and we want to merge the datasets?
+
+```{r}
+wide2
+```
+
+Let's say we know the gender and chemistry grades of each student...
+
+```{r}
+extraInfo <- data_frame(student = c("Jane", "John", "Mary", "Andy"),
+                        chemistryGrades = c(900, 901, 902, 903))
+extraInfo
+```
+
+Can we merge the data `wide2` and `extraInfo` with `bind_cols()`?
+
+```{r}
+bind_cols(wide2, extraInfo)
+```
+
+What's wrong? How to fix it?
+
+```{r}
+left_join(wide2, extraInfo)
+```
+
+Is the output what you expect? Is it correct? What does the 'Joining, by = "student"' mean?
+
+What if we have missing/incomplete extra information?
+
+```{r}
+extraInfo2 <- data_frame(student = c("Jane", "John"),
+                        chemistryGrades = c(900, 901))
+extraInfo2
+```
+
+```{r}
+left_join(wide2, extraInfo2)
+```
+
+Works! Rows with missing information have `NA`.
+
+Note that you can specify which columns/variables to join by via the `by` parameter in all join functions. By default, R automatically finds matching column/variable names between both data objects and joins by ALL matching columns/variables.
+
+Also, the output class of join functions are not `data.table`! To convert class, use pipes!
+
+```{r}
+class(left_join(wide2, extraInfo2)) # not data.table (no...)
+left_join(wide2, extraInfo2) %>% tbl_dt() # convert to data.table
+left_join(wide2, extraInfo2) %>% tbl_dt() %>% class() # check class (data.table! yea!)
+```
+
+## Within-subjects, between-subjects designs, covariates
+
+Create some data
+
+```{r}
+gradesWide <- left_join(wide2, extraInfo2)
+gradesWide
+```
+
+Wide form data is good for dependent/paired t.tests in R (within-subjects)
+
+```{r}
+t.test(gradesWide$englishGrades, gradesWide$mathGrades, paired = T)
+t.test(gradesWide$englishGrades, gradesWide$chemistryGrades, paired = T)
+```
+
+But long-form data is generally preferred
+
+```{r}
+gradesLong <- melt(gradesWide, id.vars = "student", variable.name = "class", value.name = "grade") %>% 
+    arrange(student) %>% # sort by student
+    tbl_dt() # convert to data.table and tibble
+gradesLong
+```
+
+What if we want to use `englishGrades` as a covariate? Then the covariate has to be in a separate column/variable.
+
+Subset data with just covariate and id variable
+
+```{r}
+covariate_englishGrades <- gradesLong[class == "englishGrades", .(student, grade)]
+covariate_englishGrades
+```
+
+Rename covariate 
+
+```{r}
+setnames(covariate_englishGrades, "grade", "englishGrades")
+covariate_englishGrades
+```
+
+Use `left_join()` to add covariate to data
+
+```{r}
+gradesLong_covariate <- left_join(gradesLong, covariate_englishGrades)
+gradesLong_covariate
+
+# remove englishGrades from long form data if necessary
+gradesLong_covariate2 <- gradesLong_covariate[class != "englishGrades"] 
+gradesLong_covariate2
+```
+
+Fit model with covariate using `lm()` (linear model)
+
+```{r}
+summary(lm(grade ~ class + englishGrades, data = gradesLong_covariate2))
+```
+
+Get ANOVA output from `lm()` output
+
+```{r}
+summary.aov(lm(grade ~ class + englishGrades, data = gradesLong_covariate2))
+```
+
+```{r}
+anova(lm(grade ~ class + englishGrades, data = gradesLong_covariate2))
+```
+
+Fit model with covariate using `aov()` (ANOVA)
+
+```{r}
+summary(aov(grade ~ class + englishGrades, data = gradesLong_covariate2))
+```
+
+## More join resources
+
+* [official documentation](https://dplyr.tidyverse.org/reference/join.html)
+* [more tutorial](http://stat545.com/bit001_dplyr-cheatsheet.html)

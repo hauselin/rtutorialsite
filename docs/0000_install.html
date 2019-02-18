@@ -19,30 +19,30 @@
  <!--/radix_placeholder_import_source-->
 
   <!--radix_placeholder_meta_tags-->
-  <title>Data science with R for experimental psychologists: About this site</title>
+  <title>Data science with R for experimental psychologists: Installing R and libaries</title>
   
-  <meta property="description" itemprop="description" content="Some additional details about the website"/>
+  <meta property="description" itemprop="description" content="Install R, RStudio, and useful libraries/packages."/>
   
   <link rel="license" href="https://creativecommons.org/licenses/by/4.0/"/>
   
   
   <!--  https://developers.facebook.com/docs/sharing/webmasters#markup -->
-  <meta property="og:title" content="Data science with R for experimental psychologists: About this site"/>
+  <meta property="og:title" content="Data science with R for experimental psychologists: Installing R and libaries"/>
   <meta property="og:type" content="article"/>
-  <meta property="og:description" content="Some additional details about the website"/>
+  <meta property="og:description" content="Install R, RStudio, and useful libraries/packages."/>
   <meta property="og:locale" content="en_US"/>
   <meta property="og:site_name" content="Data science with R for experimental psychologists"/>
   
   <!--  https://dev.twitter.com/cards/types/summary -->
   <meta property="twitter:card" content="summary"/>
-  <meta property="twitter:title" content="Data science with R for experimental psychologists: About this site"/>
-  <meta property="twitter:description" content="Some additional details about the website"/>
+  <meta property="twitter:title" content="Data science with R for experimental psychologists: Installing R and libaries"/>
+  <meta property="twitter:description" content="Install R, RStudio, and useful libraries/packages."/>
   
   <!--/radix_placeholder_meta_tags-->
   <!--radix_placeholder_rmarkdown_metadata-->
   
   <script type="text/json" id="radix-rmarkdown-metadata">
-  {"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["title","description"]}},"value":[{"type":"character","attributes":{},"value":["About this site"]},{"type":"character","attributes":{},"value":["Some additional details about the website"]}]}
+  {"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["title","description","output"]}},"value":[{"type":"character","attributes":{},"value":["Installing R and libaries"]},{"type":"character","attributes":{},"value":["Install R, RStudio, and useful libraries/packages."]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["radix::radix_article"]}},"value":[{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["toc","toc_depth"]}},"value":[{"type":"logical","attributes":{},"value":[true]},{"type":"integer","attributes":{},"value":[3]}]}]}]}
   </script>
   <!--/radix_placeholder_rmarkdown_metadata-->
   <!--radix_placeholder_navigation_in_header-->
@@ -1280,7 +1280,7 @@
 <!--radix_placeholder_front_matter-->
 
 <script id="distill-front-matter" type="text/json">
-{"title":"About this site","description":"Some additional details about the website","authors":[]}
+{"title":"Installing R and libaries","description":"Install R, RStudio, and useful libraries/packages.","authors":[]}
 </script>
 
 <!--/radix_placeholder_front_matter-->
@@ -1320,19 +1320,103 @@ Tutorials
 <!--/radix_placeholder_site_before_body-->
 
 <div class="d-title">
-<h1>About this site</h1>
-<p>Some additional details about the website</p>
+<h1>Installing R and libaries</h1>
+<p>Install R, RStudio, and useful libraries/packages.</p>
 </div>
 
 
 <div class="d-article">
-<div class="layout-chunk" data-layout="l-body">
-<pre><code>
-[1] &quot;abc&quot;</code></pre>
-</div>
-<aside>
-this will appear in the gutter
-</aside>
+<h3 class="d-toc-header">Table of Contents</h3>
+<nav class="d-toc" id="TOC">
+<ul>
+<li><a href="#installing-or-updating-r-and-rstudio">Installing (or updating) R and RStudio</a></li>
+<li><a href="#installing-r-packages">Installing R packages</a></li>
+</ul>
+</nav>
+<hr class="d-toc-separator"/>
+<p>If you’re new to R, follow the instructions below to install R and RStudio. Otherwise, check out my tutorials and posts. To download all the resources on this site, visit my <a href="https://github.com/hauselin/rtutorialsite">GitHub site</a>. Click the green <strong>Clone or download</strong> button at the top right of the page to download everything. The RMarkdown scripts used to generate all the tutorials and posts have filenames that end with <strong>.Rmd</strong>.</p>
+<h2 id="installing-or-updating-r-and-rstudio">Installing (or updating) R and RStudio</h2>
+<ol type="1">
+<li>Download R <a href="https://www.r-project.org/">here</a>. Follow the instructions under <strong>Getting Started</strong> to download R. Choose a mirror/location that is closest to you and download R for Linux, Mac, or Windows.</li>
+</ol>
+<ul>
+<li>R is a programming language and an environment. It doesn’t look too good and isn’t too user-friendly. We generally use RStudio as a pretty and user-friendly interface to R.</li>
+</ul>
+<ol start="2" type="1">
+<li><p>Download RStudio <a href="https://www.rstudio.com/products/rstudio/download/">here</a> (the FREE version).</p></li>
+<li><p>After installing both R and RStudio, run RStudio. We usually never use R itself and always run RStudio (RStudio relies on R). R is like your new but empty home (without furnitures and quite unlivable unless you’re a real minimalist) and RStudio are like furniture and decorations added to your house (R), making your house much more livable and even pretty. Thus, RStudio is useless without R, just like furniture and decorations are useless if you don’t already have a house.</p></li>
+</ol>
+<p><strong>Updating R and RStudio once every few months</strong></p>
+<p>You should check whether there are newer versions of R and RStudio at least once every few months and install them if available. It’s good practice to always use the latest versions. Just go to their websites and download and re-install them again.</p>
+<h2 id="installing-r-packages">Installing R packages</h2>
+<p>Here’s how to install R packages (also called libraries) that extend R’s basic functionalities. Below are packages I use regularly. Make sure you have the latest version of R and RStudio. To install packages, run the following code in RStudio. You only need to install any given package once (but remember to update them when newer versions are available).</p>
+<p>I also have my own package <a href="https://hauselin.github.io/hausekeep/">hausekeep</a>, which has functions I use frequently.</p>
+<p>which will also try to install a few of these packages if you don’t already have them). To install all of them, first</p>
+<p>You can install one package at a time or multiple at once. I suggest installing one at a time because it can be can be error-prone if you try to install too many packages at once because the warning/error messages can become difficult quite abstruse (if there are any).</p>
+<p>Comments are preceded by the # symbol in R, and you can use # or #’ for multi-line comments. R won’t run any code that’s preceded by the # symbol.</p>
+<pre class="r"><code>
+# install packages all at once using c(), which allows you to combine/concatenate stuff
+install.packages(c(&quot;tidyverse&quot;, &quot;data.table&quot;, &quot;broom&quot;, &quot;dtplyr&quot;, &quot;lme4&quot;, 
+                   &quot;lmerTest&quot;, &quot;ggbeeswarm&quot;, &quot;cowplot&quot;, &quot;piecewiseSEM&quot;,
+                   &quot;compute.es&quot;, &quot;sjstats&quot;, &quot;sjPlot&quot;, &quot;Hmisc&quot;))
+
+# install hausekeep package from my github
+# install.packages(&quot;devtools&quot;)
+devtools::install_github(&quot;hauselin/hausekeep&quot;) # you might have to install devtools first (see above)
+
+#&#39; or you can install one package at a time
+#&#39; I have commented out (added a # sign in front of a line)
+#&#39; the line of code below so I won&#39;t run it accidentally,
+#&#39; or it&#39;s to tell myself or others who are reading my code,
+#&#39; that I usually don&#39;t intend to run this line of code
+#&#39; unless I really want to.
+# install.packages(&quot;tidyverse&quot;)
+# install.packages(&quot;data.table&quot;)</code></pre>
+<p>Every time I start a new R session in RStudio, I usually run the code below at the top of my R script to load all these libraries all at once using <code>library()</code>.</p>
+<pre class="r"><code>
+library(tidyverse); library(data.table); library(broom); library(dtplyr); 
+library(lme4); library(lmerTest); library(ggbeeswarm); 
+library(cowplot); library(hausekeep)</code></pre>
+<p>These R packages above are very powerful and it’s worth learning them well.</p>
+<ul>
+<li><a href="https://www.tidyverse.org/">tidyverse</a> packages (e.g., dplyr, tidyr, ggplot2, stringr)
+<ul>
+<li>manipulate dataframes (and tibbles) easily with tidyr, dplyr</li>
+<li>make beautiful plots with clean syntax (ggplot2)</li>
+</ul></li>
+<li><a href="https://cran.r-project.org/web/packages/data.table/vignettes/datatable-intro.html">data.table</a>
+<ul>
+<li>powerful, extremely fast, and simple way to manipulate dataframes/datatables</li>
+</ul></li>
+<li><a href="https://cran.r-project.org/web/packages/broom/vignettes/broom.html">broom</a>
+<ul>
+<li>converts model outputs into tidy dataframes</li>
+</ul></li>
+<li><a href="https://github.com/hadley/dtplyr">dtplyr</a>
+<ul>
+<li><code>tbl_dt()</code> function from this package combines the best of tidyverse and data.table packages</li>
+</ul></li>
+<li><a href="https://www.jaredknowles.com/journal/2013/11/25/getting-started-with-mixed-effect-models-in-r">lme4</a>
+<ul>
+<li>fit linear mixed effects models</li>
+</ul></li>
+<li><a href="https://cran.r-project.org/web/packages/lmerTest/index.html">lmerTest</a>
+<ul>
+<li>compute probability values and degrees of freedom for mixed effects models fitted using lme4 package (uses Satterthwaite approximation)</li>
+</ul></li>
+<li><a href="https://github.com/eclarke/ggbeeswarm">ggbeeswarm</a>
+<ul>
+<li>produces beautiful and informative ggplots that show distributions of datapoints</li>
+</ul></li>
+<li><a href="https://cran.r-project.org/web/packages/cowplot/vignettes/introduction.html">cowplot</a>
+<ul>
+<li>combines multiple ggplots into one plot</li>
+</ul></li>
+<li><a href="https://hauselin.github.io/hausekeep/">hausekeep</a>
+<ul>
+<li>miscellaneous functions for psychological research</li>
+</ul></li>
+</ul>
 <!--radix_placeholder_article_footer-->
 <!--/radix_placeholder_article_footer-->
 </div>

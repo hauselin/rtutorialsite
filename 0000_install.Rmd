@@ -1,0 +1,112 @@
+---
+title: "Installing R and libaries"
+description: Install R, RStudio, and useful libraries/packages.
+output:
+    radix::radix_article:
+        toc: true
+        toc_depth: 3
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE,
+                      R.options = list(width = 80),
+                      tidy = TRUE,
+                      tidy.opts = list(width.cutoff = 80))
+```
+
+
+```{r wrap-hook, include=FALSE}
+# function that adds knitr parameter to control line width
+# https://github.com/yihui/knitr-examples/blob/master/077-wrap-output.Rmd
+library(knitr)
+hook_output = knit_hooks$get('output')
+knit_hooks$set(output = function(x, options) {
+  # this hook is used only when the linewidth option is not NULL
+  if (!is.null(n <- options$linewidth)) {
+    x = knitr:::split_lines(x)
+    # any lines wider than n should be wrapped
+    if (any(nchar(x) > n)) x = strwrap(x, width = n)
+    x = paste(x, collapse = '\n')
+  }
+  hook_output(x, options)
+})
+```
+
+If you're new to R, follow the instructions below to install R and RStudio. Otherwise, check out my tutorials and posts. To download all the resources on this site, visit my [GitHub site](https://github.com/hauselin/rtutorialsite). Click the green **Clone or download** button at the top right of the page to download everything. The RMarkdown scripts used to generate all the tutorials and posts have filenames that end with **.Rmd**.
+
+## Installing (or updating) R and RStudio
+
+1. Download R [here](https://www.r-project.org/). Follow the instructions under **Getting Started** to download R. Choose a mirror/location that is closest to you and download R for Linux, Mac, or Windows.
+
+* R is a programming language and an environment. It doesn't look too good and isn't too user-friendly. We generally use RStudio as a pretty and user-friendly interface to R.
+
+2. Download RStudio [here](https://www.rstudio.com/products/rstudio/download/) (the FREE version).
+
+3. After installing both R and RStudio, run RStudio. We usually never use R itself and always run RStudio (RStudio relies on R). R is like your new but empty home (without furnitures and quite unlivable unless you're a real minimalist) and RStudio are like furniture and decorations added to your house (R), making your house much more livable and even pretty. Thus, RStudio is useless without R, just like furniture and decorations are useless if you don't already have a house. 
+
+**Updating R and RStudio once every few months**
+
+You should check whether there are newer versions of R and RStudio at least once every few months and install them if available. It's good practice to always use the latest versions. Just go to their websites and download and re-install them again.
+
+
+## Installing R packages
+
+Here's how to install R packages (also called libraries) that extend R's basic functionalities. Below are packages I use regularly. Make sure you have the latest version of R and RStudio. To install packages, run the following code in RStudio. You only need to install any given package once (but remember to update them when newer versions are available).
+
+I also have my own package [hausekeep](https://hauselin.github.io/hausekeep/), which has functions I use frequently.
+
+which will also try to install a few of these packages if you don't already have them). To install all of them, first 
+
+You can install one package at a time or multiple at once. I suggest installing one at a time because it can be can be error-prone if you try to install too many packages at once because the warning/error messages can become difficult quite abstruse (if there are any).
+
+Comments are preceded by the # symbol in R, and you can use # or #' for multi-line comments. R won't run any code that's preceded by the # symbol.
+
+```r
+# install packages all at once using c(), which allows you to combine/concatenate stuff
+install.packages(c("tidyverse", "data.table", "broom", "dtplyr", "lme4", 
+                   "lmerTest", "ggbeeswarm", "cowplot", "piecewiseSEM",
+                   "compute.es", "sjstats", "sjPlot", "Hmisc"))
+
+# install hausekeep package from my github
+# install.packages("devtools")
+devtools::install_github("hauselin/hausekeep") # you might have to install devtools first (see above)
+
+#' or you can install one package at a time
+#' I have commented out (added a # sign in front of a line)
+#' the line of code below so I won't run it accidentally,
+#' or it's to tell myself or others who are reading my code,
+#' that I usually don't intend to run this line of code
+#' unless I really want to.
+# install.packages("tidyverse")
+# install.packages("data.table")
+```
+
+Every time I start a new R session in RStudio, I usually run the code below at the top of my R script to load all these libraries all at once using `library()`.
+
+```r
+library(tidyverse); library(data.table); library(broom); library(dtplyr); 
+library(lme4); library(lmerTest); library(ggbeeswarm); 
+library(cowplot); library(hausekeep)
+```
+
+These R packages above are very powerful and it's worth learning them well.
+
+- [tidyverse](https://www.tidyverse.org/) packages (e.g., dplyr, tidyr, ggplot2, stringr)
+  - manipulate dataframes (and tibbles) easily with tidyr, dplyr
+  - make beautiful plots with clean syntax (ggplot2)
+- [data.table](https://cran.r-project.org/web/packages/data.table/vignettes/datatable-intro.html)
+  - powerful, extremely fast, and simple way to manipulate dataframes/datatables
+- [broom](https://cran.r-project.org/web/packages/broom/vignettes/broom.html)
+  - converts model outputs into tidy dataframes
+- [dtplyr](https://github.com/hadley/dtplyr)
+  - `tbl_dt()` function from this package combines the best of tidyverse and data.table packages
+- [lme4](https://www.jaredknowles.com/journal/2013/11/25/getting-started-with-mixed-effect-models-in-r)
+  - fit linear mixed effects models
+- [lmerTest](https://cran.r-project.org/web/packages/lmerTest/index.html)
+  - compute probability values and degrees of freedom for mixed effects models fitted using lme4 package (uses Satterthwaite approximation)
+- [ggbeeswarm](https://github.com/eclarke/ggbeeswarm)
+  - produces beautiful and informative ggplots that show distributions of datapoints
+- [cowplot](https://cran.r-project.org/web/packages/cowplot/vignettes/introduction.html)
+  - combines multiple ggplots into one plot
+- [hausekeep](https://hauselin.github.io/hausekeep/)
+  - miscellaneous functions for psychological research 

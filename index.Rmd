@@ -1,13 +1,19 @@
 ---
-title: "rtutorials"
-description: |
-  Welcome to the website. I hope you enjoy it!
+title: "Data science with R"
+description:   
 site: radix::radix_website
 ---
 
+
+
+
+
+
 [hausekeep R package](https://hauselin.github.io/hausekeep/)
 
-[Effect size converter (Shiny app)](https://hause.shinyapps.io/shinyapp_effectsize/)
+
+
+
 
 
 ```{r setup, include=FALSE}

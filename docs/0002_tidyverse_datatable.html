@@ -19,7 +19,7 @@
  <!--/radix_placeholder_import_source-->
 
   <!--radix_placeholder_meta_tags-->
-  <title>rtutorials: tidyverse and data.table</title>
+  <title>Data science with R for experimental psychologists: tidyverse and data.table</title>
   
   <meta property="description" itemprop="description" content="R tidyverse and data.table packages basics"/>
   
@@ -27,15 +27,15 @@
   
   
   <!--  https://developers.facebook.com/docs/sharing/webmasters#markup -->
-  <meta property="og:title" content="rtutorials: tidyverse and data.table"/>
+  <meta property="og:title" content="Data science with R for experimental psychologists: tidyverse and data.table"/>
   <meta property="og:type" content="article"/>
   <meta property="og:description" content="R tidyverse and data.table packages basics"/>
   <meta property="og:locale" content="en_US"/>
-  <meta property="og:site_name" content="rtutorials"/>
+  <meta property="og:site_name" content="Data science with R for experimental psychologists"/>
   
   <!--  https://dev.twitter.com/cards/types/summary -->
   <meta property="twitter:card" content="summary"/>
-  <meta property="twitter:title" content="rtutorials: tidyverse and data.table"/>
+  <meta property="twitter:title" content="Data science with R for experimental psychologists: tidyverse and data.table"/>
   <meta property="twitter:description" content="R tidyverse and data.table packages basics"/>
   
   <!--/radix_placeholder_meta_tags-->
@@ -1288,11 +1288,12 @@
 <header class="header header--fixed" role="banner">
 <nav class="radix-site-nav radix-site-header">
 <div class="nav-left">
-<a href="index.html" class="title">rtutorials</a>
+<a href="index.html" class="title">Data science with R for experimental psychologists</a>
 </div>
 <div class="nav-right">
 <a href="index.html">Home</a>
 <a href="about.html">About</a>
+<a href="https://hause.shinyapps.io/shinyapp_effectsize/">Effect size converter</a>
 <div class="nav-dropdown">
 <button class="nav-dropbtn">
 Tutorials
@@ -1300,9 +1301,11 @@ Tutorials
 <span class="down-arrow">&#x25BE;</span>
 </button>
 <div class="nav-dropdown-content">
+<a href="0000_install.html">Install R and packages</a>
 <a href="0001_rbasics.html">R programming basics</a>
 <a href="0002_tidyverse_datatable.html">tidyverse and data.table</a>
 <a href="0003_ggplot_modelfitting.html">ggplot and model fitting</a>
+<a href="0004_dataform_join.html">long/wide form data and joining</a>
 </div>
 </div>
 <a href="https://github.com/hauselin/rtutorialsite">
@@ -2973,11 +2976,11 @@ Source: local data table [4 x 3]
 <pre class="r"><code>
 sample(x = c(&quot;female&quot;, &quot;male&quot;), size = 40, replace = T) # what is this doing</code></pre>
 <pre><code>
- [1] &quot;male&quot;   &quot;male&quot;   &quot;female&quot; &quot;female&quot; &quot;male&quot;   &quot;male&quot;   &quot;male&quot;   &quot;male&quot;  
- [9] &quot;female&quot; &quot;male&quot;   &quot;male&quot;   &quot;male&quot;   &quot;male&quot;   &quot;male&quot;   &quot;female&quot; &quot;male&quot;  
-[17] &quot;female&quot; &quot;male&quot;   &quot;female&quot; &quot;male&quot;   &quot;male&quot;   &quot;male&quot;   &quot;male&quot;   &quot;female&quot;
-[25] &quot;male&quot;   &quot;male&quot;   &quot;male&quot;   &quot;female&quot; &quot;male&quot;   &quot;female&quot; &quot;male&quot;   &quot;male&quot;  
-[33] &quot;male&quot;   &quot;female&quot; &quot;male&quot;   &quot;female&quot; &quot;male&quot;   &quot;male&quot;   &quot;male&quot;   &quot;male&quot;  </code></pre>
+ [1] &quot;female&quot; &quot;male&quot;   &quot;female&quot; &quot;female&quot; &quot;male&quot;   &quot;female&quot; &quot;male&quot;   &quot;male&quot;  
+ [9] &quot;female&quot; &quot;female&quot; &quot;male&quot;   &quot;female&quot; &quot;male&quot;   &quot;male&quot;   &quot;male&quot;   &quot;female&quot;
+[17] &quot;male&quot;   &quot;female&quot; &quot;female&quot; &quot;female&quot; &quot;male&quot;   &quot;female&quot; &quot;female&quot; &quot;female&quot;
+[25] &quot;male&quot;   &quot;female&quot; &quot;female&quot; &quot;male&quot;   &quot;female&quot; &quot;male&quot;   &quot;male&quot;   &quot;female&quot;
+[33] &quot;female&quot; &quot;male&quot;   &quot;female&quot; &quot;male&quot;   &quot;male&quot;   &quot;female&quot; &quot;female&quot; &quot;male&quot;  </code></pre>
 </div>
 <div class="layout-chunk" data-layout="l-body">
 <pre class="r"><code>
@@ -2995,43 +2998,43 @@ Source: local data table [40 x 4]
       iq grades class gender
    &lt;dbl&gt;  &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt; 
  1  94.5   67.9 a     female
- 2  95.4   82.5 a     female
- 3  97.8   69.1 a     male  
+ 2  95.4   82.5 a     male  
+ 3  97.8   69.1 a     female
  4  98.1   83.3 a     male  
  5  96.6   99.1 a     male  
- 6 102.    89.9 a     female
+ 6 102.    89.9 a     male  
  7 101.    73.7 a     male  
  8  97.1   47.9 a     male  
  9  94.2   55.6 a     male  
 10  94.4   44.5 a     male  
 11 104.    74.1 b     female
-12 103.    59.9 b     male  
-13 102.    47.9 b     female
+12 103.    59.9 b     female
+13 102.    47.9 b     male  
 14 105.    44.9 b     female
-15 106.    60.2 b     male  
+15 106.    60.2 b     female
 16 109.    64.9 b     female
-17 107.    74.5 b     female
-18 107.    49.9 b     male  
+17 107.    74.5 b     male  
+18 107.    49.9 b     female
 19 102.    37.9 b     female
-20 100.    54.9 b     male  
+20 100.    54.9 b     female
 21 111.    56.0 c     male  
-22 115.    56.0 c     female
+22 115.    56.0 c     male  
 23 112.    46.4 c     female
 24 109.    43.7 c     male  
 25 111.    36.4 c     male  
-26 114.    30.2 c     male  
-27 115.    39.5 c     female
+26 114.    30.2 c     female
+27 115.    39.5 c     male  
 28 119.    51.0 c     female
 29 113.    64.1 c     female
-30 118     55.3 c     female
-31 117.    17.5 d     female
+30 118     55.3 c     male  
+31 117.    17.5 d     male  
 32 121.    35.2 d     male  
 33 118.    29.9 d     female
 34 122.    18.3 d     male  
 35 124.    29.5 d     male  
-36 121.    53.7 d     female
-37 124.    63.7 d     female
-38 125.    48.7 d     male  
+36 121.    53.7 d     male  
+37 124.    63.7 d     male  
+38 125.    48.7 d     female
 39 125.    38.3 d     female
 40 128.    51.8 d     male  </code></pre>
 </div>
@@ -3049,14 +3052,14 @@ Groups: class
 # A tibble: 8 x 4
   class gender iqClassMean examGradesClassMean
   &lt;chr&gt; &lt;chr&gt;        &lt;dbl&gt;               &lt;dbl&gt;
-1 a     female        97.2                80.1
-2 a     male          97.0                67.6
-3 b     female       105.                 57.4
-4 b     male         104.                 56.2
-5 c     male         111.                 41.6
-6 c     female       115.                 52.0
-7 d     female       121.                 40.6
-8 d     male         124.                 36.7</code></pre>
+1 a     female        96.2                68.5
+2 a     male          97.3                72.1
+3 b     female       105.                 55.8
+4 b     male         104.                 61.2
+5 c     male         113.                 47.8
+6 c     female       114.                 47.9
+7 d     male         122.                 38.5
+8 d     female       122.                 39.0</code></pre>
 </div>
 <h2 id="more-dplyr-and-tidyverse-information">More <code>dplyr</code> and <code>tidyverse</code> information</h2>
 <p>For much more information, see the following sites</p>
@@ -3078,11 +3081,11 @@ Source: local data table [40 x 4]
       iq grades class gender
    &lt;dbl&gt;  &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt; 
  1  94.5   67.9 a     female
- 2  95.4   82.5 a     female
- 3  97.8   69.1 a     male  
+ 2  95.4   82.5 a     male  
+ 3  97.8   69.1 a     female
  4  98.1   83.3 a     male  
  5  96.6   99.1 a     male  
- 6 102.    89.9 a     female
+ 6 102.    89.9 a     male  
  7 101.    73.7 a     male  
  8  97.1   47.9 a     male  
  9  94.2   55.6 a     male  
@@ -3153,43 +3156,43 @@ Source: local data table [40 x 4]
       iq grades class gender
    &lt;dbl&gt;  &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt; 
  1  94.5   67.9 a     female
- 2  95.4   82.5 a     female
- 3  97.8   69.1 a     male  
+ 2  95.4   82.5 a     male  
+ 3  97.8   69.1 a     female
  4  98.1   83.3 a     male  
  5  96.6   99.1 a     male  
- 6 102.    89.9 a     female
+ 6 102.    89.9 a     male  
  7 101.    73.7 a     male  
  8  97.1   47.9 a     male  
  9  94.2   55.6 a     male  
 10  94.4   44.5 a     male  
 11 104.    74.1 b     female
-12 103.    59.9 b     male  
-13 102.    47.9 b     female
+12 103.    59.9 b     female
+13 102.    47.9 b     male  
 14 105.    44.9 b     female
-15 106.    60.2 b     male  
+15 106.    60.2 b     female
 16 109.    64.9 b     female
-17 107.    74.5 b     female
-18 107.    49.9 b     male  
+17 107.    74.5 b     male  
+18 107.    49.9 b     female
 19 102.    37.9 b     female
-20 100.    54.9 b     male  
+20 100.    54.9 b     female
 21 111.    56.0 c     male  
-22 115.    56.0 c     female
+22 115.    56.0 c     male  
 23 112.    46.4 c     female
 24 109.    43.7 c     male  
 25 111.    36.4 c     male  
-26 114.    30.2 c     male  
-27 115.    39.5 c     female
+26 114.    30.2 c     female
+27 115.    39.5 c     male  
 28 119.    51.0 c     female
 29 113.    64.1 c     female
-30 118     55.3 c     female
-31 117.    17.5 d     female
+30 118     55.3 c     male  
+31 117.    17.5 d     male  
 32 121.    35.2 d     male  
 33 118.    29.9 d     female
 34 122.    18.3 d     male  
 35 124.    29.5 d     male  
-36 121.    53.7 d     female
-37 124.    63.7 d     female
-38 125.    48.7 d     male  
+36 121.    53.7 d     male  
+37 124.    63.7 d     male  
+38 125.    48.7 d     female
 39 125.    38.3 d     female
 40 128.    51.8 d     male  </code></pre>
 <pre class="r"><code>
@@ -3202,87 +3205,66 @@ class(df4) # is it a data.table?</code></pre>
 <pre class="r"><code>
 df4[i = gender == &#39;female&#39;,] # just female (j, by are NULL)</code></pre>
 <pre><code>
-Source: local data table [20 x 4]
+Source: local data table [17 x 4]
 
-# A tibble: 20 x 4
+# A tibble: 17 x 4
       iq grades class gender
    &lt;dbl&gt;  &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt; 
  1  94.5   67.9 a     female
- 2  95.4   82.5 a     female
- 3 102.    89.9 a     female
- 4 104.    74.1 b     female
- 5 102.    47.9 b     female
- 6 105.    44.9 b     female
+ 2  97.8   69.1 a     female
+ 3 104.    74.1 b     female
+ 4 103.    59.9 b     female
+ 5 105.    44.9 b     female
+ 6 106.    60.2 b     female
  7 109.    64.9 b     female
- 8 107.    74.5 b     female
+ 8 107.    49.9 b     female
  9 102.    37.9 b     female
-10 115.    56.0 c     female
+10 100.    54.9 b     female
 11 112.    46.4 c     female
-12 115.    39.5 c     female
+12 114.    30.2 c     female
 13 119.    51.0 c     female
 14 113.    64.1 c     female
-15 118     55.3 c     female
-16 117.    17.5 d     female
-17 118.    29.9 d     female
-18 121.    53.7 d     female
-19 124.    63.7 d     female
-20 125.    38.3 d     female</code></pre>
+15 118.    29.9 d     female
+16 125.    48.7 d     female
+17 125.    38.3 d     female</code></pre>
 <pre class="r"><code>
 df4[i = gender != &#39;female&#39;,] # not female </code></pre>
 <pre><code>
-Source: local data table [20 x 4]
+Source: local data table [23 x 4]
 
-# A tibble: 20 x 4
+# A tibble: 23 x 4
       iq grades class gender
    &lt;dbl&gt;  &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt; 
- 1  97.8   69.1 a     male  
+ 1  95.4   82.5 a     male  
  2  98.1   83.3 a     male  
  3  96.6   99.1 a     male  
- 4 101.    73.7 a     male  
- 5  97.1   47.9 a     male  
- 6  94.2   55.6 a     male  
- 7  94.4   44.5 a     male  
- 8 103.    59.9 b     male  
- 9 106.    60.2 b     male  
-10 107.    49.9 b     male  
-11 100.    54.9 b     male  
-12 111.    56.0 c     male  
-13 109.    43.7 c     male  
-14 111.    36.4 c     male  
-15 114.    30.2 c     male  
-16 121.    35.2 d     male  
-17 122.    18.3 d     male  
-18 124.    29.5 d     male  
-19 125.    48.7 d     male  
-20 128.    51.8 d     male  </code></pre>
+ 4 102.    89.9 a     male  
+ 5 101.    73.7 a     male  
+ 6  97.1   47.9 a     male  
+ 7  94.2   55.6 a     male  
+ 8  94.4   44.5 a     male  
+ 9 102.    47.9 b     male  
+10 107.    74.5 b     male  
+# ... with 13 more rows</code></pre>
 <pre class="r"><code>
 df4[gender != &#39;female&#39;,] # also works</code></pre>
 <pre><code>
-Source: local data table [20 x 4]
+Source: local data table [23 x 4]
 
-# A tibble: 20 x 4
+# A tibble: 23 x 4
       iq grades class gender
    &lt;dbl&gt;  &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt; 
- 1  97.8   69.1 a     male  
+ 1  95.4   82.5 a     male  
  2  98.1   83.3 a     male  
  3  96.6   99.1 a     male  
- 4 101.    73.7 a     male  
- 5  97.1   47.9 a     male  
- 6  94.2   55.6 a     male  
- 7  94.4   44.5 a     male  
- 8 103.    59.9 b     male  
- 9 106.    60.2 b     male  
-10 107.    49.9 b     male  
-11 100.    54.9 b     male  
-12 111.    56.0 c     male  
-13 109.    43.7 c     male  
-14 111.    36.4 c     male  
-15 114.    30.2 c     male  
-16 121.    35.2 d     male  
-17 122.    18.3 d     male  
-18 124.    29.5 d     male  
-19 125.    48.7 d     male  
-20 128.    51.8 d     male  </code></pre>
+ 4 102.    89.9 a     male  
+ 5 101.    73.7 a     male  
+ 6  97.1   47.9 a     male  
+ 7  94.2   55.6 a     male  
+ 8  94.4   44.5 a     male  
+ 9 102.    47.9 b     male  
+10 107.    74.5 b     male  
+# ... with 13 more rows</code></pre>
 <pre class="r"><code>
 df4[grades &gt; 85,] # also works</code></pre>
 <pre><code>
@@ -3292,7 +3274,7 @@ Source: local data table [2 x 4]
      iq grades class gender
   &lt;dbl&gt;  &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt; 
 1  96.6   99.1 a     male  
-2 102.    89.9 a     female</code></pre>
+2 102.    89.9 a     male  </code></pre>
 <pre class="r"><code>
 # same as filter(df4, grades &gt; 85), but much more concise
 df4[grades &gt; 85] # also works</code></pre>
@@ -3303,7 +3285,7 @@ Source: local data table [2 x 4]
      iq grades class gender
   &lt;dbl&gt;  &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt; 
 1  96.6   99.1 a     male  
-2 102.    89.9 a     female</code></pre>
+2 102.    89.9 a     male  </code></pre>
 <pre class="r"><code>
 df4[i = grades &gt; 85] # also works</code></pre>
 <pre><code>
@@ -3313,7 +3295,7 @@ Source: local data table [2 x 4]
      iq grades class gender
   &lt;dbl&gt;  &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt; 
 1  96.6   99.1 a     male  
-2 102.    89.9 a     female</code></pre>
+2 102.    89.9 a     male  </code></pre>
 <pre class="r"><code>
 df4[grades &lt; 50 &amp; iq &gt; 120] # smart but (AND &amp;) lazy people (grades &lt; 50 AND iq &gt; 120)</code></pre>
 <pre><code>
@@ -3325,7 +3307,7 @@ Source: local data table [5 x 4]
 1  121.   35.2 d     male  
 2  122.   18.3 d     male  
 3  124.   29.5 d     male  
-4  125.   48.7 d     male  
+4  125.   48.7 d     female
 5  125.   38.3 d     female</code></pre>
 <pre class="r"><code>
 df4[grades &lt; 50 | iq &gt; 120] # smart but OR lazy people (grades &lt; 50 OR iq &gt; 120)</code></pre>
@@ -3337,14 +3319,14 @@ Source: local data table [21 x 4]
    &lt;dbl&gt;  &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt; 
  1  97.1   47.9 a     male  
  2  94.4   44.5 a     male  
- 3 102.    47.9 b     female
+ 3 102.    47.9 b     male  
  4 105.    44.9 b     female
- 5 107.    49.9 b     male  
+ 5 107.    49.9 b     female
  6 102.    37.9 b     female
  7 112.    46.4 c     female
  8 109.    43.7 c     male  
  9 111.    36.4 c     male  
-10 114.    30.2 c     male  
+10 114.    30.2 c     female
 # ... with 11 more rows</code></pre>
 </div>
 <p>Slice (select rows) with indices via i</p>
@@ -3358,8 +3340,8 @@ Source: local data table [3 x 4]
      iq grades class gender
   &lt;dbl&gt;  &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt; 
 1  94.5   67.9 a     female
-2  95.4   82.5 a     female
-3  97.8   69.1 a     male  </code></pre>
+2  95.4   82.5 a     male  
+3  97.8   69.1 a     female</code></pre>
 <pre class="r"><code>
 df4[35:.N] # rows 35 to last row</code></pre>
 <pre><code>
@@ -3369,9 +3351,9 @@ Source: local data table [6 x 4]
      iq grades class gender
   &lt;dbl&gt;  &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt; 
 1  124.   29.5 d     male  
-2  121.   53.7 d     female
-3  124.   63.7 d     female
-4  125.   48.7 d     male  
+2  121.   53.7 d     male  
+3  124.   63.7 d     male  
+4  125.   48.7 d     female
 5  125.   38.3 d     female
 6  128.   51.8 d     male  </code></pre>
 </div>
@@ -3446,11 +3428,11 @@ Source: local data table [40 x 3]
    grades gender    iq
     &lt;dbl&gt; &lt;chr&gt;  &lt;dbl&gt;
  1   67.9 female  94.5
- 2   82.5 female  95.4
- 3   69.1 male    97.8
+ 2   82.5 male    95.4
+ 3   69.1 female  97.8
  4   83.3 male    98.1
  5   99.1 male    96.6
- 6   89.9 female 102. 
+ 6   89.9 male   102. 
  7   73.7 male   101. 
  8   47.9 male    97.1
  9   55.6 male    94.2
@@ -3465,11 +3447,11 @@ Source: local data table [40 x 3]
    grades gender    iq
     &lt;dbl&gt; &lt;chr&gt;  &lt;dbl&gt;
  1   67.9 female  94.5
- 2   82.5 female  95.4
- 3   69.1 male    97.8
+ 2   82.5 male    95.4
+ 3   69.1 female  97.8
  4   83.3 male    98.1
  5   99.1 male    96.6
- 6   89.9 female 102. 
+ 6   89.9 male   102. 
  7   73.7 male   101. 
  8   47.9 male    97.1
  9   55.6 male    94.2
@@ -3485,11 +3467,11 @@ Source: local data table [40 x 3]
    grades class gender
     &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt; 
  1   67.9 a     female
- 2   82.5 a     female
- 3   69.1 a     male  
+ 2   82.5 a     male  
+ 3   69.1 a     female
  4   83.3 a     male  
  5   99.1 a     male  
- 6   89.9 a     female
+ 6   89.9 a     male  
  7   73.7 a     male  
  8   47.9 a     male  
  9   55.6 a     male  
@@ -3509,11 +3491,11 @@ Source: local data table [40 x 3]
    grades class gender
     &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt; 
  1   67.9 a     female
- 2   82.5 a     female
- 3   69.1 a     male  
+ 2   82.5 a     male  
+ 3   69.1 a     female
  4   83.3 a     male  
  5   99.1 a     male  
- 6   89.9 a     female
+ 6   89.9 a     male  
  7   73.7 a     male  
  8   47.9 a     male  
  9   55.6 a     male  
@@ -3615,11 +3597,11 @@ Source: local data table [40 x 2]
    gender class
    &lt;chr&gt;  &lt;chr&gt;
  1 female a    
- 2 female a    
- 3 male   a    
+ 2 male   a    
+ 3 female a    
  4 male   a    
  5 male   a    
- 6 female a    
+ 6 male   a    
  7 male   a    
  8 male   a    
  9 male   a    
@@ -3824,14 +3806,14 @@ Source: local data table [8 x 3]
 # A tibble: 8 x 3
   class gender iqMean
   &lt;chr&gt; &lt;chr&gt;   &lt;dbl&gt;
-1 a     female   97.2
-2 a     male     97.0
+1 a     female   96.2
+2 a     male     97.3
 3 b     female  105. 
 4 b     male    104. 
-5 c     male    111. 
-6 c     female  115. 
-7 d     female  121. 
-8 d     male    124. </code></pre>
+5 c     male    113. 
+6 c     female  114. 
+7 d     male    122. 
+8 d     female  122. </code></pre>
 <pre class="r"><code>
 df4[, .(iqMean = mean(iq, na.rm = T)), keyby = .(gender, class)] # summarize and sort/arrange by class then gender</code></pre>
 <pre><code>
@@ -3840,14 +3822,14 @@ Source: local data table [8 x 3]
 # A tibble: 8 x 3
   gender class iqMean
   &lt;chr&gt;  &lt;chr&gt;  &lt;dbl&gt;
-1 female a       97.2
+1 female a       96.2
 2 female b      105. 
-3 female c      115. 
-4 female d      121. 
-5 male   a       97.0
+3 female c      114. 
+4 female d      122. 
+5 male   a       97.3
 6 male   b      104. 
-7 male   c      111. 
-8 male   d      124. </code></pre>
+7 male   c      113. 
+8 male   d      122. </code></pre>
 </div>
 <p>Summarize by booleans</p>
 <div class="layout-chunk" data-layout="l-body">
@@ -3859,8 +3841,8 @@ Source: local data table [2 x 2]
 # A tibble: 2 x 2
   gender iqMean
   &lt;lgl&gt;   &lt;dbl&gt;
-1 FALSE    111.
-2 TRUE     108.</code></pre>
+1 FALSE    109.
+2 TRUE     110.</code></pre>
 <pre class="r"><code>
 df4[, .(iqMean = mean(iq, na.rm = T)), by = .(gender == &quot;male&quot;, class == &quot;a&quot;)]</code></pre>
 <pre><code>
@@ -3869,10 +3851,10 @@ Source: local data table [4 x 3]
 # A tibble: 4 x 3
   gender class iqMean
   &lt;lgl&gt;  &lt;lgl&gt;  &lt;dbl&gt;
-1 FALSE  TRUE    97.2
-2 TRUE   TRUE    97.0
-3 FALSE  FALSE  113. 
-4 TRUE   FALSE  114. </code></pre>
+1 FALSE  TRUE    96.2
+2 TRUE   TRUE    97.3
+3 FALSE  FALSE  111. 
+4 TRUE   FALSE  116. </code></pre>
 </div>
 <p>Combining pipes with <code>data.table</code> and <code>ggplot</code></p>
 <div class="layout-chunk" data-layout="l-body">
@@ -3951,8 +3933,8 @@ Source: local data table [8 x 6]
      iq grades class gender sex   iqCopy
   &lt;dbl&gt;  &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt;  &lt;chr&gt;  &lt;dbl&gt;
 1  94.5   67.9 a     female f         NA
-2  95.4   82.5 a     female f         NA
-3  97.8   69.1 a     male   m         NA
+2  95.4   82.5 a     male   m         NA
+3  97.8   69.1 a     female f         NA
 4  98.1   83.3 a     male   m         NA
 5  96.6   99.1 a     male   m         NA
 6  97.1   47.9 a     male   m         NA

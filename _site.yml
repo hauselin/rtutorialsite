@@ -1,5 +1,5 @@
-name: "rtutorials"
-title: "rtutorials"
+name: "Data science with R for experimental psychologists"
+title: "Data science with R for experimental psychologists"
 base_url: https://hausetutorials.netlify.com/
 repository_url: https://github.com/hauselin/rtutorialsite
 google_analytics: "UA-134721506-5"
@@ -13,14 +13,20 @@ navbar:
       href: index.html
     - text: "About"
       href: about.html
+    - text: "Effect size converter"
+      href: https://hause.shinyapps.io/shinyapp_effectsize/
     - text: "Tutorials"
       menu:
+        - text: "Install R and packages"
+          href: 0000_install.html
         - text: "R programming basics"
           href: 0001_rbasics.html
         - text: "tidyverse and data.table"
           href: 0002_tidyverse_datatable.html
         - text: "ggplot and model fitting"
           href: 0003_ggplot_modelfitting.html
+        - text: "long/wide form data and joining"
+          href: 0004_dataform_join.html
     - icon: fab fa-github
       href: https://github.com/hauselin/rtutorialsite
 output: radix::radix_article

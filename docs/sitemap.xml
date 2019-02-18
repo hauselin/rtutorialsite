@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd" version="1.0">
   <url>
+    <loc>https://hausetutorials.netlify.com/0000_install.html</loc>
+    <lastmod>2019-02-18T16:28:17-05:00</lastmod>
+  </url>
+  <url>
     <loc>https://hausetutorials.netlify.com/0001_rbasics.html</loc>
     <lastmod>2019-02-18T12:05:17-05:00</lastmod>
   </url>
@@ -13,12 +17,16 @@
     <lastmod>2019-02-18T15:52:13-05:00</lastmod>
   </url>
   <url>
+    <loc>https://hausetutorials.netlify.com/0004_dataform_join.html</loc>
+    <lastmod>2019-02-18T16:33:35-05:00</lastmod>
+  </url>
+  <url>
     <loc>https://hausetutorials.netlify.com/about.html</loc>
     <lastmod>2019-02-18T11:59:19-05:00</lastmod>
   </url>
   <url>
     <loc>https://hausetutorials.netlify.com/</loc>
-    <lastmod>2019-02-18T14:31:59-05:00</lastmod>
+    <lastmod>2019-02-18T16:31:27-05:00</lastmod>
   </url>
   <url>
     <loc>https://hausetutorials.netlify.com/README.html</loc>
