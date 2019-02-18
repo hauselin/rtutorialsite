@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd" version="1.0">
+  <url>
+    <loc>https://hausetutorials.netlify.com/0001_rbasics.html</loc>
+    <lastmod>2019-02-18T12:05:17-05:00</lastmod>
+  </url>
+  <url>
+    <loc>https://hausetutorials.netlify.com/0002_tidyverse_datatable.html</loc>
+    <lastmod>2019-02-18T13:37:46-05:00</lastmod>
+  </url>
+  <url>
+    <loc>https://hausetutorials.netlify.com/about.html</loc>
+    <lastmod>2019-02-18T11:59:19-05:00</lastmod>
+  </url>
+  <url>
+    <loc>https://hausetutorials.netlify.com/</loc>
+    <lastmod>2019-02-17T23:58:39-05:00</lastmod>
+  </url>
+  <url>
+    <loc>https://hausetutorials.netlify.com/README.html</loc>
+    <lastmod>2019-02-18T13:42:22-05:00</lastmod>
+  </url>
+</urlset>

@@ -1,5 +1,8 @@
 name: "rtutorials"
 title: "rtutorials"
+base_url: https://hausetutorials.netlify.com/
+repository_url: https://github.com/hauselin/rtutorialsite
+creative_commons: CC BY
 description: |
   rtutorials
 output_dir: "docs"
@@ -15,4 +18,6 @@ navbar:
           href: 0001_rbasics.html
         - text: "tidyverse and data.table"
           href: 0002_tidyverse_datatable.html
+    - icon: fab fa-github
+      href: https://github.com/hauselin/rtutorialsite
 output: radix::radix_article
