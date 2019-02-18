@@ -1361,12 +1361,13 @@ Tutorials
 <p>How to use <code>data.table</code> package and functionalities to fit a model to different groups in a dataset.</p>
 <div class="layout-chunk" data-layout="l-body">
 <pre class="r"><code>
-library(hausekeep); library(data.table)</code></pre>
+library(hausekeep); library(data.table) # load packages</code></pre>
 </div>
+<p>Convert the built-in dataset <code>ChickWeight</code> to <code>data.table</code> class so we can leverage its extensive functionalities.</p>
 <div class="layout-chunk" data-layout="l-body">
 <pre class="r"><code>
-dt1 &lt;- data.table(ChickWeight)
-dt1</code></pre>
+dt1 &lt;- data.table(ChickWeight) # convert builtin dataset to data.table class
+dt1 # print dataset</code></pre>
 <pre><code>
      weight Time Chick Diet
   1:     42    0     1    1
@@ -1380,36 +1381,68 @@ dt1</code></pre>
 576:    234   18    50    4
 577:    264   20    50    4
 578:    264   21    50    4</code></pre>
+</div>
+<p>Let’s look at just the first 5 chicks (and to demo <code>data.table</code> synax; see my <code>data.table</code> tutorials). We then fit a linear regression <code>weight ~ Time</code> to the data from these 5 chicks, ignoring that the data came from 5 different chicks.</p>
+<div class="layout-chunk" data-layout="l-body">
 <pre class="r"><code>
-model &lt;- lm(weight ~ Time, data = dt1)
+dt1[Chick &lt;= 5, ] # filter rows where Chick is &lt;= 5</code></pre>
+<pre><code>
+     weight Time Chick Diet
+  1:     42    0     1    1
+  2:     51    2     1    1
+  3:     59    4     1    1
+  4:     64    6     1    1
+  5:     76    8     1    1
+ ---                       
+192:     89   14    20    1
+193:     98   16    20    1
+194:    107   18    20    1
+195:    115   20    20    1
+196:    117   21    20    1</code></pre>
+<pre class="r"><code>
+model &lt;- lm(weight ~ Time, data = dt1[Chick &lt;= 5])
 summary(model)</code></pre>
 <pre><code>
 Call:
-lm(formula = weight ~ Time, data = dt1)
+lm(formula = weight ~ Time, data = dt1[Chick &lt;= 5])
 
 Residuals:
-     Min       1Q   Median       3Q      Max 
--138.331  -14.536    0.926   13.533  160.669 
+    Min      1Q  Median      3Q     Max 
+-64.925 -12.207   1.043   8.570  66.421 
 
 Coefficients:
             Estimate Std. Error t value Pr(&gt;|t|)    
-(Intercept)  27.4674     3.0365   9.046   &lt;2e-16 ***
-Time          8.8030     0.2397  36.725   &lt;2e-16 ***
+(Intercept)  33.4725     3.4421   9.724   &lt;2e-16 ***
+Time          6.0692     0.2773  21.887   &lt;2e-16 ***
 ---
 Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
 
-Residual standard error: 38.91 on 576 degrees of freedom
-Multiple R-squared:  0.7007,    Adjusted R-squared:  0.7002 
-F-statistic:  1349 on 1 and 576 DF,  p-value: &lt; 2.2e-16</code></pre>
+Residual standard error: 26.14 on 194 degrees of freedom
+Multiple R-squared:  0.7118,    Adjusted R-squared:  0.7103 
+F-statistic: 479.1 on 1 and 194 DF,  p-value: &lt; 2.2e-16</code></pre>
 </div>
+<aside>
+The correct way to fit this model is to account for the nested structure is to use linear mixed models (lme4 package): <code>lmer(weight ~ Time + (1 | Chick), data = dt1[Chick &lt;= 5])</code>
+</aside>
+<p>Show formatted output that can be copied-pasted into your APA manuscript.</p>
 <div class="layout-chunk" data-layout="l-body">
 <pre class="r"><code>
-summaryh(model)</code></pre>
+summaryh(model) </code></pre>
 <pre><code>
           term                                                 results
-1: (Intercept) b = 27.47, SE = 3.04, t(576) = 9.05, p &lt; .001, r = 0.35
-2:        Time b = 8.80, SE = 0.24, t(576) = 36.73, p &lt; .001, r = 0.84</code></pre>
+1: (Intercept) b = 33.47, SE = 3.44, t(194) = 9.72, p &lt; .001, r = 0.57
+2:        Time b = 6.07, SE = 0.28, t(194) = 21.89, p &lt; .001, r = 0.84</code></pre>
 </div>
+<p>Fit the same model within <code>data.table</code></p>
+<div class="layout-chunk" data-layout="l-body">
+<pre class="r"><code>
+dt1[Chick &lt;= 5, summaryh(lm(weight ~ Time))] # results are same as above</code></pre>
+<pre><code>
+          term                                                 results
+1: (Intercept) b = 33.47, SE = 3.44, t(194) = 9.72, p &lt; .001, r = 0.57
+2:        Time b = 6.07, SE = 0.28, t(194) = 21.89, p &lt; .001, r = 0.84</code></pre>
+</div>
+<p>Now we can extend the syntax above with <code>by = Chick</code> to fit the model to each chick! Just one line of code is needed.</p>
 <div class="layout-chunk" data-layout="l-body">
 <pre class="r"><code>
 # fit linear regression model to first 5 Chicks

@@ -23,19 +23,41 @@ knitr::opts_chunk$set(echo = TRUE,
 How to use `data.table` package and functionalities to fit a model to different groups in a dataset.
 
 ```{r}
-library(hausekeep); library(data.table)
+library(hausekeep); library(data.table) # load packages
 ```
 
+Convert the built-in dataset `ChickWeight` to `data.table` class so we can leverage its extensive functionalities. 
+
+```{r} 
+dt1 <- data.table(ChickWeight) # convert builtin dataset to data.table class
+dt1 # print dataset
+```
+
+Let's look at just the first 5 chicks (and to demo `data.table` synax; see my `data.table` tutorials). We then fit a linear regression `weight ~ Time` to the data from these 5 chicks, ignoring that the data came from 5 different chicks. 
+
 ```{r}
-dt1 <- data.table(ChickWeight)
-dt1
-model <- lm(weight ~ Time, data = dt1)
+dt1[Chick <= 5, ] # filter rows where Chick is <= 5
+model <- lm(weight ~ Time, data = dt1[Chick <= 5])
 summary(model)
 ```
 
+<aside>
+The correct way to fit this model is to account for the nested structure is to use linear mixed models (lme4 package): `lmer(weight ~ Time + (1 | Chick), data = dt1[Chick <= 5])`
+</aside>
+
+Show formatted output that can be copied-pasted into your APA manuscript.
+
 ```{r}
-summaryh(model)
+summaryh(model) 
 ```
+
+Fit the same model within `data.table`
+
+```{r}
+dt1[Chick <= 5, summaryh(lm(weight ~ Time))] # results are same as above
+```
+
+Now we can extend the syntax above with `by = Chick` to fit the model to each chick! Just one line of code is needed.
 
 ```{r}
 # fit linear regression model to first 5 Chicks
