@@ -64,5 +64,15 @@ Now we can extend the syntax above with `by = Chick` to fit the model to each ch
 # fit linear regression model to first 5 Chicks
 dt1[Chick %in% 1:5, summaryh(lm(weight ~ Time)), by = Chick]
 ```
+<aside>
+When calling functions inside a `data.table` with the `by` argument, your functions have to return vectors, lists, or dataframes. Otherwise, you'll get error messages. Run the code below to figure out why.
+</aside>
+
+Why `summary()` won't work?
+
+```{r
+dt1[Chick <= 5, summary(lm(weight ~ Time))] # summary() doesn't return a table
+dt1[Chick <= 5, summary(lm(weight ~ Time)), by = Chick] # doesn't work! 
+```
 
 

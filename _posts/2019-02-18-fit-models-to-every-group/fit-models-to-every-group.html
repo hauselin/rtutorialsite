@@ -1066,6 +1066,13 @@ dt1[Chick %in% 1:5, summaryh(lm(weight ~ Time)), by = Chick]</code></pre>
  9:     5 (Intercept)  b = 16.90, SE = 7.56, t(10) = 2.24, p = .049, r = 0.58
 10:     5        Time b = 10.06, SE = 0.59, t(10) = 17.10, p &lt; .001, r = 0.98</code></pre>
 </div>
+<aside>
+When calling functions inside a <code>data.table</code> with the <code>by</code> argument, your functions have to return vectors, lists, or dataframes. Otherwise, you’ll get error messages. Run the code below to figure out why.
+</aside>
+<p>Why <code>summary()</code> won’t work?</p>
+<pre class="{r"><code>
+dt1[Chick &lt;= 5, summary(lm(weight ~ Time))] # summary() doesn&#39;t return a table
+dt1[Chick &lt;= 5, summary(lm(weight ~ Time)), by = Chick] # doesn&#39;t work! </code></pre>
 <!--radix_placeholder_article_footer-->
 <!--/radix_placeholder_article_footer-->
 </div>
