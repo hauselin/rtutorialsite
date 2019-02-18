@@ -4,7 +4,8 @@ base_url: https://hausetutorials.netlify.com/
 repository_url: https://github.com/hauselin/rtutorialsite
 google_analytics: "UA-134721506-5"
 creative_commons: CC BY
-description: Data science and analysis tutorials for experimental psychologists
+description: |
+  Data science and analysis tutorials for experimental psychologists
 output_dir: "docs"
 navbar:
   right:
@@ -25,9 +26,13 @@ navbar:
         - text: "long/wide form data and joining"
           href: 0004_dataform_join.html
     - text: "Articles"
-      menu:
-        - text: "Test article 1"
-          href: 0000_install.html
+      href: articles.html
     - icon: fab fa-github
       href: https://github.com/hauselin/rtutorialsite
+    - icon: fa fa-rss
+      href: index.xml
+collections:
+  posts:
+    disqus: data-science-with-r-for-experimental-psychologists
+    share: [facebook, twitter, linkedin]
 output: radix::radix_article

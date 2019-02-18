@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss xmlns:atom="http://www.w3.org/2005/Atom" xmlns:media="http://search.yahoo.com/mrss/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:dc="http://purl.org/dc/elements/1.1/" version="2.0">
+  <channel>
+    <title>Data science with R</title>
+    <link>https://hausetutorials.netlify.com/</link>
+    <atom:link href="https://hausetutorials.netlify.com/articles.xml" rel="self" type="application/rss+xml"/>
+    <description>Data science and analysis tutorials for experimental psychologists
+</description>
+    <generator>Radix</generator>
+    <lastBuildDate>Mon, 18 Feb 2019 00:00:00 +0000</lastBuildDate>
+    <item>
+      <title>Fit models to different groups in a single line</title>
+      <dc:creator>Hause Lin</dc:creator>
+      <link>https://hausetutorials.netlify.com/posts/2019-02-18-fit-models-to-every-group</link>
+      <description>How to use data.table package to fit a model to different groups in a dataset using only one line of code</description>
+      <guid>https://hausetutorials.netlify.com/posts/2019-02-18-fit-models-to-every-group</guid>
+      <pubDate>Mon, 18 Feb 2019 00:00:00 +0000</pubDate>
+    </item>
+  </channel>
+</rss>

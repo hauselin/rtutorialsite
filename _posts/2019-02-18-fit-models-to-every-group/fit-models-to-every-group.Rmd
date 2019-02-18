@@ -1,0 +1,45 @@
+---
+title: "Fit models to different groups in a single line"
+description: |
+  How to use data.table package to fit a model to different groups in a dataset using only one line of code
+author:
+  - name: Hause Lin
+date: 02-18-2019
+output:
+  radix::radix_article:
+    self_contained: false
+draft: false
+categories: 
+  - data.table
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE,
+                      R.options = list(width = 80),
+                      tidy = TRUE,
+                      tidy.opts = list(width.cutoff = 80))
+```
+
+How to use `data.table` package and functionalities to fit a model to different groups in a dataset.
+
+```{r}
+library(hausekeep); library(data.table)
+```
+
+```{r}
+dt1 <- data.table(ChickWeight)
+dt1
+model <- lm(weight ~ Time, data = dt1)
+summary(model)
+```
+
+```{r}
+summaryh(model)
+```
+
+```{r}
+# fit linear regression model to first 5 Chicks
+dt1[Chick %in% 1:5, summaryh(lm(weight ~ Time)), by = Chick]
+```
+
+

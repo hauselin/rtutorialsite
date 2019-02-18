@@ -1,0 +1,19 @@
+[
+  {
+    "path": "posts/2019-02-18-fit-models-to-every-group/",
+    "title": "Fit models to different groups in a single line",
+    "description": "How to use data.table package to fit a model to different groups in a dataset using only one line of code",
+    "author": [
+      {
+        "name": "Hause Lin",
+        "url": {}
+      }
+    ],
+    "date": "2019-02-18",
+    "categories": [
+      "data.table"
+    ],
+    "preview": {},
+    "last_modified": "2019-02-18T17:48:42-05:00"
+  }
+]

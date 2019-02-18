@@ -19,370 +19,39 @@
  <!--/radix_placeholder_import_source-->
 
   <!--radix_placeholder_meta_tags-->
-  <title>Data science with R: Installing R and libaries</title>
+  <title>Fit models to different groups in a single line</title>
   
-  <meta property="description" itemprop="description" content="Install R, RStudio, and useful libraries/packages."/>
+  <meta property="description" itemprop="description" content="How to use data.table package to fit a model to different groups in a dataset using only one line of code"/>
   
-  <link rel="license" href="https://creativecommons.org/licenses/by/4.0/"/>
   
+  <!--  https://schema.org/Article -->
+  <meta property="article:published" itemprop="datePublished" content="2019-02-18"/>
+  <meta property="article:created" itemprop="dateCreated" content="2019-02-18"/>
+  <meta name="article:author" content="Hause Lin"/>
   
   <!--  https://developers.facebook.com/docs/sharing/webmasters#markup -->
-  <meta property="og:title" content="Data science with R: Installing R and libaries"/>
+  <meta property="og:title" content="Fit models to different groups in a single line"/>
   <meta property="og:type" content="article"/>
-  <meta property="og:description" content="Install R, RStudio, and useful libraries/packages."/>
+  <meta property="og:description" content="How to use data.table package to fit a model to different groups in a dataset using only one line of code"/>
   <meta property="og:locale" content="en_US"/>
-  <meta property="og:site_name" content="Data science with R"/>
   
   <!--  https://dev.twitter.com/cards/types/summary -->
   <meta property="twitter:card" content="summary"/>
-  <meta property="twitter:title" content="Data science with R: Installing R and libaries"/>
-  <meta property="twitter:description" content="Install R, RStudio, and useful libraries/packages."/>
+  <meta property="twitter:title" content="Fit models to different groups in a single line"/>
+  <meta property="twitter:description" content="How to use data.table package to fit a model to different groups in a dataset using only one line of code"/>
   
   <!--/radix_placeholder_meta_tags-->
   <!--radix_placeholder_rmarkdown_metadata-->
   
   <script type="text/json" id="radix-rmarkdown-metadata">
-  {"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["title","description","output"]}},"value":[{"type":"character","attributes":{},"value":["Installing R and libaries"]},{"type":"character","attributes":{},"value":["Install R, RStudio, and useful libraries/packages."]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["radix::radix_article"]}},"value":[{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["toc","toc_depth"]}},"value":[{"type":"logical","attributes":{},"value":[true]},{"type":"integer","attributes":{},"value":[3]}]}]}]}
+  {"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["title","description","author","date","output","draft","categories"]}},"value":[{"type":"character","attributes":{},"value":["Fit models to different groups in a single line"]},{"type":"character","attributes":{},"value":["How to use data.table package to fit a model to different groups in a dataset using only one line of code\n"]},{"type":"list","attributes":{},"value":[{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name"]}},"value":[{"type":"character","attributes":{},"value":["Hause Lin"]}]}]},{"type":"character","attributes":{},"value":["02-18-2019"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["radix::radix_article"]}},"value":[{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["self_contained"]}},"value":[{"type":"logical","attributes":{},"value":[false]}]}]},{"type":"logical","attributes":{},"value":[false]},{"type":"character","attributes":{},"value":["data.table"]}]}
   </script>
   <!--/radix_placeholder_rmarkdown_metadata-->
-  <!--radix_placeholder_navigation_in_header-->
   
-  <script type="application/javascript">
-  
-    window.headroom_prevent_pin = false;
-  
-    window.document.addEventListener("DOMContentLoaded", function (event) {
-  
-      // initialize headroom for banner
-      var header = $('header').get(0);
-      var headerHeight = header.offsetHeight;
-      var headroom = new Headroom(header, {
-        onPin : function() {
-          if (window.headroom_prevent_pin) {
-            window.headroom_prevent_pin = false;
-            headroom.unpin();
-          }
-        }
-      });
-      headroom.init();
-      if(window.location.hash)
-        headroom.unpin();
-      $(header).addClass('headroom--transition');
-  
-      // offset scroll location for banner on hash change
-      // (see: https://github.com/WickyNilliams/headroom.js/issues/38)
-      window.addEventListener("hashchange", function(event) {
-        window.scrollTo(0, window.pageYOffset - (headerHeight + 25));
-      });
-  
-      // responsive menu
-      $('.radix-site-header').each(function(i, val) {
-        var topnav = $(this);
-        var toggle = topnav.find('.nav-toggle');
-        toggle.on('click', function() {
-          topnav.toggleClass('responsive');
-        });
-      });
-  
-      // nav dropdowns
-      $('.nav-dropbtn').click(function(e) {
-        $(this).next('.nav-dropdown-content').toggleClass('nav-dropdown-active');
-        $(this).parent().siblings('.nav-dropdown')
-           .children('.nav-dropdown-content').removeClass('nav-dropdown-active');
-      });
-      $("body").click(function(e){
-        $('.nav-dropdown-content').removeClass('nav-dropdown-active');
-      });
-      $(".nav-dropdown").click(function(e){
-        e.stopPropagation();
-      });
-    });
+  <script type="text/json" id="radix-resource-manifest">
+  {"type":"character","attributes":{},"value":["fit-models-to-every-group_files/bowser-1.9.3/bowser.min.js","fit-models-to-every-group_files/distill-2.2.21/template.v2.js","fit-models-to-every-group_files/jquery-1.11.3/jquery.min.js","fit-models-to-every-group_files/webcomponents-2.0.0/webcomponents.js"]}
   </script>
-  
-  <style type="text/css">
-  
-  /* Theme (user-documented overrideables for nav appearance) */
-  
-  .radix-site-nav {
-    color: rgba(255, 255, 255, 0.8);
-    background-color: #455a64;
-    font-size: 15px;
-    font-weight: 300;
-  }
-  
-  .radix-site-nav a {
-    color: inherit;
-    text-decoration: none;
-  }
-  
-  .radix-site-nav a:hover {
-    color: white;
-  }
-  
-  @media print {
-    .radix-site-nav {
-      display: none;
-    }
-  }
-  
-  .radix-site-header {
-  
-  }
-  
-  .radix-site-footer {
-  
-  }
-  
-  
-  /* Site Header */
-  
-  .radix-site-header {
-    width: 100%;
-    box-sizing: border-box;
-    z-index: 3;
-  }
-  
-  .radix-site-header .nav-left {
-    display: inline-block;
-    margin-left: 8px;
-  }
-  
-  @media screen and (max-width: 768px) {
-    .radix-site-header .nav-left {
-      margin-left: 0;
-    }
-  }
-  
-  
-  .radix-site-header .nav-right {
-    float: right;
-    margin-right: 8px;
-  }
-  
-  .radix-site-header a,
-  .radix-site-header .title {
-    display: inline-block;
-    text-align: center;
-    padding: 14px 10px 14px 10px;
-  }
-  
-  .radix-site-header .title {
-    font-size: 18px;
-  }
-  
-  .radix-site-header .logo {
-    padding: 0;
-  }
-  
-  .radix-site-header .logo img {
-    display: none;
-    max-height: 20px;
-    width: auto;
-    margin-bottom: -4px;
-  }
-  
-  .radix-site-header .nav-image img {
-    max-height: 18px;
-    width: auto;
-    display: inline-block;
-    margin-bottom: -3px;
-  }
-  
-  
-  
-  @media screen and (min-width: 1000px) {
-    .radix-site-header .logo img {
-      display: inline-block;
-    }
-    .radix-site-header .nav-left {
-      margin-left: 20px;
-    }
-    .radix-site-header .nav-right {
-      margin-right: 20px;
-    }
-    .radix-site-header .title {
-      padding-left: 12px;
-    }
-  }
-  
-  
-  .radix-site-header .nav-toggle {
-    display: none;
-  }
-  
-  .nav-dropdown {
-    display: inline-block;
-    position: relative;
-  }
-  
-  .nav-dropdown .nav-dropbtn {
-    border: none;
-    outline: none;
-    color: rgba(255, 255, 255, 0.8);
-    padding: 16px 10px;
-    background-color: transparent;
-    font-family: inherit;
-    font-size: inherit;
-    font-weight: inherit;
-    margin: 0;
-    margin-top: 1px;
-    z-index: 2;
-  }
-  
-  .nav-dropdown-content {
-    display: none;
-    position: absolute;
-    background-color: white;
-    min-width: 200px;
-    border: 1px solid rgba(0,0,0,0.15);
-    border-radius: 4px;
-    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.1);
-    z-index: 1;
-    margin-top: 2px;
-    white-space: nowrap;
-    padding-top: 4px;
-    padding-bottom: 4px;
-  }
-  
-  .nav-dropdown-content hr {
-    margin-top: 4px;
-    margin-bottom: 4px;
-    border: none;
-    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
-  }
-  
-  .nav-dropdown-active {
-    display: block;
-  }
-  
-  .nav-dropdown-content a, .nav-dropdown-content .nav-dropdown-header {
-    color: black;
-    padding: 6px 24px;
-    text-decoration: none;
-    display: block;
-    text-align: left;
-  }
-  
-  .nav-dropdown-content .nav-dropdown-header {
-    display: block;
-    padding: 5px 24px;
-    padding-bottom: 0;
-    text-transform: uppercase;
-    font-size: 14px;
-    color: #999999;
-    white-space: nowrap;
-  }
-  
-  .nav-dropdown:hover .nav-dropbtn {
-    color: white;
-  }
-  
-  .nav-dropdown-content a:hover {
-    background-color: #ddd;
-    color: black;
-  }
-  
-  .nav-right .nav-dropdown-content {
-    margin-left: -45%;
-    right: 0;
-  }
-  
-  @media screen and (max-width: 768px) {
-    .radix-site-header a, .radix-site-header .nav-dropdown  {display: none;}
-    .radix-site-header a.nav-toggle {
-      float: right;
-      display: block;
-    }
-    .radix-site-header .title {
-      margin-left: 0;
-    }
-    .radix-site-header .nav-right {
-      margin-right: 0;
-    }
-    .radix-site-header {
-      overflow: hidden;
-    }
-    .nav-right .nav-dropdown-content {
-      margin-left: 0;
-    }
-  }
-  
-  
-  @media screen and (max-width: 768px) {
-    .radix-site-header.responsive {position: relative;}
-    .radix-site-header.responsive a.nav-toggle {
-      position: absolute;
-      right: 0;
-      top: 0;
-    }
-    .radix-site-header.responsive a,
-    .radix-site-header.responsive .nav-dropdown {
-      display: block;
-      text-align: left;
-    }
-    .radix-site-header.responsive .nav-left,
-    .radix-site-header.responsive .nav-right {
-      width: 100%;
-    }
-    .radix-site-header.responsive .nav-dropdown {float: none;}
-    .radix-site-header.responsive .nav-dropdown-content {position: relative;}
-    .radix-site-header.responsive .nav-dropdown .nav-dropbtn {
-      display: block;
-      width: 100%;
-      text-align: left;
-    }
-  }
-  
-  /* Site Footer */
-  
-  .radix-site-footer {
-    width: 100%;
-    overflow: hidden;
-    box-sizing: border-box;
-    z-index: 3;
-    margin-top: 30px;
-    padding-top: 30px;
-    padding-bottom: 30px;
-    text-align: center;
-  }
-  
-  /* Headroom */
-  
-  d-title {
-    padding-top: 6rem;
-  }
-  
-  @media print {
-    d-title {
-      padding-top: 4rem;
-    }
-  }
-  
-  .headroom {
-    z-index: 1000;
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-  }
-  
-  .headroom--transition {
-    transition: all .4s ease-in-out;
-  }
-  
-  .headroom--unpinned {
-    top: -100px;
-  }
-  
-  .headroom--pinned {
-    top: 0;
-  }
-  
-  </style>
-  
-  <link href="site_libs/font-awesome-5.1.0/css/all.css" rel="stylesheet"/>
-  <link href="site_libs/font-awesome-5.1.0/css/v4-shims.css" rel="stylesheet"/>
-  <script src="site_libs/headroom-0.9.4/headroom.min.js"></script>
+  <!--radix_placeholder_navigation_in_header-->
   <!--/radix_placeholder_navigation_in_header-->
   <!--radix_placeholder_distill-->
   
@@ -1258,18 +927,11 @@
   </script>
   
   <!--/radix_placeholder_distill-->
-  <script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
-  <script src="site_libs/bowser-1.9.3/bowser.min.js"></script>
-  <script src="site_libs/webcomponents-2.0.0/webcomponents.js"></script>
-  <script src="site_libs/distill-2.2.21/template.v2.js"></script>
+  <script src="fit-models-to-every-group_files/jquery-1.11.3/jquery.min.js"></script>
+  <script src="fit-models-to-every-group_files/bowser-1.9.3/bowser.min.js"></script>
+  <script src="fit-models-to-every-group_files/webcomponents-2.0.0/webcomponents.js"></script>
+  <script src="fit-models-to-every-group_files/distill-2.2.21/template.v2.js"></script>
   <!--radix_placeholder_site_in_header-->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-134721506-5"></script>
-  <script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-  gtag('config', 'UA-134721506-5');
-  </script>
   <!--/radix_placeholder_site_in_header-->
 
 
@@ -1280,147 +942,96 @@
 <!--radix_placeholder_front_matter-->
 
 <script id="distill-front-matter" type="text/json">
-{"title":"Installing R and libaries","description":"Install R, RStudio, and useful libraries/packages.","authors":[]}
+{"title":"Fit models to different groups in a single line","description":"How to use data.table package to fit a model to different groups in a dataset using only one line of code","authors":[{"author":"Hause Lin","authorURL":"#","affiliation":"&nbsp;","affiliationURL":"#"}],"publishedDate":"2019-02-18T00:00:00.000-05:00","citationText":"Lin, 2019"}
 </script>
 
 <!--/radix_placeholder_front_matter-->
 <!--radix_placeholder_navigation_before_body-->
-<header class="header header--fixed" role="banner">
-<nav class="radix-site-nav radix-site-header">
-<div class="nav-left">
-<a href="index.html" class="title">Data science with R</a>
-</div>
-<div class="nav-right">
-<a href="index.html">Home</a>
-<a href="https://hause.shinyapps.io/shinyapp_effectsize/">Effect size converter</a>
-<div class="nav-dropdown">
-<button class="nav-dropbtn">
-Tutorials
- 
-<span class="down-arrow">&#x25BE;</span>
-</button>
-<div class="nav-dropdown-content">
-<a href="0000_install.html">Install R and packages</a>
-<a href="0001_rbasics.html">R programming basics</a>
-<a href="0002_tidyverse_datatable.html">tidyverse and data.table</a>
-<a href="0003_ggplot_modelfitting.html">ggplot and model fitting</a>
-<a href="0004_dataform_join.html">long/wide form data and joining</a>
-</div>
-</div>
-<a href="articles.html">Articles</a>
-<a href="https://github.com/hauselin/rtutorialsite">
-<i class="fab fa-github"></i>
-</a>
-<a href="index.xml">
-<i class="fa fa-rss"></i>
-</a>
-<a href="javascript:void(0);" class="nav-toggle">&#9776;</a>
-</div>
-</nav>
-</header>
 <!--/radix_placeholder_navigation_before_body-->
 <!--radix_placeholder_site_before_body-->
 <!--/radix_placeholder_site_before_body-->
 
 <div class="d-title">
-<h1>Installing R and libaries</h1>
-<p>Install R, RStudio, and useful libraries/packages.</p>
+<h1>Fit models to different groups in a single line</h1>
+<p>How to use data.table package to fit a model to different groups in a dataset using only one line of code</p>
 </div>
 
+<div class="d-byline">
+  Hause Lin  
+  
+<br/>02-18-2019
+</div>
 
 <div class="d-article">
-<h3 class="d-toc-header">Table of Contents</h3>
-<nav class="d-toc" id="TOC">
-<ul>
-<li><a href="#installing-or-updating-r-and-rstudio">Installing (or updating) R and RStudio</a></li>
-<li><a href="#installing-r-packages">Installing R packages</a></li>
-</ul>
-</nav>
-<hr class="d-toc-separator"/>
-<p>Get source code for this RMarkdown script <a href="https://github.com/hauselin/rtutorialsite/blob/master/0000_install.Rmd">here</a>.</p>
-<p>If you’re new to R, follow the instructions below to install R and RStudio. Otherwise, check out my tutorials and posts. To download all the resources on this site, visit my <a href="https://github.com/hauselin/rtutorialsite">GitHub site</a>. Click the green <strong>Clone or download</strong> button at the top right of the page to download everything. The RMarkdown scripts used to generate all the tutorials and posts have filenames that end with <strong>.Rmd</strong>.</p>
-<h2 id="installing-or-updating-r-and-rstudio">Installing (or updating) R and RStudio</h2>
-<ol type="1">
-<li>Download R <a href="https://www.r-project.org/">here</a>. Follow the instructions under <strong>Getting Started</strong> to download R. Choose a mirror/location that is closest to you and download R for Linux, Mac, or Windows.</li>
-</ol>
-<ul>
-<li>R is a programming language and an environment. It doesn’t look too good and isn’t too user-friendly. We generally use RStudio as a pretty and user-friendly interface to R.</li>
-</ul>
-<ol start="2" type="1">
-<li><p>Download RStudio <a href="https://www.rstudio.com/products/rstudio/download/">here</a> (the FREE version).</p></li>
-<li><p>After installing both R and RStudio, run RStudio. We usually never use R itself and always run RStudio (RStudio relies on R). R is like your new but empty home (without furnitures and quite unlivable unless you’re a real minimalist) and RStudio are like furniture and decorations added to your house (R), making your house much more livable and even pretty. Thus, RStudio is useless without R, just like furniture and decorations are useless if you don’t already have a house.</p></li>
-</ol>
-<p><strong>Updating R and RStudio once every few months</strong></p>
-<p>You should check whether there are newer versions of R and RStudio at least once every few months and install them if available. It’s good practice to always use the latest versions. Just go to their websites and download and re-install them again.</p>
-<h2 id="installing-r-packages">Installing R packages</h2>
-<p>Here’s how to install R packages (also called libraries) that extend R’s basic functionalities. Below are packages I use regularly. Make sure you have the latest version of R and RStudio. To install packages, run the following code in RStudio. You only need to install any given package once (but remember to update them when newer versions are available).</p>
-<p>I also have my own package <a href="https://hauselin.github.io/hausekeep/">hausekeep</a>, which has functions I use frequently.</p>
-<p>which will also try to install a few of these packages if you don’t already have them). To install all of them, first</p>
-<p>You can install one package at a time or multiple at once. I suggest installing one at a time because it can be can be error-prone if you try to install too many packages at once because the warning/error messages can become difficult quite abstruse (if there are any).</p>
-<p>Comments are preceded by the # symbol in R, and you can use # or #’ for multi-line comments. R won’t run any code that’s preceded by the # symbol.</p>
+<p>How to use <code>data.table</code> package and functionalities to fit a model to different groups in a dataset.</p>
+<div class="layout-chunk" data-layout="l-body">
 <pre class="r"><code>
-# install packages all at once using c(), which allows you to combine/concatenate stuff
-install.packages(c(&quot;tidyverse&quot;, &quot;data.table&quot;, &quot;broom&quot;, &quot;dtplyr&quot;, &quot;lme4&quot;, 
-                   &quot;lmerTest&quot;, &quot;ggbeeswarm&quot;, &quot;cowplot&quot;, &quot;piecewiseSEM&quot;,
-                   &quot;compute.es&quot;, &quot;sjstats&quot;, &quot;sjPlot&quot;, &quot;Hmisc&quot;))
-
-# install hausekeep package from my github
-# install.packages(&quot;devtools&quot;)
-devtools::install_github(&quot;hauselin/hausekeep&quot;) # you might have to install devtools first (see above)
-
-#&#39; or you can install one package at a time
-#&#39; I have commented out (added a # sign in front of a line)
-#&#39; the line of code below so I won&#39;t run it accidentally,
-#&#39; or it&#39;s to tell myself or others who are reading my code,
-#&#39; that I usually don&#39;t intend to run this line of code
-#&#39; unless I really want to.
-# install.packages(&quot;tidyverse&quot;)
-# install.packages(&quot;data.table&quot;)</code></pre>
-<p>Every time I start a new R session in RStudio, I usually run the code below at the top of my R script to load all these libraries all at once using <code>library()</code>.</p>
+library(hausekeep); library(data.table)</code></pre>
+</div>
+<div class="layout-chunk" data-layout="l-body">
 <pre class="r"><code>
-library(tidyverse); library(data.table); library(broom); library(dtplyr); 
-library(lme4); library(lmerTest); library(ggbeeswarm); 
-library(cowplot); library(hausekeep)</code></pre>
-<p>These R packages above are very powerful and it’s worth learning them well.</p>
-<ul>
-<li><a href="https://www.tidyverse.org/">tidyverse</a> packages (e.g., dplyr, tidyr, ggplot2, stringr)
-<ul>
-<li>manipulate dataframes (and tibbles) easily with tidyr, dplyr</li>
-<li>make beautiful plots with clean syntax (ggplot2)</li>
-</ul></li>
-<li><a href="https://cran.r-project.org/web/packages/data.table/vignettes/datatable-intro.html">data.table</a>
-<ul>
-<li>powerful, extremely fast, and simple way to manipulate dataframes/datatables</li>
-</ul></li>
-<li><a href="https://cran.r-project.org/web/packages/broom/vignettes/broom.html">broom</a>
-<ul>
-<li>converts model outputs into tidy dataframes</li>
-</ul></li>
-<li><a href="https://github.com/hadley/dtplyr">dtplyr</a>
-<ul>
-<li><code>tbl_dt()</code> function from this package combines the best of tidyverse and data.table packages</li>
-</ul></li>
-<li><a href="https://www.jaredknowles.com/journal/2013/11/25/getting-started-with-mixed-effect-models-in-r">lme4</a>
-<ul>
-<li>fit linear mixed effects models</li>
-</ul></li>
-<li><a href="https://cran.r-project.org/web/packages/lmerTest/index.html">lmerTest</a>
-<ul>
-<li>compute probability values and degrees of freedom for mixed effects models fitted using lme4 package (uses Satterthwaite approximation)</li>
-</ul></li>
-<li><a href="https://github.com/eclarke/ggbeeswarm">ggbeeswarm</a>
-<ul>
-<li>produces beautiful and informative ggplots that show distributions of datapoints</li>
-</ul></li>
-<li><a href="https://cran.r-project.org/web/packages/cowplot/vignettes/introduction.html">cowplot</a>
-<ul>
-<li>combines multiple ggplots into one plot</li>
-</ul></li>
-<li><a href="https://hauselin.github.io/hausekeep/">hausekeep</a>
-<ul>
-<li>miscellaneous functions for psychological research</li>
-</ul></li>
-</ul>
+dt1 &lt;- data.table(ChickWeight)
+dt1</code></pre>
+<pre><code>
+     weight Time Chick Diet
+  1:     42    0     1    1
+  2:     51    2     1    1
+  3:     59    4     1    1
+  4:     64    6     1    1
+  5:     76    8     1    1
+ ---                       
+574:    175   14    50    4
+575:    205   16    50    4
+576:    234   18    50    4
+577:    264   20    50    4
+578:    264   21    50    4</code></pre>
+<pre class="r"><code>
+model &lt;- lm(weight ~ Time, data = dt1)
+summary(model)</code></pre>
+<pre><code>
+Call:
+lm(formula = weight ~ Time, data = dt1)
+
+Residuals:
+     Min       1Q   Median       3Q      Max 
+-138.331  -14.536    0.926   13.533  160.669 
+
+Coefficients:
+            Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept)  27.4674     3.0365   9.046   &lt;2e-16 ***
+Time          8.8030     0.2397  36.725   &lt;2e-16 ***
+---
+Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+
+Residual standard error: 38.91 on 576 degrees of freedom
+Multiple R-squared:  0.7007,    Adjusted R-squared:  0.7002 
+F-statistic:  1349 on 1 and 576 DF,  p-value: &lt; 2.2e-16</code></pre>
+</div>
+<div class="layout-chunk" data-layout="l-body">
+<pre class="r"><code>
+summaryh(model)</code></pre>
+<pre><code>
+          term                                                 results
+1: (Intercept) b = 27.47, SE = 3.04, t(576) = 9.05, p &lt; .001, r = 0.35
+2:        Time b = 8.80, SE = 0.24, t(576) = 36.73, p &lt; .001, r = 0.84</code></pre>
+</div>
+<div class="layout-chunk" data-layout="l-body">
+<pre class="r"><code>
+# fit linear regression model to first 5 Chicks
+dt1[Chick %in% 1:5, summaryh(lm(weight ~ Time)), by = Chick]</code></pre>
+<pre><code>
+    Chick        term                                                 results
+ 1:     1 (Intercept)  b = 24.47, SE = 6.73, t(10) = 3.64, p = .005, r = 0.75
+ 2:     1        Time  b = 7.99, SE = 0.52, t(10) = 15.25, p &lt; .001, r = 0.98
+ 3:     2 (Intercept)  b = 24.72, SE = 4.93, t(10) = 5.01, p &lt; .001, r = 0.85
+ 4:     2        Time  b = 8.72, SE = 0.38, t(10) = 22.72, p &lt; .001, r = 0.99
+ 5:     3 (Intercept)  b = 23.18, SE = 5.08, t(10) = 4.56, p = .001, r = 0.82
+ 6:     3        Time  b = 8.49, SE = 0.40, t(10) = 21.45, p &lt; .001, r = 0.99
+ 7:     4 (Intercept)  b = 32.87, SE = 4.01, t(10) = 8.21, p &lt; .001, r = 0.93
+ 8:     4        Time  b = 6.09, SE = 0.31, t(10) = 19.53, p &lt; .001, r = 0.99
+ 9:     5 (Intercept)  b = 16.90, SE = 7.56, t(10) = 2.24, p = .049, r = 0.58
+10:     5        Time b = 10.06, SE = 0.59, t(10) = 17.10, p &lt; .001, r = 0.98</code></pre>
+</div>
 <!--radix_placeholder_article_footer-->
 <!--/radix_placeholder_article_footer-->
 </div>
@@ -1432,18 +1043,9 @@ library(cowplot); library(hausekeep)</code></pre>
 <!--radix_placeholder_site_after_body-->
 <!--/radix_placeholder_site_after_body-->
 <!--radix_placeholder_appendices-->
-<div class="appendix-bottom">
-<h3 id="updates-and-corrections">Corrections</h3>
-<p>If you see mistakes or want to suggest changes, please <a href="https://github.com/hauselin/rtutorialsite/issues/new">create an issue</a> on the source repository.</p>
-<h3 id="reuse">Reuse</h3>
-<p>Text and figures are licensed under Creative Commons Attribution <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>. Source code is available at <a href="https://github.com/hauselin/rtutorialsite">https://github.com/hauselin/rtutorialsite</a>, unless otherwise noted. The figures that have been reused from other sources don't fall under this license and can be recognized by a note in their caption: "Figure from ...".</p>
-</div>
+<div class="appendix-bottom"></div>
 <!--/radix_placeholder_appendices-->
 <!--radix_placeholder_navigation_after_body-->
-<div class="radix-site-nav radix-site-footer">
-<p>Created and managed by <a href="mailto:hauselin@gmail.com">Hause Lin</a></p>
-<p>Created with <a href="https://rstudio.github.io/radix/" target="_blank" rel="noopener noreferrer">Radix</a> in <a href="https://www.rstudio.com/" target="_blank" rel="noopener noreferrer">RStudio</a></p>
-</div>
 <!--/radix_placeholder_navigation_after_body-->
 
 </body>
