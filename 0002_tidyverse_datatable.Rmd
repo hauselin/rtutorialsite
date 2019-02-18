@@ -32,9 +32,9 @@ knit_hooks$set(output = function(x, options) {
 })
 ```
 
-## Loading frequently-used packages with `library()`
+## Load packages/libraries
 
-I always load my frequently-used packages at the top of each script.
+Use `library()` to load packages at the top of each R script.
 
 ```{r loading packages, results="hide", message=FALSE, warning=FALSE}
 library(tidyverse); library(data.table); library(broom); library(dtplyr); 
@@ -408,13 +408,17 @@ arrange(df4, desc(class)) # descending order of class
 
 `order()` is another function (base R function) people often use to arrange rows. See [here](https://www.statmethods.net/management/sorting.html) for more information.
 
-### Combining functions with pipes `%in%`
+### Combining functions with pipes `%>%`
 
 ```{r}
 df4 %>% print(n = Inf) # reminder what the dataset looks like
 ```
 
-You can combine multiple functions with `%in%`. After adding each function/line, you can check your output before you add the next function/line. This way, you can build really complicated and long code/syntax without nesting functions!
+<aside>
+same as `r print(df, n = Inf)`
+</aside>
+
+You can combine multiple functions with `%>%`. After adding each function/line, you can check your output before you add the next function/line. This way, you can build really complicated and long code/syntax without nesting functions!
 
 NOTE that comments # are placed AFTER the pipe symbol!
 
