@@ -1302,6 +1302,7 @@ Tutorials
 <div class="nav-dropdown-content">
 <a href="0001_rbasics.html">R programming basics</a>
 <a href="0002_tidyverse_datatable.html">tidyverse and data.table</a>
+<a href="0003_ggplot_modelfitting.html">ggplot and model fitting</a>
 </div>
 </div>
 <a href="https://github.com/hauselin/rtutorialsite">
@@ -2007,19 +2008,19 @@ anova_classGender &lt;- aov(grades ~ class * gender, data = df1)
 summary(anova_classGender)</code></pre>
 <pre><code>
              Df Sum Sq Mean Sq F value   Pr(&gt;F)    
-class         3   5821  1940.4   9.115 0.000165 ***
-gender        1     30    29.7   0.140 0.711067    
-class:gender  3    558   186.1   0.874 0.464538    
-Residuals    32   6812   212.9                     
+class         3   5821  1940.4  10.286 6.78e-05 ***
+gender        1    186   185.5   0.983    0.329    
+class:gender  3   1178   392.6   2.081    0.122    
+Residuals    32   6037   188.6                     
 ---
 Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
 <pre class="r"><code>
 summaryh(anova_classGender)</code></pre>
 <pre><code>
-           term                             results
-1:        class F(3, 32) = 9.12, p &lt; .001, r = 0.68
-2:       gender F(1, 32) = 0.14, p = .711, r = 0.07
-3: class:gender F(3, 32) = 0.87, p = .465, r = 0.28</code></pre>
+           term                              results
+1:        class F(3, 32) = 10.29, p &lt; .001, r = 0.70
+2:       gender  F(1, 32) = 0.98, p = .329, r = 0.17
+3: class:gender  F(3, 32) = 2.08, p = .122, r = 0.40</code></pre>
 </div>
 <h3 id="specify-contrasts-resources">Specify contrasts resources</h3>
 <ul>
@@ -2055,18 +2056,18 @@ ttest_gender</code></pre>
     Welch Two Sample t-test
 
 data:  iq by gender
-t = 0.40685, df = 37.264, p-value = 0.6864
+t = -0.61902, df = 36.306, p-value = 0.5398
 alternative hypothesis: true difference in means is not equal to 0
 95 percent confidence interval:
- -5.196097  7.807838
+ -8.484871  4.515651
 sample estimates:
 mean in group female   mean in group male 
-            109.9953             108.6895 </code></pre>
+            108.4154             110.4000 </code></pre>
 <pre class="r"><code>
 summaryh(ttest_gender)</code></pre>
 <pre><code>
-                            results
-1: t(37) = 0.41, p = .686, r = 0.07</code></pre>
+                             results
+1: t(36) = −0.62, p = .540, r = 0.10</code></pre>
 </div>
 <p>class a vs. class d</p>
 <div class="layout-chunk" data-layout="l-body">
