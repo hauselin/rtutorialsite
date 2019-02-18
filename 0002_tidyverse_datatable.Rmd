@@ -37,7 +37,9 @@ knit_hooks$set(output = function(x, options) {
 I always load my frequently-used packages at the top of each script.
 
 ```{r loading packages, results="hide", message=FALSE, warning=FALSE}
-library(tidyverse); library(data.table); library(broom); library(dtplyr); library(lme4); library(lmerTest); library(ggbeeswarm); library(cowplot)
+library(tidyverse); library(data.table); library(broom); library(dtplyr); 
+library(lme4); library(lmerTest); library(ggbeeswarm); library(cowplot)
+library(hausekeep)
 ```
 
 ## Reading data into R
@@ -87,7 +89,7 @@ Check out the csv (comma separated values) data [here](https://raw.githubusercon
 Most of these read functions can import/read different types of files (e.g., csv, txt, URLs) as long as the raw data are formatted properly (e.g., separated by commas, tabs). But if you're trying to read proprietary data formats (e.g., SPSS datasets, Excel sheets), you'll need to use other libraries (e.g., `readxl`, `foreign`) to read those data into R.
 
 ```{r}
-df_url <- tbl_dt(fread("https://raw.githubusercontent.com/hauselin/RdataScience/master/data/sleep.csv"))
+df_url <- tbl_dt(fread("https://raw.githubusercontent.com/hauselin/rtutorialsite/master/data/sleep.csv"))
 df_url # print data to console; same dataset as tbl_dt(fread("./data/sleep.csv"))
 ```
 
@@ -132,17 +134,23 @@ df3$ID
 ```
 
 ```{r}
-myList <- list(a = -999, b = c(TRUE, FALSE, T, T), c = c('myAmazingList')) # create a list with named items a, b, c
+# create a list with named items a, b, c
+myList <- list(a = -999, b = c(TRUE, FALSE, T, T), c = c('myAmazingList')) 
 class(myList)
 names(myList) 
-myList # note the formatting/structure of a list ($ signs tell you how to extract items)
+myList # note the structure of a list ($ signs tell you how to get items)
 myList$a
-myList$b # lists can store objects of different classes (unlike most other objects, which expect all items to be of same class)
+myList$b 
 myList$c
 ```
 
+<aside>
+Lists can store objects of different classes (unlike most other objects, which expect all items to be of same class).
+</aside>
+
 ```{r}
-df1['extra'] # same as df1$extra, but uses characters (in '') to extract elements
+# same as df1$extra, but use characters (in '') to extract elements
+df1['extra']
 ```
 
 ** BUT the syntax above only works for the `data.frame` class!**
@@ -160,11 +168,13 @@ df3[, extra] # df3[i, j] (i is row, and j is column)
 ## Writing/saving dataframes or datatables as csv files
 
 ```{r}
-write.csv(df3, 'example1_df3.csv', row.names = F) # saves in your working directory
+# saves in your working directory
+write.csv(df3, 'example1_df3.csv', row.names = F) 
 ```
 
 ```{r, error=TRUE}
-write.csv(df3, './data/example2_df3.csv', row.names = F) # saves in your data directory (assumes data directory exists!)
+# saves in your data directory (assumes data directory exists!)
+write.csv(df3, './data/example2_df3.csv', row.names = F) 
 ```
 
 `write.csv()` overwrites any existing files that have the same name and you can't recover the original file if you've overwritten it!
@@ -178,8 +188,12 @@ write.csv(df3, './data/example2_df3.csv', row.names = F) # saves in your data di
 Included packages: `ggplot2`, `dplyr`, `tidyr`, `stringr` etc. [see official website for documentation](https://www.tidyverse.org/packages/)
 
 ```{r}
-library(tidyverse) # load tidyverse packages (I'm running this line here for educational purposes; there's actually no need for this because I've already loaded all my packages at the beginning of this script)
+library(tidyverse)
 ```
+
+<aside>
+Load tidyverse packages (I'm running this line here for educational purposes; there's actually no need for this because I've already loaded all my packages at the beginning of this script).
+</aside>
 
 ### Manipulating datasets with `dplyr` (a package in tidyverse)
 
@@ -211,8 +225,12 @@ glimpse(df4) # have a glimpse of the data (quick summary of data)
 ```
 
 ```{r}
-print(df4, n = Inf) # tibbles are automatically truncated to facilitate printing; using print(df4, n = Inf) allows me to print Inf (infinite) rows
+print(df4, n = Inf) # print all or Inf (infinite) rows
 ```
+
+<aside>
+Tibbles are automatically truncated to facilitate printing.
+</aside>
 
 ### Select columns/variables with `select()`
 
@@ -277,7 +295,7 @@ Other options for `select()` include `matches()`, `contains()`. For more informa
 ```{r}
 slice(df4, 1:5) # rows 1 to 5
 slice(df4, c(1, 3, 5, 7, 9)) # rows 1, 3, 5, 7, 9
-slice(df4, seq(1, 10, by = 2)) # same as above, but using sequence function (from 1 to 10, by/in steps of 2)
+slice(df4, seq(from = 1, to = 10, by = 2)) # same as above, but using sequence function (from 1 to 10, by/in steps of 2)
 slice(df4, -c(1:39)) # remove rows 1 to 39
 ```
 
@@ -702,8 +720,10 @@ df4[, .(iqMean = mean(iq, na.rm = T)), .(class, gender)] %>% # compute class/gen
 
 Extra cool stuff again...
 
+* Fit model to entire dataset (grades ~ iq) and use summaryh to summarize model results
+
 ```{r}
-df4[, summaryh(lm(grades ~ iq))] # reminder: fit model to entire dataset (grades ~ iq) and use summaryh to summarize model results
+df4[, summaryh(lm(grades ~ iq))] 
 df4[, summaryh(lm(grades ~ iq)), by = class] # fit model to each class separately
 df4[, tidy(lm(grades ~ iq)), by = class] # another way to summarize model output
 ```

@@ -13,4 +13,6 @@ navbar:
       menu:
         - text: "R programming basics"
           href: 0001_rbasics.html
+        - text: "tidyverse and data.table"
+          href: 0002_tidyverse_datatable.html
 output: radix::radix_article

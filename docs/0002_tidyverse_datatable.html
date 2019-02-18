@@ -1,0 +1,3982 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1"/>
+  <meta name="generator" content="radix" />
+
+  <style type="text/css">
+  /* Hide doc at startup (prevent jankiness while JS renders/transforms) */
+  body {
+    visibility: hidden;
+  }
+  </style>
+
+ <!--radix_placeholder_import_source-->
+ <!--/radix_placeholder_import_source-->
+
+  <!--radix_placeholder_meta_tags-->
+  <title>rtutorials: tidyverse and data.table</title>
+  
+  <meta property="description" itemprop="description" content="R tidyverse and data.table packages basics"/>
+  
+  
+  
+  <!--  https://developers.facebook.com/docs/sharing/webmasters#markup -->
+  <meta property="og:title" content="rtutorials: tidyverse and data.table"/>
+  <meta property="og:type" content="article"/>
+  <meta property="og:description" content="R tidyverse and data.table packages basics"/>
+  <meta property="og:locale" content="en_US"/>
+  <meta property="og:site_name" content="rtutorials"/>
+  
+  <!--  https://dev.twitter.com/cards/types/summary -->
+  <meta property="twitter:card" content="summary"/>
+  <meta property="twitter:title" content="rtutorials: tidyverse and data.table"/>
+  <meta property="twitter:description" content="R tidyverse and data.table packages basics"/>
+  
+  <!--/radix_placeholder_meta_tags-->
+  <!--radix_placeholder_rmarkdown_metadata-->
+  
+  <script type="text/json" id="radix-rmarkdown-metadata">
+  {"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["title","description","output"]}},"value":[{"type":"character","attributes":{},"value":["tidyverse and data.table"]},{"type":"character","attributes":{},"value":["R tidyverse and data.table packages basics"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["radix::radix_article"]}},"value":[{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["toc","toc_depth"]}},"value":[{"type":"logical","attributes":{},"value":[true]},{"type":"integer","attributes":{},"value":[3]}]}]}]}
+  </script>
+  <!--/radix_placeholder_rmarkdown_metadata-->
+  <!--radix_placeholder_navigation_in_header-->
+  
+  <script type="application/javascript">
+  
+    window.headroom_prevent_pin = false;
+  
+    window.document.addEventListener("DOMContentLoaded", function (event) {
+  
+      // initialize headroom for banner
+      var header = $('header').get(0);
+      var headerHeight = header.offsetHeight;
+      var headroom = new Headroom(header, {
+        onPin : function() {
+          if (window.headroom_prevent_pin) {
+            window.headroom_prevent_pin = false;
+            headroom.unpin();
+          }
+        }
+      });
+      headroom.init();
+      if(window.location.hash)
+        headroom.unpin();
+      $(header).addClass('headroom--transition');
+  
+      // offset scroll location for banner on hash change
+      // (see: https://github.com/WickyNilliams/headroom.js/issues/38)
+      window.addEventListener("hashchange", function(event) {
+        window.scrollTo(0, window.pageYOffset - (headerHeight + 25));
+      });
+  
+      // responsive menu
+      $('.radix-site-header').each(function(i, val) {
+        var topnav = $(this);
+        var toggle = topnav.find('.nav-toggle');
+        toggle.on('click', function() {
+          topnav.toggleClass('responsive');
+        });
+      });
+  
+      // nav dropdowns
+      $('.nav-dropbtn').click(function(e) {
+        $(this).next('.nav-dropdown-content').toggleClass('nav-dropdown-active');
+        $(this).parent().siblings('.nav-dropdown')
+           .children('.nav-dropdown-content').removeClass('nav-dropdown-active');
+      });
+      $("body").click(function(e){
+        $('.nav-dropdown-content').removeClass('nav-dropdown-active');
+      });
+      $(".nav-dropdown").click(function(e){
+        e.stopPropagation();
+      });
+    });
+  </script>
+  
+  <style type="text/css">
+  
+  /* Theme (user-documented overrideables for nav appearance) */
+  
+  .radix-site-nav {
+    color: rgba(255, 255, 255, 0.8);
+    background-color: #455a64;
+    font-size: 15px;
+    font-weight: 300;
+  }
+  
+  .radix-site-nav a {
+    color: inherit;
+    text-decoration: none;
+  }
+  
+  .radix-site-nav a:hover {
+    color: white;
+  }
+  
+  @media print {
+    .radix-site-nav {
+      display: none;
+    }
+  }
+  
+  .radix-site-header {
+  
+  }
+  
+  .radix-site-footer {
+  
+  }
+  
+  
+  /* Site Header */
+  
+  .radix-site-header {
+    width: 100%;
+    box-sizing: border-box;
+    z-index: 3;
+  }
+  
+  .radix-site-header .nav-left {
+    display: inline-block;
+    margin-left: 8px;
+  }
+  
+  @media screen and (max-width: 768px) {
+    .radix-site-header .nav-left {
+      margin-left: 0;
+    }
+  }
+  
+  
+  .radix-site-header .nav-right {
+    float: right;
+    margin-right: 8px;
+  }
+  
+  .radix-site-header a,
+  .radix-site-header .title {
+    display: inline-block;
+    text-align: center;
+    padding: 14px 10px 14px 10px;
+  }
+  
+  .radix-site-header .title {
+    font-size: 18px;
+  }
+  
+  .radix-site-header .logo {
+    padding: 0;
+  }
+  
+  .radix-site-header .logo img {
+    display: none;
+    max-height: 20px;
+    width: auto;
+    margin-bottom: -4px;
+  }
+  
+  .radix-site-header .nav-image img {
+    max-height: 18px;
+    width: auto;
+    display: inline-block;
+    margin-bottom: -3px;
+  }
+  
+  
+  
+  @media screen and (min-width: 1000px) {
+    .radix-site-header .logo img {
+      display: inline-block;
+    }
+    .radix-site-header .nav-left {
+      margin-left: 20px;
+    }
+    .radix-site-header .nav-right {
+      margin-right: 20px;
+    }
+    .radix-site-header .title {
+      padding-left: 12px;
+    }
+  }
+  
+  
+  .radix-site-header .nav-toggle {
+    display: none;
+  }
+  
+  .nav-dropdown {
+    display: inline-block;
+    position: relative;
+  }
+  
+  .nav-dropdown .nav-dropbtn {
+    border: none;
+    outline: none;
+    color: rgba(255, 255, 255, 0.8);
+    padding: 16px 10px;
+    background-color: transparent;
+    font-family: inherit;
+    font-size: inherit;
+    font-weight: inherit;
+    margin: 0;
+    margin-top: 1px;
+    z-index: 2;
+  }
+  
+  .nav-dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: white;
+    min-width: 200px;
+    border: 1px solid rgba(0,0,0,0.15);
+    border-radius: 4px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.1);
+    z-index: 1;
+    margin-top: 2px;
+    white-space: nowrap;
+    padding-top: 4px;
+    padding-bottom: 4px;
+  }
+  
+  .nav-dropdown-content hr {
+    margin-top: 4px;
+    margin-bottom: 4px;
+    border: none;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  }
+  
+  .nav-dropdown-active {
+    display: block;
+  }
+  
+  .nav-dropdown-content a, .nav-dropdown-content .nav-dropdown-header {
+    color: black;
+    padding: 6px 24px;
+    text-decoration: none;
+    display: block;
+    text-align: left;
+  }
+  
+  .nav-dropdown-content .nav-dropdown-header {
+    display: block;
+    padding: 5px 24px;
+    padding-bottom: 0;
+    text-transform: uppercase;
+    font-size: 14px;
+    color: #999999;
+    white-space: nowrap;
+  }
+  
+  .nav-dropdown:hover .nav-dropbtn {
+    color: white;
+  }
+  
+  .nav-dropdown-content a:hover {
+    background-color: #ddd;
+    color: black;
+  }
+  
+  .nav-right .nav-dropdown-content {
+    margin-left: -45%;
+    right: 0;
+  }
+  
+  @media screen and (max-width: 768px) {
+    .radix-site-header a, .radix-site-header .nav-dropdown  {display: none;}
+    .radix-site-header a.nav-toggle {
+      float: right;
+      display: block;
+    }
+    .radix-site-header .title {
+      margin-left: 0;
+    }
+    .radix-site-header .nav-right {
+      margin-right: 0;
+    }
+    .radix-site-header {
+      overflow: hidden;
+    }
+    .nav-right .nav-dropdown-content {
+      margin-left: 0;
+    }
+  }
+  
+  
+  @media screen and (max-width: 768px) {
+    .radix-site-header.responsive {position: relative;}
+    .radix-site-header.responsive a.nav-toggle {
+      position: absolute;
+      right: 0;
+      top: 0;
+    }
+    .radix-site-header.responsive a,
+    .radix-site-header.responsive .nav-dropdown {
+      display: block;
+      text-align: left;
+    }
+    .radix-site-header.responsive .nav-left,
+    .radix-site-header.responsive .nav-right {
+      width: 100%;
+    }
+    .radix-site-header.responsive .nav-dropdown {float: none;}
+    .radix-site-header.responsive .nav-dropdown-content {position: relative;}
+    .radix-site-header.responsive .nav-dropdown .nav-dropbtn {
+      display: block;
+      width: 100%;
+      text-align: left;
+    }
+  }
+  
+  /* Site Footer */
+  
+  .radix-site-footer {
+    width: 100%;
+    overflow: hidden;
+    box-sizing: border-box;
+    z-index: 3;
+    margin-top: 30px;
+    padding-top: 30px;
+    padding-bottom: 30px;
+    text-align: center;
+  }
+  
+  /* Headroom */
+  
+  d-title {
+    padding-top: 6rem;
+  }
+  
+  @media print {
+    d-title {
+      padding-top: 4rem;
+    }
+  }
+  
+  .headroom {
+    z-index: 1000;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+  }
+  
+  .headroom--transition {
+    transition: all .4s ease-in-out;
+  }
+  
+  .headroom--unpinned {
+    top: -100px;
+  }
+  
+  .headroom--pinned {
+    top: 0;
+  }
+  
+  </style>
+  
+  <link href="site_libs/font-awesome-5.1.0/css/all.css" rel="stylesheet"/>
+  <link href="site_libs/font-awesome-5.1.0/css/v4-shims.css" rel="stylesheet"/>
+  <script src="site_libs/headroom-0.9.4/headroom.min.js"></script>
+  <!--/radix_placeholder_navigation_in_header-->
+  <!--radix_placeholder_distill-->
+  
+  <style type="text/css">
+  
+  body {
+    background-color: white;
+  }
+  
+  .pandoc-table {
+    width: 100%;
+  }
+  
+  .pandoc-table>caption {
+    margin-bottom: 10px;
+  }
+  
+  .pandoc-table th:not([align]) {
+    text-align: left;
+  }
+  
+  .pagedtable-footer {
+    font-size: 15px;
+  }
+  
+  .html-widget {
+    margin-bottom: 2.0em;
+  }
+  
+  .l-screen-inset {
+    padding-right: 16px;
+  }
+  
+  .l-screen .caption {
+    margin-left: 10px;
+  }
+  
+  .shaded {
+    background: rgb(247, 247, 247);
+    padding-top: 20px;
+    padding-bottom: 20px;
+    border-top: 1px solid rgba(0, 0, 0, 0.1);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  }
+  
+  .shaded .html-widget {
+    margin-bottom: 0;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+  }
+  
+  .shaded .shaded-content {
+    background: white;
+  }
+  
+  .text-output {
+    margin-top: 0;
+    line-height: 1.5em;
+  }
+  
+  .hidden {
+    display: none !important;
+  }
+  
+  d-article {
+    padding-bottom: 30px;
+  }
+  
+  d-appendix {
+    padding-top: 30px;
+  }
+  
+  d-article>p>img {
+    width: 100%;
+  }
+  
+  d-article iframe {
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    margin-bottom: 2.0em;
+    width: 100%;
+  }
+  
+  figure img.external {
+    background: white;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    box-shadow: 0 1px 8px rgba(0, 0, 0, 0.1);
+    padding: 18px;
+    box-sizing: border-box;
+  }
+  
+  /* CSS for table of contents */
+  
+  .d-toc {
+    color: rgba(0,0,0,0.8);
+    font-size: 0.8em;
+    line-height: 1em;
+  }
+  
+  .d-toc-header {
+    font-size: 0.6rem;
+    font-weight: 400;
+    color: rgba(0, 0, 0, 0.5);
+    text-transform: uppercase;
+    margin-top: 0;
+    margin-bottom: 1.3em;
+  }
+  
+  .d-toc a {
+    border-bottom: none;
+  }
+  
+  .d-toc ul {
+    padding-left: 0;
+  }
+  
+  .d-toc li>ul {
+    padding-top: 0.8em;
+    padding-left: 16px;
+    margin-bottom: 0.6em;
+  }
+  
+  .d-toc ul,
+  .d-toc li {
+    list-style-type: none;
+  }
+  
+  .d-toc li {
+    margin-bottom: 0.9em;
+  }
+  
+  .d-toc-separator {
+    margin-top: 20px;
+    margin-bottom: 2em;
+  }
+  
+  .d-article-with-toc {
+    border-top: none;
+    padding-top: 0;
+  }
+  
+  
+  
+  /* Tweak code blocks (note that this CSS is repeated above in an injection
+     into the d-code shadow dom) */
+  
+  d-code {
+    overflow-x: auto !important;
+  }
+  
+  pre.d-code code.d-code {
+    padding-left: 10px;
+    font-size: 12px;
+    border-left: 2px solid rgba(0,0,0,0.1);
+  }
+  
+  pre.text-output {
+  
+    font-size: 12px;
+    color: black;
+    background: none;
+    font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
+    text-align: left;
+    white-space: pre;
+    word-spacing: normal;
+    word-break: normal;
+    word-wrap: normal;
+    line-height: 1.5;
+  
+    -moz-tab-size: 4;
+    -o-tab-size: 4;
+    tab-size: 4;
+  
+    -webkit-hyphens: none;
+    -moz-hyphens: none;
+    -ms-hyphens: none;
+    hyphens: none;
+  }
+  
+  @media(min-width: 768px) {
+  
+  d-code {
+    overflow-x: visible !important;
+  }
+  
+  pre.d-code code.d-code  {
+      padding-left: 18px;
+      font-size: 14px;
+  }
+  pre.text-output {
+    font-size: 14px;
+  }
+  }
+  
+  /* Figure */
+  
+  .figure {
+    position: relative;
+    margin-bottom: 2.5em;
+    margin-top: 1.5em;
+  }
+  
+  .figure img {
+    width: 100%;
+  }
+  
+  .figure .caption {
+    color: rgba(0, 0, 0, 0.6);
+    font-size: 12px;
+    line-height: 1.5em;
+  }
+  
+  .figure img.external {
+    background: white;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    box-shadow: 0 1px 8px rgba(0, 0, 0, 0.1);
+    padding: 18px;
+    box-sizing: border-box;
+  }
+  
+  .figure .caption a {
+    color: rgba(0, 0, 0, 0.6);
+  }
+  
+  .figure .caption b,
+  .figure .caption strong, {
+    font-weight: 600;
+    color: rgba(0, 0, 0, 1.0);
+  }
+  
+  
+  
+  /* Tweak 1000px media break to show more text */
+  
+  @media(min-width: 1000px) {
+    .base-grid,
+    distill-header,
+    d-title,
+    d-abstract,
+    d-article,
+    d-appendix,
+    distill-appendix,
+    d-byline,
+    d-footnote-list,
+    d-citation-list,
+    distill-footer {
+      grid-template-columns: [screen-start] 1fr [page-start kicker-start] 80px [middle-start] 50px [text-start kicker-end] 65px 65px 65px 65px 65px 65px 65px 65px [text-end gutter-start] 65px [middle-end] 65px [page-end gutter-end] 1fr [screen-end];
+      grid-column-gap: 16px;
+    }
+  
+    .grid {
+      grid-column-gap: 16px;
+    }
+  
+    d-article {
+      font-size: 1.06rem;
+      line-height: 1.7em;
+    }
+    figure .caption, .figure .caption, figure figcaption {
+      font-size: 13px;
+    }
+  }
+  
+  @media(min-width: 1180px) {
+    .base-grid,
+    distill-header,
+    d-title,
+    d-abstract,
+    d-article,
+    d-appendix,
+    distill-appendix,
+    d-byline,
+    d-footnote-list,
+    d-citation-list,
+    distill-footer {
+      grid-template-columns: [screen-start] 1fr [page-start kicker-start] 60px [middle-start] 60px [text-start kicker-end] 60px 60px 60px 60px 60px 60px 60px 60px [text-end gutter-start] 60px [middle-end] 60px [page-end gutter-end] 1fr [screen-end];
+      grid-column-gap: 32px;
+    }
+  
+    .grid {
+      grid-column-gap: 32px;
+    }
+  }
+  
+  
+  /* Get the citation styles for the appendix (not auto-injected on render since
+     we do our own rendering of the citation appendix) */
+  
+  d-appendix .citation-appendix,
+  .d-appendix .citation-appendix {
+    font-size: 11px;
+    line-height: 15px;
+    border-left: 1px solid rgba(0, 0, 0, 0.1);
+    padding-left: 18px;
+    border: 1px solid rgba(0,0,0,0.1);
+    background: rgba(0, 0, 0, 0.02);
+    padding: 10px 18px;
+    border-radius: 3px;
+    color: rgba(150, 150, 150, 1);
+    overflow: hidden;
+    margin-top: -12px;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+  }
+  
+  
+  /* Social footer */
+  
+  .social_footer {
+    margin-top: 30px;
+    margin-bottom: 0;
+    color: rgba(0,0,0,0.67);
+  }
+  
+  .disqus-comments {
+    margin-right: 30px;
+  }
+  
+  .disqus-comment-count {
+    border-bottom: 1px solid rgba(0, 0, 0, 0.4);
+    cursor: pointer;
+  }
+  
+  #disqus_thread {
+    margin-top: 30px;
+  }
+  
+  .article-sharing a {
+    border-bottom: none;
+    margin-right: 8px;
+  }
+  
+  .article-sharing a:hover {
+    border-bottom: none;
+  }
+  
+  .sidebar-section.subscribe {
+    font-size: 12px;
+    line-height: 1.6em;
+  }
+  
+  .subscribe p {
+    margin-bottom: 0.5em;
+  }
+  
+  
+  .article-footer .subscribe {
+    font-size: 15px;
+    margin-top: 45px;
+  }
+  
+  
+  /* Improve display for browsers without grid (IE/Edge <= 15) */
+  
+  .downlevel {
+    line-height: 1.6em;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", Arial, sans-serif;
+    margin: 0;
+  }
+  
+  .downlevel .d-title {
+    padding-top: 6rem;
+    padding-bottom: 1.5rem;
+  }
+  
+  .downlevel .d-title h1 {
+    font-size: 50px;
+    font-weight: 700;
+    line-height: 1.1em;
+    margin: 0 0 0.5rem;
+  }
+  
+  .downlevel .d-title p {
+    font-weight: 300;
+    font-size: 1.2rem;
+    line-height: 1.55em;
+    margin-top: 0;
+  }
+  
+  .downlevel .d-byline {
+    padding-top: 0.8em;
+    padding-bottom: 0.8em;
+    font-size: 0.8rem;
+    line-height: 1.8em;
+  }
+  
+  .downlevel .section-separator {
+    border: none;
+    border-top: 1px solid rgba(0, 0, 0, 0.1);
+  }
+  
+  .downlevel .d-article {
+    font-size: 1.06rem;
+    line-height: 1.7em;
+    padding-top: 1rem;
+    padding-bottom: 2rem;
+  }
+  
+  
+  .downlevel .d-appendix {
+    padding-left: 0;
+    padding-right: 0;
+    max-width: none;
+    font-size: 0.8em;
+    line-height: 1.7em;
+    margin-bottom: 0;
+    color: rgba(0,0,0,0.5);
+    padding-top: 40px;
+    padding-bottom: 48px;
+  }
+  
+  .downlevel .footnotes ol {
+    padding-left: 13px;
+  }
+  
+  .downlevel .base-grid,
+  .downlevel .distill-header,
+  .downlevel .d-title,
+  .downlevel .d-abstract,
+  .downlevel .d-article,
+  .downlevel .d-appendix,
+  .downlevel .distill-appendix,
+  .downlevel .d-byline,
+  .downlevel .d-footnote-list,
+  .downlevel .d-citation-list,
+  .downlevel .distill-footer,
+  .downlevel .appendix-bottom,
+  .downlevel .posts-container {
+    padding-left: 40px;
+    padding-right: 40px;
+  }
+  
+  @media(min-width: 768px) {
+    .downlevel .base-grid,
+    .downlevel .distill-header,
+    .downlevel .d-title,
+    .downlevel .d-abstract,
+    .downlevel .d-article,
+    .downlevel .d-appendix,
+    .downlevel .distill-appendix,
+    .downlevel .d-byline,
+    .downlevel .d-footnote-list,
+    .downlevel .d-citation-list,
+    .downlevel .distill-footer,
+    .downlevel .appendix-bottom,
+    .downlevel .posts-container {
+    padding-left: 150px;
+    padding-right: 150px;
+    max-width: 900px;
+  }
+  }
+  
+  .downlevel pre code {
+    display: block;
+    border-left: 2px solid rgba(0, 0, 0, .1);
+    padding: 0 0 0 20px;
+    font-size: 14px;
+  }
+  
+  .downlevel code, .downlevel pre {
+    color: black;
+    background: none;
+    font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
+    text-align: left;
+    white-space: pre;
+    word-spacing: normal;
+    word-break: normal;
+    word-wrap: normal;
+    line-height: 1.5;
+  
+    -moz-tab-size: 4;
+    -o-tab-size: 4;
+    tab-size: 4;
+  
+    -webkit-hyphens: none;
+    -moz-hyphens: none;
+    -ms-hyphens: none;
+    hyphens: none;
+  }
+  
+  </style>
+  
+  <script type="application/javascript">
+  
+  function is_downlevel_browser() {
+    if (bowser.isUnsupportedBrowser({ msie: "12", msedge: "16"},
+                                   window.navigator.userAgent)) {
+      return true;
+    } else {
+      return window.load_distill_framework === undefined;
+    }
+  }
+  
+  // show body when load is complete
+  function on_load_complete() {
+  
+    // set body to visible
+    document.body.style.visibility = 'visible';
+  
+    // force redraw for leaflet widgets
+    if (window.HTMLWidgets) {
+      var maps = window.HTMLWidgets.findAll(".leaflet");
+      $.each(maps, function(i, el) {
+        var map = this.getMap();
+        map.invalidateSize();
+        map.eachLayer(function(layer) {
+          if (layer instanceof L.TileLayer)
+            layer.redraw();
+        });
+      });
+    }
+  
+    // trigger 'shown' so htmlwidgets resize
+    $('d-article').trigger('shown');
+  }
+  
+  function init_distill() {
+  
+    init_common();
+  
+    // create front matter
+    var front_matter = $('<d-front-matter></d-front-matter>');
+    $('#distill-front-matter').wrap(front_matter);
+  
+    // create d-title
+    $('.d-title').changeElementType('d-title');
+  
+    // create d-byline
+    var byline = $('<d-byline></d-byline>');
+    $('.d-byline').replaceWith(byline);
+  
+    // create d-article
+    var article = $('<d-article></d-article>');
+    $('.d-article').wrap(article).children().unwrap();
+  
+    // move posts container into article
+    $('.posts-container').appendTo($('d-article'));
+  
+    // create d-appendix
+    $('.d-appendix').changeElementType('d-appendix');
+  
+    // create d-bibliography
+    var bibliography = $('<d-bibliography></d-bibliography>');
+    $('#distill-bibliography').wrap(bibliography);
+  
+    // flag indicating that we have appendix items
+    var appendix = $('.appendix-bottom').children('h3').length > 0;
+  
+    // replace citations with <d-cite>
+    $('.citation').each(function(i, val) {
+      appendix = true;
+      var cites = $(this).attr('data-cites').split(" ");
+      var dt_cite = $('<d-cite></d-cite>');
+      dt_cite.attr('key', cites.join());
+      $(this).replaceWith(dt_cite);
+    });
+    // remove refs
+    $('#refs').remove();
+  
+    // replace footnotes with <d-footnote>
+    $('.footnote-ref').each(function(i, val) {
+      appendix = true;
+      var href = $(this).attr('href');
+      var id = href.replace('#', '');
+      var fn = $('#' + id);
+      var fn_p = $('#' + id + '>p');
+      fn_p.find('.footnote-back').remove();
+      var text = fn_p.html();
+      var dtfn = $('<d-footnote></d-footnote>');
+      dtfn.html(text);
+      $(this).replaceWith(dtfn);
+    });
+    // remove footnotes
+    $('.footnotes').remove();
+  
+    $('h1.appendix, h2.appendix').each(function(i, val) {
+      $(this).changeElementType('h3');
+    });
+    $('h3.appendix').each(function(i, val) {
+      var id = $(this).attr('id');
+      $('.d-toc a[href="#' + id + '"]').parent().remove();
+      appendix = true;
+      $(this).nextUntil($('h1, h2, h3')).addBack().appendTo($('d-appendix'));
+    });
+  
+    // show d-appendix if we have appendix content
+    $("d-appendix").css('display', appendix ? 'grid' : 'none');
+  
+    // replace code blocks with d-code
+    $('pre>code').each(function(i, val) {
+      var code = $(this);
+      var pre = code.parent();
+      var clz = "";
+      var language = pre.attr('class');
+      if (language) {
+        // map unknown languages to "clike" (without this they just dissapear)
+        if ($.inArray(language, ["bash", "clike", "css", "go", "html",
+                                 "javascript", "js", "julia", "lua", "markdown",
+                                 "markup", "mathml", "python", "svg", "xml"]) == -1)
+          language = "clike";
+        language = ' language="' + language + '"';
+        var dt_code = $('<d-code block' + language + clz + '></d-code>');
+        dt_code.text(code.text());
+        pre.replaceWith(dt_code);
+      } else {
+        code.addClass('text-output').unwrap().changeElementType('pre');
+      }
+    });
+  
+    // localize layout chunks to just output
+    $('.layout-chunk').each(function(i, val) {
+  
+      // capture layout
+      var layout = $(this).attr('data-layout');
+  
+      // apply layout to markdown level block elements
+      var elements = $(this).children().not('d-code, pre.text-output, script');
+      elements.each(function(i, el) {
+        var layout_div = $('<div class="' + layout + '"></div>');
+        if (layout_div.hasClass('shaded')) {
+          var shaded_content = $('<div class="shaded-content"></div>');
+          $(this).wrap(shaded_content);
+          $(this).parent().wrap(layout_div);
+        } else {
+          $(this).wrap(layout_div);
+        }
+      });
+  
+  
+      // unwrap the layout-chunk div
+      $(this).children().unwrap();
+    });
+  
+    // load distill framework
+    load_distill_framework();
+  
+    // wait for window.distillRunlevel == 4 to do post processing
+    function distill_post_process() {
+  
+      if (!window.distillRunlevel || window.distillRunlevel < 4)
+        return;
+  
+      // hide author/affiliations entirely if we have no authors
+      var front_matter = JSON.parse($("#distill-front-matter").html());
+      var have_authors = front_matter.authors && front_matter.authors.length > 0;
+      if (!have_authors)
+        $('d-byline').addClass('hidden');
+  
+      // table of contents
+      if (have_authors) // adjust border if we are in authors
+        $('.d-toc').parent().addClass('d-article-with-toc');
+  
+      // strip links that point to #
+      $('.authors-affiliations').find('a[href="#"]').removeAttr('href');
+  
+      // hide elements of author/affiliations grid that have no value
+      function hide_byline_column(caption) {
+        $('d-byline').find('h3:contains("' + caption + '")').parent().css('visibility', 'hidden');
+      }
+  
+      // affiliations
+      var have_affiliations = false;
+      for (var i = 0; i<front_matter.authors.length; ++i) {
+        var author = front_matter.authors[i];
+        if (author.affiliation !== "&nbsp;") {
+          have_affiliations = true;
+          break;
+        }
+      }
+      if (!have_affiliations)
+        $('d-byline').find('h3:contains("Affiliations")').css('visibility', 'hidden');
+  
+      // published date
+      if (!front_matter.publishedDate)
+        hide_byline_column("Published");
+  
+      // document object identifier
+      var doi = $('d-byline').find('h3:contains("DOI")');
+      var doi_p = doi.next().empty();
+      if (!front_matter.doi) {
+        // if we have a citation and valid citationText then link to that
+        if ($('#citation').length > 0 && front_matter.citationText) {
+          doi.html('Citation');
+          $('<a href="#citation"></a>')
+            .text(front_matter.citationText)
+            .appendTo(doi_p);
+        } else {
+          hide_byline_column("DOI");
+        }
+      } else {
+        $('<a></a>')
+           .attr('href', "https://doi.org/" + front_matter.doi)
+           .html(front_matter.doi)
+           .appendTo(doi_p);
+      }
+  
+       // change plural form of authors/affiliations
+      if (front_matter.authors.length === 1) {
+        var grid = $('.authors-affiliations');
+        grid.children('h3:contains("Authors")').text('Author');
+        grid.children('h3:contains("Affiliations")').text('Affiliation');
+      }
+  
+      // inject pre code styles (can't do this with a global stylesheet b/c a shadow root is used)
+      $('d-code').each(function(i, val) {
+        var style = document.createElement('style');
+        style.innerHTML = 'pre code { padding-left: 10px; font-size: 12px; border-left: 2px solid rgba(0,0,0,0.1); } ' +
+                          '@media(min-width: 768px) { pre code { padding-left: 18px; font-size: 14px; } }';
+        if (this.shadowRoot)
+          this.shadowRoot.appendChild(style);
+      });
+  
+      // move appendix-bottom entries to the bottom
+      $('.appendix-bottom').appendTo('d-appendix').children().unwrap();
+      $('.appendix-bottom').remove();
+  
+      // clear polling timer
+      clearInterval(tid);
+  
+      // show body now that everything is ready
+      on_load_complete();
+    }
+  
+    var tid = setInterval(distill_post_process, 50);
+    distill_post_process();
+  
+  }
+  
+  function init_downlevel() {
+  
+    init_common();
+  
+     // insert hr after d-title
+    $('.d-title').after($('<hr class="section-separator"/>'));
+  
+    // check if we have authors
+    var front_matter = JSON.parse($("#distill-front-matter").html());
+    var have_authors = front_matter.authors && front_matter.authors.length > 0;
+  
+    // manage byline/border
+    if (!have_authors)
+      $('.d-byline').remove();
+    $('.d-byline').after($('<hr class="section-separator"/>'));
+    $('.d-byline a').remove();
+  
+    // remove toc
+    $('.d-toc-header').remove();
+    $('.d-toc').remove();
+    $('.d-toc-separator').remove();
+  
+    // move appendix elements
+    $('h1.appendix, h2.appendix').each(function(i, val) {
+      $(this).changeElementType('h3');
+    });
+    $('h3.appendix').each(function(i, val) {
+      $(this).nextUntil($('h1, h2, h3')).addBack().appendTo($('.d-appendix'));
+    });
+  
+  
+    // inject headers into references and footnotes
+    var refs_header = $('<h3></h3>');
+    refs_header.text('References');
+    $('#refs').prepend(refs_header);
+  
+    var footnotes_header = $('<h3></h3');
+    footnotes_header.text('Footnotes');
+    $('.footnotes').children('hr').first().replaceWith(footnotes_header);
+  
+    // move appendix-bottom entries to the bottom
+    $('.appendix-bottom').appendTo('.d-appendix').children().unwrap();
+    $('.appendix-bottom').remove();
+  
+    // remove appendix if it's empty
+    if ($('.d-appendix').children().length === 0)
+      $('.d-appendix').remove();
+  
+    // prepend separator above appendix
+    $('.d-appendix').before($('<hr class="section-separator" style="clear: both"/>'));
+  
+    // trim code
+    $('pre>code').each(function(i, val) {
+      $(this).html($.trim($(this).html()));
+    });
+  
+    // move posts-container right before article
+    $('.posts-container').insertBefore($('.d-article'));
+  
+    $('body').addClass('downlevel');
+  
+    on_load_complete();
+  }
+  
+  
+  function init_common() {
+  
+    // jquery plugin to change element types
+    (function($) {
+      $.fn.changeElementType = function(newType) {
+        var attrs = {};
+  
+        $.each(this[0].attributes, function(idx, attr) {
+          attrs[attr.nodeName] = attr.nodeValue;
+        });
+  
+        this.replaceWith(function() {
+          return $("<" + newType + "/>", attrs).append($(this).contents());
+        });
+      };
+    })(jQuery);
+  
+    // prevent underline for linked images
+    $('a > img').parent().css({'border-bottom' : 'none'});
+  
+    // mark non-body figures created by knitr chunks as 100% width
+    $('.layout-chunk').each(function(i, val) {
+      var figures = $(this).find('img, .html-widget');
+      if ($(this).attr('data-layout') !== "l-body") {
+        figures.css('width', '100%');
+      } else {
+        figures.css('max-width', '100%');
+        figures.filter("[width]").each(function(i, val) {
+          var fig = $(this);
+          fig.css('width', fig.attr('width') + 'px');
+        });
+  
+      }
+    });
+  
+    // auto-append index.html to post-preview links in file: protocol
+    // and in rstudio ide preview
+    $('.post-preview').each(function(i, val) {
+      if (window.location.protocol === "file:")
+        $(this).attr('href', $(this).attr('href') + "index.html");
+    });
+  
+    // get rid of index.html references in header
+    if (window.location.protocol !== "file:") {
+      $('.radix-site-header a[href]').each(function(i,val) {
+        $(this).attr('href', $(this).attr('href').replace("index.html", "./"));
+      });
+    }
+  
+    // add class to pandoc style tables
+    $('tr.header').parent('thead').parent('table').addClass('pandoc-table');
+    $('.kable-table').children('table').addClass('pandoc-table');
+  
+    // add figcaption style to table captions
+    $('caption').parent('table').addClass("figcaption");
+  
+    // initialize posts list
+    if (window.init_posts_list)
+      window.init_posts_list();
+  
+    // implmement disqus comment link
+    $('.disqus-comment-count').click(function() {
+      window.headroom_prevent_pin = true;
+      $('#disqus_thread').toggleClass('hidden');
+      if (!$('#disqus_thread').hasClass('hidden')) {
+        var offset = $(this).offset();
+        $(window).resize();
+        $('html, body').animate({
+          scrollTop: offset.top - 35
+        });
+      }
+    });
+  }
+  
+  document.addEventListener('DOMContentLoaded', function() {
+    if (is_downlevel_browser())
+      init_downlevel();
+    else
+      window.addEventListener('WebComponentsReady', init_distill);
+  });
+  
+  </script>
+  
+  <!--/radix_placeholder_distill-->
+  <script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
+  <script src="site_libs/bowser-1.9.3/bowser.min.js"></script>
+  <script src="site_libs/webcomponents-2.0.0/webcomponents.js"></script>
+  <script src="site_libs/distill-2.2.21/template.v2.js"></script>
+  <!--radix_placeholder_site_in_header-->
+  <!--/radix_placeholder_site_in_header-->
+
+
+</head>
+
+<body>
+
+<!--radix_placeholder_front_matter-->
+
+<script id="distill-front-matter" type="text/json">
+{"title":"tidyverse and data.table","description":"R tidyverse and data.table packages basics","authors":[]}
+</script>
+
+<!--/radix_placeholder_front_matter-->
+<!--radix_placeholder_navigation_before_body-->
+<header class="header header--fixed" role="banner">
+<nav class="radix-site-nav radix-site-header">
+<div class="nav-left">
+<a href="index.html" class="title">rtutorials</a>
+</div>
+<div class="nav-right">
+<a href="index.html">Home</a>
+<a href="about.html">About</a>
+<div class="nav-dropdown">
+<button class="nav-dropbtn">
+Tutorials
+ 
+<span class="down-arrow">&#x25BE;</span>
+</button>
+<div class="nav-dropdown-content">
+<a href="0001_rbasics.html">R programming basics</a>
+<a href="0002_tidyverse_datatable.html">tidyverse and data.table</a>
+</div>
+</div>
+<a href="javascript:void(0);" class="nav-toggle">&#9776;</a>
+</div>
+</nav>
+</header>
+<!--/radix_placeholder_navigation_before_body-->
+<!--radix_placeholder_site_before_body-->
+<!--/radix_placeholder_site_before_body-->
+
+<div class="d-title">
+<h1>tidyverse and data.table</h1>
+<p>R tidyverse and data.table packages basics</p>
+</div>
+
+
+<div class="d-article">
+<h3 class="d-toc-header">Table of Contents</h3>
+<nav class="d-toc" id="TOC">
+<ul>
+<li><a href="#loading-frequently-used-packages-with-library">Loading frequently-used packages with <code>library()</code></a></li>
+<li><a href="#reading-data-into-r">Reading data into R</a></li>
+<li><a href="#comparing-the-outputs-of-read.csvx-freadx-and-tbl_dtfreadx">Comparing the outputs of read.csv(x), fread(x), and tbl_dt(fread(x))</a><ul>
+<li><a href="#reading-urls-and-other-formats">Reading URLs and other formats</a></li>
+</ul></li>
+<li><a href="#summarizing-objects">Summarizing objects</a></li>
+<li><a href="#using-and-to-extract-elements-using-their-names">Using <code>$</code> and <code>[]</code> to extract elements using their names</a></li>
+<li><a href="#writingsaving-dataframes-or-datatables-as-csv-files">Writing/saving dataframes or datatables as csv files</a></li>
+<li><a href="#tidyverse-a-collection-of-r-packages">tidyverse: a collection of R packages</a><ul>
+<li><a href="#manipulating-datasets-with-dplyr-a-package-in-tidyverse">Manipulating datasets with <code>dplyr</code> (a package in tidyverse)</a></li>
+<li><a href="#select-columnsvariables-with-select">Select columns/variables with <code>select()</code></a></li>
+<li><a href="#select-rows-with-slice">Select rows with <code>slice()</code></a></li>
+<li><a href="#filtering-or-subsetting-datarows-with-filter">Filtering or subsetting data/rows with <code>filter()</code></a></li>
+<li><a href="#rename-variablescolumns-with-rename">Rename variables/columns with <code>rename()</code></a></li>
+<li><a href="#create-new-columnsvariables-with-mutate">Create new columns/variables with <code>mutate()</code></a></li>
+<li><a href="#sorting-or-arranging-data-rows-with-arrange">Sorting or arranging data rows with <code>arrange()</code></a></li>
+<li><a href="#combining-functions-with-pipes-in">Combining functions with pipes <code>%in%</code></a></li>
+<li><a href="#compute-summary-statistics-with-summarize-or-summarise">Compute summary statistics with <code>summarize()</code> or <code>summarise()</code></a></li>
+</ul></li>
+<li><a href="#more-dplyr-and-tidyverse-information">More <code>dplyr</code> and <code>tidyverse</code> information</a></li>
+<li><a href="#supercharging-your-workflow-with-data.table">Supercharging your workflow with data.table()</a><ul>
+<li><a href="#data.table-basics-i-j-by"><code>data.table()</code> basics: [i, j, by]</a></li>
+<li><a href="#filter-data.table-via-i">Filter data.table via i</a></li>
+<li><a href="#selecting-columns-via-j">Selecting columns via j</a></li>
+<li><a href="#chaining-with-data.table-piping">Chaining with <code>data.table</code> (“piping”)</a></li>
+<li><a href="#summarize-data-via-j">Summarize data via j</a></li>
+<li><a href="#compute-summary-statistics-and-apply-functions-to-j-by-groups">Compute summary statistics and apply functions to j by groups</a></li>
+<li><a href="#creating-new-variablescolumns-and-reassigning-in-data.tables-with">Creating new variables/columns and reassigning in data.tables with <code>:=</code></a></li>
+<li><a href="#renaming-with-setnames">Renaming with <code>setnames()</code></a></li>
+</ul></li>
+<li><a href="#more-data.table-information">More <code>data.table</code> information</a></li>
+</ul>
+</nav>
+<hr class="d-toc-separator"/>
+<h2 id="loading-frequently-used-packages-with-library">Loading frequently-used packages with <code>library()</code></h2>
+<p>I always load my frequently-used packages at the top of each script.</p>
+<div class="layout-chunk" data-layout="l-body">
+<pre class="r"><code>
+library(tidyverse); library(data.table); library(broom); library(dtplyr); 
+library(lme4); library(lmerTest); library(ggbeeswarm); library(cowplot)
+library(hausekeep)</code></pre>
+</div>
+<h2 id="reading-data-into-r">Reading data into R</h2>
+<p>Read file in a directory and save the data as an object in the environment by using the assignment <code>&lt;-</code> operator.</p>
+<div class="layout-chunk" data-layout="l-body">
+<pre class="r"><code>
+df1 &lt;- read.csv(&quot;./data/sleep.csv&quot;) # base R read.csv() function
+# same as df1 &lt;- read.csv(&quot;data/sleep.csv&quot;)
+# READ: assign the output read.csv(&quot;data/sleep.csv&quot;) into df1
+
+df2 &lt;- fread(&quot;./data/sleep.csv&quot;) # fread() from library(data.table)
+# same as df2 &lt;- fread(&quot;data/sleep.csv&quot;)
+
+# my favorite way of reading data: combining tbl_dt() and fread()
+df3 &lt;- tbl_dt(fread(&quot;./data/sleep.csv&quot;)) # tbl_dt() from library(dtplyr)
+# same as df3 &lt;- tbl_dt(fread(&quot;data/sleep.csv&quot;))</code></pre>
+</div>
+<p>The <code>.</code> in the file path simply refers to the current working directory, so it can be dropped. And <code>..</code> can be used to refer to the parent directory.</p>
+<h2 id="comparing-the-outputs-of-read.csvx-freadx-and-tbl_dtfreadx">Comparing the outputs of read.csv(x), fread(x), and tbl_dt(fread(x))</h2>
+<div class="layout-chunk" data-layout="l-body">
+<pre class="r"><code>
+df1 # read.csv(&quot;./data/sleep.csv&quot;)</code></pre>
+<pre><code>
+   extra group ID
+1    0.7     1  1
+2   -1.6     1  2
+3   -0.2     1  3
+4   -1.2     1  4
+5   -0.1     1  5
+6    3.4     1  6
+7    3.7     1  7
+8    0.8     1  8
+9    0.0     1  9
+10   2.0     1 10
+11   1.9     2  1
+12   0.8     2  2
+13   1.1     2  3
+14   0.1     2  4
+15  -0.1     2  5
+16   4.4     2  6
+17   5.5     2  7
+18   1.6     2  8
+19   4.6     2  9
+20   3.4     2 10</code></pre>
+<pre class="r"><code>
+class(df1) # read.csv(&quot;./data/sleep.csv&quot;)</code></pre>
+<pre><code>
+[1] &quot;data.frame&quot;</code></pre>
+</div>
+<div class="layout-chunk" data-layout="l-body">
+<pre class="r"><code>
+df2 # fread(&quot;./data/sleep.csv&quot;) # fread() from library(data.table)</code></pre>
+<pre><code>
+    extra group ID
+ 1:   0.7     1  1
+ 2:  -1.6     1  2
+ 3:  -0.2     1  3
+ 4:  -1.2     1  4
+ 5:  -0.1     1  5
+ 6:   3.4     1  6
+ 7:   3.7     1  7
+ 8:   0.8     1  8
+ 9:   0.0     1  9
+10:   2.0     1 10
+11:   1.9     2  1
+12:   0.8     2  2
+13:   1.1     2  3
+14:   0.1     2  4
+15:  -0.1     2  5
+16:   4.4     2  6
+17:   5.5     2  7
+18:   1.6     2  8
+19:   4.6     2  9
+20:   3.4     2 10</code></pre>
+<pre class="r"><code>
+class(df2) # fread(&quot;./data/sleep.csv&quot;) # fread() from library(data.table)</code></pre>
+<pre><code>
+[1] &quot;data.table&quot; &quot;data.frame&quot;</code></pre>
+</div>
+<p>How’s the output different from the one above?</p>
+<div class="layout-chunk" data-layout="l-body">
+<pre class="r"><code>
+df3 # tbl_dt(fread(&quot;./data/sleep.csv&quot;)) # tbl_dt() from library(dtplyr)</code></pre>
+<pre><code>
+Source: local data table [20 x 3]
+
+# A tibble: 20 x 3
+   extra group    ID
+   &lt;dbl&gt; &lt;int&gt; &lt;int&gt;
+ 1   0.7     1     1
+ 2  -1.6     1     2
+ 3  -0.2     1     3
+ 4  -1.2     1     4
+ 5  -0.1     1     5
+ 6   3.4     1     6
+ 7   3.7     1     7
+ 8   0.8     1     8
+ 9   0       1     9
+10   2       1    10
+11   1.9     2     1
+12   0.8     2     2
+13   1.1     2     3
+14   0.1     2     4
+15  -0.1     2     5
+16   4.4     2     6
+17   5.5     2     7
+18   1.6     2     8
+19   4.6     2     9
+20   3.4     2    10</code></pre>
+<pre class="r"><code>
+class(df3) # tbl_dt(fread(&quot;./data/sleep.csv&quot;)) # tbl_dt() from library(dtplyr)</code></pre>
+<pre><code>
+[1] &quot;tbl_dt&quot;     &quot;tbl&quot;        &quot;data.table&quot; &quot;data.frame&quot;</code></pre>
+</div>
+<p>How’s the output different from the two outputs above?</p>
+<h3 id="reading-urls-and-other-formats">Reading URLs and other formats</h3>
+<p>Check out the csv (comma separated values) data <a href="https://raw.githubusercontent.com/hauselin/RdataScience/master/data/sleep.csv">here</a>. You can read data directly off a website.</p>
+<p>Most of these read functions can import/read different types of files (e.g., csv, txt, URLs) as long as the raw data are formatted properly (e.g., separated by commas, tabs). But if you’re trying to read proprietary data formats (e.g., SPSS datasets, Excel sheets), you’ll need to use other libraries (e.g., <code>readxl</code>, <code>foreign</code>) to read those data into R.</p>
+<div class="layout-chunk" data-layout="l-body">
+<pre class="r"><code>
+df_url &lt;- tbl_dt(fread(&quot;https://raw.githubusercontent.com/hauselin/rtutorialsite/master/data/sleep.csv&quot;))
+df_url # print data to console; same dataset as tbl_dt(fread(&quot;./data/sleep.csv&quot;))</code></pre>
+<pre><code>
+Source: local data table [20 x 3]
+
+# A tibble: 20 x 3
+   extra group    ID
+   &lt;dbl&gt; &lt;int&gt; &lt;int&gt;
+ 1   0.7     1     1
+ 2  -1.6     1     2
+ 3  -0.2     1     3
+ 4  -1.2     1     4
+ 5  -0.1     1     5
+ 6   3.4     1     6
+ 7   3.7     1     7
+ 8   0.8     1     8
+ 9   0       1     9
+10   2       1    10
+11   1.9     2     1
+12   0.8     2     2
+13   1.1     2     3
+14   0.1     2     4
+15  -0.1     2     5
+16   4.4     2     6
+17   5.5     2     7
+18   1.6     2     8
+19   4.6     2     9
+20   3.4     2    10</code></pre>
+</div>
+<h2 id="summarizing-objects">Summarizing objects</h2>
+<p>You can summarize objects quickly by using <code>summary()</code>, <code>str()</code>, <code>glimpse()</code>, or <code>print(x, n)</code>.</p>
+<p>To view the first/last few items of an object, use <code>head()</code> or <code>tail()</code>.</p>
+<div class="layout-chunk" data-layout="l-body">
+<pre class="r"><code>
+summary(df1) # we use summary() for many many other purposes</code></pre>
+<pre><code>
+     extra            group           ID      
+ Min.   :-1.600   Min.   :1.0   Min.   : 1.0  
+ 1st Qu.:-0.025   1st Qu.:1.0   1st Qu.: 3.0  
+ Median : 0.950   Median :1.5   Median : 5.5  
+ Mean   : 1.540   Mean   :1.5   Mean   : 5.5  
+ 3rd Qu.: 3.400   3rd Qu.:2.0   3rd Qu.: 8.0  
+ Max.   : 5.500   Max.   :2.0   Max.   :10.0  </code></pre>
+<pre class="r"><code>
+str(df1) </code></pre>
+<pre><code>
+&#39;data.frame&#39;:   20 obs. of  3 variables:
+ $ extra: num  0.7 -1.6 -0.2 -1.2 -0.1 3.4 3.7 0.8 0 2 ...
+ $ group: int  1 1 1 1 1 1 1 1 1 1 ...
+ $ ID   : int  1 2 3 4 5 6 7 8 9 10 ...</code></pre>
+<pre class="r"><code>
+glimpse(df1)</code></pre>
+<pre><code>
+Observations: 20
+Variables: 3
+$ extra &lt;dbl&gt; 0.7, -1.6, -0.2, -1.2, -0.1, 3.4, 3.7, 0.8, 0.0, 2.0, 1.9, 0....
+$ group &lt;int&gt; 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2
+$ ID    &lt;int&gt; 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10</code></pre>
+<pre class="r"><code>
+head(df1)</code></pre>
+<pre><code>
+  extra group ID
+1   0.7     1  1
+2  -1.6     1  2
+3  -0.2     1  3
+4  -1.2     1  4
+5  -0.1     1  5
+6   3.4     1  6</code></pre>
+<pre class="r"><code>
+head(df3, n = 3) # what does this do?</code></pre>
+<pre><code>
+Source: local data table [3 x 3]
+
+# A tibble: 3 x 3
+  extra group    ID
+  &lt;dbl&gt; &lt;int&gt; &lt;int&gt;
+1   0.7     1     1
+2  -1.6     1     2
+3  -0.2     1     3</code></pre>
+<pre class="r"><code>
+tail(df3, n = 2)</code></pre>
+<pre><code>
+Source: local data table [2 x 3]
+
+# A tibble: 2 x 3
+  extra group    ID
+  &lt;dbl&gt; &lt;int&gt; &lt;int&gt;
+1   4.6     2     9
+2   3.4     2    10</code></pre>
+<pre class="r"><code>
+print(df3, n = Inf) # Inf is infinte (so print all rows)</code></pre>
+<pre><code>
+Source: local data table [20 x 3]
+
+# A tibble: 20 x 3
+   extra group    ID
+   &lt;dbl&gt; &lt;int&gt; &lt;int&gt;
+ 1   0.7     1     1
+ 2  -1.6     1     2
+ 3  -0.2     1     3
+ 4  -1.2     1     4
+ 5  -0.1     1     5
+ 6   3.4     1     6
+ 7   3.7     1     7
+ 8   0.8     1     8
+ 9   0       1     9
+10   2       1    10
+11   1.9     2     1
+12   0.8     2     2
+13   1.1     2     3
+14   0.1     2     4
+15  -0.1     2     5
+16   4.4     2     6
+17   5.5     2     7
+18   1.6     2     8
+19   4.6     2     9
+20   3.4     2    10</code></pre>
+</div>
+<p>Use pipes <code>%&gt;%</code> to summarize objects</p>
+<div class="layout-chunk" data-layout="l-body">
+<pre class="r"><code>
+df3 %&gt;% head(n = 2)</code></pre>
+<pre><code>
+Source: local data table [2 x 3]
+
+# A tibble: 2 x 3
+  extra group    ID
+  &lt;dbl&gt; &lt;int&gt; &lt;int&gt;
+1   0.7     1     1
+2  -1.6     1     2</code></pre>
+<pre class="r"><code>
+df3 %&gt;% head(2) # why does this work?</code></pre>
+<pre><code>
+Source: local data table [2 x 3]
+
+# A tibble: 2 x 3
+  extra group    ID
+  &lt;dbl&gt; &lt;int&gt; &lt;int&gt;
+1   0.7     1     1
+2  -1.6     1     2</code></pre>
+<pre class="r"><code>
+df3 %&gt;% print(Inf)</code></pre>
+<pre><code>
+Source: local data table [20 x 3]
+
+# A tibble: 20 x 3
+   extra group    ID
+   &lt;dbl&gt; &lt;int&gt; &lt;int&gt;
+ 1   0.7     1     1
+ 2  -1.6     1     2
+ 3  -0.2     1     3
+ 4  -1.2     1     4
+ 5  -0.1     1     5
+ 6   3.4     1     6
+ 7   3.7     1     7
+ 8   0.8     1     8
+ 9   0       1     9
+10   2       1    10
+11   1.9     2     1
+12   0.8     2     2
+13   1.1     2     3
+14   0.1     2     4
+15  -0.1     2     5
+16   4.4     2     6
+17   5.5     2     7
+18   1.6     2     8
+19   4.6     2     9
+20   3.4     2    10</code></pre>
+<pre class="r"><code>
+df3 %&gt;% summary() # does this work? why?</code></pre>
+<pre><code>
+     extra            group           ID      
+ Min.   :-1.600   Min.   :1.0   Min.   : 1.0  
+ 1st Qu.:-0.025   1st Qu.:1.0   1st Qu.: 3.0  
+ Median : 0.950   Median :1.5   Median : 5.5  
+ Mean   : 1.540   Mean   :1.5   Mean   : 5.5  
+ 3rd Qu.: 3.400   3rd Qu.:2.0   3rd Qu.: 8.0  
+ Max.   : 5.500   Max.   :2.0   Max.   :10.0  </code></pre>
+</div>
+<p>datatables and <code>dplyr</code>’s data_frame are much better because they tell us the class of each variable at the top when you print the object in the console. They also tell you the dimensions of your data.</p>
+<div class="layout-chunk" data-layout="l-body">
+<pre class="r"><code>
+df3 # data_frame (dplyr) + data.table + tibble</code></pre>
+<pre><code>
+Source: local data table [20 x 3]
+
+# A tibble: 20 x 3
+   extra group    ID
+   &lt;dbl&gt; &lt;int&gt; &lt;int&gt;
+ 1   0.7     1     1
+ 2  -1.6     1     2
+ 3  -0.2     1     3
+ 4  -1.2     1     4
+ 5  -0.1     1     5
+ 6   3.4     1     6
+ 7   3.7     1     7
+ 8   0.8     1     8
+ 9   0       1     9
+10   2       1    10
+11   1.9     2     1
+12   0.8     2     2
+13   1.1     2     3
+14   0.1     2     4
+15  -0.1     2     5
+16   4.4     2     6
+17   5.5     2     7
+18   1.6     2     8
+19   4.6     2     9
+20   3.4     2    10</code></pre>
+</div>
+<h2 id="using-and-to-extract-elements-using-their-names">Using <code>$</code> and <code>[]</code> to extract elements using their names</h2>
+<div class="layout-chunk" data-layout="l-body">
+<pre class="r"><code>
+names(df3)</code></pre>
+<pre><code>
+[1] &quot;extra&quot; &quot;group&quot; &quot;ID&quot;   </code></pre>
+<pre class="r"><code>
+df3$extra # extracts column/variable as a vector</code></pre>
+<pre><code>
+ [1]  0.7 -1.6 -0.2 -1.2 -0.1  3.4  3.7  0.8  0.0  2.0  1.9  0.8  1.1  0.1 -0.1
+[16]  4.4  5.5  1.6  4.6  3.4</code></pre>
+<pre class="r"><code>
+df3$group</code></pre>
+<pre><code>
+ [1] 1 1 1 1 1 1 1 1 1 1 2 2 2 2 2 2 2 2 2 2</code></pre>
+<pre class="r"><code>
+df3$ID</code></pre>
+<pre><code>
+ [1]  1  2  3  4  5  6  7  8  9 10  1  2  3  4  5  6  7  8  9 10</code></pre>
+</div>
+<div class="layout-chunk" data-layout="l-body">
+<pre class="r"><code>
+# create a list with named items a, b, c
+myList &lt;- list(a = -999, b = c(TRUE, FALSE, T, T), c = c(&#39;myAmazingList&#39;)) 
+class(myList)</code></pre>
+<pre><code>
+[1] &quot;list&quot;</code></pre>
+<pre class="r"><code>
+names(myList) </code></pre>
+<pre><code>
+[1] &quot;a&quot; &quot;b&quot; &quot;c&quot;</code></pre>
+<pre class="r"><code>
+myList # note the structure of a list ($ signs tell you how to get items)</code></pre>
+<pre><code>
+$a
+[1] -999
+
+$b
+[1]  TRUE FALSE  TRUE  TRUE
+
+$c
+[1] &quot;myAmazingList&quot;</code></pre>
+<pre class="r"><code>
+myList$a</code></pre>
+<pre><code>
+[1] -999</code></pre>
+<pre class="r"><code>
+myList$b </code></pre>
+<pre><code>
+[1]  TRUE FALSE  TRUE  TRUE</code></pre>
+<pre class="r"><code>
+myList$c</code></pre>
+<pre><code>
+[1] &quot;myAmazingList&quot;</code></pre>
+</div>
+<aside>
+Lists can store objects of different classes (unlike most other objects, which expect all items to be of same class).
+</aside>
+<div class="layout-chunk" data-layout="l-body">
+<pre class="r"><code>
+# same as df1$extra, but use characters (in &#39;&#39;) to extract elements
+df1[&#39;extra&#39;]</code></pre>
+<pre><code>
+   extra
+1    0.7
+2   -1.6
+3   -0.2
+4   -1.2
+5   -0.1
+6    3.4
+7    3.7
+8    0.8
+9    0.0
+10   2.0
+11   1.9
+12   0.8
+13   1.1
+14   0.1
+15  -0.1
+16   4.4
+17   5.5
+18   1.6
+19   4.6
+20   3.4</code></pre>
+</div>
+<p>** BUT the syntax above only works for the <code>data.frame</code> class!**</p>
+<div class="layout-chunk" data-layout="l-body">
+<pre class="r"><code>
+df3[&#39;extra&#39;] # fails!!!</code></pre>
+<pre><code>
+Error in `[.data.table`(df3, &quot;extra&quot;): When i is a data.table (or character vector), the columns to join by must be specified either using &#39;on=&#39; argument (see ?data.table) or by keying x (i.e. sorted, and, marked as sorted, see ?setkey). Keyed joins might have further speed benefits on very large data due to x being sorted in RAM.</code></pre>
+</div>
+<p>If it’s a <code>data.table</code> class, you do it differently (so know the classes of your objects)! More on <code>data.table</code> later on.</p>
+<div class="layout-chunk" data-layout="l-body">
+<pre class="r"><code>
+df3[, extra] # df3[i, j] (i is row, and j is column)</code></pre>
+<pre><code>
+ [1]  0.7 -1.6 -0.2 -1.2 -0.1  3.4  3.7  0.8  0.0  2.0  1.9  0.8  1.1  0.1 -0.1
+[16]  4.4  5.5  1.6  4.6  3.4</code></pre>
+</div>
+<h2 id="writingsaving-dataframes-or-datatables-as-csv-files">Writing/saving dataframes or datatables as csv files</h2>
+<div class="layout-chunk" data-layout="l-body">
+<pre class="r"><code>
+# saves in your working directory
+write.csv(df3, &#39;example1_df3.csv&#39;, row.names = F) </code></pre>
+</div>
+<div class="layout-chunk" data-layout="l-body">
+<pre class="r"><code>
+# saves in your data directory (assumes data directory exists!)
+write.csv(df3, &#39;./data/example2_df3.csv&#39;, row.names = F) </code></pre>
+</div>
+<p><code>write.csv()</code> overwrites any existing files that have the same name and you can’t recover the original file if you’ve overwritten it!</p>
+<h2 id="tidyverse-a-collection-of-r-packages">tidyverse: a collection of R packages</h2>
+<p><a href="https://www.tidyverse.org/packages/">tidyverse:</a></p>
+<blockquote>
+<p>The tidyverse is an opinionated collection of R packages designed for data science. All packages share an underlying design philosophy, grammar, and data structures.</p>
+</blockquote>
+<p>Included packages: <code>ggplot2</code>, <code>dplyr</code>, <code>tidyr</code>, <code>stringr</code> etc. <a href="https://www.tidyverse.org/packages/">see official website for documentation</a></p>
+<div class="layout-chunk" data-layout="l-body">
+<pre class="r"><code>
+library(tidyverse)</code></pre>
+</div>
+<aside>
+Load tidyverse packages (I’m running this line here for educational purposes; there’s actually no need for this because I’ve already loaded all my packages at the beginning of this script).
+</aside>
+<h3 id="manipulating-datasets-with-dplyr-a-package-in-tidyverse">Manipulating datasets with <code>dplyr</code> (a package in tidyverse)</h3>
+<p>Read in data from a csv file (stored in “./data/simpsonsParadox.csv”).</p>
+<ul>
+<li><code>fread()</code>: a function from <code>data.table</code> (fast-read, hence fread) that is <strong>EXTREMELY</strong> fast and powerful, and much better than <code>read.csv()</code> or <code>read.table()</code> from base R</li>
+<li><code>tbl_dt()</code>: converts data to a <code>tibble</code> class and <code>data.table</code> class</li>
+</ul>
+<div class="layout-chunk" data-layout="l-body">
+<pre class="r"><code>
+df4 &lt;- tbl_dt(fread(&quot;./data/simpsonsParadox.csv&quot;))
+df4 # print table in console </code></pre>
+<pre><code>
+Source: local data table [40 x 3]
+
+# A tibble: 40 x 3
+      iq grades class
+   &lt;dbl&gt;  &lt;dbl&gt; &lt;chr&gt;
+ 1  94.5   67.9 a    
+ 2  95.4   82.5 a    
+ 3  97.8   69.1 a    
+ 4  98.1   83.3 a    
+ 5  96.6   99.1 a    
+ 6 102.    89.9 a    
+ 7 101.    73.7 a    
+ 8  97.1   47.9 a    
+ 9  94.2   55.6 a    
+10  94.4   44.5 a    
+# ... with 30 more rows</code></pre>
+<pre class="r"><code>
+class(df4) # note the different classes</code></pre>
+<pre><code>
+[1] &quot;tbl_dt&quot;     &quot;tbl&quot;        &quot;data.table&quot; &quot;data.frame&quot;</code></pre>
+</div>
+<p>Note the information at the top.</p>
+<ul>
+<li>Source: local data table [40 x 3]: data.table and dimensions (40 rows, 3 columns)</li>
+<li>A tibble: 40 x 3: tibble and dimensions</li>
+<li>Below each variable/column name you see the class of each column (dbl is double/a number/numeric, chr is character)</li>
+</ul>
+<div class="layout-chunk" data-layout="l-body">
+<pre class="r"><code>
+class(df4$iq)</code></pre>
+<pre><code>
+[1] &quot;numeric&quot;</code></pre>
+<pre class="r"><code>
+class(df4$grades)</code></pre>
+<pre><code>
+[1] &quot;numeric&quot;</code></pre>
+<pre class="r"><code>
+class(df4$class)</code></pre>
+<pre><code>
+[1] &quot;character&quot;</code></pre>
+</div>
+<div class="layout-chunk" data-layout="l-body">
+<pre class="r"><code>
+glimpse(df4) # have a glimpse of the data (quick summary of data)</code></pre>
+<pre><code>
+Observations: 40
+Variables: 3
+$ iq     &lt;dbl&gt; 94.5128, 95.4359, 97.7949, 98.1026, 96.5641, 101.5897, 100.8...
+$ grades &lt;dbl&gt; 67.9295, 82.5449, 69.0833, 83.3141, 99.0833, 89.8526, 73.698...
+$ class  &lt;chr&gt; &quot;a&quot;, &quot;a&quot;, &quot;a&quot;, &quot;a&quot;, &quot;a&quot;, &quot;a&quot;, &quot;a&quot;, &quot;a&quot;, &quot;a&quot;, &quot;a&quot;, &quot;b&quot;, &quot;b&quot;, ...</code></pre>
+</div>
+<div class="layout-chunk" data-layout="l-body">
+<pre class="r"><code>
+print(df4, n = Inf) # print all or Inf (infinite) rows</code></pre>
+<pre><code>
+Source: local data table [40 x 3]
+
+# A tibble: 40 x 3
+      iq grades class
+   &lt;dbl&gt;  &lt;dbl&gt; &lt;chr&gt;
+ 1  94.5   67.9 a    
+ 2  95.4   82.5 a    
+ 3  97.8   69.1 a    
+ 4  98.1   83.3 a    
+ 5  96.6   99.1 a    
+ 6 102.    89.9 a    
+ 7 101.    73.7 a    
+ 8  97.1   47.9 a    
+ 9  94.2   55.6 a    
+10  94.4   44.5 a    
+11 104.    74.1 b    
+12 103.    59.9 b    
+13 102.    47.9 b    
+14 105.    44.9 b    
+15 106.    60.2 b    
+16 109.    64.9 b    
+17 107.    74.5 b    
+18 107.    49.9 b    
+19 102.    37.9 b    
+20 100.    54.9 b    
+21 111.    56.0 c    
+22 115.    56.0 c    
+23 112.    46.4 c    
+24 109.    43.7 c    
+25 111.    36.4 c    
+26 114.    30.2 c    
+27 115.    39.5 c    
+28 119.    51.0 c    
+29 113.    64.1 c    
+30 118     55.3 c    
+31 117.    17.5 d    
+32 121.    35.2 d    
+33 118.    29.9 d    
+34 122.    18.3 d    
+35 124.    29.5 d    
+36 121.    53.7 d    
+37 124.    63.7 d    
+38 125.    48.7 d    
+39 125.    38.3 d    
+40 128.    51.8 d    </code></pre>
+</div>
+<aside>
+Tibbles are automatically truncated to facilitate printing.
+</aside>
+<h3 id="select-columnsvariables-with-select">Select columns/variables with <code>select()</code></h3>
+<p>Select with names</p>
+<div class="layout-chunk" data-layout="l-body">
+<pre class="r"><code>
+select(df4, iq) # just prints the output to console without saving</code></pre>
+<pre><code>
+Source: local data table [40 x 1]
+
+# A tibble: 40 x 1
+      iq
+   &lt;dbl&gt;
+ 1  94.5
+ 2  95.4
+ 3  97.8
+ 4  98.1
+ 5  96.6
+ 6 102. 
+ 7 101. 
+ 8  97.1
+ 9  94.2
+10  94.4
+# ... with 30 more rows</code></pre>
+<pre class="r"><code>
+df4_iq &lt;- select(df4, iq) # if you want to save as a new object
+df4_iq # print df4_iq</code></pre>
+<pre><code>
+Source: local data table [40 x 1]
+
+# A tibble: 40 x 1
+      iq
+   &lt;dbl&gt;
+ 1  94.5
+ 2  95.4
+ 3  97.8
+ 4  98.1
+ 5  96.6
+ 6 102. 
+ 7 101. 
+ 8  97.1
+ 9  94.2
+10  94.4
+# ... with 30 more rows</code></pre>
+</div>
+<div class="layout-chunk" data-layout="l-body">
+<pre class="r"><code>
+select(df4, class, grades)</code></pre>
+<pre><code>
+Source: local data table [40 x 2]
+
+# A tibble: 40 x 2
+   class grades
+   &lt;chr&gt;  &lt;dbl&gt;
+ 1 a       67.9
+ 2 a       82.5
+ 3 a       69.1
+ 4 a       83.3
+ 5 a       99.1
+ 6 a       89.9
+ 7 a       73.7
+ 8 a       47.9
+ 9 a       55.6
+10 a       44.5
+# ... with 30 more rows</code></pre>
+<pre class="r"><code>
+select(df4, iq, grades)</code></pre>
+<pre><code>
+Source: local data table [40 x 2]
+
+# A tibble: 40 x 2
+      iq grades
+   &lt;dbl&gt;  &lt;dbl&gt;
+ 1  94.5   67.9
+ 2  95.4   82.5
+ 3  97.8   69.1
+ 4  98.1   83.3
+ 5  96.6   99.1
+ 6 102.    89.9
+ 7 101.    73.7
+ 8  97.1   47.9
+ 9  94.2   55.6
+10  94.4   44.5
+# ... with 30 more rows</code></pre>
+</div>
+<p>Select multiple columns in sequence with :</p>
+<div class="layout-chunk" data-layout="l-body">
+<pre class="r"><code>
+select(df4, iq:class)</code></pre>
+<pre><code>
+Source: local data table [40 x 3]
+
+# A tibble: 40 x 3
+      iq grades class
+   &lt;dbl&gt;  &lt;dbl&gt; &lt;chr&gt;
+ 1  94.5   67.9 a    
+ 2  95.4   82.5 a    
+ 3  97.8   69.1 a    
+ 4  98.1   83.3 a    
+ 5  96.6   99.1 a    
+ 6 102.    89.9 a    
+ 7 101.    73.7 a    
+ 8  97.1   47.9 a    
+ 9  94.2   55.6 a    
+10  94.4   44.5 a    
+# ... with 30 more rows</code></pre>
+</div>
+<p>Select with numbers</p>
+<div class="layout-chunk" data-layout="l-body">
+<pre class="r"><code>
+select(df4, 1, 3)</code></pre>
+<pre><code>
+Source: local data table [40 x 2]
+
+# A tibble: 40 x 2
+      iq class
+   &lt;dbl&gt; &lt;chr&gt;
+ 1  94.5 a    
+ 2  95.4 a    
+ 3  97.8 a    
+ 4  98.1 a    
+ 5  96.6 a    
+ 6 102.  a    
+ 7 101.  a    
+ 8  97.1 a    
+ 9  94.2 a    
+10  94.4 a    
+# ... with 30 more rows</code></pre>
+<pre class="r"><code>
+select(df4, 1:3) # what does 1:3 do?</code></pre>
+<pre><code>
+Source: local data table [40 x 3]
+
+# A tibble: 40 x 3
+      iq grades class
+   &lt;dbl&gt;  &lt;dbl&gt; &lt;chr&gt;
+ 1  94.5   67.9 a    
+ 2  95.4   82.5 a    
+ 3  97.8   69.1 a    
+ 4  98.1   83.3 a    
+ 5  96.6   99.1 a    
+ 6 102.    89.9 a    
+ 7 101.    73.7 a    
+ 8  97.1   47.9 a    
+ 9  94.2   55.6 a    
+10  94.4   44.5 a    
+# ... with 30 more rows</code></pre>
+</div>
+<p>How can we reorder columns with <code>select()</code>?</p>
+<div class="layout-chunk" data-layout="l-body">
+<pre class="r"><code>
+select(df4, 3:1) # column 3, then 2, then 1</code></pre>
+<pre><code>
+Source: local data table [40 x 3]
+
+# A tibble: 40 x 3
+   class grades    iq
+   &lt;chr&gt;  &lt;dbl&gt; &lt;dbl&gt;
+ 1 a       67.9  94.5
+ 2 a       82.5  95.4
+ 3 a       69.1  97.8
+ 4 a       83.3  98.1
+ 5 a       99.1  96.6
+ 6 a       89.9 102. 
+ 7 a       73.7 101. 
+ 8 a       47.9  97.1
+ 9 a       55.6  94.2
+10 a       44.5  94.4
+# ... with 30 more rows</code></pre>
+</div>
+<p>Select with <code>starts_with()</code> or <code>ends_with()</code></p>
+<div class="layout-chunk" data-layout="l-body">
+<pre class="r"><code>
+select(df4, starts_with(&quot;c&quot;))</code></pre>
+<pre><code>
+Source: local data table [40 x 1]
+
+# A tibble: 40 x 1
+   class
+   &lt;chr&gt;
+ 1 a    
+ 2 a    
+ 3 a    
+ 4 a    
+ 5 a    
+ 6 a    
+ 7 a    
+ 8 a    
+ 9 a    
+10 a    
+# ... with 30 more rows</code></pre>
+<pre class="r"><code>
+select(df4, starts_with(&quot;g&quot;))</code></pre>
+<pre><code>
+Source: local data table [40 x 1]
+
+# A tibble: 40 x 1
+   grades
+    &lt;dbl&gt;
+ 1   67.9
+ 2   82.5
+ 3   69.1
+ 4   83.3
+ 5   99.1
+ 6   89.9
+ 7   73.7
+ 8   47.9
+ 9   55.6
+10   44.5
+# ... with 30 more rows</code></pre>
+<pre class="r"><code>
+select(df4, starts_with(&quot;g&quot;), ends_with(&quot;s&quot;))</code></pre>
+<pre><code>
+Source: local data table [40 x 2]
+
+# A tibble: 40 x 2
+   grades class
+    &lt;dbl&gt; &lt;chr&gt;
+ 1   67.9 a    
+ 2   82.5 a    
+ 3   69.1 a    
+ 4   83.3 a    
+ 5   99.1 a    
+ 6   89.9 a    
+ 7   73.7 a    
+ 8   47.9 a    
+ 9   55.6 a    
+10   44.5 a    
+# ... with 30 more rows</code></pre>
+</div>
+<p>Dropping columns with <code>-</code></p>
+<div class="layout-chunk" data-layout="l-body">
+<pre class="r"><code>
+select(df4, -grades) # what should you get?</code></pre>
+<pre><code>
+Source: local data table [40 x 2]
+
+# A tibble: 40 x 2
+      iq class
+   &lt;dbl&gt; &lt;chr&gt;
+ 1  94.5 a    
+ 2  95.4 a    
+ 3  97.8 a    
+ 4  98.1 a    
+ 5  96.6 a    
+ 6 102.  a    
+ 7 101.  a    
+ 8  97.1 a    
+ 9  94.2 a    
+10  94.4 a    
+# ... with 30 more rows</code></pre>
+<pre class="r"><code>
+select(df4, -ends_with(&quot;s&quot;)) # what should you get?</code></pre>
+<pre><code>
+Source: local data table [40 x 1]
+
+# A tibble: 40 x 1
+      iq
+   &lt;dbl&gt;
+ 1  94.5
+ 2  95.4
+ 3  97.8
+ 4  98.1
+ 5  96.6
+ 6 102. 
+ 7 101. 
+ 8  97.1
+ 9  94.2
+10  94.4
+# ... with 30 more rows</code></pre>
+<pre class="r"><code>
+select(df4, -ends_with(&quot;s&quot;), class, -1) # what should you get?</code></pre>
+<pre><code>
+Source: local data table [40 x 1]
+
+# A tibble: 40 x 1
+   class
+   &lt;chr&gt;
+ 1 a    
+ 2 a    
+ 3 a    
+ 4 a    
+ 5 a    
+ 6 a    
+ 7 a    
+ 8 a    
+ 9 a    
+10 a    
+# ... with 30 more rows</code></pre>
+</div>
+<p>Renaming while selecting columns/variables</p>
+<div class="layout-chunk" data-layout="l-body">
+<pre class="r"><code>
+select(df4, intelligence = iq) # select iq and rename it to intelligence</code></pre>
+<pre><code>
+Source: local data table [40 x 1]
+
+# A tibble: 40 x 1
+   intelligence
+          &lt;dbl&gt;
+ 1         94.5
+ 2         95.4
+ 3         97.8
+ 4         98.1
+ 5         96.6
+ 6        102. 
+ 7        101. 
+ 8         97.1
+ 9         94.2
+10         94.4
+# ... with 30 more rows</code></pre>
+</div>
+<p>Other options for <code>select()</code> include <code>matches()</code>, <code>contains()</code>. For more information, see tutorial/vignette <a href="https://cran.r-project.org/web/packages/dplyr/vignettes/dplyr.html">here</a>. For official documentation, see <a href="https://cran.r-project.org/web/packages/dplyr/dplyr.pdf">here</a>.</p>
+<h3 id="select-rows-with-slice">Select rows with <code>slice()</code></h3>
+<div class="layout-chunk" data-layout="l-body">
+<pre class="r"><code>
+slice(df4, 1:5) # rows 1 to 5</code></pre>
+<pre><code>
+Source: local data table [5 x 3]
+
+# A tibble: 5 x 3
+     iq grades class
+  &lt;dbl&gt;  &lt;dbl&gt; &lt;chr&gt;
+1  94.5   67.9 a    
+2  95.4   82.5 a    
+3  97.8   69.1 a    
+4  98.1   83.3 a    
+5  96.6   99.1 a    </code></pre>
+<pre class="r"><code>
+slice(df4, c(1, 3, 5, 7, 9)) # rows 1, 3, 5, 7, 9</code></pre>
+<pre><code>
+Source: local data table [5 x 3]
+
+# A tibble: 5 x 3
+     iq grades class
+  &lt;dbl&gt;  &lt;dbl&gt; &lt;chr&gt;
+1  94.5   67.9 a    
+2  97.8   69.1 a    
+3  96.6   99.1 a    
+4 101.    73.7 a    
+5  94.2   55.6 a    </code></pre>
+<pre class="r"><code>
+slice(df4, seq(from = 1, to = 10, by = 2)) # same as above, but using sequence function (from 1 to 10, by/in steps of 2)</code></pre>
+<pre><code>
+Source: local data table [5 x 3]
+
+# A tibble: 5 x 3
+     iq grades class
+  &lt;dbl&gt;  &lt;dbl&gt; &lt;chr&gt;
+1  94.5   67.9 a    
+2  97.8   69.1 a    
+3  96.6   99.1 a    
+4 101.    73.7 a    
+5  94.2   55.6 a    </code></pre>
+<pre class="r"><code>
+slice(df4, -c(1:39)) # remove rows 1 to 39</code></pre>
+<pre><code>
+Source: local data table [1 x 3]
+
+# A tibble: 1 x 3
+     iq grades class
+  &lt;dbl&gt;  &lt;dbl&gt; &lt;chr&gt;
+1  128.   51.8 d    </code></pre>
+</div>
+<h3 id="filtering-or-subsetting-datarows-with-filter">Filtering or subsetting data/rows with <code>filter()</code></h3>
+<p>While <code>select()</code> acts on columns, <code>filter()</code> acts on rows. It chooses/subsets rows based on criteria you specify.</p>
+<p>How many classes are there in this dataset? How many unique classes?</p>
+<div class="layout-chunk" data-layout="l-body">
+<pre class="r"><code>
+df4$class</code></pre>
+<pre><code>
+ [1] &quot;a&quot; &quot;a&quot; &quot;a&quot; &quot;a&quot; &quot;a&quot; &quot;a&quot; &quot;a&quot; &quot;a&quot; &quot;a&quot; &quot;a&quot; &quot;b&quot; &quot;b&quot; &quot;b&quot; &quot;b&quot; &quot;b&quot; &quot;b&quot; &quot;b&quot; &quot;b&quot; &quot;b&quot;
+[20] &quot;b&quot; &quot;c&quot; &quot;c&quot; &quot;c&quot; &quot;c&quot; &quot;c&quot; &quot;c&quot; &quot;c&quot; &quot;c&quot; &quot;c&quot; &quot;c&quot; &quot;d&quot; &quot;d&quot; &quot;d&quot; &quot;d&quot; &quot;d&quot; &quot;d&quot; &quot;d&quot; &quot;d&quot;
+[39] &quot;d&quot; &quot;d&quot;</code></pre>
+<pre class="r"><code>
+unique(df4$class) # unique classes</code></pre>
+<pre><code>
+[1] &quot;a&quot; &quot;b&quot; &quot;c&quot; &quot;d&quot;</code></pre>
+<pre class="r"><code>
+df4$class %&gt;% unique() # same as above but with pipes</code></pre>
+<pre><code>
+[1] &quot;a&quot; &quot;b&quot; &quot;c&quot; &quot;d&quot;</code></pre>
+</div>
+<p>Filter rows that match one criterion</p>
+<div class="layout-chunk" data-layout="l-body">
+<pre class="r"><code>
+filter(df4, class == &quot;a&quot;) # how many rows of data do we have now?</code></pre>
+<pre><code>
+Source: local data table [10 x 3]
+
+# A tibble: 10 x 3
+      iq grades class
+   &lt;dbl&gt;  &lt;dbl&gt; &lt;chr&gt;
+ 1  94.5   67.9 a    
+ 2  95.4   82.5 a    
+ 3  97.8   69.1 a    
+ 4  98.1   83.3 a    
+ 5  96.6   99.1 a    
+ 6 102.    89.9 a    
+ 7 101.    73.7 a    
+ 8  97.1   47.9 a    
+ 9  94.2   55.6 a    
+10  94.4   44.5 a    </code></pre>
+<pre class="r"><code>
+filter(df4, class == &#39;b&#39;) # R accepths single or double quotations</code></pre>
+<pre><code>
+Source: local data table [10 x 3]
+
+# A tibble: 10 x 3
+      iq grades class
+   &lt;dbl&gt;  &lt;dbl&gt; &lt;chr&gt;
+ 1  104.   74.1 b    
+ 2  103.   59.9 b    
+ 3  102.   47.9 b    
+ 4  105.   44.9 b    
+ 5  106.   60.2 b    
+ 6  109.   64.9 b    
+ 7  107.   74.5 b    
+ 8  107.   49.9 b    
+ 9  102.   37.9 b    
+10  100.   54.9 b    </code></pre>
+<pre class="r"><code>
+df4_classA &lt;- filter(df4, class == &#39;a&#39;) # to save filtered data as an object
+df4_classA</code></pre>
+<pre><code>
+Source: local data table [10 x 3]
+
+# A tibble: 10 x 3
+      iq grades class
+   &lt;dbl&gt;  &lt;dbl&gt; &lt;chr&gt;
+ 1  94.5   67.9 a    
+ 2  95.4   82.5 a    
+ 3  97.8   69.1 a    
+ 4  98.1   83.3 a    
+ 5  96.6   99.1 a    
+ 6 102.    89.9 a    
+ 7 101.    73.7 a    
+ 8  97.1   47.9 a    
+ 9  94.2   55.6 a    
+10  94.4   44.5 a    </code></pre>
+</div>
+<p>Filter rows that match multiple criteria</p>
+<div class="layout-chunk" data-layout="l-body">
+<pre class="r"><code>
+filter(df4, class == c(&quot;a&quot;, &quot;b&quot;)) </code></pre>
+<pre><code>
+Source: local data table [10 x 3]
+
+# A tibble: 10 x 3
+      iq grades class
+   &lt;dbl&gt;  &lt;dbl&gt; &lt;chr&gt;
+ 1  94.5   67.9 a    
+ 2  97.8   69.1 a    
+ 3  96.6   99.1 a    
+ 4 101.    73.7 a    
+ 5  94.2   55.6 a    
+ 6 103.    59.9 b    
+ 7 105.    44.9 b    
+ 8 109.    64.9 b    
+ 9 107.    49.9 b    
+10 100.    54.9 b    </code></pre>
+</div>
+<p>Is anything wrong? Look at the output and compare with <code>filter(df4, class == &quot;a&quot;)</code> and <code>filter(df4, class == &quot;b&quot;)</code>. How many rows should you expect from <code>filter(df4, class == c(&quot;a&quot;, &quot;b&quot;))</code>? How many rows did you get?</p>
+<p>Here’s how to do it properly. You use <code>%in%</code> if you want to match multiple criteria. <code>==</code> only works if you’re matching by just ONE criterion</p>
+<div class="layout-chunk" data-layout="l-body">
+<pre class="r"><code>
+filter(df4, class %in% c(&quot;a&quot;, &quot;b&quot;)) # check number of rows of output</code></pre>
+<pre><code>
+Source: local data table [20 x 3]
+
+# A tibble: 20 x 3
+      iq grades class
+   &lt;dbl&gt;  &lt;dbl&gt; &lt;chr&gt;
+ 1  94.5   67.9 a    
+ 2  95.4   82.5 a    
+ 3  97.8   69.1 a    
+ 4  98.1   83.3 a    
+ 5  96.6   99.1 a    
+ 6 102.    89.9 a    
+ 7 101.    73.7 a    
+ 8  97.1   47.9 a    
+ 9  94.2   55.6 a    
+10  94.4   44.5 a    
+11 104.    74.1 b    
+12 103.    59.9 b    
+13 102.    47.9 b    
+14 105.    44.9 b    
+15 106.    60.2 b    
+16 109.    64.9 b    
+17 107.    74.5 b    
+18 107.    49.9 b    
+19 102.    37.9 b    
+20 100.    54.9 b    </code></pre>
+</div>
+<p>Filter by range</p>
+<div class="layout-chunk" data-layout="l-body">
+<pre class="r"><code>
+filter(df4, iq &gt; 120) # iq greater than 120</code></pre>
+<pre><code>
+Source: local data table [8 x 3]
+
+# A tibble: 8 x 3
+     iq grades class
+  &lt;dbl&gt;  &lt;dbl&gt; &lt;chr&gt;
+1  121.   35.2 d    
+2  122.   18.3 d    
+3  124.   29.5 d    
+4  121.   53.7 d    
+5  124.   63.7 d    
+6  125.   48.7 d    
+7  125.   38.3 d    
+8  128.   51.8 d    </code></pre>
+<pre class="r"><code>
+filter(df4, iq &gt;= 115) # iq greater than or equal to 120 (&gt; and =, without space in between)</code></pre>
+<pre><code>
+Source: local data table [13 x 3]
+
+# A tibble: 13 x 3
+      iq grades class
+   &lt;dbl&gt;  &lt;dbl&gt; &lt;chr&gt;
+ 1  115.   39.5 c    
+ 2  119.   51.0 c    
+ 3  118    55.3 c    
+ 4  117.   17.5 d    
+ 5  121.   35.2 d    
+ 6  118.   29.9 d    
+ 7  122.   18.3 d    
+ 8  124.   29.5 d    
+ 9  121.   53.7 d    
+10  124.   63.7 d    
+11  125.   48.7 d    
+12  125.   38.3 d    
+13  128.   51.8 d    </code></pre>
+<pre class="r"><code>
+filter(df4, grades &lt; 20) # grades less than 20</code></pre>
+<pre><code>
+Source: local data table [2 x 3]
+
+# A tibble: 2 x 3
+     iq grades class
+  &lt;dbl&gt;  &lt;dbl&gt; &lt;chr&gt;
+1  117.   17.5 d    
+2  122.   18.3 d    </code></pre>
+<pre class="r"><code>
+filter(df4, grades &lt;= 30) # grades less than 30</code></pre>
+<pre><code>
+Source: local data table [4 x 3]
+
+# A tibble: 4 x 3
+     iq grades class
+  &lt;dbl&gt;  &lt;dbl&gt; &lt;chr&gt;
+1  117.   17.5 d    
+2  118.   29.9 d    
+3  122.   18.3 d    
+4  124.   29.5 d    </code></pre>
+<pre class="r"><code>
+filter(df4, grades &lt;= 30 &amp; iq &gt; 120) # the intelligent but lazy students</code></pre>
+<pre><code>
+Source: local data table [2 x 3]
+
+# A tibble: 2 x 3
+     iq grades class
+  &lt;dbl&gt;  &lt;dbl&gt; &lt;chr&gt;
+1  122.   18.3 d    
+2  124.   29.5 d    </code></pre>
+</div>
+<p>Filter through negating <code>!</code></p>
+<div class="layout-chunk" data-layout="l-body">
+<pre class="r"><code>
+filter(df4, class != &quot;a&quot;) # class IS NOT &quot;a&quot; (! and =, without space in between)</code></pre>
+<pre><code>
+Source: local data table [30 x 3]
+
+# A tibble: 30 x 3
+      iq grades class
+   &lt;dbl&gt;  &lt;dbl&gt; &lt;chr&gt;
+ 1  104.   74.1 b    
+ 2  103.   59.9 b    
+ 3  102.   47.9 b    
+ 4  105.   44.9 b    
+ 5  106.   60.2 b    
+ 6  109.   64.9 b    
+ 7  107.   74.5 b    
+ 8  107.   49.9 b    
+ 9  102.   37.9 b    
+10  100.   54.9 b    
+# ... with 20 more rows</code></pre>
+</div>
+<p>How would you remove values that match “a” and “b”?</p>
+<div class="layout-chunk" data-layout="l-body">
+<pre class="r"><code>
+filter(df4, class !%in% c(&quot;a&quot;, &quot;b&quot;)) # note RStudio underlies potential errors for you (like Microsoft Word highlighting typos and grammar errors)</code></pre>
+<pre><code>
+Error: &lt;text&gt;:1:19: unexpected &#39;!&#39;
+1: filter(df4, class !
+                      ^</code></pre>
+</div>
+<p>Oops, what’s wrong?</p>
+<div class="layout-chunk" data-layout="l-body">
+<pre class="r"><code>
+filter(df4, !class %in% c(&quot;a&quot;, &quot;b&quot;)) # correct way to do it</code></pre>
+<pre><code>
+Source: local data table [20 x 3]
+
+# A tibble: 20 x 3
+      iq grades class
+   &lt;dbl&gt;  &lt;dbl&gt; &lt;chr&gt;
+ 1  111.   56.0 c    
+ 2  115.   56.0 c    
+ 3  112.   46.4 c    
+ 4  109.   43.7 c    
+ 5  111.   36.4 c    
+ 6  114.   30.2 c    
+ 7  115.   39.5 c    
+ 8  119.   51.0 c    
+ 9  113.   64.1 c    
+10  118    55.3 c    
+11  117.   17.5 d    
+12  121.   35.2 d    
+13  118.   29.9 d    
+14  122.   18.3 d    
+15  124.   29.5 d    
+16  121.   53.7 d    
+17  124.   63.7 d    
+18  125.   48.7 d    
+19  125.   38.3 d    
+20  128.   51.8 d    </code></pre>
+</div>
+<h4 id="operators">Operators</h4>
+<p><code>==</code>, <code>%in%</code>, <code>%between%</code>, <code>&gt;</code>, <code>&gt;=</code>, <code>&lt;</code>, <code>&lt;=</code>, <code>!=</code> are operators. See <a href="https://www.statmethods.net/management/operators.html">here</a> for more information.</p>
+<h3 id="rename-variablescolumns-with-rename">Rename variables/columns with <code>rename()</code></h3>
+<div class="layout-chunk" data-layout="l-body">
+<pre class="r"><code>
+df4_renamed &lt;- rename(df4, intelligence = iq, examGrades = grades, classroom = class) # rename(data, newname = oldname)
+df4_renamed</code></pre>
+<pre><code>
+Source: local data table [40 x 3]
+
+# A tibble: 40 x 3
+   intelligence examGrades classroom
+          &lt;dbl&gt;      &lt;dbl&gt; &lt;chr&gt;    
+ 1         94.5       67.9 a        
+ 2         95.4       82.5 a        
+ 3         97.8       69.1 a        
+ 4         98.1       83.3 a        
+ 5         96.6       99.1 a        
+ 6        102.        89.9 a        
+ 7        101.        73.7 a        
+ 8         97.1       47.9 a        
+ 9         94.2       55.6 a        
+10         94.4       44.5 a        
+# ... with 30 more rows</code></pre>
+<pre class="r"><code>
+glimpse(df4_renamed)</code></pre>
+<pre><code>
+Observations: 40
+Variables: 3
+$ intelligence &lt;dbl&gt; 94.5128, 95.4359, 97.7949, 98.1026, 96.5641, 101.5897,...
+$ examGrades   &lt;dbl&gt; 67.9295, 82.5449, 69.0833, 83.3141, 99.0833, 89.8526, ...
+$ classroom    &lt;chr&gt; &quot;a&quot;, &quot;a&quot;, &quot;a&quot;, &quot;a&quot;, &quot;a&quot;, &quot;a&quot;, &quot;a&quot;, &quot;a&quot;, &quot;a&quot;, &quot;a&quot;, &quot;b&quot;,...</code></pre>
+<pre class="r"><code>
+names(df4_renamed)</code></pre>
+<pre><code>
+[1] &quot;intelligence&quot; &quot;examGrades&quot;   &quot;classroom&quot;   </code></pre>
+</div>
+<h3 id="create-new-columnsvariables-with-mutate">Create new columns/variables with <code>mutate()</code></h3>
+<div class="layout-chunk" data-layout="l-body">
+<pre class="r"><code>
+mutate(df4, 
+       iqMeanCentered = iq - mean(iq, na.rm = T), # substract mean iq from each iq
+       gradesRound0dp = round(grades) # round grades
+       )</code></pre>
+<pre><code>
+Source: local data table [40 x 5]
+
+# A tibble: 40 x 5
+      iq grades class iqMeanCentered gradesRound0dp
+   &lt;dbl&gt;  &lt;dbl&gt; &lt;chr&gt;          &lt;dbl&gt;          &lt;dbl&gt;
+ 1  94.5   67.9 a             -14.9              68
+ 2  95.4   82.5 a             -14.0              83
+ 3  97.8   69.1 a             -11.6              69
+ 4  98.1   83.3 a             -11.3              83
+ 5  96.6   99.1 a             -12.8              99
+ 6 102.    89.9 a              -7.82             90
+ 7 101.    73.7 a              -8.54             74
+ 8  97.1   47.9 a             -12.3              48
+ 9  94.2   55.6 a             -15.2              56
+10  94.4   44.5 a             -15.0              44
+# ... with 30 more rows</code></pre>
+</div>
+<div class="layout-chunk" data-layout="l-body">
+<pre class="r"><code>
+mutate(df4, studentNumber = 1:nrow(df4))</code></pre>
+<pre><code>
+Source: local data table [40 x 4]
+
+# A tibble: 40 x 4
+      iq grades class studentNumber
+   &lt;dbl&gt;  &lt;dbl&gt; &lt;chr&gt;         &lt;int&gt;
+ 1  94.5   67.9 a                 1
+ 2  95.4   82.5 a                 2
+ 3  97.8   69.1 a                 3
+ 4  98.1   83.3 a                 4
+ 5  96.6   99.1 a                 5
+ 6 102.    89.9 a                 6
+ 7 101.    73.7 a                 7
+ 8  97.1   47.9 a                 8
+ 9  94.2   55.6 a                 9
+10  94.4   44.5 a                10
+# ... with 30 more rows</code></pre>
+</div>
+<div class="layout-chunk" data-layout="l-body">
+<pre class="r"><code>
+nrow(df4) # number of rows; ncol() gives you number of columns</code></pre>
+<pre><code>
+[1] 40</code></pre>
+<pre class="r"><code>
+1:nrow(df4) # generate sequence of numbers from 1 to number of rows of dataset</code></pre>
+<pre><code>
+ [1]  1  2  3  4  5  6  7  8  9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25
+[26] 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40</code></pre>
+</div>
+<div class="layout-chunk" data-layout="l-body">
+<pre class="r"><code>
+mutate(df4, studentNumber = 1:nrow(df4)) %&gt;% print(n = Inf)</code></pre>
+<pre><code>
+Source: local data table [40 x 4]
+
+# A tibble: 40 x 4
+      iq grades class studentNumber
+   &lt;dbl&gt;  &lt;dbl&gt; &lt;chr&gt;         &lt;int&gt;
+ 1  94.5   67.9 a                 1
+ 2  95.4   82.5 a                 2
+ 3  97.8   69.1 a                 3
+ 4  98.1   83.3 a                 4
+ 5  96.6   99.1 a                 5
+ 6 102.    89.9 a                 6
+ 7 101.    73.7 a                 7
+ 8  97.1   47.9 a                 8
+ 9  94.2   55.6 a                 9
+10  94.4   44.5 a                10
+11 104.    74.1 b                11
+12 103.    59.9 b                12
+13 102.    47.9 b                13
+14 105.    44.9 b                14
+15 106.    60.2 b                15
+16 109.    64.9 b                16
+17 107.    74.5 b                17
+18 107.    49.9 b                18
+19 102.    37.9 b                19
+20 100.    54.9 b                20
+21 111.    56.0 c                21
+22 115.    56.0 c                22
+23 112.    46.4 c                23
+24 109.    43.7 c                24
+25 111.    36.4 c                25
+26 114.    30.2 c                26
+27 115.    39.5 c                27
+28 119.    51.0 c                28
+29 113.    64.1 c                29
+30 118     55.3 c                30
+31 117.    17.5 d                31
+32 121.    35.2 d                32
+33 118.    29.9 d                33
+34 122.    18.3 d                34
+35 124.    29.5 d                35
+36 121.    53.7 d                36
+37 124.    63.7 d                37
+38 125.    48.7 d                38
+39 125.    38.3 d                39
+40 128.    51.8 d                40</code></pre>
+</div>
+<h3 id="sorting-or-arranging-data-rows-with-arrange">Sorting or arranging data rows with <code>arrange()</code></h3>
+<div class="layout-chunk" data-layout="l-body">
+<pre class="r"><code>
+arrange(df4, iq) # ascending order of iq</code></pre>
+<pre><code>
+Source: local data table [40 x 3]
+
+# A tibble: 40 x 3
+      iq grades class
+   &lt;dbl&gt;  &lt;dbl&gt; &lt;chr&gt;
+ 1  94.2   55.6 a    
+ 2  94.4   44.5 a    
+ 3  94.5   67.9 a    
+ 4  95.4   82.5 a    
+ 5  96.6   99.1 a    
+ 6  97.1   47.9 a    
+ 7  97.8   69.1 a    
+ 8  98.1   83.3 a    
+ 9 100.    54.9 b    
+10 101.    73.7 a    
+# ... with 30 more rows</code></pre>
+<pre class="r"><code>
+arrange(df4, iq, grades) # ascending order of iq then grades</code></pre>
+<pre><code>
+Source: local data table [40 x 3]
+
+# A tibble: 40 x 3
+      iq grades class
+   &lt;dbl&gt;  &lt;dbl&gt; &lt;chr&gt;
+ 1  94.2   55.6 a    
+ 2  94.4   44.5 a    
+ 3  94.5   67.9 a    
+ 4  95.4   82.5 a    
+ 5  96.6   99.1 a    
+ 6  97.1   47.9 a    
+ 7  97.8   69.1 a    
+ 8  98.1   83.3 a    
+ 9 100.    54.9 b    
+10 101.    73.7 a    
+# ... with 30 more rows</code></pre>
+<pre class="r"><code>
+arrange(df4, desc(iq)) # descending order of iq</code></pre>
+<pre><code>
+Source: local data table [40 x 3]
+
+# A tibble: 40 x 3
+      iq grades class
+   &lt;dbl&gt;  &lt;dbl&gt; &lt;chr&gt;
+ 1  128.   51.8 d    
+ 2  125.   38.3 d    
+ 3  125.   48.7 d    
+ 4  124.   63.7 d    
+ 5  124.   29.5 d    
+ 6  122.   18.3 d    
+ 7  121.   53.7 d    
+ 8  121.   35.2 d    
+ 9  119.   51.0 c    
+10  118    55.3 c    
+# ... with 30 more rows</code></pre>
+<pre class="r"><code>
+arrange(df4, desc(class)) # descending order of class</code></pre>
+<pre><code>
+Source: local data table [40 x 3]
+
+# A tibble: 40 x 3
+      iq grades class
+   &lt;dbl&gt;  &lt;dbl&gt; &lt;chr&gt;
+ 1  117.   17.5 d    
+ 2  121.   35.2 d    
+ 3  118.   29.9 d    
+ 4  122.   18.3 d    
+ 5  124.   29.5 d    
+ 6  121.   53.7 d    
+ 7  124.   63.7 d    
+ 8  125.   48.7 d    
+ 9  125.   38.3 d    
+10  128.   51.8 d    
+# ... with 30 more rows</code></pre>
+</div>
+<p><code>order()</code> is another function (base R function) people often use to arrange rows. See <a href="https://www.statmethods.net/management/sorting.html">here</a> for more information.</p>
+<h3 id="combining-functions-with-pipes-in">Combining functions with pipes <code>%in%</code></h3>
+<div class="layout-chunk" data-layout="l-body">
+<pre class="r"><code>
+df4 %&gt;% print(n = Inf) # reminder what the dataset looks like</code></pre>
+<pre><code>
+Source: local data table [40 x 3]
+
+# A tibble: 40 x 3
+      iq grades class
+   &lt;dbl&gt;  &lt;dbl&gt; &lt;chr&gt;
+ 1  94.5   67.9 a    
+ 2  95.4   82.5 a    
+ 3  97.8   69.1 a    
+ 4  98.1   83.3 a    
+ 5  96.6   99.1 a    
+ 6 102.    89.9 a    
+ 7 101.    73.7 a    
+ 8  97.1   47.9 a    
+ 9  94.2   55.6 a    
+10  94.4   44.5 a    
+11 104.    74.1 b    
+12 103.    59.9 b    
+13 102.    47.9 b    
+14 105.    44.9 b    
+15 106.    60.2 b    
+16 109.    64.9 b    
+17 107.    74.5 b    
+18 107.    49.9 b    
+19 102.    37.9 b    
+20 100.    54.9 b    
+21 111.    56.0 c    
+22 115.    56.0 c    
+23 112.    46.4 c    
+24 109.    43.7 c    
+25 111.    36.4 c    
+26 114.    30.2 c    
+27 115.    39.5 c    
+28 119.    51.0 c    
+29 113.    64.1 c    
+30 118     55.3 c    
+31 117.    17.5 d    
+32 121.    35.2 d    
+33 118.    29.9 d    
+34 122.    18.3 d    
+35 124.    29.5 d    
+36 121.    53.7 d    
+37 124.    63.7 d    
+38 125.    48.7 d    
+39 125.    38.3 d    
+40 128.    51.8 d    </code></pre>
+</div>
+<p>You can combine multiple functions with <code>%in%</code>. After adding each function/line, you can check your output before you add the next function/line. This way, you can build really complicated and long code/syntax without nesting functions!</p>
+<p>NOTE that comments # are placed AFTER the pipe symbol!</p>
+<div class="layout-chunk" data-layout="l-body">
+<pre class="r"><code>
+df4 %&gt;% 
+    mutate(gradesRound = round(grades), studentNo = 1:.N) %&gt;% # round grades, add subject number: .N is a shortcut for nrow(df4)
+    select(-grades) %&gt;% # remove original grades variable
+    select(studentNo, class, iq, gradesRound) %&gt;%  # reorder columns
+    rename(intelligence = iq, examGrades = gradesRound, classroom = class) %&gt;% # rename variables
+    filter(intelligence %between% c(90, 105)) # select only those with intelligence between 90 and 105</code></pre>
+<pre><code>
+Source: local data table [15 x 4]
+
+# A tibble: 15 x 4
+   studentNo classroom intelligence examGrades
+       &lt;int&gt; &lt;chr&gt;            &lt;dbl&gt;      &lt;dbl&gt;
+ 1         1 a                 94.5         68
+ 2         2 a                 95.4         83
+ 3         3 a                 97.8         69
+ 4         4 a                 98.1         83
+ 5         5 a                 96.6         99
+ 6         6 a                102.          90
+ 7         7 a                101.          74
+ 8         8 a                 97.1         48
+ 9         9 a                 94.2         56
+10        10 a                 94.4         44
+11        11 b                104.          74
+12        12 b                103.          60
+13        13 b                102.          48
+14        19 b                102.          38
+15        20 b                100.          55</code></pre>
+</div>
+<p>The code above doesn’t save the output as an object. Below we save it as an object.</p>
+<div class="layout-chunk" data-layout="l-body">
+<pre class="r"><code>
+df5 &lt;- df4 %&gt;% 
+    mutate(gradesRound = round(grades), studentNo = 1:.N) %&gt;% # round grades, add subject number: .N is a shortcut for nrow(df4)
+    select(-grades) %&gt;% # remove original grades variable
+    select(studentNo, class, iq, gradesRound) %&gt;%  # reorder columns
+    rename(intelligence = iq, examGrades = gradesRound, classroom = class) %&gt;% # rename variables
+    filter(intelligence %between% c(90, 105)) # select only those with intelligence between 90 and 105
+df5 # check output</code></pre>
+<pre><code>
+Source: local data table [15 x 4]
+
+# A tibble: 15 x 4
+   studentNo classroom intelligence examGrades
+       &lt;int&gt; &lt;chr&gt;            &lt;dbl&gt;      &lt;dbl&gt;
+ 1         1 a                 94.5         68
+ 2         2 a                 95.4         83
+ 3         3 a                 97.8         69
+ 4         4 a                 98.1         83
+ 5         5 a                 96.6         99
+ 6         6 a                102.          90
+ 7         7 a                101.          74
+ 8         8 a                 97.1         48
+ 9         9 a                 94.2         56
+10        10 a                 94.4         44
+11        11 b                104.          74
+12        12 b                103.          60
+13        13 b                102.          48
+14        19 b                102.          38
+15        20 b                100.          55</code></pre>
+</div>
+<p>You can even pipe the output to any other functions (e.g., plotting functions)</p>
+<div class="layout-chunk" data-layout="l-body">
+<pre class="r"><code>
+df4 %&gt;% 
+    mutate(gradesRound = round(grades), studentNo = 1:.N) %&gt;% # round grades, add subject number: .N is a shortcut for nrow(df4)
+    select(-grades) %&gt;% # remove original grades variable
+    select(studentNo, class, iq, gradesRound) %&gt;%  # reorder columns
+    rename(intelligence = iq, examGrades = gradesRound, classroom = class) %&gt;% # rename variables
+    filter(intelligence %between% c(80, 115)) %&gt;% # select only those with intelligence between 80 and 115
+    ggplot(aes(x = intelligence, y = examGrades)) + # note the + sign! (ggplot uses + sign)
+    geom_point() + # add each data point
+    geom_smooth(method = &#39;lm&#39;, se = T) # fit regression line with standard error (se = TRUE)</code></pre>
+<p><img src="0002_tidyverse_datatable_files/figure-html5/unnamed-chunk-46-1.png" width="624" /></p>
+</div>
+<p>Higher intelligence, worse grades? What’s going on? We figure out why later on. And more on <code>ggplot2</code> package in future tutorials.</p>
+<h3 id="compute-summary-statistics-with-summarize-or-summarise">Compute summary statistics with <code>summarize()</code> or <code>summarise()</code></h3>
+<div class="layout-chunk" data-layout="l-body">
+<pre class="r"><code>
+df5 %&gt;% 
+    group_by(classroom) %&gt;% # grouping by classroom
+    summarise(iqMean = mean(intelligence, na.rm = T))</code></pre>
+<pre><code>
+Source: local data table [2 x 2]
+
+# A tibble: 2 x 2
+  classroom iqMean
+  &lt;chr&gt;      &lt;dbl&gt;
+1 a           97.1
+2 b          102. </code></pre>
+</div>
+<div class="layout-chunk" data-layout="l-body">
+<pre class="r"><code>
+df5 %&gt;% 
+    group_by(classroom) %&gt;% # grouping by classroom
+    summarize(iqClassMean = mean(intelligence, na.rm = T),
+              examGradesClassMean = mean(examGrades, na.rm = T))</code></pre>
+<pre><code>
+Source: local data table [2 x 3]
+
+# A tibble: 2 x 3
+  classroom iqClassMean examGradesClassMean
+  &lt;chr&gt;           &lt;dbl&gt;               &lt;dbl&gt;
+1 a                97.1                71.4
+2 b               102.                 55  </code></pre>
+</div>
+<p>Same code but with original dataset (dimensions: 40 x 3)</p>
+<div class="layout-chunk" data-layout="l-body">
+<pre class="r"><code>
+df4 %&gt;% 
+    group_by(class) %&gt;% # grouping by class
+    summarise(iqClassMean = mean(iq, na.rm = T), 
+              examGradesClassMean = mean(grades, na.rm = T))</code></pre>
+<pre><code>
+Source: local data table [4 x 3]
+
+# A tibble: 4 x 3
+  class iqClassMean examGradesClassMean
+  &lt;chr&gt;       &lt;dbl&gt;               &lt;dbl&gt;
+1 a            97.1                71.4
+2 b           105.                 56.9
+3 c           114.                 47.9
+4 d           122.                 38.7</code></pre>
+</div>
+<p>Group by multiple variables/conditions</p>
+<p>Randomly generate gender of student for each row of data with <code>sample()</code></p>
+<div class="layout-chunk" data-layout="l-body">
+<pre class="r"><code>
+sample(x = c(&quot;female&quot;, &quot;male&quot;), size = 40, replace = T) # what is this doing</code></pre>
+<pre><code>
+ [1] &quot;male&quot;   &quot;male&quot;   &quot;male&quot;   &quot;female&quot; &quot;male&quot;   &quot;female&quot; &quot;male&quot;   &quot;male&quot;  
+ [9] &quot;female&quot; &quot;female&quot; &quot;male&quot;   &quot;male&quot;   &quot;female&quot; &quot;female&quot; &quot;male&quot;   &quot;male&quot;  
+[17] &quot;female&quot; &quot;female&quot; &quot;male&quot;   &quot;male&quot;   &quot;female&quot; &quot;male&quot;   &quot;female&quot; &quot;female&quot;
+[25] &quot;female&quot; &quot;male&quot;   &quot;female&quot; &quot;male&quot;   &quot;female&quot; &quot;male&quot;   &quot;female&quot; &quot;female&quot;
+[33] &quot;male&quot;   &quot;male&quot;   &quot;female&quot; &quot;male&quot;   &quot;male&quot;   &quot;female&quot; &quot;male&quot;   &quot;female&quot;</code></pre>
+</div>
+<div class="layout-chunk" data-layout="l-body">
+<pre class="r"><code>
+df4$gender &lt;- sample(x = c(&quot;female&quot;, &quot;male&quot;), size = 40, replace = T)
+# same as df4 &lt;- mutate(df4, gender = sample(x = c(&quot;female&quot;, &quot;male&quot;), size = .N, replace = T))</code></pre>
+</div>
+<p>Because the gender labels are generated randomly, you’ll get different values each time you re-run the code.</p>
+<div class="layout-chunk" data-layout="l-body">
+<pre class="r"><code>
+print(df4, n = Inf)</code></pre>
+<pre><code>
+Source: local data table [40 x 4]
+
+# A tibble: 40 x 4
+      iq grades class gender
+   &lt;dbl&gt;  &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt; 
+ 1  94.5   67.9 a     male  
+ 2  95.4   82.5 a     male  
+ 3  97.8   69.1 a     male  
+ 4  98.1   83.3 a     male  
+ 5  96.6   99.1 a     female
+ 6 102.    89.9 a     male  
+ 7 101.    73.7 a     female
+ 8  97.1   47.9 a     female
+ 9  94.2   55.6 a     male  
+10  94.4   44.5 a     male  
+11 104.    74.1 b     female
+12 103.    59.9 b     female
+13 102.    47.9 b     female
+14 105.    44.9 b     female
+15 106.    60.2 b     female
+16 109.    64.9 b     male  
+17 107.    74.5 b     male  
+18 107.    49.9 b     female
+19 102.    37.9 b     female
+20 100.    54.9 b     male  
+21 111.    56.0 c     male  
+22 115.    56.0 c     female
+23 112.    46.4 c     male  
+24 109.    43.7 c     male  
+25 111.    36.4 c     female
+26 114.    30.2 c     female
+27 115.    39.5 c     female
+28 119.    51.0 c     male  
+29 113.    64.1 c     female
+30 118     55.3 c     female
+31 117.    17.5 d     male  
+32 121.    35.2 d     female
+33 118.    29.9 d     female
+34 122.    18.3 d     male  
+35 124.    29.5 d     male  
+36 121.    53.7 d     male  
+37 124.    63.7 d     female
+38 125.    48.7 d     female
+39 125.    38.3 d     female
+40 128.    51.8 d     female</code></pre>
+</div>
+<p>Compute mean for each class by gender</p>
+<div class="layout-chunk" data-layout="l-body">
+<pre class="r"><code>
+df4 %&gt;% 
+    group_by(class, gender) %&gt;% # group by class then gender
+    summarise(iqClassMean = mean(iq, na.rm = T), 
+              examGradesClassMean = mean(grades, na.rm = T))</code></pre>
+<pre><code>
+Source: local data table [8 x 4]
+Groups: class
+
+# A tibble: 8 x 4
+  class gender iqClassMean examGradesClassMean
+  &lt;chr&gt; &lt;chr&gt;        &lt;dbl&gt;               &lt;dbl&gt;
+1 a     male          96.6                70.4
+2 a     female        98.2                73.6
+3 b     female       104.                 53.5
+4 b     male         106.                 64.7
+5 c     male         113.                 49.3
+6 c     female       114.                 46.9
+7 d     male         121.                 29.8
+8 d     female       123.                 44.6</code></pre>
+</div>
+<h2 id="more-dplyr-and-tidyverse-information">More <code>dplyr</code> and <code>tidyverse</code> information</h2>
+<p>For much more information, see the following sites</p>
+<ul>
+<li><a href="https://cran.r-project.org/web/packages/dplyr/vignettes/dplyr.html">dplyr tutorial/vignette</a></li>
+<li><a href="https://cran.r-project.org/web/packages/dplyr/dplyr.pdf">official dplyr documentation</a></li>
+<li><a href="https://www.tidyverse.org/">tidyverse</a></li>
+</ul>
+<h2 id="supercharging-your-workflow-with-data.table">Supercharging your workflow with data.table()</h2>
+<p>While the syntax of <code>tidyverse</code> and <code>dplyr</code> functions are really easy to understand, they sometimes can be quite long-winded. Using pipes <code>%&gt;%</code> makes your code readable, but is a bit long to read sometimes. Now we’ll see how <code>data.table()</code> can shorten all that code while maintaining readability. Also, <code>data.table()</code> is MUCH faster, which is especially useful when dealing with bigger datasets (hundreds of MBs and GBs and even TBs).</p>
+<p>If you use <code>tbl_dt(fread('filename'))</code> to read your dataset into R, then your object is already a <code>data.table</code>. Check it with <code>class(objectName)</code>.</p>
+<div class="layout-chunk" data-layout="l-body">
+<pre class="r"><code>
+df4</code></pre>
+<pre><code>
+Source: local data table [40 x 4]
+
+# A tibble: 40 x 4
+      iq grades class gender
+   &lt;dbl&gt;  &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt; 
+ 1  94.5   67.9 a     male  
+ 2  95.4   82.5 a     male  
+ 3  97.8   69.1 a     male  
+ 4  98.1   83.3 a     male  
+ 5  96.6   99.1 a     female
+ 6 102.    89.9 a     male  
+ 7 101.    73.7 a     female
+ 8  97.1   47.9 a     female
+ 9  94.2   55.6 a     male  
+10  94.4   44.5 a     male  
+# ... with 30 more rows</code></pre>
+<pre class="r"><code>
+class(df4)</code></pre>
+<pre><code>
+[1] &quot;tbl_dt&quot;     &quot;tbl&quot;        &quot;data.table&quot; &quot;data.frame&quot;</code></pre>
+<pre class="r"><code>
+df1</code></pre>
+<pre><code>
+   extra group ID
+1    0.7     1  1
+2   -1.6     1  2
+3   -0.2     1  3
+4   -1.2     1  4
+5   -0.1     1  5
+6    3.4     1  6
+7    3.7     1  7
+8    0.8     1  8
+9    0.0     1  9
+10   2.0     1 10
+11   1.9     2  1
+12   0.8     2  2
+13   1.1     2  3
+14   0.1     2  4
+15  -0.1     2  5
+16   4.4     2  6
+17   5.5     2  7
+18   1.6     2  8
+19   4.6     2  9
+20   3.4     2 10</code></pre>
+<pre class="r"><code>
+class(df1)</code></pre>
+<pre><code>
+[1] &quot;data.frame&quot;</code></pre>
+</div>
+<p>If your object isn’t a <code>data.table</code>, you can convert it to one using <code>tbl_dt()</code> from the <code>dtplyr</code> package. <code>tbl_dt()</code> turns your dataset into <code>tibble</code> (tbl) and <code>data.table</code>.</p>
+<div class="layout-chunk" data-layout="l-body">
+<pre class="r"><code>
+df1_dt &lt;- tbl_dt(df1) # preferred approach, especially for datasets with many columns and rows
+class(df1_dt)</code></pre>
+<pre><code>
+[1] &quot;tbl_dt&quot;     &quot;tbl&quot;        &quot;data.table&quot; &quot;data.frame&quot;</code></pre>
+<pre class="r"><code>
+setDT(df1) # setDT() also works (and works without reassignment: no need to use &lt;-)
+class(df1) # but setDT() doesn&#39;t convert your dataset to a tibble class at the same time</code></pre>
+<pre><code>
+[1] &quot;data.table&quot; &quot;data.frame&quot;</code></pre>
+</div>
+<h3 id="data.table-basics-i-j-by"><code>data.table()</code> basics: [i, j, by]</h3>
+<p><code>data.table</code> use a special but extremely concise syntax that only works with objects that have the <code>data.table</code> class associated with them. If you try to use this special syntax on other classes, you’ll screw up big time. So check your class or try to convert to or use <code>data.table()</code> whenever possible!</p>
+<p>data.table[i, j, by]</p>
+<ul>
+<li>i: row (equivalent to <code>filter()</code> and <code>slice()</code>)</li>
+<li>j: column (equivelent to <code>select()</code> and <code>summarize()</code> and <code>mutate()</code>)</li>
+<li>by: group by (equivalent to <code>group_by()</code>)</li>
+</ul>
+<h3 id="filter-data.table-via-i">Filter data.table via i</h3>
+<div class="layout-chunk" data-layout="l-body">
+<pre class="r"><code>
+print(df4, n = Inf) # remind yourself what your data look like</code></pre>
+<pre><code>
+Source: local data table [40 x 4]
+
+# A tibble: 40 x 4
+      iq grades class gender
+   &lt;dbl&gt;  &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt; 
+ 1  94.5   67.9 a     male  
+ 2  95.4   82.5 a     male  
+ 3  97.8   69.1 a     male  
+ 4  98.1   83.3 a     male  
+ 5  96.6   99.1 a     female
+ 6 102.    89.9 a     male  
+ 7 101.    73.7 a     female
+ 8  97.1   47.9 a     female
+ 9  94.2   55.6 a     male  
+10  94.4   44.5 a     male  
+11 104.    74.1 b     female
+12 103.    59.9 b     female
+13 102.    47.9 b     female
+14 105.    44.9 b     female
+15 106.    60.2 b     female
+16 109.    64.9 b     male  
+17 107.    74.5 b     male  
+18 107.    49.9 b     female
+19 102.    37.9 b     female
+20 100.    54.9 b     male  
+21 111.    56.0 c     male  
+22 115.    56.0 c     female
+23 112.    46.4 c     male  
+24 109.    43.7 c     male  
+25 111.    36.4 c     female
+26 114.    30.2 c     female
+27 115.    39.5 c     female
+28 119.    51.0 c     male  
+29 113.    64.1 c     female
+30 118     55.3 c     female
+31 117.    17.5 d     male  
+32 121.    35.2 d     female
+33 118.    29.9 d     female
+34 122.    18.3 d     male  
+35 124.    29.5 d     male  
+36 121.    53.7 d     male  
+37 124.    63.7 d     female
+38 125.    48.7 d     female
+39 125.    38.3 d     female
+40 128.    51.8 d     female</code></pre>
+<pre class="r"><code>
+class(df4) # is it a data.table?</code></pre>
+<pre><code>
+[1] &quot;tbl_dt&quot;     &quot;tbl&quot;        &quot;data.table&quot; &quot;data.frame&quot;</code></pre>
+</div>
+<p>Different ways to filter via i</p>
+<div class="layout-chunk" data-layout="l-body">
+<pre class="r"><code>
+df4[i = gender == &#39;female&#39;,] # just female (j, by are NULL)</code></pre>
+<pre><code>
+Source: local data table [22 x 4]
+
+# A tibble: 22 x 4
+      iq grades class gender
+   &lt;dbl&gt;  &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt; 
+ 1  96.6   99.1 a     female
+ 2 101.    73.7 a     female
+ 3  97.1   47.9 a     female
+ 4 104.    74.1 b     female
+ 5 103.    59.9 b     female
+ 6 102.    47.9 b     female
+ 7 105.    44.9 b     female
+ 8 106.    60.2 b     female
+ 9 107.    49.9 b     female
+10 102.    37.9 b     female
+# ... with 12 more rows</code></pre>
+<pre class="r"><code>
+df4[i = gender != &#39;female&#39;,] # not female </code></pre>
+<pre><code>
+Source: local data table [18 x 4]
+
+# A tibble: 18 x 4
+      iq grades class gender
+   &lt;dbl&gt;  &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt; 
+ 1  94.5   67.9 a     male  
+ 2  95.4   82.5 a     male  
+ 3  97.8   69.1 a     male  
+ 4  98.1   83.3 a     male  
+ 5 102.    89.9 a     male  
+ 6  94.2   55.6 a     male  
+ 7  94.4   44.5 a     male  
+ 8 109.    64.9 b     male  
+ 9 107.    74.5 b     male  
+10 100.    54.9 b     male  
+11 111.    56.0 c     male  
+12 112.    46.4 c     male  
+13 109.    43.7 c     male  
+14 119.    51.0 c     male  
+15 117.    17.5 d     male  
+16 122.    18.3 d     male  
+17 124.    29.5 d     male  
+18 121.    53.7 d     male  </code></pre>
+<pre class="r"><code>
+df4[gender != &#39;female&#39;,] # also works</code></pre>
+<pre><code>
+Source: local data table [18 x 4]
+
+# A tibble: 18 x 4
+      iq grades class gender
+   &lt;dbl&gt;  &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt; 
+ 1  94.5   67.9 a     male  
+ 2  95.4   82.5 a     male  
+ 3  97.8   69.1 a     male  
+ 4  98.1   83.3 a     male  
+ 5 102.    89.9 a     male  
+ 6  94.2   55.6 a     male  
+ 7  94.4   44.5 a     male  
+ 8 109.    64.9 b     male  
+ 9 107.    74.5 b     male  
+10 100.    54.9 b     male  
+11 111.    56.0 c     male  
+12 112.    46.4 c     male  
+13 109.    43.7 c     male  
+14 119.    51.0 c     male  
+15 117.    17.5 d     male  
+16 122.    18.3 d     male  
+17 124.    29.5 d     male  
+18 121.    53.7 d     male  </code></pre>
+<pre class="r"><code>
+df4[grades &gt; 85,] # also works</code></pre>
+<pre><code>
+Source: local data table [2 x 4]
+
+# A tibble: 2 x 4
+     iq grades class gender
+  &lt;dbl&gt;  &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt; 
+1  96.6   99.1 a     female
+2 102.    89.9 a     male  </code></pre>
+<pre class="r"><code>
+# same as filter(df4, grades &gt; 85), but much more concise
+df4[grades &gt; 85] # also works</code></pre>
+<pre><code>
+Source: local data table [2 x 4]
+
+# A tibble: 2 x 4
+     iq grades class gender
+  &lt;dbl&gt;  &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt; 
+1  96.6   99.1 a     female
+2 102.    89.9 a     male  </code></pre>
+<pre class="r"><code>
+df4[i = grades &gt; 85] # also works</code></pre>
+<pre><code>
+Source: local data table [2 x 4]
+
+# A tibble: 2 x 4
+     iq grades class gender
+  &lt;dbl&gt;  &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt; 
+1  96.6   99.1 a     female
+2 102.    89.9 a     male  </code></pre>
+<pre class="r"><code>
+df4[grades &lt; 50 &amp; iq &gt; 120] # smart but (AND &amp;) lazy people (grades &lt; 50 AND iq &gt; 120)</code></pre>
+<pre><code>
+Source: local data table [5 x 4]
+
+# A tibble: 5 x 4
+     iq grades class gender
+  &lt;dbl&gt;  &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt; 
+1  121.   35.2 d     female
+2  122.   18.3 d     male  
+3  124.   29.5 d     male  
+4  125.   48.7 d     female
+5  125.   38.3 d     female</code></pre>
+<pre class="r"><code>
+df4[grades &lt; 50 | iq &gt; 120] # smart but OR lazy people (grades &lt; 50 OR iq &gt; 120)</code></pre>
+<pre><code>
+Source: local data table [21 x 4]
+
+# A tibble: 21 x 4
+      iq grades class gender
+   &lt;dbl&gt;  &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt; 
+ 1  97.1   47.9 a     female
+ 2  94.4   44.5 a     male  
+ 3 102.    47.9 b     female
+ 4 105.    44.9 b     female
+ 5 107.    49.9 b     female
+ 6 102.    37.9 b     female
+ 7 112.    46.4 c     male  
+ 8 109.    43.7 c     male  
+ 9 111.    36.4 c     female
+10 114.    30.2 c     female
+# ... with 11 more rows</code></pre>
+</div>
+<p>Slice (select rows) with indices via i</p>
+<div class="layout-chunk" data-layout="l-body">
+<pre class="r"><code>
+df4[1:3] # rows 1 to 3</code></pre>
+<pre><code>
+Source: local data table [3 x 4]
+
+# A tibble: 3 x 4
+     iq grades class gender
+  &lt;dbl&gt;  &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt; 
+1  94.5   67.9 a     male  
+2  95.4   82.5 a     male  
+3  97.8   69.1 a     male  </code></pre>
+<pre class="r"><code>
+df4[35:.N] # rows 35 to last row</code></pre>
+<pre><code>
+Source: local data table [6 x 4]
+
+# A tibble: 6 x 4
+     iq grades class gender
+  &lt;dbl&gt;  &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt; 
+1  124.   29.5 d     male  
+2  121.   53.7 d     male  
+3  124.   63.7 d     female
+4  125.   48.7 d     female
+5  125.   38.3 d     female
+6  128.   51.8 d     female</code></pre>
+</div>
+<h3 id="selecting-columns-via-j">Selecting columns via j</h3>
+<div class="layout-chunk" data-layout="l-body">
+<pre class="r"><code>
+df4[, j = grades] # vector</code></pre>
+<pre><code>
+ [1] 67.9295 82.5449 69.0833 83.3141 99.0833 89.8526 73.6987 47.9295 55.6218
+[10] 44.4679 74.0833 59.8526 47.9295 44.8526 60.2372 64.8526 74.4679 49.8526
+[19] 37.9295 54.8526 56.0064 56.0064 46.3910 43.6987 36.3910 30.2372 39.4679
+[28] 51.0064 64.0833 55.3000 17.5449 35.2372 29.8526 18.3141 29.4679 53.6987
+[37] 63.6987 48.6987 38.3141 51.7756</code></pre>
+<pre class="r"><code>
+df4[, grades] # same as above, but note the comma, which indicates j via position (i is before the first comma)</code></pre>
+<pre><code>
+ [1] 67.9295 82.5449 69.0833 83.3141 99.0833 89.8526 73.6987 47.9295 55.6218
+[10] 44.4679 74.0833 59.8526 47.9295 44.8526 60.2372 64.8526 74.4679 49.8526
+[19] 37.9295 54.8526 56.0064 56.0064 46.3910 43.6987 36.3910 30.2372 39.4679
+[28] 51.0064 64.0833 55.3000 17.5449 35.2372 29.8526 18.3141 29.4679 53.6987
+[37] 63.6987 48.6987 38.3141 51.7756</code></pre>
+<pre class="r"><code>
+class(df4[, grades]) # not a data.table!</code></pre>
+<pre><code>
+[1] &quot;numeric&quot;</code></pre>
+<pre class="r"><code>
+df4$grades # vector (same as above)</code></pre>
+<pre><code>
+ [1] 67.9295 82.5449 69.0833 83.3141 99.0833 89.8526 73.6987 47.9295 55.6218
+[10] 44.4679 74.0833 59.8526 47.9295 44.8526 60.2372 64.8526 74.4679 49.8526
+[19] 37.9295 54.8526 56.0064 56.0064 46.3910 43.6987 36.3910 30.2372 39.4679
+[28] 51.0064 64.0833 55.3000 17.5449 35.2372 29.8526 18.3141 29.4679 53.6987
+[37] 63.6987 48.6987 38.3141 51.7756</code></pre>
+<pre class="r"><code>
+class(df4$grades) # not a data.table!</code></pre>
+<pre><code>
+[1] &quot;numeric&quot;</code></pre>
+</div>
+<p>How to select columns and keep them as data.table?</p>
+<div class="layout-chunk" data-layout="l-body">
+<pre class="r"><code>
+df4[, .(grades)] # output looks like a table (tibble + local data table)</code></pre>
+<pre><code>
+Source: local data table [40 x 1]
+
+# A tibble: 40 x 1
+   grades
+    &lt;dbl&gt;
+ 1   67.9
+ 2   82.5
+ 3   69.1
+ 4   83.3
+ 5   99.1
+ 6   89.9
+ 7   73.7
+ 8   47.9
+ 9   55.6
+10   44.5
+# ... with 30 more rows</code></pre>
+<pre class="r"><code>
+class(df4[, .(grades)]) # still a data.table!</code></pre>
+<pre><code>
+[1] &quot;tbl_dt&quot;     &quot;tbl&quot;        &quot;data.table&quot; &quot;data.frame&quot;</code></pre>
+</div>
+<div class="layout-chunk" data-layout="l-body">
+<pre class="r"><code>
+df4[, j = .(grades, gender, iq)] # select multiple columns</code></pre>
+<pre><code>
+Source: local data table [40 x 3]
+
+# A tibble: 40 x 3
+   grades gender    iq
+    &lt;dbl&gt; &lt;chr&gt;  &lt;dbl&gt;
+ 1   67.9 male    94.5
+ 2   82.5 male    95.4
+ 3   69.1 male    97.8
+ 4   83.3 male    98.1
+ 5   99.1 female  96.6
+ 6   89.9 male   102. 
+ 7   73.7 female 101. 
+ 8   47.9 female  97.1
+ 9   55.6 male    94.2
+10   44.5 male    94.4
+# ... with 30 more rows</code></pre>
+<pre class="r"><code>
+df4[, .(grades,gender, iq)] # same as above and we often omit j =</code></pre>
+<pre><code>
+Source: local data table [40 x 3]
+
+# A tibble: 40 x 3
+   grades gender    iq
+    &lt;dbl&gt; &lt;chr&gt;  &lt;dbl&gt;
+ 1   67.9 male    94.5
+ 2   82.5 male    95.4
+ 3   69.1 male    97.8
+ 4   83.3 male    98.1
+ 5   99.1 female  96.6
+ 6   89.9 male   102. 
+ 7   73.7 female 101. 
+ 8   47.9 female  97.1
+ 9   55.6 male    94.2
+10   44.5 male    94.4
+# ... with 30 more rows</code></pre>
+<pre class="r"><code>
+# select(df4, grades, gender, iq) # same as above but with select()
+df4[, grades:gender] # select grades to gender</code></pre>
+<pre><code>
+Source: local data table [40 x 3]
+
+# A tibble: 40 x 3
+   grades class gender
+    &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt; 
+ 1   67.9 a     male  
+ 2   82.5 a     male  
+ 3   69.1 a     male  
+ 4   83.3 a     male  
+ 5   99.1 a     female
+ 6   89.9 a     male  
+ 7   73.7 a     female
+ 8   47.9 a     female
+ 9   55.6 a     male  
+10   44.5 a     male  
+# ... with 30 more rows</code></pre>
+<pre class="r"><code>
+# select(df4, grades:gender) # same as above but with select()
+# df4[, .(grades:gender)] # this version doesn&#39;t work at the moment</code></pre>
+</div>
+<div class="layout-chunk" data-layout="l-body">
+<pre class="r"><code>
+df4[, c(2, 3, 4)] # via column index/number</code></pre>
+<pre><code>
+Source: local data table [40 x 3]
+
+# A tibble: 40 x 3
+   grades class gender
+    &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt; 
+ 1   67.9 a     male  
+ 2   82.5 a     male  
+ 3   69.1 a     male  
+ 4   83.3 a     male  
+ 5   99.1 a     female
+ 6   89.9 a     male  
+ 7   73.7 a     female
+ 8   47.9 a     female
+ 9   55.6 a     male  
+10   44.5 a     male  
+# ... with 30 more rows</code></pre>
+<pre class="r"><code>
+df4[, -c(2, 3, 4)] # via column index/number (minus/not columns 1, 3, 4)</code></pre>
+<pre><code>
+Source: local data table [40 x 1]
+
+# A tibble: 40 x 1
+      iq
+   &lt;dbl&gt;
+ 1  94.5
+ 2  95.4
+ 3  97.8
+ 4  98.1
+ 5  96.6
+ 6 102. 
+ 7 101. 
+ 8  97.1
+ 9  94.2
+10  94.4
+# ... with 30 more rows</code></pre>
+<pre class="r"><code>
+df4[, 1:3] # via column index/number (1 to 3)</code></pre>
+<pre><code>
+Source: local data table [40 x 3]
+
+# A tibble: 40 x 3
+      iq grades class
+   &lt;dbl&gt;  &lt;dbl&gt; &lt;chr&gt;
+ 1  94.5   67.9 a    
+ 2  95.4   82.5 a    
+ 3  97.8   69.1 a    
+ 4  98.1   83.3 a    
+ 5  96.6   99.1 a    
+ 6 102.    89.9 a    
+ 7 101.    73.7 a    
+ 8  97.1   47.9 a    
+ 9  94.2   55.6 a    
+10  94.4   44.5 a    
+# ... with 30 more rows</code></pre>
+</div>
+<p>Other ways to select columns</p>
+<div class="layout-chunk" data-layout="l-body">
+<pre class="r"><code>
+df4[, &quot;grades&quot;] # 1 column (character)</code></pre>
+<pre><code>
+Source: local data table [40 x 1]
+
+# A tibble: 40 x 1
+   grades
+    &lt;dbl&gt;
+ 1   67.9
+ 2   82.5
+ 3   69.1
+ 4   83.3
+ 5   99.1
+ 6   89.9
+ 7   73.7
+ 8   47.9
+ 9   55.6
+10   44.5
+# ... with 30 more rows</code></pre>
+<pre class="r"><code>
+df4[, c(&quot;grades&quot;, &quot;iq&quot;)] # multiple columns (characters)</code></pre>
+<pre><code>
+Source: local data table [40 x 2]
+
+# A tibble: 40 x 2
+   grades    iq
+    &lt;dbl&gt; &lt;dbl&gt;
+ 1   67.9  94.5
+ 2   82.5  95.4
+ 3   69.1  97.8
+ 4   83.3  98.1
+ 5   99.1  96.6
+ 6   89.9 102. 
+ 7   73.7 101. 
+ 8   47.9  97.1
+ 9   55.6  94.2
+10   44.5  94.4
+# ... with 30 more rows</code></pre>
+</div>
+<p>Column names are stored in an object</p>
+<div class="layout-chunk" data-layout="l-body">
+<pre class="r"><code>
+colNames &lt;- c(&quot;gender&quot;, &quot;class&quot;)
+df4[, colNames] # doesn&#39;t work!</code></pre>
+<pre><code>
+Error in `[.data.table`(df4, , colNames): j (the 2nd argument inside [...]) is a single symbol but column name &#39;colNames&#39; is not found. Perhaps you intended DT[, ..colNames]. This difference to data.frame is deliberate and explained in FAQ 1.1.</code></pre>
+<pre class="r"><code>
+df4[, ..colNames] # works! (special syntax)</code></pre>
+<pre><code>
+Source: local data table [40 x 2]
+
+# A tibble: 40 x 2
+   gender class
+   &lt;chr&gt;  &lt;chr&gt;
+ 1 male   a    
+ 2 male   a    
+ 3 male   a    
+ 4 male   a    
+ 5 female a    
+ 6 male   a    
+ 7 female a    
+ 8 female a    
+ 9 male   a    
+10 male   a    
+# ... with 30 more rows</code></pre>
+</div>
+<h3 id="chaining-with-data.table-piping">Chaining with <code>data.table</code> (“piping”)</h3>
+<div class="layout-chunk" data-layout="l-body">
+<pre class="r"><code>
+df4[1:5, 1:3][grades &lt; 80, ][iq &gt; 95, ] # data.table chaining (or piping)</code></pre>
+<pre><code>
+Source: local data table [1 x 3]
+
+# A tibble: 1 x 3
+     iq grades class
+  &lt;dbl&gt;  &lt;dbl&gt; &lt;chr&gt;
+1  97.8   69.1 a    </code></pre>
+<pre class="r"><code>
+df4[1:5, 1:3] %&gt;% filter(grades &lt; 80) %&gt;% filter(iq &gt; 95) # same result as above</code></pre>
+<pre><code>
+Source: local data table [1 x 3]
+
+# A tibble: 1 x 3
+     iq grades class
+  &lt;dbl&gt;  &lt;dbl&gt; &lt;chr&gt;
+1  97.8   69.1 a    </code></pre>
+</div>
+<h3 id="summarize-data-via-j">Summarize data via j</h3>
+<div class="layout-chunk" data-layout="l-body">
+<pre class="r"><code>
+df4[, j = .(iqGrandMean = mean(iq, na.rm = T))] # compute grand mean iq and rename variable as iqGrandMean</code></pre>
+<pre><code>
+Source: local data table [1 x 1]
+
+# A tibble: 1 x 1
+  iqGrandMean
+        &lt;dbl&gt;
+1        109.</code></pre>
+<pre class="r"><code>
+df4[, .(iqGrandMean = mean(iq, na.rm = T))] # also works</code></pre>
+<pre><code>
+Source: local data table [1 x 1]
+
+# A tibble: 1 x 1
+  iqGrandMean
+        &lt;dbl&gt;
+1        109.</code></pre>
+<pre class="r"><code>
+df4[, mean(iq, na.rm = T)] # also works, but no renaming and returns a vector (not a data.table!)</code></pre>
+<pre><code>
+[1] 109.4077</code></pre>
+</div>
+<p>Compare output with <code>summary()</code></p>
+<div class="layout-chunk" data-layout="l-body">
+<pre class="r"><code>
+summary(df4) # check mean</code></pre>
+<pre><code>
+       iq             grades         class              gender         
+ Min.   : 94.21   Min.   :17.54   Length:40          Length:40         
+ 1st Qu.:101.41   1st Qu.:42.64   Class :character   Class :character  
+ Median :109.08   Median :52.74   Mode  :character   Mode  :character  
+ Mean   :109.41   Mean   :53.69                                        
+ 3rd Qu.:117.77   3rd Qu.:64.28                                        
+ Max.   :127.64   Max.   :99.08                                        </code></pre>
+</div>
+<p>What about other statistics and variables? Standard deviation?</p>
+<div class="layout-chunk" data-layout="l-body">
+<pre class="r"><code>
+df4[, .(iqGrandMean = mean(iq, na.rm = T),
+        iqSD = sd(iq, na.rm = T),
+        gradesGrandMean = mean(grades, na.rm = T),
+        gradesSD = sd(grades, na.rm = T))]</code></pre>
+<pre><code>
+Source: local data table [1 x 4]
+
+# A tibble: 1 x 4
+  iqGrandMean  iqSD gradesGrandMean gradesSD
+        &lt;dbl&gt; &lt;dbl&gt;           &lt;dbl&gt;    &lt;dbl&gt;
+1        109.  10.1            53.7     18.4</code></pre>
+</div>
+<p>Extra stuff…</p>
+<div class="layout-chunk" data-layout="l-body">
+<pre class="r"><code>
+df4[, lm(formula = grades ~ iq)] # fit linear regression (lm), y predicted by x (grades predicted by iq) </code></pre>
+<pre><code>
+Call:
+lm(formula = grades ~ iq)
+
+Coefficients:
+(Intercept)           iq  
+   161.1355      -0.9821  </code></pre>
+<pre class="r"><code>
+lm(formula = grades ~ iq, data = df4) # standard way to fit regression models</code></pre>
+<pre><code>
+Call:
+lm(formula = grades ~ iq, data = df4)
+
+Coefficients:
+(Intercept)           iq  
+   161.1355      -0.9821  </code></pre>
+</div>
+<p>Again, note the negative relationship between iq and grades. We’ll explore why in future tutorials.</p>
+<p>The point here is to show how powerful <code>j</code> is in <code>data.table</code>. You can’t use this syntax if your object is not a <code>data.table</code>.</p>
+<div class="layout-chunk" data-layout="l-body">
+<pre class="r"><code>
+df4[, summary(lm(formula = grades ~ iq))] # more extensive output</code></pre>
+<pre><code>
+Call:
+lm(formula = grades ~ iq)
+
+Residuals:
+    Min      1Q  Median      3Q     Max 
+-28.715 -12.841  -0.248  11.661  32.779 
+
+Coefficients:
+            Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept) 161.1355    27.5316   5.853 9.07e-07 ***
+iq           -0.9821     0.2506  -3.919 0.000359 ***
+---
+Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+
+Residual standard error: 15.74 on 38 degrees of freedom
+Multiple R-squared:  0.2878,    Adjusted R-squared:  0.2691 
+F-statistic: 15.36 on 1 and 38 DF,  p-value: 0.0003592</code></pre>
+<pre class="r"><code>
+# summary(lm(formula = grades ~ iq, data = df4)) # standard way to fit regression models</code></pre>
+</div>
+<p>Or you can use functions written by me to generate American Psychological Association formatted output. To use those functions, run <code>source(&quot;https://raw.githubusercontent.com/hauselin/Rcode/master/summaryh.R&quot;)</code> just once per script. After you’ve run this line of code, you’ll have access to the <code>summaryh()</code> function. For more information, see <a href="https://github.com/hauselin/Rcode">here</a>.</p>
+<div class="layout-chunk" data-layout="l-body">
+<pre class="r"><code>
+source(&quot;https://raw.githubusercontent.com/hauselin/Rcode/master/summaryh.R&quot;)</code></pre>
+<pre><code>
+d: 0.20 (small), 0.50 (medium), .80 (large) (Cohen, 1992)
+r: .10 (small), .30 (medium), .50 (large) (Cohen, 1992)
+R2: .02 (small), .13 (medium), .26 (large) (Cohen, 1992)</code></pre>
+<pre class="r"><code>
+df4[, summaryh(lm(formula = grades ~ iq))] # summaryh function gives you APA-format results and effect size estimates</code></pre>
+<pre><code>
+Source: local data table [2 x 2]
+
+# A tibble: 2 x 2
+  term        results                                                 
+  &lt;chr&gt;       &lt;chr&gt;                                                   
+1 (Intercept) b = 161.14, SE = 27.53, t(38) = 5.85, p &lt; .001, r = 0.69
+2 iq          b = −0.98, SE = 0.25, t(38) = −3.92, p &lt; .001, r = 0.54 </code></pre>
+<pre class="r"><code>
+# summaryh(lm(formula = grades ~ iq, data = df4)) # standard way to fit regression models</code></pre>
+</div>
+<h3 id="compute-summary-statistics-and-apply-functions-to-j-by-groups">Compute summary statistics and apply functions to j by groups</h3>
+<p>What if we want the mean iq and grades for each class? Here is where <code>data.table</code> is much more concise than <code>dplyr</code> and <code>tidyverse</code>.</p>
+<p><code>data.table</code> syntax</p>
+<div class="layout-chunk" data-layout="l-body">
+<pre class="r"><code>
+df4[, .(iqMean = mean(iq, na.rm = T)), by = class]</code></pre>
+<pre><code>
+Source: local data table [4 x 2]
+
+# A tibble: 4 x 2
+  class iqMean
+  &lt;chr&gt;  &lt;dbl&gt;
+1 a       97.1
+2 b      105. 
+3 c      114. 
+4 d      122. </code></pre>
+<pre class="r"><code>
+df4[, .(iqMean = mean(iq, na.rm = T)), class] # also works</code></pre>
+<pre><code>
+Source: local data table [4 x 2]
+
+# A tibble: 4 x 2
+  class iqMean
+  &lt;chr&gt;  &lt;dbl&gt;
+1 a       97.1
+2 b      105. 
+3 c      114. 
+4 d      122. </code></pre>
+</div>
+<p><code>dplyr</code> syntax</p>
+<div class="layout-chunk" data-layout="l-body">
+<pre class="r"><code>
+df4 %&gt;%
+    group_by(class) %&gt;% 
+    summarize(iqMean = mean(iq, na.rm = T))</code></pre>
+<pre><code>
+Source: local data table [4 x 2]
+
+# A tibble: 4 x 2
+  class iqMean
+  &lt;chr&gt;  &lt;dbl&gt;
+1 a       97.1
+2 b      105. 
+3 c      114. 
+4 d      122. </code></pre>
+</div>
+<p>Summarize by class and gender</p>
+<div class="layout-chunk" data-layout="l-body">
+<pre class="r"><code>
+df4[, .(iqMean = mean(iq, na.rm = T)), by = .(class, gender)]</code></pre>
+<pre><code>
+Source: local data table [8 x 3]
+
+# A tibble: 8 x 3
+  class gender iqMean
+  &lt;chr&gt; &lt;chr&gt;   &lt;dbl&gt;
+1 a     male     96.6
+2 a     female   98.2
+3 b     female  104. 
+4 b     male    106. 
+5 c     male    113. 
+6 c     female  114. 
+7 d     male    121. 
+8 d     female  123. </code></pre>
+<pre class="r"><code>
+df4[, .(iqMean = mean(iq, na.rm = T)), keyby = .(gender, class)] # summarize and sort/arrange by class then gender</code></pre>
+<pre><code>
+Source: local data table [8 x 3]
+
+# A tibble: 8 x 3
+  gender class iqMean
+  &lt;chr&gt;  &lt;chr&gt;  &lt;dbl&gt;
+1 female a       98.2
+2 female b      104. 
+3 female c      114. 
+4 female d      123. 
+5 male   a       96.6
+6 male   b      106. 
+7 male   c      113. 
+8 male   d      121. </code></pre>
+</div>
+<p>Summarize by booleans</p>
+<div class="layout-chunk" data-layout="l-body">
+<pre class="r"><code>
+df4[, .(iqMean = mean(iq, na.rm = T)), by = .(gender == &quot;male&quot;)]</code></pre>
+<pre><code>
+Source: local data table [2 x 2]
+
+# A tibble: 2 x 2
+  gender iqMean
+  &lt;lgl&gt;   &lt;dbl&gt;
+1 TRUE     107.
+2 FALSE    111.</code></pre>
+<pre class="r"><code>
+df4[, .(iqMean = mean(iq, na.rm = T)), by = .(gender == &quot;male&quot;, class == &quot;a&quot;)]</code></pre>
+<pre><code>
+Source: local data table [4 x 3]
+
+# A tibble: 4 x 3
+  gender class iqMean
+  &lt;lgl&gt;  &lt;lgl&gt;  &lt;dbl&gt;
+1 TRUE   TRUE    96.6
+2 FALSE  TRUE    98.2
+3 FALSE  FALSE  113. 
+4 TRUE   FALSE  114. </code></pre>
+</div>
+<p>Combining pipes with <code>data.table</code> and <code>ggplot</code></p>
+<div class="layout-chunk" data-layout="l-body">
+<pre class="r"><code>
+df4[, .(iqMean = mean(iq, na.rm = T)), .(class, gender)] %&gt;% # compute class/gender mean
+    ggplot(aes(class, iqMean, col = gender)) + # plot mean values
+    geom_point(position = position_dodge(0.5)) # plot points and dodge points to avoid overlapping</code></pre>
+<p><img src="0002_tidyverse_datatable_files/figure-html5/unnamed-chunk-76-1.png" width="624" /></p>
+</div>
+<p>Extra cool stuff again…</p>
+<ul>
+<li>Fit model to entire dataset (grades ~ iq) and use summaryh to summarize model results</li>
+</ul>
+<div class="layout-chunk" data-layout="l-body">
+<pre class="r"><code>
+df4[, summaryh(lm(grades ~ iq))] </code></pre>
+<pre><code>
+Source: local data table [2 x 2]
+
+# A tibble: 2 x 2
+  term        results                                                 
+  &lt;chr&gt;       &lt;chr&gt;                                                   
+1 (Intercept) b = 161.14, SE = 27.53, t(38) = 5.85, p &lt; .001, r = 0.69
+2 iq          b = −0.98, SE = 0.25, t(38) = −3.92, p &lt; .001, r = 0.54 </code></pre>
+<pre class="r"><code>
+df4[, summaryh(lm(grades ~ iq)), by = class] # fit model to each class separately</code></pre>
+<pre><code>
+Source: local data table [8 x 3]
+
+# A tibble: 8 x 3
+  class term        results                                                   
+  &lt;chr&gt; &lt;chr&gt;       &lt;chr&gt;                                                     
+1 a     (Intercept) b = −239.52, SE = 210.07, t(8) = −1.14, p = .287, r = 0.37
+2 a     iq          b = 3.20, SE = 2.16, t(8) = 1.48, p = .177, r = 0.46      
+3 b     (Intercept) b = −105.91, SE = 137.69, t(8) = −0.77, p = .464, r = 0.26
+4 b     iq          b = 1.56, SE = 1.32, t(8) = 1.18, p = .271, r = 0.39      
+5 c     (Intercept) b = −29.07, SE = 129.22, t(8) = −0.22, p = .828, r = 0.08 
+6 c     iq          b = 0.68, SE = 1.14, t(8) = 0.60, p = .568, r = 0.21      
+7 d     (Intercept) b = −301.13, SE = 165.25, t(8) = −1.82, p = .106, r = 0.54
+8 d     iq          b = 2.78, SE = 1.35, t(8) = 2.06, p = .074, r = 0.59      </code></pre>
+<pre class="r"><code>
+df4[, tidy(lm(grades ~ iq)), by = class] # another way to summarize model output</code></pre>
+<pre><code>
+Source: local data table [8 x 6]
+
+# A tibble: 8 x 6
+  class term        estimate std.error statistic p.value
+  &lt;chr&gt; &lt;chr&gt;          &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;   &lt;dbl&gt;
+1 a     (Intercept) -240.       210.      -1.14   0.287 
+2 a     iq             3.20       2.16     1.48   0.177 
+3 b     (Intercept) -106.       138.      -0.769  0.464 
+4 b     iq             1.56       1.32     1.18   0.271 
+5 c     (Intercept)  -29.1      129.      -0.225  0.828 
+6 c     iq             0.677      1.14     0.595  0.568 
+7 d     (Intercept) -301.       165.      -1.82   0.106 
+8 d     iq             2.78       1.35     2.06   0.0737</code></pre>
+</div>
+<p>What we fit just one model to all the data (all 40 rows), what’s the relationship between iq and grades? Positive or negative?</p>
+<p>And what happens when we fit the model to each class separately, what’s the relationship between iq and grades? Positive or negative? We’ll explore these relationships in depth in future tutorials.</p>
+<h3 id="creating-new-variablescolumns-and-reassigning-in-data.tables-with">Creating new variables/columns and reassigning in data.tables with <code>:=</code></h3>
+<div class="layout-chunk" data-layout="l-body">
+<pre class="r"><code>
+df4[, class := toupper(class)] # convert to upper case
+df4[, class := tolower(class)] # convert to lower case
+df4[, sex := gender] # make a copy of column
+# same as df4$sex &lt;- df4$gender
+df4[, sex := substr(sex, 1, 1)] # take only first character
+# same as df4$sex &lt;- substr(df4$sex, 1, 1)
+df4[, iqCopy := iq]
+df4[iqCopy &lt; 100, iqCopy := NA] # convert values less than 100 to NA
+df4[is.na(iqCopy)] # filter via i (show only rows where iqCopy is NA)</code></pre>
+<pre><code>
+Source: local data table [8 x 6]
+
+# A tibble: 8 x 6
+     iq grades class gender sex   iqCopy
+  &lt;dbl&gt;  &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt;  &lt;chr&gt;  &lt;dbl&gt;
+1  94.5   67.9 a     male   m         NA
+2  95.4   82.5 a     male   m         NA
+3  97.8   69.1 a     male   m         NA
+4  98.1   83.3 a     male   m         NA
+5  96.6   99.1 a     female f         NA
+6  97.1   47.9 a     female f         NA
+7  94.2   55.6 a     male   m         NA
+8  94.4   44.5 a     male   m         NA</code></pre>
+</div>
+<div class="layout-chunk" data-layout="l-body">
+<pre class="r"><code>
+df4[iqCopy == NA] # DOESN&#39;T WORK!!! use is.na()</code></pre>
+<pre><code>
+Source: local data table [0 x 6]
+
+# A tibble: 0 x 6
+# ... with 6 variables: iq &lt;dbl&gt;, grades &lt;dbl&gt;, class &lt;chr&gt;, gender &lt;chr&gt;,
+#   sex &lt;chr&gt;, iqCopy &lt;dbl&gt;</code></pre>
+</div>
+<p>Remove columns with <code>NULL</code></p>
+<div class="layout-chunk" data-layout="l-body">
+<pre class="r"><code>
+df4[, iqCopy := NULL]
+# same as df4$iqCopy &lt;- NULL
+df4[, sex := NULL]</code></pre>
+</div>
+<h3 id="renaming-with-setnames">Renaming with <code>setnames()</code></h3>
+<p>You don’t need to reassign with &lt;- if you use <code>setnames()</code>!</p>
+<div class="layout-chunk" data-layout="l-body">
+<pre class="r"><code>
+setnames(df4, &quot;iq&quot;, &quot;intelligence&quot;) # setnames(datatable, oldname, newname)
+setnames(df4, c(&quot;intelligence&quot;, &quot;scores&quot;, &quot;classroom&quot;, &quot;sex&quot;)) # rename all variables</code></pre>
+</div>
+<h2 id="more-data.table-information">More <code>data.table</code> information</h2>
+<p>For more <code>data.table</code> information and tips and tricks, google for them…</p>
+<ul>
+<li><a href="https://cran.r-project.org/web/packages/data.table/vignettes/datatable-intro.html">tutorial/vignette</a></li>
+<li><a href="https://cran.r-project.org/web/packages/data.table/data.table.pdf">official documentation</a></li>
+</ul>
+<!--radix_placeholder_article_footer-->
+<!--/radix_placeholder_article_footer-->
+</div>
+
+<div class="d-appendix">
+</div>
+
+
+<!--radix_placeholder_site_after_body-->
+<!--/radix_placeholder_site_after_body-->
+<!--radix_placeholder_appendices-->
+<div class="appendix-bottom"></div>
+<!--/radix_placeholder_appendices-->
+<!--radix_placeholder_navigation_after_body-->
+<!--/radix_placeholder_navigation_after_body-->
+
+</body>
+
+</html>
