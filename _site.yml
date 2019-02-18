@@ -1,0 +1,16 @@
+name: "rtutorials"
+title: "rtutorials"
+description: |
+  rtutorials
+output_dir: "docs"
+navbar:
+  right:
+    - text: "Home"
+      href: index.html
+    - text: "About"
+      href: about.html
+    - text: "Tutorials"
+      menu:
+        - text: "R programming basics"
+          href: 0001_rbasics.html
+output: radix::radix_article
