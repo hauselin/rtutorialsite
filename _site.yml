@@ -31,6 +31,8 @@ navbar:
       href: https://twitter.com/hauselin
     - icon: fab fa-github
       href: https://github.com/hauselin/rtutorialsite
+    - icon: fab fa-google
+      href: https://scholar.google.ca/citations?user=4_ZopI0AAAAJ&hl=en
     - icon: fa fa-rss
       href: articles.xml
 collections:
