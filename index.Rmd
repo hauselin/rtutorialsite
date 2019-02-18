@@ -9,6 +9,7 @@ site: radix::radix_website
 
 [Effect size converter (Shiny app)](https://hause.shinyapps.io/shinyapp_effectsize/)
 
+
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = FALSE)
 
@@ -19,4 +20,3 @@ knitr::opts_chunk$set(echo = FALSE)
 # https://rstudio.github.io/radix/publish_website.html#github-pages
 
 ```
-

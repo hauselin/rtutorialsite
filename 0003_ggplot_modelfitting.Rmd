@@ -1,0 +1,747 @@
+---
+title: "ggplot and model fitting"
+description: Plotting with ggplot and fitting statistical models
+output:
+    radix::radix_article:
+        toc: true
+        toc_depth: 3
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE,
+                      R.options = list(width = 80),
+                      tidy = TRUE,
+                      tidy.opts = list(width.cutoff = 80))
+```
+
+
+```{r wrap-hook, include=FALSE}
+# function that adds knitr parameter to control line width
+# https://github.com/yihui/knitr-examples/blob/master/077-wrap-output.Rmd
+library(knitr)
+hook_output = knit_hooks$get('output')
+knit_hooks$set(output = function(x, options) {
+  # this hook is used only when the linewidth option is not NULL
+  if (!is.null(n <- options$linewidth)) {
+    x = knitr:::split_lines(x)
+    # any lines wider than n should be wrapped
+    if (any(nchar(x) > n)) x = strwrap(x, width = n)
+    x = paste(x, collapse = '\n')
+  }
+  hook_output(x, options)
+})
+```
+
+## Load packages/libraries
+
+Use `library()` to load packages at the top of each R script.
+
+```{r loading packages, results="hide", message=FALSE, warning=FALSE}
+library(tidyverse); library(data.table); library(broom); library(dtplyr); 
+library(lme4); library(lmerTest); library(ggbeeswarm); library(cowplot)
+library(hausekeep)
+```
+
+
+## Read data from folder/directory into R
+
+```{r}
+df1 <- tbl_dt(fread("data/simpsonsParadox.csv")) # data.table
+print(df1, n = Inf)
+glimpse(df1)
+```
+
+## `ggplot2` basics: layering
+
+`ggplot2` produces figures by adding layers one at a time. New layers are added using the + sign. The first line is the first/bottom-most layer, and second line is on top of the bottom layer, and third line is on top of the second layer, and the last line of code is the top-most layer.
+
+See [official documentation here](http://ggplot2.tidyverse.org/).
+
+Note: ggplot prefers long-form (tidy) data.
+
+### Layer 1: specify data object, axes, and grouping variables
+
+Use `ggplot` function (not `ggplot2`, which is the name of the library, not a function!). Plot iq on x-axis and grades on y-axis.
+
+```{r}
+ggplot(data = df1, aes(x = iq, y = grades)) # see Plots panel (empty plot with correct axis labels)
+```
+
+### Subsequent layers: add data points and everything else
+
+```{r}
+ggplot(df1, aes(iq, grades)) + # also works without specifying data, x, and y
+    geom_point() # add points
+```
+
+Each time you want to know more about a `ggplot2` function, google **ggplot2 function_name** to see official documentation and examples and learn those examples! That's usually how we plot figures. Even [Hadley Wickham](http://hadley.nz/), the creator of `tidyverse` and many many cool things in R refers to his own online documentations all the time. There are way too many things for everyone to remember, and we usually just look them up on the internet whenever we need to use them (e.g., google **ggplot2 geom point**).
+
+You'll use `geom_point()` most frequently to add points to your plots. Check out the official documentation for `geom_point` [here](http://ggplot2.tidyverse.org/reference/geom_point.html).
+
+```{r}
+ggplot(df1, aes(iq, grades)) + 
+    geom_point(size = 8, col = 'green') + # change size and colour
+    labs(y = "Exam grades (0 to 100)", x = "Intelligence (IQ)") # rename axes
+```
+
+```{r}
+ggplot(df1, aes(iq, grades)) + 
+    geom_point(size = 3, col = 'blue') + # change size and colour
+    labs(y = "Exam grades (0 to 100)", x = "Intelligence (IQ)") + # rename axes
+    scale_y_continuous(limits = c(0, 100), breaks = c(0, 20, 40, 60, 80, 100)) + # y axis limits/range (0, 100), break points
+    scale_x_continuous(limits = c(90, 130)) # x axis limits/range
+```
+
+## Save the plot as an object
+
+```{r}
+plot1 <- ggplot(df1, aes(iq, grades)) + 
+    geom_point(size = 3, col = 'red') + # change size and colour
+    labs(y = "Exam grades (0 to 100)", x = "Intelligence (IQ)") + # rename axes
+    scale_y_continuous(limits = c(0, 100), breaks = c(0, 20, 40, 60, 80, 100)) + # y axis limits/range (0, 100), break points
+    scale_x_continuous(limits = c(90, 130)) # x axis limits/range
+plot1 # print plot
+```
+
+## Save a plot to your directory
+
+Save to Figures directory, assuming this directory/folder already exists. You can also change the width/height of your figure and dpi (resolution/quality) of your figure (journals usually expect around 300 dpi).
+
+```{r, eval=F}
+ggsave(plot1, './Figures/iq_grades.png', width = 10, heigth = 10, dpi = 100)
+```
+
+
+## Add line of best fit
+
+```{r}
+plot1 + 
+    geom_smooth() # fit line to data (defaults loess smoothing)
+```
+
+Same as above 
+
+```{r}
+ggplot(df1, aes(iq, grades)) + 
+    geom_point(size = 3, col = 'red') + # change size and colour
+    labs(y = "Exam grades (0 to 100)", x = "Intelligence (IQ)") + # rename axes
+    scale_y_continuous(limits = c(0, 100), breaks = c(0, 20, 40, 60, 80, 100)) + # y axis limits/range (0, 100), break points
+    scale_x_continuous(limits = c(90, 130)) + # x axis limits/range 
+    geom_smooth()
+```
+
+Note that the smooth (i.e., the line of best fit) is on top of the dots, because of layering. Let's add the line first, then use `geom_point()`. What do you think will happen?
+
+```{r}
+ggplot(df1, aes(iq, grades)) + 
+    geom_smooth(size = 2) +
+    geom_point(size = 3, col = 'red') + # change size and colour
+    labs(y = "Exam grades (0 to 100)", x = "Intelligence (IQ)", title = 'Changed layers') + # rename axes
+    scale_y_continuous(limits = c(0, 100), breaks = c(0, 20, 40, 60, 80, 100)) + # y axis limits/range (0, 100), break points
+    scale_x_continuous(limits = c(90, 130))# x axis limits/range 
+```
+
+Note that now the points are above the line. Also, I've added a title via the `labs()` line.
+
+```{r}
+ggplot(df1, aes(iq, grades)) + 
+    geom_point(size = 3, col = 'red') + # change size and colour
+    labs(y = "Exam grades (0 to 100)", x = "Intelligence (IQ)") + # rename axes
+    scale_y_continuous(limits = c(0, 100), breaks = c(0, 20, 40, 60, 80, 100)) + # y axis limits/range (0, 100), break points
+    scale_x_continuous(limits = c(90, 130)) + # x axis limits/range 
+    geom_smooth(method = 'lm', se = F, col = 'black') # fit linear regression line, remove standard error, black line
+```
+
+Why is IQ negatively correlated with grades?
+
+## Grouping
+
+### Use `col` to specify grouping variable
+
+Note what's new in the first line/layer to add grouping. 
+
+```{r}
+ggplot(df1, aes(iq, grades, col = class)) + 
+    geom_point(size = 3) + # change size and colour
+    labs(y = "Exam grades (0 to 100)", x = "Intelligence (IQ)") + # rename axes
+    scale_y_continuous(limits = c(0, 100), breaks = c(0, 20, 40, 60, 80, 100)) + # y axis limits/range (0, 100), break points
+    scale_x_continuous(limits = c(90, 130)) + # x axis limits/range 
+    geom_smooth(method = 'lm', se = F) # fit linear regression line 
+```
+
+`ggplot(df1, aes(iq, grades, col = class))` specifies the data to plot `df1`, x-axis `iq`, y-axis `grades`, and to give different colours to different groups `col = class`, where `class` refers to the grouping variable in the dataset.
+
+What is the relationship between IQ and grades within each class now? What happened?!?
+
+### Use `shape` to specify grouping variable
+
+```{r}
+ggplot(df1, aes(iq, grades, shape = class)) + 
+    geom_point(size = 3) + # change size and colour
+    labs(y = "Exam grades (0 to 100)", x = "Intelligence (IQ)") + # rename axes
+    scale_y_continuous(limits = c(0, 100), breaks = c(0, 20, 40, 60, 80, 100)) + # y axis limits/range (0, 100), break points
+    scale_x_continuous(limits = c(90, 130)) + # x axis limits/range 
+    geom_smooth(method = 'lm', se = F) # fit linear regression line 
+```
+
+### Adding an overall line of best fit while ignoring class
+
+```{r}
+ggplot(df1, aes(iq, grades, col = class)) + 
+    geom_point(size = 3) + # change size and colour
+    labs(y = "Exam grades (0 to 100)", x = "Intelligence (IQ)") + # rename axes
+    scale_y_continuous(limits = c(0, 100), breaks = c(0, 20, 40, 60, 80, 100)) + # y axis limits/range (0, 100), break points
+    scale_x_continuous(limits = c(90, 130)) + # x axis limits/range 
+    geom_smooth(method = 'lm', se = F, aes(group = 1)) # fit linear regression line 
+```
+
+### Adding an overall line of best fit AND separate lines for each group
+
+```{r}
+plot2 <- ggplot(df1, aes(iq, grades, col = class)) + 
+    geom_point(size = 3) + # change size and colour
+    labs(y = "Exam grades (0 to 100)", x = "Intelligence (IQ)") + # rename axes
+    scale_y_continuous(limits = c(0, 100), breaks = c(0, 20, 40, 60, 80, 100)) + # y axis limits/range (0, 100), break points
+    scale_x_continuous(limits = c(90, 130)) + # x axis limits/range 
+    geom_smooth(method = 'lm', se = F) + # fit linear regression line 
+    geom_smooth(method = 'lm', se = F, aes(group = 1))
+plot2
+```
+
+[Simpson's paradox](https://en.wikipedia.org/wiki/Simpson%27s_paradox): Negative overall relationship, but positive relationship within each class.
+
+## Plotting histograms, boxplots, and violinplots
+
+Histogram
+
+```{r}
+ggplot(df1, aes(iq)) +
+    geom_histogram()
+```
+
+Specifying binwidth
+
+```{r}
+ggplot(df1, aes(iq)) +
+    geom_histogram(binwidth = 5)
+```
+
+Density plot
+
+```{r}
+ggplot(df1, aes(iq)) +
+    geom_density()
+```
+
+Boxplot for each class
+
+```{r}
+ggplot(df1, aes(class, grades)) +
+    geom_boxplot()
+```
+
+Violinplot for each class
+
+```{r}
+ggplot(df1, aes(class, grades)) +
+    geom_violin()
+```
+
+Layering and colouring plots
+
+```{r}
+ggplot(df1, aes(class, grades, col = class)) +
+    geom_violin() +
+    geom_boxplot() +
+    geom_point()
+```
+
+## Distribution of points with `geom_quasirandom()`
+
+An alternative that I prefer more than both boxplots and violin plots: `geom_quasirandom()` from the `ggbeeswarm` package. See [here](https://github.com/eclarke/ggbeeswarm) for more information.
+
+`geom_quasirandom()` extends `geom_point()` by showing the distribution information at the same time. It basically combines all the good things in `geom_boxplot`, `geom_violin`, `geom_point` and `geom_histogram`.
+
+```{r}
+ggplot(df1, aes(class, grades, col = class)) +
+    geom_quasirandom()
+```
+
+```{r}
+df1$overallClass <- "one_class" # create variable that assigns everyone to one class
+# df1[, overallClass := "one_class"] # data.table syntax for the line above
+```
+
+`geom_quasirandom` shows distribution information!
+
+```{r}
+ggplot(df1, aes(overallClass, grades)) + # y: grades
+    geom_quasirandom()
+```
+
+```{r}
+ggplot(df1, aes(overallClass, iq)) + # y: iq
+    geom_quasirandom() +
+    labs(x = "") # remove x-axis label (compare with above)
+```
+
+## Summary statistics with ggplot2
+
+`stat_summary()` can quickly help you compute summary statistics and plot them. If you get a warning message about Hmisc package, just install that package using `install.packages('Hmisc')` and then `library(Hmisc)`
+
+```{r}
+ggplot(df1, aes(class, iq)) + # y: iq
+    geom_quasirandom(alpha = 0.3) +
+    stat_summary(fun.y = mean, geom = 'point', size = 3) + # apply mean function to y axis (fun.y = mean)
+    stat_summary(fun.data = mean_cl_normal, geom = 'errorbar', width = 0, size = 1) # apply mean_cl_normal function to data
+```
+
+## Facets for grouping: `facet_wrap()` and `facet_grid()`
+
+Randomly assign gender to each row (see previous tutorial for detailed explanation of the code below)
+
+```{r}
+df1$gender <- sample(x = c("female", "male"), size = 40, replace = T)
+```
+
+Code from before
+
+```{r}
+ggplot(df1, aes(iq, grades)) + 
+    geom_point(size = 3) + # change size and colour
+    labs(y = "Exam grades (0 to 100)", x = "Intelligence (IQ)") + # rename axes
+    scale_y_continuous(limits = c(0, 100), breaks = c(0, 20, 40, 60, 80, 100)) + # y axis limits/range (0, 100), break points
+    scale_x_continuous(limits = c(90, 130)) + # x axis limits/range 
+    geom_smooth(method = 'lm', se = F)
+```
+
+Using facets instead of `col = class`. See the last line of code `facet_wrap()`.
+
+`facet_wrap()`: one facet per class
+
+```{r}
+ggplot(df1, aes(iq, grades)) + 
+    geom_point(size = 2) + # change size and colour
+    labs(y = "Exam grades (0 to 100)", x = "Intelligence (IQ)") + # rename axes
+    scale_y_continuous(limits = c(0, 100), breaks = c(0, 20, 40, 60, 80, 100)) + # y axis limits/range (0, 100), break points
+    scale_x_continuous(limits = c(90, 130)) + # x axis limits/range 
+    geom_smooth(method = 'lm', se = F) +
+    facet_wrap(~class) # one facet per class
+```
+
+`facet_wrap()`: one facet per class and gender
+
+```{r}
+ggplot(df1, aes(iq, grades)) + 
+    geom_point(size = 2) + # change size and colour
+    labs(y = "Exam grades (0 to 100)", x = "Intelligence (IQ)") + # rename axes
+    scale_y_continuous(limits = c(0, 100), breaks = c(0, 20, 40, 60, 80, 100)) + # y axis limits/range (0, 100), break points
+    scale_x_continuous(limits = c(90, 130)) + # x axis limits/range 
+    geom_smooth(method = 'lm', se = F) +
+    facet_wrap(class~gender) # one facet per class and gender
+```
+
+`facet_grid()`: one facet per gender
+
+```{r}
+ggplot(df1, aes(iq, grades)) + 
+    geom_point(size = 2) + # change size and colour
+    labs(y = "Exam grades (0 to 100)", x = "Intelligence (IQ)") + # rename axes
+    scale_y_continuous(limits = c(0, 100), breaks = c(0, 20, 40, 60, 80, 100)) + # y axis limits/range (0, 100), break points
+    scale_x_continuous(limits = c(90, 130)) + # x axis limits/range 
+    geom_smooth(method = 'lm', se = F) +
+    facet_grid(.~gender) # one facet per gender
+```
+
+`facet_grid()`: one facet per gender
+
+```{r}
+ggplot(df1, aes(iq, grades)) + 
+    geom_point(size = 2) + # change size and colour
+    labs(y = "Exam grades (0 to 100)", x = "Intelligence (IQ)") + # rename axes
+    scale_y_continuous(limits = c(0, 100), breaks = c(0, 20, 40, 60, 80, 100)) + # y axis limits/range (0, 100), break points
+    scale_x_continuous(limits = c(90, 130)) + # x axis limits/range 
+    geom_smooth(method = 'lm', se = F) +
+    facet_grid(gender~.) # one facet per gender
+```
+
+`facet_grid()`: one facet per class and gender
+
+```{r}
+ggplot(df1, aes(iq, grades)) + 
+    geom_point(size = 2) + # change size and colour
+    labs(y = "Exam grades (0 to 100)", x = "Intelligence (IQ)") + # rename axes
+    scale_y_continuous(limits = c(0, 100), breaks = c(0, 20, 40, 60, 80, 100)) + # y axis limits/range (0, 100), break points
+    scale_x_continuous(limits = c(90, 130)) + # x axis limits/range 
+    geom_smooth(method = 'lm', se = F) +
+    facet_grid(gender~class) # one facet per gender
+```
+
+`facet_grid()`: one facet per class and gender
+
+Add variable name
+
+```{r}
+ggplot(df1, aes(iq, grades)) + 
+    geom_point(size = 2) + # change size and colour
+    labs(y = "Exam grades (0 to 100)", x = "Intelligence (IQ)") + # rename axes
+    scale_y_continuous(limits = c(0, 100), breaks = c(0, 20, 40, 60, 80, 100)) + # y axis limits/range (0, 100), break points
+    scale_x_continuous(limits = c(90, 130)) + # x axis limits/range 
+    geom_smooth(method = 'lm', se = F) +
+    facet_grid(gender~class, labeller = label_both) # one facet per gender
+```
+
+## Fitting linear models (general linear model framework)
+
+Fit a model to this this relationship
+
+```{r}
+ggplot(df1, aes(iq, grades)) + 
+    geom_point() +
+    labs(y = "Exam grades (0 to 100)", x = "Intelligence (IQ)") + # rename axes
+    scale_y_continuous(limits = c(0, 100), breaks = c(0, 20, 40, 60, 80, 100)) + # y axis limits/range (0, 100), break points
+    scale_x_continuous(limits = c(90, 130)) + # x axis limits/range 
+    geom_smooth(method = 'lm', se = F, col = 'black') # fit linear regression line, remove standard error, black line
+```
+
+### Model specification in R
+
+* most model fitting functions prefer long-form data (aka tidy data)
+* ~ is the symbol for "prediction" (read: "predicted by")
+* y ~ x: y predicted by x (y is outcome/dependent variable, x is predictor/independent variable)
+* `lm(y ~ x, data)` is the most commonly-used and flexible function (linear model)
+* covariates and predictors are specified in the same way (unlike SPSS)
+
+Test the relationship in the plot above
+
+```{r}
+modelLinear <- lm(formula = iq ~ grades, data = df1)
+summary(modelLinear) # get model results and p values
+summaryh(modelLinear) # generates APA-formmatted results
+```
+
+Note the significant negative relationship between iq and grades.
+
+Since we know that class "moderates" the effect between iq and grades, let's "control" for class by adding `class` into the model specification.
+
+```{r}
+ggplot(df1, aes(iq, grades, col = class)) + 
+    geom_point(size = 3) + # change size and colour
+    labs(y = "Exam grades (0 to 100)", x = "Intelligence (IQ)") + # rename axes
+    scale_y_continuous(limits = c(0, 100), breaks = c(0, 20, 40, 60, 80, 100)) + # y axis limits/range (0, 100), break points
+    scale_x_continuous(limits = c(90, 130)) + # x axis limits/range 
+    geom_smooth(method = 'lm', se = F) + # fit linear regression line 
+    geom_smooth(method = 'lm', se = F, aes(group = 1))
+```
+
+Test the relationship above by "controlling" for class
+
+```{r}
+modelLinear_class <- lm(iq ~ grades + class, data = df1)
+summary(modelLinear_class) # get model results and p values
+summaryh(modelLinear_class)
+```
+
+Note the significantly positive relationship between iq and grades now.
+
+### Reference groups and releveling (changing reference group) 
+R automatically recodes categorical/factor variables into 0s and 1s (i.e., dummy-coding). Alphabets/letters/characters/numbers that come first (a comes before b) will be coded 0, and those that follow will be coded 1.
+
+In our case, class "a" has been coded 0 (reference group) and all other classes ("b", "c", "d") are contrasted against it, hence you have 3 other effects ("classb", "classc", "classd") that reflect the difference between class "a" and each of the other classes.
+
+To change reference group, use `as.factor()` and `relevel()`
+
+To change reference groups, you first have to convert your grouping variable to `factor` class, which explicitly tells R your variable is a categorical/factor variable. Then use `relevel()` to change the reference group. 
+
+```{r}
+df1$class <- relevel(as.factor(df1$class), ref = "d")
+levels(df1$class) # check reference levels (d is now the reference/first group)
+summaryh(lm(iq ~ grades + class, data = df1)) # quickly fit model and look at outcome (no assignment to object)
+```
+
+### Specify interactions
+
+* y predicted by x1, x2, and their interactions: y ~ x1 + x2 + x1:x2
+* concise expression: y ~ x1 * x2 (includes all main effects and interaction) 
+
+```{r}
+modelLinear_interact <- lm(iq ~ grades + class + grades:class, data = df1)
+summary(modelLinear_interact)
+summaryh(modelLinear_interact)
+```
+
+#### Intercept-only model
+
+R uses `1` to refer to the intercept
+
+```{r}
+modelLinear_intercept <- lm(iq ~ 1, data = df1) # mean iq
+summaryh(modelLinear_intercept)
+df1[, mean(iq)] # matches the intercept term
+mean(df1$iq) # same as above
+```
+
+Remove intercept from model (if you ever need to do so...) by specifying `-1`
+
+```{r}
+modelLinear_noIntercept <- lm(iq ~ grades - 1, data = df1) # substract intercept
+summary(modelLinear_noIntercept)
+summaryh(modelLinear_noIntercept)
+```
+
+### Fitting ANOVA with `anova` and `aov`
+
+By default, R uses Type I sum of squares. 
+
+Let's test this model with ANOVA. 
+
+```{r}
+ggplot(df1, aes(class, iq)) + # y: iq
+    geom_quasirandom(alpha = 0.3) +
+    stat_summary(fun.y = mean, geom = 'point', size = 3) + # apply mean function to y axis (fun.y = mean)
+    stat_summary(fun.data = mean_cl_normal, geom = 'errorbar', width = 0, size = 1) # apply mean_cl_normal function to data
+```
+
+Note that class d comes first because we releveled it earlier on (we changed the reference group to d).
+
+Fit ANOVA with `aov()`
+
+```{r}
+anova_class <- aov(grades ~ class, data = df1)
+summary(anova_class)
+summaryh(anova_class)
+```
+
+Class * gender interaction (and main effects)
+
+```{r}
+ggplot(df1, aes(class, iq, col = gender)) + # y: iq
+    geom_quasirandom(alpha = 0.3, dodge = 0.5) +
+    stat_summary(fun.y = mean, geom = 'point', size = 3, position = position_dodge(0.5)) + 
+    stat_summary(fun.data = mean_cl_normal, geom = 'errorbar', 
+                 width = 0, size = 1, position = position_dodge(0.5))
+```
+
+```{r}
+anova_classGender <- aov(grades ~ class * gender, data = df1)
+summary(anova_classGender)
+summaryh(anova_classGender)
+```
+
+### Specify contrasts resources
+
+* [UCLA site](https://stats.idre.ucla.edu/r/library/r-library-contrast-coding-systems-for-categorical-variables/).
+* [another tutorial](https://rstudio-pubs-static.s3.amazonaws.com/65059_586f394d8eb84f84b1baaf56ffb6b47f.html)
+
+### Post-hoc tests resources
+
+* [UCLA site](https://stats.idre.ucla.edu/r/faq/how-can-i-do-post-hoc-pairwise-comparisons-in-r/)
+
+### Plotting and testing simple effects when you have interactions
+
+* `sjPlot` package: see [here](http://www.strengejacke.de/sjPlot/)
+* [more tutorial and packages](https://cran.r-project.org/web/packages/jtools/vignettes/interactions.html)
+
+### Fit t-test with `t.test()`
+
+Fit models for this figure
+
+```{r}
+ggplot(df1, aes(class, iq, col = gender)) + # y: iq
+    geom_quasirandom(alpha = 0.3, dodge = 0.5) +
+    stat_summary(fun.y = mean, geom = 'point', size = 3, position = position_dodge(0.5)) + 
+    stat_summary(fun.data = mean_cl_normal, geom = 'errorbar', 
+                 width = 0, size = 1, position = position_dodge(0.5))
+```
+
+Gender effect
+
+```{r}
+ttest_gender <- t.test(iq ~ gender, data = df1)
+ttest_gender
+summaryh(ttest_gender)
+```
+
+class a vs. class d
+
+```{r}
+ttest_classAD <- t.test(iq ~ class, data = df1[class %in% c("a", "d")]) # data.table subsetting
+ttest_classAD
+summaryh(ttest_classAD, showTable = T) # show all other effect sizes
+```
+
+### Multi-level (hierarchical) model with `lmer()` from the `lme4` package
+
+Rather than "control" for class when fitting models to test the relationship between iq and grades below, we can use multi-level models to specify nesting within the data. See [here](http://mfviz.com/hierarchical-models/) for beautiful visual introduction to multi-level models. 
+
+Another function is `nlme()` from the `lme` package. We use both `nlme()` and `lmer()`, depending on our needs. 
+
+```{r}
+ggplot(df1, aes(iq, grades, col = class)) + 
+    geom_point(size = 3) + # change size and colour
+    labs(y = "Exam grades (0 to 100)", x = "Intelligence (IQ)") + # rename axes
+    scale_y_continuous(limits = c(0, 100), breaks = c(0, 20, 40, 60, 80, 100)) + # y axis limits/range (0, 100), break points
+    scale_x_continuous(limits = c(90, 130)) + # x axis limits/range 
+    geom_smooth(method = 'lm', se = F) + # fit linear regression line 
+    geom_smooth(method = 'lm', se = F, aes(group = 1))
+```
+
+Model specification with `lmer()`
+
+* y ~ x (same as other models)
+* (1 | group): varying intercept (one intercept per group)
+* (1 + x | group): varying intercept and slope (one intercept and slope per group)
+
+#### Random intercept model (fixed slope)
+
+```{r}
+m_intercept <- lmer(grades ~ iq + (1 | class), data = df1)
+summary(m_intercept)
+summaryh(m_intercept)
+coef(m_intercept) # check coefficients for each class
+```
+
+By accounting for nesting within class, the relationship between iq and grades is positive!
+
+#### Random intercept and slope model
+
+```{r}
+m_interceptSlope <- lmer(grades ~ iq + (1 + iq | class), data = df1)
+summary(m_interceptSlope)
+summaryh(m_interceptSlope)
+coef(m_interceptSlope) # check coefficients for each class
+```
+
+#### Random slope model (fixed intercept)
+
+```{r}
+m_slope <- lmer(grades ~ iq + (0 + iq | class), data = df1)
+summary(m_slope)
+summaryh(m_slope)
+coef(m_slope) # check coefficients for each class
+```
+
+### More multi-level model resources
+
+* [what lmer (and lme) can do](https://github.com/clayford/LMEMInR/blob/master/lme4_cheat_sheet.Rmd)
+* [lmer cheatsheet on stackexchange](https://stats.stackexchange.com/questions/13166/rs-lmer-cheat-sheet)
+* [two/three level models](http://rpsychologist.com/r-guide-longitudinal-lme-lmer)
+
+## MANOVA
+
+Let's use a different dataset. `iris`, a famous dataset that comes with R. Type `?iris` in your console for more information about this dataset.
+
+```{r}
+irisDT <- tbl_dt(iris) # convert to data.table and tibble
+irisDT # wide form data
+```
+
+The dataset is in wide form. To visualize easily with `ggplot`, we need to convert it to long form (more on converting between forms) in future tutorials.
+
+```{r}
+gather(irisDT, meaureLength, length, -Species) %>% # convert from wide to long form
+    tbl_dt() %>% # convert to data.table and tibble
+    ggplot(aes(Species, length, col = meaureLength)) + # no need to specify data because of piping
+    geom_quasirandom(alpha = 0.3, dodge = 0.5) 
+    
+```
+
+MANOVA to test if species predicts length of sepal length and petal length?
+
+![Long to wide form](./Extra/sepalPetal.png)
+
+```{r}
+outcome <- cbind(irisDT$Sepal.Length, irisDT$Petal.Length) # cbind (column bind)
+manova_results <- manova(outcome ~ Species, data = iris)
+summary(manova_results) # manova results
+summary.aov(manova_results) # see which outcome variables differ
+```
+
+#### MANOVA resources
+
+* [link 1](https://rpubs.com/aaronsc32/manova)
+* [link 2](https://www.statmethods.net/stats/anova.html)
+* [link 3](http://www.sthda.com/english/wiki/manova-test-in-r-multivariate-analysis-of-variance)
+
+### Computing between- and within-subjects error bars (also between-within designs)
+
+Error bars for between- and within-subjects designs have to be calculated differently. There's much debate on how to compute within-subjects this properly...
+
+```{r}
+cw <- tbl_dt(ChickWeight) # convert built-in ChickWeight data to data.table and tibble
+```
+
+data information
+
+* ID variable: Chick (50 chicks)
+* outcome/dependent variable: weight (weight of Chick) (**within**-subjects variable)
+* predictor/indepedent variable: Diet (diet each Chick was assigned to) (**between**-subjects variable)
+
+```{r}
+cw # weight of 50 chicks are different times, on different diets
+cw[, unique(Time)] # time points
+cw[, n_distinct(Chick)] # no. of Chicks
+cw[, unique(Diet)] # Diets
+```
+
+#### Between-subject error bars
+
+Do different diets lead to different weights? Each chick is only assigned to one diet (rather than > 1 diet), so we can use between-subjects error bars (or confidence intervals).
+
+```{r}
+ggplot(cw, aes(Diet, weight)) +
+    geom_quasirandom(alpha = 0.3) + # this line plots raw data and can be omitted, depending on your plotting preferences
+    stat_summary(fun.y = mean, geom = 'point', size = 5) + # compute mean and plot
+    stat_summary(fun.data = mean_cl_normal, geom = 'errorbar', width = 0, size = 1) # compute between-sub confidence intervals
+```
+
+#### Within-subject error bars
+
+How does weight change over time (ignoring diet)? Each chick has multiple measurements of time, so we'll use within-subjects error bars, which we have to calculate ourselves. Use `seWithin()` from the `hausekeep` package to compute within-subjects error bars.
+
+```{r}
+cw_weight_withinEB <- seWithin(data = cw, measurevar = c("weight"), 
+                               withinvars = c("Time"), idvar = "Chick")
+```
+
+The output contains the mean weight at each time, number of values (N), standard deviation, standard error, and confidence interval (default 95% unless you change via the `conf.interval` argument). The output contains information you'll use for plotting with `ggplot`.
+
+Plot with within-subjects error bars
+
+```{r}
+ggplot(cw_weight_withinEB, aes(Time, weight)) +
+    geom_quasirandom(data = cw, alpha = 0.1) + # this line plots raw data and can be omitted, depending on your plotting
+    geom_point() + # add points
+    geom_errorbar(aes(ymin = weight - ci, ymax = weight + ci), width = 0) # ymin (lower bound), ymax (upper bound)
+```
+
+Note the second line `geom_quasirandom(data = cw, alpha = 0.1)` adds the raw data to the plot (hence `data = cw`). Depending your data structure and research questions, you might have to compute your "raw data" for the plot differently before specifying it in `geom_quasirandom()`.
+
+Plot with between-subjects error bars (WRONG but illustrative purposes)
+
+```{r}
+ggplot(cw, aes(Time, weight)) +
+    geom_quasirandom(alpha = 0.1) + # this line plots raw data and can be omitted, depending on your plotting preferences
+    stat_summary(fun.y = mean, geom = 'point') + # compute mean and plot
+    stat_summary(fun.data = mean_cl_normal, geom = 'errorbar', width = 0) # compute between-sub confidence intervals
+```
+
+#### Mixed (between-within) designs
+
+Let's investigate the effects of time (within-subjects) and diet (between-subjects) together.
+
+```{r}
+cw_weight_mixed <- seWithin(data = cw, measurevar = c("weight"), 
+                            betweenvars = c("Diet"), withinvars = c("Time"), 
+                            idvar = "Chick")
+```
+
+Now your summary output has an extra Diet column.
+
+```{r}
+ggplot(cw_weight_mixed, aes(Time, weight, col = as.factor(Diet))) + # Diet is numeric but we want it to be a factor/categorical variable
+    geom_quasirandom(data = cw, alpha = 0.3, dodge = 0.7) + # this line plots raw data and can be omitted, depending on your plotting
+    geom_point(position = position_dodge(0.7), size = 2.5) + # add points
+    geom_errorbar(aes(ymin = weight - ci, ymax = weight + ci), width = 0, position = position_dodge(0.7), size = 1) + # ymin (lower bound), ymax (upper bound)
+    labs(col = "Diet")
+```
