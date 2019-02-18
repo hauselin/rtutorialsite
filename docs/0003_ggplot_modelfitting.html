@@ -19,7 +19,7 @@
  <!--/radix_placeholder_import_source-->
 
   <!--radix_placeholder_meta_tags-->
-  <title>Data science with R for experimental psychologists: ggplot and model fitting</title>
+  <title>Data science with R: ggplot and model fitting</title>
   
   <meta property="description" itemprop="description" content="Plotting with ggplot and fitting statistical models"/>
   
@@ -27,15 +27,15 @@
   
   
   <!--  https://developers.facebook.com/docs/sharing/webmasters#markup -->
-  <meta property="og:title" content="Data science with R for experimental psychologists: ggplot and model fitting"/>
+  <meta property="og:title" content="Data science with R: ggplot and model fitting"/>
   <meta property="og:type" content="article"/>
   <meta property="og:description" content="Plotting with ggplot and fitting statistical models"/>
   <meta property="og:locale" content="en_US"/>
-  <meta property="og:site_name" content="Data science with R for experimental psychologists"/>
+  <meta property="og:site_name" content="Data science with R"/>
   
   <!--  https://dev.twitter.com/cards/types/summary -->
   <meta property="twitter:card" content="summary"/>
-  <meta property="twitter:title" content="Data science with R for experimental psychologists: ggplot and model fitting"/>
+  <meta property="twitter:title" content="Data science with R: ggplot and model fitting"/>
   <meta property="twitter:description" content="Plotting with ggplot and fitting statistical models"/>
   
   <!--/radix_placeholder_meta_tags-->
@@ -1288,11 +1288,10 @@
 <header class="header header--fixed" role="banner">
 <nav class="radix-site-nav radix-site-header">
 <div class="nav-left">
-<a href="index.html" class="title">Data science with R for experimental psychologists</a>
+<a href="index.html" class="title">Data science with R</a>
 </div>
 <div class="nav-right">
 <a href="index.html">Home</a>
-<a href="about.html">About</a>
 <a href="https://hause.shinyapps.io/shinyapp_effectsize/">Effect size converter</a>
 <div class="nav-dropdown">
 <button class="nav-dropbtn">
@@ -1306,6 +1305,16 @@ Tutorials
 <a href="0002_tidyverse_datatable.html">tidyverse and data.table</a>
 <a href="0003_ggplot_modelfitting.html">ggplot and model fitting</a>
 <a href="0004_dataform_join.html">long/wide form data and joining</a>
+</div>
+</div>
+<div class="nav-dropdown">
+<button class="nav-dropbtn">
+Articles
+ 
+<span class="down-arrow">&#x25BE;</span>
+</button>
+<div class="nav-dropdown-content">
+<a href="0000_install.html">Test article 1</a>
 </div>
 </div>
 <a href="https://github.com/hauselin/rtutorialsite">
@@ -2010,20 +2019,20 @@ ggplot(df1, aes(class, iq, col = gender)) + # y: iq
 anova_classGender &lt;- aov(grades ~ class * gender, data = df1)
 summary(anova_classGender)</code></pre>
 <pre><code>
-             Df Sum Sq Mean Sq F value  Pr(&gt;F)    
-class         3   5821  1940.4   9.083 0.00017 ***
-gender        1     13    12.6   0.059 0.80956    
-class:gender  3    551   183.8   0.860 0.47161    
-Residuals    32   6836   213.6                    
+             Df Sum Sq Mean Sq F value   Pr(&gt;F)    
+class         3   5821  1940.4   9.212 0.000153 ***
+gender        1      4     4.2   0.020 0.888647    
+class:gender  3    655   218.4   1.037 0.389427    
+Residuals    32   6740   210.6                     
 ---
 Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
 <pre class="r"><code>
 summaryh(anova_classGender)</code></pre>
 <pre><code>
            term                             results
-1:        class F(3, 32) = 9.08, p &lt; .001, r = 0.68
-2:       gender F(1, 32) = 0.06, p = .810, r = 0.04
-3: class:gender F(3, 32) = 0.86, p = .472, r = 0.27</code></pre>
+1:        class F(3, 32) = 9.21, p &lt; .001, r = 0.68
+2:       gender F(1, 32) = 0.02, p = .889, r = 0.02
+3: class:gender F(3, 32) = 1.04, p = .389, r = 0.30</code></pre>
 </div>
 <h3 id="specify-contrasts-resources">Specify contrasts resources</h3>
 <ul>
@@ -2059,18 +2068,18 @@ ttest_gender</code></pre>
     Welch Two Sample t-test
 
 data:  iq by gender
-t = -0.21789, df = 27.219, p-value = 0.8291
+t = 0.71297, df = 30.835, p-value = 0.4812
 alternative hypothesis: true difference in means is not equal to 0
 95 percent confidence interval:
- -7.611331  6.149476
+ -4.234257  8.784244
 sample estimates:
 mean in group female   mean in group male 
-            109.1519             109.8828 </code></pre>
+            110.8864             108.6114 </code></pre>
 <pre class="r"><code>
 summaryh(ttest_gender)</code></pre>
 <pre><code>
-                             results
-1: t(27) = −0.22, p = .829, r = 0.04</code></pre>
+                            results
+1: t(31) = 0.71, p = .481, r = 0.13</code></pre>
 </div>
 <p>class a vs. class d</p>
 <div class="layout-chunk" data-layout="l-body">

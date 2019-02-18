@@ -19,27 +19,30 @@
  <!--/radix_placeholder_import_source-->
 
   <!--radix_placeholder_meta_tags-->
-  <title>Data science with R for experimental psychologists: Data science with R</title>
+  <title>Data science with R</title>
   
+  <meta property="description" itemprop="description" content="Clean, process, and analyse experimental psychology data"/>
   
   <link rel="license" href="https://creativecommons.org/licenses/by/4.0/"/>
   
   
   <!--  https://developers.facebook.com/docs/sharing/webmasters#markup -->
-  <meta property="og:title" content="Data science with R for experimental psychologists: Data science with R"/>
+  <meta property="og:title" content="Data science with R"/>
   <meta property="og:type" content="article"/>
+  <meta property="og:description" content="Clean, process, and analyse experimental psychology data"/>
   <meta property="og:locale" content="en_US"/>
-  <meta property="og:site_name" content="Data science with R for experimental psychologists"/>
+  <meta property="og:site_name" content="Data science with R"/>
   
   <!--  https://dev.twitter.com/cards/types/summary -->
   <meta property="twitter:card" content="summary"/>
-  <meta property="twitter:title" content="Data science with R for experimental psychologists: Data science with R"/>
+  <meta property="twitter:title" content="Data science with R"/>
+  <meta property="twitter:description" content="Clean, process, and analyse experimental psychology data"/>
   
   <!--/radix_placeholder_meta_tags-->
   <!--radix_placeholder_rmarkdown_metadata-->
   
   <script type="text/json" id="radix-rmarkdown-metadata">
-  {"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["title","description","site"]}},"value":[{"type":"character","attributes":{},"value":["Data science with R"]},{"type":"NULL"},{"type":"character","attributes":{},"value":["radix::radix_website"]}]}
+  {"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["title","description","site"]}},"value":[{"type":"character","attributes":{},"value":["Data science with R"]},{"type":"character","attributes":{},"value":["Clean, process, and analyse experimental psychology data"]},{"type":"character","attributes":{},"value":["radix::radix_website"]}]}
   </script>
   <!--/radix_placeholder_rmarkdown_metadata-->
   <!--radix_placeholder_navigation_in_header-->
@@ -1277,7 +1280,7 @@
 <!--radix_placeholder_front_matter-->
 
 <script id="distill-front-matter" type="text/json">
-{"title":"Data science with R","authors":[]}
+{"title":"Data science with R","description":"Clean, process, and analyse experimental psychology data","authors":[]}
 </script>
 
 <!--/radix_placeholder_front_matter-->
@@ -1285,11 +1288,10 @@
 <header class="header header--fixed" role="banner">
 <nav class="radix-site-nav radix-site-header">
 <div class="nav-left">
-<a href="index.html" class="title">Data science with R for experimental psychologists</a>
+<a href="index.html" class="title">Data science with R</a>
 </div>
 <div class="nav-right">
 <a href="index.html">Home</a>
-<a href="about.html">About</a>
 <a href="https://hause.shinyapps.io/shinyapp_effectsize/">Effect size converter</a>
 <div class="nav-dropdown">
 <button class="nav-dropbtn">
@@ -1305,6 +1307,16 @@ Tutorials
 <a href="0004_dataform_join.html">long/wide form data and joining</a>
 </div>
 </div>
+<div class="nav-dropdown">
+<button class="nav-dropbtn">
+Articles
+ 
+<span class="down-arrow">&#x25BE;</span>
+</button>
+<div class="nav-dropdown-content">
+<a href="0000_install.html">Test article 1</a>
+</div>
+</div>
 <a href="https://github.com/hauselin/rtutorialsite">
 <i class="fab fa-github"></i>
 </a>
@@ -1318,12 +1330,27 @@ Tutorials
 
 <div class="d-title">
 <h1>Data science with R</h1>
-
+<p>Clean, process, and analyse experimental psychology data</p>
 </div>
 
 
 <div class="d-article">
-<p><a href="https://hauselin.github.io/hausekeep/">hausekeep R package</a></p>
+<p>This site contains beginner R tutorials as well as relatively advanced data analysis tips/tricks I have used to analyze experimental psychology data. I have used these tutorials and articles to teach data science with R in graduate school. In my tutorials and articles, I usually try my best to explain <em>how</em> things work rather than just provide the uncommented code. If you have any questions or comments, <a href="mailto:hauselin@gmail.com">email me</a> or create a new issue <a href="https://github.com/hauselin/rtutorialsite/issues">here</a>.</p>
+<h2 id="where-to-begin">Where to begin</h2>
+<p>If you’re new to R, start with the tutorials. If you’re looking for tips/tricks to improve your existing R workflow, check out my articles.</p>
+<h2 id="resources">Resources</h2>
+<ul>
+<li><a href="http://datacamp.com/">DataCamp</a>: mostly R and Python tutorials</li>
+<li>my <a href="https://hauselin.github.io/hausekeep/">hausekeep R package</a>: contains functions for experimental psychological research</li>
+<li><a href="https://www.tidyverse.org/">tidyverse</a>: contains many packages (e.g., dplyr, tidyr, ggplot2, stringr)
+<ul>
+<li>manipulate dataframes (and tibbles) easily with tidyr, dplyr; make beautiful plots with clean syntax (ggplot2)</li>
+</ul></li>
+<li><a href="https://cran.r-project.org/web/packages/data.table/vignettes/datatable-intro.html">data.table</a>
+<ul>
+<li>powerful, extremely fast, and simple way to manipulate dataframes/datatables</li>
+</ul></li>
+</ul>
 <!--radix_placeholder_article_footer-->
 <!--/radix_placeholder_article_footer-->
 </div>
