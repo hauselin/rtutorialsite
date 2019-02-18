@@ -1048,6 +1048,9 @@ dt1[Chick &lt;= 5, summaryh(lm(weight ~ Time))]  # results are same as above</co
 1: (Intercept) b = 33.47, SE = 3.44, t(194) = 9.72, p &lt; .001, r = 0.57
 2:        Time b = 6.07, SE = 0.28, t(194) = 21.89, p &lt; .001, r = 0.84</code></pre>
 </div>
+<aside>
+<code>summaryh()</code> returns results in a <code>data.table</code>.
+</aside>
 <p>Now we can extend the syntax above with <code>by = Chick</code> to fit the model to each chick! Just one line of code is needed.</p>
 <div class="layout-chunk" data-layout="l-body">
 <pre class="r"><code>

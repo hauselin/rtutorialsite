@@ -58,6 +58,10 @@ Fit the same model within `data.table`
 dt1[Chick <= 5, summaryh(lm(weight ~ Time))] # results are same as above
 ```
 
+<aside>
+`summaryh()` returns results in a `data.table`.
+</aside>
+
 Now we can extend the syntax above with `by = Chick` to fit the model to each chick! Just one line of code is needed.
 
 ```{r}
