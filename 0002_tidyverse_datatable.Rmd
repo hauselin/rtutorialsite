@@ -209,12 +209,15 @@ df4 <- tbl_dt(fread("./data/simpsonsParadox.csv"))
 # or download the data directly from my github site to your working directory
 # df4 <- tbl_dt(fread("https://raw.githubusercontent.com/hauselin/rtutorialsite/master/data/simpsonsParadox.csv))
 df4 # print table in console 
-class(df4) # note the different classes
 ```
 
 <aside>
 Tibbles are automatically truncated to facilitate printing.
 </aside>
+
+```{r}
+class(df4) # note the different classes
+```
 
 Note the information at the top.
 
@@ -237,7 +240,7 @@ print(df4, n = Inf) # print all or Inf (infinite) rows
 ```
 
 <aside>
-Tibbles are automatically truncated to facilitate printing. But we can force it to print all rows or a specific number of rows.
+Tibbles are automatically truncated to facilitate printing. But we can force R to print all rows or a specific number of rows.
 </aside>
 
 ### Select columns/variables with `select()`
