@@ -1272,8 +1272,38 @@
   gtag('js', new Date());
   gtag('config', 'UA-134721506-5');
   </script>
+  <style type="text/css">
+  .radix-site-nav {
+      color: rgba(255, 255, 255, 0.8);
+      background-color: #383838;
+      font-size: 15px;
+      font-weight: 300;
+    }
+    
+    .radix-site-nav a {
+      color: inherit;
+      text-decoration: none;
+    }
+    
+    .radix-site-nav a:hover {
+      color: white;
+    }
+    
+    .radix-site-header {
+    }
+    
+    .radix-site-footer {
+    }
+    
+    @media print {
+      .radix-site-nav {
+        display: none;
+      }
+    }
+  </style>
   <!--/radix_placeholder_site_in_header-->
 
+  <link rel="stylesheet" href="styles.css" type="text/css"/>
 
 </head>
 
@@ -2019,19 +2049,19 @@ anova_classGender &lt;- aov(grades ~ class * gender, data = df1)
 summary(anova_classGender)</code></pre>
 <pre><code>
              Df Sum Sq Mean Sq F value   Pr(&gt;F)    
-class         3   5821  1940.4  12.113 1.84e-05 ***
-gender        1     61    61.2   0.382  0.54081    
-class:gender  3   2213   737.6   4.605  0.00866 ** 
-Residuals    32   5126   160.2                     
+class         3   5821  1940.4   9.124 0.000164 ***
+gender        1    332   331.9   1.561 0.220599    
+class:gender  3    263    87.7   0.412 0.745324    
+Residuals    32   6805   212.7                     
 ---
 Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
 <pre class="r"><code>
 summaryh(anova_classGender)</code></pre>
 <pre><code>
-           term                              results
-1:        class F(3, 32) = 12.11, p &lt; .001, r = 0.73
-2:       gender  F(1, 32) = 0.38, p = .541, r = 0.11
-3: class:gender  F(3, 32) = 4.60, p = .009, r = 0.55</code></pre>
+           term                             results
+1:        class F(3, 32) = 9.12, p &lt; .001, r = 0.68
+2:       gender F(1, 32) = 1.56, p = .221, r = 0.22
+3: class:gender F(3, 32) = 0.41, p = .745, r = 0.19</code></pre>
 </div>
 <h3 id="specify-contrasts-resources">Specify contrasts resources</h3>
 <ul>
@@ -2067,18 +2097,18 @@ ttest_gender</code></pre>
     Welch Two Sample t-test
 
 data:  iq by gender
-t = -0.88897, df = 32.092, p-value = 0.3806
+t = -0.29946, df = 29.737, p-value = 0.7667
 alternative hypothesis: true difference in means is not equal to 0
 95 percent confidence interval:
- -9.167502  3.596390
+ -7.893559  5.875355
 sample estimates:
 mean in group female   mean in group male 
-            107.5971             110.3826 </code></pre>
+            108.9788             109.9879 </code></pre>
 <pre class="r"><code>
 summaryh(ttest_gender)</code></pre>
 <pre><code>
                              results
-1: t(32) = −0.89, p = .381, r = 0.16</code></pre>
+1: t(30) = −0.30, p = .767, r = 0.05</code></pre>
 </div>
 <p>class a vs. class d</p>
 <div class="layout-chunk" data-layout="l-body">
