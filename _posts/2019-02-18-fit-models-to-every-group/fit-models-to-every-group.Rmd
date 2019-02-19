@@ -1,5 +1,5 @@
 ---
-title: "Fit models to different groups in a single line"
+title: "Fit the same statistical model to many groups with one simple line of code"
 description: |
   How to use data.table package to fit a model to different groups in a dataset using only one line of code
 author:
@@ -24,23 +24,29 @@ knitr::opts_chunk$set(echo = TRUE,
 
 Get source code for this RMarkdown script [here](https://github.com/hauselin/rtutorialsite/blob/master/_posts/2019-02-18-fit-models-to-every-group/fit-models-to-every-group.Rmd).
 
-## How to use `data.table` package and functionalities to fit a model to different groups in a dataset.
+## How to use `data.table` package to fit a model to different groups in a dataset.
 
 ```{r}
-library(hausekeep); library(data.table) # load packages
+# load packages
+library(hausekeep); library(data.table)
 ```
 
 Convert the built-in dataset `ChickWeight` to `data.table` class so we can leverage its extensive functionalities. 
 
 ```{r} 
 dt1 <- data.table(ChickWeight) # convert builtin dataset to data.table class
-dt1 # print dataset
+dt1 # print dataset 
 ```
+
+<aside>
+Dataset contains weights of 50 chicks that were fed one of four diets. Their weights were tracked over time. Type `?ChickWeight` in the console for more info about this dataset.
+</aside>
 
 Let's look at just the first 5 chicks (and to demo `data.table` synax; see my `data.table` tutorials). We then fit a linear regression `weight ~ Time` to the data from these 5 chicks, ignoring that the data came from 5 different chicks. 
 
 ```{r}
-dt1[Chick <= 5, ] # filter rows where Chick is <= 5
+# filter rows where Chick is <= 5 and fit linear regression model
+dt1[Chick <= 5, ] # syntax works only with data.table
 model <- lm(weight ~ Time, data = dt1[Chick <= 5])
 summary(model)
 ```
@@ -64,6 +70,8 @@ dt1[Chick <= 5, summaryh(lm(weight ~ Time))] # results are same as above
 <aside>
 `summaryh()` returns results in a `data.table`.
 </aside>
+
+What if you want to fit a separate model for each chick/group, so you know how time was associated with weight for each chick? You could write a for loop to loop through each chick, but you can do it with `data.table` syntax really easily. 
 
 Now we can extend the syntax above with `by = Chick` to fit the model to each chick! Just one line of code is needed.
 

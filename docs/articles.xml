@@ -9,7 +9,7 @@
     <generator>Radix</generator>
     <lastBuildDate>Mon, 18 Feb 2019 00:00:00 +0000</lastBuildDate>
     <item>
-      <title>Fit models to different groups in a single line</title>
+      <title>Fit the same statistical model to many groups with one simple line of code</title>
       <dc:creator>Hause Lin</dc:creator>
       <link>https://hausetutorials.netlify.com/posts/2019-02-18-fit-models-to-every-group</link>
       <description>How to use data.table package to fit a model to different groups in a dataset using only one line of code</description>
