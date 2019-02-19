@@ -1272,8 +1272,18 @@
   gtag('js', new Date());
   gtag('config', 'UA-134721506-5');
   </script>
+  <style type="text/css">
+  .radix-site-nav {
+    color: rgba(255, 255, 255, 0.8);
+    background-color: #383838;
+    font-size: 15px;
+    font-weight: 300;
+  }
+  
+  </style>
   <!--/radix_placeholder_site_in_header-->
 
+  <link rel="stylesheet" href="styles.css" type="text/css"/>
 
 </head>
 
@@ -2018,20 +2028,20 @@ ggplot(df1, aes(class, iq, col = gender)) + # y: iq
 anova_classGender &lt;- aov(grades ~ class * gender, data = df1)
 summary(anova_classGender)</code></pre>
 <pre><code>
-             Df Sum Sq Mean Sq F value   Pr(&gt;F)    
-class         3   5821  1940.4  10.526 5.68e-05 ***
-gender        1    317   316.6   1.717    0.199    
-class:gender  3   1184   394.8   2.142    0.114    
-Residuals    32   5899   184.3                     
+             Df Sum Sq Mean Sq F value  Pr(&gt;F)    
+class         3   5821  1940.4  11.043 3.9e-05 ***
+gender        1      1     1.3   0.007  0.9331    
+class:gender  3   1776   592.0   3.369  0.0304 *  
+Residuals    32   5623   175.7                    
 ---
 Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
 <pre class="r"><code>
 summaryh(anova_classGender)</code></pre>
 <pre><code>
            term                              results
-1:        class F(3, 32) = 10.53, p &lt; .001, r = 0.70
-2:       gender  F(1, 32) = 1.72, p = .199, r = 0.23
-3: class:gender  F(3, 32) = 2.14, p = .114, r = 0.41</code></pre>
+1:        class F(3, 32) = 11.04, p &lt; .001, r = 0.71
+2:       gender F(1, 32) = 0.007, p = .933, r = 0.01
+3: class:gender  F(3, 32) = 3.37, p = .030, r = 0.49</code></pre>
 </div>
 <h3 id="specify-contrasts-resources">Specify contrasts resources</h3>
 <ul>
@@ -2067,18 +2077,18 @@ ttest_gender</code></pre>
     Welch Two Sample t-test
 
 data:  iq by gender
-t = -0.14585, df = 31.023, p-value = 0.885
+t = 0.23857, df = 37.952, p-value = 0.8127
 alternative hypothesis: true difference in means is not equal to 0
 95 percent confidence interval:
- -7.267514  6.297418
+ -5.716989  7.244409
 sample estimates:
 mean in group female   mean in group male 
-            109.2137             109.6987 </code></pre>
+            109.7705             109.0067 </code></pre>
 <pre class="r"><code>
 summaryh(ttest_gender)</code></pre>
 <pre><code>
-                             results
-1: t(31) = −0.15, p = .885, r = 0.03</code></pre>
+                            results
+1: t(38) = 0.24, p = .813, r = 0.04</code></pre>
 </div>
 <p>class a vs. class d</p>
 <div class="layout-chunk" data-layout="l-body">

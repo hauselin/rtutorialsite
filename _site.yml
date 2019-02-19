@@ -40,4 +40,5 @@ collections:
     disqus: data-science-with-r-for-experimental-psychologists
     share: [facebook, twitter, google-plus, linkedin, pintrest]
 output:
-  radix::radix_article
+  radix::radix_article:
+    css: styles.css
