@@ -1,6 +1,14 @@
 ---
 title: "Data science with R"
 description: Clean, process, and analyse experimental psychology data
+date: Feb 18, 2019
+author:
+    - name: Hause Lin
+      url: https://scholar.google.ca/citations?user=4_ZopI0AAAAJ&hl=en
+      affiliation: University of Toronto
+      affiliation_url: http://michaelinzlicht.com/
+citation_url: https://hausetutorials.netlify.com/
+slug: lin2019rdatascience
 site: radix::radix_website
 ---
 

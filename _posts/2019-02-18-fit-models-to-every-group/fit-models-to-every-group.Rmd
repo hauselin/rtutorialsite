@@ -11,6 +11,7 @@ output:
 draft: false
 categories: 
   - data.table
+repository_url: https://github.com/hauselin/rtutorialsite/blob/master/_posts/2019-02-18-fit-models-to-every-group/fit-models-to-every-group.Rmd
 ---
 
 ```{r setup, include=FALSE}
@@ -21,7 +22,9 @@ knitr::opts_chunk$set(echo = TRUE,
                       tidy.opts = list(width.cutoff = 80))
 ```
 
-How to use `data.table` package and functionalities to fit a model to different groups in a dataset.
+Get source code for this RMarkdown script [here](https://github.com/hauselin/rtutorialsite/blob/master/_posts/2019-02-18-fit-models-to-every-group/fit-models-to-every-group.Rmd).
+
+## How to use `data.table` package and functionalities to fit a model to different groups in a dataset.
 
 ```{r}
 library(hausekeep); library(data.table) # load packages
