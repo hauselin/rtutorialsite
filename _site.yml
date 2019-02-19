@@ -1,11 +1,11 @@
-name: "Data science with R for experimental psychologists"
+name: "Data science with R"
 title: "Data science with R"
 base_url: https://hausetutorials.netlify.com/
 repository_url: https://github.com/hauselin/rtutorialsite
 google_analytics: "UA-134721506-5"
 creative_commons: CC BY
 description: |
-  Data science and analysis tutorials for experimental psychologists
+  Data science and analysis tutorials
 output_dir: "docs"
 navbar:
   right:
