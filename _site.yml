@@ -38,5 +38,5 @@ navbar:
 collections:
   posts:
     disqus: data-science-with-r-for-experimental-psychologists
-    share: [facebook, twitter, linkedin]
+    share: [facebook, twitter, google-plus, linkedin, pintrest]
 output: radix::radix_article
