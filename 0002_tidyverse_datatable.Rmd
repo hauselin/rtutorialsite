@@ -212,7 +212,7 @@ df4 # print table in console
 ```
 
 <aside>
-Tibbles are automatically truncated to facilitate printing.
+Tibbles are automatically truncated to facilitate printing. R prints only the first 10 rows and as many columns as your screen can fit. 
 </aside>
 
 ```{r}
