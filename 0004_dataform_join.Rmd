@@ -64,15 +64,19 @@ long <- data_frame(student = rep(c("Andy", "Mary"), each = 3),
 long
 ```
 
-Compare wide vs long
+Compare wide vs long data ("messy" vs. "tidy" data)
 
 ```{r}
-wide # wide
+wide # wide/messy
 ```
 
 ```{r}
-long # long
+long # long/tidy
 ```
+
+<aside>
+What's makes wide data wide and long data long? Do the wide and long data contain the same information?
+</aside>
 
 ## Wide to long with `melt()` (from `data.table`)
 
@@ -92,7 +96,7 @@ Compare with the long form we created
 
 ```{r}
 melt(wide, id.vars = c("student"), variable.name = "cLaSs", value.name = "gRaDeS") %>% 
-    arrange(student, cLaSs)
+    arrange(student, cLaSs) # sort by student then cLaSs (sort for easy visual comparison)
 ```
 
 ```{r}
@@ -106,6 +110,10 @@ long
 ```{r}
 gather(wide, key = cLaSs, value = gRaDeS, -student) # remove the id column
 ```
+
+<aside>
+I'm using combinations of upper/lower case (e.g., cLaSs) to illustrate that you can name your variables however you want and they'll be the column names in your new dataframes.
+</aside>
 
 ## Long to wide with `dcast()` (from `data.table`)
 

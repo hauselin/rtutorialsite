@@ -1258,6 +1258,8 @@
   </script>
   
   <!--/radix_placeholder_distill-->
+  <link href="site_libs/pagedtable-1.1/css/pagedtable.css" rel="stylesheet" />
+  <script src="site_libs/pagedtable-1.1/js/pagedtable.js"></script>
   <script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
   <script src="site_libs/bowser-1.9.3/bowser.min.js"></script>
   <script src="site_libs/webcomponents-2.0.0/webcomponents.js"></script>
@@ -1366,7 +1368,7 @@ Tutorials
 <li><a href="#post-hoc-tests-resources">Post-hoc tests resources</a></li>
 <li><a href="#plotting-and-testing-simple-effects-when-you-have-interactions">Plotting and testing simple effects when you have interactions</a></li>
 <li><a href="#fit-t-test-with-t.test">Fit t-test with <code>t.test()</code></a></li>
-<li><a href="#multi-level-hierarchical-model-with-lmer-from-the-lme4-package">Multi-level (hierarchical) model with <code>lmer()</code> from the <code>lme4</code> package</a></li>
+<li><a href="#linear-mixed-effects-aka.-multi-level-or-hierarchical-models-with-lmer-from-the-lme4-package">Linear mixed effects (aka. multi-level or hierarchical) models with <code>lmer()</code> from the <code>lme4</code> package</a></li>
 <li><a href="#more-multi-level-model-resources">More multi-level model resources</a></li>
 </ul></li>
 <li><a href="#manova">MANOVA</a><ul>
@@ -2017,19 +2019,19 @@ anova_classGender &lt;- aov(grades ~ class * gender, data = df1)
 summary(anova_classGender)</code></pre>
 <pre><code>
              Df Sum Sq Mean Sq F value   Pr(&gt;F)    
-class         3   5821  1940.4   8.692 0.000231 ***
-gender        1      1     1.2   0.005 0.942242    
-class:gender  3    255    85.1   0.381 0.767217    
-Residuals    32   7143   223.2                     
+class         3   5821  1940.4   8.588 0.000251 ***
+gender        1    103   103.2   0.457 0.504097    
+class:gender  3     67    22.3   0.099 0.960274    
+Residuals    32   7230   225.9                     
 ---
 Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
 <pre class="r"><code>
 summaryh(anova_classGender)</code></pre>
 <pre><code>
-           term                              results
-1:        class  F(3, 32) = 8.69, p &lt; .001, r = 0.67
-2:       gender F(1, 32) = 0.005, p = .942, r = 0.01
-3: class:gender  F(3, 32) = 0.38, p = .767, r = 0.19</code></pre>
+           term                             results
+1:        class F(3, 32) = 8.59, p &lt; .001, r = 0.67
+2:       gender F(1, 32) = 0.46, p = .504, r = 0.12
+3: class:gender F(3, 32) = 0.10, p = .960, r = 0.10</code></pre>
 </div>
 <h3 id="specify-contrasts-resources">Specify contrasts resources</h3>
 <ul>
@@ -2065,18 +2067,18 @@ ttest_gender</code></pre>
     Welch Two Sample t-test
 
 data:  iq by gender
-t = -0.20224, df = 37.877, p-value = 0.8408
+t = -0.10028, df = 37.948, p-value = 0.9206
 alternative hypothesis: true difference in means is not equal to 0
 95 percent confidence interval:
- -7.163625  5.862430
+ -6.845454  6.199294
 sample estimates:
 mean in group female   mean in group male 
-            109.0661             109.7167 </code></pre>
+            109.2462             109.5692 </code></pre>
 <pre class="r"><code>
 summaryh(ttest_gender)</code></pre>
 <pre><code>
                              results
-1: t(38) = −0.20, p = .841, r = 0.03</code></pre>
+1: t(38) = −0.10, p = .921, r = 0.02</code></pre>
 </div>
 <p>class a vs. class d</p>
 <div class="layout-chunk" data-layout="l-body">
@@ -2105,7 +2107,7 @@ $results2
           term     df statistic p.value  es.r  es.d
 1: iq by class 17.128    19.105       0 0.977 9.233</code></pre>
 </div>
-<h3 id="multi-level-hierarchical-model-with-lmer-from-the-lme4-package">Multi-level (hierarchical) model with <code>lmer()</code> from the <code>lme4</code> package</h3>
+<h3 id="linear-mixed-effects-aka.-multi-level-or-hierarchical-models-with-lmer-from-the-lme4-package">Linear mixed effects (aka. multi-level or hierarchical) models with <code>lmer()</code> from the <code>lme4</code> package</h3>
 <p>Rather than “control” for class when fitting models to test the relationship between iq and grades below, we can use multi-level models to specify nesting within the data. See <a href="http://mfviz.com/hierarchical-models/">here</a> for beautiful visual introduction to multi-level models.</p>
 <p>Another function is <code>nlme()</code> from the <code>lme</code> package. We use both <code>nlme()</code> and <code>lmer()</code>, depending on our needs.</p>
 <div class="layout-chunk" data-layout="l-body">
@@ -2326,7 +2328,7 @@ gather(irisDT, meaureLength, length, -Species) %&gt;% # convert from wide to lon
 </div>
 <p>MANOVA to test if species predicts length of sepal length and petal length?</p>
 <figure>
-<img src="./Extra/sepalPetal.png" alt="Long to wide form" /><figcaption>Long to wide form</figcaption>
+<img src="attachments/sepalPetal.png" alt="Long to wide form" /><figcaption>Long to wide form</figcaption>
 </figure>
 <div class="layout-chunk" data-layout="l-body">
 <pre class="r"><code>
@@ -2424,20 +2426,13 @@ ggplot(cw, aes(Diet, weight)) +
 <pre class="r"><code>
 cw_weight_withinEB &lt;- seWithin(data = cw, measurevar = c(&quot;weight&quot;), withinvars = c(&quot;Time&quot;), 
     idvar = &quot;Chick&quot;)</code></pre>
-<pre><code>
-Confidence intervals: 0.95    Time  N    weight       sd       se        ci
- 1:    0 50  41.06000 34.68062 4.904580  9.856123
- 2:    2 50  49.22000 33.12237 4.684210  9.413273
- 3:    4 49  59.95918 30.00113 4.285876  8.617331
- 4:    6 49  74.30612 26.56071 3.794387  7.629126
- 5:    8 49  91.24490 20.70396 2.957709  5.946873
- 6:   10 49 107.83673 15.34996 2.192851  4.409023
- 7:   12 49 129.24490 12.59951 1.799931  3.619003
- 8:   14 48 143.81250 13.08456 1.888593  3.799360
- 9:   16 47 168.08511 20.31087 2.962645  5.963495
-10:   18 47 190.19149 30.93940 4.512975  9.084148
-11:   20 46 209.71739 41.22034 6.077607 12.240929
-12:   21 45 218.68889 47.40924 7.067352 14.243313</code></pre>
+</div>
+<div class="layout-chunk" data-layout="l-body">
+<div data-pagedtable="false">
+<script data-pagedtable-source type="application/json">
+{"columns":[{"label":["Time"],"name":[1],"type":["dbl"],"align":["right"]},{"label":["N"],"name":[2],"type":["dbl"],"align":["right"]},{"label":["weight"],"name":[3],"type":["dbl"],"align":["right"]},{"label":["sd"],"name":[4],"type":["dbl"],"align":["right"]},{"label":["se"],"name":[5],"type":["dbl"],"align":["right"]},{"label":["ci"],"name":[6],"type":["dbl"],"align":["right"]}],"data":[{"1":"0","2":"50","3":"41.06000","4":"34.68062","5":"4.904580","6":"9.856123"},{"1":"2","2":"50","3":"49.22000","4":"33.12237","5":"4.684210","6":"9.413273"},{"1":"4","2":"49","3":"59.95918","4":"30.00113","5":"4.285876","6":"8.617331"},{"1":"6","2":"49","3":"74.30612","4":"26.56071","5":"3.794387","6":"7.629126"},{"1":"8","2":"49","3":"91.24490","4":"20.70396","5":"2.957709","6":"5.946873"},{"1":"10","2":"49","3":"107.83673","4":"15.34996","5":"2.192851","6":"4.409023"},{"1":"12","2":"49","3":"129.24490","4":"12.59951","5":"1.799931","6":"3.619003"},{"1":"14","2":"48","3":"143.81250","4":"13.08456","5":"1.888593","6":"3.799360"},{"1":"16","2":"47","3":"168.08511","4":"20.31087","5":"2.962645","6":"5.963495"},{"1":"18","2":"47","3":"190.19149","4":"30.93940","5":"4.512975","6":"9.084148"},{"1":"20","2":"46","3":"209.71739","4":"41.22034","5":"6.077607","6":"12.240929"},{"1":"21","2":"45","3":"218.68889","4":"47.40924","5":"7.067352","6":"14.243313"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+  </script>
+</div>
 </div>
 <p>The output contains the mean weight at each time, number of values (N), standard deviation, standard error, and confidence interval (default 95% unless you change via the <code>conf.interval</code> argument). The output contains information you’ll use for plotting with <code>ggplot</code>.</p>
 <p>Plot with within-subjects error bars</p>
@@ -2447,7 +2442,7 @@ ggplot(cw_weight_withinEB, aes(Time, weight)) +
     geom_quasirandom(data = cw, alpha = 0.1) + # this line plots raw data and can be omitted, depending on your plotting
     geom_point() + # add points
     geom_errorbar(aes(ymin = weight - ci, ymax = weight + ci), width = 0) # ymin (lower bound), ymax (upper bound)</code></pre>
-<p><img src="0003_ggplot_modelfitting_files/figure-html5/unnamed-chunk-61-1.png" width="624" /></p>
+<p><img src="0003_ggplot_modelfitting_files/figure-html5/unnamed-chunk-62-1.png" width="624" /></p>
 </div>
 <p>Note the second line <code>geom_quasirandom(data = cw, alpha = 0.1)</code> adds the raw data to the plot (hence <code>data = cw</code>). Depending your data structure and research questions, you might have to compute your “raw data” for the plot differently before specifying it in <code>geom_quasirandom()</code>.</p>
 <p>Plot with between-subjects error bars (WRONG but illustrative purposes)</p>
@@ -2457,7 +2452,7 @@ ggplot(cw, aes(Time, weight)) +
     geom_quasirandom(alpha = 0.1) + # this line plots raw data and can be omitted, depending on your plotting preferences
     stat_summary(fun.y = mean, geom = &#39;point&#39;) + # compute mean and plot
     stat_summary(fun.data = mean_cl_normal, geom = &#39;errorbar&#39;, width = 0) # compute between-sub confidence intervals</code></pre>
-<p><img src="0003_ggplot_modelfitting_files/figure-html5/unnamed-chunk-62-1.png" width="624" /></p>
+<p><img src="0003_ggplot_modelfitting_files/figure-html5/unnamed-chunk-63-1.png" width="624" /></p>
 </div>
 <h4 id="mixed-between-within-designs">Mixed (between-within) designs</h4>
 <p>Let’s investigate the effects of time (within-subjects) and diet (between-subjects) together.</p>
@@ -2465,59 +2460,18 @@ ggplot(cw, aes(Time, weight)) +
 <pre class="r"><code>
 cw_weight_mixed &lt;- seWithin(data = cw, measurevar = c(&quot;weight&quot;), betweenvars = c(&quot;Diet&quot;), 
     withinvars = c(&quot;Time&quot;), idvar = &quot;Chick&quot;)</code></pre>
-<pre><code>
-Confidence intervals: 0.95    Diet Time  N    weight        sd        se        ci
- 1:    1    0 20  41.40000 32.196088  7.199264 15.068233
- 2:    1    2 20  47.25000 31.222053  6.981463 14.612371
- 3:    1    4 19  56.47368 28.049332  6.434958 13.519345
- 4:    1    6 19  66.78947 24.955540  5.725194 12.028185
- 5:    1    8 19  79.68421 21.023526  4.823128 10.133015
- 6:    1   10 19  93.05263 14.874487  3.412441  7.169273
- 7:    1   12 19 108.52632 11.572480  2.654909  5.577757
- 8:    1   14 18 123.38889 13.870327  3.269267  6.897551
- 9:    1   16 17 144.64706 21.984518  5.332029 11.303396
-10:    1   18 17 158.94118 26.584912  6.447788 13.668700
-11:    1   20 17 170.41176 34.320498  8.323943 17.645972
-12:    1   21 16 177.75000 38.237769  9.559442 20.375469
-13:    2    0 10  40.70000 33.604854 10.626788 24.039464
-14:    2    2 10  49.40000 33.861652 10.707994 24.223166
-15:    2    4 10  59.80000 32.265022 10.203096 23.081006
-16:    2    6 10  75.40000 29.958647  9.473756 21.431125
-17:    2    8 10  91.70000 19.417095  6.140224 13.890153
-18:    2   10 10 108.50000 10.777143  3.408032  7.709503
-19:    2   12 10 131.30000 11.275312  3.565567  8.065872
-20:    2   14 10 141.90000 15.284023  4.833232 10.933531
-21:    2   16 10 164.70000 22.990849  7.270345 16.446662
-22:    2   18 10 187.70000 33.389549 10.558702 23.885444
-23:    2   20 10 205.60000 41.917684 13.255536 29.986105
-24:    2   21 10 214.70000 50.885426 16.091385 36.401241
-25:    3    0 10  40.80000 28.276080  8.941682 20.227489
-26:    3    2 10  50.40000 27.594930  8.726283 19.740223
-27:    3    4 10  62.20000 26.660100  8.430664 19.071487
-28:    3    6 10  77.90000 23.431511  7.409694 16.761893
-29:    3    8 10  98.40000 17.857046  5.646894 12.774161
-30:    3   10 10 117.10000 12.021922  3.801665  8.599965
-31:    3   12 10 144.40000 11.947923  3.778265  8.547029
-32:    3   14 10 164.50000 12.590895  3.981591  9.006984
-33:    3   16 10 197.40000 19.229222  6.080814 13.755756
-34:    3   18 10 233.10000 32.170338 10.173154 23.013273
-35:    3   20 10 258.90000 40.861992 12.921696 29.230908
-36:    3   21 10 270.30000 48.717298 15.405762 34.850255
-37:    4    0 10  41.00000 17.382195  5.496733 12.434473
-38:    4    2 10  51.80000 16.818054  5.318336 12.030911
-39:    4    4 10  64.50000 17.046321  5.390520 12.194203
-40:    4    6 10  83.90000 17.247248  5.454059 12.337938
-41:    4    8 10 105.60000 16.883489  5.339028 12.077720
-42:    4   10 10 126.00000 16.639228  5.261786 11.902987
-43:    4   12 10 151.40000 12.808176  4.050301  9.162417
-44:    4   14 10 161.80000  9.155805  2.895320  6.549668
-45:    4   16 10 182.00000 11.204764  3.543258  8.015406
-46:    4   18 10 202.90000 19.553833  6.183465 13.987970
-47:    4   20  9 233.88889 29.101735  9.700578 22.369574
-48:    4   21  9 238.55556 34.977292 11.659097 26.885927
-    Diet Time  N    weight        sd        se        ci</code></pre>
 </div>
-<p>Now your summary output has an extra Diet column.</p>
+<div class="layout-chunk" data-layout="l-body">
+<div data-pagedtable="false">
+<script data-pagedtable-source type="application/json">
+{"columns":[{"label":["Diet"],"name":[1],"type":["dbl"],"align":["right"]},{"label":["Time"],"name":[2],"type":["dbl"],"align":["right"]},{"label":["N"],"name":[3],"type":["dbl"],"align":["right"]},{"label":["weight"],"name":[4],"type":["dbl"],"align":["right"]},{"label":["sd"],"name":[5],"type":["dbl"],"align":["right"]},{"label":["se"],"name":[6],"type":["dbl"],"align":["right"]},{"label":["ci"],"name":[7],"type":["dbl"],"align":["right"]}],"data":[{"1":"1","2":"0","3":"20","4":"41.40000","5":"32.196088","6":"7.199264","7":"15.068233"},{"1":"1","2":"2","3":"20","4":"47.25000","5":"31.222053","6":"6.981463","7":"14.612371"},{"1":"1","2":"4","3":"19","4":"56.47368","5":"28.049332","6":"6.434958","7":"13.519345"},{"1":"1","2":"6","3":"19","4":"66.78947","5":"24.955540","6":"5.725194","7":"12.028185"},{"1":"1","2":"8","3":"19","4":"79.68421","5":"21.023526","6":"4.823128","7":"10.133015"},{"1":"1","2":"10","3":"19","4":"93.05263","5":"14.874487","6":"3.412441","7":"7.169273"},{"1":"1","2":"12","3":"19","4":"108.52632","5":"11.572480","6":"2.654909","7":"5.577757"},{"1":"1","2":"14","3":"18","4":"123.38889","5":"13.870327","6":"3.269267","7":"6.897551"},{"1":"1","2":"16","3":"17","4":"144.64706","5":"21.984518","6":"5.332029","7":"11.303396"},{"1":"1","2":"18","3":"17","4":"158.94118","5":"26.584912","6":"6.447788","7":"13.668700"},{"1":"1","2":"20","3":"17","4":"170.41176","5":"34.320498","6":"8.323943","7":"17.645972"},{"1":"1","2":"21","3":"16","4":"177.75000","5":"38.237769","6":"9.559442","7":"20.375469"},{"1":"2","2":"0","3":"10","4":"40.70000","5":"33.604854","6":"10.626788","7":"24.039464"},{"1":"2","2":"2","3":"10","4":"49.40000","5":"33.861652","6":"10.707994","7":"24.223166"},{"1":"2","2":"4","3":"10","4":"59.80000","5":"32.265022","6":"10.203096","7":"23.081006"},{"1":"2","2":"6","3":"10","4":"75.40000","5":"29.958647","6":"9.473756","7":"21.431125"},{"1":"2","2":"8","3":"10","4":"91.70000","5":"19.417095","6":"6.140224","7":"13.890153"},{"1":"2","2":"10","3":"10","4":"108.50000","5":"10.777143","6":"3.408032","7":"7.709503"},{"1":"2","2":"12","3":"10","4":"131.30000","5":"11.275312","6":"3.565567","7":"8.065872"},{"1":"2","2":"14","3":"10","4":"141.90000","5":"15.284023","6":"4.833232","7":"10.933531"},{"1":"2","2":"16","3":"10","4":"164.70000","5":"22.990849","6":"7.270345","7":"16.446662"},{"1":"2","2":"18","3":"10","4":"187.70000","5":"33.389549","6":"10.558702","7":"23.885444"},{"1":"2","2":"20","3":"10","4":"205.60000","5":"41.917684","6":"13.255536","7":"29.986105"},{"1":"2","2":"21","3":"10","4":"214.70000","5":"50.885426","6":"16.091385","7":"36.401241"},{"1":"3","2":"0","3":"10","4":"40.80000","5":"28.276080","6":"8.941682","7":"20.227489"},{"1":"3","2":"2","3":"10","4":"50.40000","5":"27.594930","6":"8.726283","7":"19.740223"},{"1":"3","2":"4","3":"10","4":"62.20000","5":"26.660100","6":"8.430664","7":"19.071487"},{"1":"3","2":"6","3":"10","4":"77.90000","5":"23.431511","6":"7.409694","7":"16.761893"},{"1":"3","2":"8","3":"10","4":"98.40000","5":"17.857046","6":"5.646894","7":"12.774161"},{"1":"3","2":"10","3":"10","4":"117.10000","5":"12.021922","6":"3.801665","7":"8.599965"},{"1":"3","2":"12","3":"10","4":"144.40000","5":"11.947923","6":"3.778265","7":"8.547029"},{"1":"3","2":"14","3":"10","4":"164.50000","5":"12.590895","6":"3.981591","7":"9.006984"},{"1":"3","2":"16","3":"10","4":"197.40000","5":"19.229222","6":"6.080814","7":"13.755756"},{"1":"3","2":"18","3":"10","4":"233.10000","5":"32.170338","6":"10.173154","7":"23.013273"},{"1":"3","2":"20","3":"10","4":"258.90000","5":"40.861992","6":"12.921696","7":"29.230908"},{"1":"3","2":"21","3":"10","4":"270.30000","5":"48.717298","6":"15.405762","7":"34.850255"},{"1":"4","2":"0","3":"10","4":"41.00000","5":"17.382195","6":"5.496733","7":"12.434473"},{"1":"4","2":"2","3":"10","4":"51.80000","5":"16.818054","6":"5.318336","7":"12.030911"},{"1":"4","2":"4","3":"10","4":"64.50000","5":"17.046321","6":"5.390520","7":"12.194203"},{"1":"4","2":"6","3":"10","4":"83.90000","5":"17.247248","6":"5.454059","7":"12.337938"},{"1":"4","2":"8","3":"10","4":"105.60000","5":"16.883489","6":"5.339028","7":"12.077720"},{"1":"4","2":"10","3":"10","4":"126.00000","5":"16.639228","6":"5.261786","7":"11.902987"},{"1":"4","2":"12","3":"10","4":"151.40000","5":"12.808176","6":"4.050301","7":"9.162417"},{"1":"4","2":"14","3":"10","4":"161.80000","5":"9.155805","6":"2.895320","7":"6.549668"},{"1":"4","2":"16","3":"10","4":"182.00000","5":"11.204764","6":"3.543258","7":"8.015406"},{"1":"4","2":"18","3":"10","4":"202.90000","5":"19.553833","6":"6.183465","7":"13.987970"},{"1":"4","2":"20","3":"9","4":"233.88889","5":"29.101735","6":"9.700578","7":"22.369574"},{"1":"4","2":"21","3":"9","4":"238.55556","5":"34.977292","6":"11.659097","7":"26.885927"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+  </script>
+</div>
+</div>
+<aside>
+We’ve averaged over the <code>Chick</code> variable. Each row (one Diet, one Time) now refers to the mean weight of all the chicks for a particular Diet and Time.
+</aside>
+<p>Now your summary output has the <code>Diet</code> column.</p>
 <div class="layout-chunk" data-layout="l-body">
 <pre class="r"><code>
 ggplot(cw_weight_mixed, aes(Time, weight, col = as.factor(Diet))) + # Diet is numeric but we want it to be a factor/categorical variable
@@ -2525,7 +2479,7 @@ ggplot(cw_weight_mixed, aes(Time, weight, col = as.factor(Diet))) + # Diet is nu
     geom_point(position = position_dodge(0.7), size = 2.5) + # add points
     geom_errorbar(aes(ymin = weight - ci, ymax = weight + ci), width = 0, position = position_dodge(0.7), size = 1) + # ymin (lower bound), ymax (upper bound)
     labs(col = &quot;Diet&quot;)</code></pre>
-<p><img src="0003_ggplot_modelfitting_files/figure-html5/unnamed-chunk-64-1.png" width="624" /></p>
+<p><img src="0003_ggplot_modelfitting_files/figure-html5/unnamed-chunk-66-1.png" width="624" /></p>
 </div>
 <!--radix_placeholder_article_footer-->
 <!--/radix_placeholder_article_footer-->

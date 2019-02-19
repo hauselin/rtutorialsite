@@ -1394,10 +1394,10 @@ long</code></pre>
 5 Mary    mathGrades       -20
 6 Mary    physicsGrades  -2000</code></pre>
 </div>
-<p>Compare wide vs long</p>
+<p>Compare wide vs long data (“messy” vs. “tidy” data)</p>
 <div class="layout-chunk" data-layout="l-body">
 <pre class="r"><code>
-wide  # wide</code></pre>
+wide  # wide/messy</code></pre>
 <pre><code>
 # A tibble: 2 x 4
   student englishGrades mathGrades physicsGrades
@@ -1407,7 +1407,7 @@ wide  # wide</code></pre>
 </div>
 <div class="layout-chunk" data-layout="l-body">
 <pre class="r"><code>
-long  # long</code></pre>
+long  # long/tidy</code></pre>
 <pre><code>
 # A tibble: 6 x 3
   student class         grades
@@ -1419,6 +1419,9 @@ long  # long</code></pre>
 5 Mary    mathGrades       -20
 6 Mary    physicsGrades  -2000</code></pre>
 </div>
+<aside>
+What’s makes wide data wide and long data long? Do the wide and long data contain the same information?
+</aside>
 <h2 id="wide-to-long-with-melt-from-data.table">Wide to long with <code>melt()</code> (from <code>data.table</code>)</h2>
 <p>There is a base R <code>melt()</code> function that is less powerful and slower than the <code>melt()</code> that comes with <code>data.table</code>. As long as you’ve loaded <code>data.table</code> with <code>library(data.table)</code>, you’ll be using the more powerful version of <code>melt()</code>.</p>
 <div class="layout-chunk" data-layout="l-body">
@@ -1450,7 +1453,7 @@ melt(wide, id.vars = c(&quot;student&quot;), variable.name = &quot;cLaSs&quot;, 
 <div class="layout-chunk" data-layout="l-body">
 <pre class="r"><code>
 melt(wide, id.vars = c(&quot;student&quot;), variable.name = &quot;cLaSs&quot;, value.name = &quot;gRaDeS&quot;) %&gt;% 
-    arrange(student, cLaSs)</code></pre>
+    arrange(student, cLaSs)  # sort by student then cLaSs (sort for easy visual comparison)</code></pre>
 <pre><code>
   student         cLaSs gRaDeS
 1    Andy englishGrades      1
@@ -1490,6 +1493,9 @@ gather(wide, key = cLaSs, value = gRaDeS, -student)  # remove the id column</cod
 5 Andy    physicsGrades   1000
 6 Mary    physicsGrades  -2000</code></pre>
 </div>
+<aside>
+I’m using combinations of upper/lower case (e.g., cLaSs) to illustrate that you can name your variables however you want and they’ll be the column names in your new dataframes.
+</aside>
 <h2 id="long-to-wide-with-dcast-from-data.table">Long to wide with <code>dcast()</code> (from <code>data.table</code>)</h2>
 <p>There is a base R <code>dcast()</code> function that is less powerful and slower than the <code>dcast()</code> that comes with <code>data.table</code>. As long as you’ve loaded <code>data.table</code> with <code>library(data.table)</code>, you’ll be using the more powerful version of <code>dcast()</code>.</p>
 <ul>

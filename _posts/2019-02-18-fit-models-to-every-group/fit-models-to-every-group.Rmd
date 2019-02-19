@@ -42,7 +42,7 @@ dt1 # print dataset
 Dataset contains weights of 50 chicks that were fed one of four diets. Their weights were tracked over time. Type `?ChickWeight` in the console for more info about this dataset.
 </aside>
 
-Let's look at just the first 5 chicks (and to demo `data.table` synax; see my `data.table` tutorials). We then fit a linear regression `weight ~ Time` to the data from these 5 chicks, ignoring that the data came from 5 different chicks. 
+Let's look at just the first 5 chicks (and to illustrate `data.table` syntax; see my [data.table](https://hausetutorials.netlify.com/0002_tidyverse_datatable.html) tutorials). We then fit a linear regression `weight ~ Time` to the data from these 5 chicks, ignoring that the data came from 5 different chicks. 
 
 ```{r}
 # filter rows where Chick is <= 5 and fit linear regression model

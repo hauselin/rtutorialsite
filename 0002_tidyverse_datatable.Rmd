@@ -39,14 +39,15 @@ Get source code for this RMarkdown script [here](https://github.com/hauselin/rtu
 Use `library()` to load packages at the top of each R script.
 
 ```{r loading packages, results="hide", message=FALSE, warning=FALSE}
-library(tidyverse); library(data.table); library(broom); library(dtplyr); 
-library(lme4); library(lmerTest); library(ggbeeswarm); library(cowplot)
-library(hausekeep)
+library(tidyverse); library(data.table); library(dtplyr); 
+library(broom); library(hausekeep)
 ```
 
 ## Reading data into R
 
-Read file in a directory and save the data as an object in the environment by using the assignment `<-` operator. 
+Read file in a directory and save the data as an object in the environment by using the assignment `<-` operator. `
+
+If you don't have the dataset, right click [here](https://raw.githubusercontent.com/hauselin/rtutorialsite/master/data/sleep.csv) to download and save `sleep.csv` dataset. If you're following the tutorial step by step, you should also create a data folder in your current folder, and put the sleep.csv file inside the data folder. 
 
 ```{r read data, results="hide", message=FALSE, warning=FALSE}
 df1 <- read.csv("./data/sleep.csv") # base R read.csv() function
@@ -60,6 +61,10 @@ df2 <- fread("./data/sleep.csv") # fread() from library(data.table)
 df3 <- tbl_dt(fread("./data/sleep.csv")) # tbl_dt() from library(dtplyr)
 # same as df3 <- tbl_dt(fread("data/sleep.csv"))
 ```
+
+<aside>
+The `sleep` dataset is actually a built-in dataset in R. Try typing `sleep` in your console and `?sleep` for more info on this dataset. R has a lot of built-in datasets; type `data()` in the console to see what dataests are available.
+</aside>
 
 The `.` in the file path simply refers to the current working directory, so it can be dropped. And `..` can be used to refer to the parent directory.
 
@@ -364,13 +369,17 @@ filter(df4, class != "a") # class IS NOT "a" (! and =, without space in between)
 How would you remove values that match "a" and "b"?
 
 ```{r, error=TRUE}
-filter(df4, class !%in% c("a", "b")) # note RStudio underlies potential errors for you (like Microsoft Word highlighting typos and grammar errors)
+filter(df4, class !%in% c("a", "b")) # syntax error...
 ```
+
+<aside>
+# RStudio underlines potential errors for you (like Microsoft Word highlighting typos and grammar errors).
+</aside>
 
 Oops, what's wrong? 
 
 ```{r}
-filter(df4, !class %in% c("a", "b")) # correct way to do it
+filter(df4, !class %in% c("a", "b")) # correct syntax
 ```
 
 #### Operators
@@ -391,8 +400,7 @@ names(df4_renamed)
 ```{r}
 mutate(df4, 
        iqMeanCentered = iq - mean(iq, na.rm = T), # substract mean iq from each iq
-       gradesRound0dp = round(grades) # round grades
-       )
+       gradesRound0dp = round(grades)) # round grades
 ```
 
 ```{r}
@@ -648,9 +656,11 @@ df4[1:5, 1:3] %>% filter(grades < 80) %>% filter(iq > 95) # same result as above
 ### Summarize data via j
 
 ```{r}
-df4[, j = .(iqGrandMean = mean(iq, na.rm = T))] # compute grand mean iq and rename variable as iqGrandMean
+# compute grand mean iq and rename variable as iqGrandMean
+df4[, j = .(iqGrandMean = mean(iq, na.rm = T))] 
 df4[, .(iqGrandMean = mean(iq, na.rm = T))] # also works
-df4[, mean(iq, na.rm = T)] # also works, but no renaming and returns a vector (not a data.table!)
+# also works, but no renaming and returns a vector (not a data.table!)
+df4[, mean(iq, na.rm = T)] 
 ```
 
 Compare output with `summary()`
@@ -671,8 +681,10 @@ df4[, .(iqGrandMean = mean(iq, na.rm = T),
 Extra stuff...
 
 ```{r}
-df4[, lm(formula = grades ~ iq)] # fit linear regression (lm), y predicted by x (grades predicted by iq) 
-lm(formula = grades ~ iq, data = df4) # standard way to fit regression models
+# standard way to fit regression models
+lm(formula = grades ~ iq, data = df4) # y predicted by x (grades predicted by iq) 
+# fit linear regression (lm) inside data.table
+df4[, lm(formula = grades ~ iq)] 
 ```
 
 Again, note the negative relationship between iq and grades. We'll explore why in future tutorials.
@@ -684,11 +696,10 @@ df4[, summary(lm(formula = grades ~ iq))] # more extensive output
 # summary(lm(formula = grades ~ iq, data = df4)) # standard way to fit regression models
 ```
 
-Or you can use functions written by me to generate American Psychological Association formatted output. To use those functions, run `source("https://raw.githubusercontent.com/hauselin/Rcode/master/summaryh.R")` just once per script. After you've run this line of code, you'll have access to the `summaryh()` function. For more information, see [here](https://github.com/hauselin/Rcode).
+Or use the `summaryh()` function in the `hausekeep` package to get APA-formatted results and effect size estimates
 
 ```{r}
-source("https://raw.githubusercontent.com/hauselin/Rcode/master/summaryh.R")
-df4[, summaryh(lm(formula = grades ~ iq))] # summaryh function gives you APA-format results and effect size estimates
+df4[, summaryh(lm(formula = grades ~ iq))] 
 # summaryh(lm(formula = grades ~ iq, data = df4)) # standard way to fit regression models
 ```
 

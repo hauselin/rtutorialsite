@@ -573,7 +573,7 @@ ttest_classAD
 summaryh(ttest_classAD, showTable = T) # show all other effect sizes
 ```
 
-### Multi-level (hierarchical) model with `lmer()` from the `lme4` package
+### Linear mixed effects (aka. multi-level or hierarchical) models with `lmer()` from the `lme4` package
 
 Rather than "control" for class when fitting models to test the relationship between iq and grades below, we can use multi-level models to specify nesting within the data. See [here](http://mfviz.com/hierarchical-models/) for beautiful visual introduction to multi-level models. 
 
@@ -651,7 +651,7 @@ gather(irisDT, meaureLength, length, -Species) %>% # convert from wide to long f
 
 MANOVA to test if species predicts length of sepal length and petal length?
 
-![Long to wide form](./Extra/sepalPetal.png)
+![Long to wide form](./attachments/sepalPetal.png)
 
 ```{r}
 outcome <- cbind(irisDT$Sepal.Length, irisDT$Petal.Length) # cbind (column bind)
@@ -702,9 +702,14 @@ ggplot(cw, aes(Diet, weight)) +
 
 How does weight change over time (ignoring diet)? Each chick has multiple measurements of time, so we'll use within-subjects error bars, which we have to calculate ourselves. Use `seWithin()` from the `hausekeep` package to compute within-subjects error bars.
 
-```{r}
+```{r, results='hide'}
 cw_weight_withinEB <- seWithin(data = cw, measurevar = c("weight"), 
                                withinvars = c("Time"), idvar = "Chick")
+```
+
+```{r, echo=FALSE}
+library(rmarkdown)
+paged_table(cw_weight_withinEB)
 ```
 
 The output contains the mean weight at each time, number of values (N), standard deviation, standard error, and confidence interval (default 95% unless you change via the `conf.interval` argument). The output contains information you'll use for plotting with `ggplot`.
@@ -733,13 +738,22 @@ ggplot(cw, aes(Time, weight)) +
 
 Let's investigate the effects of time (within-subjects) and diet (between-subjects) together.
 
-```{r}
+```{r, results='hide'}
 cw_weight_mixed <- seWithin(data = cw, measurevar = c("weight"), 
                             betweenvars = c("Diet"), withinvars = c("Time"), 
                             idvar = "Chick")
 ```
 
-Now your summary output has an extra Diet column.
+```{r, echo=FALSE}
+library(rmarkdown)
+paged_table(cw_weight_mixed)
+```
+
+<aside>
+We've averaged over the `Chick` variable. Each row (one Diet, one Time) now refers to the mean weight of all the chicks for a particular Diet and Time. 
+</aside>
+
+Now your summary output has the `Diet` column.
 
 ```{r}
 ggplot(cw_weight_mixed, aes(Time, weight, col = as.factor(Diet))) + # Diet is numeric but we want it to be a factor/categorical variable

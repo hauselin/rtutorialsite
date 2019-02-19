@@ -1369,9 +1369,11 @@ Tutorials
 <li>Evaluating fitted models</li>
 </ul>
 <h2 id="setting-up-installing-r-packageslibraries-install.packages">Setting up: Installing R packages/libraries <code>install.packages()</code></h2>
-<p>Use the <code>install.packages()</code> function to install packages from CRAN (The Comprehensive R Archive Network), which hosts official releases of different packages (also known as libraries) written by R users (people like you and I can write these packages).</p>
-<p>Install packages once and you’ll have them on your computer. You only need to update them regularly in the future. No need to rerun <code>install.packages()</code> every time you want to use these packages.</p>
-<p>Or install packages all at once, calling <code>install.packages()</code> function just once, using the <code>c()</code> (combine/concatenate) to combine all your package names into one big vector (more on what vectors and classes are later).</p>
+<p>Use the <code>install.packages()</code> function to install packages from CRAN (The Comprehensive R Archive Network), which hosts official releases of different packages (also known as libraries) written by R users (people like you and I can write these packages). For more info, see this <a href="0000_install.html">tutorial on installation</a>.</p>
+<p>Install packages all at once, calling <code>install.packages()</code> function just once, using the <code>c()</code> (combine/concatenate) to combine all your package names into one big vector (more on what vectors and classes are later).</p>
+<aside>
+Install packages once and you’ll have them on your computer. You only need to update them regularly in the future. No need to rerun <code>install.packages()</code> every time you want to use these packages.
+</aside>
 <div class="layout-chunk" data-layout="l-body">
 <pre class="r"><code>
 install.packages(c(&quot;tidyverse&quot;, &quot;data.table&quot;, &quot;dtplyr&quot;))</code></pre>
@@ -1420,40 +1422,33 @@ setwd(&quot;your/path/is/here&quot;)</code></pre>
 <h2 id="getting-help-via-or-help">Getting help via ? or <code>help()</code></h2>
 <p>To get help and read the documentation for any function, use <code>?</code> or the <code>help()</code> function. Beginners will often find the <strong>Examples</strong> section of the documentation (at the bottom of the document) most useful. Try copying and pasting the code from that section into your script to see how that function works.</p>
 <p>Equivalent ways to get help:</p>
-<div class="layout-chunk" data-layout="l-body">
 <pre class="r"><code>
 # get help for mean function
-`?`(mean  # I usually use this version because there&#39;s less typing
-)
-`?`(mean())
 help(mean)
+?mean # also works
+?mean() # also works
 
-# get help for setwd function
-`?`(setwd)
-`?`(setwd())
+# 3 ways to get help for setwd function
+?setwd
+?setwd()
 help(setwd)</code></pre>
-</div>
 <h3 id="which-package-does-a-function-come-from">Which package does a function come from?</h3>
 <p>If you ask for help using <code>?</code> or <code>help()</code>, at the top left corner of the documentation, you’ll see something that looks like <code>functionName{anotherName}</code>, the name within the <code>{}</code> tells you which package a particular function comes from.</p>
-<div class="layout-chunk" data-layout="l-body">
 <pre class="r"><code>
-`?`(lm  # linear regression, lm{stats} (comes from stats package, which comes with R)
-)
-`?`(mean  # mean, mean{base} (comes from base package, which comes with R)
-)</code></pre>
-</div>
+?lm # linear regression, lm{stats} (comes from stats package, which comes with R)
+?mean # mean, mean{base} (comes from base package, which comes with R)</code></pre>
 <p>To explicitly specify which package to use, you can use the code below. Often we don’t have to explicitly specify which package unless different packages have functions with the same names.</p>
 <div class="layout-chunk" data-layout="l-body">
 <pre class="r"><code>
-mean(c(1, 2, 3))</code></pre>
+mean(c(1, 2, 3))  # compute mean</code></pre>
 <pre><code>
 [1] 2</code></pre>
 <pre class="r"><code>
-# same as above but explicitly specifies the base package
-base::mean(c(1, 2, 3))</code></pre>
+base::mean(c(1, 2, 3))  # same as above (explicitly specifies the base package)</code></pre>
 <pre><code>
 [1] 2</code></pre>
 <pre class="r"><code>
+# fit linear model/regression function lm(y ~ x, data) (built-in dataset mtcars)
 lm(mpg ~ cyl, data = mtcars)</code></pre>
 <pre><code>
 Call:
@@ -1463,8 +1458,7 @@ Coefficients:
 (Intercept)          cyl  
      37.885       -2.876  </code></pre>
 <pre class="r"><code>
-# same as above but explicitly specifies the stats package
-stats::lm(mpg ~ cyl, data = mtcars)</code></pre>
+stats::lm(mpg ~ cyl, data = mtcars)  # (explicitly specifies the stats package)</code></pre>
 <pre><code>
 Call:
 stats::lm(formula = mpg ~ cyl, data = mtcars)
@@ -1475,7 +1469,9 @@ Coefficients:
 </div>
 <h2 id="objects-variables-and-classes">Objects, variables, and classes</h2>
 <p>Objects are ‘things’ in your environment. Just like physical objects (e.g., jeans, frying pan) in your physical environment. Different objects have different properties, and thus belong to different categories/classes: jeans belong to clothes and frying pan belongs to utensils. Same with programming language objects: different objects in your environment belong to different categories/classes (often also known as type). And different categories/classes have different properties associated with them. You wear your jeans but not your frying pan; you can fry eggs with your pan but not your jeans. Same with different programming objects, which includes <strong>vectors, lists, dataframes, datatables, matrices, characters (also known as strings), numerics, integers, booleans</strong> (and the list goes on). Different programming objects/classes/categories have different properties and actions associated with them.</p>
-<p>Note (courtesy of John Eusebio): You can fry your jeans on your frying pan. It’s just not recommended. Same thing with some R functions. You can do some things, like use a for loop to iterate through and operate on every element of a matrix, but you shouldn’t. There are tools that are made to do stuff like matrix operations much more smoothly.</p>
+<aside>
+Note (courtesy of John Eusebio): You can fry your jeans on your frying pan. It’s just not recommended. Same thing with some R functions. You can do some things, like use a for loop to iterate through and operate on every element of a matrix, but you shouldn’t. There are tools that are made to do stuff like matrix operations much more smoothly.
+</aside>
 <p>You can check the class/category/type of an object with the <code>class()</code> function.</p>
 <div class="layout-chunk" data-layout="l-body">
 <pre class="r"><code>
@@ -1484,7 +1480,7 @@ class(mean)</code></pre>
 [1] &quot;function&quot;</code></pre>
 </div>
 <p>Creating objects (specifically vectors) with the <code>&lt;-</code> assignment operator</p>
-<p>Keyboard shortcut for <code>&lt;-</code>: Alt -</p>
+<p>Keyboard shortcut for <code>&lt;-</code> is Alt -</p>
 <div class="layout-chunk" data-layout="l-body">
 <pre class="r"><code>
 variable1 &lt;- 10 # assign/store the value 10 in variable1
@@ -1529,7 +1525,10 @@ v4  # prints v4, which is a vector</code></pre>
 </div>
 <p>What does <code>c()</code> do?</p>
 <p><strong>Vectors</strong> are objects that store data of the same <strong>class</strong></p>
-<p><code>c()</code> combines values of the same class into a vector (or list). Think: like how you put all your clothes (one category/class of objects) into your wardrobe (vector)</p>
+<p><code>c()</code> combines values of the same class into a vector (or list).</p>
+<aside>
+Like how you put all your clothes (one category/class of objects) into your wardrobe (vector)!
+</aside>
 <div class="layout-chunk" data-layout="l-body">
 <pre class="r"><code>
 v4</code></pre>

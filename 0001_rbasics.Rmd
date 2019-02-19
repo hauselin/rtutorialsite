@@ -44,11 +44,13 @@ Get source code for this RMarkdown script [here](https://github.com/hauselin/rtu
 
 ## Setting up: Installing R packages/libraries `install.packages()`
 
-Use the `install.packages()` function to install packages from CRAN (The Comprehensive R Archive Network), which hosts official releases of different packages (also known as libraries) written by R users (people like you and I can write these packages). 
+Use the `install.packages()` function to install packages from CRAN (The Comprehensive R Archive Network), which hosts official releases of different packages (also known as libraries) written by R users (people like you and I can write these packages). For more info, see this [tutorial on installation](0000_install.html).
 
+Install packages all at once, calling `install.packages()` function just once, using the `c()` (combine/concatenate) to combine all your package names into one big vector (more on what vectors and classes are later). 
+
+<aside>
 Install packages once and you'll have them on your computer. You only need to update them regularly in the future. No need to rerun `install.packages()` every time you want to use these packages.
-
-Or install packages all at once, calling `install.packages()` function just once, using the `c()` (combine/concatenate) to combine all your package names into one big vector (more on what vectors and classes are later). 
+</aside>
 
 ```{r installing packages2, eval=FALSE}
 install.packages(c("tidyverse", "data.table", "dtplyr"))
@@ -108,13 +110,13 @@ To get help and read the documentation for any function, use `?` or the `help()`
 
 Equivalent ways to get help:
 
-```{r, eval=FALSE}
+```r
 # get help for mean function
-?mean # I usually use this version because there's less typing
-?mean()
 help(mean)
+?mean # also works
+?mean() # also works
 
-# get help for setwd function
+# 3 ways to get help for setwd function
 ?setwd
 ?setwd()
 help(setwd)
@@ -124,7 +126,7 @@ help(setwd)
 
 If you ask for help using `?` or `help()`, at the top left corner of the documentation, you'll see something that looks like `functionName{anotherName}`, the name within the `{}` tells you which package a particular function comes from.
 
-```{r}
+```r
 ?lm # linear regression, lm{stats} (comes from stats package, which comes with R)
 ?mean # mean, mean{base} (comes from base package, which comes with R)
 ```
@@ -132,13 +134,12 @@ If you ask for help using `?` or `help()`, at the top left corner of the documen
 To explicitly specify which package to use, you can use the code below. Often we don't have to explicitly specify which package unless different packages have functions with the same names.
 
 ```{r}
-mean(c(1, 2, 3))
-# same as above but explicitly specifies the base package
-base::mean(c(1, 2, 3)) 
+mean(c(1, 2, 3)) # compute mean
+base::mean(c(1, 2, 3)) # same as above (explicitly specifies the base package)
 
-lm(mpg ~ cyl, data = mtcars)
-# same as above but explicitly specifies the stats package
-stats::lm(mpg ~ cyl, data = mtcars)
+# fit linear model/regression function lm(y ~ x, data) (built-in dataset mtcars)
+lm(mpg ~ cyl, data = mtcars) 
+stats::lm(mpg ~ cyl, data = mtcars) # (explicitly specifies the stats package)
 ```
 
 
@@ -146,7 +147,9 @@ stats::lm(mpg ~ cyl, data = mtcars)
 
 Objects are 'things' in your environment. Just like physical objects (e.g., jeans, frying pan) in your physical environment. Different objects have different properties, and thus belong to different categories/classes: jeans belong to clothes and frying pan belongs to utensils. Same with programming language objects: different objects in your environment belong to different categories/classes (often also known as type). And different categories/classes have different properties associated with them. You wear your jeans but not your frying pan; you can fry eggs with your pan but not your jeans. Same with different programming objects, which includes **vectors, lists, dataframes, datatables, matrices, characters (also known as strings), numerics, integers, booleans** (and the list goes on). Different programming objects/classes/categories have different properties and actions associated with them.
 
+<aside>
 Note (courtesy of John Eusebio): You can fry your jeans on your frying pan. It's just not recommended. Same thing with some R functions. You can do some things, like use a for loop to iterate through and operate on every element of a matrix, but you shouldn't. There are tools that are made to do stuff like matrix operations much more smoothly.
+</aside>
 
 You can check the class/category/type of an object with the `class()` function.
 
@@ -156,7 +159,7 @@ class(mean)
 
 Creating objects (specifically vectors) with the `<-` assignment operator
 
-Keyboard shortcut for `<-`: Alt -
+Keyboard shortcut for `<-` is Alt -
 
 ```{r}
 variable1 <- 10 # assign/store the value 10 in variable1
@@ -177,7 +180,6 @@ class(variable2)
 class(v3)
 ```
 
-
 ```{r}
 v4 <- c(1, 2, 3, 4, 5) # 'c' stands for concatenate or combine
 v4 # prints v4, which is a vector
@@ -187,7 +189,12 @@ What does `c()` do?
 
 **Vectors** are objects that store data of the same **class**
 
-`c()` combines values of the same class into a vector (or list). Think: like how you put all your clothes (one category/class of objects) into your wardrobe (vector)
+`c()` combines values of the same class into a vector (or list). 
+
+<aside>
+Like how you put all your clothes (one category/class of objects) into your wardrobe (vector)!
+</aside>
+
 
 ```{r}
 v4

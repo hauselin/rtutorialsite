@@ -1388,7 +1388,7 @@ dt1  # print dataset </code></pre>
 <aside>
 Dataset contains weights of 50 chicks that were fed one of four diets. Their weights were tracked over time. Type <code>?ChickWeight</code> in the console for more info about this dataset.
 </aside>
-<p>Let’s look at just the first 5 chicks (and to demo <code>data.table</code> synax; see my <code>data.table</code> tutorials). We then fit a linear regression <code>weight ~ Time</code> to the data from these 5 chicks, ignoring that the data came from 5 different chicks.</p>
+<p>Let’s look at just the first 5 chicks (and to illustrate <code>data.table</code> syntax; see my <a href="https://hausetutorials.netlify.com/0002_tidyverse_datatable.html">data.table</a> tutorials). We then fit a linear regression <code>weight ~ Time</code> to the data from these 5 chicks, ignoring that the data came from 5 different chicks.</p>
 <div class="layout-chunk" data-layout="l-body">
 <pre class="r"><code>
 # filter rows where Chick is &lt;= 5 and fit linear regression model
