@@ -56,6 +56,7 @@ dt1 <- bind_rows(dt1) # bind list containing separate datasets into a dataframe
 dt1
 ```
 
+Compute mean and standard deviation for each dataset and group.
 
 ```{r}
 dt1[, .(scores = mean(scores), scores_stdev = sd(scores)), by = .(dataset, group)]

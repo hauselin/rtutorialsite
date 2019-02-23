@@ -2029,19 +2029,19 @@ anova_classGender &lt;- aov(grades ~ class * gender, data = df1)
 summary(anova_classGender)</code></pre>
 <pre><code>
              Df Sum Sq Mean Sq F value   Pr(&gt;F)    
-class         3   5821  1940.4   9.049 0.000174 ***
-gender        1     83    82.8   0.386 0.538800    
-class:gender  3    456   152.0   0.709 0.553938    
-Residuals    32   6861   214.4                     
+class         3   5821  1940.4   9.201 0.000155 ***
+gender        1    407   407.5   1.932 0.174118    
+class:gender  3    244    81.5   0.386 0.763632    
+Residuals    32   6748   210.9                     
 ---
 Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
 <pre class="r"><code>
 summaryh(anova_classGender)</code></pre>
 <pre><code>
            term                             results
-1:        class F(3, 32) = 9.05, p &lt; .001, r = 0.68
-2:       gender F(1, 32) = 0.39, p = .539, r = 0.11
-3: class:gender F(3, 32) = 0.71, p = .554, r = 0.25</code></pre>
+1:        class F(3, 32) = 9.20, p &lt; .001, r = 0.68
+2:       gender F(1, 32) = 1.93, p = .174, r = 0.24
+3: class:gender F(3, 32) = 0.39, p = .764, r = 0.19</code></pre>
 </div>
 <h3 id="specify-contrasts-resources">Specify contrasts resources</h3>
 <ul>
@@ -2077,18 +2077,18 @@ ttest_gender</code></pre>
     Welch Two Sample t-test
 
 data:  iq by gender
-t = 0.61879, df = 32.135, p-value = 0.5404
+t = -0.56035, df = 37.892, p-value = 0.5785
 alternative hypothesis: true difference in means is not equal to 0
 95 percent confidence interval:
- -4.675037  8.755841
+ -8.240026  4.667537
 sample estimates:
 mean in group female   mean in group male 
-            110.5299             108.4895 </code></pre>
+            108.5592             110.3455 </code></pre>
 <pre class="r"><code>
 summaryh(ttest_gender)</code></pre>
 <pre><code>
-                            results
-1: t(32) = 0.62, p = .540, r = 0.11</code></pre>
+                             results
+1: t(38) = −0.56, p = .579, r = 0.09</code></pre>
 </div>
 <p>class a vs. class d</p>
 <div class="layout-chunk" data-layout="l-body">
