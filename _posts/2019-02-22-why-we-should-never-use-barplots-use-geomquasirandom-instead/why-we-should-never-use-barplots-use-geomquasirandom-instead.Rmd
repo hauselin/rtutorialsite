@@ -1,0 +1,120 @@
+---
+title: "Why barplots are terrible (use ggbeeswarm instead)"
+description: |
+  A short description of the post.
+author:
+  - name: Hause Lin
+date: 02-22-2019
+output:
+  radix::radix_article:
+    self_contained: false
+draft: false
+categories: 
+  - data.table, gganimate
+repository_url: https://github.com/hauselin/rtutorialsite/blob/master/_posts/2019-02-18-fit-models-to-every-group/fit-models-to-every-group.Rmd
+editor_options: 
+  chunk_output_type: console
+---
+
+```{r setup, include=FALSE}
+library(roxygen2)
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+Get source code for this RMarkdown script [here](https://github.com/hauselin/rtutorialsite/blob/master/_posts/2019-02-18-fit-models-to-every-group/fit-models-to-every-group.Rmd).
+
+```{r loading packages, results="hide", message=FALSE, warning=FALSE}
+# load packages
+library(data.table); library(tidyverse); library(gganimate); 
+library(ggbeeswarm); library(rmarkdown); library(knitr)
+```
+
+## Randomly generate 10 datasets
+
+Within each dataset, we have data from two groups, with 50 data points (e.g., subjects) per group. One group has mean 100 (sd = 15) and the other has mean 105 (sd = 45). 
+
+```{r generate data with rnorm2, layout="l-body-outset"}
+# extend R's rnorm() function 
+# rnormFixed generates random data from a normal distribution 
+# but ensures mean and sd values are exactly what we wanted
+rnormFixed <- function(n, mean, sd) {
+    mean + sd * scale(rnorm(n))
+}
+
+set.seed(1) # to ensure results/figures can be replicated
+n <- 50 # datapoints per group
+datasets <- 10
+
+# generate datasets
+dt1 <- lapply(1:datasets, # loop iterator 
+              function(x) {data.table(
+                scores = c(rnormFixed(n = n, mean = 100, sd = 15), # mean of group 1
+                           rnormFixed(n = n, mean = 105, sd = 45)), # mean of group 2
+                group = rep(x = c("group 1", "group 2"), each = n), # condition label
+                dataset = x)})
+dt1 <- bind_rows(dt1) # bind list containing separate datasets into a dataframe 
+dt1
+```
+
+
+```{r}
+dt1[, .(scores = mean(scores), scores_stdev = sd(scores)), by = .(dataset, group)]
+```
+
+
+## Plotting
+
+Compare barplot, boxplot, violin plot, and plot with `geom_quasirandom()` from `ggbeeswarm` package.
+
+```{r, eval=FALSE}
+# barplot
+plot_bar <- ggplot(dt1, aes(group, scores)) + 
+    stat_summary(fun.y = mean, geom = 'bar', size = 6) +
+    stat_summary(fun.data = mean_cl_normal, geom = 'errorbar', width = 0, size = 1.1) +
+    transition_states(dataset) +
+    labs(title = 'Sample {closest_state}')
+plot_bar
+# anim_save("./attachments/plot_bar.gif", plot_bar)
+```
+
+```{r eval=FALSE}
+plot_boxplot <- ggplot(dt1, aes(group, scores)) + 
+    geom_boxplot() +
+    stat_summary(fun.y = mean, geom = 'point', shape = 95, size = 6) +
+    stat_summary(fun.data = mean_cl_normal, geom = 'errorbar', width = 0) +
+    transition_states(dataset) +
+    labs(title = 'Sample {closest_state}')
+plot_boxplot
+# anim_save("./attachments/plot_boxplot.gif", plot_boxplot)
+```
+
+```{r, eval=FALSE}
+plot_violin <- ggplot(dt1, aes(group, scores)) +
+    geom_violin() +
+    stat_summary(fun.y = mean, geom = 'point', shape = 95, size = 6) +
+    stat_summary(fun.data = mean_cl_normal, geom = 'errorbar', width = 0, size = 1.1) +
+    scale_colour_viridis_d(begin = 0, end = 0.5) +
+    transition_states(dataset) +
+    labs(title = 'Sample {closest_state}')
+plot_violin
+# anim_save("./attachments/plot_violin.gif", plot_violin)
+```
+
+```{r, eval=FALSE}
+plot_dotdist <- ggplot(dt1, aes(group, scores)) +
+    geom_quasirandom(alpha = 0.2) +
+    stat_summary(fun.y = mean, geom = 'point', shape = 95, size = 6) +
+    stat_summary(fun.data = mean_cl_normal, geom = 'errorbar', width = 0, size = 1.1) +
+    scale_colour_viridis_d(begin = 0, end = 0.5) +
+    transition_states(dataset) +
+    labs(title = 'Sample {closest_state}')
+plot_dotdist
+# anim_save("./attachments/plot_dotdist.gif", plot_dotdist)
+```
+
+```{r, out.width="50%", echo=FALSE}
+knitr::include_graphics(c("./figure-html5/unnamed-chunk-2-1.gif", 
+                          "./figure-html5/unnamed-chunk-3-1.gif", 
+                          "./figure-html5/unnamed-chunk-3-1.gif", 
+                          "./figure-html5/unnamed-chunk-4-1.gif"))
+```

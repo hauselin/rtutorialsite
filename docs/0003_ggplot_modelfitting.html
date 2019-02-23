@@ -1458,9 +1458,9 @@ glimpse(df1)</code></pre>
 <pre><code>
 Observations: 40
 Variables: 3
-$ iq     &lt;dbl&gt; 94.5128, 95.4359, 97.7949, 98.1026, 96.5641, 101.5897, 100.8...
-$ grades &lt;dbl&gt; 67.9295, 82.5449, 69.0833, 83.3141, 99.0833, 89.8526, 73.698...
-$ class  &lt;chr&gt; &quot;a&quot;, &quot;a&quot;, &quot;a&quot;, &quot;a&quot;, &quot;a&quot;, &quot;a&quot;, &quot;a&quot;, &quot;a&quot;, &quot;a&quot;, &quot;a&quot;, &quot;b&quot;, &quot;b&quot;, ...</code></pre>
+$ iq     &lt;dbl&gt; 94.5128, 95.4359, 97.7949, 98.1026, 96.5641, 101.5897, 100.871…
+$ grades &lt;dbl&gt; 67.9295, 82.5449, 69.0833, 83.3141, 99.0833, 89.8526, 73.6987,…
+$ class  &lt;chr&gt; &quot;a&quot;, &quot;a&quot;, &quot;a&quot;, &quot;a&quot;, &quot;a&quot;, &quot;a&quot;, &quot;a&quot;, &quot;a&quot;, &quot;a&quot;, &quot;a&quot;, &quot;b&quot;, &quot;b&quot;, &quot;b…</code></pre>
 </div>
 <h2 id="ggplot2-basics-layering"><code>ggplot2</code> basics: layering</h2>
 <p><code>ggplot2</code> produces figures by adding layers one at a time. New layers are added using the + sign. The first line is the first/bottom-most layer, and second line is on top of the bottom layer, and third line is on top of the second layer, and the last line of code is the top-most layer.</p>
@@ -2029,19 +2029,19 @@ anova_classGender &lt;- aov(grades ~ class * gender, data = df1)
 summary(anova_classGender)</code></pre>
 <pre><code>
              Df Sum Sq Mean Sq F value   Pr(&gt;F)    
-class         3   5821  1940.4   9.957 8.67e-05 ***
-gender        1     58    57.6   0.296    0.590    
-class:gender  3   1107   368.9   1.893    0.151    
-Residuals    32   6236   194.9                     
+class         3   5821  1940.4   9.049 0.000174 ***
+gender        1     83    82.8   0.386 0.538800    
+class:gender  3    456   152.0   0.709 0.553938    
+Residuals    32   6861   214.4                     
 ---
 Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
 <pre class="r"><code>
 summaryh(anova_classGender)</code></pre>
 <pre><code>
            term                             results
-1:        class F(3, 32) = 9.96, p &lt; .001, r = 0.69
-2:       gender F(1, 32) = 0.30, p = .590, r = 0.10
-3: class:gender F(3, 32) = 1.89, p = .151, r = 0.39</code></pre>
+1:        class F(3, 32) = 9.05, p &lt; .001, r = 0.68
+2:       gender F(1, 32) = 0.39, p = .539, r = 0.11
+3: class:gender F(3, 32) = 0.71, p = .554, r = 0.25</code></pre>
 </div>
 <h3 id="specify-contrasts-resources">Specify contrasts resources</h3>
 <ul>
@@ -2077,18 +2077,18 @@ ttest_gender</code></pre>
     Welch Two Sample t-test
 
 data:  iq by gender
-t = -0.52539, df = 30.595, p-value = 0.6031
+t = 0.61879, df = 32.135, p-value = 0.5404
 alternative hypothesis: true difference in means is not equal to 0
 95 percent confidence interval:
- -8.536685  5.040927
+ -4.675037  8.755841
 sample estimates:
 mean in group female   mean in group male 
-            108.3590             110.1068 </code></pre>
+            110.5299             108.4895 </code></pre>
 <pre class="r"><code>
 summaryh(ttest_gender)</code></pre>
 <pre><code>
-                             results
-1: t(31) = −0.53, p = .603, r = 0.09</code></pre>
+                            results
+1: t(32) = 0.62, p = .540, r = 0.11</code></pre>
 </div>
 <p>class a vs. class d</p>
 <div class="layout-chunk" data-layout="l-body">
@@ -2325,7 +2325,7 @@ Source: local data table [150 x 5]
  8          5           3.4          1.5         0.2 setosa 
  9          4.4         2.9          1.4         0.2 setosa 
 10          4.9         3.1          1.5         0.1 setosa 
-# ... with 140 more rows</code></pre>
+# … with 140 more rows</code></pre>
 </div>
 <p>The dataset is in wide form. To visualize easily with <code>ggplot</code>, we need to convert it to long form (more on converting between forms) in future tutorials.</p>
 <div class="layout-chunk" data-layout="l-body">
@@ -2405,7 +2405,7 @@ Source: local data table [578 x 4]
  8    125    14 1     1    
  9    149    16 1     1    
 10    171    18 1     1    
-# ... with 568 more rows</code></pre>
+# … with 568 more rows</code></pre>
 <pre class="r"><code>
 cw[, unique(Time)]  # time points</code></pre>
 <pre><code>

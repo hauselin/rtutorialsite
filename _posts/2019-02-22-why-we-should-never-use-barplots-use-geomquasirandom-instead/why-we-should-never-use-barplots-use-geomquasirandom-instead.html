@@ -7,7 +7,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1"/>
   <meta name="generator" content="radix" />
-  <link rel="alternate" type="application/rss+xml" href="https://hausetutorials.netlify.com/articles.xml" />
 
   <style type="text/css">
   /* Hide doc at startup (prevent jankiness while JS renders/transforms) */
@@ -20,367 +19,39 @@
  <!--/radix_placeholder_import_source-->
 
   <!--radix_placeholder_meta_tags-->
-  <title>Data science with R: Articles and posts</title>
+  <title>Why barplots are terrible (use ggbeeswarm instead)</title>
+  
+  <meta property="description" itemprop="description" content="A short description of the post."/>
   
   
-  <link rel="license" href="https://creativecommons.org/licenses/by/4.0/"/>
-  
+  <!--  https://schema.org/Article -->
+  <meta property="article:published" itemprop="datePublished" content="2019-02-22"/>
+  <meta property="article:created" itemprop="dateCreated" content="2019-02-22"/>
+  <meta name="article:author" content="Hause Lin"/>
   
   <!--  https://developers.facebook.com/docs/sharing/webmasters#markup -->
-  <meta property="og:title" content="Data science with R: Articles and posts"/>
+  <meta property="og:title" content="Why barplots are terrible (use ggbeeswarm instead)"/>
   <meta property="og:type" content="article"/>
+  <meta property="og:description" content="A short description of the post."/>
   <meta property="og:locale" content="en_US"/>
-  <meta property="og:site_name" content="Data science with R"/>
   
   <!--  https://dev.twitter.com/cards/types/summary -->
   <meta property="twitter:card" content="summary"/>
-  <meta property="twitter:title" content="Data science with R: Articles and posts"/>
+  <meta property="twitter:title" content="Why barplots are terrible (use ggbeeswarm instead)"/>
+  <meta property="twitter:description" content="A short description of the post."/>
   
   <!--/radix_placeholder_meta_tags-->
   <!--radix_placeholder_rmarkdown_metadata-->
   
   <script type="text/json" id="radix-rmarkdown-metadata">
-  {"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["title","site","listing"]}},"value":[{"type":"character","attributes":{},"value":["Articles and posts"]},{"type":"character","attributes":{},"value":["radix::radix_website"]},{"type":"character","attributes":{},"value":["posts"]}]}
+  {"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["title","description","author","date","output","draft","categories","repository_url","editor_options"]}},"value":[{"type":"character","attributes":{},"value":["Why barplots are terrible (use ggbeeswarm instead)"]},{"type":"character","attributes":{},"value":["A short description of the post.\n"]},{"type":"list","attributes":{},"value":[{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name"]}},"value":[{"type":"character","attributes":{},"value":["Hause Lin"]}]}]},{"type":"character","attributes":{},"value":["02-22-2019"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["radix::radix_article"]}},"value":[{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["self_contained"]}},"value":[{"type":"logical","attributes":{},"value":[false]}]}]},{"type":"logical","attributes":{},"value":[false]},{"type":"character","attributes":{},"value":["data.table, gganimate"]},{"type":"character","attributes":{},"value":["https://github.com/hauselin/rtutorialsite/blob/master/_posts/2019-02-18-fit-models-to-every-group/fit-models-to-every-group.Rmd"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["chunk_output_type"]}},"value":[{"type":"character","attributes":{},"value":["console"]}]}]}
   </script>
   <!--/radix_placeholder_rmarkdown_metadata-->
-  <!--radix_placeholder_navigation_in_header-->
   
-  <script type="application/javascript">
-  
-    window.headroom_prevent_pin = false;
-  
-    window.document.addEventListener("DOMContentLoaded", function (event) {
-  
-      // initialize headroom for banner
-      var header = $('header').get(0);
-      var headerHeight = header.offsetHeight;
-      var headroom = new Headroom(header, {
-        onPin : function() {
-          if (window.headroom_prevent_pin) {
-            window.headroom_prevent_pin = false;
-            headroom.unpin();
-          }
-        }
-      });
-      headroom.init();
-      if(window.location.hash)
-        headroom.unpin();
-      $(header).addClass('headroom--transition');
-  
-      // offset scroll location for banner on hash change
-      // (see: https://github.com/WickyNilliams/headroom.js/issues/38)
-      window.addEventListener("hashchange", function(event) {
-        window.scrollTo(0, window.pageYOffset - (headerHeight + 25));
-      });
-  
-      // responsive menu
-      $('.radix-site-header').each(function(i, val) {
-        var topnav = $(this);
-        var toggle = topnav.find('.nav-toggle');
-        toggle.on('click', function() {
-          topnav.toggleClass('responsive');
-        });
-      });
-  
-      // nav dropdowns
-      $('.nav-dropbtn').click(function(e) {
-        $(this).next('.nav-dropdown-content').toggleClass('nav-dropdown-active');
-        $(this).parent().siblings('.nav-dropdown')
-           .children('.nav-dropdown-content').removeClass('nav-dropdown-active');
-      });
-      $("body").click(function(e){
-        $('.nav-dropdown-content').removeClass('nav-dropdown-active');
-      });
-      $(".nav-dropdown").click(function(e){
-        e.stopPropagation();
-      });
-    });
+  <script type="text/json" id="radix-resource-manifest">
+  {"type":"character","attributes":{},"value":["why-we-should-never-use-barplots-use-geomquasirandom-instead_files/bowser-1.9.3/bowser.min.js","why-we-should-never-use-barplots-use-geomquasirandom-instead_files/distill-2.2.21/template.v2.js","why-we-should-never-use-barplots-use-geomquasirandom-instead_files/figure-html5/unnamed-chunk-2-1.gif","why-we-should-never-use-barplots-use-geomquasirandom-instead_files/figure-html5/unnamed-chunk-3-1.gif","why-we-should-never-use-barplots-use-geomquasirandom-instead_files/figure-html5/unnamed-chunk-4-1.gif","why-we-should-never-use-barplots-use-geomquasirandom-instead_files/figure-html5/unnamed-chunk-5-1.gif","why-we-should-never-use-barplots-use-geomquasirandom-instead_files/jquery-1.11.3/jquery.min.js","why-we-should-never-use-barplots-use-geomquasirandom-instead_files/pagedtable-1.1/css/pagedtable.css","why-we-should-never-use-barplots-use-geomquasirandom-instead_files/pagedtable-1.1/js/pagedtable.js","why-we-should-never-use-barplots-use-geomquasirandom-instead_files/webcomponents-2.0.0/webcomponents.js"]}
   </script>
-  
-  <style type="text/css">
-  
-  /* Theme (user-documented overrideables for nav appearance) */
-  
-  .radix-site-nav {
-    color: rgba(255, 255, 255, 0.8);
-    background-color: #455a64;
-    font-size: 15px;
-    font-weight: 300;
-  }
-  
-  .radix-site-nav a {
-    color: inherit;
-    text-decoration: none;
-  }
-  
-  .radix-site-nav a:hover {
-    color: white;
-  }
-  
-  @media print {
-    .radix-site-nav {
-      display: none;
-    }
-  }
-  
-  .radix-site-header {
-  
-  }
-  
-  .radix-site-footer {
-  
-  }
-  
-  
-  /* Site Header */
-  
-  .radix-site-header {
-    width: 100%;
-    box-sizing: border-box;
-    z-index: 3;
-  }
-  
-  .radix-site-header .nav-left {
-    display: inline-block;
-    margin-left: 8px;
-  }
-  
-  @media screen and (max-width: 768px) {
-    .radix-site-header .nav-left {
-      margin-left: 0;
-    }
-  }
-  
-  
-  .radix-site-header .nav-right {
-    float: right;
-    margin-right: 8px;
-  }
-  
-  .radix-site-header a,
-  .radix-site-header .title {
-    display: inline-block;
-    text-align: center;
-    padding: 14px 10px 14px 10px;
-  }
-  
-  .radix-site-header .title {
-    font-size: 18px;
-  }
-  
-  .radix-site-header .logo {
-    padding: 0;
-  }
-  
-  .radix-site-header .logo img {
-    display: none;
-    max-height: 20px;
-    width: auto;
-    margin-bottom: -4px;
-  }
-  
-  .radix-site-header .nav-image img {
-    max-height: 18px;
-    width: auto;
-    display: inline-block;
-    margin-bottom: -3px;
-  }
-  
-  
-  
-  @media screen and (min-width: 1000px) {
-    .radix-site-header .logo img {
-      display: inline-block;
-    }
-    .radix-site-header .nav-left {
-      margin-left: 20px;
-    }
-    .radix-site-header .nav-right {
-      margin-right: 20px;
-    }
-    .radix-site-header .title {
-      padding-left: 12px;
-    }
-  }
-  
-  
-  .radix-site-header .nav-toggle {
-    display: none;
-  }
-  
-  .nav-dropdown {
-    display: inline-block;
-    position: relative;
-  }
-  
-  .nav-dropdown .nav-dropbtn {
-    border: none;
-    outline: none;
-    color: rgba(255, 255, 255, 0.8);
-    padding: 16px 10px;
-    background-color: transparent;
-    font-family: inherit;
-    font-size: inherit;
-    font-weight: inherit;
-    margin: 0;
-    margin-top: 1px;
-    z-index: 2;
-  }
-  
-  .nav-dropdown-content {
-    display: none;
-    position: absolute;
-    background-color: white;
-    min-width: 200px;
-    border: 1px solid rgba(0,0,0,0.15);
-    border-radius: 4px;
-    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.1);
-    z-index: 1;
-    margin-top: 2px;
-    white-space: nowrap;
-    padding-top: 4px;
-    padding-bottom: 4px;
-  }
-  
-  .nav-dropdown-content hr {
-    margin-top: 4px;
-    margin-bottom: 4px;
-    border: none;
-    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
-  }
-  
-  .nav-dropdown-active {
-    display: block;
-  }
-  
-  .nav-dropdown-content a, .nav-dropdown-content .nav-dropdown-header {
-    color: black;
-    padding: 6px 24px;
-    text-decoration: none;
-    display: block;
-    text-align: left;
-  }
-  
-  .nav-dropdown-content .nav-dropdown-header {
-    display: block;
-    padding: 5px 24px;
-    padding-bottom: 0;
-    text-transform: uppercase;
-    font-size: 14px;
-    color: #999999;
-    white-space: nowrap;
-  }
-  
-  .nav-dropdown:hover .nav-dropbtn {
-    color: white;
-  }
-  
-  .nav-dropdown-content a:hover {
-    background-color: #ddd;
-    color: black;
-  }
-  
-  .nav-right .nav-dropdown-content {
-    margin-left: -45%;
-    right: 0;
-  }
-  
-  @media screen and (max-width: 768px) {
-    .radix-site-header a, .radix-site-header .nav-dropdown  {display: none;}
-    .radix-site-header a.nav-toggle {
-      float: right;
-      display: block;
-    }
-    .radix-site-header .title {
-      margin-left: 0;
-    }
-    .radix-site-header .nav-right {
-      margin-right: 0;
-    }
-    .radix-site-header {
-      overflow: hidden;
-    }
-    .nav-right .nav-dropdown-content {
-      margin-left: 0;
-    }
-  }
-  
-  
-  @media screen and (max-width: 768px) {
-    .radix-site-header.responsive {position: relative;}
-    .radix-site-header.responsive a.nav-toggle {
-      position: absolute;
-      right: 0;
-      top: 0;
-    }
-    .radix-site-header.responsive a,
-    .radix-site-header.responsive .nav-dropdown {
-      display: block;
-      text-align: left;
-    }
-    .radix-site-header.responsive .nav-left,
-    .radix-site-header.responsive .nav-right {
-      width: 100%;
-    }
-    .radix-site-header.responsive .nav-dropdown {float: none;}
-    .radix-site-header.responsive .nav-dropdown-content {position: relative;}
-    .radix-site-header.responsive .nav-dropdown .nav-dropbtn {
-      display: block;
-      width: 100%;
-      text-align: left;
-    }
-  }
-  
-  /* Site Footer */
-  
-  .radix-site-footer {
-    width: 100%;
-    overflow: hidden;
-    box-sizing: border-box;
-    z-index: 3;
-    margin-top: 30px;
-    padding-top: 30px;
-    padding-bottom: 30px;
-    text-align: center;
-  }
-  
-  /* Headroom */
-  
-  d-title {
-    padding-top: 6rem;
-  }
-  
-  @media print {
-    d-title {
-      padding-top: 4rem;
-    }
-  }
-  
-  .headroom {
-    z-index: 1000;
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-  }
-  
-  .headroom--transition {
-    transition: all .4s ease-in-out;
-  }
-  
-  .headroom--unpinned {
-    top: -100px;
-  }
-  
-  .headroom--pinned {
-    top: 0;
-  }
-  
-  </style>
-  
-  <link href="site_libs/font-awesome-5.1.0/css/all.css" rel="stylesheet"/>
-  <link href="site_libs/font-awesome-5.1.0/css/v4-shims.css" rel="stylesheet"/>
-  <script src="site_libs/headroom-0.9.4/headroom.min.js"></script>
+  <!--radix_placeholder_navigation_in_header-->
   <!--/radix_placeholder_navigation_in_header-->
   <!--radix_placeholder_distill-->
   
@@ -1256,459 +927,161 @@
   </script>
   
   <!--/radix_placeholder_distill-->
-  <script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
-  <script src="site_libs/bowser-1.9.3/bowser.min.js"></script>
-  <script src="site_libs/webcomponents-2.0.0/webcomponents.js"></script>
-  <script src="site_libs/distill-2.2.21/template.v2.js"></script>
+  <script src="why-we-should-never-use-barplots-use-geomquasirandom-instead_files/jquery-1.11.3/jquery.min.js"></script>
+  <script src="why-we-should-never-use-barplots-use-geomquasirandom-instead_files/bowser-1.9.3/bowser.min.js"></script>
+  <script src="why-we-should-never-use-barplots-use-geomquasirandom-instead_files/webcomponents-2.0.0/webcomponents.js"></script>
+  <script src="why-we-should-never-use-barplots-use-geomquasirandom-instead_files/distill-2.2.21/template.v2.js"></script>
   <!--radix_placeholder_site_in_header-->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-134721506-5"></script>
-  <script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-  gtag('config', 'UA-134721506-5');
-  </script>
-  <style type="text/css">
-  .radix-site-nav {
-    color: rgba(255, 255, 255, 0.8);
-    background-color: #383838;
-    font-size: 15px;
-    font-weight: 300;
-  }
-  
-  </style>
   <!--/radix_placeholder_site_in_header-->
 
-  <link rel="stylesheet" href="styles.css" type="text/css"/>
 
 </head>
 
-<body class="layout-listing">
+<body>
 
 <!--radix_placeholder_front_matter-->
 
 <script id="distill-front-matter" type="text/json">
-{"title":"Articles and posts","authors":[]}
+{"title":"Why barplots are terrible (use ggbeeswarm instead)","description":"A short description of the post.","authors":[{"author":"Hause Lin","authorURL":"#","affiliation":"&nbsp;","affiliationURL":"#"}],"publishedDate":"2019-02-22T00:00:00.000-05:00","citationText":"Lin, 2019"}
 </script>
 
 <!--/radix_placeholder_front_matter-->
 <!--radix_placeholder_navigation_before_body-->
-<header class="header header--fixed" role="banner">
-<nav class="radix-site-nav radix-site-header">
-<div class="nav-left">
-<a href="index.html" class="title">Data science with R</a>
-</div>
-<div class="nav-right">
-<a href="index.html">Home</a>
-<a href="https://hause.shinyapps.io/shinyapp_effectsize/">Effect size converter</a>
-<div class="nav-dropdown">
-<button class="nav-dropbtn">
-Tutorials
- 
-<span class="down-arrow">&#x25BE;</span>
-</button>
-<div class="nav-dropdown-content">
-<a href="0000_install.html">Install R and packages</a>
-<a href="0001_rbasics.html">R programming basics</a>
-<a href="0002_tidyverse_datatable.html">tidyverse and data.table</a>
-<a href="0003_ggplot_modelfitting.html">ggplot and model fitting</a>
-<a href="0004_dataform_join.html">long/wide form data and joining</a>
-</div>
-</div>
-<a href="articles.html">Articles</a>
-<a href="https://twitter.com/hauselin">
-<i class="fab fa-twitter"></i>
-</a>
-<a href="https://github.com/hauselin/rtutorialsite">
-<i class="fab fa-github"></i>
-</a>
-<a href="https://scholar.google.ca/citations?user=4_ZopI0AAAAJ&amp;hl=en">
-<i class="fab fa-google"></i>
-</a>
-<a href="articles.xml">
-<i class="fa fa-rss"></i>
-</a>
-<a href="javascript:void(0);" class="nav-toggle">&#9776;</a>
-</div>
-</nav>
-</header>
 <!--/radix_placeholder_navigation_before_body-->
 <!--radix_placeholder_site_before_body-->
 <!--/radix_placeholder_site_before_body-->
-<!--radix_placeholder_article_listing-->
-
-<style type="text/css">
-
-/* Styles for listing layout (hide title) */
-.layout-listing d-title, .layout-listing .d-title {
-  display: none;
-}
-
-/* Styles for posts lists (not auto-injected) */
-
-
-.posts-with-sidebar {
-  padding-left: 45px;
-  padding-right: 45px;
-}
-
-.posts-list .description h2,
-.posts-list .description p {
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", Arial, sans-serif;
-}
-
-.posts-list .description h2 {
-  font-weight: 700;
-  border-bottom: none;
-  padding-bottom: 0;
-}
-
-.posts-list h2.post-tag {
-  border-bottom: 1px solid rgba(0, 0, 0, 0.2);
-  padding-bottom: 12px;
-}
-.posts-list {
-  margin-top: 60px;
-  margin-bottom: 24px;
-}
-
-.posts-list .post-preview {
-  text-decoration: none;
-  overflow: hidden;
-  display: block;
-  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
-  padding: 24px 0;
-}
-
-.post-preview-last {
-  border-bottom: none !important;
-}
-
-.posts-list .posts-list-caption {
-  grid-column: screen;
-  font-weight: 400;
-}
-
-.posts-list .post-preview h2 {
-  margin: 0 0 6px 0;
-  line-height: 1.2em;
-  font-style: normal;
-  font-size: 24px;
-}
-
-.posts-list .post-preview p {
-  margin: 0 0 12px 0;
-  line-height: 1.4em;
-  font-size: 16px;
-}
-
-.posts-list .post-preview .thumbnail {
-  box-sizing: border-box;
-  margin-bottom: 24px;
-  position: relative;
-  max-width: 500px;
-}
-.posts-list .post-preview img {
-  width: 100%;
-  display: block;
-}
-
-.posts-list .metadata {
-  font-size: 12px;
-  line-height: 1.4em;
-  margin-bottom: 18px;
-}
-
-.posts-list .metadata > * {
-  display: inline-block;
-}
-
-.posts-list .metadata .publishedDate {
-  margin-right: 1em;
-}
-
-.posts-list .metadata .tags {
-  margin-top: 1em;
-}
-
-.posts-list .tags .tag {
-  color: rgba(0,0,0,0.67);
-  padding: 0.3em 0.5em;
-  margin: 0;
-  font-size: 80%;
-  border: 1px solid rgba(0,0,0,0.4);
-  border-radius: 3px;
-  text-transform: uppercase;
-  font-weight: 500;
-}
-
-.posts-list img {
-  opacity: 1;
-}
-
-.posts-list img[data-src] {
-  opacity: 0;
-}
-
-.posts-more {
-  clear: both;
-}
-
-
-.posts-sidebar {
-  font-size: 16px;
-}
-
-.posts-sidebar h3 {
-  font-size: 16px;
-  margin-top: 0;
-  margin-bottom: 0.5em;
-  font-weight: 400;
-  text-transform: uppercase;
-}
-
-.sidebar-section {
-  margin-bottom: 30px;
-}
-
-.categories ul {
-  list-style-type: none;
-  margin: 0;
-  padding: 0;
-}
-
-.categories li {
-  color: rgba(0, 0, 0, 0.8);
-  margin-bottom: 0;
-}
-
-.categories li>a {
-  border-bottom: none;
-}
-
-.categories li>a:hover {
-  border-bottom: 1px solid rgba(0, 0, 0, 0.4);
-}
-
-.categories .active {
-  font-weight: 600;
-}
-
-.categories .category-count {
-  color: rgba(0, 0, 0, 0.4);
-}
-
-
-@media(min-width: 768px) {
-  .posts-list .post-preview h2 {
-    font-size: 26px;
-  }
-  .posts-list .post-preview .thumbnail {
-    float: right;
-    width: 35%;
-    margin-bottom: 0;
-  }
-  .posts-list .post-preview .description {
-    float: left;
-    width: 45%;
-  }
-  .posts-list .post-preview .metadata {
-    float: left;
-    width: 15%;
-    margin-top: 8px;
-  }
-  .posts-list .post-preview p {
-    margin: 0 0 12px 0;
-    line-height: 1.5em;
-    font-size: 16px;
-  }
-  .posts-with-sidebar .posts-list {
-    float: left;
-    width: 72%;
-  }
-  .posts-with-sidebar .posts-sidebar {
-    float: right;
-    width: 20%;
-    margin-top: 60px;
-    padding-top: 24px;
-    padding-bottom: 24px;
-  }
-}
-
-.downlevel .posts-list .post-preview {
-  color: inherit;
-}
-
-</style>
-
-<script type="application/javascript">
-
-function init_posts_list() {
-
-  function load_image(img) {
-    var src = $(img).attr('data-src');
-    if (src) {
-      $(img).attr('src', src);
-      $(img).load(function() {
-        img.removeAttribute('data-src');
-      });
-    }
-  }
-
-  function set_posts_visible(posts, visible) {
-    if (visible) {
-
-      // show bottom border by default
-      $(posts).removeClass('post-preview-last');
-
-      // apply limits if need be
-      var max_posts = 25;
-      var apply_limits = $('.posts-container').hasClass('posts-apply-limit');
-      if (apply_limits && posts.length > max_posts) {
-        posts = $(posts).slice(0, max_posts);
-      } else {
-        $('.posts-more a').addClass('hidden');
-      }
-
-      // apply last style
-      $(posts.slice(-1)[0]).addClass('post-preview-last');
-
-      $(posts).removeClass('hidden');
-      $(posts).find('img[data-src]').each(function(i, img) {
-        load_image(img);
-      });
-    } else {
-      $(posts).addClass('hidden');
-    }
-  }
-
-  function apply_hash_filter() {
-
-    // clear active state
-    $('.categories .active').removeClass('active');
-
-    // mark all posts invisible to start
-    set_posts_visible($('.posts-list').children('a'), false);
-
-    // if we have a hash filter
-    if (window.location.hash) {
-
-      // mark posts that match the category visible
-      var page_category = window.location.hash.replace("#", "");
-      var posts = $('.post-metadata').map(function(idx, script) {
-        var metadata = $.parseJSON($(script).html());
-        var post = null;
-        $.each(metadata.categories, function(idx, category) {
-          category = category.replace(/ /g,"_");
-          if (category == page_category) {
-            post = $(script).parent().get();
-            return false;
-          }
-        });
-        return post;
-      });
-      set_posts_visible(posts, true);
-
-      // mark the hash active
-      $('.categories li>a[href="' + window.location.hash + '"]').addClass('active');
-
-    } else {
-
-      // no hash filter, make all posts visible (subject to max display)
-      set_posts_visible($('.posts-list').children(), true);
-
-    }
-  }
-
-  // more articles
-  function apply_post_limits(apply) {
-    if (apply) {
-      $('.posts-container').addClass('posts-apply-limit');
-      $('.posts-more a').removeClass('hidden');
-    } else {
-      $('.posts-container').removeClass('posts-apply-limit');
-      $('.posts-more a').addClass('hidden');
-    }
-  }
-
-  // hash filter handling
-  apply_hash_filter();
-  $(window).on('hashchange',function() {
-    apply_post_limits(true);
-    apply_hash_filter();
-  });
-
-  // more articles link
-  $('.posts-more a').click(function(e) {
-    e.preventDefault();
-    apply_post_limits(false);
-    apply_hash_filter();
-    return false;
-  });
-
-}
-
-</script>
-
-
-
-<div class="posts-container posts-with-sidebar posts-apply-limit l-screen-inset">
-<div class="posts-list">
-<h1 class="posts-list-caption">Articles and posts</h1>
-<a href="posts/2019-02-22-why-we-should-never-use-barplots-use-geomquasirandom-instead/" class="post-preview">
-<script class="post-metadata" type="text/json">{"categories":["data.table, gganimate"]}</script>
-<div class="metadata">
-<div class="publishedDate">Feb. 22, 2019</div>
-</div>
-<div class="thumbnail"></div>
-<div class="description">
-<h2>Why barplots are terrible (use ggbeeswarm instead)</h2>
-<p>A short description of the post.</p>
-</div>
-</a>
-<a href="posts/2019-02-18-fit-models-to-every-group/" class="post-preview">
-<script class="post-metadata" type="text/json">{"categories":["data.table"]}</script>
-<div class="metadata">
-<div class="publishedDate">Feb. 18, 2019</div>
-</div>
-<div class="thumbnail">
-<img/>
-</div>
-<div class="description">
-<h2>Fit the same statistical model to many groups with one simple line of code</h2>
-<p>How to use data.table package to fit a model to different groups in a dataset using only one line of code</p>
-</div>
-</a>
-</div>
-<div class="posts-sidebar">
-<div class="sidebar-section categories">
-<h3>Categories</h3>
-<ul>
-<li>
-<a href="#data.table">data.table</a>
-<span class="category-count">(1)</span>
-</li>
-<li>
-<a href="#data.table,_gganimate">data.table, gganimate</a>
-<span class="category-count">(1)</span>
-</li>
-</ul>
-</div>
-</div>
-<div class="posts-more">
-<a href="#">More articles &raquo;</a>
-</div>
-</div>
-<!--/radix_placeholder_article_listing-->
 
 <div class="d-title">
-<h1>Articles and posts</h1>
-
+<h1>Why barplots are terrible (use ggbeeswarm instead)</h1>
+<p>A short description of the post.</p>
 </div>
 
+<div class="d-byline">
+  Hause Lin  
+  
+<br/>02-22-2019
+</div>
 
 <div class="d-article">
+<p>Get source code for this RMarkdown script <a href="https://github.com/hauselin/rtutorialsite/blob/master/_posts/2019-02-18-fit-models-to-every-group/fit-models-to-every-group.Rmd">here</a>.</p>
+<div class="layout-chunk" data-layout="l-body">
+<pre class="r"><code>
+# load packages
+library(data.table); library(tidyverse); library(gganimate); 
+library(ggbeeswarm); library(rmarkdown); library(knitr)</code></pre>
+</div>
+<h2 id="randomly-generate-10-datasets">Randomly generate 10 datasets</h2>
+<p>Within each dataset, we have data from two groups, with 50 data points (e.g., subjects) per group. One group has mean 100 (sd = 15) and the other has mean 105 (sd = 45).</p>
+<div class="layout-chunk" data-layout="l-body-outset">
+<pre class="r"><code>
+# extend R&#39;s rnorm() function 
+# rnormFixed generates random data from a normal distribution 
+# but ensures mean and sd values are exactly what we wanted
+rnormFixed &lt;- function(n, mean, sd) {
+    mean + sd * scale(rnorm(n))
+}
 
+set.seed(1) # to ensure results/figures can be replicated
+n &lt;- 50 # datapoints per group
+datasets &lt;- 10
+
+# generate datasets
+dt1 &lt;- lapply(1:datasets, # loop iterator 
+              function(x) {data.table(
+                scores = c(rnormFixed(n = n, mean = 100, sd = 15), # mean of group 1
+                           rnormFixed(n = n, mean = 105, sd = 45)), # mean of group 2
+                group = rep(x = c(&quot;group 1&quot;, &quot;group 2&quot;), each = n), # condition label
+                dataset = x)})
+dt1 &lt;- bind_rows(dt1) # bind list containing separate datasets into a dataframe 
+dt1</code></pre>
+<pre><code>
+         scores   group dataset
+   1:  86.88524 group 1       1
+   2: 101.50100 group 1       1
+   3:  83.11131 group 1       1
+   4: 126.96975 group 1       1
+   5: 104.13269 group 1       1
+  ---                          
+ 996:  96.99936 group 2      10
+ 997:  73.10838 group 2      10
+ 998:  92.53620 group 2      10
+ 999:  47.75614 group 2      10
+1000:  80.82894 group 2      10</code></pre>
+</div>
+<div class="layout-chunk" data-layout="l-body">
+<pre class="r"><code>
+dt1[, .(scores = mean(scores), scores_stdev = sd(scores)), by = .(dataset, group)]</code></pre>
+<pre><code>
+    dataset   group scores scores_stdev
+ 1:       1 group 1    100           15
+ 2:       1 group 2    105           45
+ 3:       2 group 1    100           15
+ 4:       2 group 2    105           45
+ 5:       3 group 1    100           15
+ 6:       3 group 2    105           45
+ 7:       4 group 1    100           15
+ 8:       4 group 2    105           45
+ 9:       5 group 1    100           15
+10:       5 group 2    105           45
+11:       6 group 1    100           15
+12:       6 group 2    105           45
+13:       7 group 1    100           15
+14:       7 group 2    105           45
+15:       8 group 1    100           15
+16:       8 group 2    105           45
+17:       9 group 1    100           15
+18:       9 group 2    105           45
+19:      10 group 1    100           15
+20:      10 group 2    105           45</code></pre>
+</div>
+<h2 id="plotting">Plotting</h2>
+<p>Compare barplot, boxplot, violin plot, and plot with <code>geom_quasirandom()</code> from <code>ggbeeswarm</code> package.</p>
+<div class="layout-chunk" data-layout="l-body">
+<pre class="r"><code>
+# barplot
+plot_bar &lt;- ggplot(dt1, aes(group, scores)) + 
+    stat_summary(fun.y = mean, geom = &#39;bar&#39;, size = 6) +
+    stat_summary(fun.data = mean_cl_normal, geom = &#39;errorbar&#39;, width = 0, size = 1.1) +
+    transition_states(dataset) +
+    labs(title = &#39;Sample {closest_state}&#39;)
+plot_bar
+# anim_save(&quot;./attachments/plot_bar.gif&quot;, plot_bar)</code></pre>
+</div>
+<div class="layout-chunk" data-layout="l-body">
+<pre class="r"><code>
+plot_boxplot &lt;- ggplot(dt1, aes(group, scores)) + 
+    geom_boxplot() +
+    stat_summary(fun.y = mean, geom = &#39;point&#39;, shape = 95, size = 6) +
+    stat_summary(fun.data = mean_cl_normal, geom = &#39;errorbar&#39;, width = 0) +
+    transition_states(dataset) +
+    labs(title = &#39;Sample {closest_state}&#39;)
+plot_boxplot
+# anim_save(&quot;./attachments/plot_boxplot.gif&quot;, plot_boxplot)</code></pre>
+</div>
+<div class="layout-chunk" data-layout="l-body">
+<pre class="r"><code>
+plot_violin &lt;- ggplot(dt1, aes(group, scores)) +
+    geom_violin() +
+    stat_summary(fun.y = mean, geom = &#39;point&#39;, shape = 95, size = 6) +
+    stat_summary(fun.data = mean_cl_normal, geom = &#39;errorbar&#39;, width = 0, size = 1.1) +
+    scale_colour_viridis_d(begin = 0, end = 0.5) +
+    transition_states(dataset) +
+    labs(title = &#39;Sample {closest_state}&#39;)
+plot_violin
+# anim_save(&quot;./attachments/plot_violin.gif&quot;, plot_violin)</code></pre>
+</div>
+<div class="layout-chunk" data-layout="l-body">
+<pre class="r"><code>
+plot_dotdist &lt;- ggplot(dt1, aes(group, scores)) +
+    geom_quasirandom(alpha = 0.2) +
+    stat_summary(fun.y = mean, geom = &#39;point&#39;, shape = 95, size = 6) +
+    stat_summary(fun.data = mean_cl_normal, geom = &#39;errorbar&#39;, width = 0, size = 1.1) +
+    scale_colour_viridis_d(begin = 0, end = 0.5) +
+    transition_states(dataset) +
+    labs(title = &#39;Sample {closest_state}&#39;)
+plot_dotdist
+# anim_save(&quot;./attachments/plot_dotdist.gif&quot;, plot_dotdist)</code></pre>
+</div>
 <!--radix_placeholder_article_footer-->
 <!--/radix_placeholder_article_footer-->
 </div>
@@ -1722,16 +1095,10 @@ function init_posts_list() {
 <!--radix_placeholder_appendices-->
 <div class="appendix-bottom">
 <h3 id="updates-and-corrections">Corrections</h3>
-<p>If you see mistakes or want to suggest changes, please <a href="https://github.com/hauselin/rtutorialsite/issues/new">create an issue</a> on the source repository.</p>
-<h3 id="reuse">Reuse</h3>
-<p>Text and figures are licensed under Creative Commons Attribution <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>. Source code is available at <a href="https://github.com/hauselin/rtutorialsite">https://github.com/hauselin/rtutorialsite</a>, unless otherwise noted. The figures that have been reused from other sources don't fall under this license and can be recognized by a note in their caption: "Figure from ...".</p>
+<p>If you see mistakes or want to suggest changes, please <a href="https://github.com/hauselin/rtutorialsite/blob/master/_posts/2019-02-18-fit-models-to-every-group/fit-models-to-every-group.Rmd/issues/new">create an issue</a> on the source repository.</p>
 </div>
 <!--/radix_placeholder_appendices-->
 <!--radix_placeholder_navigation_after_body-->
-<div class="radix-site-nav radix-site-footer">
-<p>Created and managed by <a href="mailto:hauselin@gmail.com">Hause Lin</a></p>
-<p>Created with <a href="https://rstudio.github.io/radix/" target="_blank" rel="noopener noreferrer">Radix</a> in <a href="https://www.rstudio.com/" target="_blank" rel="noopener noreferrer">RStudio</a></p>
-</div>
 <!--/radix_placeholder_navigation_after_body-->
 
 </body>
