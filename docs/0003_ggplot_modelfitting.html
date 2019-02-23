@@ -2029,19 +2029,19 @@ anova_classGender &lt;- aov(grades ~ class * gender, data = df1)
 summary(anova_classGender)</code></pre>
 <pre><code>
              Df Sum Sq Mean Sq F value   Pr(&gt;F)    
-class         3   5821  1940.4  10.797 4.66e-05 ***
-gender        1     88    88.3   0.492   0.4883    
-class:gender  3   1561   520.3   2.895   0.0503 .  
-Residuals    32   5751   179.7                     
+class         3   5821  1940.4   9.476 0.000125 ***
+gender        1    184   183.7   0.897 0.350687    
+class:gender  3    664   221.3   1.081 0.371265    
+Residuals    32   6552   204.8                     
 ---
 Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
 <pre class="r"><code>
 summaryh(anova_classGender)</code></pre>
 <pre><code>
-           term                              results
-1:        class F(3, 32) = 10.80, p &lt; .001, r = 0.71
-2:       gender  F(1, 32) = 0.49, p = .488, r = 0.12
-3: class:gender  F(3, 32) = 2.90, p = .050, r = 0.46</code></pre>
+           term                             results
+1:        class F(3, 32) = 9.48, p &lt; .001, r = 0.69
+2:       gender F(1, 32) = 0.90, p = .351, r = 0.17
+3: class:gender F(3, 32) = 1.08, p = .371, r = 0.30</code></pre>
 </div>
 <h3 id="specify-contrasts-resources">Specify contrasts resources</h3>
 <ul>
@@ -2077,18 +2077,18 @@ ttest_gender</code></pre>
     Welch Two Sample t-test
 
 data:  iq by gender
-t = 1.8802, df = 37.973, p-value = 0.06777
+t = -0.63543, df = 35.262, p-value = 0.5293
 alternative hypothesis: true difference in means is not equal to 0
 95 percent confidence interval:
- -0.4436059 12.0063548
+ -8.648794  4.524447
 sample estimates:
 mean in group female   mean in group male 
-            112.1538             106.3725 </code></pre>
+            108.2735             110.3357 </code></pre>
 <pre class="r"><code>
 summaryh(ttest_gender)</code></pre>
 <pre><code>
-                            results
-1: t(38) = 1.88, p = .068, r = 0.29</code></pre>
+                             results
+1: t(35) = −0.64, p = .529, r = 0.11</code></pre>
 </div>
 <p>class a vs. class d</p>
 <div class="layout-chunk" data-layout="l-body">

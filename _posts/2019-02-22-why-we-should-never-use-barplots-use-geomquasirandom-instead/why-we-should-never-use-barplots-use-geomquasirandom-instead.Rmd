@@ -1,7 +1,7 @@
 ---
-title: "Why barplots are terrible (use ggbeeswarm instead)"
+title: "Why bar (dynamite) plots are terrible (use ggbeeswarm instead)"
 description: |
-  Why are barplots so bad? Comparing four different types of plots: barplot, boxplot, violinplot, and geom_quasirandom plot
+  Why are barplots or dynamite plots so bad? Comparing four different types of plots: barplot, boxplot, violinplot, and geom_quasirandom plot
 preview: https://raw.githubusercontent.com/hauselin/rtutorialsite/master/docs/attachments/plot_dotdist.gif
 author:
   - name: Hause Lin
@@ -17,6 +17,7 @@ categories:
 repository_url: https://github.com/hauselin/rtutorialsite/blob/master/_posts/2019-02-22-why-we-should-never-use-barplots-use-geomquasirandom-instead/why-we-should-never-use-barplots-use-geomquasirandom-instead.Rmd
 editor_options: 
   chunk_output_type: console
+bibliography: biblio.bib
 ---
 
 ```{r setup, include=FALSE}
@@ -28,11 +29,15 @@ Get source code for this RMarkdown script [here](https://github.com/hauselin/rtu
 
 ## Dynamite or bar plots must die?
 
-A [recent open letter to journal editors](https://simplystatistics.org/2019/02/21/dynamite-plots-must-die/) said that "dynamite plots must die". 
+A [recent open letter to journal editors](https://simplystatistics.org/2019/02/21/dynamite-plots-must-die/) said that "dynamite plots must die".
 
-> Statisticians have been pointing out the problem with dynamite plots, also known as bar and line graphs, for years. Karl Broman lists them as one of the top ten worst graphs. The problem has even been documneted in the peer reviewed literature. For example, this British Journal of Pharmacology paper titled Show the data, don’t conceal them was published in 2011.
+> Statisticians have been pointing out the problem with dynamite plots^[[simply statistics site](https://simplystatistics.org/2019/02/21/dynamite-plots-must-die/)], also known as bar and line graphs, for years. Karl Broman lists them as one of the top ten worst graphs^[Check out the top 10 worst graphs [here](https://www.biostat.wisc.edu/~kbroman/topten_worstgraphs)]. The problem has even been documented in the peer reviewed literature.
 
-Here, I'm simulating datasets to compare barplots (dynamite plots), boxplots, violin plots, and another kind of plot I prefer ([ggbeeswarm](https://github.com/eclarke/ggbeeswarm)). 
+> One of my professional pet peeves is dynamite plots. Sometimes they are incorrectly referred to as bar plots. Dynamite plots do not have a formal name because they are not a part of conventional statistical graphics that should be used in reporting scientific results. But they are everywhere! ~ Tatsuki Koyama (Vanderbilt Biostatistics)
+
+> Graphics reveal data, communicate complex ideas and dependencies with clarity, precision and efficiency. ~ Edward Tufte
+
+Many others have also suggested we need to plot better [@drummond2011;@Weissgerber2015]. Here, I'm simulating datasets to compare barplots (dynamite plots), boxplots, violin plots, and another kind of plot I prefer ([ggbeeswarm](https://github.com/eclarke/ggbeeswarm)). 
 
 ```{r loading packages, results="hide", message=FALSE, warning=FALSE}
 # load packages

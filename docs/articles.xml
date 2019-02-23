@@ -9,10 +9,10 @@
     <generator>Radix</generator>
     <lastBuildDate>Fri, 22 Feb 2019 00:00:00 +0000</lastBuildDate>
     <item>
-      <title>Why barplots are terrible (use ggbeeswarm instead)</title>
+      <title>Why bar (dynamite) plots are terrible (use ggbeeswarm instead)</title>
       <dc:creator>Hause Lin</dc:creator>
       <link>https://hausetutorials.netlify.com/posts/2019-02-22-why-we-should-never-use-barplots-use-geomquasirandom-instead</link>
-      <description>Why are barplots so bad? Comparing four different types of plots: barplot, boxplot, violinplot, and geom_quasirandom plot</description>
+      <description>Why are barplots or dynamite plots so bad? Comparing four different types of plots: barplot, boxplot, violinplot, and geom_quasirandom plot</description>
       <guid>https://hausetutorials.netlify.com/posts/2019-02-22-why-we-should-never-use-barplots-use-geomquasirandom-instead</guid>
       <pubDate>Fri, 22 Feb 2019 00:00:00 +0000</pubDate>
       <media:content url="https://raw.githubusercontent.com/hauselin/rtutorialsite/master/docs/attachments/plot_dotdist.gif" medium="image" type="image/gif"/>
