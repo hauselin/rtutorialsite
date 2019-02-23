@@ -1447,7 +1447,7 @@ plot_bar &lt;- ggplot(dt1, aes(group, scores)) +
     stat_summary(fun.y = mean, geom = &#39;bar&#39;, size = 6) +
     stat_summary(fun.data = mean_cl_normal, geom = &#39;errorbar&#39;, width = 0, size = 1.1) +
     transition_states(dataset) +
-    labs(title = &#39;Sample {closest_state}&#39;)
+    labs(x = &#39;Sample {closest_state}&#39;)
 plot_bar
 # anim_save(&quot;./attachments/plot_bar.gif&quot;, plot_bar)</code></pre>
 </div>
@@ -1458,7 +1458,7 @@ plot_boxplot &lt;- ggplot(dt1, aes(group, scores)) +
     stat_summary(fun.y = mean, geom = &#39;point&#39;, shape = 95, size = 6) +
     stat_summary(fun.data = mean_cl_normal, geom = &#39;errorbar&#39;, width = 0) +
     transition_states(dataset) +
-    labs(title = &#39;Sample {closest_state}&#39;)
+    labs(x = &#39;Sample {closest_state}&#39;)
 plot_boxplot
 # anim_save(&quot;./attachments/plot_boxplot.gif&quot;, plot_boxplot)</code></pre>
 </div>
@@ -1470,7 +1470,7 @@ plot_violin &lt;- ggplot(dt1, aes(group, scores)) +
     stat_summary(fun.data = mean_cl_normal, geom = &#39;errorbar&#39;, width = 0, size = 1.1) +
     scale_colour_viridis_d(begin = 0, end = 0.5) +
     transition_states(dataset) +
-    labs(title = &#39;Sample {closest_state}&#39;)
+    labs(x = &#39;Sample {closest_state}&#39;)
 plot_violin
 # anim_save(&quot;./attachments/plot_violin.gif&quot;, plot_violin)</code></pre>
 </div>
@@ -1482,9 +1482,12 @@ plot_dotdist &lt;- ggplot(dt1, aes(group, scores)) +
     stat_summary(fun.data = mean_cl_normal, geom = &#39;errorbar&#39;, width = 0, size = 1.1) +
     scale_colour_viridis_d(begin = 0, end = 0.5) +
     transition_states(dataset) +
-    labs(title = &#39;Sample {closest_state}&#39;)
+    labs(x = &#39;Sample {closest_state}&#39;)
 plot_dotdist
 # anim_save(&quot;./attachments/plot_dotdist.gif&quot;, plot_dotdist)</code></pre>
+</div>
+<div class="layout-chunk" data-layout="l-body">
+<p><img src="https://raw.githubusercontent.com/hauselin/rtutorialsite/master/attachments/plot_bar.gif" width="50%" /><img src="https://raw.githubusercontent.com/hauselin/rtutorialsite/master/attachments/plot_boxplot.gif" width="50%" /><img src="https://raw.githubusercontent.com/hauselin/rtutorialsite/master/attachments/plot_violin.gif" width="50%" /><img src="https://raw.githubusercontent.com/hauselin/rtutorialsite/master/attachments/plot_dotdist.gif" width="50%" /></p>
 </div>
 <!--radix_placeholder_article_footer-->
 <div class="article-footer">

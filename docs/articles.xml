@@ -15,6 +15,7 @@
       <description>A short description of the post.</description>
       <guid>https://hausetutorials.netlify.com/posts/2019-02-22-why-we-should-never-use-barplots-use-geomquasirandom-instead</guid>
       <pubDate>Fri, 22 Feb 2019 00:00:00 +0000</pubDate>
+      <media:content url="https://raw.githubusercontent.com/hauselin/rtutorialsite/master/attachments/plot_bar.gif" medium="image" type="image/gif"/>
     </item>
     <item>
       <title>Fit the same statistical model to many groups with one simple line of code</title>

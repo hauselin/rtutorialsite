@@ -72,7 +72,7 @@ plot_bar <- ggplot(dt1, aes(group, scores)) +
     stat_summary(fun.y = mean, geom = 'bar', size = 6) +
     stat_summary(fun.data = mean_cl_normal, geom = 'errorbar', width = 0, size = 1.1) +
     transition_states(dataset) +
-    labs(title = 'Sample {closest_state}')
+    labs(x = 'Sample {closest_state}')
 plot_bar
 # anim_save("./attachments/plot_bar.gif", plot_bar)
 ```
@@ -83,7 +83,7 @@ plot_boxplot <- ggplot(dt1, aes(group, scores)) +
     stat_summary(fun.y = mean, geom = 'point', shape = 95, size = 6) +
     stat_summary(fun.data = mean_cl_normal, geom = 'errorbar', width = 0) +
     transition_states(dataset) +
-    labs(title = 'Sample {closest_state}')
+    labs(x = 'Sample {closest_state}')
 plot_boxplot
 # anim_save("./attachments/plot_boxplot.gif", plot_boxplot)
 ```
@@ -95,7 +95,7 @@ plot_violin <- ggplot(dt1, aes(group, scores)) +
     stat_summary(fun.data = mean_cl_normal, geom = 'errorbar', width = 0, size = 1.1) +
     scale_colour_viridis_d(begin = 0, end = 0.5) +
     transition_states(dataset) +
-    labs(title = 'Sample {closest_state}')
+    labs(x = 'Sample {closest_state}')
 plot_violin
 # anim_save("./attachments/plot_violin.gif", plot_violin)
 ```
@@ -107,14 +107,14 @@ plot_dotdist <- ggplot(dt1, aes(group, scores)) +
     stat_summary(fun.data = mean_cl_normal, geom = 'errorbar', width = 0, size = 1.1) +
     scale_colour_viridis_d(begin = 0, end = 0.5) +
     transition_states(dataset) +
-    labs(title = 'Sample {closest_state}')
+    labs(x = 'Sample {closest_state}')
 plot_dotdist
 # anim_save("./attachments/plot_dotdist.gif", plot_dotdist)
 ```
 
 ```{r, out.width="50%", echo=FALSE}
-knitr::include_graphics(c("./figure-html5/unnamed-chunk-2-1.gif", 
-                          "./figure-html5/unnamed-chunk-3-1.gif", 
-                          "./figure-html5/unnamed-chunk-3-1.gif", 
-                          "./figure-html5/unnamed-chunk-4-1.gif"))
+knitr::include_graphics(c("https://raw.githubusercontent.com/hauselin/rtutorialsite/master/attachments/plot_bar.gif", 
+                          "https://raw.githubusercontent.com/hauselin/rtutorialsite/master/attachments/plot_boxplot.gif", 
+                          "https://raw.githubusercontent.com/hauselin/rtutorialsite/master/attachments/plot_violin.gif", 
+                          "https://raw.githubusercontent.com/hauselin/rtutorialsite/master/attachments/plot_dotdist.gif"))
 ```
