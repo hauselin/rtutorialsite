@@ -1,7 +1,8 @@
 ---
 title: "Why barplots are terrible (use ggbeeswarm instead)"
 description: |
-  A short description of the post.
+  Why are barplots so bad? Comparing four different types of plots: barplot, boxplot, violinplot, and geom_quasirandom plot
+preview: https://raw.githubusercontent.com/hauselin/rtutorialsite/master/docs/attachments/plot_dotdist.gif
 author:
   - name: Hause Lin
 date: 02-22-2019
@@ -10,8 +11,10 @@ output:
     self_contained: false
 draft: false
 categories: 
-  - data.table, gganimate
-repository_url: https://github.com/hauselin/rtutorialsite/blob/master/_posts/2019-02-18-fit-models-to-every-group/fit-models-to-every-group.Rmd
+  - ggbeeswarm
+  - ggplot2
+  - gganimate
+repository_url: https://github.com/hauselin/rtutorialsite/blob/master/_posts/2019-02-22-why-we-should-never-use-barplots-use-geomquasirandom-instead/why-we-should-never-use-barplots-use-geomquasirandom-instead.Rmd
 editor_options: 
   chunk_output_type: console
 ---
@@ -21,7 +24,15 @@ library(roxygen2)
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-Get source code for this RMarkdown script [here](https://github.com/hauselin/rtutorialsite/blob/master/_posts/2019-02-18-fit-models-to-every-group/fit-models-to-every-group.Rmd).
+Get source code for this RMarkdown script [here](https://github.com/hauselin/rtutorialsite/blob/master/_posts/2019-02-22-why-we-should-never-use-barplots-use-geomquasirandom-instead/why-we-should-never-use-barplots-use-geomquasirandom-instead.Rmd).
+
+## Dynamite or bar plots must die?
+
+A [recent open letter to journal editors](https://simplystatistics.org/2019/02/21/dynamite-plots-must-die/) said that "dynamite plots must die". 
+
+> Statisticians have been pointing out the problem with dynamite plots, also known as bar and line graphs, for years. Karl Broman lists them as one of the top ten worst graphs. The problem has even been documneted in the peer reviewed literature. For example, this British Journal of Pharmacology paper titled Show the data, don’t conceal them was published in 2011.
+
+Here, I'm simulating datasets to compare barplots (dynamite plots), boxplots, violin plots, and another kind of plot I prefer ([ggbeeswarm](https://github.com/eclarke/ggbeeswarm)). 
 
 ```{r loading packages, results="hide", message=FALSE, warning=FALSE}
 # load packages
@@ -29,7 +40,7 @@ library(data.table); library(tidyverse); library(gganimate);
 library(ggbeeswarm); library(rmarkdown); library(knitr)
 ```
 
-## Randomly generate 10 datasets
+## Randomly generate 10 datasets with same mean and sd
 
 Within each dataset, we have data from two groups, with 50 data points (e.g., subjects) per group. One group has mean 100 (sd = 15) and the other has mean 105 (sd = 45). 
 
@@ -62,8 +73,7 @@ Compute mean and standard deviation for each dataset and group.
 dt1[, .(scores = mean(scores), scores_stdev = sd(scores)), by = .(dataset, group)]
 ```
 
-
-## Plotting
+## R code to generate four figures below
 
 Compare barplot, boxplot, violin plot, and plot with `geom_quasirandom()` from `ggbeeswarm` package.
 
@@ -101,7 +111,7 @@ plot_violin
 # anim_save("./attachments/plot_violin.gif", plot_violin)
 ```
 
-```{r, eval=FALSE}
+```{r, eval=FALSE, preview=TRUE}
 plot_dotdist <- ggplot(dt1, aes(group, scores)) +
     geom_quasirandom(alpha = 0.2) +
     stat_summary(fun.y = mean, geom = 'point', shape = 95, size = 6) +
@@ -113,9 +123,18 @@ plot_dotdist
 # anim_save("./attachments/plot_dotdist.gif", plot_dotdist)
 ```
 
+## Comparing bar plots, boxplots, violin plots, and `geom_quasirandom()` plots
+
+Note what happens in the four figures below.
+
+* Barplots hide data. Means and standard deviation don't change across the 10 datasets.
+* Boxplot are slightly more informative and shows the outliers.
+* Violin plots are also informative. They show the distributions.
+* `geom_quasirandom` from [ggbeeswarm](https://github.com/eclarke/ggbeeswarm) package plots the distribution and dots. Such plots are most informative.
+
 ```{r, out.width="50%", echo=FALSE}
-knitr::include_graphics(c("https://raw.githubusercontent.com/hauselin/rtutorialsite/master/attachments/plot_bar.gif", 
-                          "https://raw.githubusercontent.com/hauselin/rtutorialsite/master/attachments/plot_boxplot.gif", 
-                          "https://raw.githubusercontent.com/hauselin/rtutorialsite/master/attachments/plot_violin.gif", 
-                          "https://raw.githubusercontent.com/hauselin/rtutorialsite/master/attachments/plot_dotdist.gif"))
+knitr::include_graphics(c("https://raw.githubusercontent.com/hauselin/rtutorialsite/master/docs/attachments/plot_bar.gif", 
+                          "https://raw.githubusercontent.com/hauselin/rtutorialsite/master/docs/attachments/plot_boxplot.gif", 
+                          "https://raw.githubusercontent.com/hauselin/rtutorialsite/master/docs/attachments/plot_violin.gif", 
+                          "https://raw.githubusercontent.com/hauselin/rtutorialsite/master/docs/attachments/plot_dotdist.gif"))
 ```

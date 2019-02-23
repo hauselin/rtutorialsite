@@ -21,7 +21,7 @@
   <!--radix_placeholder_meta_tags-->
 <title>Data science with R: Why barplots are terrible (use ggbeeswarm instead)</title>
 
-<meta property="description" itemprop="description" content="A short description of the post."/>
+<meta property="description" itemprop="description" content="Why are barplots so bad? Comparing four different types of plots: barplot, boxplot, violinplot, and geom_quasirandom plot"/>
 
 <link rel="canonical" href="https://hausetutorials.netlify.com/posts/2019-02-22-why-we-should-never-use-barplots-use-geomquasirandom-instead/"/>
 <link rel="license" href="https://creativecommons.org/licenses/by/4.0/"/>
@@ -34,7 +34,7 @@
 <!--  https://developers.facebook.com/docs/sharing/webmasters#markup -->
 <meta property="og:title" content="Data science with R: Why barplots are terrible (use ggbeeswarm instead)"/>
 <meta property="og:type" content="article"/>
-<meta property="og:description" content="A short description of the post."/>
+<meta property="og:description" content="Why are barplots so bad? Comparing four different types of plots: barplot, boxplot, violinplot, and geom_quasirandom plot"/>
 <meta property="og:url" content="https://hausetutorials.netlify.com/posts/2019-02-22-why-we-should-never-use-barplots-use-geomquasirandom-instead/"/>
 <meta property="og:locale" content="en_US"/>
 <meta property="og:site_name" content="Data science with R"/>
@@ -42,7 +42,7 @@
 <!--  https://dev.twitter.com/cards/types/summary -->
 <meta property="twitter:card" content="summary"/>
 <meta property="twitter:title" content="Data science with R: Why barplots are terrible (use ggbeeswarm instead)"/>
-<meta property="twitter:description" content="A short description of the post."/>
+<meta property="twitter:description" content="Why are barplots so bad? Comparing four different types of plots: barplot, boxplot, violinplot, and geom_quasirandom plot"/>
 <meta property="twitter:url" content="https://hausetutorials.netlify.com/posts/2019-02-22-why-we-should-never-use-barplots-use-geomquasirandom-instead/"/>
 
 <!--  https://scholar.google.com/intl/en/scholar/inclusion.html#indexing -->
@@ -56,7 +56,7 @@
   <!--radix_placeholder_rmarkdown_metadata-->
 
 <script type="text/json" id="radix-rmarkdown-metadata">
-{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["creative_commons","title","description","author","date","output","draft","categories","repository_url","editor_options","citation_url","canonical_url"]}},"value":[{"type":"character","attributes":{},"value":["CC BY"]},{"type":"character","attributes":{},"value":["Why barplots are terrible (use ggbeeswarm instead)"]},{"type":"character","attributes":{},"value":["A short description of the post."]},{"type":"list","attributes":{},"value":[{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name"]}},"value":[{"type":"character","attributes":{},"value":["Hause Lin"]}]}]},{"type":"character","attributes":{},"value":["02-22-2019"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["radix::radix_article"]}},"value":[{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["self_contained"]}},"value":[{"type":"logical","attributes":{},"value":[false]}]}]},{"type":"logical","attributes":{},"value":[false]},{"type":"character","attributes":{},"value":["data.table, gganimate"]},{"type":"character","attributes":{},"value":["https://github.com/hauselin/rtutorialsite/blob/master/_posts/2019-02-18-fit-models-to-every-group/fit-models-to-every-group.Rmd"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["chunk_output_type"]}},"value":[{"type":"character","attributes":{},"value":["console"]}]},{"type":"character","attributes":{},"value":["https://hausetutorials.netlify.com/posts/2019-02-22-why-we-should-never-use-barplots-use-geomquasirandom-instead/"]},{"type":"character","attributes":{},"value":["https://hausetutorials.netlify.com/posts/2019-02-22-why-we-should-never-use-barplots-use-geomquasirandom-instead/"]}]}
+{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["creative_commons","title","description","preview","author","date","output","draft","categories","repository_url","editor_options","citation_url","canonical_url"]}},"value":[{"type":"character","attributes":{},"value":["CC BY"]},{"type":"character","attributes":{},"value":["Why barplots are terrible (use ggbeeswarm instead)"]},{"type":"character","attributes":{},"value":["Why are barplots so bad? Comparing four different types of plots: barplot, boxplot, violinplot, and geom_quasirandom plot"]},{"type":"character","attributes":{},"value":["https://raw.githubusercontent.com/hauselin/rtutorialsite/master/docs/attachments/plot_dotdist.gif"]},{"type":"list","attributes":{},"value":[{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name"]}},"value":[{"type":"character","attributes":{},"value":["Hause Lin"]}]}]},{"type":"character","attributes":{},"value":["02-22-2019"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["radix::radix_article"]}},"value":[{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["self_contained"]}},"value":[{"type":"logical","attributes":{},"value":[false]}]}]},{"type":"logical","attributes":{},"value":[false]},{"type":"character","attributes":{},"value":["ggbeeswarm","ggplot2","gganimate"]},{"type":"character","attributes":{},"value":["https://github.com/hauselin/rtutorialsite/blob/master/_posts/2019-02-22-why-we-should-never-use-barplots-use-geomquasirandom-instead/why-we-should-never-use-barplots-use-geomquasirandom-instead.Rmd"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["chunk_output_type"]}},"value":[{"type":"character","attributes":{},"value":["console"]}]},{"type":"character","attributes":{},"value":["https://hausetutorials.netlify.com/posts/2019-02-22-why-we-should-never-use-barplots-use-geomquasirandom-instead/"]},{"type":"character","attributes":{},"value":["https://hausetutorials.netlify.com/posts/2019-02-22-why-we-should-never-use-barplots-use-geomquasirandom-instead/"]}]}
 </script>
 <!--/radix_placeholder_rmarkdown_metadata-->
   
@@ -1307,7 +1307,7 @@ gtag('config', 'UA-134721506-5');
 <!--radix_placeholder_front_matter-->
 
 <script id="distill-front-matter" type="text/json">
-{"title":"Why barplots are terrible (use ggbeeswarm instead)","description":"A short description of the post.","authors":[{"author":"Hause Lin","authorURL":"#","affiliation":"&nbsp;","affiliationURL":"#"}],"publishedDate":"2019-02-22T00:00:00.000-05:00","citationText":"Lin, 2019"}
+{"title":"Why barplots are terrible (use ggbeeswarm instead)","description":"Why are barplots so bad? Comparing four different types of plots: barplot, boxplot, violinplot, and geom_quasirandom plot","authors":[{"author":"Hause Lin","authorURL":"#","affiliation":"&nbsp;","affiliationURL":"#"}],"publishedDate":"2019-02-22T00:00:00.000-05:00","citationText":"Lin, 2019"}
 </script>
 
 <!--/radix_placeholder_front_matter-->
@@ -1357,7 +1357,7 @@ Tutorials
 
 <div class="d-title">
 <h1>Why barplots are terrible (use ggbeeswarm instead)</h1>
-<p>A short description of the post.</p>
+<p>Why are barplots so bad? Comparing four different types of plots: barplot, boxplot, violinplot, and geom_quasirandom plot</p>
 </div>
 
 <div class="d-byline">
@@ -1367,14 +1367,20 @@ Tutorials
 </div>
 
 <div class="d-article">
-<p>Get source code for this RMarkdown script <a href="https://github.com/hauselin/rtutorialsite/blob/master/_posts/2019-02-18-fit-models-to-every-group/fit-models-to-every-group.Rmd">here</a>.</p>
+<p>Get source code for this RMarkdown script <a href="https://github.com/hauselin/rtutorialsite/blob/master/_posts/2019-02-22-why-we-should-never-use-barplots-use-geomquasirandom-instead/why-we-should-never-use-barplots-use-geomquasirandom-instead.Rmd">here</a>.</p>
+<h2 id="dynamite-or-bar-plots-must-die">Dynamite or bar plots must die?</h2>
+<p>A <a href="https://simplystatistics.org/2019/02/21/dynamite-plots-must-die/">recent open letter to journal editors</a> said that “dynamite plots must die”.</p>
+<blockquote>
+<p>Statisticians have been pointing out the problem with dynamite plots, also known as bar and line graphs, for years. Karl Broman lists them as one of the top ten worst graphs. The problem has even been documneted in the peer reviewed literature. For example, this British Journal of Pharmacology paper titled Show the data, don’t conceal them was published in 2011.</p>
+</blockquote>
+<p>Here, I’m simulating datasets to compare barplots (dynamite plots), boxplots, violin plots, and another kind of plot I prefer (<a href="https://github.com/eclarke/ggbeeswarm">ggbeeswarm</a>).</p>
 <div class="layout-chunk" data-layout="l-body">
 <pre class="r"><code>
 # load packages
 library(data.table); library(tidyverse); library(gganimate); 
 library(ggbeeswarm); library(rmarkdown); library(knitr)</code></pre>
 </div>
-<h2 id="randomly-generate-10-datasets">Randomly generate 10 datasets</h2>
+<h2 id="randomly-generate-10-datasets-with-same-mean-and-sd">Randomly generate 10 datasets with same mean and sd</h2>
 <p>Within each dataset, we have data from two groups, with 50 data points (e.g., subjects) per group. One group has mean 100 (sd = 15) and the other has mean 105 (sd = 45).</p>
 <div class="layout-chunk" data-layout="l-body-outset">
 <pre class="r"><code>
@@ -1412,6 +1418,7 @@ dt1</code></pre>
  999:  47.75614 group 2      10
 1000:  80.82894 group 2      10</code></pre>
 </div>
+<p>Compute mean and standard deviation for each dataset and group.</p>
 <div class="layout-chunk" data-layout="l-body">
 <pre class="r"><code>
 dt1[, .(scores = mean(scores), scores_stdev = sd(scores)), by = .(dataset, group)]</code></pre>
@@ -1438,7 +1445,7 @@ dt1[, .(scores = mean(scores), scores_stdev = sd(scores)), by = .(dataset, group
 19:      10 group 1    100           15
 20:      10 group 2    105           45</code></pre>
 </div>
-<h2 id="plotting">Plotting</h2>
+<h2 id="r-code-to-generate-four-figures-below">R code to generate four figures below</h2>
 <p>Compare barplot, boxplot, violin plot, and plot with <code>geom_quasirandom()</code> from <code>ggbeeswarm</code> package.</p>
 <div class="layout-chunk" data-layout="l-body">
 <pre class="r"><code>
@@ -1486,8 +1493,16 @@ plot_dotdist &lt;- ggplot(dt1, aes(group, scores)) +
 plot_dotdist
 # anim_save(&quot;./attachments/plot_dotdist.gif&quot;, plot_dotdist)</code></pre>
 </div>
+<h2 id="comparing-bar-plots-boxplots-violin-plots-and-geom_quasirandom-plots">Comparing bar plots, boxplots, violin plots, and <code>geom_quasirandom()</code> plots</h2>
+<p>Note what happens in the four figures below.</p>
+<ul>
+<li>Barplots hide data. Means and standard deviation don’t change across the 10 datasets.</li>
+<li>Boxplot are slightly more informative and shows the outliers.</li>
+<li>Violin plots are also informative. They show the distributions.</li>
+<li><code>geom_quasirandom</code> from <a href="https://github.com/eclarke/ggbeeswarm">ggbeeswarm</a> package plots the distribution and dots. Such plots are most informative.</li>
+</ul>
 <div class="layout-chunk" data-layout="l-body">
-<p><img src="https://raw.githubusercontent.com/hauselin/rtutorialsite/master/attachments/plot_bar.gif" width="50%" /><img src="https://raw.githubusercontent.com/hauselin/rtutorialsite/master/attachments/plot_boxplot.gif" width="50%" /><img src="https://raw.githubusercontent.com/hauselin/rtutorialsite/master/attachments/plot_violin.gif" width="50%" /><img src="https://raw.githubusercontent.com/hauselin/rtutorialsite/master/attachments/plot_dotdist.gif" width="50%" /></p>
+<p><img src="https://raw.githubusercontent.com/hauselin/rtutorialsite/master/docs/attachments/plot_bar.gif" width="50%" /><img src="https://raw.githubusercontent.com/hauselin/rtutorialsite/master/docs/attachments/plot_boxplot.gif" width="50%" /><img src="https://raw.githubusercontent.com/hauselin/rtutorialsite/master/docs/attachments/plot_violin.gif" width="50%" /><img src="https://raw.githubusercontent.com/hauselin/rtutorialsite/master/docs/attachments/plot_dotdist.gif" width="50%" /></p>
 </div>
 <!--radix_placeholder_article_footer-->
 <div class="article-footer">
@@ -1540,9 +1555,9 @@ var disqus_config = function () {
 <!--radix_placeholder_appendices-->
 <div class="appendix-bottom">
   <h3 id="updates-and-corrections">Corrections</h3>
-  <p>If you see mistakes or want to suggest changes, please <a href="https://github.com/hauselin/rtutorialsite/blob/master/_posts/2019-02-18-fit-models-to-every-group/fit-models-to-every-group.Rmd/issues/new">create an issue</a> on the source repository.</p>
+  <p>If you see mistakes or want to suggest changes, please <a href="https://github.com/hauselin/rtutorialsite/blob/master/_posts/2019-02-22-why-we-should-never-use-barplots-use-geomquasirandom-instead/why-we-should-never-use-barplots-use-geomquasirandom-instead.Rmd/issues/new">create an issue</a> on the source repository.</p>
   <h3 id="reuse">Reuse</h3>
-  <p>Text and figures are licensed under Creative Commons Attribution <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>. Source code is available at <a href="https://github.com/hauselin/rtutorialsite/blob/master/_posts/2019-02-18-fit-models-to-every-group/fit-models-to-every-group.Rmd">https://github.com/hauselin/rtutorialsite/blob/master/_posts/2019-02-18-fit-models-to-every-group/fit-models-to-every-group.Rmd</a>, unless otherwise noted. The figures that have been reused from other sources don't fall under this license and can be recognized by a note in their caption: "Figure from ...".</p>
+  <p>Text and figures are licensed under Creative Commons Attribution <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>. Source code is available at <a href="https://github.com/hauselin/rtutorialsite/blob/master/_posts/2019-02-22-why-we-should-never-use-barplots-use-geomquasirandom-instead/why-we-should-never-use-barplots-use-geomquasirandom-instead.Rmd">https://github.com/hauselin/rtutorialsite/blob/master/_posts/2019-02-22-why-we-should-never-use-barplots-use-geomquasirandom-instead/why-we-should-never-use-barplots-use-geomquasirandom-instead.Rmd</a>, unless otherwise noted. The figures that have been reused from other sources don't fall under this license and can be recognized by a note in their caption: "Figure from ...".</p>
   <h3 id="citation">Citation</h3>
   <p>For attribution, please cite this work as</p>
   <pre class="citation-appendix short">Lin (2019, Feb. 22). Data science with R: Why barplots are terrible (use ggbeeswarm instead). Retrieved from https://hausetutorials.netlify.com/posts/2019-02-22-why-we-should-never-use-barplots-use-geomquasirandom-instead/</pre>

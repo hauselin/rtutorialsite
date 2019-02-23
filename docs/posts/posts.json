@@ -2,7 +2,7 @@
   {
     "path": "posts/2019-02-22-why-we-should-never-use-barplots-use-geomquasirandom-instead/",
     "title": "Why barplots are terrible (use ggbeeswarm instead)",
-    "description": "A short description of the post.",
+    "description": "Why are barplots so bad? Comparing four different types of plots: barplot, boxplot, violinplot, and geom_quasirandom plot",
     "author": [
       {
         "name": "Hause Lin",
@@ -11,10 +11,12 @@
     ],
     "date": "2019-02-22",
     "categories": [
-      "data.table, gganimate"
+      "ggbeeswarm",
+      "ggplot2",
+      "gganimate"
     ],
-    "preview": "https://raw.githubusercontent.com/hauselin/rtutorialsite/master/attachments/plot_bar.gif",
-    "last_modified": "2019-02-22T19:20:54-05:00"
+    "preview": "https://raw.githubusercontent.com/hauselin/rtutorialsite/master/docs/attachments/plot_dotdist.gif",
+    "last_modified": "2019-02-22T19:43:57-05:00"
   },
   {
     "path": "posts/2019-02-18-fit-models-to-every-group/",
