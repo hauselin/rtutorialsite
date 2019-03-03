@@ -1403,9 +1403,15 @@ library(cowplot)
 library(hausekeep)</code></pre>
 </div>
 <h2 id="read-data-from-folderdirectory-into-r">Read data from folder/directory into R</h2>
+<p>Read in data from a csv file (stored in “./data/simpsonsParadox.csv”). Right-click to download and save the data <a href="https://raw.githubusercontent.com/hauselin/rtutorialsite/master/data/simpsonsParadox.csv">here</a>. You can also use the <code>fread()</code> function to read and download it directly from the URL (see code below).</p>
 <div class="layout-chunk" data-layout="l-body">
 <pre class="r"><code>
 df1 &lt;- tbl_dt(fread(&quot;data/simpsonsParadox.csv&quot;))  # data.table
+
+# or download data directly from URL
+url &lt;- &quot;https://raw.githubusercontent.com/hauselin/rtutorialsite/master/data/simpsonsParadox.csv&quot;
+df1 &lt;- tbl_dt(fread(url))
+
 print(df1, n = Inf)</code></pre>
 <pre><code>
 Source: local data table [40 x 3]
@@ -2029,19 +2035,19 @@ anova_classGender &lt;- aov(grades ~ class * gender, data = df1)
 summary(anova_classGender)</code></pre>
 <pre><code>
              Df Sum Sq Mean Sq F value   Pr(&gt;F)    
-class         3   5821  1940.4   9.476 0.000125 ***
-gender        1    184   183.7   0.897 0.350687    
-class:gender  3    664   221.3   1.081 0.371265    
-Residuals    32   6552   204.8                     
+class         3   5821  1940.4   8.602 0.000248 ***
+gender        1     55    55.3   0.245 0.623912    
+class:gender  3    127    42.2   0.187 0.904359    
+Residuals    32   7218   225.6                     
 ---
 Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
 <pre class="r"><code>
 summaryh(anova_classGender)</code></pre>
 <pre><code>
            term                             results
-1:        class F(3, 32) = 9.48, p &lt; .001, r = 0.69
-2:       gender F(1, 32) = 0.90, p = .351, r = 0.17
-3: class:gender F(3, 32) = 1.08, p = .371, r = 0.30</code></pre>
+1:        class F(3, 32) = 8.60, p &lt; .001, r = 0.67
+2:       gender F(1, 32) = 0.25, p = .624, r = 0.09
+3: class:gender F(3, 32) = 0.19, p = .904, r = 0.13</code></pre>
 </div>
 <h3 id="specify-contrasts-resources">Specify contrasts resources</h3>
 <ul>
@@ -2077,18 +2083,18 @@ ttest_gender</code></pre>
     Welch Two Sample t-test
 
 data:  iq by gender
-t = -0.63543, df = 35.262, p-value = 0.5293
+t = -1.4903, df = 29.456, p-value = 0.1468
 alternative hypothesis: true difference in means is not equal to 0
 95 percent confidence interval:
- -8.648794  4.524447
+ -11.450886   1.793446
 sample estimates:
 mean in group female   mean in group male 
-            108.2735             110.3357 </code></pre>
+            106.3897             111.2185 </code></pre>
 <pre class="r"><code>
 summaryh(ttest_gender)</code></pre>
 <pre><code>
                              results
-1: t(35) = −0.64, p = .529, r = 0.11</code></pre>
+1: t(29) = −1.49, p = .147, r = 0.26</code></pre>
 </div>
 <p>class a vs. class d</p>
 <div class="layout-chunk" data-layout="l-body">
@@ -2152,18 +2158,18 @@ REML criterion at convergence: 326
 
 Scaled residuals: 
      Min       1Q   Median       3Q      Max 
--1.71341 -0.79563  0.03887  0.56708  2.18978 
+-1.71343 -0.79565  0.03888  0.56708  2.18979 
 
 Random effects:
  Groups   Name        Variance Std.Dev.
- class    (Intercept) 895.5    29.92   
- Residual             176.7    13.29   
+ class    (Intercept) 895.7    29.93   
+ Residual             176.6    13.29   
 Number of obs: 40, groups:  class, 4
 
 Fixed effects:
              Estimate Std. Error        df t value Pr(&gt;|t|)  
-(Intercept) -100.7338    74.1311   27.4649  -1.359   0.1852  
-iq             1.4115     0.6633   31.3429   2.128   0.0413 *
+(Intercept) -100.7438    74.1321   27.4656  -1.359   0.1852  
+iq             1.4116     0.6634   31.3445   2.128   0.0413 *
 ---
 Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
 
@@ -2174,17 +2180,17 @@ iq -0.979</code></pre>
 summaryh(m_intercept)</code></pre>
 <pre><code>
           term                                                    results
-1: (Intercept) b = −100.73, SE = 74.13, t(27) = −1.36, p = .185, r = 0.25
+1: (Intercept) b = −100.74, SE = 74.13, t(27) = −1.36, p = .185, r = 0.25
 2:          iq      b = 1.41, SE = 0.66, t(31) = 2.13, p = .041, r = 0.36</code></pre>
 <pre class="r"><code>
 coef(m_intercept)  # check coefficients for each class</code></pre>
 <pre><code>
 $class
-  (Intercept)       iq
-d  -133.42844 1.411459
-a   -66.31753 1.411459
-b   -90.94790 1.411459
-c  -112.24144 1.411459
+  (Intercept)      iq
+d  -133.43968 1.41155
+a   -66.32624 1.41155
+b   -90.95738 1.41155
+c  -112.25181 1.41155
 
 attr(,&quot;class&quot;)
 [1] &quot;coef.mer&quot;</code></pre>
@@ -2205,19 +2211,19 @@ REML criterion at convergence: 326
 
 Scaled residuals: 
      Min       1Q   Median       3Q      Max 
--1.71461 -0.79955  0.04047  0.56706  2.19534 
+-1.71504 -0.77488  0.03495  0.57017  2.20283 
 
 Random effects:
  Groups   Name        Variance  Std.Dev. Corr
- class    (Intercept) 4.180e+02 20.44479     
-          iq          7.853e-03  0.08862 1.00
- Residual             1.765e+02 13.28371     
+ class    (Intercept)  51.20361  7.1557      
+          iq            0.04541  0.2131  0.99
+ Residual             176.32034 13.2786      
 Number of obs: 40, groups:  class, 4
 
 Fixed effects:
              Estimate Std. Error        df t value Pr(&gt;|t|)  
-(Intercept) -101.7384    73.4587   20.6522  -1.385   0.1808  
-iq             1.4270     0.6677   19.6229   2.137   0.0454 *
+(Intercept) -102.4819    72.9541   30.3777  -1.405   0.1702  
+iq             1.4427     0.6779   11.7465   2.128   0.0552 .
 ---
 Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
 
@@ -2225,22 +2231,22 @@ Correlation of Fixed Effects:
    (Intr)
 iq -0.978
 convergence code: 0
-singular fit</code></pre>
+Model failed to converge with max|grad| = 0.0391438 (tol = 0.002, component 1)</code></pre>
 <pre class="r"><code>
 summaryh(m_interceptSlope)</code></pre>
 <pre><code>
           term                                                    results
-1: (Intercept) b = −101.74, SE = 73.46, t(21) = −1.38, p = .181, r = 0.29
-2:          iq      b = 1.43, SE = 0.67, t(20) = 2.14, p = .045, r = 0.43</code></pre>
+1: (Intercept) b = −102.48, SE = 72.95, t(30) = −1.40, p = .170, r = 0.25
+2:          iq      b = 1.44, SE = 0.68, t(12) = 2.13, p = .055, r = 0.53</code></pre>
 <pre class="r"><code>
 coef(m_interceptSlope)  # check coefficients for each class</code></pre>
 <pre><code>
 $class
   (Intercept)       iq
-d  -123.68895 1.331876
-a   -77.86894 1.530486
-b   -95.42589 1.454384
-c  -109.96969 1.391343
+d  -109.95237 1.219693
+a   -93.98509 1.696469
+b  -100.47154 1.502764
+c  -105.51844 1.352012
 
 attr(,&quot;class&quot;)
 [1] &quot;coef.mer&quot;</code></pre>
@@ -2260,18 +2266,18 @@ REML criterion at convergence: 326
 
 Scaled residuals: 
      Min       1Q   Median       3Q      Max 
--1.71468 -0.75940  0.02992  0.57631  2.20673 
+-1.71468 -0.75940  0.02992  0.57630  2.20673 
 
 Random effects:
  Groups   Name Variance  Std.Dev.
- class    iq     0.07825  0.2797 
- Residual      176.30986 13.2782 
+ class    iq     0.07826  0.2797 
+ Residual      176.30897 13.2781 
 Number of obs: 40, groups:  class, 4
 
 Fixed effects:
              Estimate Std. Error        df t value Pr(&gt;|t|)  
-(Intercept) -102.5776    72.8997   31.8195  -1.407   0.1691  
-iq             1.4484     0.6854   27.8155   2.113   0.0437 *
+(Intercept) -102.5810    72.8999   31.8200  -1.407   0.1691  
+iq             1.4484     0.6854   27.8157   2.113   0.0437 *
 ---
 Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
 
@@ -2289,10 +2295,10 @@ coef(m_slope)  # check coefficients for each class</code></pre>
 <pre><code>
 $class
   (Intercept)       iq
-d   -102.5776 1.159490
-a   -102.5776 1.784924
-b   -102.5776 1.522970
-c   -102.5776 1.326058
+d    -102.581 1.159517
+a    -102.581 1.784959
+b    -102.581 1.523003
+c    -102.581 1.326087
 
 attr(,&quot;class&quot;)
 [1] &quot;coef.mer&quot;</code></pre>

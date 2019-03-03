@@ -10,9 +10,7 @@ repository_url: https://github.com/hauselin/rtutorialsite/blob/master/0004_dataf
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE,
-                      R.options = list(width = 80),
-                      tidy = TRUE,
-                      tidy.opts = list(width.cutoff = 80))
+                      R.options = list(width = 80))
 ```
 
 
@@ -48,19 +46,23 @@ library(tidyverse); library(data.table); library(dtplyr)
 Manually create wide data
 
 ```{r}
-wide <- data_frame(student = c("Andy", "Mary"),
-                   englishGrades = c(1, -2),
-                   mathGrades = englishGrades * 10,
-                   physicsGrades = mathGrades * 100)
+wide <- tibble(student = c("Andy", "Mary"),
+               englishGrades = c(1, -2),
+               mathGrades = englishGrades * 10,
+               physicsGrades = mathGrades * 100)
 wide
 ```
+
+<aside>
+`tibble()` lets you create supercharged, better `data.frames`. See [here](https://cran.r-project.org/web/packages/tibble/vignettes/tibble.html) for vignette.
+</aside>
 
 Manually create equivalent long data
 
 ```{r}
-long <- data_frame(student = rep(c("Andy", "Mary"), each = 3),
-                   class = rep(c("englishGrades", "mathGrades", "physicsGrades"), times = 2),
-                   grades = c(1, 10, 1000, -2, -20, -2000))
+long <- tibble(student = rep(c("Andy", "Mary"), each = 3),
+               class = rep(c("englishGrades", "mathGrades", "physicsGrades"), times = 2),
+               grades = c(1, 10, 1000, -2, -20, -2000))
 long
 ```
 
@@ -159,10 +161,10 @@ wide # original data
 ```
 
 ```{r}
-moreRows <- data_frame(student = c("John", "Jane"),
-                       englishGrades = c(5, -5),
-                       mathGrades = englishGrades * 10,
-                       physicsGrades = mathGrades * NA)
+moreRows <- tibble(student = c("John", "Jane"),
+                   englishGrades = c(5, -5),
+                   mathGrades = englishGrades * 10,
+                   physicsGrades = mathGrades * NA)
 moreRows
 ```
 
@@ -177,9 +179,9 @@ bind_rows(wide, moreRows)
 `bind_rows` has same effect as rbind() above, but much more efficient/flexible and binds even if column numbers don't match (see below).
 
 ```{r}
-moreRows2 <- data_frame(student = c("John", "Jane"),
-                       englishGrades = c(5, -5),
-                       mathGrades = englishGrades * 10)
+moreRows2 <- tibble(student = c("John", "Jane"),
+                    englishGrades = c(5, -5),
+                    mathGrades = englishGrades * 10)
 moreRows2
 ```
 
@@ -206,7 +208,7 @@ wide2
 ```
 
 ```{r}
-columnsToBind <- data_frame(extraCol = c(999, NA, 999, NA))
+columnsToBind <- tibble(extraCol = c(999, NA, 999, NA))
 columnsToBind
 ```
 
@@ -227,8 +229,8 @@ wide2
 Let's say we know the gender and chemistry grades of each student...
 
 ```{r}
-extraInfo <- data_frame(student = c("Jane", "John", "Mary", "Andy"),
-                        chemistryGrades = c(900, 901, 902, 903))
+extraInfo <- tibble(student = c("Jane", "John", "Mary", "Andy"),
+                    chemistryGrades = c(900, 901, 902, 903))
 extraInfo
 ```
 
@@ -249,8 +251,7 @@ Is the output what you expect? Is it correct? What does the 'Joining, by = "stud
 What if we have missing/incomplete extra information?
 
 ```{r}
-extraInfo2 <- data_frame(student = c("Jane", "John"),
-                        chemistryGrades = c(900, 901))
+extraInfo2 <- tibble(student = c("Jane", "John"), chemistryGrades = c(900, 901))
 extraInfo2
 ```
 

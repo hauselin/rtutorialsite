@@ -48,8 +48,15 @@ library(hausekeep)
 
 ## Read data from folder/directory into R
 
+Read in data from a csv file (stored in "./data/simpsonsParadox.csv"). Right-click to download and save the data [here](https://raw.githubusercontent.com/hauselin/rtutorialsite/master/data/simpsonsParadox.csv). You can also use the `fread()` function to read and download it directly from the URL (see code below).
+
 ```{r}
 df1 <- tbl_dt(fread("data/simpsonsParadox.csv")) # data.table
+
+# or download data directly from URL
+url <- "https://raw.githubusercontent.com/hauselin/rtutorialsite/master/data/simpsonsParadox.csv"
+df1 <- tbl_dt(fread(url))
+
 print(df1, n = Inf)
 glimpse(df1)
 ```

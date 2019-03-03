@@ -60,6 +60,10 @@ df2 <- fread("./data/sleep.csv") # fread() from library(data.table)
 # my favorite way of reading data: combining tbl_dt() and fread()
 df3 <- tbl_dt(fread("./data/sleep.csv")) # tbl_dt() from library(dtplyr)
 # same as df3 <- tbl_dt(fread("data/sleep.csv"))
+
+# or download data from website directly 
+url <- "https://raw.githubusercontent.com/hauselin/rtutorialsite/master/data/sleep.csv"
+df_url <- tbl_dt(fread(url))
 ```
 
 <aside>
@@ -204,15 +208,17 @@ Load tidyverse packages (I'm running this line here for educational purposes; th
 
 ### Manipulating datasets with `dplyr` (a package in tidyverse)
 
-Read in data from a csv file (stored in "./data/simpsonsParadox.csv"). Right-click to download and save the data [here](https://raw.githubusercontent.com/hauselin/rtutorialsite/master/data/simpsonsParadox.csv) (you can also use the `fread()` function to read and download it directly; see code below)
+Read in data from a csv file (stored in "./data/simpsonsParadox.csv"). Right-click to download and save the data [here](https://raw.githubusercontent.com/hauselin/rtutorialsite/master/data/simpsonsParadox.csv) (you can also use the `fread()` function to read and download it directly from the URL; see code below)
 
-* `fread()`: a function from `data.table` (fast-read, hence fread) that is **EXTREMELY** fast and powerful, and much better than `read.csv()` or `read.table()` from base R
+* `fread()`: a function from `data.table` (fast-read, hence fread) that is **VERY** fast and powerful, and much better than `read.csv()` or `read.table()` from base R
 * `tbl_dt()`: converts data to a `tibble` class and `data.table` class
 
 ```{r}
 df4 <- tbl_dt(fread("./data/simpsonsParadox.csv"))
-# or download the data directly from my github site to your working directory
-# df4 <- tbl_dt(fread("https://raw.githubusercontent.com/hauselin/rtutorialsite/master/data/simpsonsParadox.csv))
+# or download data directly from URL
+url <- "https://raw.githubusercontent.com/hauselin/rtutorialsite/master/data/simpsonsParadox.csv"
+df4 <- tbl_dt(fread(url))
+
 df4 # print table in console 
 ```
 
