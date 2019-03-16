@@ -2,42 +2,42 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd" version="1.0">
   <url>
     <loc>https://hausetutorials.netlify.com/0000_install.html</loc>
-    <lastmod>2019-02-18T19:38:18-05:00</lastmod>
+    <lastmod>2019-02-19T01:38:18+01:00</lastmod>
   </url>
   <url>
     <loc>https://hausetutorials.netlify.com/0001_rbasics.html</loc>
-    <lastmod>2019-02-18T22:52:30-05:00</lastmod>
+    <lastmod>2019-02-19T04:52:30+01:00</lastmod>
   </url>
   <url>
     <loc>https://hausetutorials.netlify.com/0002_tidyverse_datatable.html</loc>
-    <lastmod>2019-03-03T11:35:05-05:00</lastmod>
+    <lastmod>2019-03-03T17:35:05+01:00</lastmod>
   </url>
   <url>
     <loc>https://hausetutorials.netlify.com/0003_ggplot_modelfitting.html</loc>
-    <lastmod>2019-03-03T11:30:24-05:00</lastmod>
+    <lastmod>2019-03-03T17:30:24+01:00</lastmod>
   </url>
   <url>
     <loc>https://hausetutorials.netlify.com/0004_dataform_join.html</loc>
-    <lastmod>2019-03-03T11:26:44-05:00</lastmod>
+    <lastmod>2019-03-03T17:26:44+01:00</lastmod>
   </url>
   <url>
     <loc>https://hausetutorials.netlify.com/articles.html</loc>
-    <lastmod>2019-02-18T17:40:47-05:00</lastmod>
+    <lastmod>2019-02-18T23:40:47+01:00</lastmod>
   </url>
   <url>
     <loc>https://hausetutorials.netlify.com/</loc>
-    <lastmod>2019-02-22T22:50:55-05:00</lastmod>
+    <lastmod>2019-02-23T04:50:55+01:00</lastmod>
   </url>
   <url>
     <loc>https://hausetutorials.netlify.com/README.html</loc>
-    <lastmod>2019-02-18T13:42:22-05:00</lastmod>
+    <lastmod>2019-02-18T19:42:22+01:00</lastmod>
   </url>
   <url>
     <loc>https://hausetutorials.netlify.com/posts/2019-02-22-why-we-should-never-use-barplots-use-geomquasirandom-instead/</loc>
-    <lastmod>2019-02-22T23:12:12-05:00</lastmod>
+    <lastmod>2019-02-23T05:12:12+01:00</lastmod>
   </url>
   <url>
     <loc>https://hausetutorials.netlify.com/posts/2019-02-18-fit-models-to-every-group/</loc>
-    <lastmod>2019-02-21T11:35:44-05:00</lastmod>
+    <lastmod>2019-02-21T17:35:44+01:00</lastmod>
   </url>
 </urlset>

@@ -12,7 +12,7 @@ navbar:
     - text: "Home"
       href: index.html
     - text: "Effect size converter"
-      href: https://hause.shinyapps.io/shinyapp_effectsize/
+      href: http://escal.site
     - text: "Tutorials"
       menu:
         - text: "Install R and packages"

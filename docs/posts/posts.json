@@ -16,7 +16,7 @@
       "gganimate"
     ],
     "preview": "https://raw.githubusercontent.com/hauselin/rtutorialsite/master/docs/attachments/plot_dotdist.gif",
-    "last_modified": "2019-02-22T23:12:12-05:00"
+    "last_modified": "2019-02-23T05:12:12+01:00"
   },
   {
     "path": "posts/2019-02-18-fit-models-to-every-group/",
@@ -33,6 +33,6 @@
       "data.table"
     ],
     "preview": {},
-    "last_modified": "2019-02-21T11:35:44-05:00"
+    "last_modified": "2019-02-21T17:35:44+01:00"
   }
 ]
