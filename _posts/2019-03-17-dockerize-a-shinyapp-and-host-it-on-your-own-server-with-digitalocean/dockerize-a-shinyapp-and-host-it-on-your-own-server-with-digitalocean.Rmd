@@ -1,7 +1,7 @@
 ---
 title: "Dockerize a ShinyApp and host it on your own server with DigitalOcean"
 description: |
-  How I managed to deploy my ShinyApp with Docker and host it on a web server with DigitalOcean. 
+  Step-by-step instructions describing how I managed to deploy my ShinyApp with Docker and host it on a web server with DigitalOcean on Mac OS X.
 preview: https://raw.githubusercontent.com/hauselin/rtutorialsite/master/docs/attachments/dockerShinyDigitalOcean.jpg
 author:
   - name: Hause Lin
@@ -33,9 +33,9 @@ In RStudio, create a new project via File -> New Project -> New Directory -> Shi
 
 ## Step 2. Dockerize your ShinyApp and RStudio Server
 
-If you deploy (or run) your ShinyApp with Docker, you're making your app self-contained, which means anyone can run your app even if they don't have R or RStudio, as long as they have Docker installed. When you later host your app on a web server with DigitalOcean, we'll simply upload this Docker image or container of your app to your web server. I followed the instructions on this site (steps summarized below): [Learn how to dockerize a ShinyApp in 7 steps](https://www.bjoern-hartmann.de/post/learn-how-to-dockerize-a-shinyapp-in-7-steps/#step-7-transfer-the-shinyapp-to-a-web-server-and-deploy-it-online)
+If you deploy (or run) your ShinyApp with Docker, you're making your app self-contained, which means anyone can run your app even if they don't have R or RStudio, as long as they have Docker installed. When you later host your app on a web server with DigitalOcean, we'll simply upload this Docker image or container of your app to your web server. I followed the instructions on this site (steps summarized below): [Learn how to dockerize a ShinyApp in 7 steps](https://www.bjoern-hartmann.de/post/learn-how-to-dockerize-a-shinyapp-in-7-steps/)
 
-1. Install Docker by downloading the free Docker Engine for your machine via [docker.com](docker.com)
+1. Install Docker by downloading the free Docker Engine for your machine via [docker.com](http://docker.com)
 
 2. Create a new directory/folder (I've named it `myApp_docker`) and copy over all the files, scripts, and data that are required to run your ShinyApp into the folder `app` inside the `myApp_docker` directory. A really simple directory structure should look like the one below. After copying things over and setting up this directory, make sure you can run your ShinyApp from this directory. 
 
