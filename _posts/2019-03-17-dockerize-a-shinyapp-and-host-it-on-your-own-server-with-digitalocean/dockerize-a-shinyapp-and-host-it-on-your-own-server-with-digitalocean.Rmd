@@ -1,7 +1,7 @@
 ---
 title: "Dockerize a ShinyApp and host it on your own server with DigitalOcean"
 description: |
-  Step-by-step instructions describing how I managed to deploy my ShinyApp with Docker and host it on a web server with DigitalOcean on Mac OS X.
+  Step-by-step instructions describing how I deployed my ShinyApp with Docker and hosted it on a web server with DigitalOcean (using Mac OS X).
 preview: https://raw.githubusercontent.com/hauselin/rtutorialsite/master/docs/attachments/dockerShinyDigitalOcean.jpg
 author:
   - name: Hause Lin
