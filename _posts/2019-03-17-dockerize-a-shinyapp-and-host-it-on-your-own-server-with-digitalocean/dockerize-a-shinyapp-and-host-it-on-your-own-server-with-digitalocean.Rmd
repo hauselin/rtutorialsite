@@ -2,7 +2,7 @@
 title: "Dockerize a ShinyApp and host it on your own server with DigitalOcean"
 description: |
   How I managed to deploy my ShinyApp with Docker and host it on a web server with DigitalOcean. 
-preview: https://raw.githubusercontent.com/hauselin/rtutorialsite/master/docs/attachments/dockerShinyDigitalOcean.jpeg
+preview: https://raw.githubusercontent.com/hauselin/rtutorialsite/master/docs/attachments/dockerShinyDigitalOcean.jpg
 author:
   - name: Hause Lin
 date: 03-16-2019
@@ -16,14 +16,14 @@ categories:
   - docker
   - digitalocean
   - webserver
-repository_url: https://hausetutorials.netlify.com/articles.html
+repository_url: https://github.com/hauselin/rtutorialsite/blob/master/_posts/2019-03-17-dockerize-a-shinyapp-and-host-it-on-your-own-server-with-digitalocean/dockerize-a-shinyapp-and-host-it-on-your-own-server-with-digitalocean.Rmd
 editor_options: 
   chunk_output_type: console
 ---
 
 ## Hosting a ShinyApp on your own website/domain with Docker and DigitalOcean
 
-After much fiddling, I managed to dockerize my [effect size converter ShinyApp](http://escal.site/) and hosted it on my own web server with [DigitalOcean](http://digitalocean.com/), which is cheaper, faster, and more flexible than [shinyapps.io](http://shinyapps.io/). Below are the exact steps I took and solutions to problems I ran into along the way. Note that I did everything on **Mac OS X**, so I won't promise everything will work if you use other operating systems! I've provided the links to the key resources I used at each step. 
+After much fiddling, I managed to dockerize my [effect size converter ShinyApp](http://escal.site/) and hosted it on my own web server with [DigitalOcean](https://m.do.co/c/a32d79a17aa9), which is cheaper, faster, and more flexible than [shinyapps.io](http://shinyapps.io/). Below are the exact steps I took and solutions to problems I ran into along the way. Note that I did everything on **Mac OS X**, so I won't promise everything will work if you use other operating systems! I've provided the links to the key resources I used at each step. 
 
 ## Step 1. Create your ShinyApp
 
