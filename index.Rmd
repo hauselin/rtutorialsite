@@ -17,7 +17,7 @@ site: radix::radix_website
 This site contains beginner R tutorials as well as relatively advanced data analysis tips/tricks I have used to analyze experimental psychology data. Occasionally, I'll also explain statistical procedures and concepts with code. I have used these tutorials and articles to teach data science in graduate school. In my tutorials and articles, I usually try my best to explain *how* things work rather than just provide the uncommented code. 
 
 * tutorials: beginner R tutorials ([R programming basics](0001_rbasics.html), [tidyverse, data.table](0002_tidyverse_datatable.html), etc.)
-* [articles](articles.html): more advanced analysis tricks/tips and statistical concepts illustrated in R
+* [articles](articles.html): more advanced analysis tricks/tips and statistical concepts illustrated with code
 
 ## Where to begin?
 
