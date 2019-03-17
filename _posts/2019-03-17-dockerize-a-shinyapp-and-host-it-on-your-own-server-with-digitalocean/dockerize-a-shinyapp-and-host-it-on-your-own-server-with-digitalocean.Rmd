@@ -1,0 +1,114 @@
+---
+title: "Dockerize a ShinyApp and host it on your own server with DigitalOcean"
+description: |
+  How I managed to deploy my ShinyApp with Docker and host it on a web server with DigitalOcean. 
+preview: https://raw.githubusercontent.com/hauselin/rtutorialsite/master/docs/attachments/dockerShinyDigitalOcean.jpeg
+author:
+  - name: Hause Lin
+date: 03-16-2019
+output:
+  radix::radix_article:
+    toc: true
+    self_contained: false
+draft: false
+categories: 
+  - shinyapp
+  - docker
+  - digitalocean
+  - webserver
+repository_url: https://hausetutorials.netlify.com/articles.html
+editor_options: 
+  chunk_output_type: console
+---
+
+## Hosting a ShinyApp on your own website/domain with Docker and DigitalOcean
+
+After much fiddling, I managed to dockerize my [effect size converter ShinyApp](http://escal.site/) and hosted it on my own web server with [DigitalOcean](http://digitalocean.com/), which is cheaper, faster, and more flexible than [shinyapps.io](http://shinyapps.io/). Below are the exact steps I took and solutions to problems I ran into along the way. Note that I did everything on **Mac OS X**, so I won't promise everything will work if you use other operating systems! I've provided the links to the key resources I used at each step. 
+
+## Step 1. Create your ShinyApp
+
+In RStudio, create a new project via File -> New Project -> New Directory -> Shiny Web Application. RStudio will create a ShinyApp project and directory that comes with a really simple ShinyApp (`app.R` which you can run by press Run App), which you can play with and edit to create your own ShinyApp. 
+
+* [DataCamp course: Building Web Applications in R with Shiny](https://www.datacamp.com/tracks/shiny-fundamentals-with-r)
+
+## Step 2. Dockerize your ShinyApp and RStudio Server
+
+If you deploy (or run) your ShinyApp with Docker, you're making your app self-contained, which means anyone can run your app even if they don't have R or RStudio, as long as they have Docker installed. When you later host your app on a web server with DigitalOcean, we'll simply upload this Docker image or container of your app to your web server. I followed the instructions on this site (steps summarized below): [Learn how to dockerize a ShinyApp in 7 steps](https://www.bjoern-hartmann.de/post/learn-how-to-dockerize-a-shinyapp-in-7-steps/#step-7-transfer-the-shinyapp-to-a-web-server-and-deploy-it-online)
+
+1. Install Docker by downloading the free Docker Engine for your machine via [docker.com](docker.com)
+
+2. Create a new directory/folder (I've named it `myApp_docker`) and copy over all the files, scripts, and data that are required to run your ShinyApp into the folder `app` inside the `myApp_docker` directory. A really simple directory structure should look like the one below. After copying things over and setting up this directory, make sure you can run your ShinyApp from this directory. 
+
+```
+myApp_docker
+  - app
+    - app.R
+```
+
+3. Create a Dockerfile, which tells Docker what to install (and in what order) to make a self-contained ShinyApp. You can download, edit, and use my [example Dockerfile](https://raw.githubusercontent.com/hauselin/rtutorialsite/master/docs/attachments/Dockerfile). You can specify which R version you want to install on line 2. Depending on what R packages you need, you'll have to modify line 24 accordingly. When I created my Dockerfile, I ran into issues with permissions later on and I fixed it by adding the following lines (lines 36 to 38) in my Dockerfile.
+
+```
+# Permission
+# see https://github.com/rocker-org/shiny/issues/32
+RUN ["chmod", "+x", "/usr/bin/shiny-server.sh"]
+```
+
+4. Add the Dockerfile and the shiny-server.conf and shiny-server.sh files to your `myApp_docker` directory. Follow instructions and download the files from [here](https://www.bjoern-hartmann.de/post/learn-how-to-dockerize-a-shinyapp-in-7-steps/#step-4-add-configuration-files-for-your-shinyapp). Your directory should look like this now:
+
+```
+myApp_docker
+  - Dockerfile
+  - shiny-server.conf
+  - shiny-server.sh
+  - app
+    - app.R
+```
+
+5. Build the docker image. In terminal (bash), navigate to your `myApp_docker` directory and run `docker build -t myApp_docker .` You can name the Docker image whatever you like (it's `myApp_docker` here, so the directory and Docker image name are identical).
+
+6. Test run your Docker image by running your ShinyApp locally with Docker. In terminal/bash, run `docker run -p 80:80 myApp_docker` which starts your myApp_docker Docker image. When the image is running, go to your web browser and you can navigate to [http://localhost](http://localhost) to run your app. If it works, congrats on creating a self-contained Docker image of your ShinyApp! Make sure your app runs before you continue!
+
+7. Save your Docker image as a tar-archive so you can upload it to a web server later on. Run `docker save -o myApp_docker.tar myApp_docker` which saves your Docker image as a tar-acrhive in your current directory (myApp_docker). Depending on the size of your image (about 1GB for my image), this command might take some time to run.
+
+## Step 3. Sign up to DigitalOcean to get a private server
+
+Go to [DigitalOcean](https://m.do.co/c/a32d79a17aa9) (use this link to get 2 months free and credits!) then follow steps 1 to 4 on [this site](https://deanattali.com/2015/05/09/setup-rstudio-shiny-server-digital-ocean/), which are summarized below. 
+
+1. Sign up to DigitalOcean.
+
+2. Create a new droplet by choosing the smallest/cheapest machine ($5/month plan), which is often more than enough for simple ShinyApps. I chose New York for region because it's closest to me.
+
+<aside>
+I accidentally selected FrankFurt initially (because I created the droplet when I was in Europe) and I ran into issues logging in with ssh, which I couldn't fix. But when I recreated my droplet by selecting New York region, the problem fixed itself!
+</aside>
+
+3. Log in to your new server with your droplet's IP address (I'm going to use `xxx.xxx.xxx.xx` here). You can either log in via the Access tab (Launch Console) on the droplet's page or via ssh if you're on a unix machine. On my machine, I ran this in termal: `ssh root@xxx.xxx.xxx.xx`. It will ask for your password, which has been emailed to you when you created your droplet earlier on. Enter that password and it might ask you to change your default password. 
+
+4. Add a user (my name `hause` in this example) to your server so you don't use the root account. Run `adduser hause` and then `gpasswd -a hause sudo`. It might ask you to provide a password for this new account. Now, you can log in to this account instead of root. Try running `exit` to leave your server and then log in again but using `ssh hause@xxx.xxx.xxx.xx`. You should now be in your new account rather than root!
+
+## Step 4. Transfer your Docker tar-archive image to your DigitalOcean droplet
+
+You're getting there! Now you have to transfer your Docker tar-archive image to your DigitalOcean droplet. Use `rsync` or any FTP service you usually use (e.g., CyberDuck; I use [ForkLift](https://binarynights.com/) on my Mac). If you use `rsync`, you can run the following: `rsync -av myApp_docker.tar hause@xxx.xxx.xxx.xx` to copy your Docker tar-archive to your droplet. It might take some time to transfer, depending on the size of your tar-achive and your internet connection.
+
+## Step 5. Load your Docker image on droplet and run your app on our server!
+
+Finally you're at the last step! When your Docker tar-archive is on your droplet, you first load it by running `docker load -i myApp_docker.tar` and then run it with `docker run -d -p 80:80 myApp_docker` (-d or --detach tells the droplet to run the docker image in the background; see [here](http://networkstatic.net/running-docker-machine-on-digital-ocean/) for more info). See [here](http://networkstatic.net/docker-one-liners/) for Docker one-liner tutorial! If everything is working properly, if you go to your web browser and enter your droplet IP address (http://xxx.xxx.xxx.xx), your ShinyApp should be working! Congrats!
+
+## Step 6. (optional but recommended): Get a nice domain name ("URL") for your droplet
+
+I use [NameCheap](http://namecheap.com/) to buy the domain [escal.site](escal.site) for my ShinyApp. After buying your domain, point your droplet IP address to your domain by following the instructions [here](https://www.howlthemes.com/point-domain-name-digitalocean-droplet/), which are summarized below.
+
+1. Manage your domain on NameCheap and search for an option called DNS (Domain Server Name) or just nameServer. Select custom DNS and add the following three nameservers. Then click the green checkmark. DigitalOcean also provides [good tutorials](https://www.digitalocean.com/community/tutorials/how-to-point-to-digitalocean-nameservers-from-common-domain-registrars#registrar-namecheap). It might take between 10 mins and 24 hours for the name server changes to take effect. 
+
+```
+ns1.digitalocean.com
+ns2.digitalocean.com
+ns3.digitalocean.com
+```
+
+2. Point your droplet IP to your domain name. Go to your DigitalOcean account and select Networking from the menu. Under "Add a domain", enter your new domain name (escal.site in my case) and tell it which droplet or project you want to point to. Then manage this domain by creating new records. Create an "A" type to point your droplet IP to your domain name. Create a "CNAME" type to point one URL to another URL (e.g., www.escal.site also points to escal.site in my case). See [here](https://www.howlthemes.com/point-domain-name-digitalocean-droplet/) and [here](https://www.digitalocean.com/docs/networking/dns/how-to/manage-records/) for more instructions. 
+
+
+
+
+

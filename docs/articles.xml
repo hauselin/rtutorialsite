@@ -7,7 +7,16 @@
     <description>Data science and analysis tutorials
 </description>
     <generator>Radix</generator>
-    <lastBuildDate>Fri, 22 Feb 2019 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Sat, 16 Mar 2019 00:00:00 +0000</lastBuildDate>
+    <item>
+      <title>Dockerize a ShinyApp and host it on your own server with DigitalOcean</title>
+      <dc:creator>Hause Lin</dc:creator>
+      <link>https://hausetutorials.netlify.com/posts/2019-03-17-dockerize-a-shinyapp-and-host-it-on-your-own-server-with-digitalocean</link>
+      <description>How I managed to deploy my ShinyApp with Docker and host it on a web server with DigitalOcean.</description>
+      <guid>https://hausetutorials.netlify.com/posts/2019-03-17-dockerize-a-shinyapp-and-host-it-on-your-own-server-with-digitalocean</guid>
+      <pubDate>Sat, 16 Mar 2019 00:00:00 +0000</pubDate>
+      <media:content url="https://raw.githubusercontent.com/hauselin/rtutorialsite/master/docs/attachments/dockerShinyDigitalOcean.jpeg" medium="image" type="image/jpeg"/>
+    </item>
     <item>
       <title>Why bar (dynamite) plots are terrible (use ggbeeswarm instead)</title>
       <dc:creator>Hause Lin</dc:creator>

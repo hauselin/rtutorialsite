@@ -19,50 +19,49 @@
  <!--/radix_placeholder_import_source-->
 
   <!--radix_placeholder_meta_tags-->
-<title>Data science with R: Why bar (dynamite) plots are terrible (use ggbeeswarm instead)</title>
+<title>Data science with R: Dockerize a ShinyApp and host it on your own server with DigitalOcean</title>
 
-<meta property="description" itemprop="description" content="Why are barplots or dynamite plots so bad? Comparing four different types of plots: barplot, boxplot, violinplot, and geom_quasirandom plot"/>
+<meta property="description" itemprop="description" content="How I managed to deploy my ShinyApp with Docker and host it on a web server with DigitalOcean."/>
 
-<link rel="canonical" href="https://hausetutorials.netlify.com/posts/2019-02-22-why-we-should-never-use-barplots-use-geomquasirandom-instead/"/>
+<link rel="canonical" href="https://hausetutorials.netlify.com/posts/2019-03-17-dockerize-a-shinyapp-and-host-it-on-your-own-server-with-digitalocean/"/>
 <link rel="license" href="https://creativecommons.org/licenses/by/4.0/"/>
 
 <!--  https://schema.org/Article -->
-<meta property="article:published" itemprop="datePublished" content="2019-02-22"/>
-<meta property="article:created" itemprop="dateCreated" content="2019-02-22"/>
+<meta property="article:published" itemprop="datePublished" content="2019-03-16"/>
+<meta property="article:created" itemprop="dateCreated" content="2019-03-16"/>
 <meta name="article:author" content="Hause Lin"/>
 
 <!--  https://developers.facebook.com/docs/sharing/webmasters#markup -->
-<meta property="og:title" content="Data science with R: Why bar (dynamite) plots are terrible (use ggbeeswarm instead)"/>
+<meta property="og:title" content="Data science with R: Dockerize a ShinyApp and host it on your own server with DigitalOcean"/>
 <meta property="og:type" content="article"/>
-<meta property="og:description" content="Why are barplots or dynamite plots so bad? Comparing four different types of plots: barplot, boxplot, violinplot, and geom_quasirandom plot"/>
-<meta property="og:url" content="https://hausetutorials.netlify.com/posts/2019-02-22-why-we-should-never-use-barplots-use-geomquasirandom-instead/"/>
+<meta property="og:description" content="How I managed to deploy my ShinyApp with Docker and host it on a web server with DigitalOcean."/>
+<meta property="og:url" content="https://hausetutorials.netlify.com/posts/2019-03-17-dockerize-a-shinyapp-and-host-it-on-your-own-server-with-digitalocean/"/>
 <meta property="og:locale" content="en_US"/>
 <meta property="og:site_name" content="Data science with R"/>
 
 <!--  https://dev.twitter.com/cards/types/summary -->
 <meta property="twitter:card" content="summary"/>
-<meta property="twitter:title" content="Data science with R: Why bar (dynamite) plots are terrible (use ggbeeswarm instead)"/>
-<meta property="twitter:description" content="Why are barplots or dynamite plots so bad? Comparing four different types of plots: barplot, boxplot, violinplot, and geom_quasirandom plot"/>
-<meta property="twitter:url" content="https://hausetutorials.netlify.com/posts/2019-02-22-why-we-should-never-use-barplots-use-geomquasirandom-instead/"/>
+<meta property="twitter:title" content="Data science with R: Dockerize a ShinyApp and host it on your own server with DigitalOcean"/>
+<meta property="twitter:description" content="How I managed to deploy my ShinyApp with Docker and host it on a web server with DigitalOcean."/>
+<meta property="twitter:url" content="https://hausetutorials.netlify.com/posts/2019-03-17-dockerize-a-shinyapp-and-host-it-on-your-own-server-with-digitalocean/"/>
 
 <!--  https://scholar.google.com/intl/en/scholar/inclusion.html#indexing -->
-<meta name="citation_title" content="Data science with R: Why bar (dynamite) plots are terrible (use ggbeeswarm instead)"/>
-<meta name="citation_fulltext_html_url" content="https://hausetutorials.netlify.com/posts/2019-02-22-why-we-should-never-use-barplots-use-geomquasirandom-instead/"/>
+<meta name="citation_title" content="Data science with R: Dockerize a ShinyApp and host it on your own server with DigitalOcean"/>
+<meta name="citation_fulltext_html_url" content="https://hausetutorials.netlify.com/posts/2019-03-17-dockerize-a-shinyapp-and-host-it-on-your-own-server-with-digitalocean/"/>
 <meta name="citation_fulltext_world_readable" content=""/>
-<meta name="citation_online_date" content="2019/02/22"/>
-<meta name="citation_publication_date" content="2019/02/22"/>
+<meta name="citation_online_date" content="2019/03/16"/>
+<meta name="citation_publication_date" content="2019/03/16"/>
 <meta name="citation_author" content="Hause Lin"/>
 <!--/radix_placeholder_meta_tags-->
-  
   <!--radix_placeholder_rmarkdown_metadata-->
 
 <script type="text/json" id="radix-rmarkdown-metadata">
-{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["creative_commons","title","description","preview","author","date","output","draft","categories","repository_url","editor_options","bibliography","citation_url","canonical_url"]}},"value":[{"type":"character","attributes":{},"value":["CC BY"]},{"type":"character","attributes":{},"value":["Why bar (dynamite) plots are terrible (use ggbeeswarm instead)"]},{"type":"character","attributes":{},"value":["Why are barplots or dynamite plots so bad? Comparing four different types of plots: barplot, boxplot, violinplot, and geom_quasirandom plot"]},{"type":"character","attributes":{},"value":["https://raw.githubusercontent.com/hauselin/rtutorialsite/master/docs/attachments/plot_dotdist.gif"]},{"type":"list","attributes":{},"value":[{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name"]}},"value":[{"type":"character","attributes":{},"value":["Hause Lin"]}]}]},{"type":"character","attributes":{},"value":["02-22-2019"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["radix::radix_article"]}},"value":[{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["toc","self_contained"]}},"value":[{"type":"logical","attributes":{},"value":[true]},{"type":"logical","attributes":{},"value":[false]}]}]},{"type":"logical","attributes":{},"value":[false]},{"type":"character","attributes":{},"value":["ggbeeswarm","ggplot2","gganimate"]},{"type":"character","attributes":{},"value":["https://github.com/hauselin/rtutorialsite/blob/master/_posts/2019-02-22-why-we-should-never-use-barplots-use-geomquasirandom-instead/why-we-should-never-use-barplots-use-geomquasirandom-instead.Rmd"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["chunk_output_type"]}},"value":[{"type":"character","attributes":{},"value":["console"]}]},{"type":"character","attributes":{},"value":["biblio.bib"]},{"type":"character","attributes":{},"value":["https://hausetutorials.netlify.com/posts/2019-02-22-why-we-should-never-use-barplots-use-geomquasirandom-instead/"]},{"type":"character","attributes":{},"value":["https://hausetutorials.netlify.com/posts/2019-02-22-why-we-should-never-use-barplots-use-geomquasirandom-instead/"]}]}
+{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["creative_commons","title","description","preview","author","date","output","draft","categories","repository_url","editor_options","citation_url","canonical_url"]}},"value":[{"type":"character","attributes":{},"value":["CC BY"]},{"type":"character","attributes":{},"value":["Dockerize a ShinyApp and host it on your own server with DigitalOcean"]},{"type":"character","attributes":{},"value":["How I managed to deploy my ShinyApp with Docker and host it on a web server with DigitalOcean."]},{"type":"character","attributes":{},"value":["https://raw.githubusercontent.com/hauselin/rtutorialsite/master/docs/attachments/dockerShinyDigitalOcean.jpeg"]},{"type":"list","attributes":{},"value":[{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name"]}},"value":[{"type":"character","attributes":{},"value":["Hause Lin"]}]}]},{"type":"character","attributes":{},"value":["03-16-2019"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["radix::radix_article"]}},"value":[{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["toc","self_contained"]}},"value":[{"type":"logical","attributes":{},"value":[true]},{"type":"logical","attributes":{},"value":[false]}]}]},{"type":"logical","attributes":{},"value":[false]},{"type":"character","attributes":{},"value":["shinyapp","docker","digitalocean","webserver"]},{"type":"character","attributes":{},"value":["https://hausetutorials.netlify.com/articles.html"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["chunk_output_type"]}},"value":[{"type":"character","attributes":{},"value":["console"]}]},{"type":"character","attributes":{},"value":["https://hausetutorials.netlify.com/posts/2019-03-17-dockerize-a-shinyapp-and-host-it-on-your-own-server-with-digitalocean/"]},{"type":"character","attributes":{},"value":["https://hausetutorials.netlify.com/posts/2019-03-17-dockerize-a-shinyapp-and-host-it-on-your-own-server-with-digitalocean/"]}]}
 </script>
 <!--/radix_placeholder_rmarkdown_metadata-->
   
   <script type="text/json" id="radix-resource-manifest">
-  {"type":"character","attributes":{},"value":["biblio.bib","why-we-should-never-use-barplots-use-geomquasirandom-instead_files/bowser-1.9.3/bowser.min.js","why-we-should-never-use-barplots-use-geomquasirandom-instead_files/distill-2.2.21/template.v2.js","why-we-should-never-use-barplots-use-geomquasirandom-instead_files/figure-html5/unnamed-chunk-2-1.gif","why-we-should-never-use-barplots-use-geomquasirandom-instead_files/figure-html5/unnamed-chunk-3-1.gif","why-we-should-never-use-barplots-use-geomquasirandom-instead_files/figure-html5/unnamed-chunk-4-1.gif","why-we-should-never-use-barplots-use-geomquasirandom-instead_files/figure-html5/unnamed-chunk-5-1.gif","why-we-should-never-use-barplots-use-geomquasirandom-instead_files/jquery-1.11.3/jquery.min.js","why-we-should-never-use-barplots-use-geomquasirandom-instead_files/pagedtable-1.1/css/pagedtable.css","why-we-should-never-use-barplots-use-geomquasirandom-instead_files/pagedtable-1.1/js/pagedtable.js","why-we-should-never-use-barplots-use-geomquasirandom-instead_files/webcomponents-2.0.0/webcomponents.js"]}
+  {"type":"character","attributes":{},"value":["dockerize-a-shinyapp-and-host-it-on-your-own-server-with-digitalocean_files/bowser-1.9.3/bowser.min.js","dockerize-a-shinyapp-and-host-it-on-your-own-server-with-digitalocean_files/distill-2.2.21/template.v2.js","dockerize-a-shinyapp-and-host-it-on-your-own-server-with-digitalocean_files/jquery-1.11.3/jquery.min.js","dockerize-a-shinyapp-and-host-it-on-your-own-server-with-digitalocean_files/webcomponents-2.0.0/webcomponents.js"]}
   </script>
   <!--radix_placeholder_navigation_in_header-->
 
@@ -1308,7 +1307,7 @@ gtag('config', 'UA-134721506-5');
 <!--radix_placeholder_front_matter-->
 
 <script id="distill-front-matter" type="text/json">
-{"title":"Why bar (dynamite) plots are terrible (use ggbeeswarm instead)","description":"Why are barplots or dynamite plots so bad? Comparing four different types of plots: barplot, boxplot, violinplot, and geom_quasirandom plot","authors":[{"author":"Hause Lin","authorURL":"#","affiliation":"&nbsp;","affiliationURL":"#"}],"publishedDate":"2019-02-22T00:00:00.000+01:00","citationText":"Lin, 2019"}
+{"title":"Dockerize a ShinyApp and host it on your own server with DigitalOcean","description":"How I managed to deploy my ShinyApp with Docker and host it on a web server with DigitalOcean.","authors":[{"author":"Hause Lin","authorURL":"#","affiliation":"&nbsp;","affiliationURL":"#"}],"publishedDate":"2019-03-16T00:00:00.000+01:00","citationText":"Lin, 2019"}
 </script>
 
 <!--/radix_placeholder_front_matter-->
@@ -1357,205 +1356,118 @@ Tutorials
 <!--/radix_placeholder_site_before_body-->
 
 <div class="d-title">
-<h1>Why bar (dynamite) plots are terrible (use ggbeeswarm instead)</h1>
-<p>Why are barplots or dynamite plots so bad? Comparing four different types of plots: barplot, boxplot, violinplot, and geom_quasirandom plot</p>
+<h1>Dockerize a ShinyApp and host it on your own server with DigitalOcean</h1>
+<p>How I managed to deploy my ShinyApp with Docker and host it on a web server with DigitalOcean.</p>
 </div>
 
 <div class="d-byline">
   Hause Lin  
   
-<br/>02-22-2019
+<br/>03-16-2019
 </div>
 
 <div class="d-article">
 <h3 class="d-toc-header">Table of Contents</h3>
 <nav class="d-toc" id="TOC">
 <ul>
-<li><a href="#dynamite-or-bar-plots-must-die">Dynamite or bar plots must die?</a></li>
-<li><a href="#randomly-generate-10-datasets-with-same-mean-and-sd">Randomly generate 10 datasets with same mean and sd</a></li>
-<li><a href="#r-code-to-generate-four-figures-below">R code to generate four figures below</a></li>
-<li><a href="#comparing-bar-plots-boxplots-violin-plots-and-geom_quasirandom-plots">Comparing bar plots, boxplots, violin plots, and <code>geom_quasirandom()</code> plots</a></li>
+<li><a href="#hosting-a-shinyapp-on-your-own-websitedomain-with-docker-and-digitalocean">Hosting a ShinyApp on your own website/domain with Docker and DigitalOcean</a></li>
+<li><a href="#step-1.-create-your-shinyapp">Step 1. Create your ShinyApp</a></li>
+<li><a href="#step-2.-dockerize-your-shinyapp-and-rstudio-server">Step 2. Dockerize your ShinyApp and RStudio Server</a></li>
+<li><a href="#step-3.-sign-up-to-digitalocean-to-get-a-private-server">Step 3. Sign up to DigitalOcean to get a private server</a></li>
+<li><a href="#step-4.-transfer-your-docker-tar-archive-image-to-your-digitalocean-droplet">Step 4. Transfer your Docker tar-archive image to your DigitalOcean droplet</a></li>
+<li><a href="#step-5.-load-your-docker-image-on-droplet-and-run-your-app-on-our-server">Step 5. Load your Docker image on droplet and run your app on our server!</a></li>
+<li><a href="#step-6.-optional-but-recommended-get-a-nice-domain-name-url-for-your-droplet">Step 6. (optional but recommended): Get a nice domain name (“URL”) for your droplet</a></li>
 </ul>
 </nav>
 <hr class="d-toc-separator"/>
-<p>Get source code for this RMarkdown script <a href="https://github.com/hauselin/rtutorialsite/blob/master/_posts/2019-02-22-why-we-should-never-use-barplots-use-geomquasirandom-instead/why-we-should-never-use-barplots-use-geomquasirandom-instead.Rmd">here</a>.</p>
-<h2 id="dynamite-or-bar-plots-must-die">Dynamite or bar plots must die?</h2>
-<p>A <a href="https://simplystatistics.org/2019/02/21/dynamite-plots-must-die/">recent open letter to journal editors</a> said that “dynamite plots must die”.</p>
-<blockquote>
-<p>Statisticians have been pointing out the problem with dynamite plots<a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a>, also known as bar and line graphs, for years. Karl Broman lists them as one of the top ten worst graphs<a href="#fn2" class="footnote-ref" id="fnref2"><sup>2</sup></a>. The problem has even been documented in the peer reviewed literature.</p>
-</blockquote>
-<blockquote>
-<p>One of my professional pet peeves is dynamite plots. Sometimes they are incorrectly referred to as bar plots. Dynamite plots do not have a formal name because they are not a part of conventional statistical graphics that should be used in reporting scientific results. But they are everywhere! ~ Tatsuki Koyama (Vanderbilt Biostatistics)</p>
-</blockquote>
-<blockquote>
-<p>Graphics reveal data, communicate complex ideas and dependencies with clarity, precision and efficiency. ~ Edward Tufte</p>
-</blockquote>
-<p>Many others have also suggested we need to plot better <span class="citation" data-cites="drummond2011 Weissgerber2015">(Drummond and Vowler <a href="#ref-drummond2011">2011</a>; Weissgerber et al. <a href="#ref-Weissgerber2015">2015</a>)</span>. Here, I’m simulating datasets to compare barplots (dynamite plots), boxplots, violin plots, and another kind of plot I prefer (<a href="https://github.com/eclarke/ggbeeswarm">ggbeeswarm</a>).</p>
-<div class="layout-chunk" data-layout="l-body">
-<pre class="r"><code>
-# load packages
-library(data.table); library(tidyverse); library(gganimate); 
-library(ggbeeswarm); library(rmarkdown); library(knitr)</code></pre>
-</div>
-<h2 id="randomly-generate-10-datasets-with-same-mean-and-sd">Randomly generate 10 datasets with same mean and sd</h2>
-<p>Within each dataset, we have data from two groups, with 50 data points (e.g., subjects) per group. One group has mean 100 (sd = 15) and the other has mean 105 (sd = 45).</p>
-<div class="layout-chunk" data-layout="l-body-outset">
-<pre class="r"><code>
-# extend R&#39;s rnorm() function 
-# rnormFixed generates random data from a normal distribution 
-# but ensures mean and sd values are exactly what we wanted
-rnormFixed &lt;- function(n, mean, sd) {
-    mean + sd * scale(rnorm(n))
-}
-
-set.seed(1) # to ensure results/figures can be replicated
-n &lt;- 50 # datapoints per group
-datasets &lt;- 10
-
-# generate datasets
-dt1 &lt;- lapply(1:datasets, # loop iterator 
-              function(x) {data.table(
-                scores = c(rnormFixed(n = n, mean = 100, sd = 15), # mean of group 1
-                           rnormFixed(n = n, mean = 105, sd = 45)), # mean of group 2
-                group = rep(x = c(&quot;group 1&quot;, &quot;group 2&quot;), each = n), # condition label
-                dataset = x)})
-dt1 &lt;- bind_rows(dt1) # bind list containing separate datasets into a dataframe 
-dt1</code></pre>
-<pre><code>
-         scores   group dataset
-   1:  86.88524 group 1       1
-   2: 101.50100 group 1       1
-   3:  83.11131 group 1       1
-   4: 126.96975 group 1       1
-   5: 104.13269 group 1       1
-  ---                          
- 996:  96.99936 group 2      10
- 997:  73.10838 group 2      10
- 998:  92.53620 group 2      10
- 999:  47.75614 group 2      10
-1000:  80.82894 group 2      10</code></pre>
-</div>
-<p>Compute mean and standard deviation for each dataset and group.</p>
-<div class="layout-chunk" data-layout="l-body">
-<pre class="r"><code>
-dt1[, .(scores = mean(scores), scores_stdev = sd(scores)), by = .(dataset, group)]</code></pre>
-<pre><code>
-    dataset   group scores scores_stdev
- 1:       1 group 1    100           15
- 2:       1 group 2    105           45
- 3:       2 group 1    100           15
- 4:       2 group 2    105           45
- 5:       3 group 1    100           15
- 6:       3 group 2    105           45
- 7:       4 group 1    100           15
- 8:       4 group 2    105           45
- 9:       5 group 1    100           15
-10:       5 group 2    105           45
-11:       6 group 1    100           15
-12:       6 group 2    105           45
-13:       7 group 1    100           15
-14:       7 group 2    105           45
-15:       8 group 1    100           15
-16:       8 group 2    105           45
-17:       9 group 1    100           15
-18:       9 group 2    105           45
-19:      10 group 1    100           15
-20:      10 group 2    105           45</code></pre>
-</div>
-<h2 id="r-code-to-generate-four-figures-below">R code to generate four figures below</h2>
-<p>Compare barplot, boxplot, violin plot, and plot with <code>geom_quasirandom()</code> from <code>ggbeeswarm</code> package.</p>
-<div class="layout-chunk" data-layout="l-body">
-<pre class="r"><code>
-# barplot
-plot_bar &lt;- ggplot(dt1, aes(group, scores)) + 
-    stat_summary(fun.y = mean, geom = &#39;bar&#39;, size = 6) +
-    stat_summary(fun.data = mean_cl_normal, geom = &#39;errorbar&#39;, width = 0, size = 1.1) +
-    transition_states(dataset) +
-    labs(x = &#39;Sample {closest_state}&#39;)
-plot_bar
-# anim_save(&quot;./attachments/plot_bar.gif&quot;, plot_bar)</code></pre>
-</div>
-<div class="layout-chunk" data-layout="l-body">
-<pre class="r"><code>
-plot_boxplot &lt;- ggplot(dt1, aes(group, scores)) + 
-    geom_boxplot() +
-    stat_summary(fun.y = mean, geom = &#39;point&#39;, shape = 95, size = 6) +
-    stat_summary(fun.data = mean_cl_normal, geom = &#39;errorbar&#39;, width = 0) +
-    transition_states(dataset) +
-    labs(x = &#39;Sample {closest_state}&#39;)
-plot_boxplot
-# anim_save(&quot;./attachments/plot_boxplot.gif&quot;, plot_boxplot)</code></pre>
-</div>
-<div class="layout-chunk" data-layout="l-body">
-<pre class="r"><code>
-plot_violin &lt;- ggplot(dt1, aes(group, scores)) +
-    geom_violin() +
-    stat_summary(fun.y = mean, geom = &#39;point&#39;, shape = 95, size = 6) +
-    stat_summary(fun.data = mean_cl_normal, geom = &#39;errorbar&#39;, width = 0, size = 1.1) +
-    scale_colour_viridis_d(begin = 0, end = 0.5) +
-    transition_states(dataset) +
-    labs(x = &#39;Sample {closest_state}&#39;)
-plot_violin
-# anim_save(&quot;./attachments/plot_violin.gif&quot;, plot_violin)</code></pre>
-</div>
-<div class="layout-chunk" data-layout="l-body">
-<pre class="r"><code>
-plot_dotdist &lt;- ggplot(dt1, aes(group, scores)) +
-    geom_quasirandom(alpha = 0.2) +
-    stat_summary(fun.y = mean, geom = &#39;point&#39;, shape = 95, size = 6) +
-    stat_summary(fun.data = mean_cl_normal, geom = &#39;errorbar&#39;, width = 0, size = 1.1) +
-    scale_colour_viridis_d(begin = 0, end = 0.5) +
-    transition_states(dataset) +
-    labs(x = &#39;Sample {closest_state}&#39;)
-plot_dotdist
-# anim_save(&quot;./attachments/plot_dotdist.gif&quot;, plot_dotdist)</code></pre>
-</div>
-<h2 id="comparing-bar-plots-boxplots-violin-plots-and-geom_quasirandom-plots">Comparing bar plots, boxplots, violin plots, and <code>geom_quasirandom()</code> plots</h2>
-<p>Note what happens in the four figures below.</p>
+<h2 id="hosting-a-shinyapp-on-your-own-websitedomain-with-docker-and-digitalocean">Hosting a ShinyApp on your own website/domain with Docker and DigitalOcean</h2>
+<p>After much fiddling, I managed to dockerize my <a href="http://escal.site/">effect size converter ShinyApp</a> and hosted it on my own web server with <a href="http://digitalocean.com/">DigitalOcean</a>, which is cheaper, faster, and more flexible than <a href="http://shinyapps.io/">shinyapps.io</a>. Below are the exact steps I took and solutions to problems I ran into along the way. Note that I did everything on <strong>Mac OS X</strong>, so I won’t promise everything will work if you use other operating systems! I’ve provided the links to the key resources I used at each step.</p>
+<h2 id="step-1.-create-your-shinyapp">Step 1. Create your ShinyApp</h2>
+<p>In RStudio, create a new project via File -&gt; New Project -&gt; New Directory -&gt; Shiny Web Application. RStudio will create a ShinyApp project and directory that comes with a really simple ShinyApp (<code>app.R</code> which you can run by press Run App), which you can play with and edit to create your own ShinyApp.</p>
 <ul>
-<li>Barplots hide data. Means and standard deviation don’t change across the 10 datasets.</li>
-<li>Boxplot are slightly more informative and shows the outliers.</li>
-<li>Violin plots are also informative. They show the distributions.</li>
-<li><code>geom_quasirandom</code> from <a href="https://github.com/eclarke/ggbeeswarm">ggbeeswarm</a> package plots the distribution and dots. Such plots are most informative.</li>
+<li><a href="https://www.datacamp.com/tracks/shiny-fundamentals-with-r">DataCamp course: Building Web Applications in R with Shiny</a></li>
 </ul>
-<div class="layout-chunk" data-layout="l-body">
-<p><img src="https://raw.githubusercontent.com/hauselin/rtutorialsite/master/docs/attachments/plot_bar.gif" width="50%" /><img src="https://raw.githubusercontent.com/hauselin/rtutorialsite/master/docs/attachments/plot_boxplot.gif" width="50%" /><img src="https://raw.githubusercontent.com/hauselin/rtutorialsite/master/docs/attachments/plot_violin.gif" width="50%" /><img src="https://raw.githubusercontent.com/hauselin/rtutorialsite/master/docs/attachments/plot_dotdist.gif" width="50%" /></p>
-</div>
-<div id="refs" class="references">
-<div id="ref-drummond2011">
-<p>Drummond, GB, and SL Vowler. 2011. “Show the Data, Don’t Conceal Them.” <em>Adv Physiol Educ</em> 35 (2). Department of Anaesthesia; Pain Medicine, University of Edinburgh, UK. g.b.drummond@ed.ac.uk: 130–32. <a href="https://www.physiology.org/doi/pdf/10.1152/advan.00009.2011">https://www.physiology.org/doi/pdf/10.1152/advan.00009.2011</a>.</p>
-</div>
-<div id="ref-Weissgerber2015">
-<p>Weissgerber, TL, NM Milic, SJ Winham, and VD Garovic. 2015. “Beyond Bar and Line Graphs: Time for a New Data Presentation Paradigm.” <em>PLoS Biol.</em> 13 (4). Division of Nephrology &amp; Hypertension, Mayo Clinic, Rochester, Minnesota, United States of America. Division of Nephrology &amp; Hypertension, Mayo Clinic, Rochester, Minnesota, United States of America; Department of Biostatistics, Medical Faculty, University of Belgrade, Belgrade, Serbia. Division of Biomedical Statistic; Informatics, Mayo Clinic, Rochester, Minnesota, United States of America. Division of Nephrology &amp; Hypertension, Mayo Clinic, Rochester, Minnesota, United States of America.: e1002128. <a href="https://journals.plos.org/plosbiology/article?id=10.1371/journal.pbio.1002128">https://journals.plos.org/plosbiology/article?id=10.1371/journal.pbio.1002128</a>.</p>
-</div>
-</div>
-<section class="footnotes">
-<hr />
-<ol>
-<li id="fn1"><p><a href="https://simplystatistics.org/2019/02/21/dynamite-plots-must-die/">simply statistics site</a><a href="#fnref1" class="footnote-back">↩</a></p></li>
-<li id="fn2"><p>Check out the top 10 worst graphs <a href="https://www.biostat.wisc.edu/~kbroman/topten_worstgraphs">here</a><a href="#fnref2" class="footnote-back">↩</a></p></li>
+<h2 id="step-2.-dockerize-your-shinyapp-and-rstudio-server">Step 2. Dockerize your ShinyApp and RStudio Server</h2>
+<p>If you deploy (or run) your ShinyApp with Docker, you’re making your app self-contained, which means anyone can run your app even if they don’t have R or RStudio, as long as they have Docker installed. When you later host your app on a web server with DigitalOcean, we’ll simply upload this Docker image or container of your app to your web server. I followed the instructions on this site (steps summarized below): <a href="https://www.bjoern-hartmann.de/post/learn-how-to-dockerize-a-shinyapp-in-7-steps/#step-7-transfer-the-shinyapp-to-a-web-server-and-deploy-it-online">Learn how to dockerize a ShinyApp in 7 steps</a></p>
+<ol type="1">
+<li><p>Install Docker by downloading the free Docker Engine for your machine via <a href="docker.com">docker.com</a></p></li>
+<li><p>Create a new directory/folder (I’ve named it <code>myApp_docker</code>) and copy over all the files, scripts, and data that are required to run your ShinyApp into the folder <code>app</code> inside the <code>myApp_docker</code> directory. A really simple directory structure should look like the one below. After copying things over and setting up this directory, make sure you can run your ShinyApp from this directory.</p></li>
 </ol>
-</section>
+<pre><code>
+myApp_docker
+  - app
+    - app.R</code></pre>
+<ol start="3" type="1">
+<li>Create a Dockerfile, which tells Docker what to install (and in what order) to make a self-contained ShinyApp. You can download, edit, and use my <a href="https://raw.githubusercontent.com/hauselin/rtutorialsite/master/docs/attachments/Dockerfile">example Dockerfile</a>. You can specify which R version you want to install on line 2. Depending on what R packages you need, you’ll have to modify line 24 accordingly. When I created my Dockerfile, I ran into issues with permissions later on and I fixed it by adding the following lines (lines 36 to 38) in my Dockerfile.</li>
+</ol>
+<pre><code>
+# Permission
+# see https://github.com/rocker-org/shiny/issues/32
+RUN [&quot;chmod&quot;, &quot;+x&quot;, &quot;/usr/bin/shiny-server.sh&quot;]</code></pre>
+<ol start="4" type="1">
+<li>Add the Dockerfile and the shiny-server.conf and shiny-server.sh files to your <code>myApp_docker</code> directory. Follow instructions and download the files from <a href="https://www.bjoern-hartmann.de/post/learn-how-to-dockerize-a-shinyapp-in-7-steps/#step-4-add-configuration-files-for-your-shinyapp">here</a>. Your directory should look like this now:</li>
+</ol>
+<pre><code>
+myApp_docker
+  - Dockerfile
+  - shiny-server.conf
+  - shiny-server.sh
+  - app
+    - app.R</code></pre>
+<ol start="5" type="1">
+<li><p>Build the docker image. In terminal (bash), navigate to your <code>myApp_docker</code> directory and run <code>docker build -t myApp_docker .</code> You can name the Docker image whatever you like (it’s <code>myApp_docker</code> here, so the directory and Docker image name are identical).</p></li>
+<li><p>Test run your Docker image by running your ShinyApp locally with Docker. In terminal/bash, run <code>docker run -p 80:80 myApp_docker</code> which starts your myApp_docker Docker image. When the image is running, go to your web browser and you can navigate to <a href="http://localhost">http://localhost</a> to run your app. If it works, congrats on creating a self-contained Docker image of your ShinyApp! Make sure your app runs before you continue!</p></li>
+<li><p>Save your Docker image as a tar-archive so you can upload it to a web server later on. Run <code>docker save -o myApp_docker.tar myApp_docker</code> which saves your Docker image as a tar-acrhive in your current directory (myApp_docker). Depending on the size of your image (about 1GB for my image), this command might take some time to run.</p></li>
+</ol>
+<h2 id="step-3.-sign-up-to-digitalocean-to-get-a-private-server">Step 3. Sign up to DigitalOcean to get a private server</h2>
+<p>Go to <a href="https://m.do.co/c/a32d79a17aa9">DigitalOcean</a> (use this link to get 2 months free and credits!) then follow steps 1 to 4 on <a href="https://deanattali.com/2015/05/09/setup-rstudio-shiny-server-digital-ocean/">this site</a>, which are summarized below.</p>
+<ol type="1">
+<li><p>Sign up to DigitalOcean.</p></li>
+<li><p>Create a new droplet by choosing the smallest/cheapest machine ($5/month plan), which is often more than enough for simple ShinyApps. I chose New York for region because it’s closest to me.</p></li>
+</ol>
+<aside>
+I accidentally selected FrankFurt initially (because I created the droplet when I was in Europe) and I ran into issues logging in with ssh, which I couldn’t fix. But when I recreated my droplet by selecting New York region, the problem fixed itself!
+</aside>
+<ol start="3" type="1">
+<li><p>Log in to your new server with your droplet’s IP address (I’m going to use <code>xxx.xxx.xxx.xx</code> here). You can either log in via the Access tab (Launch Console) on the droplet’s page or via ssh if you’re on a unix machine. On my machine, I ran this in termal: <code>ssh root@xxx.xxx.xxx.xx</code>. It will ask for your password, which has been emailed to you when you created your droplet earlier on. Enter that password and it might ask you to change your default password.</p></li>
+<li><p>Add a user (my name <code>hause</code> in this example) to your server so you don’t use the root account. Run <code>adduser hause</code> and then <code>gpasswd -a hause sudo</code>. It might ask you to provide a password for this new account. Now, you can log in to this account instead of root. Try running <code>exit</code> to leave your server and then log in again but using <code>ssh hause@xxx.xxx.xxx.xx</code>. You should now be in your new account rather than root!</p></li>
+</ol>
+<h2 id="step-4.-transfer-your-docker-tar-archive-image-to-your-digitalocean-droplet">Step 4. Transfer your Docker tar-archive image to your DigitalOcean droplet</h2>
+<p>You’re getting there! Now you have to transfer your Docker tar-archive image to your DigitalOcean droplet. Use <code>rsync</code> or any FTP service you usually use (e.g., CyberDuck; I use <a href="https://binarynights.com/">ForkLift</a> on my Mac). If you use <code>rsync</code>, you can run the following: <code>rsync -av myApp_docker.tar hause@xxx.xxx.xxx.xx</code> to copy your Docker tar-archive to your droplet. It might take some time to transfer, depending on the size of your tar-achive and your internet connection.</p>
+<h2 id="step-5.-load-your-docker-image-on-droplet-and-run-your-app-on-our-server">Step 5. Load your Docker image on droplet and run your app on our server!</h2>
+<p>Finally you’re at the last step! When your Docker tar-archive is on your droplet, you first load it by running <code>docker load -i myApp_docker.tar</code> and then run it with <code>docker run -d -p 80:80 myApp_docker</code> (-d or –detach tells the droplet to run the docker image in the background; see <a href="http://networkstatic.net/running-docker-machine-on-digital-ocean/">here</a> for more info). See <a href="http://networkstatic.net/docker-one-liners/">here</a> for Docker one-liner tutorial! If everything is working properly, if you go to your web browser and enter your droplet IP address (<a href="http://xxx.xxx.xxx.xx" class="uri">http://xxx.xxx.xxx.xx</a>), your ShinyApp should be working! Congrats!</p>
+<h2 id="step-6.-optional-but-recommended-get-a-nice-domain-name-url-for-your-droplet">Step 6. (optional but recommended): Get a nice domain name (“URL”) for your droplet</h2>
+<p>I use <a href="http://namecheap.com/">NameCheap</a> to buy the domain <a href="escal.site">escal.site</a> for my ShinyApp. After buying your domain, point your droplet IP address to your domain by following the instructions <a href="https://www.howlthemes.com/point-domain-name-digitalocean-droplet/">here</a>, which are summarized below.</p>
+<ol type="1">
+<li>Manage your domain on NameCheap and search for an option called DNS (Domain Server Name) or just nameServer. Select custom DNS and add the following three nameservers. Then click the green checkmark. DigitalOcean also provides <a href="https://www.digitalocean.com/community/tutorials/how-to-point-to-digitalocean-nameservers-from-common-domain-registrars#registrar-namecheap">good tutorials</a>. It might take between 10 mins and 24 hours for the name server changes to take effect.</li>
+</ol>
+<pre><code>
+ns1.digitalocean.com
+ns2.digitalocean.com
+ns3.digitalocean.com</code></pre>
+<ol start="2" type="1">
+<li>Point your droplet IP to your domain name. Go to your DigitalOcean account and select Networking from the menu. Under “Add a domain”, enter your new domain name (escal.site in my case) and tell it which droplet or project you want to point to. Then manage this domain by creating new records. Create an “A” type to point your droplet IP to your domain name. Create a “CNAME” type to point one URL to another URL (e.g., www.escal.site also points to escal.site in my case). See <a href="https://www.howlthemes.com/point-domain-name-digitalocean-droplet/">here</a> and <a href="https://www.digitalocean.com/docs/networking/dns/how-to/manage-records/">here</a> for more instructions.</li>
+</ol>
 <!--radix_placeholder_article_footer-->
 <div class="article-footer">
   <p class="social_footer">
     <span class="disqus-comments">
       <i class="fas fa-comments"></i>
       &nbsp;
-      <span class="disqus-comment-count" data-disqus-identifier="posts/2019-02-22-why-we-should-never-use-barplots-use-geomquasirandom-instead/">Comment on this article</span>
+      <span class="disqus-comment-count" data-disqus-identifier="posts/2019-03-17-dockerize-a-shinyapp-and-host-it-on-your-own-server-with-digitalocean/">Comment on this article</span>
     </span>
     <span class="article-sharing">
       Share: &nbsp;
-      <a href="https://www.facebook.com/sharer/sharer.php?s=100&amp;p[url]=https%3A%2F%2Fhausetutorials.netlify.com%2Fposts%2F2019-02-22-why-we-should-never-use-barplots-use-geomquasirandom-instead%2F">
+      <a href="https://www.facebook.com/sharer/sharer.php?s=100&amp;p[url]=https%3A%2F%2Fhausetutorials.netlify.com%2Fposts%2F2019-03-17-dockerize-a-shinyapp-and-host-it-on-your-own-server-with-digitalocean%2F">
         <i class="fab fa-facebook"></i>
       </a>
-      <a href="https://twitter.com/share?text=Why%20bar%20%28dynamite%29%20plots%20are%20terrible%20%28use%20ggbeeswarm%20instead%29&amp;url=https%3A%2F%2Fhausetutorials.netlify.com%2Fposts%2F2019-02-22-why-we-should-never-use-barplots-use-geomquasirandom-instead%2F">
+      <a href="https://twitter.com/share?text=Dockerize%20a%20ShinyApp%20and%20host%20it%20on%20your%20own%20server%20with%20DigitalOcean&amp;url=https%3A%2F%2Fhausetutorials.netlify.com%2Fposts%2F2019-03-17-dockerize-a-shinyapp-and-host-it-on-your-own-server-with-digitalocean%2F">
         <i class="fab fa-twitter"></i>
       </a>
-      <a href="https://plus.google.com/share?url=https%3A%2F%2Fhausetutorials.netlify.com%2Fposts%2F2019-02-22-why-we-should-never-use-barplots-use-geomquasirandom-instead%2F">
+      <a href="https://plus.google.com/share?url=https%3A%2F%2Fhausetutorials.netlify.com%2Fposts%2F2019-03-17-dockerize-a-shinyapp-and-host-it-on-your-own-server-with-digitalocean%2F">
         <i class="fab fa-google-plus"></i>
       </a>
-      <a href="https://www.linkedin.com/shareArticle?mini=true&amp;url=https%3A%2F%2Fhausetutorials.netlify.com%2Fposts%2F2019-02-22-why-we-should-never-use-barplots-use-geomquasirandom-instead%2F&amp;title=Why%20bar%20%28dynamite%29%20plots%20are%20terrible%20%28use%20ggbeeswarm%20instead%29">
+      <a href="https://www.linkedin.com/shareArticle?mini=true&amp;url=https%3A%2F%2Fhausetutorials.netlify.com%2Fposts%2F2019-03-17-dockerize-a-shinyapp-and-host-it-on-your-own-server-with-digitalocean%2F&amp;title=Dockerize%20a%20ShinyApp%20and%20host%20it%20on%20your%20own%20server%20with%20DigitalOcean">
         <i class="fab fa-linkedin"></i>
       </a>
     </span>
@@ -1564,8 +1476,8 @@ plot_dotdist
   <div id="disqus_thread" class="hidden"></div>
   <script>
 var disqus_config = function () {
-  this.page.url = 'https://hausetutorials.netlify.com/posts/2019-02-22-why-we-should-never-use-barplots-use-geomquasirandom-instead/';
-  this.page.identifier = 'posts/2019-02-22-why-we-should-never-use-barplots-use-geomquasirandom-instead/';
+  this.page.url = 'https://hausetutorials.netlify.com/posts/2019-03-17-dockerize-a-shinyapp-and-host-it-on-your-own-server-with-digitalocean/';
+  this.page.identifier = 'posts/2019-03-17-dockerize-a-shinyapp-and-host-it-on-your-own-server-with-digitalocean/';
 };
 (function() {
   var d = document, s = d.createElement('script');
@@ -1587,48 +1499,20 @@ var disqus_config = function () {
 <!--radix_placeholder_appendices-->
 <div class="appendix-bottom">
   <h3 id="updates-and-corrections">Corrections</h3>
-  <p>If you see mistakes or want to suggest changes, please <a href="https://github.com/hauselin/rtutorialsite/blob/master/_posts/2019-02-22-why-we-should-never-use-barplots-use-geomquasirandom-instead/why-we-should-never-use-barplots-use-geomquasirandom-instead.Rmd/issues/new">create an issue</a> on the source repository.</p>
+  <p>If you see mistakes or want to suggest changes, please <a href="https://hausetutorials.netlify.com/articles.html">create an issue</a> on the source repository.</p>
   <h3 id="reuse">Reuse</h3>
-  <p>Text and figures are licensed under Creative Commons Attribution <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>. Source code is available at <a href="https://github.com/hauselin/rtutorialsite/blob/master/_posts/2019-02-22-why-we-should-never-use-barplots-use-geomquasirandom-instead/why-we-should-never-use-barplots-use-geomquasirandom-instead.Rmd">https://github.com/hauselin/rtutorialsite/blob/master/_posts/2019-02-22-why-we-should-never-use-barplots-use-geomquasirandom-instead/why-we-should-never-use-barplots-use-geomquasirandom-instead.Rmd</a>, unless otherwise noted. The figures that have been reused from other sources don't fall under this license and can be recognized by a note in their caption: "Figure from ...".</p>
+  <p>Text and figures are licensed under Creative Commons Attribution <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>. Source code is available at <a href="https://hausetutorials.netlify.com/articles.html">https://hausetutorials.netlify.com/articles.html</a>, unless otherwise noted. The figures that have been reused from other sources don't fall under this license and can be recognized by a note in their caption: "Figure from ...".</p>
   <h3 id="citation">Citation</h3>
   <p>For attribution, please cite this work as</p>
-  <pre class="citation-appendix short">Lin (2019, Feb. 22). Data science with R: Why bar (dynamite) plots are terrible (use ggbeeswarm instead). Retrieved from https://hausetutorials.netlify.com/posts/2019-02-22-why-we-should-never-use-barplots-use-geomquasirandom-instead/</pre>
+  <pre class="citation-appendix short">Lin (2019, March 16). Data science with R: Dockerize a ShinyApp and host it on your own server with DigitalOcean. Retrieved from https://hausetutorials.netlify.com/posts/2019-03-17-dockerize-a-shinyapp-and-host-it-on-your-own-server-with-digitalocean/</pre>
   <p>BibTeX citation</p>
-  <pre class="citation-appendix long">@misc{lin2019why,
+  <pre class="citation-appendix long">@misc{lin2019dockerize,
   author = {Lin, Hause},
-  title = {Data science with R: Why bar (dynamite) plots are terrible (use ggbeeswarm instead)},
-  url = {https://hausetutorials.netlify.com/posts/2019-02-22-why-we-should-never-use-barplots-use-geomquasirandom-instead/},
+  title = {Data science with R: Dockerize a ShinyApp and host it on your own server with DigitalOcean},
+  url = {https://hausetutorials.netlify.com/posts/2019-03-17-dockerize-a-shinyapp-and-host-it-on-your-own-server-with-digitalocean/},
   year = {2019}
 }</pre>
 </div>
-<script id="distill-bibliography" type="text/bibtex">
-@Article{Weissgerber2015,
-author = {Weissgerber, TL and Milic, NM and Winham, SJ and Garovic, VD},
-title = {Beyond bar and line graphs: time for a new data presentation paradigm.},
-journal = {PLoS Biol.},
-volume = {13},
-number = {4},
-pages = {e1002128},
-year = {2015},
-url = {https://journals.plos.org/plosbiology/article?id=10.1371/journal.pbio.1002128},
-abstract = {Figures in scientific publications are critically important because they often show the data supporting key findings. Our systematic review of research articles published in top physiology journals (n = 703) suggests that, as scientists, we urgently need to change our practices for presenting continuous data in small sample size studies. Papers rarely included scatterplots, box plots, and histograms that allow readers to critically evaluate continuous data. Most papers presented continuous data in bar and line graphs. This is problematic, as many different data distributions can lead to the same bar or line graph. The full data may suggest different conclusions from the summary statistics. We recommend training investigators in data presentation, encouraging a more complete presentation of data, and changing journal editorial policies. Investigators can quickly make univariate scatterplots for small sample size studies using our Excel templates.},
-location = {Division of Nephrology & Hypertension, Mayo Clinic, Rochester, Minnesota, United States of America. Division of Nephrology & Hypertension, Mayo Clinic, Rochester, Minnesota, United States of America; Department of Biostatistics, Medical Faculty, University of Belgrade, Belgrade, Serbia. Division of Biomedical Statistic and Informatics, Mayo Clinic, Rochester, Minnesota, United States of America. Division of Nephrology & Hypertension, Mayo Clinic, Rochester, Minnesota, United States of America.},
-keywords = {statistics}}
-
-
-@Article{drummond2011,
-author = {Drummond, GB and Vowler, SL},
-title = {Show the data, don't conceal them.},
-journal = {Adv Physiol Educ},
-volume = {35},
-number = {2},
-pages = {130–132},
-year = {2011},
-abstract = {Current standards of data presentation and analysis in biological journals often fall short of ideal. This is the first of a planned series of short articles, to be published in a number of journals, aiming to highlight the principles of clear data presentation and appropriate statistical analysis. This article considers the methods used to show data, in particular the value of the dot plot, and methods to summarise the distribution of values. The uses of measures such as standard deviation, standard error of the mean, and confidence intervals are contrasted.},
-location = {Department of Anaesthesia and Pain Medicine, University of Edinburgh, UK. g.b.drummond@ed.ac.uk},
-keywords = {},
-url = {https://www.physiology.org/doi/pdf/10.1152/advan.00009.2011}}
-</script>
 <!--/radix_placeholder_appendices-->
 <!--radix_placeholder_navigation_after_body-->
 <div class="radix-site-nav radix-site-footer">

@@ -1,5 +1,25 @@
 [
   {
+    "path": "posts/2019-03-17-dockerize-a-shinyapp-and-host-it-on-your-own-server-with-digitalocean/",
+    "title": "Dockerize a ShinyApp and host it on your own server with DigitalOcean",
+    "description": "How I managed to deploy my ShinyApp with Docker and host it on a web server with DigitalOcean.",
+    "author": [
+      {
+        "name": "Hause Lin",
+        "url": {}
+      }
+    ],
+    "date": "2019-03-16",
+    "categories": [
+      "shinyapp",
+      "docker",
+      "digitalocean",
+      "webserver"
+    ],
+    "preview": "https://raw.githubusercontent.com/hauselin/rtutorialsite/master/docs/attachments/dockerShinyDigitalOcean.jpeg",
+    "last_modified": "2019-03-17T14:28:55+01:00"
+  },
+  {
     "path": "posts/2019-02-22-why-we-should-never-use-barplots-use-geomquasirandom-instead/",
     "title": "Why bar (dynamite) plots are terrible (use ggbeeswarm instead)",
     "description": "Why are barplots or dynamite plots so bad? Comparing four different types of plots: barplot, boxplot, violinplot, and geom_quasirandom plot",
@@ -16,7 +36,7 @@
       "gganimate"
     ],
     "preview": "https://raw.githubusercontent.com/hauselin/rtutorialsite/master/docs/attachments/plot_dotdist.gif",
-    "last_modified": "2019-02-23T05:12:12+01:00"
+    "last_modified": "2019-03-17T12:55:05+01:00"
   },
   {
     "path": "posts/2019-02-18-fit-models-to-every-group/",
@@ -33,6 +53,6 @@
       "data.table"
     ],
     "preview": {},
-    "last_modified": "2019-02-21T17:35:44+01:00"
+    "last_modified": "2019-03-17T12:54:48+01:00"
   }
 ]

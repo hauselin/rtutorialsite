@@ -8,6 +8,7 @@ author:
 date: 02-22-2019
 output:
   radix::radix_article:
+    toc: true
     self_contained: false
 draft: false
 categories: 
