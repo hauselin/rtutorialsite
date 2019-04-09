@@ -7,14 +7,23 @@
     <description>Data science and analysis tutorials
 </description>
     <generator>Radix</generator>
-    <lastBuildDate>Fri, 15 Mar 2019 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Tue, 09 Apr 2019 00:00:00 +0000</lastBuildDate>
+    <item>
+      <title>Bayesian inference and MCMC sampling introduction</title>
+      <dc:creator>Hause Lin</dc:creator>
+      <link>https://hausetutorials.netlify.com/posts/2019-04-09-gentle-and-intuitive-intro-to-markov-chain-monte-carlo-mcmc</link>
+      <description>A gentle and intuitive introduction to Markov Chain Monte Carlo sampling with rejection sampling.</description>
+      <guid>https://hausetutorials.netlify.com/posts/2019-04-09-gentle-and-intuitive-intro-to-markov-chain-monte-carlo-mcmc</guid>
+      <pubDate>Tue, 09 Apr 2019 00:00:00 +0000</pubDate>
+      <media:content url="https://raw.githubusercontent.com/hauselin/rtutorialsite/master/docs/attachments/plot_dotdist.gif" medium="image" type="image/gif"/>
+    </item>
     <item>
       <title>Dockerize a ShinyApp and host it on your own server with DigitalOcean</title>
       <dc:creator>Hause Lin</dc:creator>
       <link>https://hausetutorials.netlify.com/posts/2019-03-17-dockerize-a-shinyapp-and-host-it-on-your-own-server-with-digitalocean</link>
       <description>Step-by-step instructions describing how I deployed my ShinyApp with Docker and hosted it on a web server with DigitalOcean (using Mac OS X).</description>
       <guid>https://hausetutorials.netlify.com/posts/2019-03-17-dockerize-a-shinyapp-and-host-it-on-your-own-server-with-digitalocean</guid>
-      <pubDate>Fri, 15 Mar 2019 00:00:00 +0000</pubDate>
+      <pubDate>Sat, 16 Mar 2019 00:00:00 +0000</pubDate>
       <media:content url="https://raw.githubusercontent.com/hauselin/rtutorialsite/master/docs/attachments/dockerShinyDigitalOcean.jpg" medium="image" type="image/jpeg"/>
     </item>
     <item>

@@ -1,0 +1,243 @@
+---
+title: "Bayesian inference and MCMC sampling introduction"
+description: |
+  A gentle and intuitive introduction to Markov Chain Monte Carlo sampling with rejection sampling.
+preview: https://raw.githubusercontent.com/hauselin/rtutorialsite/master/docs/attachments/plot_dotdist.gif
+author:
+  - name: Hause Lin
+date: 04-09-2019
+output:
+  radix::radix_article:
+    toc: true
+    self_contained: false
+draft: false
+categories: 
+  - bayes
+  - mcmc
+repository_url: https://github.com/hauselin/rtutorialsite/blob/master/_posts/2019-02-22-why-we-should-never-use-barplots-use-geomquasirandom-instead/why-we-should-never-use-barplots-use-geomquasirandom-instead.Rmd
+editor_options: 
+  chunk_output_type: console
+---
+
+```{r setup, include=FALSE}
+library(roxygen2)
+knitr::opts_chunk$set(echo = TRUE, cache = FALSE, comment = NA, message = FALSE, warning = FALSE)
+```
+
+Bayesian inference, priors, likelihood, posteriors, and especially Markov Chain Monte Carlo sampling can be mysterious. I will try to explain these concepts with a simple 1-dimensional example, using something known as **rejection sampling**, which is good for explaining how sampling works, but is never used in practice because it is highly inefficient (we'll see what that means later on).
+
+## Binomial distribution example (life or death, heads or tails)
+
+In a hospital, there are a total of 100 patients suffering from different deadly diseases. Doctor X is very optimistic and thinks that 83% of the patients will survive after 2 days. That is, Doctor X is expecting 83 patients to survive and 17 to die. This situation is like typical coin-toss scenarios, where survive is heads (coded 1) and death is tails (coded 0). Coin tosses and our scenario can be described with the binomial distribution. 
+
+Let's generate some random data assuming we have 100 patients and 83% survival probability. Because the number is randomly generated from a binomial distribution (n = 100 and success = 83), we might not get exactly 83 as the output.
+
+```{r}
+n_patients <- 100 # number of patients
+survive_probability <- 0.83 # probability of surviving
+number_of_simulations <- 1
+rbinom(n = number_of_simulations, size = n_patients, prob = survive_probability)
+```
+
+Let's repeat the scenario/simulation 10 times. Because the numbers are randomly generated from a binomial distribution (n = 100 and success = 83), we get slightly different numbers for each simulation. But these numbers should be close to 83.
+
+```{r}
+number_of_simulations <- 10
+rbinom(n = number_of_simulations, size = n_patients, prob = survive_probability)
+```
+
+## Representing beliefs about probability with the beta distribution
+
+Doctor X believes 83% of the 100 patients will survive. In other words, he believes that 83% is the most likely survival probability, whereas 82% and 84% are also likely, but less likely than 83%. We can represent Doctor X's belief using a beta distribution, which is useful for describing probabilities because it ranges from 0 to 1, and has two parameters shape1 and shape2 that can be used to describe success or failure respectively. 
+
+If you're not familiar with the beta distribution, here are the key properties of the beta distribution:
+
+* it ranges from 0 to 1
+* shape1 and shape2 parameter can be thought of as the "success" and "failure" parameter
+
+Below are the shapes of beta distributions with different shape1 and shape2 parameters. As shown below, the beta distribution is very flexible and changing the two parameters of the distribution can change the shape of the distribution drastically!
+
+```{r} 
+par(mfrow = c(2, 3)) # display subplots in a 2 x 3 grid
+curve(dbeta(x, shape1 = 1.0, shape2 = 1.0), from = 0, to = 1) # uniform
+curve(dbeta(x, shape1 = 1.2, shape2 = 1.2), from = 0, to = 1)
+curve(dbeta(x, shape1 = 4, shape2 = 4), from = 0, to = 1) # normal looking
+curve(dbeta(x, shape1 = 0.5, shape2 = 0.5), from = 0, to = 1) # u-shape
+curve(dbeta(x, shape1 = 5, shape2 = 2), from = 0, to = 1) # success more likely than failure
+curve(dbeta(x, shape1 = 3, shape2 = 6), from = 0, to = 1) # failure more likely than success
+```
+
+```{r, include=FALSE}
+par(mfrow = c(1, 1))
+```
+
+We can represent Doctor X's belief with this beta distribution. Doctor X believes that 83% survival is the most likely to occur, and 40% survival is about half as likely to occur, but what this beta distribution says is that Doctor X believes that different survival probabilities ranging from 0 to 1 are plausible, even though he believes that 83% is most likely to occur.
+
+```{r}
+curve(dbeta(x, shape1 = 3.5, shape2 = 1.5), from = 0, to = 1, 
+      xlab = "Plausible probabilities (survival percent or proportion)",
+      ylab = "Likelihood", 
+      main = "Doctor X's belief")
+abline(v = 0.83, col = "black", lwd = 3)
+```
+
+In Bayesian terminology, Doctor X's belief is his prior (prior beliefs), $P(\theta)$.
+
+After 2 days, only 72 patients survived (28 died). Doctor X's priors were not too accurate, it seems. Before we discuss how Doctor X should update/revise his beliefs, let's return to our simulations from earlier on to see how rare/frequent it is to get 72 survivals (out of 100), assuming that we believe that 83% should survive.
+
+Run the `rbinom()` function a few times and see how many times you got 23? Probably none...
+
+```{r}
+n_patients <- 100 # number of patients
+survive_probability <- 0.83 # probability of surviving
+number_of_simulations <- 1 
+rbinom(n = number_of_simulations, size = n_patients, prob = survive_probability)
+```
+
+Let's run 100,000 simulations to see how many 72s we can get! 
+
+```{r}
+number_of_simulations <- 100000
+simdata <- rbinom(n = number_of_simulations, size = n_patients, prob = survive_probability)
+sum(simdata == 72) # total number of simulations that resulted in 72 survivals
+```
+
+Only `r sum(simdata == 72)` of 100000 simulations (assuming 83% survival probability) generated 72 survivals!
+
+
+Remember, 83% is just one of the plausible parameter probability values in Doctor X's prior beliefs distribution. See beta distribution reflecting his beliefs for the entire range of probability values in the figure above! 72% might not be as likely as 83% in his prior beliefs distribution, but it's still fairly likely to occur!
+
+Let's run another 100,000 simulations to see how many 72s we can get, assuming the prior belief of survival is 72%.
+
+```{r}
+n_patients <- 100 # number of patients
+survive_probability <- 0.72 # probability of surviving
+number_of_simulations <- 100000
+simdata <- rbinom(n = number_of_simulations, size = n_patients, prob = survive_probability)
+sum(simdata == 72) # total number of simulations that resulted in 72 survivals
+```
+
+This time, `r sum(simdata == 72)` of 100000 simulations generated 72 survivals!
+
+Now, we're ready to understanding rejection sampling, MCMC, and how prior information and likelihood combine to form the posterior!
+
+## Generate prior distribution by randomly creating data
+
+First, let's generate random data to create Doctor X's prior distribution. Remember, we're using the beta distribution (ranges from 0 to 1) to generate probability values reflecting Doctor X's beliefs.
+
+```{r}
+n_patients <- 100 # number of patients
+survive_probability <- 0.83 # probability of surviving
+prior_nsamples <- 20000
+priordist <- rbeta(n = prior_nsamples, shape1 = 3.5, shape2 = 1.5)
+head(priordist) # probability values
+```
+
+It's always good to plot and visualize how your distributions look like.
+
+```{r}
+hist(priordist, main = paste0("Doctor X's prior", " (prior samples = ", length(priordist), ")"), 
+     xlab = "Value", ylab = "Count", xlim = c(0, 1))
+abline(v = survive_probability, col = "black", lwd = 3)
+```
+
+## Define likelihood and simulate data samples for our posterior distribution
+
+Earlier on, we have only generated data with `rbinom()` assuming 83% and 72% survival. The `prob` parameter in the `rbinom()` function actually allows you to provide more than 1 probability at a time, which means we can enter the entire range of probability values ranging from 0 to 1 that reflects Doctor X's prior belief beta distribution.
+
+```{r}
+simulated_data <- rbinom(n = length(priordist), size = n_patients, prob = priordist)
+length(simulated_data)
+head(priordist)
+head(simulated_data)
+```
+
+If `rbinom(n = length(priordist), size = n_patients, prob = priordist)` doesn't make sense, stop and think about what's going on... For each value in the prior distribution `priordist` (continuous values 0 to 1 generated from the beta distribution reflecting Doctor X's prior beliefs), we simulated (randomly generated) data from a binomial distribution with 100 patients (`size = n_patient`) and a specific survival probability (`r head(priordist)[1]` in the first simulation).
+
+## Identify samples that match our observed outcome
+
+```{r}
+sim_equals_observed_boolean <- simulated_data == 72 # "combine" prior with data
+head(sim_equals_observed_boolean)
+```
+
+## Identify prior samples associated with samples that match observed outcome to get the posterior!
+
+```{r}
+posterior <- priordist[sim_equals_observed_boolean] # "combine" prior with data
+length(posterior)
+head(posterior)
+```
+
+Yes, this posterior is the Bayesian posterior, $P(\theta|data)$, the probability of your theory given the data, or Doctor X's updated/revised beliefs!
+
+**Rejection sampling**: Note that we have only `r length(posterior)` samples in our posterior distribution, even though we started off with `r length(priordist)` samples in the prior! We have rejected all the prior samples that fail to generate 72 survivals (observed outcome) during our simulations. Hence the term **"rejection sampling"**. Rejection sampling is highly inefficient because we reject or throw out many samples! In practice, we never use rejection sampling, but it's good to illustrate MCMC principles and how sampling works to combine the prior with the data to produce the posterior.
+
+## Summarize posterior samples
+
+```{r}
+mean(posterior)
+median(posterior)
+quantile(posterior, c(0.025, 0.975))
+hist(posterior, main = paste0("Posterior", " (n = ", length(posterior), ")"), 
+     xlab = "Value", ylab = "Count", xlim = c(0, 1))
+abline(v = survive_probability, col = "black", lwd = 3)
+abline(v = mean(posterior), col = "blue", lwd = 5)
+abline(v = quantile(posterior, c(0.025, 0.975))[1], col = "blue", lwd = 1)
+abline(v = quantile(posterior, c(0.025, 0.975))[2], col = "blue", lwd = 1)
+```
+
+
+## Put  function for further simulations and exploration
+
+```{r}
+posterior_from_prior <- function(total_patients, total_survive, prior_samples, prior_beta_shape1 = 1, prior_beta_shape2 = 1) {
+  survive_propr <- total_survive/total_patients
+  priordist <- rbeta(n = prior_samples, shape1 = prior_beta_shape1, shape2 = prior_beta_shape2)
+  simulated_data <- rbinom(n = length(priordist), size = total_patients, prob = priordist)
+  posterior <- priordist[simulated_data == total_survive]
+
+  par(mfrow = c(1, 2))
+  hist(priordist, main = paste0("Prior", " (N = ", length(priordist), ")"), 
+       xlab = "Value", ylab = "Count", xlim = c(0, 1))
+  abline(v = survive_propr, col = "black", lwd = 3)
+  hist(posterior, main = paste0("Posterior", " (n = ", length(posterior), ")"), 
+       xlab = "Value", ylab = "Count", xlim = c(0, 1))
+  abline(v = survive_propr, col = "black", lwd = 3)
+  abline(v = mean(posterior), col = "blue", lwd = 5)
+  abline(v = quantile(posterior, c(0.025, 0.975))[1], col = "blue", lwd = 1)
+  abline(v = quantile(posterior, c(0.025, 0.975))[2], col = "blue", lwd = 1)
+  print(paste0("posterior mean: ", round(mean(posterior), 2)))
+  print(paste0("posterior median: ", round(median(posterior), 2)))
+  par(mfrow = c(1, 1))
+}
+```
+
+## Exploring different parameters (sample size, prior shapes)
+
+```{r}
+posterior_from_prior(total_patients = 10, total_survive = 5, 
+                     prior_samples = 20000, 
+                     prior_beta_shape1 = 0.5, prior_beta_shape2 = 0.5)
+
+posterior_from_prior(total_patients = 10, total_survive = 8, 
+                     prior_samples = 20000, 
+                     prior_beta_shape1 = 0.1, prior_beta_shape2 = 0.9)
+
+posterior_from_prior(total_patients = 10, total_survive = 3, 
+                     prior_samples = 10000, 
+                     prior_beta_shape1 = 4.0, prior_beta_shape2 = 1.0)
+
+posterior_from_prior(total_patients = 10, total_survive = 3, 
+                     prior_samples = 10000, 
+                     prior_beta_shape1 = 1.0, prior_beta_shape2 = 4.0)
+
+posterior_from_prior(total_patients = 10, total_survive = 5, 
+                     prior_samples = 10000, 
+                     prior_beta_shape1 = 1.0, prior_beta_shape2 = 1.0)
+
+posterior_from_prior(total_patients = 10, total_survive = 5, 
+                     prior_samples = 10000, 
+                     prior_beta_shape1 = 1.0, prior_beta_shape2 = 4.0)
+```
+
