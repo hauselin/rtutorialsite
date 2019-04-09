@@ -15,7 +15,7 @@
       <description>A gentle and intuitive introduction to Markov Chain Monte Carlo sampling with rejection sampling.</description>
       <guid>https://hausetutorials.netlify.com/posts/2019-04-09-gentle-and-intuitive-intro-to-markov-chain-monte-carlo-mcmc</guid>
       <pubDate>Mon, 08 Apr 2019 00:00:00 +0000</pubDate>
-      <media:content url="https://raw.githubusercontent.com/hauselin/rtutorialsite/master/_posts/2019-04-09-gentle-and-intuitive-intro-to-markov-chain-monte-carlo-mcmc/gentle-and-intuitive-intro-to-markov-chain-monte-carlo-mcmc_files/figure-html5/unnamed-chunk-16-3.png" medium="image" type="image/png"/>
+      <media:content url="https://raw.githubusercontent.com/hauselin/rtutorialsite/master/_posts/2019-04-09-gentle-and-intuitive-intro-to-markov-chain-monte-carlo-mcmc/gentle-and-intuitive-intro-to-markov-chain-monte-carlo-mcmc_files/figure-html5/unnamed-chunk-17-3.png" medium="image" type="image/png"/>
     </item>
     <item>
       <title>Dockerize a ShinyApp and host it on your own server with DigitalOcean</title>
