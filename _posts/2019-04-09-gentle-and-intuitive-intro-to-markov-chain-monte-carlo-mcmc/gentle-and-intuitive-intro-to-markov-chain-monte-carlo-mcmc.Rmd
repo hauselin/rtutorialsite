@@ -190,7 +190,7 @@ abline(v = quantile(posterior, c(0.025, 0.975))[2], col = "blue", lwd = 1)
 ```
 
 
-## Put  function for further simulations and exploration
+## Create simplefunction for further simulations and exploration
 
 ```{r}
 posterior_from_prior <- function(total_patients, total_survive, prior_samples, prior_beta_shape1 = 1, prior_beta_shape2 = 1) {
@@ -217,29 +217,19 @@ posterior_from_prior <- function(total_patients, total_survive, prior_samples, p
 
 ## Exploring different parameters (sample size, prior shapes)
 
+Try different parameters yourself to get a better sense of how things work.
+
 ```{r}
-posterior_from_prior(total_patients = 10, total_survive = 5, 
+posterior_from_prior(total_patients = 50, total_survive = 10, 
                      prior_samples = 20000, 
                      prior_beta_shape1 = 0.5, prior_beta_shape2 = 0.5)
 
-posterior_from_prior(total_patients = 10, total_survive = 8, 
+posterior_from_prior(total_patients = 100, total_survive = 70, 
                      prior_samples = 20000, 
                      prior_beta_shape1 = 0.1, prior_beta_shape2 = 0.9)
 
-posterior_from_prior(total_patients = 10, total_survive = 3, 
-                     prior_samples = 10000, 
-                     prior_beta_shape1 = 4.0, prior_beta_shape2 = 1.0)
-
-posterior_from_prior(total_patients = 10, total_survive = 3, 
-                     prior_samples = 10000, 
-                     prior_beta_shape1 = 1.0, prior_beta_shape2 = 4.0)
-
-posterior_from_prior(total_patients = 10, total_survive = 5, 
-                     prior_samples = 10000, 
-                     prior_beta_shape1 = 1.0, prior_beta_shape2 = 1.0)
-
-posterior_from_prior(total_patients = 10, total_survive = 5, 
-                     prior_samples = 10000, 
-                     prior_beta_shape1 = 1.0, prior_beta_shape2 = 4.0)
+posterior_from_prior(total_patients = 10, total_survive = 7, 
+                     prior_samples = 20000, 
+                     prior_beta_shape1 = 1.0, prior_beta_shape2 = 5.0)
 ```
 

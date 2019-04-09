@@ -973,7 +973,7 @@
 <li><a href="#identify-samples-that-match-our-observed-outcome">Identify samples that match our observed outcome</a></li>
 <li><a href="#identify-prior-samples-associated-with-samples-that-match-observed-outcome-to-get-the-posterior">Identify prior samples associated with samples that match observed outcome to get the posterior!</a></li>
 <li><a href="#summarize-posterior-samples">Summarize posterior samples</a></li>
-<li><a href="#put-function-for-further-simulations-and-exploration">Put function for further simulations and exploration</a></li>
+<li><a href="#create-simplefunction-for-further-simulations-and-exploration">Create simplefunction for further simulations and exploration</a></li>
 <li><a href="#exploring-different-parameters-sample-size-prior-shapes">Exploring different parameters (sample size, prior shapes)</a></li>
 </ul>
 </nav>
@@ -998,7 +998,7 @@ rbinom(n = number_of_simulations, size = n_patients, prob = survive_probability)
 number_of_simulations &lt;- 10
 rbinom(n = number_of_simulations, size = n_patients, prob = survive_probability)</code></pre>
 <pre><code>
- [1] 86 77 81 84 82 90 81 80 84 87</code></pre>
+ [1] 87 78 90 86 79 81 90 81 86 82</code></pre>
 </div>
 <h2 id="representing-beliefs-about-probability-with-the-beta-distribution">Representing beliefs about probability with the beta distribution</h2>
 <p>Doctor X believes 83% of the 100 patients will survive. In other words, he believes that 83% is the most likely survival probability, whereas 82% and 84% are also likely, but less likely than 83%. We can represent Doctor X’s belief using a beta distribution, which is useful for describing probabilities because it ranges from 0 to 1, and has two parameters shape1 and shape2 that can be used to describe success or failure respectively.</p>
@@ -1039,7 +1039,7 @@ survive_probability &lt;- 0.83 # probability of surviving
 number_of_simulations &lt;- 1 
 rbinom(n = number_of_simulations, size = n_patients, prob = survive_probability)</code></pre>
 <pre><code>
-[1] 78</code></pre>
+[1] 85</code></pre>
 </div>
 <p>Let’s run 100,000 simulations to see how many 72s we can get!</p>
 <div class="layout-chunk" data-layout="l-body">
@@ -1048,9 +1048,9 @@ number_of_simulations &lt;- 100000
 simdata &lt;- rbinom(n = number_of_simulations, size = n_patients, prob = survive_probability)
 sum(simdata == 72) # total number of simulations that resulted in 72 survivals</code></pre>
 <pre><code>
-[1] 231</code></pre>
+[1] 211</code></pre>
 </div>
-<p>Only 231 of 100000 simulations (assuming 83% survival probability) generated 72 survivals!</p>
+<p>Only 211 of 100000 simulations (assuming 83% survival probability) generated 72 survivals!</p>
 <p>Remember, 83% is just one of the plausible parameter probability values in Doctor X’s prior beliefs distribution. See beta distribution reflecting his beliefs for the entire range of probability values in the figure above! 72% might not be as likely as 83% in his prior beliefs distribution, but it’s still fairly likely to occur!</p>
 <p>Let’s run another 100,000 simulations to see how many 72s we can get, assuming the prior belief of survival is 72%.</p>
 <div class="layout-chunk" data-layout="l-body">
@@ -1061,9 +1061,9 @@ number_of_simulations &lt;- 100000
 simdata &lt;- rbinom(n = number_of_simulations, size = n_patients, prob = survive_probability)
 sum(simdata == 72) # total number of simulations that resulted in 72 survivals</code></pre>
 <pre><code>
-[1] 8843</code></pre>
+[1] 8875</code></pre>
 </div>
-<p>This time, 8843 of 100000 simulations generated 72 survivals!</p>
+<p>This time, 8875 of 100000 simulations generated 72 survivals!</p>
 <p>Now, we’re ready to understanding rejection sampling, MCMC, and how prior information and likelihood combine to form the posterior!</p>
 <h2 id="generate-prior-distribution-by-randomly-creating-data">Generate prior distribution by randomly creating data</h2>
 <p>First, let’s generate random data to create Doctor X’s prior distribution. Remember, we’re using the beta distribution (ranges from 0 to 1) to generate probability values reflecting Doctor X’s beliefs.</p>
@@ -1075,7 +1075,7 @@ prior_nsamples &lt;- 20000
 priordist &lt;- rbeta(n = prior_nsamples, shape1 = 3.5, shape2 = 1.5)
 head(priordist) # probability values</code></pre>
 <pre><code>
-[1] 0.7932568 0.6784748 0.8315758 0.7138054 0.8469366 0.7705712</code></pre>
+[1] 0.2688040 0.3384370 0.4024417 0.7100199 0.8602812 0.4474000</code></pre>
 </div>
 <p>It’s always good to plot and visualize how your distributions look like.</p>
 <div class="layout-chunk" data-layout="l-body">
@@ -1096,13 +1096,13 @@ length(simulated_data)</code></pre>
 <pre class="r"><code>
 head(priordist)</code></pre>
 <pre><code>
-[1] 0.7932568 0.6784748 0.8315758 0.7138054 0.8469366 0.7705712</code></pre>
+[1] 0.2688040 0.3384370 0.4024417 0.7100199 0.8602812 0.4474000</code></pre>
 <pre class="r"><code>
 head(simulated_data)</code></pre>
 <pre><code>
-[1] 80 69 86 69 84 76</code></pre>
+[1] 31 30 34 79 82 41</code></pre>
 </div>
-<p>If <code>rbinom(n = length(priordist), size = n_patients, prob = priordist)</code> doesn’t make sense, stop and think about what’s going on… For each value in the prior distribution <code>priordist</code> (continuous values 0 to 1 generated from the beta distribution reflecting Doctor X’s prior beliefs), we simulated (randomly generated) data from a binomial distribution with 100 patients (<code>size = n_patient</code>) and a specific survival probability (0.7932568 in the first simulation).</p>
+<p>If <code>rbinom(n = length(priordist), size = n_patients, prob = priordist)</code> doesn’t make sense, stop and think about what’s going on… For each value in the prior distribution <code>priordist</code> (continuous values 0 to 1 generated from the beta distribution reflecting Doctor X’s prior beliefs), we simulated (randomly generated) data from a binomial distribution with 100 patients (<code>size = n_patient</code>) and a specific survival probability (0.268804 in the first simulation).</p>
 <h2 id="identify-samples-that-match-our-observed-outcome">Identify samples that match our observed outcome</h2>
 <div class="layout-chunk" data-layout="l-body">
 <pre class="r"><code>
@@ -1117,29 +1117,29 @@ head(sim_equals_observed_boolean)</code></pre>
 posterior &lt;- priordist[sim_equals_observed_boolean] # &quot;combine&quot; prior with data
 length(posterior)</code></pre>
 <pre><code>
-[1] 348</code></pre>
+[1] 398</code></pre>
 <pre class="r"><code>
 head(posterior)</code></pre>
 <pre><code>
-[1] 0.7172740 0.7547355 0.7318960 0.7692488 0.6650129 0.6509430</code></pre>
+[1] 0.6725716 0.7840007 0.7754880 0.6974264 0.6778313 0.7471934</code></pre>
 </div>
 <p>Yes, this posterior is the Bayesian posterior, <span class="math inline">\(P(\theta|data)\)</span>, the probability of your theory given the data, or Doctor X’s updated/revised beliefs!</p>
-<p><strong>Rejection sampling</strong>: Note that we have only 348 samples in our posterior distribution, even though we started off with 20000 samples in the prior! We have rejected all the prior samples that fail to generate 72 survivals (observed outcome) during our simulations. Hence the term <strong>“rejection sampling”</strong>. Rejection sampling is highly inefficient because we reject or throw out many samples! In practice, we never use rejection sampling, but it’s good to illustrate MCMC principles and how sampling works to combine the prior with the data to produce the posterior.</p>
+<p><strong>Rejection sampling</strong>: Note that we have only 398 samples in our posterior distribution, even though we started off with 20000 samples in the prior! We have rejected all the prior samples that fail to generate 72 survivals (observed outcome) during our simulations. Hence the term <strong>“rejection sampling”</strong>. Rejection sampling is highly inefficient because we reject or throw out many samples! In practice, we never use rejection sampling, but it’s good to illustrate MCMC principles and how sampling works to combine the prior with the data to produce the posterior.</p>
 <h2 id="summarize-posterior-samples">Summarize posterior samples</h2>
 <div class="layout-chunk" data-layout="l-body">
 <pre class="r"><code>
 mean(posterior)</code></pre>
 <pre><code>
-[1] 0.7195305</code></pre>
+[1] 0.7161688</code></pre>
 <pre class="r"><code>
 median(posterior)</code></pre>
 <pre><code>
-[1] 0.7220207</code></pre>
+[1] 0.7167646</code></pre>
 <pre class="r"><code>
 quantile(posterior, c(0.025, 0.975))</code></pre>
 <pre><code>
      2.5%     97.5% 
-0.6340508 0.7938378 </code></pre>
+0.6289289 0.7941060 </code></pre>
 <pre class="r"><code>
 hist(posterior, main = paste0(&quot;Posterior&quot;, &quot; (n = &quot;, length(posterior), &quot;)&quot;), 
      xlab = &quot;Value&quot;, ylab = &quot;Count&quot;, xlim = c(0, 1))
@@ -1149,7 +1149,7 @@ abline(v = quantile(posterior, c(0.025, 0.975))[1], col = &quot;blue&quot;, lwd 
 abline(v = quantile(posterior, c(0.025, 0.975))[2], col = &quot;blue&quot;, lwd = 1)</code></pre>
 <p><img src="gentle-and-intuitive-intro-to-markov-chain-monte-carlo-mcmc_files/figure-html5/unnamed-chunk-14-1.png" width="624" /></p>
 </div>
-<h2 id="put-function-for-further-simulations-and-exploration">Put function for further simulations and exploration</h2>
+<h2 id="create-simplefunction-for-further-simulations-and-exploration">Create simplefunction for further simulations and exploration</h2>
 <div class="layout-chunk" data-layout="l-body">
 <pre class="r"><code>
 posterior_from_prior &lt;- function(total_patients, total_survive, prior_samples, prior_beta_shape1 = 1, prior_beta_shape2 = 1) {
@@ -1174,55 +1174,32 @@ posterior_from_prior &lt;- function(total_patients, total_survive, prior_samples
 }</code></pre>
 </div>
 <h2 id="exploring-different-parameters-sample-size-prior-shapes">Exploring different parameters (sample size, prior shapes)</h2>
+<p>Try different parameters yourself to get a better sense of how things work.</p>
 <div class="layout-chunk" data-layout="l-body">
 <pre class="r"><code>
-posterior_from_prior(total_patients = 10, total_survive = 5, 
+posterior_from_prior(total_patients = 50, total_survive = 10, 
                      prior_samples = 20000, 
                      prior_beta_shape1 = 0.5, prior_beta_shape2 = 0.5)</code></pre>
 <p><img src="gentle-and-intuitive-intro-to-markov-chain-monte-carlo-mcmc_files/figure-html5/unnamed-chunk-16-1.png" width="624" /></p>
 <pre><code>
-[1] &quot;posterior mean: 0.5&quot;
-[1] &quot;posterior median: 0.5&quot;</code></pre>
+[1] &quot;posterior mean: 0.21&quot;
+[1] &quot;posterior median: 0.2&quot;</code></pre>
 <pre class="r"><code>
-posterior_from_prior(total_patients = 10, total_survive = 8, 
+posterior_from_prior(total_patients = 100, total_survive = 70, 
                      prior_samples = 20000, 
                      prior_beta_shape1 = 0.1, prior_beta_shape2 = 0.9)</code></pre>
 <p><img src="gentle-and-intuitive-intro-to-markov-chain-monte-carlo-mcmc_files/figure-html5/unnamed-chunk-16-2.png" width="624" /></p>
 <pre><code>
-[1] &quot;posterior mean: 0.72&quot;
-[1] &quot;posterior median: 0.74&quot;</code></pre>
+[1] &quot;posterior mean: 0.68&quot;
+[1] &quot;posterior median: 0.69&quot;</code></pre>
 <pre class="r"><code>
-posterior_from_prior(total_patients = 10, total_survive = 3, 
-                     prior_samples = 10000, 
-                     prior_beta_shape1 = 4.0, prior_beta_shape2 = 1.0)</code></pre>
+posterior_from_prior(total_patients = 10, total_survive = 7, 
+                     prior_samples = 20000, 
+                     prior_beta_shape1 = 1.0, prior_beta_shape2 = 5.0)</code></pre>
 <p><img src="gentle-and-intuitive-intro-to-markov-chain-monte-carlo-mcmc_files/figure-html5/unnamed-chunk-16-3.png" width="624" /></p>
 <pre><code>
-[1] &quot;posterior mean: 0.45&quot;
-[1] &quot;posterior median: 0.45&quot;</code></pre>
-<pre class="r"><code>
-posterior_from_prior(total_patients = 10, total_survive = 3, 
-                     prior_samples = 10000, 
-                     prior_beta_shape1 = 1.0, prior_beta_shape2 = 4.0)</code></pre>
-<p><img src="gentle-and-intuitive-intro-to-markov-chain-monte-carlo-mcmc_files/figure-html5/unnamed-chunk-16-4.png" width="624" /></p>
-<pre><code>
-[1] &quot;posterior mean: 0.27&quot;
-[1] &quot;posterior median: 0.26&quot;</code></pre>
-<pre class="r"><code>
-posterior_from_prior(total_patients = 10, total_survive = 5, 
-                     prior_samples = 10000, 
-                     prior_beta_shape1 = 1.0, prior_beta_shape2 = 1.0)</code></pre>
-<p><img src="gentle-and-intuitive-intro-to-markov-chain-monte-carlo-mcmc_files/figure-html5/unnamed-chunk-16-5.png" width="624" /></p>
-<pre><code>
-[1] &quot;posterior mean: 0.5&quot;
+[1] &quot;posterior mean: 0.51&quot;
 [1] &quot;posterior median: 0.5&quot;</code></pre>
-<pre class="r"><code>
-posterior_from_prior(total_patients = 10, total_survive = 5, 
-                     prior_samples = 10000, 
-                     prior_beta_shape1 = 1.0, prior_beta_shape2 = 4.0)</code></pre>
-<p><img src="gentle-and-intuitive-intro-to-markov-chain-monte-carlo-mcmc_files/figure-html5/unnamed-chunk-16-6.png" width="624" /></p>
-<pre><code>
-[1] &quot;posterior mean: 0.39&quot;
-[1] &quot;posterior median: 0.38&quot;</code></pre>
 </div>
 <!--radix_placeholder_article_footer-->
 <!--/radix_placeholder_article_footer-->
