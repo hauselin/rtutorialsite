@@ -2,7 +2,7 @@
 title: "Bayesian inference and MCMC sampling introduction"
 description: |
   A gentle and intuitive introduction to Markov Chain Monte Carlo sampling with rejection sampling.
-preview: https://raw.githubusercontent.com/hauselin/rtutorialsite/master/docs/attachments/plot_dotdist.gif
+preview: https://raw.githubusercontent.com/hauselin/rtutorialsite/master/_posts/2019-04-09-gentle-and-intuitive-intro-to-markov-chain-monte-carlo-mcmc/gentle-and-intuitive-intro-to-markov-chain-monte-carlo-mcmc_files/figure-html5/unnamed-chunk-16-3.png
 author:
   - name: Hause Lin
 date: 04-09-2019
@@ -14,7 +14,7 @@ draft: false
 categories: 
   - bayes
   - mcmc
-repository_url: https://github.com/hauselin/rtutorialsite/blob/master/_posts/2019-02-22-why-we-should-never-use-barplots-use-geomquasirandom-instead/why-we-should-never-use-barplots-use-geomquasirandom-instead.Rmd
+repository_url: https://github.com/hauselin/rtutorialsite/blob/master/_posts/2019-04-09-gentle-and-intuitive-intro-to-markov-chain-monte-carlo-mcmc/gentle-and-intuitive-intro-to-markov-chain-monte-carlo-mcmc.Rmd
 editor_options: 
   chunk_output_type: console
 ---
@@ -23,6 +23,8 @@ editor_options:
 library(roxygen2)
 knitr::opts_chunk$set(echo = TRUE, cache = FALSE, comment = NA, message = FALSE, warning = FALSE)
 ```
+
+Get source code for this RMarkdown script [here](https://github.com/hauselin/rtutorialsite/blob/master/_posts/2019-04-09-gentle-and-intuitive-intro-to-markov-chain-monte-carlo-mcmc/gentle-and-intuitive-intro-to-markov-chain-monte-carlo-mcmc.Rmd).
 
 Bayesian inference, priors, likelihood, posteriors, and especially Markov Chain Monte Carlo sampling can be mysterious. I will try to explain these concepts with a simple 1-dimensional example, using something known as **rejection sampling**, which is good for explaining how sampling works, but is never used in practice because it is highly inefficient (we'll see what that means later on).
 
