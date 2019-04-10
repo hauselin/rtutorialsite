@@ -26,7 +26,7 @@ knitr::opts_chunk$set(echo = TRUE, cache = FALSE, comment = NA, message = FALSE,
 
 Get source code for this RMarkdown script [here](https://github.com/hauselin/rtutorialsite/blob/master/_posts/2019-04-09-gentle-and-intuitive-intro-to-markov-chain-monte-carlo-mcmc/gentle-and-intuitive-intro-to-markov-chain-monte-carlo-mcmc.Rmd).
 
-Bayesian inference, priors, likelihood, posteriors, and especially Markov Chain Monte Carlo sampling can be mysterious. I will try to explain these concepts with a simple 1-dimensional example, using something known as **rejection sampling**, which is good for explaining how sampling works, but is never used in practice because it is highly inefficient (we'll see what that means later on).
+Bayesian inference, priors, likelihood, posteriors, and especially Markov Chain Monte Carlo sampling can be mysterious. I will try to explain these concepts with a simple 1-dimensional example, using something known as [**rejection sampling**](https://en.wikipedia.org/wiki/Rejection_sampling), which is good for explaining how sampling works, but is never used in practice because it is highly inefficient (we'll see what that means later on).
 
 ## Binomial distribution example (life or death, heads or tails)
 
@@ -178,7 +178,7 @@ Yes, this posterior is the Bayesian posterior, $P(\theta|data)$, the probability
 
 $$P(\theta|data) = \frac{P(data|\theta)P(\theta)}{P(data)}$$
 
-**Rejection sampling**: Note that we have only `r length(posterior)` samples in our posterior distribution, even though we started off with `r length(priordist)` samples in the prior! We have rejected all the prior samples that fail to generate 72 survivals (observed outcome) during our simulations. Hence the term **"rejection sampling"**. Rejection sampling is highly inefficient because we reject or throw out many samples! In practice, we never use rejection sampling, but it's good to illustrate MCMC principles and how sampling works to combine the prior with the data to produce the posterior.
+[**Rejection sampling**](https://en.wikipedia.org/wiki/Rejection_sampling): Note that we have only `r length(posterior)` samples in our posterior distribution, even though we started off with `r length(priordist)` samples in the prior! We have rejected all the prior samples that fail to generate 72 survivals (observed outcome) during our simulations. Hence the term **"rejection sampling"**. Rejection sampling is highly inefficient because we reject or throw out many samples! In practice, we never use rejection sampling, but it's good to illustrate MCMC principles and how sampling works to combine the prior with the data to produce the posterior. 
 
 ## Summarize posterior samples
 
