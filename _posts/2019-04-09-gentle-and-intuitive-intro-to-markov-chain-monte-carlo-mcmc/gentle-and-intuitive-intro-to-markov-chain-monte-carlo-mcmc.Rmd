@@ -70,7 +70,7 @@ curve(dbeta(x, shape1 = 5, shape2 = 2), from = 0, to = 1) # success more likely 
 curve(dbeta(x, shape1 = 3, shape2 = 6), from = 0, to = 1) # failure more likely than success
 ```
 
-We can represent Doctor X's belief with this beta distribution. Doctor X believes that 83% survival is the most likely to occur, and 40% survival is about half as likely to occur, but what this beta distribution says is that Doctor X believes that different survival probabilities ranging from 0 to 1 are plausible, even though he believes that 83% is most likely to occur.
+We can represent Doctor X's belief with the beta distribution below (shape1 = 3.5, shape2 = 1.5). Doctor X believes that 83% survival is the most likely to occur, and 40% survival is about half as likely to occur, but what this beta distribution says is that Doctor X believes that different survival probabilities ranging from 0 to 1 are plausible, even though he believes that 83% is most likely to occur.
 
 ```{r}
 par(mfrow = c(1, 1)) # change back to showing plots in a 1 x 1 grid
@@ -118,19 +118,23 @@ sum(simdata == 72) # total number of simulations that resulted in 72 survivals
 
 This time, `r sum(simdata == 72)` of 100000 simulations generated 72 survivals!
 
-Now, we're ready to understanding rejection sampling, MCMC, and how prior information and likelihood combine to form the posterior!
+Now, we can start to understand rejection sampling, MCMC, and how prior information and likelihood combine to form the posterior!
 
 ## Generate prior distribution by randomly creating data
 
-First, let's generate random samples to create Doctor X's prior distribution. Remember, we're using the beta distribution (ranges from 0 to 1) to generate probability values reflecting Doctor X's beliefs.
+First, let's generate random samples to create Doctor X's prior distribution. Remember, we're using the beta distribution (ranges from 0 to 1) to generate probability values reflecting Doctor X's beliefs. 
 
 ```{r}
 n_patients <- 100 # number of patients
-survive_probability <- 0.83 # probability of surviving
+survive_probability <- 0.83 # prior belief of probability of surviving
 prior_nsamples <- 20000
 priordist <- rbeta(n = prior_nsamples, shape1 = 3.5, shape2 = 1.5)
 head(priordist) # probability values
 ```
+
+<aside>
+We use `rbeta` rather than `dbeta` because `r` refers to random generation, whereas `d` refers to density. We're trying to generate random samples from the beta distribution to generate our prior distribution.
+</aside>
 
 It's always good to plot and visualize how your distributions look like.
 
@@ -146,12 +150,18 @@ The likelihood, $P(data|\theta)$, is the generative model, the theoretical model
 
 Earlier on, we have only generated data with `rbinom()` assuming 83% and 72% survival. The `prob` parameter in the `rbinom()` function actually allows you to provide more than 1 probability at a time, which means we can enter the entire range of probability values ranging from 0 to 1 that reflects Doctor X's prior belief beta distribution.
 
+First, let's remind ourselves what are the values contained in our `priordist` vector. 
+
 ```{r}
 length(priordist)
-head(priordist)
+head(priordist) # different probability values generated from beta distribution
+summary(priordist) # beta dist ranges from 0 to 1
+
+# generate data from the binomial distribution
 simulated_data <- rbinom(n = length(priordist), size = n_patients, prob = priordist)
 length(simulated_data)
 head(simulated_data)
+summary(simulated_data)
 ```
 
 If `rbinom(n = length(priordist), size = n_patients, prob = priordist)` doesn't make sense, stop and think about what's going on... For each value in the prior distribution `priordist` (continuous values 0 to 1 generated from the beta distribution reflecting Doctor X's prior beliefs), we simulated (randomly generated) data from a binomial distribution with 100 patients (`size = n_patient`) and a specific survival probability (`r head(priordist)[1]` in the first simulation).
@@ -183,8 +193,7 @@ $$P(\theta|data) = \frac{P(data|\theta)P(\theta)}{P(data)}$$
 ## Summarize posterior samples
 
 ```{r}
-mean(posterior)
-median(posterior)
+summary(posterior)
 quantile(posterior, c(0.025, 0.975))
 ```
 
@@ -200,8 +209,8 @@ abline(v = 0.83, col = "black", lwd = 3)
 hist(posterior, main = paste0("Posterior", " (n = ", length(posterior), ")"), 
      xlab = "Plausible probability values", ylab = "Count", xlim = c(0, 1))
 abline(v = mean(posterior), col = "blue", lwd = 5)
-abline(v = quantile(posterior, c(0.025, 0.975))[1], col = "blue", lwd = 1)
-abline(v = quantile(posterior, c(0.025, 0.975))[2], col = "blue", lwd = 1)
+abline(v = quantile(posterior, c(0.025)), col = "blue", lwd = 1)
+abline(v = quantile(posterior, c(0.975)), col = "blue", lwd = 1)
 ```
 
 ## Create a simple function for further simulations and exploration
@@ -222,8 +231,8 @@ posterior_from_prior <- function(total_patients, total_survive,
        xlab = "Plausible probability values", ylab = "Count", xlim = c(0, 1))
   abline(v = survive_propr, col = "red", lwd = 3)
   abline(v = mean(posterior), col = "blue", lwd = 5)
-  abline(v = quantile(posterior, c(0.025, 0.975))[1], col = "blue", lwd = 1)
-  abline(v = quantile(posterior, c(0.025, 0.975))[2], col = "blue", lwd = 1)
+  abline(v = quantile(posterior, c(0.025)), col = "blue", lwd = 1)
+  abline(v = quantile(posterior, c(0.975)), col = "blue", lwd = 1)
   print(paste0("posterior mean: ", round(mean(posterior), 2)))
   print(paste0("posterior median: ", round(median(posterior), 2)))
   par(mfrow = c(1, 1))
