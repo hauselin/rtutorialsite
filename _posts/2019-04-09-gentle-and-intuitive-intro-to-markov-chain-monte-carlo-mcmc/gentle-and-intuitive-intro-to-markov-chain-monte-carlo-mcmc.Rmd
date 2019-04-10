@@ -2,7 +2,7 @@
 title: "Bayesian inference and MCMC sampling introduction"
 description: |
   A gentle and intuitive introduction to Markov Chain Monte Carlo sampling with rejection sampling.
-preview: ./figure-html5/unnamed-chunk-17-3.png
+preview: ./gentle-and-intuitive-intro-to-markov-chain-monte-carlo-mcmc_files/figure-html5/unnamed-chunk-19-1.png
 author:
   - name: Hause Lin
 date: 04-09-2019
