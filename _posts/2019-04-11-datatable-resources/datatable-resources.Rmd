@@ -2,6 +2,7 @@
 title: "Resources for data.table"
 description: |
   Resources for the R data.table package
+preview: ./datatable.jpg
 author:
   - name: Hause Lin
     url: {}
@@ -15,15 +16,13 @@ output:
     self_contained: false
 ---
 
-https://raw.githubusercontent.com/hauselin/rtutorialsite/master/attachments/datatable.jpg
-
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = FALSE)
 ```
 
 ### Information and tutorials
 
-* [Homepage](https://github.com/Rdatatable/data.table/wiki)
+* [Homepage (check out the pdf and presentation!)](https://github.com/Rdatatable/data.table/wiki)
 * [Intro to `data.table` vignette](https://cran.r-project.org/web/packages/data.table/vignettes/datatable-intro.html)
 * [`data.table` vs `dplyr`](https://atrebas.github.io/post/2019-03-03-datatable-dplyr/)
 * [`data.table` vs Python `pandas`](https://datascience-enthusiast.com/R/pandas_datatable.html)
