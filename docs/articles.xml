@@ -7,14 +7,22 @@
     <description>Data science and analysis tutorials
 </description>
     <generator>Radix</generator>
-    <lastBuildDate>Mon, 08 Apr 2019 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Wed, 10 Apr 2019 00:00:00 +0000</lastBuildDate>
+    <item>
+      <title>Resources for data.table</title>
+      <dc:creator>Hause Lin</dc:creator>
+      <link>https://hausetutorials.netlify.com/posts/2019-04-11-datatable-resources</link>
+      <description>Resources for the R data.table package</description>
+      <guid>https://hausetutorials.netlify.com/posts/2019-04-11-datatable-resources</guid>
+      <pubDate>Wed, 10 Apr 2019 00:00:00 +0000</pubDate>
+    </item>
     <item>
       <title>Bayesian inference and MCMC sampling introduction</title>
       <dc:creator>Hause Lin</dc:creator>
       <link>https://hausetutorials.netlify.com/posts/2019-04-09-gentle-and-intuitive-intro-to-markov-chain-monte-carlo-mcmc</link>
       <description>A gentle and intuitive introduction to Markov Chain Monte Carlo sampling with rejection sampling.</description>
       <guid>https://hausetutorials.netlify.com/posts/2019-04-09-gentle-and-intuitive-intro-to-markov-chain-monte-carlo-mcmc</guid>
-      <pubDate>Mon, 08 Apr 2019 00:00:00 +0000</pubDate>
+      <pubDate>Tue, 09 Apr 2019 00:00:00 +0000</pubDate>
       <media:content url="https://hausetutorials.netlify.com/posts/2019-04-09-gentle-and-intuitive-intro-to-markov-chain-monte-carlo-mcmc/./gentle-and-intuitive-intro-to-markov-chain-monte-carlo-mcmc_files/figure-html5/unnamed-chunk-19-1.png" medium="image" type="image/png" width="1248" height="768"/>
     </item>
     <item>

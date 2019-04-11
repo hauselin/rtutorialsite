@@ -1,0 +1,38 @@
+---
+title: "Resources for data.table"
+description: |
+  Resources for the R data.table package
+author:
+  - name: Hause Lin
+    url: {}
+date: 04-11-2019
+categories: 
+  - resources
+  - data.table
+output:
+  radix::radix_article:
+    toc: true
+    self_contained: false
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+```
+
+### Information and tutorials
+
+* [Homepage](https://github.com/Rdatatable/data.table/wiki)
+* [Intro to `data.table` vignette](https://cran.r-project.org/web/packages/data.table/vignettes/datatable-intro.html)
+* [`data.table` vs `dplyr`](https://atrebas.github.io/post/2019-03-03-datatable-dplyr/)
+* [`data.table` vs Python `pandas`](https://datascience-enthusiast.com/R/pandas_datatable.html)
+* [Datacamp `data.table` tutorials](https://www.datacamp.com/search?q=data.table&tab=courses)
+* [Data analysis the `data.table` way](https://ugoproto.github.io/ugo_r_doc/Data_Analysis_in_R,_the_data.table_Way/)
+
+### Cheatsheets
+
+* https://www.datacamp.com/community/tutorials/data-table-cheat-sheet
+
+### Other developments
+
+* [Benchmarking (`data.table` speed vs other packages and languages)](https://github.com/Rdatatable/data.table/wiki/Benchmarks-:-Grouping)
+* [`data.table` in Python](https://github.com/h2oai/datatable)

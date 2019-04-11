@@ -1,5 +1,23 @@
 [
   {
+    "path": "posts/2019-04-11-datatable-resources/",
+    "title": "Resources for data.table",
+    "description": "Resources for the R data.table package",
+    "author": [
+      {
+        "name": "Hause Lin",
+        "url": {}
+      }
+    ],
+    "date": "2019-04-11",
+    "categories": [
+      "resources",
+      "data.table"
+    ],
+    "preview": {},
+    "last_modified": "2019-04-11T15:07:52+02:00"
+  },
+  {
     "path": "posts/2019-04-09-gentle-and-intuitive-intro-to-markov-chain-monte-carlo-mcmc/",
     "title": "Bayesian inference and MCMC sampling introduction",
     "description": "A gentle and intuitive introduction to Markov Chain Monte Carlo sampling with rejection sampling.",
