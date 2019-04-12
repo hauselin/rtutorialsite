@@ -30,7 +30,7 @@ Get source code for this RMarkdown script [here](https://github.com/hauselin/rtu
 
 Logistic regression (also known as classification in machine learning) is used to predict the probability of a categorical dependent variable. In logistic regression, the dependent variable is a binary variable that contains data coded as 1 (e.g., yes, success) or 0 (e.g., no, failure).
 
-I have read many explanations and tutorials but haven't found one that explains how logistic regression, inverse logit and logit functions, and maximum likelihood estimation are related. I hope this tutorial will fill that gap. If anything is unclear or wrong, let me know. 
+I have read many explanations and tutorials but haven't found one that clearly explains how logistic regression, inverse logit and logit functions, and maximum likelihood estimation are related. I hope this tutorial will fill those gaps. If anything is unclear or wrong, let me know. 
 
 ```{r}
 library(tidyverse); library(data.table)
