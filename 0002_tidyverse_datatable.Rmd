@@ -379,7 +379,7 @@ filter(df4, class !%in% c("a", "b")) # syntax error...
 ```
 
 <aside>
-# RStudio underlines potential errors for you (like Microsoft Word highlighting typos and grammar errors).
+RStudio underlines potential errors for you (like Microsoft Word highlighting typos and grammar errors).
 </aside>
 
 Oops, what's wrong? 
@@ -388,7 +388,7 @@ Oops, what's wrong?
 filter(df4, !class %in% c("a", "b")) # correct syntax
 ```
 
-#### Operators
+### Operators
 
 `==`, `%in%`, `%between%`, `>`, `>=`, `<`, `<=`, `!=` are operators. See [here](https://www.statmethods.net/management/operators.html) for more information. 
 
@@ -805,4 +805,5 @@ For more `data.table` information and tips and tricks, google for them...
 
 * [tutorial/vignette](https://cran.r-project.org/web/packages/data.table/vignettes/datatable-intro.html)
 * [official documentation](https://cran.r-project.org/web/packages/data.table/data.table.pdf)
+* [my own collection of resources](https://hausetutorials.netlify.com/posts/2019-04-11-datatable-resources/)
 
