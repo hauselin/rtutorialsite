@@ -1903,7 +1903,8 @@ guesses</code></pre>
 <p>Apply our likelihood function to each row and plot the summed log-likelihood values!</p>
 <div class="layout-chunk" data-layout="l-body">
 <pre class="r"><code>
-guesses[, loglikelihood := mle(b0 = b0_guess, b1 = b1_guess), by = guessid] # apply our mle() function to each row</code></pre>
+# apply our mle() function to each row
+guesses[, loglikelihood := mle(b0 = b0_guess, b1 = b1_guess), by = guessid] </code></pre>
 </div>
 <p>Plot and visualize:</p>
 <div class="layout-chunk" data-layout="l-body">
@@ -2002,7 +2003,7 @@ guesses[rowid, .(b0_guess, b1_guess)] # coefficients that had the largest loglik
 <p><span class="math display">\[p + pe^{-y} = 1\]</span></p>
 <p>Isolate the term with the exponential (<span class="math inline">\(pe^{-y}\)</span>):</p>
 <p><span class="math display">\[pe^{-y} = 1 - p\]</span></p>
-<p>Express the left-hand side in fraction form:</p>
+<p>Express the left-hand side as a fraction:</p>
 <p><span class="math display">\[\frac{p}{e^{y}} = 1 - p\]</span></p>
 <p>Multiply both sides by the denominator of the left-hand side, <span class="math inline">\(e^{y}\)</span>:</p>
 <p><span class="math display">\[p = e^{y}(1 - p)\]</span></p>

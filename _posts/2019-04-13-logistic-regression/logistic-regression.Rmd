@@ -553,7 +553,7 @@ Isolate the term with the exponential ($pe^{-y}$):
 
 $$pe^{-y} = 1 - p$$
 
-Express the left-hand side in fraction form:
+Express the left-hand side as a fraction:
 
 $$\frac{p}{e^{y}} = 1 - p$$
 
