@@ -116,7 +116,7 @@ lm1
 
 Based on these results, we're saying we can model each y value ($y_i$) as a function of the corresponding x value ($x_i$), using this linear regression function:
 
-$$y_i = \beta_0 + \beta_1x_i + \varepsilon_i$$
+$$y_i = \beta_0 + \beta_1x_{i} + \varepsilon_i$$
 
 Matrix notation:
 
@@ -164,7 +164,7 @@ $$\hat{Y}=X \hat{\beta}$$
 
 For example, row 3: `x` = -1: 
 
-$$\hat{y_3} = \beta_0 + \beta_1x_3 $$
+$$\hat{y_3} = \beta_0 + \beta_1x_{3} $$
 $$\hat{y_3} = 0.57 + 0.11 * -1$$
 
 Let's do it for all rows.
@@ -190,7 +190,7 @@ The `y` and `y2` values match exactly! We recreated our `y` values by using the 
 
 For example, row 3: `x` = -1, `y` = 1, $\varepsilon$ = 0.54:
 
-$$y_3 = \beta_0 + \beta_1x_3 + \varepsilon_3$$
+$$y_3 = \beta_0 + \beta_1x_{3} + \varepsilon_3$$
 $$y_3 = 0.57 + 0.11 * -1 + 0.54 =  1$$
 
 
@@ -341,7 +341,7 @@ Model:
 
 $$log(\frac{p}{1-p})= X\beta + \varepsilon = \beta_0 + \beta_1x + \varepsilon$$
 
-$$log(\frac{p_i}{1-p_i})= 0.6779 + 1.0011*x_i + \varepsilon_i$$
+$$log(\frac{p_i}{1-p_i})= 0.6779 + 1.0011*x_{i} + \varepsilon_i$$
 
 Exponentiate the coefficients to get the values in the "normal" odds scale:
 

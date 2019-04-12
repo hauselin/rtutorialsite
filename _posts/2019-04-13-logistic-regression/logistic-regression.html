@@ -1091,7 +1091,7 @@ Coefficients:
      0.5714       0.1143  </code></pre>
 </div>
 <p>Based on these results, we’re saying we can model each y value (<span class="math inline">\(y_i\)</span>) as a function of the corresponding x value (<span class="math inline">\(x_i\)</span>), using this linear regression function:</p>
-<p><span class="math display">\[y_i = \beta_0 + \beta_1x_i + \varepsilon_i\]</span></p>
+<p><span class="math display">\[y_i = \beta_0 + \beta_1x_{i} + \varepsilon_i\]</span></p>
 <p>Matrix notation:</p>
 <p><span class="math display">\[
 \left(\begin{array}{cc} 
@@ -1140,7 +1140,7 @@ dt1</code></pre>
 <p>Matrix notation is shown below. This notation is nice because it’s compact and no matter how many <span class="math inline">\(x\)</span> variables (predictors) you have in your model, the form is still the same.</p>
 <p><span class="math display">\[\hat{Y}=X \hat{\beta}\]</span></p>
 <p>For example, row 3: <code>x</code> = -1:</p>
-<p><span class="math display">\[\hat{y_3} = \beta_0 + \beta_1x_3 \]</span> <span class="math display">\[\hat{y_3} = 0.57 + 0.11 * -1\]</span></p>
+<p><span class="math display">\[\hat{y_3} = \beta_0 + \beta_1x_{3} \]</span> <span class="math display">\[\hat{y_3} = 0.57 + 0.11 * -1\]</span></p>
 <p>Let’s do it for all rows.</p>
 <div class="layout-chunk" data-layout="l-body">
 <pre class="r"><code>
@@ -1177,7 +1177,7 @@ dt1 </code></pre>
 </div>
 <p>The <code>y</code> and <code>y2</code> values match exactly! We recreated our <code>y</code> values by using the beta coefficients, x values, and residuals.</p>
 <p>For example, row 3: <code>x</code> = -1, <code>y</code> = 1, <span class="math inline">\(\varepsilon\)</span> = 0.54:</p>
-<p><span class="math display">\[y_3 = \beta_0 + \beta_1x_3 + \varepsilon_3\]</span> <span class="math display">\[y_3 = 0.57 + 0.11 * -1 + 0.54 =  1\]</span></p>
+<p><span class="math display">\[y_3 = \beta_0 + \beta_1x_{3} + \varepsilon_3\]</span> <span class="math display">\[y_3 = 0.57 + 0.11 * -1 + 0.54 =  1\]</span></p>
 <h2 id="from-linear-to-logistic-regression-via-the-logistic-function">From linear to logistic regression via the logistic function</h2>
 <p>Below is the <strong>logistic function</strong> (aka <strong>sigmoid function</strong>, <strong>inverse logit link function</strong>) again. Note I’ve replaced the <span class="math inline">\(x\)</span> variable with the <span class="math inline">\(y\)</span> variable and changed the function name from <span class="math inline">\(f\)</span> to <span class="math inline">\(logistic\)</span>. Other than that, it’s the same equation as above.</p>
 <p><span class="math display">\[logistic(y)=\frac{1}{1+e^{-y}}\]</span></p>
@@ -1332,7 +1332,7 @@ Number of Fisher Scoring iterations: 6</code></pre>
 </div>
 <p>Model:</p>
 <p><span class="math display">\[log(\frac{p}{1-p})= X\beta + \varepsilon = \beta_0 + \beta_1x + \varepsilon\]</span></p>
-<p><span class="math display">\[log(\frac{p_i}{1-p_i})= 0.6779 + 1.0011*x_i + \varepsilon_i\]</span></p>
+<p><span class="math display">\[log(\frac{p_i}{1-p_i})= 0.6779 + 1.0011*x_{i} + \varepsilon_i\]</span></p>
 <p>Exponentiate the coefficients to get the values in the “normal” odds scale:</p>
 <div class="layout-chunk" data-layout="l-body">
 <pre class="r"><code>
