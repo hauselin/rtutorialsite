@@ -1,7 +1,7 @@
 ---
-title: "Fit the same statistical model to many groups with one simple line of code"
+title: "Complete vs no-pooling: Fit the same model to different groups (just one simple line of code)"
 description: |
-  How to use data.table package to fit a model to different groups in a dataset using only one line of code
+  What is complete pooling, no-pooling (and partial pooling), and how to use data.table for no-pooling models (fit the same model, but separately to each group)
 author:
   - name: Hause Lin
 date: 02-18-2019
@@ -12,6 +12,8 @@ output:
 draft: false
 categories: 
   - data.table
+  - pooling
+  - hausekeep
 repository_url: https://github.com/hauselin/rtutorialsite/blob/master/_posts/2019-02-18-fit-models-to-every-group/fit-models-to-every-group.Rmd
 bibliography: biblio.bib
 editor_options: 

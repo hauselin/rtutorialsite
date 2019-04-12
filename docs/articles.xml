@@ -54,10 +54,10 @@
       <media:content url="https://raw.githubusercontent.com/hauselin/rtutorialsite/master/docs/attachments/plot_dotdist.gif" medium="image" type="image/gif"/>
     </item>
     <item>
-      <title>Fit the same statistical model to many groups with one simple line of code</title>
+      <title>Complete vs no-pooling: Fit the same model to different groups (just one simple line of code)</title>
       <dc:creator>Hause Lin</dc:creator>
       <link>https://hausetutorials.netlify.com/posts/2019-02-18-fit-models-to-every-group</link>
-      <description>How to use data.table package to fit a model to different groups in a dataset using only one line of code</description>
+      <description>What is complete pooling, no-pooling (and partial pooling), and how to use data.table for no-pooling models (fit the same model, but separately to each group)</description>
       <guid>https://hausetutorials.netlify.com/posts/2019-02-18-fit-models-to-every-group</guid>
       <pubDate>Sun, 17 Feb 2019 00:00:00 +0000</pubDate>
     </item>
