@@ -32,6 +32,8 @@ Logistic regression (also known as classification in machine learning) is used t
 
 I have read many explanations and tutorials but haven't found one that clearly explains how logistic regression, inverse logit and logit functions, and maximum likelihood estimation are related. I hope this tutorial will fill those gaps. If anything is unclear or wrong, let me know. 
 
+The principles underlying logistic regression are also relevant to [decision making and choice models](https://khakieconomics.github.io/2019/03/17/A-simple-model-of-choice.html), machine learning, [activation functions in neural networks](https://towardsdatascience.com/activation-functions-neural-networks-1cbd9f8d91d6), and many other things. So it's good to understand the basic underlying principles really well.
+
 ```{r}
 library(tidyverse); library(data.table)
 ```
