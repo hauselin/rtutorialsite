@@ -41,15 +41,17 @@
   <meta property="twitter:description" content="How to use data.table package to fit a model to different groups in a dataset using only one line of code"/>
   
   <!--/radix_placeholder_meta_tags-->
+  
+  <meta name="citation_reference" content="citation_title=Regression analyses of repeated measures data in cognitive research.;citation_publication_date=1990;citation_volume=16;citation_author=Robert F. Lorch;citation_author=Jerome L. Myers"/>
   <!--radix_placeholder_rmarkdown_metadata-->
   
   <script type="text/json" id="radix-rmarkdown-metadata">
-  {"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["title","description","author","date","output","draft","categories","repository_url"]}},"value":[{"type":"character","attributes":{},"value":["Fit the same statistical model to many groups with one simple line of code"]},{"type":"character","attributes":{},"value":["How to use data.table package to fit a model to different groups in a dataset using only one line of code\n"]},{"type":"list","attributes":{},"value":[{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name"]}},"value":[{"type":"character","attributes":{},"value":["Hause Lin"]}]}]},{"type":"character","attributes":{},"value":["02-18-2019"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["radix::radix_article"]}},"value":[{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["toc","self_contained"]}},"value":[{"type":"logical","attributes":{},"value":[true]},{"type":"logical","attributes":{},"value":[false]}]}]},{"type":"logical","attributes":{},"value":[false]},{"type":"character","attributes":{},"value":["data.table"]},{"type":"character","attributes":{},"value":["https://github.com/hauselin/rtutorialsite/blob/master/_posts/2019-02-18-fit-models-to-every-group/fit-models-to-every-group.Rmd"]}]}
+  {"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["title","description","author","date","output","draft","categories","repository_url","bibliography","editor_options"]}},"value":[{"type":"character","attributes":{},"value":["Fit the same statistical model to many groups with one simple line of code"]},{"type":"character","attributes":{},"value":["How to use data.table package to fit a model to different groups in a dataset using only one line of code\n"]},{"type":"list","attributes":{},"value":[{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name"]}},"value":[{"type":"character","attributes":{},"value":["Hause Lin"]}]}]},{"type":"character","attributes":{},"value":["02-18-2019"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["radix::radix_article"]}},"value":[{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["toc","self_contained"]}},"value":[{"type":"logical","attributes":{},"value":[true]},{"type":"logical","attributes":{},"value":[false]}]}]},{"type":"logical","attributes":{},"value":[false]},{"type":"character","attributes":{},"value":["data.table"]},{"type":"character","attributes":{},"value":["https://github.com/hauselin/rtutorialsite/blob/master/_posts/2019-02-18-fit-models-to-every-group/fit-models-to-every-group.Rmd"]},{"type":"character","attributes":{},"value":["biblio.bib"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["chunk_output_type"]}},"value":[{"type":"character","attributes":{},"value":["console"]}]}]}
   </script>
   <!--/radix_placeholder_rmarkdown_metadata-->
   
   <script type="text/json" id="radix-resource-manifest">
-  {"type":"character","attributes":{},"value":["fit-models-to-every-group_files/bowser-1.9.3/bowser.min.js","fit-models-to-every-group_files/distill-2.2.21/template.v2.js","fit-models-to-every-group_files/jquery-1.11.3/jquery.min.js","fit-models-to-every-group_files/webcomponents-2.0.0/webcomponents.js"]}
+  {"type":"character","attributes":{},"value":["biblio.bib","fit-models-to-every-group_files/bowser-1.9.3/bowser.min.js","fit-models-to-every-group_files/distill-2.2.21/template.v2.js","fit-models-to-every-group_files/jquery-1.11.3/jquery.min.js","fit-models-to-every-group_files/webcomponents-2.0.0/webcomponents.js"]}
   </script>
   <!--radix_placeholder_navigation_in_header-->
   <!--/radix_placeholder_navigation_in_header-->
@@ -966,12 +968,15 @@
 <h3 class="d-toc-header">Table of Contents</h3>
 <nav class="d-toc" id="TOC">
 <ul>
-<li><a href="#how-to-use-data.table-package-to-fit-a-model-to-different-groups-in-a-dataset.">How to use <code>data.table</code> package to fit a model to different groups in a dataset.</a></li>
+<li><a href="#how-to-use-data.table-package-to-repeatedly-fit-a-model-to-separate-groups-in-a-dataset">How to use <code>data.table</code> package to repeatedly fit a model to separate groups in a dataset</a></li>
+<li><a href="#completing-pooling-approach">Completing pooling approach</a></li>
+<li><a href="#no-pooling-approach">No pooling approach</a></li>
 </ul>
 </nav>
 <hr class="d-toc-separator"/>
 <p>Get source code for this RMarkdown script <a href="https://github.com/hauselin/rtutorialsite/blob/master/_posts/2019-02-18-fit-models-to-every-group/fit-models-to-every-group.Rmd">here</a>.</p>
-<h2 id="how-to-use-data.table-package-to-fit-a-model-to-different-groups-in-a-dataset.">How to use <code>data.table</code> package to fit a model to different groups in a dataset.</h2>
+<h2 id="how-to-use-data.table-package-to-repeatedly-fit-a-model-to-separate-groups-in-a-dataset">How to use <code>data.table</code> package to repeatedly fit a model to separate groups in a dataset</h2>
+<p>Before the invention of multi-level models (aka linear mixed effects models), how did people analyze nested or repeated-measures data? They aggregated the data, used repeated-measures ANOVA, and did other things. One interesting approach is to repeatedly fit the same model to each group separately, and this approach seems to be first mentioned in this article <span class="citation" data-cites="Lorch">(Lorch and Myers <a href="#ref-Lorch">1990</a>)</span>. If you have 10 data points per subject, you have nested data (data points nested within subjects), and you could fit 10 linear regressions, one for each subject. This approach is still quite useful, and I’ll demonstrate how to do it easily with <code>data.table</code> and my <code>summaryh()</code> function from my <code>hausekeep</code> package.</p>
 <div class="layout-chunk" data-layout="l-body">
 <pre class="r"><code>
 # load packages
@@ -1000,7 +1005,8 @@ dt1  # print dataset </code></pre>
 <aside>
 Dataset contains weights of 50 chicks that were fed one of four diets. Their weights were tracked over time. Type <code>?ChickWeight</code> in the console for more info about this dataset.
 </aside>
-<p>Let’s look at just the first 5 chicks (and to illustrate <code>data.table</code> syntax; see my <a href="https://hausetutorials.netlify.com/0002_tidyverse_datatable.html">data.table</a> tutorials). We then fit a linear regression <code>weight ~ Time</code> to the data from these 5 chicks, ignoring that the data came from 5 different chicks.</p>
+<h2 id="completing-pooling-approach">Completing pooling approach</h2>
+<p>Let’s look at just the first 5 chicks (and to illustrate <code>data.table</code> syntax; see my <a href="https://hausetutorials.netlify.com/0002_tidyverse_datatable.html">data.table</a> tutorials). We then fit a linear regression <code>weight ~ Time</code> to the data from these 5 chicks, ignoring that the data came from 5 different chicks (i.e., completing pooling). That is, we pretend all the data came from one chick.</p>
 <div class="layout-chunk" data-layout="l-body">
 <pre class="r"><code>
 # filter rows where Chick is &lt;= 5 and fit linear regression model
@@ -1041,7 +1047,7 @@ Multiple R-squared:  0.7118,    Adjusted R-squared:  0.7103
 F-statistic: 479.1 on 1 and 194 DF,  p-value: &lt; 2.2e-16</code></pre>
 </div>
 <aside>
-The correct way to fit this model is to account for the nested structure is to use linear mixed models (lme4 package): <code>lmer(weight ~ Time + (1 | Chick), data = dt1[Chick &lt;= 5])</code>
+The correct way to fit this model is to account for the nested structure is to use linear mixed models (lme4 package): <code>lmer(weight ~ Time + (1 | Chick), data = dt1[Chick &lt;= 5])</code>. This approach is ‘partial pooling’.
 </aside>
 <p>Show formatted output that can be copied-pasted into your APA manuscript.</p>
 <div class="layout-chunk" data-layout="l-body">
@@ -1064,6 +1070,7 @@ dt1[Chick &lt;= 5, summaryh(lm(weight ~ Time))]  # results are same as above</co
 <aside>
 <code>summaryh()</code> returns results in a <code>data.table</code>.
 </aside>
+<h2 id="no-pooling-approach">No pooling approach</h2>
 <p>What if you want to fit a separate model for each chick/group, so you know how time was associated with weight for each chick? You could write a for loop to loop through each chick, but you can do it with <code>data.table</code> syntax really easily.</p>
 <p>Now we can extend the syntax above with <code>by = Chick</code> to fit the model to each chick! Just one line of code is needed.</p>
 <div class="layout-chunk" data-layout="l-body">
@@ -1090,6 +1097,29 @@ When calling functions inside a <code>data.table</code> with the <code>by</code>
 <pre class="{r"><code>
 dt1[Chick &lt;= 5, summary(lm(weight ~ Time))] # summary() doesn&#39;t return a table
 dt1[Chick &lt;= 5, summary(lm(weight ~ Time)), by = Chick] # doesn&#39;t work! </code></pre>
+<p>You can also use the <code>lmList()</code> function from the <code>lme4</code> package to fit this ‘no-pooling’ model, but you don’t get p-values, effect sizes, and other useful information!</p>
+<div class="layout-chunk" data-layout="l-body">
+<pre class="r"><code>
+library(lme4)
+lmList(weight ~ Time | Chick, data = dt1[Chick %in% 1:5])</code></pre>
+<pre><code>
+Call: lmList(formula = weight ~ Time | Chick, data = dt1[Chick %in%      1:5]) 
+Coefficients:
+  (Intercept)      Time
+4    32.86568  6.088640
+3    23.17955  8.487370
+1    24.46544  7.987899
+2    24.72485  8.719861
+5    16.89563 10.055362
+
+Degrees of freedom: 60 total; 50 residual
+Residual standard error: 10.60642</code></pre>
+</div>
+<div id="refs" class="references">
+<div id="ref-Lorch">
+<p>Lorch, Robert F., and Jerome L. Myers. 1990. “Regression Analyses of Repeated Measures Data in Cognitive Research.” <em>Journal of Experimental Psychology: Learning, Memory, and Cognition</em> 16 (1): 149–57.</p>
+</div>
+</div>
 <!--radix_placeholder_article_footer-->
 <!--/radix_placeholder_article_footer-->
 </div>
@@ -1105,6 +1135,19 @@ dt1[Chick &lt;= 5, summary(lm(weight ~ Time)), by = Chick] # doesn&#39;t work! <
 <h3 id="updates-and-corrections">Corrections</h3>
 <p>If you see mistakes or want to suggest changes, please <a href="https://github.com/hauselin/rtutorialsite/blob/master/_posts/2019-02-18-fit-models-to-every-group/fit-models-to-every-group.Rmd/issues/new">create an issue</a> on the source repository.</p>
 </div>
+<script id="distill-bibliography" type="text/bibtex">
+@Article{Lorch,
+author = {Lorch, Robert F. and Myers, Jerome L.},
+title = {Regression analyses of repeated measures data in cognitive research.},
+journal = {Journal of Experimental Psychology: Learning, Memory, and Cognition},
+volume = {16},
+number = {1},
+pages = {149–157},
+year = {1990},
+abstract = {Repeated measures designs involving nonorthogonal variables are being used with increasing frequency in cognitive psychology. Researchers usually analyze the data from such designs inappropriately, probably because the designs are not discussed in standard textbooks on regression. Two commonly used approaches to analyzing repeated measures designs are considered in this article. It is argued that both approaches use inappropriate error terms for testing the effects of independent variables. A more appropriate analysis is …},
+location = {},
+keywords = {statistics}}
+</script>
 <!--/radix_placeholder_appendices-->
 <!--radix_placeholder_navigation_after_body-->
 <!--/radix_placeholder_navigation_after_body-->

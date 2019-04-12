@@ -7,14 +7,14 @@
     <description>Data science and analysis tutorials
 </description>
     <generator>Radix</generator>
-    <lastBuildDate>Fri, 12 Apr 2019 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Sat, 13 Apr 2019 00:00:00 +0000</lastBuildDate>
     <item>
       <title>Gentle intro to logistic regression</title>
       <dc:creator>Hause Lin</dc:creator>
       <link>https://hausetutorials.netlify.com/posts/2019-04-13-logistic-regression</link>
       <description>A gentle, step-by-step intro to logistic regression, inverse logit and logit functions, and maximum likelihood estimation in the context of logistic regression</description>
       <guid>https://hausetutorials.netlify.com/posts/2019-04-13-logistic-regression</guid>
-      <pubDate>Fri, 12 Apr 2019 00:00:00 +0000</pubDate>
+      <pubDate>Sat, 13 Apr 2019 00:00:00 +0000</pubDate>
       <media:content url="https://hausetutorials.netlify.com/posts/2019-04-13-logistic-regression/logistic-regression_files/figure-html5/unnamed-chunk-5-1.png" medium="image" type="image/png" width="1248" height="768"/>
     </item>
     <item>
@@ -59,7 +59,7 @@
       <link>https://hausetutorials.netlify.com/posts/2019-02-18-fit-models-to-every-group</link>
       <description>How to use data.table package to fit a model to different groups in a dataset using only one line of code</description>
       <guid>https://hausetutorials.netlify.com/posts/2019-02-18-fit-models-to-every-group</guid>
-      <pubDate>Mon, 18 Feb 2019 00:00:00 +0000</pubDate>
+      <pubDate>Sun, 17 Feb 2019 00:00:00 +0000</pubDate>
     </item>
   </channel>
 </rss>

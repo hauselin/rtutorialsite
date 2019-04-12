@@ -13,19 +13,21 @@ draft: false
 categories: 
   - data.table
 repository_url: https://github.com/hauselin/rtutorialsite/blob/master/_posts/2019-02-18-fit-models-to-every-group/fit-models-to-every-group.Rmd
+bibliography: biblio.bib
+editor_options: 
+  chunk_output_type: console
 ---
 
 ```{r setup, include=FALSE}
 library(roxygen2)
-knitr::opts_chunk$set(echo = TRUE,
-                      R.options = list(width = 80),
-                      tidy = TRUE,
-                      tidy.opts = list(width.cutoff = 80))
+knitr::opts_chunk$set(echo = TRUE, cache = FALSE, comment = NA, message = FALSE, warning = FALSE, tidy = TRUE, tidy.opts = list(width.cutoff = 80), R.options = list(width = 80))
 ```
 
 Get source code for this RMarkdown script [here](https://github.com/hauselin/rtutorialsite/blob/master/_posts/2019-02-18-fit-models-to-every-group/fit-models-to-every-group.Rmd).
 
-## How to use `data.table` package to fit a model to different groups in a dataset.
+## How to use `data.table` package to repeatedly fit a model to separate groups in a dataset
+
+Before the invention of multi-level models (aka linear mixed effects models), how did people analyze nested or repeated-measures data? They aggregated the data, used repeated-measures ANOVA, and did other things. One interesting approach is to repeatedly fit the same model to each group separately, and this approach seems to be first mentioned in this article [@Lorch]. If you have 10 data points per subject, you have nested data (data points nested within subjects), and you could fit 10 linear regressions, one for each subject. This approach is still quite useful, and I'll demonstrate how to do it easily with `data.table` and my `summaryh()` function from my `hausekeep` package. 
 
 ```{r}
 # load packages
@@ -43,7 +45,9 @@ dt1 # print dataset
 Dataset contains weights of 50 chicks that were fed one of four diets. Their weights were tracked over time. Type `?ChickWeight` in the console for more info about this dataset.
 </aside>
 
-Let's look at just the first 5 chicks (and to illustrate `data.table` syntax; see my [data.table](https://hausetutorials.netlify.com/0002_tidyverse_datatable.html) tutorials). We then fit a linear regression `weight ~ Time` to the data from these 5 chicks, ignoring that the data came from 5 different chicks. 
+## Completing pooling approach
+
+Let's look at just the first 5 chicks (and to illustrate `data.table` syntax; see my [data.table](https://hausetutorials.netlify.com/0002_tidyverse_datatable.html) tutorials). We then fit a linear regression `weight ~ Time` to the data from these 5 chicks, ignoring that the data came from 5 different chicks (i.e., completing pooling).  That is, we pretend all the data came from one chick.
 
 ```{r}
 # filter rows where Chick is <= 5 and fit linear regression model
@@ -53,7 +57,7 @@ summary(model)
 ```
 
 <aside>
-The correct way to fit this model is to account for the nested structure is to use linear mixed models (lme4 package): `lmer(weight ~ Time + (1 | Chick), data = dt1[Chick <= 5])`
+The correct way to fit this model is to account for the nested structure is to use linear mixed models (lme4 package): `lmer(weight ~ Time + (1 | Chick), data = dt1[Chick <= 5])`. This approach is 'partial pooling'.
 </aside>
 
 Show formatted output that can be copied-pasted into your APA manuscript.
@@ -71,6 +75,8 @@ dt1[Chick <= 5, summaryh(lm(weight ~ Time))] # results are same as above
 <aside>
 `summaryh()` returns results in a `data.table`.
 </aside>
+
+## No pooling approach
 
 What if you want to fit a separate model for each chick/group, so you know how time was associated with weight for each chick? You could write a for loop to loop through each chick, but you can do it with `data.table` syntax really easily. 
 
@@ -91,4 +97,10 @@ dt1[Chick <= 5, summary(lm(weight ~ Time))] # summary() doesn't return a table
 dt1[Chick <= 5, summary(lm(weight ~ Time)), by = Chick] # doesn't work! 
 ```
 
+You can also use the `lmList()` function from the `lme4` package to fit this 'no-pooling' model, but you don't get p-values, effect sizes, and other useful information!
+
+```{r}
+library(lme4)
+lmList(weight ~ Time | Chick, data = dt1[Chick %in% 1:5])
+```
 
