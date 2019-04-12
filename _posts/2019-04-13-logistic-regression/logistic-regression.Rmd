@@ -223,13 +223,14 @@ Here's the **inverse logit** (aka logistic function or sigmoid function) again. 
 
 $$p=\frac{1}{1+e^{-y}}$$
 
-To remind you what how the inverse logit function above maps input values to output values again:
+To remind you how the inverse logit function above maps input values to output values again:
 
 ```{r}
 tibble(x = seq(-20, 20, 0.1), y = logistic(x)) %>% 
   ggplot(aes(x, y)) + geom_point() +
   geom_vline(xintercept = 0) + geom_hline(yintercept = 0.5) +
-  labs(x = "x (input values)", y = "p (output or transformed values)", title = "Logistic (sigmoid or inverse logit) function")
+  labs(x = "x (input values)", y = "p (output or transformed values)", 
+       title = "Logistic (sigmoid or inverse logit) function")
 ```
 What is the **logit function**? It's the "opposite" or the inverse of the inverse logit function above (inverse-inverse means you undo the inverse!)
 
@@ -258,8 +259,11 @@ logit(c(0.001, 0.999))
 ```{r}
 tibble(x = seq(-0.5, 1.5, 0.01), y = logit(x)) %>% 
   ggplot(aes(x, y)) + geom_point() +
-  geom_vline(xintercept = 0) + geom_hline(yintercept = 0.0) + geom_vline(xintercept = 0.5, linetype = "dashed") +
-  labs(x = "p (input values)", y = "y or f(x) (output or transformed values)", title = "Logit function")
+  geom_vline(xintercept = 0) + 
+  geom_hline(yintercept = 0.0) + 
+  geom_vline(xintercept = 0.5, linetype = "dashed") +
+  labs(x = "p (input values)", y = "y or f(x) (output or transformed values)", 
+       title = "Logit function")
 ```
 
 The logit function maps inputs ranging from 0 to 1 and maps those inputs to values ranging from $-\infty$ to $+\infty$. If the input value is smaller than 0 or larger than 1, you get `NaN` as the output! 
@@ -292,15 +296,15 @@ And since the equation above can be expressed as $X\beta=log(\frac{p}{1-p})$, we
 
 $$log(\frac{p}{1-p})=X\beta$$
 
+<aside>
+See the section below on converting between inverse logit and logit if you want to see how to convert between these two equations (logit to inverse logit and vice versa).
+</aside>
+
 The left-hand side $log(\frac{p}{1-p})$ is the $Y$ we're modelling when we fit logistic regression. If you replace the left-hand side with $Y$, you get the basic linear regression equation, $Y=X\beta$.
 
 ### Log odds
 
 $log(\frac{p}{1-p})$ is called the log odds, because odds is the probability of success $p$ divided by the probability of failure (or non-success), which is $1-p$, so $odds = \frac{1}{1-p}$.
-
-<aside>
-See the section below on converting between inverse logit and logit if you don't understand this part.
-</aside>
 
 ### Interpretating logistic regression coefficients
 
@@ -337,7 +341,7 @@ $$log(\frac{p}{1-p})= X\beta + \varepsilon = \beta_0 + \beta_1x + \varepsilon$$
 
 $$log(\frac{p_i}{1-p_i})= 0.6779 + 1.0011*x_i + \varepsilon_i$$
 
-Exponentiate the coefficients to get the values in the "normal" scale
+Exponentiate the coefficients to get the values in the "normal" odds scale:
 
 ```{r}
 # get coefficients
@@ -361,7 +365,7 @@ ggplot(dt1, aes(x, y)) +
 
 ## How are logistic regression coefficients estimated?
 
-Maximum likelihood estimation. I will only describe the idea being this approach and won't go into the details.
+Maximum likelihood estimation. I will only briefly describe how it works and won't go into too much details.
 
 We know what the true coefficient values are from our fitted model:
 
@@ -379,7 +383,7 @@ With our guesses, we can calculate the expected or predicted $\hat{Y}$ given our
 
 ```{r}
 predicted_y <- beta_guess["b0"] + beta_guess["b1"] * dt1$x 
-predicted_y
+predicted_y 
 ```
 
 We can get the corresponding predicted probabilities for each $\hat{y_i}$ by applying the inverse logit (or logistic) function:
@@ -391,13 +395,13 @@ predicted_probs <- logistic(predicted_y)
 predicted_probs
 ```
 
-Since our outcome $y$ contains 0s and 1s, we can assume that the underlying model generating the outcomce variable is the binomial distribution, hence the `family = binomial(link = "logit")` argument when we use thye `glm()` function to fit logistic regression.
+The `predicted_probs` values are the probabilities of each y value equals 1, given each x value and our beta coefficients (our guesses!).
 
-We can calculate the likelihood of our coefficients $b0 = 0.5$ and $b1 = 1.0$ given the observed data `dt1$y`, which is expressed as the following:
+Since our outcome $y$ contains 0s and 1s, we can assume that the underlying model generating the outcomce variable is the binomial distribution ("coin-toss" distribution), hence the `family = binomial(link = "logit")` argument when we use thye `glm()` function to fit logistic regression.
 
-$$\mathcal{L}(\beta;\boldsymbol{y})$$
+We can calculate the likelihood of our coefficients $b_0 = 0.5$ and $b_1 = 1.0$ given the observed data `dt1$y`, which is expressed as the following: $\mathcal{L}(\beta;\boldsymbol{y})$
 
-We can use the `dbinom()` function to calculate the likelihood of each value `dt1$y` (0 or 1) occuring given a probability. Simple examples:
+We can use the `dbinom()` function to calculate the likelihood of each value in `dt1$y` (0 or 1) occuring given a probability. Simple examples:
 
 ```{r}
 # likelihood of getting 0 when probability of success if 80%
@@ -463,7 +467,8 @@ guesses
 Apply our likelihood function to each row and plot the summed log-likelihood values!
 
 ```{r}
-guesses[, loglikelihood := mle(b0 = b0_guess, b1 = b1_guess), by = guessid] # apply our mle() function to each row
+# apply our mle() function to each row
+guesses[, loglikelihood := mle(b0 = b0_guess, b1 = b1_guess), by = guessid] 
 ```
 
 Plot and visualize:

@@ -1613,13 +1613,14 @@ dt1 # compare the ranges of y_hat and logistic_yhat</code></pre>
 <h2 id="inverse-logit-and-logit-functions">Inverse logit and logit functions</h2>
 <p>Here’s the <strong>inverse logit</strong> (aka logistic function or sigmoid function) again. Repetition is good… I’ve changed the left-hand side to <span class="math inline">\(p\)</span>, because the logistic (i.e., inverse logit) function takes inputs from <span class="math inline">\(-\infty\)</span> to <span class="math inline">\(+\infty\)</span> and maps those inputs into values ranging from 0 to 1, which are probability values, so <span class="math inline">\(p\)</span> (probability) on the left-hand side makes sense too.</p>
 <p><span class="math display">\[p=\frac{1}{1+e^{-y}}\]</span></p>
-<p>To remind you what how the inverse logit function above maps input values to output values again:</p>
+<p>To remind you how the inverse logit function above maps input values to output values again:</p>
 <div class="layout-chunk" data-layout="l-body">
 <pre class="r"><code>
 tibble(x = seq(-20, 20, 0.1), y = logistic(x)) %&gt;% 
   ggplot(aes(x, y)) + geom_point() +
   geom_vline(xintercept = 0) + geom_hline(yintercept = 0.5) +
-  labs(x = &quot;x (input values)&quot;, y = &quot;p (output or transformed values)&quot;, title = &quot;Logistic (sigmoid or inverse logit) function&quot;)</code></pre>
+  labs(x = &quot;x (input values)&quot;, y = &quot;p (output or transformed values)&quot;, 
+       title = &quot;Logistic (sigmoid or inverse logit) function&quot;)</code></pre>
 <p><img src="logistic-regression_files/figure-html5/unnamed-chunk-12-1.png" width="624" /></p>
 </div>
 <p>What is the <strong>logit function</strong>? It’s the “opposite” or the inverse of the inverse logit function above (inverse-inverse means you undo the inverse!)</p>
@@ -1653,8 +1654,11 @@ logit(c(0.001, 0.999))</code></pre>
 <pre class="r"><code>
 tibble(x = seq(-0.5, 1.5, 0.01), y = logit(x)) %&gt;% 
   ggplot(aes(x, y)) + geom_point() +
-  geom_vline(xintercept = 0) + geom_hline(yintercept = 0.0) + geom_vline(xintercept = 0.5, linetype = &quot;dashed&quot;) +
-  labs(x = &quot;p (input values)&quot;, y = &quot;y or f(x) (output or transformed values)&quot;, title = &quot;Logit function&quot;)</code></pre>
+  geom_vline(xintercept = 0) + 
+  geom_hline(yintercept = 0.0) + 
+  geom_vline(xintercept = 0.5, linetype = &quot;dashed&quot;) +
+  labs(x = &quot;p (input values)&quot;, y = &quot;y or f(x) (output or transformed values)&quot;, 
+       title = &quot;Logit function&quot;)</code></pre>
 <p><img src="logistic-regression_files/figure-html5/unnamed-chunk-15-1.png" width="624" /></p>
 </div>
 <p>The logit function maps inputs ranging from 0 to 1 and maps those inputs to values ranging from <span class="math inline">\(-\infty\)</span> to <span class="math inline">\(+\infty\)</span>. If the input value is smaller than 0 or larger than 1, you get <code>NaN</code> as the output!</p>
@@ -1677,12 +1681,12 @@ tibble(x = seq(-0.5, 1.5, 0.01), y = logit(x)) %&gt;%
 <p><span class="math display">\[p=\frac{1}{1+e^{-X\beta}}\]</span></p>
 <p>And since the equation above can be expressed as <span class="math inline">\(X\beta=log(\frac{p}{1-p})\)</span>, we get the following:</p>
 <p><span class="math display">\[log(\frac{p}{1-p})=X\beta\]</span></p>
+<aside>
+See the section below on converting between inverse logit and logit if you want to see how to convert between these two equations (logit to inverse logit and vice versa).
+</aside>
 <p>The left-hand side <span class="math inline">\(log(\frac{p}{1-p})\)</span> is the <span class="math inline">\(Y\)</span> we’re modelling when we fit logistic regression. If you replace the left-hand side with <span class="math inline">\(Y\)</span>, you get the basic linear regression equation, <span class="math inline">\(Y=X\beta\)</span>.</p>
 <h3 id="log-odds">Log odds</h3>
 <p><span class="math inline">\(log(\frac{p}{1-p})\)</span> is called the log odds, because odds is the probability of success <span class="math inline">\(p\)</span> divided by the probability of failure (or non-success), which is <span class="math inline">\(1-p\)</span>, so <span class="math inline">\(odds = \frac{1}{1-p}\)</span>.</p>
-<aside>
-See the section below on converting between inverse logit and logit if you don’t understand this part.
-</aside>
 <h3 id="interpretating-logistic-regression-coefficients">Interpretating logistic regression coefficients</h3>
 <p>Since we’re modelling <span class="math inline">\(log(\frac{p}{1-p})=X\beta\)</span> when we fit logistic regression, the beta coefficients have to be interpreted as such: If <span class="math inline">\(b1 = 0.3\)</span>, when <span class="math inline">\(x_1\)</span> increases by 1 unit, the outcome <span class="math inline">\(log(\frac{p}{1-p})\)</span> increases by 0.3.</p>
 <p>But since we aren’t used to interpreting things on the natural log scale (how much is <span class="math inline">\(log(\frac{p}{1-p}) = 0.3\)</span>?), we convert the coefficient back to the “normal scale” by taking the exponential: <span class="math inline">\(e^{log(\frac{p}{1-p})} = e^{0.3}\)</span>, giving us <span class="math inline">\(\frac{p}{1-p} = odds = e^{0.3}\)</span>, which equals 1.3498588. The output is easy to interpret. Let’s try a few <span class="math inline">\(b\)</span> coefficient values:</p>
@@ -1738,7 +1742,7 @@ Number of Fisher Scoring iterations: 6</code></pre>
 <p>Model:</p>
 <p><span class="math display">\[log(\frac{p}{1-p})= X\beta + \varepsilon = \beta_0 + \beta_1x + \varepsilon\]</span></p>
 <p><span class="math display">\[log(\frac{p_i}{1-p_i})= 0.6779 + 1.0011*x_i + \varepsilon_i\]</span></p>
-<p>Exponentiate the coefficients to get the values in the “normal” scale</p>
+<p>Exponentiate the coefficients to get the values in the “normal” odds scale:</p>
 <div class="layout-chunk" data-layout="l-body">
 <pre class="r"><code>
 # get coefficients
@@ -1765,7 +1769,7 @@ ggplot(dt1, aes(x, y)) +
 <p><img src="logistic-regression_files/figure-html5/unnamed-chunk-20-1.png" width="624" /></p>
 </div>
 <h2 id="how-are-logistic-regression-coefficients-estimated">How are logistic regression coefficients estimated?</h2>
-<p>Maximum likelihood estimation. I will only describe the idea being this approach and won’t go into the details.</p>
+<p>Maximum likelihood estimation. I will only briefly describe how it works and won’t go into too much details.</p>
 <p>We know what the true coefficient values are from our fitted model:</p>
 <div class="layout-chunk" data-layout="l-body">
 <pre class="r"><code>
@@ -1783,7 +1787,7 @@ beta_guess &lt;- c(b0 = 0.5, b1 = 1.0) # guess b0 = 0.5, b1 = 1.0</code></pre>
 <div class="layout-chunk" data-layout="l-body">
 <pre class="r"><code>
 predicted_y &lt;- beta_guess[&quot;b0&quot;] + beta_guess[&quot;b1&quot;] * dt1$x 
-predicted_y</code></pre>
+predicted_y </code></pre>
 <pre><code>
 [1] -4.5 -2.5 -0.5  0.5  1.5  3.5  5.5</code></pre>
 </div>
@@ -1797,10 +1801,10 @@ predicted_probs</code></pre>
 [1] 0.01098694 0.07585818 0.37754067 0.62245933 0.81757448 0.97068777
 [7] 0.99592986</code></pre>
 </div>
-<p>Since our outcome <span class="math inline">\(y\)</span> contains 0s and 1s, we can assume that the underlying model generating the outcomce variable is the binomial distribution, hence the <code>family = binomial(link = &quot;logit&quot;)</code> argument when we use thye <code>glm()</code> function to fit logistic regression.</p>
-<p>We can calculate the likelihood of our coefficients <span class="math inline">\(b0 = 0.5\)</span> and <span class="math inline">\(b1 = 1.0\)</span> given the observed data <code>dt1$y</code>, which is expressed as the following:</p>
-<p><span class="math display">\[\mathcal{L}(\beta;\boldsymbol{y})\]</span></p>
-<p>We can use the <code>dbinom()</code> function to calculate the likelihood of each value <code>dt1$y</code> (0 or 1) occuring given a probability. Simple examples:</p>
+<p>The <code>predicted_probs</code> values are the probabilities of each y value equals 1, given each x value and our beta coefficients (our guesses!).</p>
+<p>Since our outcome <span class="math inline">\(y\)</span> contains 0s and 1s, we can assume that the underlying model generating the outcomce variable is the binomial distribution (“coin-toss” distribution), hence the <code>family = binomial(link = &quot;logit&quot;)</code> argument when we use thye <code>glm()</code> function to fit logistic regression.</p>
+<p>We can calculate the likelihood of our coefficients <span class="math inline">\(b_0 = 0.5\)</span> and <span class="math inline">\(b_1 = 1.0\)</span> given the observed data <code>dt1$y</code>, which is expressed as the following: <span class="math inline">\(\mathcal{L}(\beta;\boldsymbol{y})\)</span></p>
+<p>We can use the <code>dbinom()</code> function to calculate the likelihood of each value in <code>dt1$y</code> (0 or 1) occuring given a probability. Simple examples:</p>
 <div class="layout-chunk" data-layout="l-body">
 <pre class="r"><code>
 # likelihood of getting 0 when probability of success if 80%
