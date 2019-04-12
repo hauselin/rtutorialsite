@@ -399,7 +399,7 @@ predicted_probs
 
 The `predicted_probs` values are the probabilities of each y value equals 1, given each x value and our beta coefficients (our guesses!).
 
-Since our outcome $y$ contains 0s and 1s, we can assume that the underlying model generating the outcomce variable is the binomial distribution ("coin-toss" distribution), hence the `family = binomial(link = "logit")` argument when we use thye `glm()` function to fit logistic regression.
+Since our outcome $y$ contains 0s and 1s, we can assume that the underlying model generating the outcome variable is the binomial distribution ("coin-toss" distribution), hence the `family = binomial(link = "logit")` argument when we use the `glm()` function to fit logistic regression.
 
 We can calculate the likelihood of our coefficients $b_0 = 0.5$ and $b_1 = 1.0$ given the observed data `dt1$y`, which is expressed as the following: $\mathcal{L}(\beta;\boldsymbol{y})$
 
@@ -452,16 +452,17 @@ Let's guess a range of coefficient values and plot!
 
 ```{r}
 # create coefficient combinations with expand.grid()
-guesses <- expand.grid(b0_guess = seq(0.1, 0.9, 0.05), b1_guess = seq(-2, 2, 0.05)) 
+guesses <- expand.grid(b0_guess = seq(0.1, 0.9, 0.05), # 0.1 to 0.9, steps of 0.05
+                       b1_guess = seq(-2, 2, 0.05)) # -2 to 2, steps of 0.05
 setDT(guesses) # convert to data.table
 guesses
 ```
 
-Since we know what the true values are, let's include them in our guesses too! Let's just replace the first row with our true values...
+Since we know what the true values are, let's include them in our guesses too! Let's just replace the 234th row (randomly selected!) with our true values...
 
 ```{r}
-guesses[1, b0_guess := true_values[1]]
-guesses[1, b1_guess := true_values[2]]
+guesses[234, b0_guess := true_values[1]]
+guesses[234, b1_guess := true_values[2]]
 guesses[, guessid := 1:.N] # add an id to each row
 guesses
 ```
@@ -479,11 +480,10 @@ Plot and visualize:
 ggplot(guesses, aes(guessid, loglikelihood)) +
   geom_point()
 ```
-
-The first row (or first data point) is our true coefficients obtained from `glm()` and has the highest summed log-likelihood! All other summed log-likelihood values calculated using other coefficient combinations are less likely to have generated our observed data.
+There's a point that looks like an outlier. It's the one we manaully changed (row 234), which contains our true coefficients obtained from `glm()` and has the highest summed log-likelihood! All other summed log-likelihood values calculated using other coefficient combinations are less likely to have generated our observed data.
 
 ```{r}
-which.max(guesses$loglikelihood) # row one has the max value
+which.max(guesses$loglikelihood) # row 234 has the max value
 ```
 
 ## Another logistic regression example

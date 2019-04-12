@@ -1803,7 +1803,7 @@ predicted_probs</code></pre>
 [7] 0.99592986</code></pre>
 </div>
 <p>The <code>predicted_probs</code> values are the probabilities of each y value equals 1, given each x value and our beta coefficients (our guesses!).</p>
-<p>Since our outcome <span class="math inline">\(y\)</span> contains 0s and 1s, we can assume that the underlying model generating the outcomce variable is the binomial distribution (“coin-toss” distribution), hence the <code>family = binomial(link = &quot;logit&quot;)</code> argument when we use thye <code>glm()</code> function to fit logistic regression.</p>
+<p>Since our outcome <span class="math inline">\(y\)</span> contains 0s and 1s, we can assume that the underlying model generating the outcome variable is the binomial distribution (“coin-toss” distribution), hence the <code>family = binomial(link = &quot;logit&quot;)</code> argument when we use the <code>glm()</code> function to fit logistic regression.</p>
 <p>We can calculate the likelihood of our coefficients <span class="math inline">\(b_0 = 0.5\)</span> and <span class="math inline">\(b_1 = 1.0\)</span> given the observed data <code>dt1$y</code>, which is expressed as the following: <span class="math inline">\(\mathcal{L}(\beta;\boldsymbol{y})\)</span></p>
 <p>We can use the <code>dbinom()</code> function to calculate the likelihood of each value in <code>dt1$y</code> (0 or 1) occuring given a probability. Simple examples:</p>
 <div class="layout-chunk" data-layout="l-body">
@@ -1863,7 +1863,8 @@ mle(b0 = 0.6, b1 = 1.01) # another random guess</code></pre>
 <div class="layout-chunk" data-layout="l-body">
 <pre class="r"><code>
 # create coefficient combinations with expand.grid()
-guesses &lt;- expand.grid(b0_guess = seq(0.1, 0.9, 0.05), b1_guess = seq(-2, 2, 0.05)) 
+guesses &lt;- expand.grid(b0_guess = seq(0.1, 0.9, 0.05), # 0.1 to 0.9, steps of 0.05
+                       b1_guess = seq(-2, 2, 0.05)) # -2 to 2, steps of 0.05
 setDT(guesses) # convert to data.table
 guesses</code></pre>
 <pre><code>
@@ -1880,26 +1881,26 @@ guesses</code></pre>
 1376:     0.85        2
 1377:     0.90        2</code></pre>
 </div>
-<p>Since we know what the true values are, let’s include them in our guesses too! Let’s just replace the first row with our true values…</p>
+<p>Since we know what the true values are, let’s include them in our guesses too! Let’s just replace the 234th row (randomly selected!) with our true values…</p>
 <div class="layout-chunk" data-layout="l-body">
 <pre class="r"><code>
-guesses[1, b0_guess := true_values[1]]
-guesses[1, b1_guess := true_values[2]]
+guesses[234, b0_guess := true_values[1]]
+guesses[234, b1_guess := true_values[2]]
 guesses[, guessid := 1:.N] # add an id to each row
 guesses</code></pre>
 <pre><code>
-       b0_guess  b1_guess guessid
-   1: 0.6778522  1.001124       1
-   2: 0.1500000 -2.000000       2
-   3: 0.2000000 -2.000000       3
-   4: 0.2500000 -2.000000       4
-   5: 0.3000000 -2.000000       5
-  ---                            
-1373: 0.7000000  2.000000    1373
-1374: 0.7500000  2.000000    1374
-1375: 0.8000000  2.000000    1375
-1376: 0.8500000  2.000000    1376
-1377: 0.9000000  2.000000    1377</code></pre>
+      b0_guess b1_guess guessid
+   1:     0.10       -2       1
+   2:     0.15       -2       2
+   3:     0.20       -2       3
+   4:     0.25       -2       4
+   5:     0.30       -2       5
+  ---                          
+1373:     0.70        2    1373
+1374:     0.75        2    1374
+1375:     0.80        2    1375
+1376:     0.85        2    1376
+1377:     0.90        2    1377</code></pre>
 </div>
 <p>Apply our likelihood function to each row and plot the summed log-likelihood values!</p>
 <div class="layout-chunk" data-layout="l-body">
@@ -1914,12 +1915,12 @@ ggplot(guesses, aes(guessid, loglikelihood)) +
   geom_point()</code></pre>
 <p><img src="logistic-regression_files/figure-html5/unnamed-chunk-34-1.png" width="624" /></p>
 </div>
-<p>The first row (or first data point) is our true coefficients obtained from <code>glm()</code> and has the highest summed log-likelihood! All other summed log-likelihood values calculated using other coefficient combinations are less likely to have generated our observed data.</p>
+<p>There’s a point that looks like an outlier. It’s the one we manaully changed (row 234), which contains our true coefficients obtained from <code>glm()</code> and has the highest summed log-likelihood! All other summed log-likelihood values calculated using other coefficient combinations are less likely to have generated our observed data.</p>
 <div class="layout-chunk" data-layout="l-body">
 <pre class="r"><code>
-which.max(guesses$loglikelihood) # row one has the max value</code></pre>
+which.max(guesses$loglikelihood) # row 234 has the max value</code></pre>
 <pre><code>
-[1] 1</code></pre>
+[1] 234</code></pre>
 </div>
 <h2 id="another-logistic-regression-example">Another logistic regression example</h2>
 <div class="layout-chunk" data-layout="l-body">
