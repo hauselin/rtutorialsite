@@ -5,7 +5,7 @@ description: |
 author:
   - name: Hause Lin
     url: {}
-date: 04-12-2019
+date: 04-13-2019
 categories: 
   - resources
   - logistic regression
@@ -17,6 +17,7 @@ output:
     toc: true
     self_contained: false
 draft: false
+repository_url: https://github.com/hauselin/rtutorialsite/blob/master/_posts/2019-04-11-logistic-regression/logistic-regression.Rmd
 editor_options: 
   chunk_output_type: console
 ---
@@ -24,6 +25,9 @@ editor_options:
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE, cache = FALSE, comment = NA, message = FALSE, warning = FALSE)
 ```
+
+Get source code for this RMarkdown script [here](https://github.com/hauselin/rtutorialsite/blob/master/_posts/2019-04-11-logistic-regression/logistic-regression.Rmd).
+
 
 Logistic regression (also known as classification in machine learning) is used to predict the probability of a categorical dependent variable. In logistic regression, the dependent variable is a binary variable that contains data coded as 1 (e.g., yes, success) or 0 (e.g., no, failure).
 

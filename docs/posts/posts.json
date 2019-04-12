@@ -1,5 +1,28 @@
 [
   {
+    "path": "posts/2019-04-11-logistic-regression/",
+    "title": "Gentle intro to logistic regression",
+    "description": "A gentle, step-by-step intro to logistic regression, inverse logit and logit functions, and maximum likelihood estimation in the context of logistic regression",
+    "author": [
+      {
+        "name": "Hause Lin",
+        "url": {}
+      }
+    ],
+    "date": "2019-04-13",
+    "categories": [
+      "resources",
+      "logistic regression",
+      "logit",
+      "general linear model",
+      "maximum likelihood"
+    ],
+    "preview": "posts/2019-04-11-logistic-regression/logistic-regression_files/figure-html5/unnamed-chunk-5-1.png",
+    "last_modified": "2019-04-12T14:44:13+02:00",
+    "preview_width": 1248,
+    "preview_height": 768
+  },
+  {
     "path": "posts/2019-04-11-datatable-resources/",
     "title": "Resources for data.table",
     "description": "Resources for the R data.table package",
@@ -16,29 +39,6 @@
     ],
     "preview": "posts/2019-04-11-datatable-resources/./datatable.jpg",
     "last_modified": "2019-04-11T15:14:59+02:00"
-  },
-  {
-    "path": "posts/2019-04-11-logistic-regression/",
-    "title": "Gentle intro to logistic regression",
-    "description": "A gentle, step-by-step intro to logistic regression, inverse logit and logit functions, and maximum likelihood estimation in the context of logistic regression",
-    "author": [
-      {
-        "name": "Hause Lin",
-        "url": {}
-      }
-    ],
-    "date": "2019-04-12",
-    "categories": [
-      "resources",
-      "logistic regression",
-      "logit",
-      "general linear model",
-      "maximum likelihood"
-    ],
-    "preview": "posts/2019-04-11-logistic-regression/logistic-regression_files/figure-html5/unnamed-chunk-5-1.png",
-    "last_modified": "2019-04-12T14:41:18+02:00",
-    "preview_width": 1248,
-    "preview_height": 768
   },
   {
     "path": "posts/2019-04-09-gentle-and-intuitive-intro-to-markov-chain-monte-carlo-mcmc/",

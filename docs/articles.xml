@@ -7,7 +7,16 @@
     <description>Data science and analysis tutorials
 </description>
     <generator>Radix</generator>
-    <lastBuildDate>Thu, 11 Apr 2019 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Fri, 12 Apr 2019 00:00:00 +0000</lastBuildDate>
+    <item>
+      <title>Gentle intro to logistic regression</title>
+      <dc:creator>Hause Lin</dc:creator>
+      <link>https://hausetutorials.netlify.com/posts/2019-04-11-logistic-regression</link>
+      <description>A gentle, step-by-step intro to logistic regression, inverse logit and logit functions, and maximum likelihood estimation in the context of logistic regression</description>
+      <guid>https://hausetutorials.netlify.com/posts/2019-04-11-logistic-regression</guid>
+      <pubDate>Fri, 12 Apr 2019 00:00:00 +0000</pubDate>
+      <media:content url="https://hausetutorials.netlify.com/posts/2019-04-11-logistic-regression/logistic-regression_files/figure-html5/unnamed-chunk-5-1.png" medium="image" type="image/png" width="1248" height="768"/>
+    </item>
     <item>
       <title>Resources for data.table</title>
       <dc:creator>Hause Lin</dc:creator>
@@ -16,15 +25,6 @@
       <guid>https://hausetutorials.netlify.com/posts/2019-04-11-datatable-resources</guid>
       <pubDate>Thu, 11 Apr 2019 00:00:00 +0000</pubDate>
       <media:content url="https://hausetutorials.netlify.com/posts/2019-04-11-datatable-resources/./datatable.jpg" medium="image" type="image/jpeg"/>
-    </item>
-    <item>
-      <title>Gentle intro to logistic regression</title>
-      <dc:creator>Hause Lin</dc:creator>
-      <link>https://hausetutorials.netlify.com/posts/2019-04-11-logistic-regression</link>
-      <description>A gentle, step-by-step intro to logistic regression, inverse logit and logit functions, and maximum likelihood estimation in the context of logistic regression</description>
-      <guid>https://hausetutorials.netlify.com/posts/2019-04-11-logistic-regression</guid>
-      <pubDate>Thu, 11 Apr 2019 00:00:00 +0000</pubDate>
-      <media:content url="https://hausetutorials.netlify.com/posts/2019-04-11-logistic-regression/logistic-regression_files/figure-html5/unnamed-chunk-5-1.png" medium="image" type="image/png" width="1248" height="768"/>
     </item>
     <item>
       <title>Bayesian inference and MCMC sampling introduction</title>
