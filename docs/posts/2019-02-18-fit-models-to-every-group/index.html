@@ -1410,12 +1410,27 @@ dt1 # print dataset </code></pre>
 <aside>
 Dataset contains weights of 50 chicks that were fed one of four diets. Their weights were tracked over time. Type <code>?ChickWeight</code> in the console for more info about this dataset.
 </aside>
-<h2 id="completing-pooling-approach">Completing pooling approach</h2>
-<p>Let’s look at just the first 5 chicks (and to illustrate <code>data.table</code> syntax; see my <a href="https://hausetutorials.netlify.com/0002_tidyverse_datatable.html">data.table</a> tutorials). We then fit a linear regression <code>weight ~ Time</code> to the data from these 5 chicks, ignoring that the data came from 5 different chicks (i.e., completing pooling). That is, we pretend all the data came from one chick.</p>
 <div class="layout-chunk" data-layout="l-body">
 <pre class="r"><code>
-# filter rows where Chick is &lt;= 5 and fit linear regression model
-dt1[Chick &lt;= 5, ] # syntax works only with data.table</code></pre>
+summary(dt1) # check dataset</code></pre>
+<pre><code>
+     weight           Time           Chick     Diet   
+ Min.   : 35.0   Min.   : 0.00   13     : 12   1:220  
+ 1st Qu.: 63.0   1st Qu.: 4.00   9      : 12   2:120  
+ Median :103.0   Median :10.00   20     : 12   3:120  
+ Mean   :121.8   Mean   :10.72   10     : 12   4:118  
+ 3rd Qu.:163.8   3rd Qu.:16.00   17     : 12          
+ Max.   :373.0   Max.   :21.00   19     : 12          
+                                 (Other):506          </code></pre>
+<pre class="r"><code>
+dt1[, Chick := as.numeric(as.character(Chick))] # recode factor as numeric</code></pre>
+</div>
+<h2 id="completing-pooling-approach">Completing pooling approach</h2>
+<p>Let’s look at just the first 10 chicks (and to illustrate <code>data.table</code> syntax; see my <a href="https://hausetutorials.netlify.com/0002_tidyverse_datatable.html">data.table</a> tutorials). We then fit a linear regression <code>weight ~ Time</code> to the data from these 10 chicks, ignoring that the data came from 10 different chicks (i.e., completing pooling). That is, we pretend all the data came from one chick.</p>
+<div class="layout-chunk" data-layout="l-body">
+<pre class="r"><code>
+# filter rows where Chick is &lt;= 10 and fit linear regression model
+dt1[Chick &lt;= 10, ] # syntax works only with data.table</code></pre>
 <pre><code>
      weight Time Chick Diet
   1:     42    0     1    1
@@ -1424,103 +1439,102 @@ dt1[Chick &lt;= 5, ] # syntax works only with data.table</code></pre>
   4:     64    6     1    1
   5:     76    8     1    1
  ---                       
-192:     89   14    20    1
-193:     98   16    20    1
-194:    107   18    20    1
-195:    115   20    20    1
-196:    117   21    20    1</code></pre>
+115:     96   14    10    1
+116:    101   16    10    1
+117:    112   18    10    1
+118:    120   20    10    1
+119:    124   21    10    1</code></pre>
 <pre class="r"><code>
-model &lt;- lm(weight ~ Time, data = dt1[Chick &lt;= 5])
+model &lt;- lm(weight ~ Time, data = dt1[Chick &lt;= 10])
 summary(model)</code></pre>
 <pre><code>
 Call:
-lm(formula = weight ~ Time, data = dt1[Chick &lt;= 5])
+lm(formula = weight ~ Time, data = dt1[Chick &lt;= 10])
 
 Residuals:
     Min      1Q  Median      3Q     Max 
--64.925 -12.207   1.043   8.570  66.421 
+-85.907 -11.399  -1.485  11.291 121.093 
 
 Coefficients:
             Estimate Std. Error t value Pr(&gt;|t|)    
-(Intercept)  33.4725     3.4421   9.724   &lt;2e-16 ***
-Time          6.0692     0.2773  21.887   &lt;2e-16 ***
+(Intercept)  30.2094     5.2189   5.788 6.07e-08 ***
+Time          7.3189     0.4091  17.892  &lt; 2e-16 ***
 ---
 Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
 
-Residual standard error: 26.14 on 194 degrees of freedom
-Multiple R-squared:  0.7118,    Adjusted R-squared:  0.7103 
-F-statistic: 479.1 on 1 and 194 DF,  p-value: &lt; 2.2e-16</code></pre>
+Residual standard error: 30.08 on 117 degrees of freedom
+Multiple R-squared:  0.7323,    Adjusted R-squared:   0.73 
+F-statistic: 320.1 on 1 and 117 DF,  p-value: &lt; 2.2e-16</code></pre>
 </div>
-<p>Show formatted output that can be copied-pasted into your APA manuscript.</p>
+<p>If you use <code>summaryh()</code> from my <a href="https://hauselin.github.io/hausekeep/reference/summaryh.html">hausekeep package</a>, you can show formatted output that can be copied-pasted into your APA manuscript.</p>
 <div class="layout-chunk" data-layout="l-body">
 <pre class="r"><code>
 summaryh(model) </code></pre>
 <pre><code>
           term                                                 results
-1: (Intercept) b = 33.47, SE = 3.44, t(194) = 9.72, p &lt; .001, r = 0.57
-2:        Time b = 6.07, SE = 0.28, t(194) = 21.89, p &lt; .001, r = 0.84</code></pre>
+1: (Intercept) b = 30.21, SE = 5.22, t(117) = 5.79, p &lt; .001, r = 0.47
+2:        Time b = 7.32, SE = 0.41, t(117) = 17.89, p &lt; .001, r = 0.86</code></pre>
 </div>
 <p>Or fit the same model within <code>data.table</code></p>
 <div class="layout-chunk" data-layout="l-body">
 <pre class="r"><code>
-dt1[Chick &lt;= 5, summaryh(lm(weight ~ Time))] # results are same as above</code></pre>
+dt1[Chick &lt;= 10, summaryh(lm(weight ~ Time))] # results are same as above</code></pre>
 <pre><code>
           term                                                 results
-1: (Intercept) b = 33.47, SE = 3.44, t(194) = 9.72, p &lt; .001, r = 0.57
-2:        Time b = 6.07, SE = 0.28, t(194) = 21.89, p &lt; .001, r = 0.84</code></pre>
+1: (Intercept) b = 30.21, SE = 5.22, t(117) = 5.79, p &lt; .001, r = 0.47
+2:        Time b = 7.32, SE = 0.41, t(117) = 17.89, p &lt; .001, r = 0.86</code></pre>
 </div>
 <aside>
 <code>summaryh()</code> returns results in a <code>data.table</code>.
 </aside>
 <h2 id="partial-pooling-approach">Partial pooling approach</h2>
-<p>The more appropriate way to fit this model is to account for the nested structure is to use linear mixed models (lme4 package): <code>lmer(weight ~ Time + (1 | Chick), data = dt1[Chick &lt;= 5])</code>. This approach is ‘partial pooling’, because it assumes hierarchy in the data structure.</p>
+<p>The more appropriate way to fit this model is to account for the nested structure is to use linear mixed models (lme4 package). This approach is ‘partial pooling’, because it assumes hierarchy in the data structure.</p>
 <div class="layout-chunk" data-layout="l-body">
 <pre class="r"><code>
 library(lme4); library(lmerTest)
-lme1 &lt;- lmer(weight ~ Time + (1 | Chick), data = dt1[Chick %in% 1:5])
+lme1 &lt;- lmer(weight ~ Time + (1 | Chick), data = dt1[Chick %in% 1:10])
 summaryh(lme1)</code></pre>
 <pre><code>
-          term                                                results
-1: (Intercept)  b = 24.43, SE = 5.39, t(8) = 4.54, p = .002, r = 0.85
-2:        Time b = 8.27, SE = 0.26, t(54) = 31.60, p &lt; .001, r = 0.97</code></pre>
+          term                                                 results
+1: (Intercept)  b = 30.33, SE = 7.39, t(15) = 4.10, p = .001, r = 0.73
+2:        Time b = 7.30, SE = 0.32, t(108) = 22.74, p &lt; .001, r = 0.91</code></pre>
 <pre class="r"><code>
 summary(lme1)</code></pre>
 <pre><code>
-Linear mixed model fit by REML. t-tests use Satterthwaite&#39;s method [
-lmerModLmerTest]
+Linear mixed model fit by REML. t-tests use Satterthwaite&#39;s method [&#39;lmerModLmerTest&#39;]
 Formula: weight ~ Time + (1 | Chick)
-   Data: dt1[Chick %in% 1:5]
+   Data: dt1[Chick %in% 1:10]
 
-REML criterion at convergence: 488.1
+REML criterion at convergence: 1104.9
 
 Scaled residuals: 
     Min      1Q  Median      3Q     Max 
--2.0400 -0.6352 -0.2413  0.8179  2.2290 
+-2.5405 -0.5187 -0.0682  0.6075  3.6354 
 
 Random effects:
  Groups   Name        Variance Std.Dev.
- Chick    (Intercept)  88.54    9.41   
- Residual             188.59   13.73   
-Number of obs: 60, groups:  Chick, 5
+ Chick    (Intercept) 378.8    19.46   
+ Residual             556.4    23.59   
+Number of obs: 119, groups:  Chick, 10
 
 Fixed effects:
             Estimate Std. Error      df t value Pr(&gt;|t|)    
-(Intercept)  24.4262     5.3862  7.6559   4.535  0.00214 ** 
-Time          8.2678     0.2617 54.0000  31.598  &lt; 2e-16 ***
+(Intercept)   30.329      7.392  14.747   4.103 0.000972 ***
+Time           7.300      0.321 108.052  22.741  &lt; 2e-16 ***
 ---
 Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
 
 Correlation of Fixed Effects:
      (Intr)
-Time -0.530</code></pre>
+Time -0.470</code></pre>
 </div>
 <h2 id="no-pooling-approach">No pooling approach</h2>
 <p>What if you want to fit a separate model for each chick/group, so you know how time was associated with weight for each chick? You could write a for loop to loop through each chick, but you can do it with <code>data.table</code> syntax really easily.</p>
 <p>Now we can extend the syntax above with <code>by = Chick</code> to fit the model to each chick! Just one line of code is needed.</p>
 <div class="layout-chunk" data-layout="l-body">
 <pre class="r"><code>
-# fit linear regression model to first 5 Chicks
-dt1[Chick %in% 1:5, summaryh(lm(weight ~ Time)), by = Chick]</code></pre>
+# fit linear regression model to first 10 Chicks
+dt1[Chick %in% 1:10, summaryh(lm(weight ~ Time)), by = Chick]</code></pre>
 <pre><code>
     Chick        term                                                 results
  1:     1 (Intercept)  b = 24.47, SE = 6.73, t(10) = 3.64, p = .005, r = 0.75
@@ -1532,36 +1546,80 @@ dt1[Chick %in% 1:5, summaryh(lm(weight ~ Time)), by = Chick]</code></pre>
  7:     4 (Intercept)  b = 32.87, SE = 4.01, t(10) = 8.21, p &lt; .001, r = 0.93
  8:     4        Time  b = 6.09, SE = 0.31, t(10) = 19.53, p &lt; .001, r = 0.99
  9:     5 (Intercept)  b = 16.90, SE = 7.56, t(10) = 2.24, p = .049, r = 0.58
-10:     5        Time b = 10.06, SE = 0.59, t(10) = 17.10, p &lt; .001, r = 0.98</code></pre>
+10:     5        Time b = 10.06, SE = 0.59, t(10) = 17.10, p &lt; .001, r = 0.98
+11:     6 (Intercept)  b = 44.12, SE = 7.35, t(10) = 6.00, p &lt; .001, r = 0.88
+12:     6        Time  b = 6.38, SE = 0.57, t(10) = 11.15, p &lt; .001, r = 0.96
+13:     7 (Intercept)  b = 5.84, SE = 11.42, t(10) = 0.51, p = .620, r = 0.16
+14:     7        Time b = 13.21, SE = 0.89, t(10) = 14.85, p &lt; .001, r = 0.98
+15:     8 (Intercept)  b = 43.73, SE = 3.70, t(9) = 11.82, p &lt; .001, r = 0.97
+16:     8        Time   b = 4.83, SE = 0.31, t(9) = 15.44, p &lt; .001, r = 0.98
+17:     9 (Intercept) b = 52.09, SE = 4.79, t(10) = 10.88, p &lt; .001, r = 0.96
+18:     9        Time   b = 2.66, SE = 0.37, t(10) = 7.15, p &lt; .001, r = 0.91
+19:    10 (Intercept) b = 38.70, SE = 1.13, t(10) = 34.28, p &lt; .001, r = 1.00
+20:    10        Time  b = 4.07, SE = 0.09, t(10) = 46.29, p &lt; .001, r = 1.00</code></pre>
 </div>
 <aside>
 When calling functions inside a <code>data.table</code> with the <code>by</code> argument, your functions have to return vectors, lists, or dataframes. Otherwise, you’ll get error messages. Run the code below to figure out why.
 </aside>
+<p>Return specific results (e.g., t, p, SE, beta) in separate columns</p>
+<div class="layout-chunk" data-layout="l-body">
+<pre class="r"><code>
+dt1[Chick %in% 1:10, summaryh(lm(weight ~ Time), showTable = T)$results2, by = Chick]</code></pre>
+<pre><code>
+    Chick        term estimate std.error df statistic p.value  es.r   es.d es.r.squared es.adj.r.squared
+ 1:     1 (Intercept)   24.465     6.728 10     3.636   0.005 0.755  2.300        0.959            0.955
+ 2:     1        Time    7.988     0.524 10    15.255   0.000 0.979  9.648        0.959            0.955
+ 3:     2 (Intercept)   24.725     4.931 10     5.014   0.001 0.846  3.171        0.981            0.979
+ 4:     2        Time    8.720     0.384 10    22.721   0.000 0.990 14.370        0.981            0.979
+ 5:     3 (Intercept)   23.180     5.083 10     4.560   0.001 0.822  2.884        0.979            0.977
+ 6:     3        Time    8.487     0.396 10    21.455   0.000 0.989 13.569        0.979            0.977
+ 7:     4 (Intercept)   32.866     4.005 10     8.206   0.000 0.933  5.190        0.974            0.972
+ 8:     4        Time    6.089     0.312 10    19.532   0.000 0.987 12.353        0.974            0.972
+ 9:     5 (Intercept)   16.896     7.556 10     2.236   0.049 0.577  1.414        0.967            0.964
+10:     5        Time   10.055     0.588 10    17.098   0.000 0.983 10.814        0.967            0.964
+11:     6 (Intercept)   44.123     7.351 10     6.002   0.000 0.885  3.796        0.926            0.918
+12:     6        Time    6.378     0.572 10    11.147   0.000 0.962  7.050        0.926            0.918
+13:     7 (Intercept)    5.843    11.422 10     0.512   0.620 0.160  0.324        0.957            0.952
+14:     7        Time   13.205     0.889 10    14.855   0.000 0.978  9.395        0.957            0.952
+15:     8 (Intercept)   43.727     3.698  9    11.824   0.000 0.969  7.882        0.964            0.960
+16:     8        Time    4.827     0.313  9    15.444   0.000 0.982 10.296        0.964            0.960
+17:     9 (Intercept)   52.094     4.786 10    10.885   0.000 0.960  6.884        0.836            0.820
+18:     9        Time    2.663     0.372 10     7.150   0.000 0.915  4.522        0.836            0.820
+19:    10 (Intercept)   38.695     1.129 10    34.285   0.000 0.996 21.684        0.995            0.995
+20:    10        Time    4.066     0.088 10    46.289   0.000 0.998 29.276        0.995            0.995</code></pre>
+</div>
+<aside>
+This line of code might look complicated, but it’s actually quite easy if you understand how the <code>summaryh()</code> function works. See <a href="https://hauselin.github.io/hausekeep/reference/summaryh.html">here</a> for documentation.
+</aside>
 <p>Why won’t <code>summary()</code> work?</p>
 <pre class="{r"><code>
-dt1[Chick &lt;= 5, summary(lm(weight ~ Time))] # summary() doesn&#39;t return a table
-dt1[Chick &lt;= 5, summary(lm(weight ~ Time)), by = Chick] # doesn&#39;t work! </code></pre>
+dt1[Chick &lt;= 10, summary(lm(weight ~ Time))] # summary() doesn&#39;t return a table
+dt1[Chick &lt;= 10, summary(lm(weight ~ Time)), by = Chick] # doesn&#39;t work! </code></pre>
 <p>You can also use the <code>lmList()</code> function from the <code>lme4</code> package to fit this ‘no-pooling’ model, but you don’t get p-values, effect sizes, and other useful information!</p>
 <div class="layout-chunk" data-layout="l-body">
 <pre class="r"><code>
-dt2 &lt;- dt1[Chick %in% 1:5]
-lmList(weight ~ Time | Chick, data = dt2)</code></pre>
+lmList(weight ~ Time | Chick, data = dt1[Chick &lt;= 10])</code></pre>
 <pre><code>
-Call: lmList(formula = weight ~ Time | Chick, data = dt2) 
+Call: lmList(formula = weight ~ Time | Chick, data = dt1[Chick &lt;= 10]) 
 Coefficients:
-  (Intercept)      Time
-4    32.86568  6.088640
-3    23.17955  8.487370
-1    24.46544  7.987899
-2    24.72485  8.719861
-5    16.89563 10.055362
+   (Intercept)      Time
+1    24.465436  7.987899
+2    24.724853  8.719861
+3    23.179549  8.487370
+4    32.865678  6.088640
+5    16.895628 10.055362
+6    44.123431  6.378006
+7     5.842535 13.205264
+8    43.727273  4.827273
+9    52.094086  2.663137
+10   38.695054  4.066102
 
-Degrees of freedom: 60 total; 50 residual
-Residual standard error: 10.60642</code></pre>
+Degrees of freedom: 119 total; 99 residual
+Residual standard error: 11.44853</code></pre>
 </div>
 <div id="refs" class="references">
 <div id="ref-Lorch">
-<p>Lorch, Robert F., and Jerome L. Myers. 1990. “Regression Analyses of Repeated Measures Data in Cognitive Research.” <em>Journal of Experimental Psychology: Learning, Memory, and Cognition</em> 16 (1): 149–57.</p>
+<p>Lorch, Robert F., and Jerome L. Myers. 1990. “Regression Analyses of Repeated Measures Data in Cognitive Research.” <em>Journal of Experimental Psychology: Learning, Memory, and Cognition</em> 16 (1): 149–57. <a href="https://www.ncbi.nlm.nih.gov/pubmed/2136750">https://www.ncbi.nlm.nih.gov/pubmed/2136750</a>.</p>
 </div>
 </div>
 <!--radix_placeholder_article_footer-->
@@ -1640,7 +1698,8 @@ pages = {149–157},
 year = {1990},
 abstract = {Repeated measures designs involving nonorthogonal variables are being used with increasing frequency in cognitive psychology. Researchers usually analyze the data from such designs inappropriately, probably because the designs are not discussed in standard textbooks on regression. Two commonly used approaches to analyzing repeated measures designs are considered in this article. It is argued that both approaches use inappropriate error terms for testing the effects of independent variables. A more appropriate analysis is …},
 location = {},
-keywords = {statistics}}
+keywords = {statistics},
+url = {https://www.ncbi.nlm.nih.gov/pubmed/2136750}}
 </script>
 <!--/radix_placeholder_appendices-->
 <!--radix_placeholder_navigation_after_body-->
