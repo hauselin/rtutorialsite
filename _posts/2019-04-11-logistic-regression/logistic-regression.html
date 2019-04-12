@@ -989,6 +989,7 @@
 <hr class="d-toc-separator"/>
 <p>Get source code for this RMarkdown script <a href="https://github.com/hauselin/rtutorialsite/blob/master/_posts/2019-04-11-logistic-regression/logistic-regression.Rmd">here</a>.</p>
 <p>Logistic regression (also known as classification in machine learning) is used to predict the probability of a categorical dependent variable. In logistic regression, the dependent variable is a binary variable that contains data coded as 1 (e.g., yes, success) or 0 (e.g., no, failure).</p>
+<p>I have read many explanations and tutorials but haven’t found one that explains how logistic regression, inverse logit and logit functions, and maximum likelihood estimation are related. I hope this tutorial will fill that gap. If anything is unclear or wrong, let me know.</p>
 <div class="layout-chunk" data-layout="l-body">
 <pre class="r"><code>
 library(tidyverse); library(data.table)</code></pre>
@@ -1640,10 +1641,16 @@ exp(log(11.3))</code></pre>
 <p>I also used these resources to learn how logistic regression works and to create this tutorial.</p>
 <ul>
 <li><a href="https://towardsdatascience.com/understanding-logistic-regression-step-by-step-704a78be7e0a" class="uri">https://towardsdatascience.com/understanding-logistic-regression-step-by-step-704a78be7e0a</a></li>
-<li><a href="https://christophm.github.io/interpretable-ml-book/logistic.html" class="uri">https://christophm.github.io/interpretable-ml-book/logistic.html</a></li>
 <li><a href="https://medium.com/data-science-group-iitr/logistic-regression-simplified-9b4efe801389" class="uri">https://medium.com/data-science-group-iitr/logistic-regression-simplified-9b4efe801389</a></li>
 <li><a href="https://towardsdatascience.com/understanding-logistic-regression-9b02c2aec102" class="uri">https://towardsdatascience.com/understanding-logistic-regression-9b02c2aec102</a></li>
-<li></li>
+<li><a href="https://christophm.github.io/interpretable-ml-book/logistic.html" class="uri">https://christophm.github.io/interpretable-ml-book/logistic.html</a></li>
+<li><a href="https://www.datacamp.com/community/tutorials/understanding-logistic-regression-python" class="uri">https://www.datacamp.com/community/tutorials/understanding-logistic-regression-python</a></li>
+<li><a href="https://czep.net/stat/mlelr.pdf">Maximum Likelihood Estimation of Logistic Regression Models: Theory and Implementation</a></li>
+<li><a href="https://rpubs.com/aelhabr/logistic-regression-tutorial" class="uri">https://rpubs.com/aelhabr/logistic-regression-tutorial</a></li>
+<li><a href="https://daviddalpiaz.github.io/appliedstats/logistic-regression.html" class="uri">https://daviddalpiaz.github.io/appliedstats/logistic-regression.html</a></li>
+<li><a href="https://daviddalpiaz.github.io/r4sl/logistic-regression.html" class="uri">https://daviddalpiaz.github.io/r4sl/logistic-regression.html</a></li>
+<li><a href="https://machinelearningmastery.com/logistic-regression-tutorial-for-machine-learning/" class="uri">https://machinelearningmastery.com/logistic-regression-tutorial-for-machine-learning/</a></li>
+<li><a href="https://www.machinelearningplus.com/machine-learning/logistic-regression-tutorial-examples-r/" class="uri">https://www.machinelearningplus.com/machine-learning/logistic-regression-tutorial-examples-r/</a></li>
 </ul>
 <!--radix_placeholder_article_footer-->
 <!--/radix_placeholder_article_footer-->

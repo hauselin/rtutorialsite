@@ -28,8 +28,9 @@ knitr::opts_chunk$set(echo = TRUE, cache = FALSE, comment = NA, message = FALSE,
 
 Get source code for this RMarkdown script [here](https://github.com/hauselin/rtutorialsite/blob/master/_posts/2019-04-11-logistic-regression/logistic-regression.Rmd).
 
-
 Logistic regression (also known as classification in machine learning) is used to predict the probability of a categorical dependent variable. In logistic regression, the dependent variable is a binary variable that contains data coded as 1 (e.g., yes, success) or 0 (e.g., no, failure).
+
+I have read many explanations and tutorials but haven't found one that explains how logistic regression, inverse logit and logit functions, and maximum likelihood estimation are related. I hope this tutorial will fill that gap. If anything is unclear or wrong, let me know. 
 
 ```{r}
 library(tidyverse); library(data.table)
@@ -621,7 +622,13 @@ $$
 I also used these resources to learn how logistic regression works and to create this tutorial.
 
 * https://towardsdatascience.com/understanding-logistic-regression-step-by-step-704a78be7e0a
-* https://christophm.github.io/interpretable-ml-book/logistic.html
 * https://medium.com/data-science-group-iitr/logistic-regression-simplified-9b4efe801389
 * https://towardsdatascience.com/understanding-logistic-regression-9b02c2aec102
-* 
+* https://christophm.github.io/interpretable-ml-book/logistic.html
+* https://www.datacamp.com/community/tutorials/understanding-logistic-regression-python
+* [Maximum Likelihood Estimation of Logistic Regression Models: Theory and Implementation](https://czep.net/stat/mlelr.pdf)
+* https://rpubs.com/aelhabr/logistic-regression-tutorial
+* https://daviddalpiaz.github.io/appliedstats/logistic-regression.html
+* https://daviddalpiaz.github.io/r4sl/logistic-regression.html
+* https://machinelearningmastery.com/logistic-regression-tutorial-for-machine-learning/
+* https://www.machinelearningplus.com/machine-learning/logistic-regression-tutorial-examples-r/
