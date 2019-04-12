@@ -62,7 +62,7 @@
   <!--radix_placeholder_rmarkdown_metadata-->
 
 <script type="text/json" id="radix-rmarkdown-metadata">
-{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["creative_commons","title","description","author","date","categories","output","draft","repository_url","editor_options","citation_url","canonical_url"]}},"value":[{"type":"character","attributes":{},"value":["CC BY"]},{"type":"character","attributes":{},"value":["Gentle intro to logistic regression"]},{"type":"character","attributes":{},"value":["A gentle, step-by-step intro to logistic regression, inverse logit and logit functions, and maximum likelihood estimation in the context of logistic regression"]},{"type":"list","attributes":{},"value":[{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","url"]}},"value":[{"type":"character","attributes":{},"value":["Hause Lin"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":[]}},"value":[]}]}]},{"type":"character","attributes":{},"value":["04-13-2019"]},{"type":"character","attributes":{},"value":["resources","logistic regression","logit","general linear model","maximum likelihood"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["radix::radix_article"]}},"value":[{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["toc","self_contained"]}},"value":[{"type":"logical","attributes":{},"value":[true]},{"type":"logical","attributes":{},"value":[false]}]}]},{"type":"logical","attributes":{},"value":[false]},{"type":"character","attributes":{},"value":["https://github.com/hauselin/rtutorialsite/blob/master/_posts/2019-04-11-logistic-regression/logistic-regression.Rmd"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["chunk_output_type"]}},"value":[{"type":"character","attributes":{},"value":["console"]}]},{"type":"character","attributes":{},"value":["https://hausetutorials.netlify.com/posts/2019-04-13-logistic-regression/"]},{"type":"character","attributes":{},"value":["https://hausetutorials.netlify.com/posts/2019-04-13-logistic-regression/"]}]}
+{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["creative_commons","title","description","author","date","categories","output","draft","repository_url","editor_options","citation_url","canonical_url"]}},"value":[{"type":"character","attributes":{},"value":["CC BY"]},{"type":"character","attributes":{},"value":["Gentle intro to logistic regression"]},{"type":"character","attributes":{},"value":["A gentle, step-by-step intro to logistic regression, inverse logit and logit functions, and maximum likelihood estimation in the context of logistic regression"]},{"type":"list","attributes":{},"value":[{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","url"]}},"value":[{"type":"character","attributes":{},"value":["Hause Lin"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":[]}},"value":[]}]}]},{"type":"character","attributes":{},"value":["04-13-2019"]},{"type":"character","attributes":{},"value":["resources","logistic regression","logit","general linear model","maximum likelihood"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["radix::radix_article"]}},"value":[{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["toc","self_contained"]}},"value":[{"type":"logical","attributes":{},"value":[true]},{"type":"logical","attributes":{},"value":[false]}]}]},{"type":"logical","attributes":{},"value":[false]},{"type":"character","attributes":{},"value":["https://github.com/hauselin/rtutorialsite/blob/master/_posts/2019-04-13-logistic-regression/logistic-regression.Rmd"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["chunk_output_type"]}},"value":[{"type":"character","attributes":{},"value":["console"]}]},{"type":"character","attributes":{},"value":["https://hausetutorials.netlify.com/posts/2019-04-13-logistic-regression/"]},{"type":"character","attributes":{},"value":["https://hausetutorials.netlify.com/posts/2019-04-13-logistic-regression/"]}]}
 </script>
 <!--/radix_placeholder_rmarkdown_metadata-->
   
@@ -1397,7 +1397,7 @@ Tutorials
 </ul>
 </nav>
 <hr class="d-toc-separator"/>
-<p>Get source code for this RMarkdown script <a href="https://github.com/hauselin/rtutorialsite/blob/master/_posts/2019-04-11-logistic-regression/logistic-regression.Rmd">here</a>.</p>
+<p>Get source code for this RMarkdown script <a href="https://github.com/hauselin/rtutorialsite/blob/master/_posts/2019-04-13-logistic-regression/logistic-regression.Rmd">here</a>.</p>
 <p>Logistic regression (also known as classification in machine learning) is used to predict the probability of a categorical dependent variable. In logistic regression, the dependent variable is a binary variable that contains data coded as 1 (e.g., yes, success) or 0 (e.g., no, failure).</p>
 <p>I have read many explanations and tutorials but haven’t found one that clearly explains how logistic regression, inverse logit and logit functions, and maximum likelihood estimation are related. I hope this tutorial will fill those gaps. If anything is unclear or wrong, let me know.</p>
 <div class="layout-chunk" data-layout="l-body">
@@ -1458,7 +1458,7 @@ logistic(0) # 0 -&gt; 0.5, because exp(0) is 1, thus 1/(1+1)</code></pre>
 <pre><code>
 [1] 0.5</code></pre>
 </div>
-<p>The logistic function, also called sigmoid function gives an ‘S’ shaped curve that can take any real-valued number (-<span class="math inline">\(\infty\)</span> to <span class="math inline">\(+\infty\)</span>) and maps it into a value between 0 and 1.</p>
+<p>The logistic function, also called sigmoid function gives an ‘S’ shaped curve that can take any real-valued number (-<span class="math inline">\(\infty\)</span> to <span class="math inline">\(+\infty\)</span>) and maps it to value between 0 and 1.</p>
 <div class="layout-chunk" data-layout="l-body">
 <pre class="r"><code>
 tibble(x = seq(-20, 20, 0.1), y = logistic(x)) %&gt;% 
@@ -1635,7 +1635,7 @@ logit &lt;- function(p) {
   log(p / (1 - p))
 }</code></pre>
 </div>
-<p>let’s try a few values to see how the logit function works:</p>
+<p>Let’s try a few values to see how the logit function works:</p>
 <div class="layout-chunk" data-layout="l-body">
 <pre class="r"><code>
 logit(-3) # warning because you can&#39;t take the log of negative values; try log(-1)</code></pre>
@@ -2129,9 +2129,9 @@ var disqus_config = function () {
 <!--radix_placeholder_appendices-->
 <div class="appendix-bottom">
   <h3 id="updates-and-corrections">Corrections</h3>
-  <p>If you see mistakes or want to suggest changes, please <a href="https://github.com/hauselin/rtutorialsite/blob/master/_posts/2019-04-11-logistic-regression/logistic-regression.Rmd/issues/new">create an issue</a> on the source repository.</p>
+  <p>If you see mistakes or want to suggest changes, please <a href="https://github.com/hauselin/rtutorialsite/blob/master/_posts/2019-04-13-logistic-regression/logistic-regression.Rmd/issues/new">create an issue</a> on the source repository.</p>
   <h3 id="reuse">Reuse</h3>
-  <p>Text and figures are licensed under Creative Commons Attribution <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>. Source code is available at <a href="https://github.com/hauselin/rtutorialsite/blob/master/_posts/2019-04-11-logistic-regression/logistic-regression.Rmd">https://github.com/hauselin/rtutorialsite/blob/master/_posts/2019-04-11-logistic-regression/logistic-regression.Rmd</a>, unless otherwise noted. The figures that have been reused from other sources don't fall under this license and can be recognized by a note in their caption: "Figure from ...".</p>
+  <p>Text and figures are licensed under Creative Commons Attribution <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>. Source code is available at <a href="https://github.com/hauselin/rtutorialsite/blob/master/_posts/2019-04-13-logistic-regression/logistic-regression.Rmd">https://github.com/hauselin/rtutorialsite/blob/master/_posts/2019-04-13-logistic-regression/logistic-regression.Rmd</a>, unless otherwise noted. The figures that have been reused from other sources don't fall under this license and can be recognized by a note in their caption: "Figure from ...".</p>
   <h3 id="citation">Citation</h3>
   <p>For attribution, please cite this work as</p>
   <pre class="citation-appendix short">Lin (2019, April 13). Data science with R: Gentle intro to logistic regression. Retrieved from https://hausetutorials.netlify.com/posts/2019-04-13-logistic-regression/</pre>
