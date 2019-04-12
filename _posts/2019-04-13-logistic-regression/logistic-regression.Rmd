@@ -89,7 +89,9 @@ The logistic function, also called sigmoid function gives an ‘S’ shaped curv
 tibble(x = seq(-20, 20, 0.1), y = logistic(x)) %>% 
   ggplot(aes(x, y)) + geom_point() +
   geom_vline(xintercept = 0) + geom_hline(yintercept = 0.5) +
-  labs(x = "x (input values)", y = "y or f(x) (output or transformed values)", title = "Logistic (sigmoid) function")
+  labs(x = "x (input values)", 
+       y = "y or f(x) (output or transformed values)", 
+       title = "Logistic (sigmoid) function")
 ```
 
 
@@ -217,7 +219,7 @@ Each value in the `logistic_yhat` column tells you the probability of $y$ equals
 
 ## Inverse logit and logit functions
 
-Here's the **inverse logit** (aka logistic function or sigmoid function) again. Repetition is good... I've changed the left-hand side to $p$, because the logistic (i.e., inverse logit) function takes inputs from $-\infty$ to $+-\infty$ and maps those inputs into values ranging from 0 to 1, which are probability values, so $p$ (probability) on the left-hand side makes sense too.
+Here's the **inverse logit** (aka logistic function or sigmoid function) again. Repetition is good... I've changed the left-hand side to $p$, because the logistic (i.e., inverse logit) function takes inputs from $-\infty$ to $+\infty$ and maps those inputs into values ranging from 0 to 1, which are probability values, so $p$ (probability) on the left-hand side makes sense too.
 
 $$p=\frac{1}{1+e^{-y}}$$
 
@@ -260,19 +262,19 @@ tibble(x = seq(-0.5, 1.5, 0.01), y = logit(x)) %>%
   labs(x = "p (input values)", y = "y or f(x) (output or transformed values)", title = "Logit function")
 ```
 
-The logit function maps inputs ranging from 0 to 1 and maps those inputs to values ranging from $-\infty$ to $+-\infty$. If the input value is smaller than 0 or larger than 1, you get `NaN` as the output! 
+The logit function maps inputs ranging from 0 to 1 and maps those inputs to values ranging from $-\infty$ to $+\infty$. If the input value is smaller than 0 or larger than 1, you get `NaN` as the output! 
 
 ### Summary: inverse logit and logit functions
 
 **Inverse logit** function (sigmoid or logistic function)
 
-* input range:$-\infty$ to $+-\infty$
+* input range:$-\infty$ to $+\infty$
 * output range: 0 to 1
 
 **Logit** function
 
 * input range: 0 to 1
-* output range:$-\infty$ to $+-\infty$
+* output range:$-\infty$ to $+\infty$
 
 Now you should understand why they are "opposites" of each other!
 

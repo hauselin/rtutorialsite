@@ -1054,7 +1054,9 @@ logistic(0) # 0 -&gt; 0.5, because exp(0) is 1, thus 1/(1+1)</code></pre>
 tibble(x = seq(-20, 20, 0.1), y = logistic(x)) %&gt;% 
   ggplot(aes(x, y)) + geom_point() +
   geom_vline(xintercept = 0) + geom_hline(yintercept = 0.5) +
-  labs(x = &quot;x (input values)&quot;, y = &quot;y or f(x) (output or transformed values)&quot;, title = &quot;Logistic (sigmoid) function&quot;)</code></pre>
+  labs(x = &quot;x (input values)&quot;, 
+       y = &quot;y or f(x) (output or transformed values)&quot;, 
+       title = &quot;Logistic (sigmoid) function&quot;)</code></pre>
 <p><img src="logistic-regression_files/figure-html5/unnamed-chunk-5-1.png" width="624" /></p>
 </div>
 <h2 id="linear-regression-basics">Linear regression basics</h2>
@@ -1199,7 +1201,7 @@ dt1 # compare the ranges of y_hat and logistic_yhat</code></pre>
 </div>
 <p>Each value in the <code>logistic_yhat</code> column tells you the probability of <span class="math inline">\(y\)</span> equals 1, <span class="math inline">\(P(y_i = 1)\)</span>.</p>
 <h2 id="inverse-logit-and-logit-functions">Inverse logit and logit functions</h2>
-<p>Here’s the <strong>inverse logit</strong> (aka logistic function or sigmoid function) again. Repetition is good… I’ve changed the left-hand side to <span class="math inline">\(p\)</span>, because the logistic (i.e., inverse logit) function takes inputs from <span class="math inline">\(-\infty\)</span> to <span class="math inline">\(+-\infty\)</span> and maps those inputs into values ranging from 0 to 1, which are probability values, so <span class="math inline">\(p\)</span> (probability) on the left-hand side makes sense too.</p>
+<p>Here’s the <strong>inverse logit</strong> (aka logistic function or sigmoid function) again. Repetition is good… I’ve changed the left-hand side to <span class="math inline">\(p\)</span>, because the logistic (i.e., inverse logit) function takes inputs from <span class="math inline">\(-\infty\)</span> to <span class="math inline">\(+\infty\)</span> and maps those inputs into values ranging from 0 to 1, which are probability values, so <span class="math inline">\(p\)</span> (probability) on the left-hand side makes sense too.</p>
 <p><span class="math display">\[p=\frac{1}{1+e^{-y}}\]</span></p>
 <p>To remind you what how the inverse logit function above maps input values to output values again:</p>
 <div class="layout-chunk" data-layout="l-body">
@@ -1245,17 +1247,17 @@ tibble(x = seq(-0.5, 1.5, 0.01), y = logit(x)) %&gt;%
   labs(x = &quot;p (input values)&quot;, y = &quot;y or f(x) (output or transformed values)&quot;, title = &quot;Logit function&quot;)</code></pre>
 <p><img src="logistic-regression_files/figure-html5/unnamed-chunk-15-1.png" width="624" /></p>
 </div>
-<p>The logit function maps inputs ranging from 0 to 1 and maps those inputs to values ranging from <span class="math inline">\(-\infty\)</span> to <span class="math inline">\(+-\infty\)</span>. If the input value is smaller than 0 or larger than 1, you get <code>NaN</code> as the output!</p>
+<p>The logit function maps inputs ranging from 0 to 1 and maps those inputs to values ranging from <span class="math inline">\(-\infty\)</span> to <span class="math inline">\(+\infty\)</span>. If the input value is smaller than 0 or larger than 1, you get <code>NaN</code> as the output!</p>
 <h3 id="summary-inverse-logit-and-logit-functions">Summary: inverse logit and logit functions</h3>
 <p><strong>Inverse logit</strong> function (sigmoid or logistic function)</p>
 <ul>
-<li>input range:<span class="math inline">\(-\infty\)</span> to <span class="math inline">\(+-\infty\)</span></li>
+<li>input range:<span class="math inline">\(-\infty\)</span> to <span class="math inline">\(+\infty\)</span></li>
 <li>output range: 0 to 1</li>
 </ul>
 <p><strong>Logit</strong> function</p>
 <ul>
 <li>input range: 0 to 1</li>
-<li>output range:<span class="math inline">\(-\infty\)</span> to <span class="math inline">\(+-\infty\)</span></li>
+<li>output range:<span class="math inline">\(-\infty\)</span> to <span class="math inline">\(+\infty\)</span></li>
 </ul>
 <p>Now you should understand why they are “opposites” of each other!</p>
 <p>If you’re up for the challenge, work through the algebra, rearrange the terms in the inverse logit function to get the logit function, and vice versa! Solutions are provided below!</p>
