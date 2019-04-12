@@ -1,7 +1,7 @@
 ---
-title: "Complete vs no-pooling: Fit the same model to different groups (just one simple line of code)"
+title: "Complete vs. partial vs. no-pooling: Fit the same model to different groups (just one simple line of code)"
 description: |
-  What is complete pooling, no-pooling (and partial pooling), and how to use data.table for no-pooling models (fit the same model, but separately to each group)
+  What is complete pooling, no-pooling, and partial pooling, and how to use data.table for no-pooling models (fit the same model, but separately to each group)
 author:
   - name: Hause Lin
 date: 02-18-2019
@@ -22,7 +22,7 @@ editor_options:
 
 ```{r setup, include=FALSE}
 library(roxygen2)
-knitr::opts_chunk$set(echo = TRUE, cache = FALSE, comment = NA, message = FALSE, warning = FALSE, tidy = TRUE, tidy.opts = list(width.cutoff = 80), R.options = list(width = 80))
+knitr::opts_chunk$set(echo = TRUE, cache = FALSE, comment = NA, message = FALSE, warning = FALSE, R.options = list(width = 80))
 ```
 
 Get source code for this RMarkdown script [here](https://github.com/hauselin/rtutorialsite/blob/master/_posts/2019-02-18-fit-models-to-every-group/fit-models-to-every-group.Rmd).
@@ -58,17 +58,13 @@ model <- lm(weight ~ Time, data = dt1[Chick <= 5])
 summary(model)
 ```
 
-<aside>
-The correct way to fit this model is to account for the nested structure is to use linear mixed models (lme4 package): `lmer(weight ~ Time + (1 | Chick), data = dt1[Chick <= 5])`. This approach is 'partial pooling'.
-</aside>
-
 Show formatted output that can be copied-pasted into your APA manuscript.
 
 ```{r}
 summaryh(model) 
 ```
 
-Fit the same model within `data.table`
+Or fit the same model within `data.table`
 
 ```{r}
 dt1[Chick <= 5, summaryh(lm(weight ~ Time))] # results are same as above
@@ -77,6 +73,17 @@ dt1[Chick <= 5, summaryh(lm(weight ~ Time))] # results are same as above
 <aside>
 `summaryh()` returns results in a `data.table`.
 </aside>
+
+## Partial pooling approach
+
+The more appropriate way to fit this model is to account for the nested structure is to use linear mixed models (lme4 package): `lmer(weight ~ Time + (1 | Chick), data = dt1[Chick <= 5])`. This approach is 'partial pooling', because it assumes hierarchy in the data structure.
+
+```{r}
+library(lme4); library(lmerTest)
+lme1 <- lmer(weight ~ Time + (1 | Chick), data = dt1[Chick %in% 1:5])
+summaryh(lme1)
+summary(lme1)
+```
 
 ## No pooling approach
 
@@ -102,7 +109,6 @@ dt1[Chick <= 5, summary(lm(weight ~ Time)), by = Chick] # doesn't work!
 You can also use the `lmList()` function from the `lme4` package to fit this 'no-pooling' model, but you don't get p-values, effect sizes, and other useful information!
 
 ```{r}
-library(lme4)
-lmList(weight ~ Time | Chick, data = dt1[Chick %in% 1:5])
+dt2 <- dt1[Chick %in% 1:5]
+lmList(weight ~ Time | Chick, data = dt2)
 ```
-
