@@ -29,7 +29,9 @@ Get source code for this RMarkdown script [here](https://github.com/hauselin/rtu
 
 ## How to use `data.table` package to repeatedly fit a model to separate groups in a dataset
 
-Before the invention of multi-level models (aka linear mixed effects models), how did people analyze nested or repeated-measures data? They aggregated the data, used repeated-measures ANOVA, and did other things. One interesting approach is to repeatedly fit the same model to each group separately, and this approach seems to be first mentioned in this article [@Lorch]. If you have 10 data points per subject, you have nested data (data points nested within subjects), and you could fit 10 linear regressions, one for each subject. This approach is still quite useful, and I'll demonstrate how to do it easily with `data.table` and my `summaryh()` function from my `hausekeep` package. 
+Before the invention of multi-level models (aka linear mixed effects models), how did people analyze nested or repeated-measures data? They aggregated the data, used repeated-measures ANOVA, and did other things. 
+
+One interesting approach is to repeatedly fit the same model to each group separately, and this approach seems to be first mentioned in this article [@Lorch]. If you have 10 data points per subject, you have nested data (data points nested within subjects), and you could fit 10 linear regressions, one for each subject. This approach is still quite useful nowadays (I use it regularly in my research), and I'll demonstrate how to do it easily with `data.table` and my `summaryh()` function from my `hausekeep` package. 
 
 ```{r}
 # load packages
