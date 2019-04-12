@@ -1674,13 +1674,13 @@ tibble(x = seq(-0.5, 1.5, 0.01), y = logit(x)) %&gt;%
 <li>input range: 0 to 1</li>
 <li>output range:<span class="math inline">\(-\infty\)</span> to <span class="math inline">\(+\infty\)</span></li>
 </ul>
-<p>Now you should understand why they are “opposites” of each other!</p>
-<p>If you’re up for the challenge, work through the algebra, rearrange the terms in the inverse logit function to get the logit function, and vice versa! Solutions are provided below!</p>
+<p>Now you should understand why they are “opposites” of each other.</p>
+<p>If you’re up for the challenge, work through the algebra, rearrange the terms in the inverse logit function to get the logit function, and vice versa. Solutions are provided below.</p>
 <h2 id="understanding-logistic-regression">Understanding logistic regression</h2>
 <p>Now we know what the inverse logit and logit functions are, we can finally understand logistic regression. In the general linear model framework, we model y as a function of x using this equation: <span class="math inline">\(\hat{Y}=X \hat{\beta}\)</span></p>
 <p>In logistic regression, we apply the logistic function to get the probability of each <span class="math inline">\(y\)</span> value equals 1, <span class="math inline">\(P(y_i = 1)\)</span>.</p>
 <p><span class="math display">\[p=\frac{1}{1+e^{-X\beta}}\]</span></p>
-<p>And since the equation above can be expressed as <span class="math inline">\(X\beta=log(\frac{p}{1-p})\)</span>, we get the following:</p>
+<p>With a little bit of algebra and rearranging, you can express the equation above as the equation below:</p>
 <p><span class="math display">\[log(\frac{p}{1-p})=X\beta\]</span></p>
 <aside>
 See the section below on converting between inverse logit and logit if you want to see how to convert between these two equations (logit to inverse logit and vice versa).

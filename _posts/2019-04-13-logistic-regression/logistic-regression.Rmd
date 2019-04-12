@@ -282,9 +282,9 @@ The logit function maps inputs ranging from 0 to 1 and maps those inputs to valu
 * input range: 0 to 1
 * output range:$-\infty$ to $+\infty$
 
-Now you should understand why they are "opposites" of each other!
+Now you should understand why they are "opposites" of each other.
 
-If you're up for the challenge, work through the algebra, rearrange the terms in the inverse logit function to get the logit function, and vice versa! Solutions are provided below!
+If you're up for the challenge, work through the algebra, rearrange the terms in the inverse logit function to get the logit function, and vice versa. Solutions are provided below.
 
 ## Understanding logistic regression
 
@@ -294,7 +294,7 @@ In logistic regression, we apply the logistic function to get the probability of
 
 $$p=\frac{1}{1+e^{-X\beta}}$$
 
-And since the equation above can be expressed as $X\beta=log(\frac{p}{1-p})$, we get the following:
+With a little bit of algebra and rearranging, you can express the equation above as the equation below:
 
 $$log(\frac{p}{1-p})=X\beta$$
 
