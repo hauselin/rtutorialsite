@@ -1054,7 +1054,7 @@ coef(model_continuous_predictor)</code></pre>
 <li>-5.34: whenever <code>wt</code> increases by 1 (unit), <code>mpg</code> changes by this amount</li>
 <li>37.29: whenever <code>wt</code> is 0, <code>mpg</code> is this value (i.e., intercept: the value of <code>mpg</code> when <code>wt = 0</code>, of the value of the outcome variable when the predictor is 0)</li>
 </ul>
-<p>Note that in the data, <code>wt</code> only takes on values between 1 and 5, so the intercept of 37.29 is an extrapolation of the regression line to values that don’t exist in our data (see figure below).</p>
+<p>Note that in the data, <code>wt</code> only takes on values between 1 and 5, so the intercept of 37.29 is an extrapolation of the regression line to <code>wt</code> values that don’t exist in our data (see figure below).</p>
 <div class="layout-chunk" data-layout="l-body">
 <pre class="r"><code>
 ggplot(dt1, aes(wt, mpg)) +
@@ -1105,7 +1105,10 @@ coef(lm(mpg ~ vs, dt1))  # numeric predictor</code></pre>
 <li>7.94: whenever <code>vs_factor</code> increases by 1 (unit), <code>mpg</code> changes by this amount; here, when <code>vs = 0</code> is one categorical level/condition, and vs = 1 is the second categorical level/condition; thus this value refers to the difference in mean values between the two conditions</li>
 <li>16.62: whenever <code>vs_factor</code> is 0, <code>mpg</code> is this value (i.e., intercept: the value of y when x = 0); thus, the intercept is the mean of the values when <code>vs = 0</code>.</li>
 </ul>
-<p>To show you the interpretation of the coefficients are indeed correct, let’s compute the mean of the two conditions (<code>vs = 0</code>, <code>vs = 1</code>) and compute their difference.</p>
+<aside>
+The <code>vs_factor</code> coefficient name has a 1 at the end (<code>vs_factor1</code>). Why? R has coded the intercept as vs = 0 (i.e., <code>vs_factor0</code>) and vs = 1 as the next level (i.e., <code>vs_factor1</code>). Hence the coefficient in this model is the difference between the means of the two levels.
+</aside>
+<p>To show you the interpretation of the coefficients is indeed correct, let’s manually compute the mean of the two conditions (<code>vs = 0</code>, <code>vs = 1</code>) and compute their difference.</p>
 <div class="layout-chunk" data-layout="l-body">
 <pre class="r"><code>
 # compute mean mpg for each vs condition
@@ -1116,7 +1119,7 @@ vs_condition_means  </code></pre>
 1:  0       16.61667
 2:  1       24.55714</code></pre>
 </div>
-<p>The mean <code>mpg</code> value for the group <code>vs = 0</code> is the same as the intercept value from the regression above.</p>
+<p>The mean <code>mpg</code> value for the group <code>vs = 0</code> is the same as the intercept value from the regression above (16.62).</p>
 <div class="layout-chunk" data-layout="l-body">
 <pre class="r"><code>
 # compute difference in mpg value between vs conditions
@@ -1124,7 +1127,7 @@ vs_condition_means$mpg_group_mean[2] - vs_condition_means$mpg_group_mean[1]</cod
 <pre><code>
 [1] 7.940476</code></pre>
 </div>
-<p>The difference in mean <code>mpg</code> values between the two <code>vs</code> conditions is the same as the slope (beta coefficient) from the regression above.</p>
+<p>The difference in mean <code>mpg</code> values between the two <code>vs</code> conditions is the same as the slope (beta coefficient) from the regression above (7.94).</p>
 <div class="layout-chunk" data-layout="l-body">
 <pre class="r"><code>
 ggplot(dt1, aes(vs, mpg)) +
@@ -1169,11 +1172,11 @@ coef(lm(mpg ~ cyl_factor, dt1))  # factor predictor</code></pre>
 <p>Interpreting the coefficients in the model with the categorical predictor</p>
 <ul>
 <li><p>When we convert variables to factors or characters, <code>R</code> automatically represents the “smallest” condition (1 is smaller than 9; “a” is smaller than “b”) as the intercept. In other words, this condition is treated assigned the value 0 and all other conditions are assigned 1. That is, <code>R</code> by default uses “dummy coding”.</p></li>
-<li><p>26.66: whenever <code>cyl_factor</code> is 4 (or the “smallest” <code>cyl_factor</code> value in the dataset), <code>mpg</code> is this value (i.e., intercept); thus, the intercept is the mean of the values when <code>cyl_factor = 4</code>.</p></li>
+<li><p>26.66: when <code>cyl_factor</code> is 4 (or the “smallest” <code>cyl_factor</code> value in the dataset), <code>mpg</code> is this value (i.e., intercept); thus, the intercept is the mean of the values when <code>cyl_factor = 4</code>.</p></li>
 <li><p>-6.92: difference in mean <code>mpg</code> values between the conditions <code>cyl_factor = 4</code> and <code>cyl_factor = 6</code></p></li>
 <li><p>-11.56: difference in mean <code>mpg</code> values between the conditions <code>cyl_factor = 4</code> and <code>cyl_factor = 8</code></p></li>
 </ul>
-<p>To show you the interpretation of the coefficients are indeed correct, let’s compute the mean of the three conditions (<code>cyl_factor</code> is 4, 6, 8) and compute their differences.</p>
+<p>To show you the interpretation of the coefficients is indeed correct, let’s manually compute the mean of the three conditions (<code>cyl_factor</code> is 4, 6, 8) and compute their differences.</p>
 <div class="layout-chunk" data-layout="l-body">
 <pre class="r"><code>
 # compute mean mpg for each vs condition

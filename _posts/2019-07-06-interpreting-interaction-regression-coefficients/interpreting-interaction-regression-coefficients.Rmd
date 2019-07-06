@@ -58,7 +58,7 @@ coef(model_continuous_predictor)
 * `r round(coef(model_continuous_predictor)[2], 2)`: whenever `wt` increases by 1 (unit), `mpg` changes by this amount
 * `r round(coef(model_continuous_predictor)[1], 2)`: whenever `wt` is 0, `mpg` is this value (i.e., intercept: the value of `mpg` when `wt = 0`, of the value of the outcome variable when the predictor is 0)
 
-Note that in the data, `wt` only takes on values between 1 and 5, so the intercept of `r round(coef(model_continuous_predictor)[1], 2)` is an extrapolation of the regression line to values that don't exist in our data (see figure below). 
+Note that in the data, `wt` only takes on values between 1 and 5, so the intercept of `r round(coef(model_continuous_predictor)[1], 2)` is an extrapolation of the regression line to `wt` values that don't exist in our data (see figure below). 
 
 ```{r}
 ggplot(dt1, aes(wt, mpg)) +
@@ -91,7 +91,11 @@ coef(lm(mpg ~ vs, dt1))  # numeric predictor
 * `r round(coef(model_categorical_predictor)[2], 2)`: whenever `vs_factor` increases by 1 (unit), `mpg` changes by this amount; here, when `vs = 0` is one categorical level/condition, and vs = 1 is the second categorical level/condition; thus this value refers to the difference in mean values between the two conditions
 * `r round(coef(model_categorical_predictor)[1], 2)`: whenever `vs_factor` is 0, `mpg` is this value (i.e., intercept: the value of y when x = 0); thus, the intercept is the mean of the values when `vs = 0`. 
 
-To show you the interpretation of the coefficients are indeed correct, let's compute the mean of the two conditions (`vs = 0`, `vs = 1`) and compute their difference.
+<aside>
+The `vs_factor` coefficient name has a 1 at the end (`vs_factor1`). Why? R has coded the intercept as vs = 0 (i.e., `vs_factor0`) and vs = 1 as the next level (i.e., `vs_factor1`). Hence the coefficient in this model is the difference between the means of the two levels. 
+</aside>
+
+To show you the interpretation of the coefficients is indeed correct, let's manually compute the mean of the two conditions (`vs = 0`, `vs = 1`) and compute their difference.
 
 ```{r}
 # compute mean mpg for each vs condition
@@ -99,14 +103,14 @@ vs_condition_means <- dt1[, .(mpg_group_mean = mean(mpg)), keyby = vs]
 vs_condition_means  
 ```
 
-The mean `mpg` value for the group `vs = 0` is the same as the intercept value from the regression above.
+The mean `mpg` value for the group `vs = 0` is the same as the intercept value from the regression above (`r round(vs_condition_means$mpg_group_mean[1], 2)`).
 
 ```{r}
 # compute difference in mpg value between vs conditions
 vs_condition_means$mpg_group_mean[2] - vs_condition_means$mpg_group_mean[1]
 ```
 
-The difference in mean `mpg` values between the two `vs` conditions is the same as the slope (beta coefficient) from the regression above.
+The difference in mean `mpg` values between the two `vs` conditions is the same as the slope (beta coefficient) from the regression above (`r round(coef(model_categorical_predictor)[2], 2)`).
 
 ```{r}
 ggplot(dt1, aes(vs, mpg)) +
@@ -135,13 +139,13 @@ Interpreting the coefficients in the model with the categorical predictor
 
 * When we convert variables to factors or characters, `R` automatically represents the "smallest" condition (1 is smaller than 9; "a" is smaller than "b") as the intercept. In other words, this condition is treated assigned the value 0 and all other conditions are assigned 1. That is, `R` by default uses "dummy coding". 
 
-* `r round(coef(model_categorical_predictor_3)[1], 2)`: whenever `cyl_factor` is 4 (or the "smallest" `cyl_factor` value in the dataset), `mpg` is this value (i.e., intercept); thus, the intercept is the mean of the values when `cyl_factor = 4`. 
+* `r round(coef(model_categorical_predictor_3)[1], 2)`: when `cyl_factor` is 4 (or the "smallest" `cyl_factor` value in the dataset), `mpg` is this value (i.e., intercept); thus, the intercept is the mean of the values when `cyl_factor = 4`. 
 
 * `r round(coef(model_categorical_predictor_3)[2], 2)`: difference in mean `mpg` values between the conditions `cyl_factor = 4` and `cyl_factor = 6`
 
 * `r round(coef(model_categorical_predictor_3)[3], 2)`: difference in mean `mpg` values between the conditions `cyl_factor = 4` and `cyl_factor = 8`
 
-To show you the interpretation of the coefficients are indeed correct, let's compute the mean of the three conditions (`cyl_factor` is 4, 6, 8) and compute their differences.
+To show you the interpretation of the coefficients is indeed correct, let's manually compute the mean of the three conditions (`cyl_factor` is 4, 6, 8) and compute their differences.
 
 ```{r}
 # compute mean mpg for each vs condition
@@ -190,7 +194,7 @@ Fit linear models (`mpg ~ disp`) separately for `vs_factor = 0` and `vs_factor =
 
 ```{r}
 model_mpg_disp_vs0 <- lm(mpg ~ disp, data = dt1[vs_factor == 0])  # blue line in figure below
-model_mpg_disp_vs1 <- lm(mpg ~ disp, data = dt1[vs_factor == 1])  # orange line in figure belows
+model_mpg_disp_vs1 <- lm(mpg ~ disp, data = dt1[vs_factor == 1])  # orange line in figure below
 ```
 
 Check the coefficeints of `disp` for these two models
