@@ -1,5 +1,5 @@
 ---
-title: "Interpreting interaction regression coefficients"
+title: "Interpreting regression coefficients (including interaction coefficients)"
 description: |
   A short tutorial on how to interpreting regression coefficients, including interaction coefficients.
 author:
