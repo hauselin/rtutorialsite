@@ -1,0 +1,260 @@
+---
+title: "Interpreting interaction regression coefficients"
+description: |
+  A short tutorial on how to interpreting regression coefficients, including interaction coefficients.
+author:
+  - name: Hause Lin
+    url: {}
+date: 07-06-2019
+categories: 
+  - regression
+  - general linear model
+output:
+  radix::radix_article:
+    toc: true
+    self_contained: false
+draft: false
+repository_url: https://github.com/hauselin/rtutorialsite/blob/master/_posts/2019-04-13-logistic-regression/logistic-regression.Rmd
+editor_options: 
+  chunk_output_type: console
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, cache = FALSE, comment = NA, message = FALSE, warning = FALSE)
+```
+
+Get source code for this RMarkdown script [here](https://github.com/hauselin/rtutorialsite/blob/master/_posts/2019-04-13-logistic-regression/logistic-regression.Rmd).
+
+This tutorial provides a step-by-step introduction to interpreting regression coefficients in linear models. I will use the built-in dataset `mtcars`. 
+
+General guidelines for interpreting regression coefficients
+
+* intercept coefficient term (b0): the value of the outcome variable when all predictors = 0
+* all other non-interaction coefficients: the change in the outcome variable when the predictor increases by 1
+* interaction coefficients: the change in **coefficient** value when one predictor increases by 1
+
+```{r}
+library(data.table)  # to manipulate dataframes
+library(interactions)  # to plot interactions later on
+library(ggplot2)
+```
+
+Have a look at the `mtcars` dataset.
+
+```{r}
+dt1 <- as.data.table(mtcars)  # convert to datatable
+dt1
+```
+
+## Linear regression with one continuous predictor
+
+```{r}
+head(dt1)  # check data
+model_continuous_predictor <- lm(mpg ~ wt, dt1)
+# summary(model_continuous_predictor)
+coef(model_continuous_predictor)
+```
+
+* `r round(coef(model_continuous_predictor)[2], 2)`: whenever `wt` increases by 1 (unit), `mpg` increase by this amount
+* `r round(coef(model_continuous_predictor)[1], 2)`: whenever `wt` is 0, `mpg` is this value (i.e., intercept: the value of `mpg` when `wt = 0`, of the value of the outcome variable when the predictor is 0)
+
+Note that in the data, `wt` only takes on values between 1 and 5, so the intercept of `r round(coef(model_continuous_predictor)[1], 2)` is an extrapolation of the regression line to values that don't exist in our data (see figure below). 
+
+```{r}
+ggplot(dt1, aes(wt, mpg)) +
+  geom_vline(xintercept = 0) +
+  geom_point() +
+  geom_smooth(method = 'lm', formula = y ~ poly(x, 1), fullrange = TRUE) +
+  scale_x_continuous(limits = c(-1, 7), breaks = -1:7) +
+  annotate("text", x = 1.7, y = coef(model_continuous_predictor)[1] + 2,
+           label = paste0(round(coef(model_continuous_predictor)[1], 2), " (intercept)"),
+           size = 6)
+```
+
+## Linear regression with one categorical predictor (two levels)
+
+```{r}
+head(dt1)  # check data (vs is a binary variable with just 0 and 1)
+dt1[, vs_factor := as.factor(vs)]  # turn vs into a factor
+model_categorical_predictor <- lm(mpg ~ vs_factor, dt1)
+# summary(model_categorical_predictor)
+coef(model_categorical_predictor)
+```
+
+When the categorical predictor has only two levels (coded 0 and 1), we can use the numeric variable as the predictor. We'll get the same results as above. 
+
+```{r}
+coef(lm(mpg ~ vs_factor, dt1))  # factor predictor
+coef(lm(mpg ~ vs, dt1))  # numeric predictor
+```
+
+* `r round(coef(model_categorical_predictor)[2], 2)`: whenever `vs_factor` increases by 1 (unit), `mpg` increase by this amount; here, when `vs = 0` is one categorical level/condition, and vs = 1 is the second categorical level/condition; thus this value refers to the difference in mean values between the two conditions
+* `r round(coef(model_categorical_predictor)[1], 2)`: whenever `vs_factor` is 0, `mpg` is this value (i.e., intercept: the value of y when x = 0); thus, the intercept is the mean of the values when `vs = 0`. 
+
+To show you the interpretation of the coefficients are indeed correct, let's compute the mean of the two conditions (`vs = 0`, `vs = 1`) and compute their difference.
+
+```{r}
+# compute mean mpg for each vs condition
+vs_condition_means <- dt1[, .(mpg_group_mean = mean(mpg)), keyby = vs]
+vs_condition_means  
+```
+
+The mean `mpg` value for the group `vs = 0` is the same as the intercept value from the regression above.
+
+```{r}
+# compute difference in mpg value between vs conditions
+vs_condition_means$mpg_group_mean[2] - vs_condition_means$mpg_group_mean[1]
+```
+
+The difference in mean `mpg` values between the two `vs` conditions is the same as the slope (beta coefficient) from the regression above.
+
+```{r}
+ggplot(dt1, aes(vs, mpg)) +
+  geom_point() +
+  geom_smooth(method = 'lm', formula = y ~ poly(x, 1), fullrange = TRUE)
+```
+
+## Linear regression with one categorial predictor (three levels)
+
+```{r}
+head(dt1)  # check data (cyl is a categorical predictor with 3 levels)
+dt1[, cyl_factor := as.factor(cyl)]  # turn cyl into a factor
+model_categorical_predictor_3 <- lm(mpg ~ cyl_factor, dt1)
+# summary(model_categorical_predictor_3)
+coef(model_categorical_predictor_3)
+```
+
+When the categorical predictor has three or more levels, we can't use the numeric variable as the predictor because the coefficients will be different. 
+
+```{r}
+coef(lm(mpg ~ cyl, dt1))  # numeric predictor
+coef(lm(mpg ~ cyl_factor, dt1))  # factor predictor
+```
+
+Interpreting the coefficients in the model with the categorical predictor
+
+* When we convert variables to factors or characters, `R` automatically represents the "smallest" condition (1 is smaller than 9; "a" is smaller than "b") as the intercept. In other words, this condition is treated assigned the value 0 and all other conditions are assigned 1. That is, `R` by default uses "dummy coding". 
+
+* `r round(coef(model_categorical_predictor_3)[1], 2)`: whenever `cyl_factor` is 4 (or the "smallest" `cyl_factor` value in the dataset), `mpg` is this value (i.e., intercept); thus, the intercept is the mean of the values when `cyl_factor = 4`. 
+
+* `r round(coef(model_categorical_predictor_3)[2], 2)`: difference in mean `mpg` values between the conditions `cyl_factor = 4` and `cyl_factor = 6`
+
+* `r round(coef(model_categorical_predictor_3)[3], 2)`: difference in mean `mpg` values between the conditions `cyl_factor = 4` and `cyl_factor = 8`
+
+To show you the interpretation of the coefficients are indeed correct, let's compute the mean of the three conditions (`cyl_factor` is 4, 6, 8) and compute their differences.
+
+```{r}
+# compute mean mpg for each vs condition
+cyl_condition_means <- dt1[, .(mpg_group_mean = mean(mpg)), keyby = cyl_factor]
+cyl_condition_means  
+```
+
+The mean `mpg` value for the group `cyl_factor = 4` is the same as the intercept value from the regression above.
+
+```{r}
+# compute difference in mpg value between cyl = 6 and cyl = 4
+cyl_condition_means$mpg_group_mean[2] - cyl_condition_means$mpg_group_mean[1]
+coef(model_categorical_predictor_3)[2]  # beta coefficient
+```
+
+```{r}
+# compute difference in mpg value between cyl = 8 and cyl = 4
+cyl_condition_means$mpg_group_mean[3] - cyl_condition_means$mpg_group_mean[1]
+coef(model_categorical_predictor_3)[3]  # beta coefficient
+```
+
+```{r}
+ggplot(dt1, aes(cyl, mpg)) +
+  geom_point() +
+  geom_smooth(method = 'lm', formula = y ~ poly(x, 1), fullrange = TRUE)
+```
+
+When fitting the regression model, `R` uses dummy coding by default. Hence, the condition `cyl = 4` is actually assigned 0 (and thus is the intercept). 
+
+## Linear regression with continuous predictor, categorical predictor (two levels), and their interaction
+
+Let's fit a regression model that includes an interaction term.
+
+```{r}
+model_interaction1 <- lm(mpg ~ disp * vs_factor, data = dt1)
+coef(model_interaction1)
+```
+
+How do we interpret the interaction coefficient? 
+
+For every 1 unit increase in `vs_factor` (coded 0 and 1), the **coefficient** of `disp` changes by `r round(coef(model_interaction1), 3)[4]`. READ THAT SENTENCE AGAIN TO SLOWLY DIGEST IT! It's the change in the **COEFFICIENT** of `disp` when `vs_factor` increases by 1 (unit).
+
+Let's fit separate models for the two `vs_factor` conditions to verify the statement/interpretation above.
+
+Fit linear models (`mpg ~ disp`) separately for `vs_factor = 0` and `vs_factor = 1`.
+
+```{r}
+model_mpg_disp_vs0 <- lm(mpg ~ disp, data = dt1[vs_factor == 0])  # blue line in figure below
+model_mpg_disp_vs1 <- lm(mpg ~ disp, data = dt1[vs_factor == 1])  # orange line in figure belows
+```
+
+Check the coefficeints of `disp` for these two models
+
+```{r}
+coef(model_mpg_disp_vs0)
+coef(model_mpg_disp_vs1)
+```
+
+Here's a reminder (again) of how to interpret the `disp * vs_factor` interaction coefficient in the interaction model (`mpg ~ disp * vs_factor`): For every 1 unit increase in `vs_factor` (coded 0 and 1), the **coefficient** of `disp` changes by `r round(coef(model_interaction1), 3)[4]`. Or the change in the **COEFFICIENT** of `disp` when `vs_factor` increases by 1 (unit).
+
+Let's compute the difference of the `disp` coefficients in the two models above (where `vs` is 0 and 1).
+
+```{r}
+coef(model_mpg_disp_vs1)['disp'] - coef(model_mpg_disp_vs0)['disp']
+```
+
+The difference in the `disp` coefficients (`r round(coef(model_mpg_disp_vs1)['disp'] - coef(model_mpg_disp_vs0)['disp'], 3)`) in the two models (where `vs_factor` is 1 or 0) is identical to the interaction coefficient (`disp * factor`: `r round(coef(model_interaction1), 3)[4]`) in the `model_interaction1` model.
+
+In other words, the interaction coefficient is the difference between the values of the two slopes (i.e., coefficients) (see figure below). 
+
+* `mpg ~ disp` when `vs_factor = 0`: `disp` coefficient is `r round(coef(model_mpg_disp_vs0)['disp'], 3)`
+* `mpg ~ disp` when `vs_factor = 1`: `disp` coefficient is `r round(coef(model_mpg_disp_vs1)['disp'], 3)`
+* The slope (i.e., coefficient) of `disp` in the `mpg ~ disp` model is more negative (by `disp * factor`: `r round(coef(model_interaction1), 3)[4]`) when `vs_factor = 1` than when `vs_factor = 0`.
+
+```{r}
+interact_plot(model_interaction1, pred = disp, modx = vs_factor)
+```
+
+## Linear regression with two continuous predictors and their interaction
+
+You can interpret the interaction coefficients in all models (continuous or categorical variables) the same way.
+
+```{r}
+model_interaction2 <- lm(mpg ~ disp * wt, data = dt1)  # all continuous predictors
+coef(model_interaction2)
+```
+
+* `disp:wt` = `r round(coef(model_interaction2)['disp:wt'], 3)`: the change in the **coefficient** of `disp` when `wt` increases by 1 unit (or the change in the **coefficient** of `wt` when `disp` increases by 1 unit)
+
+When all predictors are continuous variables, the convention is to plot the effect of one regressor at different levels (+/- 1 SD and mean value) of the other regressor.
+
+```{r}
+interact_plot(model_interaction2, pred = wt, modx = disp)
+```
+
+```{r}
+interact_plot(model_interaction2, pred = disp, modx = wt)
+```
+
+## Linear regression with three- or four-way interactions
+
+No matter how complicated your interaction terms are (3 or 4 or 10-way interactions), you interpret the coefficients the same way!
+
+```{r}
+model_interaction4 <- lm(mpg ~ disp * wt * qsec * drat, data = dt1)  # all continuous predictors
+coef(model_interaction4)["disp:wt:qsec:drat"]  # the 4-way interaction
+```
+
+There are many ways to interpret the coefficient `disp:wt:qsec:drat` = `r round(coef(model_interaction4)["disp:wt:qsec:drat"], 2)`:
+
+* when `disp` increases by 1, the `wt:qsec:drat` coefficient (slope) changes by `r round(coef(model_interaction4)["disp:wt:qsec:drat"], 2)`
+* when `wt` increases by 1, the `disp:qsec:drat` coefficient (slope) changes by `r round(coef(model_interaction4)["disp:wt:qsec:drat"], 2)`
+* when `qsec` increases by 1, the `disp:wt:drat` coefficient (slope) changes by `r round(coef(model_interaction4)["disp:wt:qsec:drat"], 2)`
+* when `drat` increases by 1, the `disp:wt:qsec` coefficient (slope) changes by `r round(coef(model_interaction4)["disp:wt:qsec:drat"], 2)`
+
+You can also interpret the three- or two-way interactions in the same model in the same way. You get it...

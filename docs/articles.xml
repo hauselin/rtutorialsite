@@ -7,7 +7,16 @@
     <description>Data science and analysis tutorials
 </description>
     <generator>Radix</generator>
-    <lastBuildDate>Sat, 13 Apr 2019 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Sat, 06 Jul 2019 00:00:00 +0000</lastBuildDate>
+    <item>
+      <title>Interpreting interaction regression coefficients</title>
+      <dc:creator>Hause Lin</dc:creator>
+      <link>https://hausetutorials.netlify.com/posts/2019-07-06-interpreting-interaction-regression-coefficients</link>
+      <description>A short tutorial on how to interpreting regression coefficients, including interaction coefficients.</description>
+      <guid>https://hausetutorials.netlify.com/posts/2019-07-06-interpreting-interaction-regression-coefficients</guid>
+      <pubDate>Sat, 06 Jul 2019 00:00:00 +0000</pubDate>
+      <media:content url="https://hausetutorials.netlify.com/posts/2019-07-06-interpreting-interaction-regression-coefficients/interpreting-interaction-regression-coefficients_files/figure-html5/unnamed-chunk-4-1.png" medium="image" type="image/png" width="1248" height="768"/>
+    </item>
     <item>
       <title>Gentle intro to logistic regression</title>
       <dc:creator>Hause Lin</dc:creator>
@@ -59,7 +68,7 @@
       <link>https://hausetutorials.netlify.com/posts/2019-02-18-fit-models-to-every-group</link>
       <description>What is complete pooling, no-pooling, and partial pooling, and how to use data.table for no-pooling models (fit the same model, but separately to each group)</description>
       <guid>https://hausetutorials.netlify.com/posts/2019-02-18-fit-models-to-every-group</guid>
-      <pubDate>Sun, 17 Feb 2019 00:00:00 +0000</pubDate>
+      <pubDate>Mon, 18 Feb 2019 00:00:00 +0000</pubDate>
     </item>
   </channel>
 </rss>

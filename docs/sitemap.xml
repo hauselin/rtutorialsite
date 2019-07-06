@@ -2,35 +2,39 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd" version="1.0">
   <url>
     <loc>https://hausetutorials.netlify.com/0000_install.html</loc>
-    <lastmod>2019-02-19T01:38:18+01:00</lastmod>
+    <lastmod>2019-02-18T19:38:18-05:00</lastmod>
   </url>
   <url>
     <loc>https://hausetutorials.netlify.com/0001_rbasics.html</loc>
-    <lastmod>2019-02-19T04:52:30+01:00</lastmod>
+    <lastmod>2019-02-18T22:52:30-05:00</lastmod>
   </url>
   <url>
     <loc>https://hausetutorials.netlify.com/0002_tidyverse_datatable.html</loc>
-    <lastmod>2019-04-12T18:22:47+02:00</lastmod>
+    <lastmod>2019-04-12T12:22:47-04:00</lastmod>
   </url>
   <url>
     <loc>https://hausetutorials.netlify.com/0003_ggplot_modelfitting.html</loc>
-    <lastmod>2019-03-03T17:30:24+01:00</lastmod>
+    <lastmod>2019-03-03T11:30:24-05:00</lastmod>
   </url>
   <url>
     <loc>https://hausetutorials.netlify.com/0004_dataform_join.html</loc>
-    <lastmod>2019-03-03T17:26:44+01:00</lastmod>
+    <lastmod>2019-03-03T11:26:44-05:00</lastmod>
   </url>
   <url>
     <loc>https://hausetutorials.netlify.com/articles.html</loc>
-    <lastmod>2019-02-18T23:40:47+01:00</lastmod>
+    <lastmod>2019-02-18T17:40:47-05:00</lastmod>
   </url>
   <url>
     <loc>https://hausetutorials.netlify.com/</loc>
-    <lastmod>2019-04-12T17:49:54+02:00</lastmod>
+    <lastmod>2019-04-12T11:49:54-04:00</lastmod>
   </url>
   <url>
     <loc>https://hausetutorials.netlify.com/README.html</loc>
-    <lastmod>2019-02-18T19:42:22+01:00</lastmod>
+    <lastmod>2019-02-18T13:42:22-05:00</lastmod>
+  </url>
+  <url>
+    <loc>https://hausetutorials.netlify.com/posts/2019-07-06-interpreting-interaction-regression-coefficients/</loc>
+    <lastmod>2019-07-06T19:26:08-04:00</lastmod>
   </url>
   <url>
     <loc>https://hausetutorials.netlify.com/posts/2019-04-13-logistic-regression/</loc>
