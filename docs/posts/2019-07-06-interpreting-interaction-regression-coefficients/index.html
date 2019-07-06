@@ -1391,7 +1391,7 @@ Tutorials
 <ul>
 <li>intercept coefficient term (b0): the value of the outcome variable when all predictors = 0</li>
 <li>all other non-interaction coefficients: the change in the outcome variable when the predictor increases by 1</li>
-<li>interaction coefficients: the change in <strong>coefficient</strong> value when one predictor increases by 1</li>
+<li>interaction coefficients: the change in a <strong>coefficient</strong> value when one predictor increases by 1</li>
 </ul>
 <div class="layout-chunk" data-layout="l-body">
 <pre class="r"><code>
@@ -1461,7 +1461,7 @@ coef(model_continuous_predictor)</code></pre>
   37.285126   -5.344472 </code></pre>
 </div>
 <ul>
-<li>-5.34: whenever <code>wt</code> increases by 1 (unit), <code>mpg</code> increase by this amount</li>
+<li>-5.34: whenever <code>wt</code> increases by 1 (unit), <code>mpg</code> changes by this amount</li>
 <li>37.29: whenever <code>wt</code> is 0, <code>mpg</code> is this value (i.e., intercept: the value of <code>mpg</code> when <code>wt = 0</code>, of the value of the outcome variable when the predictor is 0)</li>
 </ul>
 <p>Note that in the data, <code>wt</code> only takes on values between 1 and 5, so the intercept of 37.29 is an extrapolation of the regression line to values that don’t exist in our data (see figure below).</p>
@@ -1512,7 +1512,7 @@ coef(lm(mpg ~ vs, dt1))  # numeric predictor</code></pre>
   16.616667    7.940476 </code></pre>
 </div>
 <ul>
-<li>7.94: whenever <code>vs_factor</code> increases by 1 (unit), <code>mpg</code> increase by this amount; here, when <code>vs = 0</code> is one categorical level/condition, and vs = 1 is the second categorical level/condition; thus this value refers to the difference in mean values between the two conditions</li>
+<li>7.94: whenever <code>vs_factor</code> increases by 1 (unit), <code>mpg</code> changes by this amount; here, when <code>vs = 0</code> is one categorical level/condition, and vs = 1 is the second categorical level/condition; thus this value refers to the difference in mean values between the two conditions</li>
 <li>16.62: whenever <code>vs_factor</code> is 0, <code>mpg</code> is this value (i.e., intercept: the value of y when x = 0); thus, the intercept is the mean of the values when <code>vs = 0</code>.</li>
 </ul>
 <p>To show you the interpretation of the coefficients are indeed correct, let’s compute the mean of the two conditions (<code>vs = 0</code>, <code>vs = 1</code>) and compute their difference.</p>
@@ -1692,7 +1692,7 @@ coef(model_interaction2)</code></pre>
 44.08199770 -0.05635816 -6.49567966  0.01170542 </code></pre>
 </div>
 <ul>
-<li><code>disp:wt</code> = 0.012: the change in the <strong>coefficient</strong> of <code>disp</code> when <code>wt</code> increases by 1 unit (or the change in the <strong>coefficient</strong> of <code>wt</code> when <code>disp</code> increases by 1 unit)</li>
+<li><code>disp:wt</code> = 0.012: the change in the <strong>coefficient</strong> of <code>disp</code> when <code>wt</code> increases by 1 unit (or the reverse is also fine: the change in the <strong>coefficient</strong> of <code>wt</code> when <code>disp</code> increases by 1 unit)</li>
 </ul>
 <p>When all predictors are continuous variables, the convention is to plot the effect of one regressor at different levels (+/- 1 SD and mean value) of the other regressor.</p>
 <div class="layout-chunk" data-layout="l-body">

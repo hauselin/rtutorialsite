@@ -31,7 +31,7 @@ General guidelines for interpreting regression coefficients
 
 * intercept coefficient term (b0): the value of the outcome variable when all predictors = 0
 * all other non-interaction coefficients: the change in the outcome variable when the predictor increases by 1
-* interaction coefficients: the change in **coefficient** value when one predictor increases by 1
+* interaction coefficients: the change in a **coefficient** value when one predictor increases by 1
 
 ```{r}
 library(data.table)  # to manipulate dataframes
@@ -55,7 +55,7 @@ model_continuous_predictor <- lm(mpg ~ wt, dt1)
 coef(model_continuous_predictor)
 ```
 
-* `r round(coef(model_continuous_predictor)[2], 2)`: whenever `wt` increases by 1 (unit), `mpg` increase by this amount
+* `r round(coef(model_continuous_predictor)[2], 2)`: whenever `wt` increases by 1 (unit), `mpg` changes by this amount
 * `r round(coef(model_continuous_predictor)[1], 2)`: whenever `wt` is 0, `mpg` is this value (i.e., intercept: the value of `mpg` when `wt = 0`, of the value of the outcome variable when the predictor is 0)
 
 Note that in the data, `wt` only takes on values between 1 and 5, so the intercept of `r round(coef(model_continuous_predictor)[1], 2)` is an extrapolation of the regression line to values that don't exist in our data (see figure below). 
@@ -88,7 +88,7 @@ coef(lm(mpg ~ vs_factor, dt1))  # factor predictor
 coef(lm(mpg ~ vs, dt1))  # numeric predictor
 ```
 
-* `r round(coef(model_categorical_predictor)[2], 2)`: whenever `vs_factor` increases by 1 (unit), `mpg` increase by this amount; here, when `vs = 0` is one categorical level/condition, and vs = 1 is the second categorical level/condition; thus this value refers to the difference in mean values between the two conditions
+* `r round(coef(model_categorical_predictor)[2], 2)`: whenever `vs_factor` increases by 1 (unit), `mpg` changes by this amount; here, when `vs = 0` is one categorical level/condition, and vs = 1 is the second categorical level/condition; thus this value refers to the difference in mean values between the two conditions
 * `r round(coef(model_categorical_predictor)[1], 2)`: whenever `vs_factor` is 0, `mpg` is this value (i.e., intercept: the value of y when x = 0); thus, the intercept is the mean of the values when `vs = 0`. 
 
 To show you the interpretation of the coefficients are indeed correct, let's compute the mean of the two conditions (`vs = 0`, `vs = 1`) and compute their difference.
@@ -229,7 +229,7 @@ model_interaction2 <- lm(mpg ~ disp * wt, data = dt1)  # all continuous predicto
 coef(model_interaction2)
 ```
 
-* `disp:wt` = `r round(coef(model_interaction2)['disp:wt'], 3)`: the change in the **coefficient** of `disp` when `wt` increases by 1 unit (or the change in the **coefficient** of `wt` when `disp` increases by 1 unit)
+* `disp:wt` = `r round(coef(model_interaction2)['disp:wt'], 3)`: the change in the **coefficient** of `disp` when `wt` increases by 1 unit (or the reverse is also fine: the change in the **coefficient** of `wt` when `disp` increases by 1 unit)
 
 When all predictors are continuous variables, the convention is to plot the effect of one regressor at different levels (+/- 1 SD and mean value) of the other regressor.
 
