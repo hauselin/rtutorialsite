@@ -14,7 +14,7 @@ output:
     toc: true
     self_contained: false
 draft: false
-repository_url: https://github.com/hauselin/rtutorialsite/blob/master/_posts/2019-04-13-logistic-regression/logistic-regression.Rmd
+repository_url: https://github.com/hauselin/rtutorialsite/blob/master/_posts/2019-07-06-interpreting-interaction-regression-coefficients/interpreting-interaction-regression-coefficients.Rmd
 editor_options: 
   chunk_output_type: console
 ---
@@ -23,7 +23,7 @@ editor_options:
 knitr::opts_chunk$set(echo = TRUE, cache = FALSE, comment = NA, message = FALSE, warning = FALSE)
 ```
 
-Get source code for this RMarkdown script [here](https://github.com/hauselin/rtutorialsite/blob/master/_posts/2019-04-13-logistic-regression/logistic-regression.Rmd).
+Get source code for this RMarkdown script [here](https://github.com/hauselin/rtutorialsite/blob/master/_posts/2019-07-06-interpreting-interaction-regression-coefficients/interpreting-interaction-regression-coefficients.Rmd).
 
 This tutorial provides a step-by-step introduction to interpreting regression coefficients in linear models. I will use the built-in dataset `mtcars`. 
 
