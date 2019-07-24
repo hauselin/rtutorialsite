@@ -54,7 +54,7 @@ coef1
 
 Regression equation: 
 
-$$mpg = 29.59 - 0.04*disp_{i}$$
+$$mpg_{i} = 29.59 - 0.04*disp_{i}$$
 
 Interpretation
 
@@ -87,7 +87,7 @@ Note that after setting the intercept to 0, the relationship between `mpg` and `
 
 Regression equation: 
 
-$$mpg = 0 + 0.059*disp_{i}$$
+$$mpg_{i} = 0 + 0.059*disp_{i}$$
 
 Interpretation
 
