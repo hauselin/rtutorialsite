@@ -66,7 +66,7 @@ $$mpg = 29.59 - 0.04*0$$
 
 $$mpg = 29.59$$
 
-```{r}
+```{r fig1}
 ggplot(mtcars, aes(disp, mpg)) +
   geom_point() +
   geom_vline(xintercept = 0, col = 'grey') +
@@ -93,7 +93,7 @@ $$mpg_{i} = 0 + 0.059*disp_{i}$$
 Interpretation
 
 * For every 1 unit increase in the predictor `disp`, the outcome `mpg` changes by 0.059. That is, as `disp` increases, `mpg` **increases**. 
-* When `disp = 0`, `mpg = 0`. **By setting removing the intercept (i.e., setting it to 0), we are forcing the regression line to go through the origin (the point where disp = 0 and mpg = 0).**
+* When `disp = 0`, `mpg = 0`. **By removing the intercept (i.e., setting it to 0), we are forcing the regression line to go through the origin (the point where disp = 0 and mpg = 0).**
 
 $$mpg = 0 + 0.059*0$$
 
@@ -113,6 +113,8 @@ ggplot(mtcars, aes(disp, mpg)) +
 
 ## Fit simple regression models with mean-centered regressor
 
+Mean-center regressor
+
 ```{r}
 mtcars$dispC <- mtcars$disp - mean(mtcars$disp) # create mean-centered variable
 mean(mtcars$dispC) # mean of dispC is 0 (with some rounding error)
@@ -129,14 +131,14 @@ coef(model1c)
 The intercept is now the the mean of outcome variable `mpg`. Check it by running `mean(mtcars$mpg)`.
 </aside>
 
-Fit model **without** intercept and mean-centered regressor
+Fit model **without** intercept and with mean-centered regressor
 
 ```{r}
 model0c <- lm(mpg ~ 0 + dispC, mtcars)
 coef(model0c)
 ```
 
-After mean-centering the regressor/predictor, fitting the model with or without the intercept gives the same coefficient for `dispC`: -0.04
+After mean-centering the regressor/predictor, fitting the model with or without the intercept gives the same `dispC` coefficient: -0.04
 
 ```{r}
 ggplot(mtcars, aes(dispC, mpg)) +
@@ -147,6 +149,8 @@ ggplot(mtcars, aes(dispC, mpg)) +
   scale_y_continuous(limits = c(-10, max(mtcars$mpg))) +
   geom_abline(intercept = coef(model1c)[1], slope = coef(model1c)[2]) 
 ```
+
+Note that the regression slope is identical to the first figure. The only difference is that the points have been shifted to the left. 
 
 ## Additional resources
 

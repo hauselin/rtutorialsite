@@ -49,7 +49,7 @@
   <!--/radix_placeholder_rmarkdown_metadata-->
   
   <script type="text/json" id="radix-resource-manifest">
-  {"type":"character","attributes":{},"value":["what-happens-when-you-remove-or-set-the-intercept-to-0-in-regression-models_files/bowser-1.9.3/bowser.min.js","what-happens-when-you-remove-or-set-the-intercept-to-0-in-regression-models_files/distill-2.2.21/template.v2.js","what-happens-when-you-remove-or-set-the-intercept-to-0-in-regression-models_files/figure-html5/unnamed-chunk-10-1.png","what-happens-when-you-remove-or-set-the-intercept-to-0-in-regression-models_files/figure-html5/unnamed-chunk-4-1.png","what-happens-when-you-remove-or-set-the-intercept-to-0-in-regression-models_files/figure-html5/unnamed-chunk-6-1.png","what-happens-when-you-remove-or-set-the-intercept-to-0-in-regression-models_files/jquery-1.11.3/jquery.min.js","what-happens-when-you-remove-or-set-the-intercept-to-0-in-regression-models_files/webcomponents-2.0.0/webcomponents.js"]}
+  {"type":"character","attributes":{},"value":["what-happens-when-you-remove-or-set-the-intercept-to-0-in-regression-models_files/bowser-1.9.3/bowser.min.js","what-happens-when-you-remove-or-set-the-intercept-to-0-in-regression-models_files/distill-2.2.21/template.v2.js","what-happens-when-you-remove-or-set-the-intercept-to-0-in-regression-models_files/figure-html5/fig1-1.png","what-happens-when-you-remove-or-set-the-intercept-to-0-in-regression-models_files/figure-html5/unnamed-chunk-10-1.png","what-happens-when-you-remove-or-set-the-intercept-to-0-in-regression-models_files/figure-html5/unnamed-chunk-4-1.png","what-happens-when-you-remove-or-set-the-intercept-to-0-in-regression-models_files/figure-html5/unnamed-chunk-5-1.png","what-happens-when-you-remove-or-set-the-intercept-to-0-in-regression-models_files/figure-html5/unnamed-chunk-6-1.png","what-happens-when-you-remove-or-set-the-intercept-to-0-in-regression-models_files/figure-html5/unnamed-chunk-9-1.png","what-happens-when-you-remove-or-set-the-intercept-to-0-in-regression-models_files/jquery-1.11.3/jquery.min.js","what-happens-when-you-remove-or-set-the-intercept-to-0-in-regression-models_files/webcomponents-2.0.0/webcomponents.js"]}
   </script>
   <!--radix_placeholder_navigation_in_header-->
   <!--/radix_placeholder_navigation_in_header-->
@@ -1027,7 +1027,7 @@ ggplot(mtcars, aes(disp, mpg)) +
   scale_x_continuous(limits = c(-10, max(mtcars$disp))) +
   scale_y_continuous(limits = c(-10, max(mtcars$mpg))) +
   geom_abline(intercept = coef(model1)[1], slope = coef(model1)[2]) # manually plot regression line</code></pre>
-<p><img src="what-happens-when-you-remove-or-set-the-intercept-to-0-in-regression-models_files/figure-html5/unnamed-chunk-4-1.png" width="624" /></p>
+<p><img src="what-happens-when-you-remove-or-set-the-intercept-to-0-in-regression-models_files/figure-html5/fig1-1.png" width="624" /></p>
 </div>
 <h2 id="fit-simple-regression-model-without-intercept">Fit simple regression model without intercept</h2>
 <div class="layout-chunk" data-layout="l-body">
@@ -1045,7 +1045,7 @@ coef0</code></pre>
 <p>Interpretation</p>
 <ul>
 <li>For every 1 unit increase in the predictor <code>disp</code>, the outcome <code>mpg</code> changes by 0.059. That is, as <code>disp</code> increases, <code>mpg</code> <strong>increases</strong>.</li>
-<li>When <code>disp = 0</code>, <code>mpg = 0</code>. <strong>By setting removing the intercept (i.e., setting it to 0), we are forcing the regression line to go through the origin (the point where disp = 0 and mpg = 0).</strong></li>
+<li>When <code>disp = 0</code>, <code>mpg = 0</code>. <strong>By removing the intercept (i.e., setting it to 0), we are forcing the regression line to go through the origin (the point where disp = 0 and mpg = 0).</strong></li>
 </ul>
 <p><span class="math display">\[mpg = 0 + 0.059*0\]</span></p>
 <p><span class="math display">\[mpg = 0\]</span></p>
@@ -1059,9 +1059,10 @@ ggplot(mtcars, aes(disp, mpg)) +
   scale_x_continuous(limits = c(-10, max(mtcars$disp))) +
   scale_y_continuous(limits = c(-10, max(mtcars$mpg))) +
   geom_abline(intercept = 0, slope = coef(model0)[1]) # manually plot regression line</code></pre>
-<p><img src="what-happens-when-you-remove-or-set-the-intercept-to-0-in-regression-models_files/figure-html5/unnamed-chunk-6-1.png" width="624" /></p>
+<p><img src="what-happens-when-you-remove-or-set-the-intercept-to-0-in-regression-models_files/figure-html5/unnamed-chunk-5-1.png" width="624" /></p>
 </div>
 <h2 id="fit-simple-regression-models-with-mean-centered-regressor">Fit simple regression models with mean-centered regressor</h2>
+<p>Mean-center regressor</p>
 <div class="layout-chunk" data-layout="l-body">
 <pre class="r"><code>
 mtcars$dispC &lt;- mtcars$disp - mean(mtcars$disp) # create mean-centered variable
@@ -1081,7 +1082,7 @@ coef(model1c)</code></pre>
 <aside>
 The intercept is now the the mean of outcome variable <code>mpg</code>. Check it by running <code>mean(mtcars$mpg)</code>.
 </aside>
-<p>Fit model <strong>without</strong> intercept and mean-centered regressor</p>
+<p>Fit model <strong>without</strong> intercept and with mean-centered regressor</p>
 <div class="layout-chunk" data-layout="l-body">
 <pre class="r"><code>
 model0c &lt;- lm(mpg ~ 0 + dispC, mtcars)
@@ -1090,7 +1091,7 @@ coef(model0c)</code></pre>
       dispC 
 -0.04121512 </code></pre>
 </div>
-<p>After mean-centering the regressor/predictor, fitting the model with or without the intercept gives the same coefficient for <code>dispC</code>: -0.04</p>
+<p>After mean-centering the regressor/predictor, fitting the model with or without the intercept gives the same <code>dispC</code> coefficient: -0.04</p>
 <div class="layout-chunk" data-layout="l-body">
 <pre class="r"><code>
 ggplot(mtcars, aes(dispC, mpg)) +
@@ -1100,8 +1101,9 @@ ggplot(mtcars, aes(dispC, mpg)) +
   scale_x_continuous(limits = c(min(mtcars$dispC), max(mtcars$dispC))) +
   scale_y_continuous(limits = c(-10, max(mtcars$mpg))) +
   geom_abline(intercept = coef(model1c)[1], slope = coef(model1c)[2]) </code></pre>
-<p><img src="what-happens-when-you-remove-or-set-the-intercept-to-0-in-regression-models_files/figure-html5/unnamed-chunk-10-1.png" width="624" /></p>
+<p><img src="what-happens-when-you-remove-or-set-the-intercept-to-0-in-regression-models_files/figure-html5/unnamed-chunk-9-1.png" width="624" /></p>
 </div>
+<p>Note that the regression slope is identical to the first figure. The only difference is that the points have been shifted to the left.</p>
 <h2 id="additional-resources">Additional resources</h2>
 <ul>
 <li><p><a href="https://stats.stackexchange.com/questions/7948/when-is-it-ok-to-remove-the-intercept-in-a-linear-regression-model">StackExchange: When is it ok to remove the intercept in a linear regression model?</a></p></li>
