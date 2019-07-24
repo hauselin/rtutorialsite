@@ -125,6 +125,10 @@ model1c <- lm(mpg ~ dispC, mtcars)
 coef(model1c)
 ```
 
+<aside>
+The intercept is now the the mean of outcome variable `mpg`. Check it by running `mean(mtcars$mpg)`.
+</aside>
+
 Fit model **without** intercept and mean-centered regressor
 
 ```{r}
