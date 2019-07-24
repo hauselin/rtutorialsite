@@ -1,3 +1,3 @@
 #### create new post/article ####
 library(distill)
-create_post("Outlier detection: standard deviation (z-score) vs. median absolute deviation approaches")
+create_post(title = "What happens when you remove or set the intercept to 0 in regression models")
