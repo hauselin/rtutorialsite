@@ -7,7 +7,16 @@
     <description>Data science and analysis tutorials
 </description>
     <generator>Radix</generator>
-    <lastBuildDate>Sat, 06 Jul 2019 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Wed, 24 Jul 2019 00:00:00 +0000</lastBuildDate>
+    <item>
+      <title>What happens when you remove or set the intercept to 0 in regression models</title>
+      <dc:creator>Hause Lin</dc:creator>
+      <link>https://hausetutorials.netlify.com/posts/2019-07-24-what-happens-when-you-remove-or-set-the-intercept-to-0-in-regression-models</link>
+      <description>What happens when you force the intercept to be 0 in a regression model and why you should (generally) never do it</description>
+      <guid>https://hausetutorials.netlify.com/posts/2019-07-24-what-happens-when-you-remove-or-set-the-intercept-to-0-in-regression-models</guid>
+      <pubDate>Wed, 24 Jul 2019 00:00:00 +0000</pubDate>
+      <media:content url="https://hausetutorials.netlify.com/posts/2019-07-24-what-happens-when-you-remove-or-set-the-intercept-to-0-in-regression-models/what-happens-when-you-remove-or-set-the-intercept-to-0-in-regression-models_files/figure-html5/unnamed-chunk-4-1.png" medium="image" type="image/png" width="1248" height="768"/>
+    </item>
     <item>
       <title>Interpreting regression coefficients (including interaction coefficients)</title>
       <dc:creator>Hause Lin</dc:creator>

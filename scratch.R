@@ -1,3 +1,3 @@
-# create new post/article
+#### create new post/article ####
 library(distill)
-create_post("Interpreting interaction regression coefficients")
+create_post("Outlier detection: standard deviation (z-score) vs. median absolute deviation approaches")
