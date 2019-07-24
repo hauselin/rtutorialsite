@@ -1,7 +1,8 @@
 ---
-title: "What happens when you remove or set the intercept to 0 in regression models"
+title: "What happens when you set the intercept to 0 in regression models"
 description: |
   What happens when you force the intercept to be 0 in a regression model and why you should (generally) never do it
+preview: https://raw.githubusercontent.com/hauselin/rtutorialsite/master/_posts/2019-07-24-what-happens-when-you-remove-or-set-the-intercept-to-0-in-regression-models/what-happens-when-you-remove-or-set-the-intercept-to-0-in-regression-models_files/figure-html5/unnamed-chunk-6-1.png
 author:
   - name: Hause Lin
     url: {}
