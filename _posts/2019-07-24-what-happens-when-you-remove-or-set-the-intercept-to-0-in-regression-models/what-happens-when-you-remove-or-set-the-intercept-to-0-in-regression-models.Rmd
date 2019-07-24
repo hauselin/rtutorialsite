@@ -143,3 +143,9 @@ ggplot(mtcars, aes(dispC, mpg)) +
   geom_abline(intercept = coef(model1c)[1], slope = coef(model1c)[2]) 
 ```
 
+## Additional resources
+
+* [StackExchange: When is it ok to remove the intercept in a linear regression model?](https://stats.stackexchange.com/questions/7948/when-is-it-ok-to-remove-the-intercept-in-a-linear-regression-model)
+
+* [Interpreting regression coefficients](https://hausetutorials.netlify.com/posts/2019-07-06-interpreting-interaction-regression-coefficients/).
+
