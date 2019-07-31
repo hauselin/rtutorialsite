@@ -1361,7 +1361,7 @@ Tutorials
 <li><a href="#compute-grand-average-rt-and-acc-and-within-subject-error-bars">Compute grand average RT and ACC (and within-subject error bars)</a></li>
 <li><a href="#plot-reaction-time">Plot reaction time</a></li>
 <li><a href="#plot-accuracy">Plot accuracy</a></li>
-<li><a href="#fit-linear-mixed-models-to-single-trial-rt-and-acc-data">Fit linear mixed models to single-trial RT and ACC data</a></li>
+<li><a href="#fit-linear-mixed-models-to-single-trial-rt-and-acc">Fit linear mixed models to single-trial RT and ACC</a></li>
 </ul>
 </nav>
 <hr class="d-toc-separator"/>
@@ -1558,7 +1558,7 @@ plot_acc &lt;- ggplot(dt1_grdavg$acc, aes(instructions, acc, col = reward)) + ge
 plot_acc</code></pre>
 <p><img src="0005_analyze_multi_subject_trial_data_files/figure-html5/plot%20acc-1.png" width="624" /></p>
 </div>
-<h2 id="fit-linear-mixed-models-to-single-trial-rt-and-acc-data">Fit linear mixed models to single-trial RT and ACC data</h2>
+<h2 id="fit-linear-mixed-models-to-single-trial-rt-and-acc">Fit linear mixed models to single-trial RT and ACC</h2>
 <div class="layout-chunk" data-layout="l-body">
 <pre class="r"><code>
 model_rt &lt;- lmer(rt ~ instructions + reward + (1 | subject), data = dt1)

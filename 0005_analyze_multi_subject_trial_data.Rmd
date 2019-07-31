@@ -135,7 +135,7 @@ plot_acc <- ggplot(dt1_grdavg$acc, aes(instructions, acc, col = reward)) +
 plot_acc
 ```
 
-## Fit linear mixed models to single-trial RT and ACC data
+## Fit linear mixed models to single-trial RT and ACC
 
 ```{r fit models}
 model_rt <- lmer(rt ~ instructions + reward + (1 | subject), data = dt1)
