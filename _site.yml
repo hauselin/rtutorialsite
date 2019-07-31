@@ -25,7 +25,7 @@ navbar:
           href: 0003_ggplot_modelfitting.html
         - text: "long/wide form data and joining"
           href: 0004_dataform_join.html
-        - text: "Analyze multi-subject/trial RT data"
+        - text: "analyze multi-subject/trial RT data"
           href: 0005_analyze_multi_subject_trial_data.html
     - text: "Articles"
       href: articles.html
