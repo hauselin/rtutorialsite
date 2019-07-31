@@ -11,11 +11,11 @@ editor_options:
 ---
 
 ```{r setup, include=FALSE}
+# this chunk is for knitting Rmarkdown; you don't need this chunk if you're not knitting
 knitr::opts_chunk$set(echo = TRUE, cache = FALSE, comment = NA, message = FALSE, warning = FALSE, R.options = list(width = 80), tidy = TRUE, tidy.opts = list(width.cutoff = 80))
 ```
 
 This tutorial standard reaction time and acccuracy data that resemble data collected from standard psychology experiments (though the data have been simulated with the `rwiener` function from the `RWiener` package). This package also assumes you know how to set your working directory; if not, check out my intro tutorials [here](https://hausetutorials.netlify.com/0001_rbasics.html#workingcurrent-directory-where-are-you-and-where-should-you-be-getwd). 
-
 ## Getting the data and code
 
 * Download Rmarkdown script for this tutorial [here](https://raw.githubusercontent.com/hauselin/rtutorialsite/master/0005_analyze_multi_subject_trial_data.Rmd).
