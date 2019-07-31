@@ -1349,6 +1349,7 @@ Tutorials
 <h3 class="d-toc-header">Table of Contents</h3>
 <nav class="d-toc" id="TOC">
 <ul>
+<li><a href="#getting-the-data-and-code">Getting the data and code</a></li>
 <li><a href="#dataset-information">Dataset information</a><ul>
 <li><a href="#variables">Variables</a></li>
 </ul></li>
@@ -1365,7 +1366,9 @@ Tutorials
 </ul>
 </nav>
 <hr class="d-toc-separator"/>
-<p>This tutorial standard reaction time and acccuracy data that resemble data collected from standard psychology experiments (though the data have been simulated with the <code>rwiener</code> function from the <code>RWiener</code> package). This package also assumes you know how to set your working directory; if not, check out my intro tutorials <a href="https://hausetutorials.netlify.com/0001_rbasics.html#workingcurrent-directory-where-are-you-and-where-should-you-be-getwd">here</a>. ## Getting the data and code</p>
+<p>This tutorial shows you how to analyze simple reaction time and acccuracy data that resemble data collected from standard psychology experiments (note that the three subjects’ data were actually simulated with the <code>rwiener</code> function from the <a href="https://cran.r-project.org/web/packages/RWiener/index.html">RWiener</a> package). This package also assumes you know how to set your working directory; if not, check out my intro tutorials <a href="https://hausetutorials.netlify.com/0001_rbasics.html#workingcurrent-directory-where-are-you-and-where-should-you-be-getwd">here</a>.</p>
+<p>I use the <a href="https://github.com/Rdatatable/data.table/wiki">data.table</a> package extensively in my analyses. <code>tidyverse</code> and <code>dplyr</code> are great, but I prefer the speed and concise syntax of <code>data.table</code>. I won’t explain how <code>data.table</code> works in this tutorial, but you’ll see in the code below how flexible and concise it is. If you want to learn more, see <a href="https://hausetutorials.netlify.com/0002_tidyverse_datatable.html">my tutorials</a> and extra <a href="https://hausetutorials.netlify.com/posts/2019-04-11-datatable-resources/">resources</a>.</p>
+<h2 id="getting-the-data-and-code">Getting the data and code</h2>
 <ul>
 <li>Download Rmarkdown script for this tutorial <a href="https://raw.githubusercontent.com/hauselin/rtutorialsite/master/0005_analyze_multi_subject_trial_data.Rmd">here</a>.</li>
 <li>Download data for all my tutorials <a href="https://www.dropbox.com/sh/2ix85ij7chfuqdg/AABpkIMymvjOE5Dh9iV7SULga?dl=1">here</a>.</li>
@@ -1412,7 +1415,7 @@ library(ggbeeswarm)
 library(hausekeep)</code></pre>
 </div>
 <aside>
-<code>hausekeep</code> is my package. It contains a few helper functions. You may or may not want to use them. If you want to, install the package by running <code>devtools::install_github(&quot;hauselin/hausekeep&quot;)</code> (you might need to install <code>devtools</code> package first).
+<a href="https://hauselin.github.io/hausekeep/">hausekeep</a> is my package. It contains a few helper functions. You may or may not want to use them. If you want to, install the package by running <code>devtools::install_github(&quot;hauselin/hausekeep&quot;)</code> (you might need to install <code>devtools</code> package first).
 </aside>
 <h2 id="read-all-subjects-data-into-r">Read all subjects’ data into R</h2>
 <div class="layout-chunk" data-layout="l-body">
