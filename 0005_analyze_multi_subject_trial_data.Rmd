@@ -1,0 +1,96 @@
+---
+title: "Analyze multi-subject/trial RT data"
+description: Simple tutorial and workflow for analyzing reaction time (RT) and accuracy data from multiple experimental subjects
+output:
+    radix::radix_article:
+        toc: true
+        toc_depth: 3
+repository_url: https://github.com/hauselin/rtutorialsite/blob/master/0000_install.Rmd
+editor_options: 
+  chunk_output_type: console
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, cache = FALSE, comment = NA, message = FALSE, warning = FALSE)
+```
+
+This tutorial standard reaction time and acccuracy data that resemble data collected from standard psychology experiments (though the data have been simulated with the `rwiener` function from the `RWiener` package). This package also assumes you know how to set your working directory; if not, check out my intro tutorials [here](https://hausetutorials.netlify.com/0001_rbasics.html#workingcurrent-directory-where-are-you-and-where-should-you-be-getwd). 
+
+## Getting the data
+
+* Download data for all my tutorials [here](https://www.dropbox.com/sh/2ix85ij7chfuqdg/AABpkIMymvjOE5Dh9iV7SULga?dl=1).
+* Inside the data folder, you should see a `rt_acc_data_raw` folder that contains three subjects' data, which we will analyze in this tutorial.
+* Leave the folders and files in the unzipped folder as they are because we'll use R to read the csv files into our R environment. 
+
+## Dataset information
+
+* 3 subjects: 30, 35, 39
+* Completed a task where reaction time (rt) and accuracy (acc) were collected.
+* 2 blocks in the experiment (1, 2)
+* 40 trials per block; 4 blocks in total; 80 trials in total
+* 2 experimental manipulations: reward available on trial (high vs low); instructions for block (focus on responding carefully [caution] vs focusing on responding quickly (speed))
+
+### Variables 
+
+* subject: subject id
+* completed: whether subject completed study (1, 0)
+* rt: reaction time
+* acc: accuracy
+* reward: reward available on trial (high or low)
+* instructions: block instructions (caution or speed)
+* block: block number (1, 2)
+* trialinblock: trial in block (1 to 4 0)
+* overalltrial: overall trial number (1 to 80)
+
+## Organizing folders/directory
+
+This is how my directories/folders/files look like. You should make sure yours look identical before you continue.
+
+— analysis.Rmd (in currenct working directory)
+
+——— data
+
+————— rt_acc_data_raw
+
+——————— subject_30.csv
+
+——————— subject_35.csv
+
+——————— subject_39.csv
+
+## Load libraries
+
+```{r}
+library(tidyverse); library(data.table); library(dtplyr); library(lme4); library(lmerTest); library(ggbeeswarm); library(hausekeep)
+```
+
+## Read all subjects' data into R
+
+```{r}
+(files <- list.files(path = "./data/rt_acc_data_raw", pattern = "subject_", full.names = TRUE)) # find matching file names
+dt1 <- lapply(files, fread) %>% bind_rows() %>% tbl_dt() # read data and convert to data.table and tibble
+```
+
+## Summarize experimental design
+
+```{r}
+dt1[, .N, by = subject] # rows (trials) per subject
+dt1[, .N, keyby = .(subject, block)] # blocks per subject and rows/trials per block
+dt1[, .N, keyby = .(subject, instructions, reward)] # row (trials) per subject for instructions/reward conditions
+```
+
+## Remove outlier trials
+
+```{r}
+dt1[rt < 0.2, `:=` (rt = NA, acc = NA)] # if rt < 0.2, convert rt and acc to NA (too fast response on that trial)
+dt1[rt > 3.0, `:=` (rt = NA, acc = NA)] # if rt > 3.0, convert rt and acc to NA (too slow response on that trial)
+summary(dt1$rt)
+summary(dt1$acc)
+```
+
+## Compute mean RT and ACC for each subject, for each condition
+
+```{r}
+dt1_avg <- dt1[, .(rt = mean(rt, na.rm = T), acc = mean(acc, na.rm = T)), keyby = .(subject, instructions, reward)]
+dt1_avg
+```
