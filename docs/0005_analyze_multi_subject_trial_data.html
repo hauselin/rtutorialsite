@@ -1482,12 +1482,12 @@ Source: local data table [12 x 4]
 <pre class="r"><code>
 dt1[rt &lt; 0.2, `:=`(rt = NA, acc = NA)]  # if rt &lt; 0.2, convert rt and acc to NA (too fast response on that trial)
 dt1[rt &gt; 3, `:=`(rt = NA, acc = NA)]  # if rt &gt; 3.0, convert rt and acc to NA (too slow response on that trial)
-summary(dt1$rt)</code></pre>
+summary(dt1$rt)  # check range and number of NA</code></pre>
 <pre><code>
    Min. 1st Qu.  Median    Mean 3rd Qu.    Max.    NA&#39;s 
  0.3573  0.6123  0.7982  0.9581  1.1328  2.8346      26 </code></pre>
 <pre class="r"><code>
-summary(dt1$acc)</code></pre>
+summary(dt1$acc)  # check range and number of NA</code></pre>
 <pre><code>
    Min. 1st Qu.  Median    Mean 3rd Qu.    Max.    NA&#39;s 
  0.0000  0.0000  1.0000  0.6869  1.0000  1.0000      26 </code></pre>

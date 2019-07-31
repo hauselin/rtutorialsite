@@ -94,8 +94,8 @@ dt1[, .N, keyby = .(subject, instructions, reward)] # row (trials) per subject f
 ```{r remove outliers}
 dt1[rt < 0.2, `:=` (rt = NA, acc = NA)] # if rt < 0.2, convert rt and acc to NA (too fast response on that trial)
 dt1[rt > 3.0, `:=` (rt = NA, acc = NA)] # if rt > 3.0, convert rt and acc to NA (too slow response on that trial)
-summary(dt1$rt)
-summary(dt1$acc)
+summary(dt1$rt) # check range and number of NA
+summary(dt1$acc) # check range and number of NA
 ```
 
 ## Compute mean RT and ACC for each subject, for each condition
