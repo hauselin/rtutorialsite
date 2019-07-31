@@ -61,7 +61,7 @@ This is how my directories/folders/files look like. You should make sure yours l
 
 ## Load libraries
 
-```{r}
+```{r libraries}
 library(tidyverse); library(data.table); library(dtplyr); library(lme4); library(lmerTest); library(ggbeeswarm); library(hausekeep)
 ```
 
@@ -71,7 +71,7 @@ library(tidyverse); library(data.table); library(dtplyr); library(lme4); library
 
 ## Read all subjects' data into R
 
-```{r}
+```{r read data}
 (files <- list.files(path = "./data/rt_acc_data_raw", pattern = "subject_", full.names = TRUE)) # find matching file names
 dt1 <- lapply(files, fread) %>% bind_rows() %>% tbl_dt() # read data, combine items in list, convert to data.table and tibble
 ```
@@ -80,7 +80,7 @@ Note and explanation: `lapply` loops through each item in `files` and applies th
 
 ## Summarize experimental design
 
-```{r}
+```{r summarize design}
 dt1[, .N, by = subject] # rows (trials) per subject
 dt1[, .N, keyby = .(subject, block)] # blocks per subject and rows/trials per block
 dt1[, .N, keyby = .(subject, instructions, reward)] # row (trials) per subject for instructions/reward conditions
@@ -88,7 +88,7 @@ dt1[, .N, keyby = .(subject, instructions, reward)] # row (trials) per subject f
 
 ## Remove outlier trials
 
-```{r}
+```{r remove outliers}
 dt1[rt < 0.2, `:=` (rt = NA, acc = NA)] # if rt < 0.2, convert rt and acc to NA (too fast response on that trial)
 dt1[rt > 3.0, `:=` (rt = NA, acc = NA)] # if rt > 3.0, convert rt and acc to NA (too slow response on that trial)
 summary(dt1$rt)
@@ -97,14 +97,14 @@ summary(dt1$acc)
 
 ## Compute mean RT and ACC for each subject, for each condition
 
-```{r}
+```{r mean rt/acc}
 dt1_avg <- dt1[, .(rt = mean(rt, na.rm = T), acc = mean(acc, na.rm = T)), keyby = .(subject, instructions, reward)]
 dt1_avg
 ```
 
 ## Compute grand average RT and ACC (and within-subject error bars)
 
-```{r}
+```{r grand average rt/acc}
 dt1_grdavg <- seWithin(data = dt1_avg, measurevar = c("rt", "acc"), withinvars = c("instructions", "reward"), idvar = "subject")
 ```
 
@@ -114,7 +114,7 @@ dt1_grdavg <- seWithin(data = dt1_avg, measurevar = c("rt", "acc"), withinvars =
 
 ## Plot reaction time 
 
-```{r}
+```{r plot rt}
 plot_rt <- ggplot(dt1_grdavg$rt, aes(instructions, rt, col = reward)) +
   geom_quasirandom(data = dt1_avg, alpha = 0.2, dodge = 1, size = 0.6) +
   geom_point(position = position_dodge(1), shape = 95, size = 6) +
@@ -125,7 +125,7 @@ plot_rt
 
 ## Plot accuracy
 
-```{r}
+```{r plot acc}
 plot_acc <- ggplot(dt1_grdavg$acc, aes(instructions, acc, col = reward)) +
   geom_quasirandom(data = dt1_avg, alpha = 0.2, dodge = 1, size = 0.6) +
   geom_point(position = position_dodge(1), shape = 95, size = 6) +
@@ -137,7 +137,7 @@ plot_acc
 
 ## Fit linear mixed models to single-trial RT and ACC data
 
-```{r}
+```{r fit models}
 model_rt <- lmer(rt ~ instructions + reward + (1 | subject), data = dt1)
 summary(model_rt)
 summaryh(model_rt) # summary function from my hausekeep package

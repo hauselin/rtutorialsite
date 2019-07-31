@@ -1349,7 +1349,6 @@ Tutorials
 <h3 class="d-toc-header">Table of Contents</h3>
 <nav class="d-toc" id="TOC">
 <ul>
-<li><a href="#getting-the-data-and-code">Getting the data and code</a></li>
 <li><a href="#dataset-information">Dataset information</a><ul>
 <li><a href="#variables">Variables</a></li>
 </ul></li>
@@ -1366,8 +1365,7 @@ Tutorials
 </ul>
 </nav>
 <hr class="d-toc-separator"/>
-<p>This tutorial standard reaction time and acccuracy data that resemble data collected from standard psychology experiments (though the data have been simulated with the <code>rwiener</code> function from the <code>RWiener</code> package). This package also assumes you know how to set your working directory; if not, check out my intro tutorials <a href="https://hausetutorials.netlify.com/0001_rbasics.html#workingcurrent-directory-where-are-you-and-where-should-you-be-getwd">here</a>.</p>
-<h2 id="getting-the-data-and-code">Getting the data and code</h2>
+<p>This tutorial standard reaction time and acccuracy data that resemble data collected from standard psychology experiments (though the data have been simulated with the <code>rwiener</code> function from the <code>RWiener</code> package). This package also assumes you know how to set your working directory; if not, check out my intro tutorials <a href="https://hausetutorials.netlify.com/0001_rbasics.html#workingcurrent-directory-where-are-you-and-where-should-you-be-getwd">here</a>. ## Getting the data and code</p>
 <ul>
 <li>Download Rmarkdown script for this tutorial <a href="https://raw.githubusercontent.com/hauselin/rtutorialsite/master/0005_analyze_multi_subject_trial_data.Rmd">here</a>.</li>
 <li>Download data for all my tutorials <a href="https://www.dropbox.com/sh/2ix85ij7chfuqdg/AABpkIMymvjOE5Dh9iV7SULga?dl=1">here</a>.</li>
@@ -1547,7 +1545,7 @@ plot_rt &lt;- ggplot(dt1_grdavg$rt, aes(instructions, rt, col = reward)) + geom_
     shape = 95, size = 6) + geom_errorbar(aes(ymin = rt - ci, ymax = rt + ci), position = position_dodge(1), 
     width = 0, size = 1.1) + labs(y = &quot;reaction time (95% CI)&quot;)
 plot_rt</code></pre>
-<p><img src="0005_analyze_multi_subject_trial_data_files/figure-html5/unnamed-chunk-7-1.png" width="624" /></p>
+<p><img src="0005_analyze_multi_subject_trial_data_files/figure-html5/plot%20rt-1.png" width="624" /></p>
 </div>
 <h2 id="plot-accuracy">Plot accuracy</h2>
 <div class="layout-chunk" data-layout="l-body">
@@ -1558,7 +1556,7 @@ plot_acc &lt;- ggplot(dt1_grdavg$acc, aes(instructions, acc, col = reward)) + ge
     position = position_dodge(1), width = 0, size = 1.1) + scale_y_continuous(limits = c(0, 
     1.2), breaks = seq(0, 1, 0.25)) + labs(y = &quot;accuracy (95% CI)&quot;)
 plot_acc</code></pre>
-<p><img src="0005_analyze_multi_subject_trial_data_files/figure-html5/unnamed-chunk-8-1.png" width="624" /></p>
+<p><img src="0005_analyze_multi_subject_trial_data_files/figure-html5/plot%20acc-1.png" width="624" /></p>
 </div>
 <h2 id="fit-linear-mixed-models-to-single-trial-rt-and-acc-data">Fit linear mixed models to single-trial RT and ACC data</h2>
 <div class="layout-chunk" data-layout="l-body">
