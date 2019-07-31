@@ -11,7 +11,7 @@ editor_options:
 ---
 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE, cache = FALSE, comment = NA, message = FALSE, warning = FALSE)
+knitr::opts_chunk$set(echo = TRUE, cache = FALSE, comment = NA, message = FALSE, warning = FALSE, R.options = list(width = 80), tidy = TRUE, tidy.opts = list(width.cutoff = 80))
 ```
 
 This tutorial standard reaction time and acccuracy data that resemble data collected from standard psychology experiments (though the data have been simulated with the `rwiener` function from the `RWiener` package). This package also assumes you know how to set your working directory; if not, check out my intro tutorials [here](https://hausetutorials.netlify.com/0001_rbasics.html#workingcurrent-directory-where-are-you-and-where-should-you-be-getwd). 
@@ -93,4 +93,16 @@ summary(dt1$acc)
 ```{r}
 dt1_avg <- dt1[, .(rt = mean(rt, na.rm = T), acc = mean(acc, na.rm = T)), keyby = .(subject, instructions, reward)]
 dt1_avg
+```
+
+## Fit linear mixed models to single-trial RT and ACC data
+
+```{r}
+model_rt <- lmer(rt ~ instructions + reward + (1 | subject), data = dt1)
+summary(model_rt)
+summaryh(model_rt) # summary function from my hausekeep package
+
+model_acc <- glmer(acc ~ instructions + reward + (1 | subject), data = dt1, family = binomial)
+summary(model_acc)
+summaryh(model_acc) # summary function from my hausekeep package
 ```

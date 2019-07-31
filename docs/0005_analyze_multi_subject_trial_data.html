@@ -1359,6 +1359,7 @@ Tutorials
 <li><a href="#summarize-experimental-design">Summarize experimental design</a></li>
 <li><a href="#remove-outlier-trials">Remove outlier trials</a></li>
 <li><a href="#compute-mean-rt-and-acc-for-each-subject-for-each-condition">Compute mean RT and ACC for each subject, for each condition</a></li>
+<li><a href="#fit-linear-mixed-models-to-single-trial-rt-and-acc-data">Fit linear mixed models to single-trial RT and ACC data</a></li>
 </ul>
 </nav>
 <hr class="d-toc-separator"/>
@@ -1400,23 +1401,29 @@ Tutorials
 <h2 id="load-libraries">Load libraries</h2>
 <div class="layout-chunk" data-layout="l-body">
 <pre class="r"><code>
-library(tidyverse); library(data.table); library(dtplyr); library(lme4); library(lmerTest); library(ggbeeswarm); library(hausekeep)</code></pre>
+library(tidyverse)
+library(data.table)
+library(dtplyr)
+library(lme4)
+library(lmerTest)
+library(ggbeeswarm)
+library(hausekeep)</code></pre>
 </div>
 <h2 id="read-all-subjects-data-into-r">Read all subjects’ data into R</h2>
 <div class="layout-chunk" data-layout="l-body">
 <pre class="r"><code>
-(files &lt;- list.files(path = &quot;./data/rt_acc_data_raw&quot;, pattern = &quot;subject_&quot;, full.names = TRUE)) # find matching file names</code></pre>
+(files &lt;- list.files(path = &quot;./data/rt_acc_data_raw&quot;, pattern = &quot;subject_&quot;, full.names = TRUE))  # find matching file names</code></pre>
 <pre><code>
 [1] &quot;./data/rt_acc_data_raw/subject_30.csv&quot;
 [2] &quot;./data/rt_acc_data_raw/subject_35.csv&quot;
 [3] &quot;./data/rt_acc_data_raw/subject_39.csv&quot;</code></pre>
 <pre class="r"><code>
-dt1 &lt;- lapply(files, fread) %&gt;% bind_rows() %&gt;% tbl_dt() # read data and convert to data.table and tibble</code></pre>
+dt1 &lt;- lapply(files, fread) %&gt;% bind_rows() %&gt;% tbl_dt()  # read data and convert to data.table and tibble</code></pre>
 </div>
 <h2 id="summarize-experimental-design">Summarize experimental design</h2>
 <div class="layout-chunk" data-layout="l-body">
 <pre class="r"><code>
-dt1[, .N, by = subject] # rows (trials) per subject</code></pre>
+dt1[, .N, by = subject]  # rows (trials) per subject</code></pre>
 <pre><code>
 Source: local data table [3 x 2]
 
@@ -1427,7 +1434,7 @@ Source: local data table [3 x 2]
 2      35    80
 3      39    80</code></pre>
 <pre class="r"><code>
-dt1[, .N, keyby = .(subject, block)] # blocks per subject and rows/trials per block</code></pre>
+dt1[, .N, keyby = .(subject, block)]  # blocks per subject and rows/trials per block</code></pre>
 <pre><code>
 Source: local data table [6 x 3]
 
@@ -1441,7 +1448,7 @@ Source: local data table [6 x 3]
 5      39     1    40
 6      39     2    40</code></pre>
 <pre class="r"><code>
-dt1[, .N, keyby = .(subject, instructions, reward)] # row (trials) per subject for instructions/reward conditions</code></pre>
+dt1[, .N, keyby = .(subject, instructions, reward)]  # row (trials) per subject for instructions/reward conditions</code></pre>
 <pre><code>
 Source: local data table [12 x 4]
 
@@ -1464,8 +1471,8 @@ Source: local data table [12 x 4]
 <h2 id="remove-outlier-trials">Remove outlier trials</h2>
 <div class="layout-chunk" data-layout="l-body">
 <pre class="r"><code>
-dt1[rt &lt; 0.2, `:=` (rt = NA, acc = NA)] # if rt &lt; 0.2, convert rt and acc to NA (too fast response on that trial)
-dt1[rt &gt; 3.0, `:=` (rt = NA, acc = NA)] # if rt &gt; 3.0, convert rt and acc to NA (too slow response on that trial)
+dt1[rt &lt; 0.2, `:=`(rt = NA, acc = NA)]  # if rt &lt; 0.2, convert rt and acc to NA (too fast response on that trial)
+dt1[rt &gt; 3, `:=`(rt = NA, acc = NA)]  # if rt &gt; 3.0, convert rt and acc to NA (too slow response on that trial)
 summary(dt1$rt)</code></pre>
 <pre><code>
    Min. 1st Qu.  Median    Mean 3rd Qu.    Max.    NA&#39;s 
@@ -1479,7 +1486,8 @@ summary(dt1$acc)</code></pre>
 <h2 id="compute-mean-rt-and-acc-for-each-subject-for-each-condition">Compute mean RT and ACC for each subject, for each condition</h2>
 <div class="layout-chunk" data-layout="l-body">
 <pre class="r"><code>
-dt1_avg &lt;- dt1[, .(rt = mean(rt, na.rm = T), acc = mean(acc, na.rm = T)), keyby = .(subject, instructions, reward)]
+dt1_avg &lt;- dt1[, .(rt = mean(rt, na.rm = T), acc = mean(acc, na.rm = T)), keyby = .(subject, 
+    instructions, reward)]
 dt1_avg</code></pre>
 <pre><code>
 Source: local data table [12 x 5]
@@ -1499,6 +1507,92 @@ Source: local data table [12 x 5]
 10      39 caution      low    1.09  0.529
 11      39 speed        high   0.775 0.765
 12      39 speed        low    0.674 0.632</code></pre>
+</div>
+<h2 id="fit-linear-mixed-models-to-single-trial-rt-and-acc-data">Fit linear mixed models to single-trial RT and ACC data</h2>
+<div class="layout-chunk" data-layout="l-body">
+<pre class="r"><code>
+model_rt &lt;- lmer(rt ~ instructions + reward + (1 | subject), data = dt1)
+summary(model_rt)</code></pre>
+<pre><code>
+Linear mixed model fit by REML. t-tests use Satterthwaite&#39;s method [
+lmerModLmerTest]
+Formula: rt ~ instructions + reward + (1 | subject)
+   Data: dt1
+
+REML criterion at convergence: 276.1
+
+Scaled residuals: 
+    Min      1Q  Median      3Q     Max 
+-1.8528 -0.6872 -0.2444  0.4666  3.6802 
+
+Random effects:
+ Groups   Name        Variance Std.Dev.
+ subject  (Intercept) 0.0000   0.000   
+ Residual             0.2034   0.451   
+Number of obs: 214, groups:  subject, 3
+
+Fixed effects:
+                   Estimate Std. Error        df t value Pr(&gt;|t|)    
+(Intercept)         1.23552    0.05425 211.00000  22.774  &lt; 2e-16 ***
+instructionsspeed  -0.48007    0.06169 211.00000  -7.782 3.13e-13 ***
+rewardlow          -0.06073    0.06167 211.00000  -0.985    0.326    
+---
+Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+
+Correlation of Fixed Effects:
+            (Intr) instrc
+instrctnssp -0.590       
+rewardlow   -0.579  0.010
+convergence code: 0
+boundary (singular) fit: see ?isSingular</code></pre>
+<pre class="r"><code>
+summaryh(model_rt)  # summary function from my hausekeep package</code></pre>
+<pre><code>
+                term                                                  results
+1:       (Intercept)  b = 1.24, SE = 0.05, t(211) = 22.77, p &lt; .001, r = 0.84
+2: instructionsspeed b = −0.48, SE = 0.06, t(211) = −7.78, p &lt; .001, r = 0.47
+3:         rewardlow b = −0.06, SE = 0.06, t(211) = −0.98, p = .326, r = 0.07</code></pre>
+<pre class="r"><code>
+model_acc &lt;- glmer(acc ~ instructions + reward + (1 | subject), data = dt1, family = binomial)
+summary(model_acc)</code></pre>
+<pre><code>
+Generalized linear mixed model fit by maximum likelihood (Laplace
+  Approximation) [glmerMod]
+ Family: binomial  ( logit )
+Formula: acc ~ instructions + reward + (1 | subject)
+   Data: dt1
+
+     AIC      BIC   logLik deviance df.resid 
+   260.9    274.3   -126.4    252.9      210 
+
+Scaled residuals: 
+    Min      1Q  Median      3Q     Max 
+-2.4415 -1.1104  0.5184  0.6717  1.0753 
+
+Random effects:
+ Groups  Name        Variance Std.Dev.
+ subject (Intercept) 0.0771   0.2777  
+Number of obs: 214, groups:  subject, 3
+
+Fixed effects:
+                  Estimate Std. Error z value Pr(&gt;|z|)    
+(Intercept)         1.5925     0.3420   4.657 3.21e-06 ***
+instructionsspeed  -0.5182     0.3083  -1.681  0.09283 .  
+rewardlow          -0.9411     0.3118  -3.018  0.00255 ** 
+---
+Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+
+Correlation of Fixed Effects:
+            (Intr) instrc
+instrctnssp -0.536       
+rewardlow   -0.571  0.061</code></pre>
+<pre class="r"><code>
+summaryh(model_acc)  # summary function from my hausekeep package</code></pre>
+<pre><code>
+                term                                                   results
+1:       (Intercept)    b = 1.59, SE = 0.34, z(210) = 4.66, p &lt; .001, r = 0.40
+2: instructionsspeed b = −0.52, SE = 0.31, z(210) = −1.68, p = .093, r = −0.14
+3:         rewardlow b = −0.94, SE = 0.31, z(210) = −3.02, p = .003, r = −0.25</code></pre>
 </div>
 <!--radix_placeholder_article_footer-->
 <!--/radix_placeholder_article_footer-->
