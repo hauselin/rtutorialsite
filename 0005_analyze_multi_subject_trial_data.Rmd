@@ -5,7 +5,7 @@ output:
     radix::radix_article:
         toc: true
         toc_depth: 3
-repository_url: https://github.com/hauselin/rtutorialsite/blob/master/0000_install.Rmd
+repository_url: https://github.com/hauselin/rtutorialsite/blob/master/0005_analyze_multi_subject_trial_data.Rmd
 editor_options: 
   chunk_output_type: console
 ---
@@ -16,11 +16,12 @@ knitr::opts_chunk$set(echo = TRUE, cache = FALSE, comment = NA, message = FALSE,
 
 This tutorial standard reaction time and acccuracy data that resemble data collected from standard psychology experiments (though the data have been simulated with the `rwiener` function from the `RWiener` package). This package also assumes you know how to set your working directory; if not, check out my intro tutorials [here](https://hausetutorials.netlify.com/0001_rbasics.html#workingcurrent-directory-where-are-you-and-where-should-you-be-getwd). 
 
-## Getting the data
+## Getting the data and code
 
+* Download Rmarkdown script for this tutorial [here](https://raw.githubusercontent.com/hauselin/rtutorialsite/master/0005_analyze_multi_subject_trial_data.Rmd).
 * Download data for all my tutorials [here](https://www.dropbox.com/sh/2ix85ij7chfuqdg/AABpkIMymvjOE5Dh9iV7SULga?dl=1).
 * Inside the data folder, you should see a `rt_acc_data_raw` folder that contains three subjects' data, which we will analyze in this tutorial.
-* Leave the folders and files in the unzipped folder as they are because we'll use R to read the csv files into our R environment. 
+* Leave the folders and files in the unzipped folder as they are because we'll use R to read the csv files into our R environment.
 
 ## Dataset information
 
@@ -44,9 +45,9 @@ This tutorial standard reaction time and acccuracy data that resemble data colle
 
 ## Organizing folders/directory
 
-This is how my directories/folders/files look like. You should make sure yours look identical before you continue.
+This is how my directories/folders/files look like. You should make sure yours look similar before you continue.
 
-— analysis.Rmd (in currenct working directory)
+— 0005_analyze_multi_subject_trial_data.Rmd
 
 ——— data
 
@@ -64,12 +65,18 @@ This is how my directories/folders/files look like. You should make sure yours l
 library(tidyverse); library(data.table); library(dtplyr); library(lme4); library(lmerTest); library(ggbeeswarm); library(hausekeep)
 ```
 
+<aside>
+`hausekeep` is my package. It contains a few helper functions. You may or may not want to use them. If you want to, install the package by running `devtools::install_github("hauselin/hausekeep")` (you might need to install `devtools` package first). 
+</aside>
+
 ## Read all subjects' data into R
 
 ```{r}
 (files <- list.files(path = "./data/rt_acc_data_raw", pattern = "subject_", full.names = TRUE)) # find matching file names
-dt1 <- lapply(files, fread) %>% bind_rows() %>% tbl_dt() # read data and convert to data.table and tibble
+dt1 <- lapply(files, fread) %>% bind_rows() %>% tbl_dt() # read data, combine items in list, convert to data.table and tibble
 ```
+
+Note and explanation: `lapply` loops through each item in `files` and applies the `fread` function to each item. `bind_rows` combines all the dataframes stored as separate items in the list, and `tbl_dt()` converts the merged dataframe into `data.table` and `tibble` class.
 
 ## Summarize experimental design
 
@@ -93,6 +100,39 @@ summary(dt1$acc)
 ```{r}
 dt1_avg <- dt1[, .(rt = mean(rt, na.rm = T), acc = mean(acc, na.rm = T)), keyby = .(subject, instructions, reward)]
 dt1_avg
+```
+
+## Compute grand average RT and ACC (and within-subject error bars)
+
+```{r}
+dt1_grdavg <- seWithin(data = dt1_avg, measurevar = c("rt", "acc"), withinvars = c("instructions", "reward"), idvar = "subject")
+```
+
+<aside>
+`seWithin` computes within-subject error bars and is a function from my `hausekeep` package.
+</aside>
+
+## Plot reaction time 
+
+```{r}
+plot_rt <- ggplot(dt1_grdavg$rt, aes(instructions, rt, col = reward)) +
+  geom_quasirandom(data = dt1_avg, alpha = 0.2, dodge = 1, size = 0.6) +
+  geom_point(position = position_dodge(1), shape = 95, size = 6) +
+  geom_errorbar(aes(ymin = rt - ci, ymax = rt + ci), position = position_dodge(1), width = 0, size = 1.1) +
+  labs(y = "reaction time (95% CI)")
+plot_rt
+```
+
+## Plot accuracy
+
+```{r}
+plot_acc <- ggplot(dt1_grdavg$acc, aes(instructions, acc, col = reward)) +
+  geom_quasirandom(data = dt1_avg, alpha = 0.2, dodge = 1, size = 0.6) +
+  geom_point(position = position_dodge(1), shape = 95, size = 6) +
+  geom_errorbar(aes(ymin = acc - ci, ymax = acc + ci), position = position_dodge(1), width = 0, size = 1.1) +
+  scale_y_continuous(limits = c(0, 1.2), breaks = seq(0, 1.0, 0.25)) +
+  labs(y = "accuracy (95% CI)")
+plot_acc
 ```
 
 ## Fit linear mixed models to single-trial RT and ACC data
