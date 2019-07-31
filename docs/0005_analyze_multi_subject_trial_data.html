@@ -1541,7 +1541,7 @@ $acc
 <div class="layout-chunk" data-layout="l-body">
 <pre class="r"><code>
 plot_rt &lt;- ggplot(dt1_grdavg$rt, aes(instructions, rt, col = reward)) + geom_quasirandom(data = dt1_avg, 
-    alpha = 0.2, dodge = 1, size = 0.6) + geom_point(position = position_dodge(1), 
+    alpha = 0.8, dodge = 1, size = 1.5) + geom_point(position = position_dodge(1), 
     shape = 95, size = 6) + geom_errorbar(aes(ymin = rt - ci, ymax = rt + ci), position = position_dodge(1), 
     width = 0, size = 1.1) + labs(y = &quot;reaction time (95% CI)&quot;)
 plot_rt</code></pre>
@@ -1551,7 +1551,7 @@ plot_rt</code></pre>
 <div class="layout-chunk" data-layout="l-body">
 <pre class="r"><code>
 plot_acc &lt;- ggplot(dt1_grdavg$acc, aes(instructions, acc, col = reward)) + geom_quasirandom(data = dt1_avg, 
-    alpha = 0.2, dodge = 1, size = 0.6) + geom_point(position = position_dodge(1), 
+    alpha = 0.8, dodge = 1, size = 1.5) + geom_point(position = position_dodge(1), 
     shape = 95, size = 6) + geom_errorbar(aes(ymin = acc - ci, ymax = acc + ci), 
     position = position_dodge(1), width = 0, size = 1.1) + scale_y_continuous(limits = c(0, 
     1.2), breaks = seq(0, 1, 0.25)) + labs(y = &quot;accuracy (95% CI)&quot;)

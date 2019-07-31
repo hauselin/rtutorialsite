@@ -116,7 +116,7 @@ dt1_grdavg <- seWithin(data = dt1_avg, measurevar = c("rt", "acc"), withinvars =
 
 ```{r plot rt}
 plot_rt <- ggplot(dt1_grdavg$rt, aes(instructions, rt, col = reward)) +
-  geom_quasirandom(data = dt1_avg, alpha = 0.2, dodge = 1, size = 0.6) +
+  geom_quasirandom(data = dt1_avg, alpha = 0.8, dodge = 1, size = 1.5) +
   geom_point(position = position_dodge(1), shape = 95, size = 6) +
   geom_errorbar(aes(ymin = rt - ci, ymax = rt + ci), position = position_dodge(1), width = 0, size = 1.1) +
   labs(y = "reaction time (95% CI)")
@@ -127,7 +127,7 @@ plot_rt
 
 ```{r plot acc}
 plot_acc <- ggplot(dt1_grdavg$acc, aes(instructions, acc, col = reward)) +
-  geom_quasirandom(data = dt1_avg, alpha = 0.2, dodge = 1, size = 0.6) +
+  geom_quasirandom(data = dt1_avg, alpha = 0.8, dodge = 1, size = 1.5) +
   geom_point(position = position_dodge(1), shape = 95, size = 6) +
   geom_errorbar(aes(ymin = acc - ci, ymax = acc + ci), position = position_dodge(1), width = 0, size = 1.1) +
   scale_y_continuous(limits = c(0, 1.2), breaks = seq(0, 1.0, 0.25)) +
