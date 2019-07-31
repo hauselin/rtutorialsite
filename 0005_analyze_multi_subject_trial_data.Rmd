@@ -29,7 +29,7 @@ I use the [data.table](https://github.com/Rdatatable/data.table/wiki) package ex
 ## Dataset information
 
 * 3 subjects: 30, 35, 39
-* Completed a task where reaction time (rt) and accuracy (acc) were collected.
+* Completed a task where reaction time (rt) and accuracy (acc) were collected
 * 2 blocks in the experiment (1, 2)
 * 40 trials per block; 4 blocks in total; 80 trials in total
 * 2 experimental manipulations: reward available on trial (high vs low); instructions for block (focus on responding carefully [caution] vs focusing on responding quickly (speed))
