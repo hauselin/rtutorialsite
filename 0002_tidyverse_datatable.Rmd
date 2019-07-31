@@ -344,8 +344,8 @@ df4_classA
 
 Filter rows that match multiple criteria
 
-```{r}
-filter(df4, class == c("a", "b")) 
+```{r, eval=FALSE, error=TRUE}
+filter(df4, class == c("a", "b"))
 ```
 
 Is anything wrong? Look at the output and compare with `filter(df4, class == "a")` and `filter(df4, class == "b")`. How many rows should you expect from `filter(df4, class == c("a", "b"))`? How many rows did you get?
@@ -374,8 +374,9 @@ filter(df4, class != "a") # class IS NOT "a" (! and =, without space in between)
 
 How would you remove values that match "a" and "b"?
 
-```{r, error=TRUE}
-filter(df4, class !%in% c("a", "b")) # syntax error...
+```{r, eval=FALSE, warning=FALSE, message=FALSE, echo=TRUE}
+# the following is WRONG so I'm not running it, but try it yourself
+# filter(df4, class !%in% c("a", "b")) # syntax error...
 ```
 
 <aside>
@@ -433,6 +434,7 @@ arrange(df4, desc(class)) # descending order of class
 
 `order()` is another function (base R function) people often use to arrange rows. See [here](https://www.statmethods.net/management/sorting.html) for more information.
 
+
 ### Combining functions with pipes `%>%`
 
 ```{r}
@@ -440,20 +442,21 @@ df4 %>% print(n = Inf) # reminder what the dataset looks like
 ```
 
 <aside>
-same as `r print(df, n = Inf)`
+same as `print(df, n = Inf)`
 </aside>
 
 You can combine multiple functions with `%>%`. After adding each function/line, you can check your output before you add the next function/line. This way, you can build really complicated and long code/syntax without nesting functions!
 
 NOTE that comments # are placed AFTER the pipe symbol!
 
+
 ```{r}
-df4 %>% 
-    mutate(gradesRound = round(grades), studentNo = 1:.N) %>% # round grades, add subject number: .N is a shortcut for nrow(df4)
-    select(-grades) %>% # remove original grades variable
-    select(studentNo, class, iq, gradesRound) %>%  # reorder columns
-    rename(intelligence = iq, examGrades = gradesRound, classroom = class) %>% # rename variables
-    filter(intelligence %between% c(90, 105)) # select only those with intelligence between 90 and 105
+df4 %>%
+  mutate(gradesRound = round(grades), studentNo = 1:.N) %>% # round grades, add subject number: .N is a shortcut for nrow(df4)
+  select(-grades) %>% # remove original grades variable
+  select(studentNo, class, iq, gradesRound) %>%  # reorder columns
+  rename(intelligence = iq, examGrades = gradesRound, classroom = class) %>% # rename variables
+  filter(intelligence %between% c(90, 105)) # select only those with intelligence between 90 and 105
 ```
 
 The code above doesn't save the output as an object. Below we save it as an object.
@@ -778,7 +781,7 @@ df4[iqCopy < 100, iqCopy := NA] # convert values less than 100 to NA
 df4[is.na(iqCopy)] # filter via i (show only rows where iqCopy is NA)
 ```
 
-```{r, error=TRUE}
+```{r, error=TRUE, eval=FALSE}
 df4[iqCopy == NA] # DOESN'T WORK!!! use is.na()
 ```
 

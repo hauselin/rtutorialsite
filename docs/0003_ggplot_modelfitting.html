@@ -1317,6 +1317,7 @@ Tutorials
 <a href="0002_tidyverse_datatable.html">tidyverse and data.table</a>
 <a href="0003_ggplot_modelfitting.html">ggplot and model fitting</a>
 <a href="0004_dataform_join.html">long/wide form data and joining</a>
+<a href="0005_analyze_multi_subject_trial_data.html">analyze multi-subject/trial RT data</a>
 </div>
 </div>
 <a href="articles.html">Articles</a>
@@ -2034,20 +2035,20 @@ ggplot(df1, aes(class, iq, col = gender)) + # y: iq
 anova_classGender &lt;- aov(grades ~ class * gender, data = df1)
 summary(anova_classGender)</code></pre>
 <pre><code>
-             Df Sum Sq Mean Sq F value   Pr(&gt;F)    
-class         3   5821    1940  10.490 5.83e-05 ***
-gender        1    539     539   2.914   0.0975 .  
-class:gender  3    942     314   1.697   0.1872    
-Residuals    32   5919     185                     
+             Df Sum Sq Mean Sq F value  Pr(&gt;F)    
+class         3   5821  1940.4   8.597 0.00025 ***
+gender        1      0     0.0   0.000 0.99163    
+class:gender  3    177    59.0   0.262 0.85254    
+Residuals    32   7223   225.7                    
 ---
 Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
 <pre class="r"><code>
 summaryh(anova_classGender)</code></pre>
 <pre><code>
-           term                              results
-1:        class F(3, 32) = 10.49, p &lt; .001, r = 0.70
-2:       gender  F(1, 32) = 2.91, p = .098, r = 0.29
-3: class:gender  F(3, 32) = 1.70, p = .187, r = 0.37</code></pre>
+           term                             results
+1:        class F(3, 32) = 8.60, p &lt; .001, r = 0.67
+2:       gender   F(1, 32) = 1e−04, p = .992, r = 0
+3: class:gender F(3, 32) = 0.26, p = .853, r = 0.15</code></pre>
 </div>
 <h3 id="specify-contrasts-resources">Specify contrasts resources</h3>
 <ul>
@@ -2083,18 +2084,18 @@ ttest_gender</code></pre>
     Welch Two Sample t-test
 
 data:  iq by gender
-t = 0.37629, df = 35.744, p-value = 0.7089
+t = -0.63195, df = 37.78, p-value = 0.5312
 alternative hypothesis: true difference in means is not equal to 0
 95 percent confidence interval:
- -5.365629  7.809544
+ -8.515814  4.464534
 sample estimates:
 mean in group female   mean in group male 
-            110.0798             108.8578 </code></pre>
+            108.3949             110.4205 </code></pre>
 <pre class="r"><code>
 summaryh(ttest_gender)</code></pre>
 <pre><code>
-                            results
-1: t(36) = 0.38, p = .709, r = 0.06</code></pre>
+                             results
+1: t(38) = −0.63, p = .531, r = 0.10</code></pre>
 </div>
 <p>class a vs. class d</p>
 <div class="layout-chunk" data-layout="l-body">

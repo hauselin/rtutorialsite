@@ -9,8 +9,7 @@ repository_url: https://github.com/hauselin/rtutorialsite/blob/master/0004_dataf
 ---
 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE,
-                      R.options = list(width = 80))
+knitr::opts_chunk$set(echo = TRUE, R.options = list(width = 80))
 ```
 
 
