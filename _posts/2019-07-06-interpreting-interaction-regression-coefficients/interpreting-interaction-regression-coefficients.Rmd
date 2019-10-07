@@ -25,6 +25,10 @@ knitr::opts_chunk$set(echo = TRUE, cache = FALSE, comment = NA, message = FALSE,
 
 Get source code for this RMarkdown script [here](https://github.com/hauselin/rtutorialsite/blob/master/_posts/2019-07-06-interpreting-interaction-regression-coefficients/interpreting-interaction-regression-coefficients.Rmd).
 
+## Consider being a patron and supporting my work?
+
+[Donate and become a patron](https://donorbox.org/support-my-teaching): If you find value in what I do and have learned something from my site, please consider becoming a patron. It takes me many hours to research, learn, and put together tutorials. Your support really matters.
+
 This tutorial provides a step-by-step introduction to interpreting regression coefficients in linear models. I will use the built-in dataset `mtcars`. 
 
 General guidelines for interpreting regression coefficients
@@ -262,3 +266,7 @@ There are many ways to interpret the coefficient `disp:wt:qsec:drat` = `r round(
 * when `drat` increases by 1, the `disp:wt:qsec` coefficient (slope) changes by `r round(coef(model_interaction4)["disp:wt:qsec:drat"], 2)`
 
 You can also interpret the three- or two-way interactions in the same model in the same way. You get it...
+
+## Support my work
+
+[Support my work and become a patron here](https://donorbox.org/support-my-teaching)!

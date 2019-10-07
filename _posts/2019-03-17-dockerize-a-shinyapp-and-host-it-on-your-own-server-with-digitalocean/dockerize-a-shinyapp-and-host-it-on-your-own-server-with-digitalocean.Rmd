@@ -25,6 +25,10 @@ editor_options:
 
 After much fiddling, I managed to dockerize my [effect size converter ShinyApp](http://escal.site/) and hosted it on my own web server with [DigitalOcean](https://m.do.co/c/a32d79a17aa9), which is cheaper, faster, and more flexible than [shinyapps.io](http://shinyapps.io/). Below are the exact steps I took and solutions to problems I ran into along the way. Note that I did everything on **Mac OS X**, so I won't promise everything will work if you use other operating systems! I've provided the links to the key resources I used at each step. 
 
+## Consider being a patron and supporting my work?
+
+[Donate and become a patron](https://donorbox.org/support-my-teaching): If you find value in what I do and have learned something from my site, please consider becoming a patron. It takes me many hours to research, learn, and put together tutorials. Your support really matters.
+
 ## Step 1. Create your ShinyApp
 
 In RStudio, create a new project via File -> New Project -> New Directory -> Shiny Web Application. RStudio will create a ShinyApp project and directory that comes with a really simple ShinyApp (`app.R` which you can run by press Run App), which you can play with and edit to create your own ShinyApp. 
@@ -108,7 +112,6 @@ ns3.digitalocean.com
 
 2. Point your droplet IP to your domain name. Go to your DigitalOcean account and select Networking from the menu. Under "Add a domain", enter your new domain name (escal.site in my case) and tell it which droplet or project you want to point to. Then manage this domain by creating new records. Create an "A" type to point your droplet IP to your domain name. Create a "CNAME" type to point one URL to another URL (e.g., www.escal.site also points to escal.site in my case). See [here](https://www.howlthemes.com/point-domain-name-digitalocean-droplet/) and [here](https://www.digitalocean.com/docs/networking/dns/how-to/manage-records/) for more instructions. 
 
+## Support my work
 
-
-
-
+[Support my work and become a patron here](https://donorbox.org/support-my-teaching)!

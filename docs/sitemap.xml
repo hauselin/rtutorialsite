@@ -2,27 +2,27 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd" version="1.0">
   <url>
     <loc>https://hausetutorials.netlify.com/0000_install.html</loc>
-    <lastmod>2019-02-18T19:38:18-05:00</lastmod>
+    <lastmod>2019-10-06T22:14:35-04:00</lastmod>
   </url>
   <url>
     <loc>https://hausetutorials.netlify.com/0001_rbasics.html</loc>
-    <lastmod>2019-02-18T22:52:30-05:00</lastmod>
+    <lastmod>2019-10-06T22:15:47-04:00</lastmod>
   </url>
   <url>
     <loc>https://hausetutorials.netlify.com/0002_tidyverse_datatable.html</loc>
-    <lastmod>2019-07-31T10:53:02-04:00</lastmod>
+    <lastmod>2019-10-06T22:16:18-04:00</lastmod>
   </url>
   <url>
     <loc>https://hausetutorials.netlify.com/0003_ggplot_modelfitting.html</loc>
-    <lastmod>2019-07-31T10:54:05-04:00</lastmod>
+    <lastmod>2019-10-06T22:16:45-04:00</lastmod>
   </url>
   <url>
     <loc>https://hausetutorials.netlify.com/0004_dataform_join.html</loc>
-    <lastmod>2019-07-31T10:53:44-04:00</lastmod>
+    <lastmod>2019-10-06T22:17:13-04:00</lastmod>
   </url>
   <url>
     <loc>https://hausetutorials.netlify.com/0005_analyze_multi_subject_trial_data.html</loc>
-    <lastmod>2019-07-31T11:59:06-04:00</lastmod>
+    <lastmod>2019-10-06T22:17:53-04:00</lastmod>
   </url>
   <url>
     <loc>https://hausetutorials.netlify.com/articles.html</loc>
@@ -30,42 +30,38 @@
   </url>
   <url>
     <loc>https://hausetutorials.netlify.com/</loc>
-    <lastmod>2019-04-12T11:49:54-04:00</lastmod>
-  </url>
-  <url>
-    <loc>https://hausetutorials.netlify.com/README.html</loc>
-    <lastmod>2019-02-18T13:42:22-05:00</lastmod>
+    <lastmod>2019-10-06T22:06:37-04:00</lastmod>
   </url>
   <url>
     <loc>https://hausetutorials.netlify.com/posts/2019-07-24-what-happens-when-you-remove-or-set-the-intercept-to-0-in-regression-models/</loc>
-    <lastmod>2019-07-24T19:08:53-04:00</lastmod>
+    <lastmod>2019-10-06T22:18:42-04:00</lastmod>
   </url>
   <url>
     <loc>https://hausetutorials.netlify.com/posts/2019-07-06-interpreting-interaction-regression-coefficients/</loc>
-    <lastmod>2019-07-06T19:48:18-04:00</lastmod>
+    <lastmod>2019-10-06T22:19:38-04:00</lastmod>
   </url>
   <url>
     <loc>https://hausetutorials.netlify.com/posts/2019-04-13-logistic-regression/</loc>
-    <lastmod>2019-04-12T11:18:59-04:00</lastmod>
+    <lastmod>2019-10-06T22:20:15-04:00</lastmod>
   </url>
   <url>
     <loc>https://hausetutorials.netlify.com/posts/2019-04-11-datatable-resources/</loc>
-    <lastmod>2019-07-24T19:16:03-04:00</lastmod>
+    <lastmod>2019-10-06T22:20:59-04:00</lastmod>
   </url>
   <url>
     <loc>https://hausetutorials.netlify.com/posts/2019-04-09-gentle-and-intuitive-intro-to-markov-chain-monte-carlo-mcmc/</loc>
-    <lastmod>2019-04-10T06:04:34-04:00</lastmod>
+    <lastmod>2019-10-06T22:21:32-04:00</lastmod>
   </url>
   <url>
     <loc>https://hausetutorials.netlify.com/posts/2019-03-17-dockerize-a-shinyapp-and-host-it-on-your-own-server-with-digitalocean/</loc>
-    <lastmod>2019-03-17T09:46:28-04:00</lastmod>
+    <lastmod>2019-10-06T22:22:02-04:00</lastmod>
   </url>
   <url>
     <loc>https://hausetutorials.netlify.com/posts/2019-02-22-why-we-should-never-use-barplots-use-geomquasirandom-instead/</loc>
-    <lastmod>2019-04-09T16:35:14-04:00</lastmod>
+    <lastmod>2019-10-06T22:22:47-04:00</lastmod>
   </url>
   <url>
     <loc>https://hausetutorials.netlify.com/posts/2019-02-18-fit-models-to-every-group/</loc>
-    <lastmod>2019-04-12T12:15:35-04:00</lastmod>
+    <lastmod>2019-10-06T22:23:17-04:00</lastmod>
   </url>
 </urlset>

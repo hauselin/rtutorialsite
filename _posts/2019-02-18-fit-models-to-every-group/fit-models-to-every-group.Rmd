@@ -27,6 +27,10 @@ knitr::opts_chunk$set(echo = TRUE, cache = FALSE, comment = NA, message = FALSE,
 
 Get source code for this RMarkdown script [here](https://github.com/hauselin/rtutorialsite/blob/master/_posts/2019-02-18-fit-models-to-every-group/fit-models-to-every-group.Rmd).
 
+## Consider being a patron and supporting my work?
+
+[Donate and become a patron](https://donorbox.org/support-my-teaching): If you find value in what I do and have learned something from my site, please consider becoming a patron. It takes me many hours to research, learn, and put together tutorials. Your support really matters.
+
 ## How to use `data.table` package to repeatedly fit a model to separate groups in a dataset
 
 Before the invention of multi-level models (aka linear mixed effects models), how did people analyze nested or repeated-measures data? They aggregated the data, used repeated-measures ANOVA, and did other things. 
@@ -128,3 +132,7 @@ You can also use the `lmList()` function from the `lme4` package to fit this 'no
 ```{r}
 lmList(weight ~ Time | Chick, data = dt1[Chick <= 10])
 ```
+
+## Support my work
+
+[Support my work and become a patron here](https://donorbox.org/support-my-teaching)!

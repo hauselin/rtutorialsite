@@ -29,6 +29,8 @@ navbar:
           href: 0005_analyze_multi_subject_trial_data.html
     - text: "Articles"
       href: articles.html
+    - text: "Donate"
+      href: https://donorbox.org/support-my-teaching
     - icon: fab fa-twitter
       href: https://twitter.com/hauselin
     - icon: fab fa-github

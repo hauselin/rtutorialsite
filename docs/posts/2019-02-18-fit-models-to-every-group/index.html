@@ -1338,6 +1338,7 @@ Tutorials
 </div>
 </div>
 <a href="../../articles.html">Articles</a>
+<a href="https://donorbox.org/support-my-teaching">Donate</a>
 <a href="https://twitter.com/hauselin">
 <i class="fab fa-twitter"></i>
 </a>
@@ -1373,14 +1374,18 @@ Tutorials
 <h3 class="d-toc-header">Table of Contents</h3>
 <nav class="d-toc" id="TOC">
 <ul>
+<li><a href="#consider-being-a-patron-and-supporting-my-work">Consider being a patron and supporting my work?</a></li>
 <li><a href="#how-to-use-data.table-package-to-repeatedly-fit-a-model-to-separate-groups-in-a-dataset">How to use <code>data.table</code> package to repeatedly fit a model to separate groups in a dataset</a></li>
 <li><a href="#completing-pooling-approach">Completing pooling approach</a></li>
 <li><a href="#partial-pooling-approach">Partial pooling approach</a></li>
 <li><a href="#no-pooling-approach">No pooling approach</a></li>
+<li><a href="#support-my-work">Support my work</a></li>
 </ul>
 </nav>
 <hr class="d-toc-separator"/>
 <p>Get source code for this RMarkdown script <a href="https://github.com/hauselin/rtutorialsite/blob/master/_posts/2019-02-18-fit-models-to-every-group/fit-models-to-every-group.Rmd">here</a>.</p>
+<h2 id="consider-being-a-patron-and-supporting-my-work">Consider being a patron and supporting my work?</h2>
+<p><a href="https://donorbox.org/support-my-teaching">Donate and become a patron</a>: If you find value in what I do and have learned something from my site, please consider becoming a patron. It takes me many hours to research, learn, and put together tutorials. Your support really matters.</p>
 <h2 id="how-to-use-data.table-package-to-repeatedly-fit-a-model-to-separate-groups-in-a-dataset">How to use <code>data.table</code> package to repeatedly fit a model to separate groups in a dataset</h2>
 <p>Before the invention of multi-level models (aka linear mixed effects models), how did people analyze nested or repeated-measures data? They aggregated the data, used repeated-measures ANOVA, and did other things.</p>
 <p>One interesting approach is to repeatedly fit the same model to each group separately, and this approach seems to be first mentioned in this article <span class="citation" data-cites="Lorch">(Lorch and Myers <a href="#ref-Lorch">1990</a>)</span>. If you have 10 data points per subject, you have nested data (data points nested within subjects), and you could fit 10 linear regressions, one for each subject. This approach is still quite useful nowadays (I use it regularly in my research), and I’ll demonstrate how to do it easily with <code>data.table</code> and my <code>summaryh()</code> function from my <code>hausekeep</code> package.</p>
@@ -1618,6 +1623,8 @@ Coefficients:
 Degrees of freedom: 119 total; 99 residual
 Residual standard error: 11.44853</code></pre>
 </div>
+<h2 id="support-my-work">Support my work</h2>
+<p><a href="https://donorbox.org/support-my-teaching">Support my work and become a patron here</a>!</p>
 <div id="refs" class="references">
 <div id="ref-Lorch">
 <p>Lorch, Robert F., and Jerome L. Myers. 1990. “Regression Analyses of Repeated Measures Data in Cognitive Research.” <em>Journal of Experimental Psychology: Learning, Memory, and Cognition</em> 16 (1): 149–57. <a href="https://www.ncbi.nlm.nih.gov/pubmed/2136750">https://www.ncbi.nlm.nih.gov/pubmed/2136750</a>.</p>

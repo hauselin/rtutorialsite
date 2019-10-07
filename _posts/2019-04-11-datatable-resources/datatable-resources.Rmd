@@ -20,6 +20,10 @@ output:
 knitr::opts_chunk$set(echo = FALSE)
 ```
 
+### Consider being a patron and supporting my work?
+
+[Donate and become a patron](https://donorbox.org/support-my-teaching): If you find value in what I do and have learned something from my site, please consider becoming a patron. It takes me many hours to research, learn, and put together tutorials. Your support really matters.
+
 ### Information and tutorials
 
 * [Homepage (check out the pdf and presentation!)](https://github.com/Rdatatable/data.table/wiki)
@@ -39,4 +43,9 @@ knitr::opts_chunk$set(echo = FALSE)
 
 * [`datatable` in Python](https://github.com/h2oai/datatable)
 * [`dtplyr`: `dplyr` backend for `data.table`](https://github.com/tidyverse/dtplyr)
+
+### Support my work
+
+[Support my work and become a patron here](https://donorbox.org/support-my-teaching)!
+
 

@@ -19,6 +19,10 @@ This site contains beginner R tutorials as well as relatively advanced data anal
 * tutorials: beginner R tutorials ([R programming basics](0001_rbasics.html), [tidyverse, data.table](0002_tidyverse_datatable.html), etc.)
 * [articles](articles.html): more advanced analysis tricks/tips and statistical concepts illustrated with code
 
+## Consider being a patron and supporting my work?
+
+[Donate and become a patron](https://donorbox.org/support-my-teaching): If you find value in what I do and have learned something from my site, please consider becoming a patron. It takes me many hours to research, learn, and put together tutorials. Your support really matters.
+
 ## Where to begin?
 
 If you're new to R, start with the tutorials. If you're looking for tips/tricks to improve your existing R workflow or explanations of statistical concepts, check out my [articles](articles.html).

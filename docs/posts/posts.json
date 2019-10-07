@@ -15,7 +15,7 @@
       "general linear model"
     ],
     "preview": "https://raw.githubusercontent.com/hauselin/rtutorialsite/master/_posts/2019-07-24-what-happens-when-you-remove-or-set-the-intercept-to-0-in-regression-models/what-happens-when-you-remove-or-set-the-intercept-to-0-in-regression-models_files/figure-html5/unnamed-chunk-6-1.png",
-    "last_modified": "2019-07-24T19:08:53-04:00"
+    "last_modified": "2019-10-06T22:18:42-04:00"
   },
   {
     "path": "posts/2019-07-06-interpreting-interaction-regression-coefficients/",
@@ -33,7 +33,7 @@
       "general linear model"
     ],
     "preview": "posts/2019-07-06-interpreting-interaction-regression-coefficients/interpreting-interaction-regression-coefficients_files/figure-html5/unnamed-chunk-4-1.png",
-    "last_modified": "2019-07-06T19:48:18-04:00",
+    "last_modified": "2019-10-06T22:19:38-04:00",
     "preview_width": 1248,
     "preview_height": 768
   },
@@ -56,7 +56,7 @@
       "maximum likelihood"
     ],
     "preview": "posts/2019-04-13-logistic-regression/logistic-regression_files/figure-html5/unnamed-chunk-5-1.png",
-    "last_modified": "2019-04-12T11:18:59-04:00",
+    "last_modified": "2019-10-06T22:20:15-04:00",
     "preview_width": 1248,
     "preview_height": 768
   },
@@ -76,7 +76,7 @@
       "data.table"
     ],
     "preview": "posts/2019-04-11-datatable-resources/./datatable.jpg",
-    "last_modified": "2019-07-24T19:16:03-04:00"
+    "last_modified": "2019-10-06T22:20:59-04:00"
   },
   {
     "path": "posts/2019-04-09-gentle-and-intuitive-intro-to-markov-chain-monte-carlo-mcmc/",
@@ -94,7 +94,7 @@
       "mcmc"
     ],
     "preview": "posts/2019-04-09-gentle-and-intuitive-intro-to-markov-chain-monte-carlo-mcmc/./gentle-and-intuitive-intro-to-markov-chain-monte-carlo-mcmc_files/figure-html5/unnamed-chunk-19-1.png",
-    "last_modified": "2019-04-10T06:04:34-04:00",
+    "last_modified": "2019-10-06T22:21:32-04:00",
     "preview_width": 1248,
     "preview_height": 768
   },
@@ -116,7 +116,7 @@
       "webserver"
     ],
     "preview": "https://raw.githubusercontent.com/hauselin/rtutorialsite/master/docs/attachments/dockerShinyDigitalOcean.jpg",
-    "last_modified": "2019-03-17T09:46:28-04:00"
+    "last_modified": "2019-10-06T22:22:02-04:00"
   },
   {
     "path": "posts/2019-02-22-why-we-should-never-use-barplots-use-geomquasirandom-instead/",
@@ -135,7 +135,7 @@
       "gganimate"
     ],
     "preview": "https://raw.githubusercontent.com/hauselin/rtutorialsite/master/docs/attachments/plot_dotdist.gif",
-    "last_modified": "2019-04-09T16:35:14-04:00"
+    "last_modified": "2019-10-06T22:22:47-04:00"
   },
   {
     "path": "posts/2019-02-18-fit-models-to-every-group/",
@@ -154,6 +154,6 @@
       "hausekeep"
     ],
     "preview": {},
-    "last_modified": "2019-04-12T12:15:35-04:00"
+    "last_modified": "2019-10-06T22:23:17-04:00"
   }
 ]

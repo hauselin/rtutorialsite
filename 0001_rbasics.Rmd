@@ -35,6 +35,10 @@ knit_hooks$set(output = function(x, options) {
 
 Get source code for this RMarkdown script [here](https://github.com/hauselin/rtutorialsite/blob/master/0001_rbasics.Rmd).
 
+## Consider being a patron and supporting my work?
+
+[Donate and become a patron](https://donorbox.org/support-my-teaching): If you find value in what I do and have learned something from my site, please consider becoming a patron. It takes me many hours to research, learn, and put together tutorials. Your support really matters.
+
 ## What is data science?
 
 * Cleaning, wrangling, and munging data
@@ -451,3 +455,7 @@ Be creative! Tab and autocomplete works in MANY other situations! Explore! (vari
 * Not knowing what class of data a function expects
 * Not knowing what class of data your function returns
 * Not learning how to **properly** use [stackoverflow](https://meta.stackoverflow.com/questions/252149/how-does-a-new-user-get-started-on-stack-overflow) 
+
+## Support my work
+
+[Support my work and become a patron here](https://donorbox.org/support-my-teaching)!

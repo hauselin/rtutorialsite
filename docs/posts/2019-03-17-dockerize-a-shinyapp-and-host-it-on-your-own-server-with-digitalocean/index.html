@@ -1336,6 +1336,7 @@ Tutorials
 </div>
 </div>
 <a href="../../articles.html">Articles</a>
+<a href="https://donorbox.org/support-my-teaching">Donate</a>
 <a href="https://twitter.com/hauselin">
 <i class="fab fa-twitter"></i>
 </a>
@@ -1372,17 +1373,21 @@ Tutorials
 <nav class="d-toc" id="TOC">
 <ul>
 <li><a href="#hosting-a-shinyapp-on-your-own-websitedomain-with-docker-and-digitalocean">Hosting a ShinyApp on your own website/domain with Docker and DigitalOcean</a></li>
+<li><a href="#consider-being-a-patron-and-supporting-my-work">Consider being a patron and supporting my work?</a></li>
 <li><a href="#step-1.-create-your-shinyapp">Step 1. Create your ShinyApp</a></li>
 <li><a href="#step-2.-dockerize-your-shinyapp-and-rstudio-server">Step 2. Dockerize your ShinyApp and RStudio Server</a></li>
 <li><a href="#step-3.-sign-up-to-digitalocean-to-get-a-private-server">Step 3. Sign up to DigitalOcean to get a private server</a></li>
 <li><a href="#step-4.-transfer-your-docker-tar-archive-image-to-your-digitalocean-droplet">Step 4. Transfer your Docker tar-archive image to your DigitalOcean droplet</a></li>
 <li><a href="#step-5.-load-your-docker-image-on-droplet-and-run-your-app-on-our-server">Step 5. Load your Docker image on droplet and run your app on our server!</a></li>
 <li><a href="#step-6.-optional-but-recommended-get-a-nice-domain-name-url-for-your-droplet">Step 6. (optional but recommended): Get a nice domain name (“URL”) for your droplet</a></li>
+<li><a href="#support-my-work">Support my work</a></li>
 </ul>
 </nav>
 <hr class="d-toc-separator"/>
 <h2 id="hosting-a-shinyapp-on-your-own-websitedomain-with-docker-and-digitalocean">Hosting a ShinyApp on your own website/domain with Docker and DigitalOcean</h2>
 <p>After much fiddling, I managed to dockerize my <a href="http://escal.site/">effect size converter ShinyApp</a> and hosted it on my own web server with <a href="https://m.do.co/c/a32d79a17aa9">DigitalOcean</a>, which is cheaper, faster, and more flexible than <a href="http://shinyapps.io/">shinyapps.io</a>. Below are the exact steps I took and solutions to problems I ran into along the way. Note that I did everything on <strong>Mac OS X</strong>, so I won’t promise everything will work if you use other operating systems! I’ve provided the links to the key resources I used at each step.</p>
+<h2 id="consider-being-a-patron-and-supporting-my-work">Consider being a patron and supporting my work?</h2>
+<p><a href="https://donorbox.org/support-my-teaching">Donate and become a patron</a>: If you find value in what I do and have learned something from my site, please consider becoming a patron. It takes me many hours to research, learn, and put together tutorials. Your support really matters.</p>
 <h2 id="step-1.-create-your-shinyapp">Step 1. Create your ShinyApp</h2>
 <p>In RStudio, create a new project via File -&gt; New Project -&gt; New Directory -&gt; Shiny Web Application. RStudio will create a ShinyApp project and directory that comes with a really simple ShinyApp (<code>app.R</code> which you can run by press Run App), which you can play with and edit to create your own ShinyApp.</p>
 <ul>
@@ -1449,6 +1454,8 @@ ns3.digitalocean.com</code></pre>
 <ol start="2" type="1">
 <li>Point your droplet IP to your domain name. Go to your DigitalOcean account and select Networking from the menu. Under “Add a domain”, enter your new domain name (escal.site in my case) and tell it which droplet or project you want to point to. Then manage this domain by creating new records. Create an “A” type to point your droplet IP to your domain name. Create a “CNAME” type to point one URL to another URL (e.g., www.escal.site also points to escal.site in my case). See <a href="https://www.howlthemes.com/point-domain-name-digitalocean-droplet/">here</a> and <a href="https://www.digitalocean.com/docs/networking/dns/how-to/manage-records/">here</a> for more instructions.</li>
 </ol>
+<h2 id="support-my-work">Support my work</h2>
+<p><a href="https://donorbox.org/support-my-teaching">Support my work and become a patron here</a>!</p>
 <!--radix_placeholder_article_footer-->
 <div class="article-footer">
   <p class="social_footer">

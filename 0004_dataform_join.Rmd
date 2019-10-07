@@ -32,6 +32,10 @@ knit_hooks$set(output = function(x, options) {
 
 Get source code for this RMarkdown script [here](https://github.com/hauselin/rtutorialsite/blob/master/0004_dataform_join.Rmd).
 
+## Consider being a patron and supporting my work?
+
+[Donate and become a patron](https://donorbox.org/support-my-teaching): If you find value in what I do and have learned something from my site, please consider becoming a patron. It takes me many hours to research, learn, and put together tutorials. Your support really matters.
+
 ## Load packages/libraries
 
 Use `library()` to load packages at the top of each R script.
@@ -348,3 +352,7 @@ summary(aov(grade ~ class + englishGrades, data = gradesLong_covariate2))
 
 * [official documentation](https://dplyr.tidyverse.org/reference/join.html)
 * [more tutorial](http://stat545.com/bit001_dplyr-cheatsheet.html)
+
+## Support my work
+
+[Support my work and become a patron here](https://donorbox.org/support-my-teaching)!

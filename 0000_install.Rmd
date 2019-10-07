@@ -37,6 +37,10 @@ Get source code for this RMarkdown script [here](https://github.com/hauselin/rtu
 
 If you're new to R, follow the instructions below to install R and RStudio. Otherwise, check out my tutorials and posts. To download all the resources on this site, visit my [GitHub site](https://github.com/hauselin/rtutorialsite). Click the green **Clone or download** button at the top right of the page to download everything. The RMarkdown scripts used to generate all the tutorials and posts have filenames that end with **.Rmd**.
 
+## Consider being a patron and supporting my work?
+
+[Donate and become a patron](https://donorbox.org/support-my-teaching): If you find value in what I do and have learned something from my site, please consider becoming a patron. It takes me many hours to research, learn, and put together tutorials. Your support really matters.
+
 ## Installing (or updating) R and RStudio
 
 1. Download R [here](https://www.r-project.org/). Follow the instructions under **Getting Started** to download R. Choose a mirror/location that is closest to you and download R for Linux, Mac, or Windows.
@@ -113,3 +117,8 @@ These R packages above are very powerful and it's worth learning them well.
   - combines multiple ggplots into one plot
 - [hausekeep](https://hauselin.github.io/hausekeep/)
   - miscellaneous functions for psychological research 
+
+## Support my work
+
+[Support my work and become a patron here](https://donorbox.org/support-my-teaching)!
+

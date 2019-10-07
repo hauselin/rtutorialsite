@@ -28,6 +28,10 @@ knitr::opts_chunk$set(echo = TRUE)
 
 Get source code for this RMarkdown script [here](https://github.com/hauselin/rtutorialsite/blob/master/_posts/2019-02-22-why-we-should-never-use-barplots-use-geomquasirandom-instead/why-we-should-never-use-barplots-use-geomquasirandom-instead.Rmd).
 
+## Consider being a patron and supporting my work?
+
+[Donate and become a patron](https://donorbox.org/support-my-teaching): If you find value in what I do and have learned something from my site, please consider becoming a patron. It takes me many hours to research, learn, and put together tutorials. Your support really matters.
+
 ## Dynamite or bar plots must die?
 
 A [recent open letter to journal editors](https://simplystatistics.org/2019/02/21/dynamite-plots-must-die/) said that "dynamite plots must die".
@@ -144,3 +148,7 @@ knitr::include_graphics(c("https://raw.githubusercontent.com/hauselin/rtutorials
                           "https://raw.githubusercontent.com/hauselin/rtutorialsite/master/docs/attachments/plot_violin.gif", 
                           "https://raw.githubusercontent.com/hauselin/rtutorialsite/master/docs/attachments/plot_dotdist.gif"))
 ```
+
+## Support my work
+
+[Support my work and become a patron here](https://donorbox.org/support-my-teaching)!

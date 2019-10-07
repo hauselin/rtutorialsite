@@ -942,7 +942,7 @@
 <!--radix_placeholder_front_matter-->
 
 <script id="distill-front-matter" type="text/json">
-{"title":"Bayesian inference and MCMC sampling introduction","description":"A gentle and intuitive introduction to Markov Chain Monte Carlo sampling with rejection sampling.","authors":[{"author":"Hause Lin","authorURL":"#","affiliation":"&nbsp;","affiliationURL":"#"}],"publishedDate":"2019-04-09T00:00:00.000+02:00","citationText":"Lin, 2019"}
+{"title":"Bayesian inference and MCMC sampling introduction","description":"A gentle and intuitive introduction to Markov Chain Monte Carlo sampling with rejection sampling.","authors":[{"author":"Hause Lin","authorURL":"#","affiliation":"&nbsp;","affiliationURL":"#"}],"publishedDate":"2019-04-09T00:00:00.000-04:00","citationText":"Lin, 2019"}
 </script>
 
 <!--/radix_placeholder_front_matter-->
@@ -966,6 +966,7 @@
 <h3 class="d-toc-header">Table of Contents</h3>
 <nav class="d-toc" id="TOC">
 <ul>
+<li><a href="#consider-being-a-patron-and-supporting-my-work">Consider being a patron and supporting my work?</a></li>
 <li><a href="#binomial-distribution-example-life-or-death-heads-or-tails">Binomial distribution example (life or death, heads or tails)</a></li>
 <li><a href="#representing-beliefs-about-probability-with-the-beta-distribution">Representing beliefs about probability with the beta distribution</a></li>
 <li><a href="#generate-prior-distribution-by-randomly-creating-data">Generate prior distribution by randomly creating data</a></li>
@@ -976,10 +977,13 @@
 <li><a href="#compare-prior-and-posterior">Compare prior and posterior</a></li>
 <li><a href="#create-a-simple-function-for-further-simulations-and-exploration">Create a simple function for further simulations and exploration</a></li>
 <li><a href="#exploring-different-parameters-sample-size-prior-shapes">Exploring different parameters (sample size, prior shapes)</a></li>
+<li><a href="#support-my-work">Support my work</a></li>
 </ul>
 </nav>
 <hr class="d-toc-separator"/>
 <p>Get source code for this RMarkdown script <a href="https://github.com/hauselin/rtutorialsite/blob/master/_posts/2019-04-09-gentle-and-intuitive-intro-to-markov-chain-monte-carlo-mcmc/gentle-and-intuitive-intro-to-markov-chain-monte-carlo-mcmc.Rmd">here</a>.</p>
+<h2 id="consider-being-a-patron-and-supporting-my-work">Consider being a patron and supporting my work?</h2>
+<p><a href="https://donorbox.org/support-my-teaching">Donate and become a patron</a>: If you find value in what I do and have learned something from my site, please consider becoming a patron. It takes me many hours to research, learn, and put together tutorials. Your support really matters.</p>
 <p>Bayesian inference, priors, likelihood, posteriors, and especially Markov Chain Monte Carlo sampling can be mysterious. I will try to explain these concepts with a simple 1-dimensional example, using something known as <a href="https://en.wikipedia.org/wiki/Rejection_sampling"><strong>rejection sampling</strong></a>, which is good for explaining how sampling works, but is never used in practice because it is highly inefficient (we’ll see what that means later on).</p>
 <h2 id="binomial-distribution-example-life-or-death-heads-or-tails">Binomial distribution example (life or death, heads or tails)</h2>
 <p>In a hospital, there are a total of 100 patients suffering from different deadly diseases. Doctor X is very optimistic and thinks that 83% of the patients will survive after 2 days. That is, Doctor X is expecting 83 patients to survive and 17 to die. This situation is like typical coin-toss scenarios, where survive is heads (coded 1) and death is tails (coded 0). Coin tosses and our scenario can be described using the binomial distribution.</p>
@@ -999,7 +1003,7 @@ rbinom(n = number_of_simulations, size = n_patients, prob = survive_probability)
 number_of_simulations &lt;- 10
 rbinom(n = number_of_simulations, size = n_patients, prob = survive_probability)</code></pre>
 <pre><code>
- [1] 84 85 84 79 80 81 81 85 85 83</code></pre>
+ [1] 79 85 81 79 87 75 89 82 86 87</code></pre>
 </div>
 <h2 id="representing-beliefs-about-probability-with-the-beta-distribution">Representing beliefs about probability with the beta distribution</h2>
 <p>Doctor X believes 83% of the 100 patients will survive. In other words, he believes 83% is the most likely survival probability, whereas 82% and 84% are also likely, but less likely than 83%. We can represent Doctor X’s belief using a beta distribution, which is useful for describing probabilities because it ranges from 0 to 1, and has two parameters that define the shape of the distribution.</p>
@@ -1041,7 +1045,7 @@ survive_probability &lt;- 0.83 # probability of surviving
 number_of_simulations &lt;- 1 
 rbinom(n = number_of_simulations, size = n_patients, prob = survive_probability)</code></pre>
 <pre><code>
-[1] 80</code></pre>
+[1] 82</code></pre>
 </div>
 <p>Run <code>rbinom(n = number_of_simulations, size = n_patients, prob = survive_probability)</code> a few more times and see if you manage to get 72? You might never see any 72s. But if you keep trying, you eventually will!</p>
 <p>Rather than manually re-run the function, let’s run 100,000 simulations to see how many 72s we observe.</p>
@@ -1051,9 +1055,9 @@ number_of_simulations &lt;- 100000
 simdata &lt;- rbinom(n = number_of_simulations, size = n_patients, prob = survive_probability)
 sum(simdata == 72) # total number of simulations that resulted in 72 survivals</code></pre>
 <pre><code>
-[1] 224</code></pre>
+[1] 218</code></pre>
 </div>
-<p>Only 224 of 100000 simulations (assuming 83% survival probability) generated 72 survivals!</p>
+<p>Only 218 of 100000 simulations (assuming 83% survival probability) generated 72 survivals!</p>
 <p>Remember, 83% is just one of the plausible parameter probability values in Doctor X’s prior beliefs distribution. See beta distribution reflecting his beliefs for the entire range of probability values in the figure above! 72% might not be as likely as 83% in his prior beliefs distribution, but it’s still fairly likely to occur!</p>
 <p>Let’s run another 100,000 simulations to see how many 72s we can get, assuming the prior belief of survival is 72%.</p>
 <div class="layout-chunk" data-layout="l-body">
@@ -1064,9 +1068,9 @@ number_of_simulations &lt;- 100000
 simdata &lt;- rbinom(n = number_of_simulations, size = n_patients, prob = survive_probability)
 sum(simdata == 72) # total number of simulations that resulted in 72 survivals</code></pre>
 <pre><code>
-[1] 8945</code></pre>
+[1] 8755</code></pre>
 </div>
-<p>This time, 8945 of 100000 simulations generated 72 survivals!</p>
+<p>This time, 8755 of 100000 simulations generated 72 survivals!</p>
 <p>Now, we can start to understand rejection sampling, MCMC, and how prior information and likelihood combine to form the posterior!</p>
 <h2 id="generate-prior-distribution-by-randomly-creating-data">Generate prior distribution by randomly creating data</h2>
 <p>First, let’s generate random samples to create Doctor X’s prior distribution. Remember, we’re using the beta distribution (ranges from 0 to 1) to generate probability values reflecting Doctor X’s beliefs.</p>
@@ -1078,7 +1082,7 @@ prior_nsamples &lt;- 20000
 priordist &lt;- rbeta(n = prior_nsamples, shape1 = 3.5, shape2 = 1.5)
 head(priordist) # probability values</code></pre>
 <pre><code>
-[1] 0.9677149 0.6655997 0.8746577 0.9503311 0.3289625 0.8424840</code></pre>
+[1] 0.8746318 0.7352035 0.4928132 0.4449929 0.5970266 0.7820128</code></pre>
 </div>
 <aside>
 We use <code>rbeta</code> rather than <code>dbeta</code> because <code>r</code> refers to random generation, whereas <code>d</code> refers to density. We’re trying to generate random samples from the beta distribution to generate our prior distribution.
@@ -1103,12 +1107,12 @@ length(priordist)</code></pre>
 <pre class="r"><code>
 head(priordist) # different probability values generated from beta distribution</code></pre>
 <pre><code>
-[1] 0.9677149 0.6655997 0.8746577 0.9503311 0.3289625 0.8424840</code></pre>
+[1] 0.8746318 0.7352035 0.4928132 0.4449929 0.5970266 0.7820128</code></pre>
 <pre class="r"><code>
 summary(priordist) # beta dist ranges from 0 to 1</code></pre>
 <pre><code>
    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
-0.05315 0.57839 0.72958 0.70106 0.85177 0.99933 </code></pre>
+0.04355 0.57854 0.73185 0.70145 0.84978 0.99934 </code></pre>
 <pre class="r"><code>
 # generate data from the binomial distribution
 simulated_data &lt;- rbinom(n = length(priordist), size = n_patients, prob = priordist)
@@ -1118,14 +1122,14 @@ length(simulated_data)</code></pre>
 <pre class="r"><code>
 head(simulated_data)</code></pre>
 <pre><code>
-[1] 97 58 82 96 26 83</code></pre>
+[1] 88 77 45 46 73 80</code></pre>
 <pre class="r"><code>
 summary(simulated_data)</code></pre>
 <pre><code>
    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
-   1.00   57.00   73.00   70.15   86.00  100.00 </code></pre>
+   2.00   58.00   73.00   70.19   86.00  100.00 </code></pre>
 </div>
-<p>If <code>rbinom(n = length(priordist), size = n_patients, prob = priordist)</code> doesn’t make sense, stop and think about what’s going on… For each value in the prior distribution <code>priordist</code> (continuous values 0 to 1 generated from the beta distribution reflecting Doctor X’s prior beliefs), we simulated (randomly generated) data from a binomial distribution with 100 patients (<code>size = n_patient</code>) and a specific survival probability (0.9677149 in the first simulation).</p>
+<p>If <code>rbinom(n = length(priordist), size = n_patients, prob = priordist)</code> doesn’t make sense, stop and think about what’s going on… For each value in the prior distribution <code>priordist</code> (continuous values 0 to 1 generated from the beta distribution reflecting Doctor X’s prior beliefs), we simulated (randomly generated) data from a binomial distribution with 100 patients (<code>size = n_patient</code>) and a specific survival probability (0.8746318 in the first simulation).</p>
 <h2 id="identify-samples-that-match-our-observed-outcome">Identify samples that match our observed outcome</h2>
 <div class="layout-chunk" data-layout="l-body">
 <pre class="r"><code>
@@ -1140,30 +1144,30 @@ head(sim_equals_observed_boolean)</code></pre>
 posterior &lt;- priordist[sim_equals_observed_boolean] # &quot;combine&quot; prior with data
 length(posterior)</code></pre>
 <pre><code>
-[1] 398</code></pre>
+[1] 373</code></pre>
 <pre class="r"><code>
 head(posterior)</code></pre>
 <pre><code>
-[1] 0.7541803 0.7419229 0.6997478 0.7090708 0.7453484 0.7421337</code></pre>
+[1] 0.6996857 0.6900000 0.7248674 0.7533469 0.6614456 0.6837314</code></pre>
 </div>
 <p>Yes, this posterior is the Bayesian posterior, <span class="math inline">\(P(\theta|data)\)</span>, the probability of your theory given the data, or Doctor X’s updated/revised beliefs! We have combined the prior, <span class="math inline">\(P(\theta)\)</span> with the likelihood, <span class="math inline">\(P(data|\theta)\)</span> to get the posterior, <span class="math inline">\(P(\theta|data)\)</span>. Below is Bayes’ theorem:</p>
 <aside>
 We ignore the marginal, <span class="math inline">\(P(data)\)</span>, in our example, since it’s not needed for rejection sampling. Actual MCMC algorithms also don’t try to estimate this term, because it’s very difficult!
 </aside>
 <p><span class="math display">\[P(\theta|data) = \frac{P(data|\theta)P(\theta)}{P(data)}\]</span></p>
-<p><a href="https://en.wikipedia.org/wiki/Rejection_sampling"><strong>Rejection sampling</strong></a>: Note that we have only 398 samples in our posterior distribution, even though we started off with 20000 samples in the prior! We have rejected all the prior samples that fail to generate 72 survivals (observed outcome) during our simulations. Hence the term <strong>“rejection sampling”</strong>. Rejection sampling is highly inefficient because we reject or throw out many samples! In practice, we never use rejection sampling, but it’s good to illustrate MCMC principles and how sampling works to combine the prior with the data to produce the posterior.</p>
+<p><a href="https://en.wikipedia.org/wiki/Rejection_sampling"><strong>Rejection sampling</strong></a>: Note that we have only 373 samples in our posterior distribution, even though we started off with 20000 samples in the prior! We have rejected all the prior samples that fail to generate 72 survivals (observed outcome) during our simulations. Hence the term <strong>“rejection sampling”</strong>. Rejection sampling is highly inefficient because we reject or throw out many samples! In practice, we never use rejection sampling, but it’s good to illustrate MCMC principles and how sampling works to combine the prior with the data to produce the posterior.</p>
 <h2 id="summarize-posterior-samples">Summarize posterior samples</h2>
 <div class="layout-chunk" data-layout="l-body">
 <pre class="r"><code>
 summary(posterior)</code></pre>
 <pre><code>
    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
- 0.6011  0.6918  0.7200  0.7201  0.7477  0.8372 </code></pre>
+ 0.5935  0.6904  0.7221  0.7202  0.7480  0.8456 </code></pre>
 <pre class="r"><code>
 quantile(posterior, c(0.025, 0.975))</code></pre>
 <pre><code>
      2.5%     97.5% 
-0.6325869 0.8039117 </code></pre>
+0.6355715 0.8029220 </code></pre>
 </div>
 <h2 id="compare-prior-and-posterior">Compare prior and posterior</h2>
 <div class="layout-chunk" data-layout="l-body">
@@ -1222,8 +1226,8 @@ posterior_from_prior(total_patients = 50, total_survive = 10,
                      prior_beta_shape1 = 0.5, prior_beta_shape2 = 0.5)</code></pre>
 <p><img src="gentle-and-intuitive-intro-to-markov-chain-monte-carlo-mcmc_files/figure-html5/unnamed-chunk-17-1.png" width="624" /></p>
 <pre><code>
-[1] &quot;posterior mean: 0.21&quot;
-[1] &quot;posterior median: 0.21&quot;</code></pre>
+[1] &quot;posterior mean: 0.2&quot;
+[1] &quot;posterior median: 0.2&quot;</code></pre>
 </div>
 <div class="layout-chunk" data-layout="l-body">
 <pre class="r"><code>
@@ -1232,7 +1236,7 @@ posterior_from_prior(total_patients = 100, total_survive = 70,
                      prior_beta_shape1 = 0.1, prior_beta_shape2 = 0.9)</code></pre>
 <p><img src="gentle-and-intuitive-intro-to-markov-chain-monte-carlo-mcmc_files/figure-html5/unnamed-chunk-18-1.png" width="624" /></p>
 <pre><code>
-[1] &quot;posterior mean: 0.69&quot;
+[1] &quot;posterior mean: 0.7&quot;
 [1] &quot;posterior median: 0.7&quot;</code></pre>
 </div>
 <p>Despite the skewed prior, the posterior distribution reflects the true value (<code>70/100 = 0.7</code>), but note how few samples we have in the posterior distribution!</p>
@@ -1244,9 +1248,11 @@ posterior_from_prior(total_patients = 10, total_survive = 7,
 <p><img src="gentle-and-intuitive-intro-to-markov-chain-monte-carlo-mcmc_files/figure-html5/unnamed-chunk-19-1.png" width="624" /></p>
 <pre><code>
 [1] &quot;posterior mean: 0.51&quot;
-[1] &quot;posterior median: 0.5&quot;</code></pre>
+[1] &quot;posterior median: 0.52&quot;</code></pre>
 </div>
 <p>This time, notice how the terribly skewed prior prevents the sampler from properly “exploring” the full range of the posterior distribution, which doesn’t capture the data well (<code>7/10 = 0.7 survival</code>).</p>
+<h2 id="support-my-work">Support my work</h2>
+<p><a href="https://donorbox.org/support-my-teaching">Support my work and become a patron here</a>!</p>
 <!--radix_placeholder_article_footer-->
 <!--/radix_placeholder_article_footer-->
 </div>

@@ -1321,6 +1321,7 @@ Tutorials
 </div>
 </div>
 <a href="articles.html">Articles</a>
+<a href="https://donorbox.org/support-my-teaching">Donate</a>
 <a href="https://twitter.com/hauselin">
 <i class="fab fa-twitter"></i>
 </a>
@@ -1351,6 +1352,7 @@ Tutorials
 <h3 class="d-toc-header">Table of Contents</h3>
 <nav class="d-toc" id="TOC">
 <ul>
+<li><a href="#consider-being-a-patron-and-supporting-my-work">Consider being a patron and supporting my work?</a></li>
 <li><a href="#load-packageslibraries">Load packages/libraries</a></li>
 <li><a href="#read-data-from-folderdirectory-into-r">Read data from folder/directory into R</a></li>
 <li><a href="#ggplot2-basics-layering"><code>ggplot2</code> basics: layering</a><ul>
@@ -1385,10 +1387,13 @@ Tutorials
 <li><a href="#manova">MANOVA</a><ul>
 <li><a href="#computing-between--and-within-subjects-error-bars-also-between-within-designs">Computing between- and within-subjects error bars (also between-within designs)</a></li>
 </ul></li>
+<li><a href="#support-my-work">Support my work</a></li>
 </ul>
 </nav>
 <hr class="d-toc-separator"/>
 <p>Get source code for this RMarkdown script <a href="https://github.com/hauselin/rtutorialsite/blob/master/0003_ggplot_modelfitting.Rmd">here</a>.</p>
+<h2 id="consider-being-a-patron-and-supporting-my-work">Consider being a patron and supporting my work?</h2>
+<p><a href="https://donorbox.org/support-my-teaching">Donate and become a patron</a>: If you find value in what I do and have learned something from my site, please consider becoming a patron. It takes me many hours to research, learn, and put together tutorials. Your support really matters.</p>
 <h2 id="load-packageslibraries">Load packages/libraries</h2>
 <p>Use <code>library()</code> to load packages at the top of each R script.</p>
 <div class="layout-chunk" data-layout="l-body">
@@ -2035,20 +2040,20 @@ ggplot(df1, aes(class, iq, col = gender)) + # y: iq
 anova_classGender &lt;- aov(grades ~ class * gender, data = df1)
 summary(anova_classGender)</code></pre>
 <pre><code>
-             Df Sum Sq Mean Sq F value  Pr(&gt;F)    
-class         3   5821  1940.4   8.597 0.00025 ***
-gender        1      0     0.0   0.000 0.99163    
-class:gender  3    177    59.0   0.262 0.85254    
-Residuals    32   7223   225.7                    
+             Df Sum Sq Mean Sq F value   Pr(&gt;F)    
+class         3   5821  1940.4  10.164 7.42e-05 ***
+gender        1     17    17.2   0.090    0.766    
+class:gender  3   1274   424.7   2.225    0.104    
+Residuals    32   6109   190.9                     
 ---
 Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
 <pre class="r"><code>
 summaryh(anova_classGender)</code></pre>
 <pre><code>
-           term                             results
-1:        class F(3, 32) = 8.60, p &lt; .001, r = 0.67
-2:       gender   F(1, 32) = 1e−04, p = .992, r = 0
-3: class:gender F(3, 32) = 0.26, p = .853, r = 0.15</code></pre>
+           term                              results
+1:        class F(3, 32) = 10.16, p &lt; .001, r = 0.70
+2:       gender  F(1, 32) = 0.09, p = .766, r = 0.05
+3: class:gender  F(3, 32) = 2.22, p = .104, r = 0.42</code></pre>
 </div>
 <h3 id="specify-contrasts-resources">Specify contrasts resources</h3>
 <ul>
@@ -2084,18 +2089,18 @@ ttest_gender</code></pre>
     Welch Two Sample t-test
 
 data:  iq by gender
-t = -0.63195, df = 37.78, p-value = 0.5312
+t = 0.10769, df = 36.551, p-value = 0.9148
 alternative hypothesis: true difference in means is not equal to 0
 95 percent confidence interval:
- -8.515814  4.464534
+ -6.097432  6.781685
 sample estimates:
 mean in group female   mean in group male 
-            108.3949             110.4205 </code></pre>
+            109.5702             109.2281 </code></pre>
 <pre class="r"><code>
 summaryh(ttest_gender)</code></pre>
 <pre><code>
-                             results
-1: t(38) = −0.63, p = .531, r = 0.10</code></pre>
+                            results
+1: t(37) = 0.11, p = .915, r = 0.02</code></pre>
 </div>
 <p>class a vs. class d</p>
 <div class="layout-chunk" data-layout="l-body">
@@ -2498,6 +2503,8 @@ ggplot(cw_weight_mixed, aes(Time, weight, col = as.factor(Diet))) + # Diet is nu
     labs(col = &quot;Diet&quot;)</code></pre>
 <p><img src="0003_ggplot_modelfitting_files/figure-html5/unnamed-chunk-66-1.png" width="624" /></p>
 </div>
+<h2 id="support-my-work">Support my work</h2>
+<p><a href="https://donorbox.org/support-my-teaching">Support my work and become a patron here</a>!</p>
 <!--radix_placeholder_article_footer-->
 <!--/radix_placeholder_article_footer-->
 </div>

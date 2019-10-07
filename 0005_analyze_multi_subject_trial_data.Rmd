@@ -19,6 +19,10 @@ This tutorial shows you how to analyze simple reaction time and acccuracy data t
 
 I use the [data.table](https://github.com/Rdatatable/data.table/wiki) package extensively in my analyses. `tidyverse` and `dplyr` are great, but I prefer the speed and concise syntax of `data.table`. I won't explain how `data.table` works in this tutorial, but you'll see in the code below how flexible and concise it is. If you want to learn more, see [my tutorials](https://hausetutorials.netlify.com/0002_tidyverse_datatable.html) and extra [resources](https://hausetutorials.netlify.com/posts/2019-04-11-datatable-resources/). 
 
+## Consider being a patron and supporting my work?
+
+[Donate and become a patron](https://donorbox.org/support-my-teaching): If you find value in what I do and have learned something from my site, please consider becoming a patron. It takes me many hours to research, learn, and put together tutorials. Your support really matters.
+
 ## Getting the data and code
 
 * Download Rmarkdown script for this tutorial [here](https://raw.githubusercontent.com/hauselin/rtutorialsite/master/0005_analyze_multi_subject_trial_data.Rmd).
@@ -149,3 +153,7 @@ model_acc <- glmer(acc ~ instructions + reward + (1 | subject), data = dt1, fami
 summary(model_acc)
 summaryh(model_acc) # summary function from my hausekeep package
 ```
+
+## Support my work
+
+[Support my work and become a patron here](https://donorbox.org/support-my-teaching)!
