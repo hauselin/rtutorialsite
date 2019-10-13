@@ -14,7 +14,7 @@
       "outlier detection"
     ],
     "preview": "posts/2019-10-07-outlier-detection-with-median-absolute-deviation/outlier-detection-with-median-absolute-deviation_files/figure-html5/unnamed-chunk-1-1.png",
-    "last_modified": "2019-10-12T22:56:44-04:00",
+    "last_modified": "2019-10-12T23:55:46-04:00",
     "preview_width": 1248,
     "preview_height": 768
   },
@@ -35,8 +35,8 @@
       "dimension reduction",
       "machine learning"
     ],
-    "preview": {},
-    "last_modified": "2019-10-12T22:56:03-04:00"
+    "preview": "https://raw.githubusercontent.com/hauselin/rtutorialsite/master/attachments/pca.jpg",
+    "last_modified": "2019-10-12T23:00:57-04:00"
   },
   {
     "path": "posts/2019-10-12-online-classes/",

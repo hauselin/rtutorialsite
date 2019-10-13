@@ -6,6 +6,7 @@ author:
   - name: Hause Lin
     url: {}
 date: 09-07-2019
+repository_url: https://github.com/hauselin/rtutorialsite/blob/master/_posts/2019-10-07-outlier-detection-with-median-absolute-deviation/outlier-detection-with-median-absolute-deviation.Rmd
 categories: 
   - outlier detection
 output:
@@ -14,6 +15,7 @@ output:
     self_contained: false
 editor_options: 
   chunk_output_type: console
+bibliography: biblio.bib
 ---
 
 ```{r setup, include=FALSE}
@@ -21,7 +23,7 @@ library(roxygen2)
 knitr::opts_chunk$set(echo = TRUE, cache = FALSE, comment = NA, message = FALSE, warning = FALSE)
 ```
 
-Get source code for this RMarkdown script [here](https://github.com/hauselin/rtutorialsite/blob/master/_posts/2019-04-09-gentle-and-intuitive-intro-to-markov-chain-monte-carlo-mcmc/gentle-and-intuitive-intro-to-markov-chain-monte-carlo-mcmc.Rmd).
+Get source code for this RMarkdown script [here](https://github.com/hauselin/rtutorialsite/blob/master/_posts/2019-10-07-outlier-detection-with-median-absolute-deviation/outlier-detection-with-median-absolute-deviation.Rmd).
 
 ## Consider being a patron and supporting my work?
 
@@ -66,28 +68,126 @@ sd(scores) # original sd
 sd(scores[1:8]) # sd after excluding extreme value
 ```
 
-### Function from hausekeep package to compute z-scores
+#### Function from hausekeep package to compute z-scores
+
+To make it easier to compute z-scores, detect outliers, and remove extreme values (based on your cut-off, 1.96, 2.5 or 3 or whatever), I've created the function `outliersZ()`, which is available in my `hausekeep` package. When you run the function, it tells you how many outliers were detected and what they've been replaced by (default replaces them with `NA`). 
 
 ```{r}
 library(hausekeep)
-outliersZ(scores, zCutOff = 3.0)
-outliersZ(scores, zCutOff = 3.0, showZValues = TRUE)
-outliersZ(scores)
-outliersZ(scores, zCutOff = 3.0)
+outliersZ(scores, zCutOff = 3.0) # replace values with z-scores greater than ± 3
+outliersZ(scores, showZValues = TRUE) # show z values (default = FALSE)
+outliersZ(scores, zCutOff = 0.35)  # note that default zCutOff is 1.96
+outliersZ(scores, replaceOutliersWith = -9999) # replace outlier values with -9999
 ```
 
-See what the `outliersZ` function is doing below:
-
-```{r}
-outliersZ
-```
+For more information, type `?outliersZ` in your console. If you want to see how the `outliersZ()` function is defined, just type `outliersZ` in your console and you'll see the source code.
 
 ## Robust solution: median absolute deviation
 
+Instead of using z-scores to detect outliers (which is problematic for various reasons shown above), we can instead use a simple and robust alternative that isn't influenced by extreme outlier values: median absolute deviaion [@Leys2019;@Leys2013]. See [Wikipedia article on median absolute deviation](https://en.wikipedia.org/wiki/Median_absolute_deviation), 
+
+Before we can compute the median absolute deviation, we need the median: 
+
+```{r}
+scores_median <- median(scores)
+scores_median
+```
+
+Next we subtract the median from each value and get the absolute values:
+
+```{r}
+scores_median_absolute_deviation <- abs(scores - scores_median)
+scores_median_absolute_deviation
+```
+
+Next we get the median of the median absolute deviations:
+
+```{r}
+median_median_absolute_deviations <- median(scores_median_absolute_deviation)
+median_median_absolute_deviations
+```
+
+Next, we can compute the median of the absolute deviations (MAD):
+
+```{r}
+scores_mad <- median_median_absolute_deviations * 1.4826
+scores_mad
+```
+
+This value is conceptually equivalent to standard deviation, but is used when computing median.
+
+And why 1.4826? It's a constant linked to the assumption of normality of the data, disregarding the abnormality induced by outliers [@Rousseeuw1993].
+
+You can actually easily compute the median of the absolute deviations by calling the `mad()` function. I computed it step-by-step above to show you how it's done. Typically, you can simply call the `mad()` function and provide your raw values as input.
+
+```{r}
+mad(scores)  # save as our manually computed scores_mad 
+```
+
+Finally, you can compute how much each value deviated:
+
+```{r}
+scores_deviation <- (scores - scores_median) / scores_mad
+scores_deviation # note that the value of 1000 has a huge deviation of 167!
+```
+
+Again, the idea is conceptually similar to computed z-scores: for each value, subtract the median from it, and divide by the median of the absolute deviations.
+
+Using this robust approach, the largest value 1000 in our set of values (`r scores`) has a huge deviation of `r scores_deviation[length(scores_deviation)]`. Regardless of what criteria you use (2.0, 2.5, 3.0 are all common cut-offs you could use), 1000 is so large that it'll have to be excluded (consistent with our intuition).
+
+#### Function from hausekeep package to compute median absolute deviation
+
+To help detect and remove outliers using this robust approach, I've created the function `outliersMAD()`, which is available in my `hausekeep` package.. When you run the function, it tells you how many outliers were detected and what they've been replaced by (default replaces them with `NA`). 
+
+```{r}
+library(hausekeep)
+outliersMAD(scores, MADCutOff = 3.0) # replace values with deviations greater than ± 3
+outliersMAD(scores, showMADValues = TRUE) # show deviation (default = FALSE)
+outliersMAD(scores, MADCutOff = 0.6)  # note that default cut-off value is 3.0
+outliersMAD(scores, replaceOutliersWith = -9999) # replace outlier values with -9999
+```
+
+For more information, type `?outliersMAD` in your console. If you want to see how the `outliersMAD()` function is defined, just type `outliersMAD` in your console and you'll see the source code.
+
+Here's how you would use the function typically:
+
+```{r}
+scores_outliers_removed <- outliersMAD(scores)
+scores_outliers_removed
+```
+
+```{r}
+boxplot(scores_outliers_removed)
+```
+
+## One final example
+
+```{r}
+scores <- c(-5, -2, 4, 8, 55, 100)
+```
+
+Use z-score method with 1.96 as cut-off:
+
+```{r}
+scores_removeoutliers_zscore <- outliersZ(scores) # uses 1.96 as default cutoff
+scores_removeoutliers_zscore
+```
+
+Use median absolute deviation method with 3.00 as cut-off:
+
+```{r}
+scores_removeoutliers_mad <- outliersMAD(scores) # uses 3.00 as default cutoff
+scores_removeoutliers_mad
+```
+
+```{r}
+par(mfrow = c(1, 3))  # set figure to plot 1 row, 3 columns
+boxplot(scores, main = "raw values")
+boxplot(scores_removeoutliers_zscore, main = "after z-score outlier removal")
+boxplot(scores_removeoutliers_mad, main = "after mad outlier removal")
+```
 
 
 ## Support my work
 
 [Support my work and become a patron here](https://donorbox.org/support-my-teaching)!
-
-
