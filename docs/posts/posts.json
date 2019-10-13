@@ -1,5 +1,44 @@
 [
   {
+    "path": "posts/2019-10-07-outlier-detection-with-median-absolute-deviation/",
+    "title": "Use median absolute deviation instead of z-score to detect outliers",
+    "description": "Why is it bad to use z-scores to detect outliers and why you should use median absolute deviation instead",
+    "author": [
+      {
+        "name": "Hause Lin",
+        "url": {}
+      }
+    ],
+    "date": "2019-09-07",
+    "categories": [
+      "outlier detection"
+    ],
+    "preview": "posts/2019-10-07-outlier-detection-with-median-absolute-deviation/outlier-detection-with-median-absolute-deviation_files/figure-html5/unnamed-chunk-1-1.png",
+    "last_modified": "2019-10-12T22:34:46-04:00",
+    "preview_width": 1248,
+    "preview_height": 768
+  },
+  {
+    "path": "posts/2019-10-07-resources-for-principal-components-analysis/",
+    "title": "Resources for principal components analysis",
+    "description": "Resources for learning principal components analysis",
+    "author": [
+      {
+        "name": "Hause Lin",
+        "url": {}
+      }
+    ],
+    "date": "2019-08-07",
+    "categories": [
+      "resources",
+      "pca",
+      "dimension reduction",
+      "machine learning"
+    ],
+    "preview": {},
+    "last_modified": "2019-10-12T22:33:06-04:00"
+  },
+  {
     "path": "posts/2019-07-24-what-happens-when-you-remove-or-set-the-intercept-to-0-in-regression-models/",
     "title": "What happens when you set the intercept to 0 in regression models",
     "description": "What happens when you force the intercept to be 0 in a regression model and why you should (generally) never do it",
@@ -63,7 +102,7 @@
   {
     "path": "posts/2019-04-11-datatable-resources/",
     "title": "Resources for data.table",
-    "description": "Resources for the R data.table package",
+    "description": "Resources for the amazing R data.table package",
     "author": [
       {
         "name": "Hause Lin",
@@ -76,7 +115,7 @@
       "data.table"
     ],
     "preview": "posts/2019-04-11-datatable-resources/./datatable.jpg",
-    "last_modified": "2019-10-06T22:20:59-04:00"
+    "last_modified": "2019-10-07T09:32:19-04:00"
   },
   {
     "path": "posts/2019-04-09-gentle-and-intuitive-intro-to-markov-chain-monte-carlo-mcmc/",

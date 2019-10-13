@@ -7,7 +7,24 @@
     <description>Data science and analysis tutorials
 </description>
     <generator>Radix</generator>
-    <lastBuildDate>Wed, 24 Jul 2019 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Sat, 07 Sep 2019 00:00:00 +0000</lastBuildDate>
+    <item>
+      <title>Use median absolute deviation instead of z-score to detect outliers</title>
+      <dc:creator>Hause Lin</dc:creator>
+      <link>https://hausetutorials.netlify.com/posts/2019-10-07-outlier-detection-with-median-absolute-deviation</link>
+      <description>Why is it bad to use z-scores to detect outliers and why you should use median absolute deviation instead</description>
+      <guid>https://hausetutorials.netlify.com/posts/2019-10-07-outlier-detection-with-median-absolute-deviation</guid>
+      <pubDate>Sat, 07 Sep 2019 00:00:00 +0000</pubDate>
+      <media:content url="https://hausetutorials.netlify.com/posts/2019-10-07-outlier-detection-with-median-absolute-deviation/outlier-detection-with-median-absolute-deviation_files/figure-html5/unnamed-chunk-1-1.png" medium="image" type="image/png" width="1248" height="768"/>
+    </item>
+    <item>
+      <title>Resources for principal components analysis</title>
+      <dc:creator>Hause Lin</dc:creator>
+      <link>https://hausetutorials.netlify.com/posts/2019-10-07-resources-for-principal-components-analysis</link>
+      <description>Resources for learning principal components analysis</description>
+      <guid>https://hausetutorials.netlify.com/posts/2019-10-07-resources-for-principal-components-analysis</guid>
+      <pubDate>Wed, 07 Aug 2019 00:00:00 +0000</pubDate>
+    </item>
     <item>
       <title>What happens when you set the intercept to 0 in regression models</title>
       <dc:creator>Hause Lin</dc:creator>
@@ -39,7 +56,7 @@
       <title>Resources for data.table</title>
       <dc:creator>Hause Lin</dc:creator>
       <link>https://hausetutorials.netlify.com/posts/2019-04-11-datatable-resources</link>
-      <description>Resources for the R data.table package</description>
+      <description>Resources for the amazing R data.table package</description>
       <guid>https://hausetutorials.netlify.com/posts/2019-04-11-datatable-resources</guid>
       <pubDate>Thu, 11 Apr 2019 00:00:00 +0000</pubDate>
       <media:content url="https://hausetutorials.netlify.com/posts/2019-04-11-datatable-resources/./datatable.jpg" medium="image" type="image/jpeg"/>

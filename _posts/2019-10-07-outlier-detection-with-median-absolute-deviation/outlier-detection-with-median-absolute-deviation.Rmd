@@ -1,0 +1,93 @@
+---
+title: "Use median absolute deviation instead of z-score to detect outliers"
+description: |
+  Why is it bad to use z-scores to detect outliers and why you should use median absolute deviation instead
+author:
+  - name: Hause Lin
+    url: {}
+date: 09-07-2019
+categories: 
+  - outlier detection
+output:
+  radix::radix_article:
+    toc: true
+    self_contained: false
+editor_options: 
+  chunk_output_type: console
+---
+
+```{r setup, include=FALSE}
+library(roxygen2)
+knitr::opts_chunk$set(echo = TRUE, cache = FALSE, comment = NA, message = FALSE, warning = FALSE)
+```
+
+Get source code for this RMarkdown script [here](https://github.com/hauselin/rtutorialsite/blob/master/_posts/2019-04-09-gentle-and-intuitive-intro-to-markov-chain-monte-carlo-mcmc/gentle-and-intuitive-intro-to-markov-chain-monte-carlo-mcmc.Rmd).
+
+## Consider being a patron and supporting my work?
+
+[Donate and become a patron](https://donorbox.org/support-my-teaching): If you find value in what I do and have learned something from my site, please consider becoming a patron. It takes me many hours to research, learn, and put together tutorials. Your support really matters.
+
+## Problems with z-score approach
+
+Consider the small set of numbers assigned to variable `scores` below. Just by eyeballing the data, it looks like there's one outlier: 1000
+
+```{r}
+scores <- c(-3, 1, 3, 3, 6, 8, 10, 10, 1000)
+mean(scores) # mean 
+sd(scores) # sd
+boxplot(scores) # 1000 looks like an extreme outlier
+```
+
+What are the standard or z-scores for each value? 
+
+$$z_{i} = \frac{x_{i}-\overline{x}}{\sigma}$$
+where $z_{i}$ is the z-score for a particular score, $x_{i}$ is a particular score, $\overline{x}$ is the mean of all scores, and $\sigma$ is the standard deviation of all scores.
+
+The equation above expressed in code:
+
+```{r}
+scores_z <- (scores - mean(scores)) / sd(scores)
+scores_z  # 1000 has a z-score < 3
+```
+
+The z-score of the largest value is `r tail(scores_z, 1)`, which is relatively small, considering researchers tend to consider scores as outliers only if they have z-scores 3 or larger. 
+
+### Outliers bias the mean and standard deviation
+
+So we seem to have a problem here: By eyeballing the scores, we intuitively know that 1000 should be an outlier, but the z-score outlier detection approach suggests 1000 isn't an outlierand we shouldn't remove it Of course, you could set your exclusion criterion to "scores with z-scores 2.5 (rather than 3.0) or greater will be considered outliers". But changing the criterion arbitrarily doesn't address the main problem:
+
+* extremely negative/positive scores bias the mean and standard deviation, affecting the resulting z-score
+
+```{r}
+mean(scores) # original mean
+mean(scores[1:8]) # mean after excluding extreme value
+
+sd(scores) # original sd
+sd(scores[1:8]) # sd after excluding extreme value
+```
+
+### Function from hausekeep package to compute z-scores
+
+```{r}
+library(hausekeep)
+outliersZ(scores, zCutOff = 3.0)
+outliersZ(scores, zCutOff = 3.0, showZValues = TRUE)
+outliersZ(scores)
+outliersZ(scores, zCutOff = 3.0)
+```
+
+See what the `outliersZ` function is doing below:
+
+```{r}
+outliersZ
+```
+
+## Robust solution: median absolute deviation
+
+
+
+## Support my work
+
+[Support my work and become a patron here](https://donorbox.org/support-my-teaching)!
+
+

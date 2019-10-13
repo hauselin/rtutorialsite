@@ -1,0 +1,46 @@
+---
+title: "Resources for principal components analysis"
+description: |
+  Resources for learning principal components analysis
+author:
+  - name: Hause Lin
+    url: {}
+date: 08-07-2019
+categories: 
+  - resources
+  - pca
+  - dimension reduction
+  - machine learning
+output:
+  radix::radix_article:
+    toc: true
+    self_contained: false
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+```
+
+### Consider being a patron and supporting my work?
+
+[Donate and become a patron](https://donorbox.org/support-my-teaching): If you find value in what I do and have learned something from my site, please consider becoming a patron. It takes me many hours to research, learn, and put together tutorials. Your support really matters.
+
+### Explanations
+
+* [Making sense of principal components analysis, eigen vectors & eigenvalues](https://stats.stackexchange.com/questions/2691/making-sense-of-principal-component-analysis-eigenvectors-eigenvalues) (most popular stackoverflow explanation)
+* [Intuitive explanation for how PCA turns from a geometric problem to a linear algebra problem with eigenvectors](https://stats.stackexchange.com/questions/217995/what-is-an-intuitive-explanation-for-how-pca-turns-from-a-geometric-problem-wit) (another popular stackoverflow question)
+
+### Nice visualizations and illustrations
+
+* [Eigenvectors and eigenvalues](http://setosa.io/ev/eigenvectors-and-eigenvalues/)
+* [Principal copmonent analysis](http://setosa.io/ev/principal-component-analysis/)
+
+### Tutorials with code
+
+* [An introduction to principal components with examples in R](http://www.octoberraindrops.com/publications/Phan_2016_IntroductionToPCA.pdf)
+* [Dimension reduction with R workshop by Saskia Freytag](https://rpubs.com/Saskia/520216)
+* [An overview of principal components analysis in Python (freeCodeCamp)](https://www.freecodecamp.org/news/an-overview-of-principal-component-analysis-6340e3bc4073/)
+
+### Support my work
+
+[Support my work and become a patron here](https://donorbox.org/support-my-teaching)!
