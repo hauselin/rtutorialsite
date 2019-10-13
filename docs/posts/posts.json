@@ -13,10 +13,8 @@
     "categories": [
       "outlier detection"
     ],
-    "preview": "posts/2019-10-07-outlier-detection-with-median-absolute-deviation/outlier-detection-with-median-absolute-deviation_files/figure-html5/unnamed-chunk-1-1.png",
-    "last_modified": "2019-10-12T23:55:46-04:00",
-    "preview_width": 1248,
-    "preview_height": 768
+    "preview": "https://raw.githubusercontent.com/hauselin/rtutorialsite/master/attachments/mad_zscore_outliers.png",
+    "last_modified": "2019-10-12T23:57:05-04:00"
   },
   {
     "path": "posts/2019-10-07-resources-for-principal-components-analysis/",

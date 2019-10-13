@@ -15,7 +15,7 @@
       <description>Why is it bad to use z-scores to detect outliers and why you should use median absolute deviation instead</description>
       <guid>https://hausetutorials.netlify.com/posts/2019-10-07-outlier-detection-with-median-absolute-deviation</guid>
       <pubDate>Sat, 07 Sep 2019 00:00:00 +0000</pubDate>
-      <media:content url="https://hausetutorials.netlify.com/posts/2019-10-07-outlier-detection-with-median-absolute-deviation/outlier-detection-with-median-absolute-deviation_files/figure-html5/unnamed-chunk-1-1.png" medium="image" type="image/png" width="1248" height="768"/>
+      <media:content url="https://raw.githubusercontent.com/hauselin/rtutorialsite/master/attachments/mad_zscore_outliers.png" medium="image" type="image/png"/>
     </item>
     <item>
       <title>Resources for principal components analysis</title>
