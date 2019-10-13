@@ -33,7 +33,7 @@ knitr::opts_chunk$set(echo = FALSE)
 ### Nice visualizations and illustrations
 
 * [Eigenvectors and eigenvalues](http://setosa.io/ev/eigenvectors-and-eigenvalues/)
-* [Principal copmonent analysis](http://setosa.io/ev/principal-component-analysis/)
+* [Principal component analysis](http://setosa.io/ev/principal-component-analysis/)
 * [Essence of linear algebra series on YouTube](https://www.youtube.com/playlist?list=PLZHQObOWTQDPD3MizzM2xVFitgF8hE_ab) (highly popular series with millions of views)
 
 ### Tutorials with code
