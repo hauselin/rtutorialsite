@@ -1462,9 +1462,12 @@ outliersZ(scores, replaceOutliersWith = -9999) # replace outlier values with -99
 <pre><code>
 [1]    -3     1     3     3     6     8    10    10 -9999</code></pre>
 </div>
+<aside>
+You might notice the z-scores returned by <code>outliersZ()</code> are different from what we computed above. That’s because the <code>sd()</code> function in R by default uses <code>n-1</code> in the denominator when calculating standard deviation, whereas my function uses <code>n</code>.
+</aside>
 <p>For more information, type <code>?outliersZ</code> in your console. If you want to see how the <code>outliersZ()</code> function is defined, just type <code>outliersZ</code> in your console and you’ll see the source code.</p>
 <h2 id="robust-solution-median-absolute-deviation">Robust solution: median absolute deviation</h2>
-<p>Instead of using z-scores to detect outliers (which is problematic for various reasons shown above), we can instead use a simple and robust alternative that isn’t influenced by extreme outlier values: median absolute deviaion <span class="citation" data-cites="Leys2019 Leys2013">(Leys et al. <a href="#ref-Leys2019">2019</a>, <a href="#ref-Leys2013">2013</a>)</span>. See <a href="https://en.wikipedia.org/wiki/Median_absolute_deviation">Wikipedia article on median absolute deviation</a>,</p>
+<p>Instead of using z-scores to detect outliers (which is problematic for various reasons shown above), we can instead use a simple and robust alternative that isn’t influenced by extreme outlier values: median absolute deviaion <span class="citation" data-cites="Leys2019 Leys2013">(Leys et al. <a href="#ref-Leys2019">2019</a>, <a href="#ref-Leys2013">2013</a>)</span>. See <a href="https://en.wikipedia.org/wiki/Median_absolute_deviation">Wikipedia article on median absolute deviation</a>.</p>
 <p>Before we can compute the median absolute deviation, we need the median:</p>
 <div class="layout-chunk" data-layout="l-body">
 <pre class="r"><code>
@@ -1518,7 +1521,7 @@ scores_deviation # note that the value of 1000 has a huge deviation of 167!</cod
 <p>Again, the idea is conceptually similar to computed z-scores: for each value, subtract the median from it, and divide by the median of the absolute deviations.</p>
 <p>Using this robust approach, the largest value 1000 in our set of values (-3, 1, 3, 3, 6, 8, 10, 10, 1000) has a huge deviation of 167.6109537. Regardless of what criteria you use (2.0, 2.5, 3.0 are all common cut-offs you could use), 1000 is so large that it’ll have to be excluded (consistent with our intuition).</p>
 <h3 id="function-from-hausekeep-package-to-compute-median-absolute-deviation">Function from hausekeep package to compute median absolute deviation</h3>
-<p>To help detect and remove outliers using this robust approach, I’ve created the function <code>outliersMAD()</code>, which is available in my <code>hausekeep</code> package.. When you run the function, it tells you how many outliers were detected and what they’ve been replaced by (default replaces them with <code>NA</code>).</p>
+<p>To help detect and remove outliers using this robust approach, I’ve created the function <code>outliersMAD()</code>, which is available in my <code>hausekeep</code> package. When you run the function, it tells you how many outliers were detected and what they’ve been replaced by (default replaces them with <code>NA</code>).</p>
 <div class="layout-chunk" data-layout="l-body">
 <pre class="r"><code>
 library(hausekeep)

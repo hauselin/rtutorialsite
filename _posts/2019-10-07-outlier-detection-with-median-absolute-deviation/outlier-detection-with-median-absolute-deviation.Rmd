@@ -82,11 +82,15 @@ outliersZ(scores, zCutOff = 0.35)  # note that default zCutOff is 1.96
 outliersZ(scores, replaceOutliersWith = -9999) # replace outlier values with -9999
 ```
 
+<aside>
+You might notice the z-scores returned by `outliersZ()` are different from what we computed above. That's because the `sd()` function in R by default uses `n-1` in the denominator when calculating standard deviation, whereas my function uses `n`.
+</aside>
+
 For more information, type `?outliersZ` in your console. If you want to see how the `outliersZ()` function is defined, just type `outliersZ` in your console and you'll see the source code.
 
 ## Robust solution: median absolute deviation
 
-Instead of using z-scores to detect outliers (which is problematic for various reasons shown above), we can instead use a simple and robust alternative that isn't influenced by extreme outlier values: median absolute deviaion [@Leys2019;@Leys2013]. See [Wikipedia article on median absolute deviation](https://en.wikipedia.org/wiki/Median_absolute_deviation), 
+Instead of using z-scores to detect outliers (which is problematic for various reasons shown above), we can instead use a simple and robust alternative that isn't influenced by extreme outlier values: median absolute deviaion [@Leys2019;@Leys2013]. See [Wikipedia article on median absolute deviation](https://en.wikipedia.org/wiki/Median_absolute_deviation).
 
 Before we can compute the median absolute deviation, we need the median: 
 
@@ -140,7 +144,7 @@ Using this robust approach, the largest value 1000 in our set of values (`r scor
 
 ### Function from hausekeep package to compute median absolute deviation
 
-To help detect and remove outliers using this robust approach, I've created the function `outliersMAD()`, which is available in my `hausekeep` package.. When you run the function, it tells you how many outliers were detected and what they've been replaced by (default replaces them with `NA`). 
+To help detect and remove outliers using this robust approach, I've created the function `outliersMAD()`, which is available in my `hausekeep` package. When you run the function, it tells you how many outliers were detected and what they've been replaced by (default replaces them with `NA`). 
 
 ```{r}
 library(hausekeep)
