@@ -1,0 +1,46 @@
+---
+title: "Good online classes (MOOCs) for data science"
+description: |
+  A list of online classes I've completed or am planning to take
+author:
+  - name: Hause Lin
+    url: {}
+date: 08-01-2019
+categories: 
+  - resources
+  - moocs
+output:
+  radix::radix_article:
+    toc: true
+    self_contained: false
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+```
+
+### Consider being a patron and supporting my work?
+
+[Donate and become a patron](https://donorbox.org/support-my-teaching): If you find value in what I do and have learned something from my site, please consider becoming a patron. It takes me many hours to research, learn, and put together tutorials. Your support really matters.
+
+### Machine learning
+
+[Mathematics for machine learning specialization (3 courses)](https://www.coursera.org/specializations/mathematics-machine-learning)
+
+### Computer science
+
+[MITx 6.00.1x Introduction to Computer Science and Programming Using Python](https://www.edx.org/course/6-00-1x-introduction-to-computer-science-and-programming-using-python-3)
+
+* This course is one of the most popular online computer science course, with [more than a million enrollments](https://news.mit.edu/2018/first-mitx-mooc-reaches-enrollment-milestone-0830). 
+
+[MITx 6.00.2x Introduction to Computational Thinking and Data Science](https://www.edx.org/course/6-00-2x-introduction-to-computational-thinking-and-data-science-3)
+
+### Mike X Cohen's Udemy courses
+
+[Linear algebra, neural time series analysis, mathematics, dimension reduction, etc.](https://www.udemy.com/user/mike-x-cohen/)
+
+* I've worked with and learned a lot from Mike. He's an incredible neuroscientist, psychologist, and teacher. He also answers all questions (including life questions!) on his [online forum](https://discuss.sincxpress.com/). 
+
+### Support my work
+
+[Support my work and become a patron here](https://donorbox.org/support-my-teaching)!
