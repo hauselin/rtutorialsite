@@ -19,8 +19,8 @@
   },
   {
     "path": "posts/2019-10-07-resources-for-principal-components-analysis/",
-    "title": "Resources for principal components analysis",
-    "description": "Resources for learning principal components analysis",
+    "title": "Resources for principal components analysis and dimension reduction",
+    "description": "Resources for learning principal components analysis and dimension reduction",
     "author": [
       {
         "name": "Hause Lin",
@@ -35,7 +35,7 @@
       "machine learning"
     ],
     "preview": "https://raw.githubusercontent.com/hauselin/rtutorialsite/master/attachments/pca.jpg",
-    "last_modified": "2019-10-12T23:00:57-04:00"
+    "last_modified": "2019-10-13T00:14:11-04:00"
   },
   {
     "path": "posts/2019-10-12-online-classes/",

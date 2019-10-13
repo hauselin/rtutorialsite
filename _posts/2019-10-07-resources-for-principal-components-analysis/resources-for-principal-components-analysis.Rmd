@@ -1,7 +1,7 @@
 ---
-title: "Resources for principal components analysis"
+title: "Resources for principal components analysis and dimension reduction"
 description: |
-  Resources for learning principal components analysis
+  Resources for learning principal components analysis and dimension reduction
 preview: https://raw.githubusercontent.com/hauselin/rtutorialsite/master/attachments/pca.jpg
 author:
   - name: Hause Lin
@@ -42,6 +42,7 @@ knitr::opts_chunk$set(echo = FALSE)
 * [An introduction to principal components with examples in R](http://www.octoberraindrops.com/publications/Phan_2016_IntroductionToPCA.pdf)
 * [Dimension reduction with R workshop by Saskia Freytag](https://rpubs.com/Saskia/520216)
 * [An overview of principal components analysis in Python (freeCodeCamp)](https://www.freecodecamp.org/news/an-overview-of-principal-component-analysis-6340e3bc4073/)
+* [Brief tutorial I gave on multivariate EEG analysis with linear discriminant via generalized eigendecomposition (MATLAB)](https://github.com/hauselin/eeg_gedlda_tutorial)
 
 ### Support my work
 
