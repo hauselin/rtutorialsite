@@ -1377,8 +1377,11 @@ Tutorials
 <li><a href="#consider-being-a-patron-and-supporting-my-work">Consider being a patron and supporting my work?</a></li>
 <li><a href="#problems-with-z-score-approach">Problems with z-score approach</a><ul>
 <li><a href="#outliers-bias-the-mean-and-standard-deviation">Outliers bias the mean and standard deviation</a></li>
+<li><a href="#function-from-hausekeep-package-to-compute-z-scores">Function from hausekeep package to compute z-scores</a></li>
 </ul></li>
-<li><a href="#robust-solution-median-absolute-deviation">Robust solution: median absolute deviation</a></li>
+<li><a href="#robust-solution-median-absolute-deviation">Robust solution: median absolute deviation</a><ul>
+<li><a href="#function-from-hausekeep-package-to-compute-median-absolute-deviation">Function from hausekeep package to compute median absolute deviation</a></li>
+</ul></li>
 <li><a href="#one-final-example">One final example</a></li>
 <li><a href="#support-my-work">Support my work</a></li>
 </ul>
@@ -1438,7 +1441,7 @@ sd(scores[1:8]) # sd after excluding extreme value</code></pre>
 <pre><code>
 [1] 4.590363</code></pre>
 </div>
-<h4 id="function-from-hausekeep-package-to-compute-z-scores">Function from hausekeep package to compute z-scores</h4>
+<h3 id="function-from-hausekeep-package-to-compute-z-scores">Function from hausekeep package to compute z-scores</h3>
 <p>To make it easier to compute z-scores, detect outliers, and remove extreme values (based on your cut-off, 1.96, 2.5 or 3 or whatever), I’ve created the function <code>outliersZ()</code>, which is available in my <code>hausekeep</code> package. When you run the function, it tells you how many outliers were detected and what they’ve been replaced by (default replaces them with <code>NA</code>).</p>
 <div class="layout-chunk" data-layout="l-body">
 <pre class="r"><code>
@@ -1514,7 +1517,7 @@ scores_deviation # note that the value of 1000 has a huge deviation of 167!</cod
 </div>
 <p>Again, the idea is conceptually similar to computed z-scores: for each value, subtract the median from it, and divide by the median of the absolute deviations.</p>
 <p>Using this robust approach, the largest value 1000 in our set of values (-3, 1, 3, 3, 6, 8, 10, 10, 1000) has a huge deviation of 167.6109537. Regardless of what criteria you use (2.0, 2.5, 3.0 are all common cut-offs you could use), 1000 is so large that it’ll have to be excluded (consistent with our intuition).</p>
-<h4 id="function-from-hausekeep-package-to-compute-median-absolute-deviation">Function from hausekeep package to compute median absolute deviation</h4>
+<h3 id="function-from-hausekeep-package-to-compute-median-absolute-deviation">Function from hausekeep package to compute median absolute deviation</h3>
 <p>To help detect and remove outliers using this robust approach, I’ve created the function <code>outliersMAD()</code>, which is available in my <code>hausekeep</code> package.. When you run the function, it tells you how many outliers were detected and what they’ve been replaced by (default replaces them with <code>NA</code>).</p>
 <div class="layout-chunk" data-layout="l-body">
 <pre class="r"><code>

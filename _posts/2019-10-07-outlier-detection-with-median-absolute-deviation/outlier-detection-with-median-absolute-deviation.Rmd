@@ -69,7 +69,7 @@ sd(scores) # original sd
 sd(scores[1:8]) # sd after excluding extreme value
 ```
 
-#### Function from hausekeep package to compute z-scores
+### Function from hausekeep package to compute z-scores
 
 To make it easier to compute z-scores, detect outliers, and remove extreme values (based on your cut-off, 1.96, 2.5 or 3 or whatever), I've created the function `outliersZ()`, which is available in my `hausekeep` package. When you run the function, it tells you how many outliers were detected and what they've been replaced by (default replaces them with `NA`). 
 
@@ -136,7 +136,8 @@ Again, the idea is conceptually similar to computed z-scores: for each value, su
 
 Using this robust approach, the largest value 1000 in our set of values (`r scores`) has a huge deviation of `r scores_deviation[length(scores_deviation)]`. Regardless of what criteria you use (2.0, 2.5, 3.0 are all common cut-offs you could use), 1000 is so large that it'll have to be excluded (consistent with our intuition).
 
-#### Function from hausekeep package to compute median absolute deviation
+
+### Function from hausekeep package to compute median absolute deviation
 
 To help detect and remove outliers using this robust approach, I've created the function `outliersMAD()`, which is available in my `hausekeep` package.. When you run the function, it tells you how many outliers were detected and what they've been replaced by (default replaces them with `NA`). 
 
@@ -187,7 +188,6 @@ boxplot(scores, main = "raw values")
 boxplot(scores_removeoutliers_zscore, main = "after z-score outlier removal")
 boxplot(scores_removeoutliers_mad, main = "after mad outlier removal")
 ```
-
 
 ## Support my work
 
