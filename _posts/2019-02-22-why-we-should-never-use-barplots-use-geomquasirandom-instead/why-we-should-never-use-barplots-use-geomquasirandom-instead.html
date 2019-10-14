@@ -50,7 +50,7 @@
   <!--/radix_placeholder_rmarkdown_metadata-->
   
   <script type="text/json" id="radix-resource-manifest">
-  {"type":"character","attributes":{},"value":["biblio.bib","why-we-should-never-use-barplots-use-geomquasirandom-instead_files/bowser-1.9.3/bowser.min.js","why-we-should-never-use-barplots-use-geomquasirandom-instead_files/distill-2.2.21/template.v2.js","why-we-should-never-use-barplots-use-geomquasirandom-instead_files/figure-html5/unnamed-chunk-2-1.gif","why-we-should-never-use-barplots-use-geomquasirandom-instead_files/figure-html5/unnamed-chunk-3-1.gif","why-we-should-never-use-barplots-use-geomquasirandom-instead_files/figure-html5/unnamed-chunk-4-1.gif","why-we-should-never-use-barplots-use-geomquasirandom-instead_files/figure-html5/unnamed-chunk-5-1.gif","why-we-should-never-use-barplots-use-geomquasirandom-instead_files/jquery-1.11.3/jquery.min.js","why-we-should-never-use-barplots-use-geomquasirandom-instead_files/pagedtable-1.1/css/pagedtable.css","why-we-should-never-use-barplots-use-geomquasirandom-instead_files/pagedtable-1.1/js/pagedtable.js","why-we-should-never-use-barplots-use-geomquasirandom-instead_files/webcomponents-2.0.0/webcomponents.js"]}
+  {"type":"character","attributes":{},"value":["biblio.bib","why-we-should-never-use-barplots-use-geomquasirandom-instead_files/bowser-1.9.3/bowser.min.js","why-we-should-never-use-barplots-use-geomquasirandom-instead_files/distill-2.2.21/template.v2.js","why-we-should-never-use-barplots-use-geomquasirandom-instead_files/jquery-1.11.3/jquery.min.js","why-we-should-never-use-barplots-use-geomquasirandom-instead_files/webcomponents-2.0.0/webcomponents.js"]}
   </script>
   <!--radix_placeholder_navigation_in_header-->
   <!--/radix_placeholder_navigation_in_header-->
@@ -995,7 +995,8 @@
 <pre class="r"><code>
 # load packages
 library(data.table); library(tidyverse); library(gganimate); 
-library(ggbeeswarm); library(rmarkdown); library(knitr)</code></pre>
+library(ggbeeswarm); library(rmarkdown); library(knitr)
+theme_set(theme_bw())  # set overall ggplot theme</code></pre>
 </div>
 <h2 id="randomly-generate-10-datasets-with-same-mean-and-sd">Randomly generate 10 datasets with same mean and sd</h2>
 <p>Within each dataset, we have data from two groups, with 50 data points (e.g., subjects) per group. One group has mean 100 (sd = 15) and the other has mean 105 (sd = 45).</p>

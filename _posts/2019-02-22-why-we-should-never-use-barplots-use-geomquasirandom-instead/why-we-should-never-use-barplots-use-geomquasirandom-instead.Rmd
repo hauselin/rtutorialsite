@@ -48,6 +48,7 @@ Many others have also suggested we need to plot better [@drummond2011;@Weissgerb
 # load packages
 library(data.table); library(tidyverse); library(gganimate); 
 library(ggbeeswarm); library(rmarkdown); library(knitr)
+theme_set(theme_bw())  # set overall ggplot theme
 ```
 
 ## Randomly generate 10 datasets with same mean and sd
