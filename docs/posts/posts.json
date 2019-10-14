@@ -190,8 +190,8 @@
       "ggplot2",
       "gganimate"
     ],
-    "preview": "https://raw.githubusercontent.com/hauselin/rtutorialsite/master/docs/attachments/plot_dotdist.gif",
-    "last_modified": "2019-10-14T11:11:56-04:00"
+    "preview": "https://raw.githubusercontent.com/hauselin/rtutorialsite/master/attachments/plot_dotdist.gif",
+    "last_modified": "2019-10-14T11:14:59-04:00"
   },
   {
     "path": "posts/2019-02-18-fit-models-to-every-group/",

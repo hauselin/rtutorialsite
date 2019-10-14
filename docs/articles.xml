@@ -95,7 +95,7 @@
       <description>Why are barplots or dynamite plots so bad? Comparing four different types of plots: barplot, boxplot, violinplot, and geom_quasirandom plot</description>
       <guid>https://hausetutorials.netlify.com/posts/2019-02-22-why-we-should-never-use-barplots-use-geomquasirandom-instead</guid>
       <pubDate>Fri, 22 Feb 2019 00:00:00 +0000</pubDate>
-      <media:content url="https://raw.githubusercontent.com/hauselin/rtutorialsite/master/docs/attachments/plot_dotdist.gif" medium="image" type="image/gif"/>
+      <media:content url="https://raw.githubusercontent.com/hauselin/rtutorialsite/master/attachments/plot_dotdist.gif" medium="image" type="image/gif"/>
     </item>
     <item>
       <title>Complete vs. partial vs. no-pooling: Fit the same model to different groups (just one simple line of code)</title>

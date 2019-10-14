@@ -2,7 +2,7 @@
 title: "Why bar (dynamite) plots are terrible (use ggbeeswarm instead)"
 description: |
   Why are barplots or dynamite plots so bad? Comparing four different types of plots: barplot, boxplot, violinplot, and geom_quasirandom plot
-preview: https://raw.githubusercontent.com/hauselin/rtutorialsite/master/docs/attachments/plot_dotdist.gif
+preview: https://raw.githubusercontent.com/hauselin/rtutorialsite/master/attachments/plot_dotdist.gif
 author:
   - name: Hause Lin
 date: 02-22-2019
@@ -144,10 +144,10 @@ Note what happens in the four figures below.
 * `geom_quasirandom` from [ggbeeswarm](https://github.com/eclarke/ggbeeswarm) package plots the distribution and dots. Such plots are most informative.
 
 ```{r, out.width="50%", echo=FALSE}
-knitr::include_graphics(c("https://raw.githubusercontent.com/hauselin/rtutorialsite/master/docs/attachments/plot_bar.gif", 
-                          "https://raw.githubusercontent.com/hauselin/rtutorialsite/master/docs/attachments/plot_boxplot.gif", 
-                          "https://raw.githubusercontent.com/hauselin/rtutorialsite/master/docs/attachments/plot_violin.gif", 
-                          "https://raw.githubusercontent.com/hauselin/rtutorialsite/master/docs/attachments/plot_dotdist.gif"))
+knitr::include_graphics(c("https://raw.githubusercontent.com/hauselin/rtutorialsite/master/attachments/plot_bar.gif", 
+                          "https://raw.githubusercontent.com/hauselin/rtutorialsite/master/attachments/plot_boxplot.gif", 
+                          "https://raw.githubusercontent.com/hauselin/rtutorialsite/master/attachments/plot_violin.gif", 
+                          "https://raw.githubusercontent.com/hauselin/rtutorialsite/master/attachments/plot_dotdist.gif"))
 ```
 
 ## Support my work
