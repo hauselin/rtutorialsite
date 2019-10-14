@@ -11,6 +11,8 @@ navbar:
   right:
     - text: "Home"
       href: index.html
+    - text: "About me"
+      href: https://www.hauselin.com/about/
     - text: "Effect size converter"
       href: http://escal.site
     - text: "Tutorials"

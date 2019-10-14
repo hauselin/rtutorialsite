@@ -1304,6 +1304,7 @@
 </div>
 <div class="nav-right">
 <a href="index.html">Home</a>
+<a href="https://www.hauselin.com/about/">About me</a>
 <a href="http://escal.site">Effect size converter</a>
 <div class="nav-dropdown">
 <button class="nav-dropbtn">
@@ -2040,20 +2041,20 @@ ggplot(df1, aes(class, iq, col = gender)) + # y: iq
 anova_classGender &lt;- aov(grades ~ class * gender, data = df1)
 summary(anova_classGender)</code></pre>
 <pre><code>
-             Df Sum Sq Mean Sq F value   Pr(&gt;F)    
-class         3   5821  1940.4  10.164 7.42e-05 ***
-gender        1     17    17.2   0.090    0.766    
-class:gender  3   1274   424.7   2.225    0.104    
-Residuals    32   6109   190.9                     
+             Df Sum Sq Mean Sq F value  Pr(&gt;F)    
+class         3   5821  1940.4   8.700 0.00023 ***
+gender        1     57    57.4   0.257 0.61542    
+class:gender  3    205    68.5   0.307 0.82019    
+Residuals    32   7137   223.0                    
 ---
 Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
 <pre class="r"><code>
 summaryh(anova_classGender)</code></pre>
 <pre><code>
-           term                              results
-1:        class F(3, 32) = 10.16, p &lt; .001, r = 0.70
-2:       gender  F(1, 32) = 0.09, p = .766, r = 0.05
-3: class:gender  F(3, 32) = 2.22, p = .104, r = 0.42</code></pre>
+           term                             results
+1:        class F(3, 32) = 8.70, p &lt; .001, r = 0.67
+2:       gender F(1, 32) = 0.26, p = .615, r = 0.09
+3: class:gender F(3, 32) = 0.31, p = .820, r = 0.17</code></pre>
 </div>
 <h3 id="specify-contrasts-resources">Specify contrasts resources</h3>
 <ul>
@@ -2089,18 +2090,18 @@ ttest_gender</code></pre>
     Welch Two Sample t-test
 
 data:  iq by gender
-t = 0.10769, df = 36.551, p-value = 0.9148
+t = 0.6678, df = 30.597, p-value = 0.5093
 alternative hypothesis: true difference in means is not equal to 0
 95 percent confidence interval:
- -6.097432  6.781685
+ -4.576478  9.028973
 sample estimates:
 mean in group female   mean in group male 
-            109.5702             109.2281 </code></pre>
+            110.6878             108.4615 </code></pre>
 <pre class="r"><code>
 summaryh(ttest_gender)</code></pre>
 <pre><code>
                             results
-1: t(37) = 0.11, p = .915, r = 0.02</code></pre>
+1: t(31) = 0.67, p = .509, r = 0.12</code></pre>
 </div>
 <p>class a vs. class d</p>
 <div class="layout-chunk" data-layout="l-body">
