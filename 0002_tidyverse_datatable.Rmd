@@ -61,13 +61,12 @@ df1 <- read.csv("./data/sleep.csv") # base R read.csv() function
 df2 <- fread("./data/sleep.csv") # fread() from library(data.table)
 # same as df2 <- fread("data/sleep.csv")
 
-# my favorite way of reading data: combining tbl_dt() and fread()
-df3 <- tbl_dt(fread("./data/sleep.csv")) # tbl_dt() from library(dtplyr)
-# same as df3 <- tbl_dt(fread("data/sleep.csv"))
+# my favourite!
+df3 <- fread("./data/sleep.csv")
 
 # or download data from website directly 
 url <- "https://raw.githubusercontent.com/hauselin/rtutorialsite/master/data/sleep.csv"
-df_url <- tbl_dt(fread(url))
+df_url <- fread(url)
 ```
 
 <aside>
@@ -76,23 +75,18 @@ The `sleep` dataset is actually a built-in dataset in R. Try typing `sleep` in y
 
 The `.` in the file path simply refers to the current working directory, so it can be dropped. And `..` can be used to refer to the parent directory.
 
-## Comparing the outputs of read.csv(x), fread(x), and tbl_dt(fread(x))
+## Comparing the outputs of read.csv(x) and fread(x)
 
 ```{r}
 df1 # read.csv("./data/sleep.csv")
 class(df1) # read.csv("./data/sleep.csv")
 ```
 
-```{r}
-df2 # fread("./data/sleep.csv") # fread() from library(data.table)
-class(df2) # fread("./data/sleep.csv") # fread() from library(data.table)
-```
-
 How's the output different from the one above?
 
 ```{r}
-df3 # tbl_dt(fread("./data/sleep.csv")) # tbl_dt() from library(dtplyr)
-class(df3) # tbl_dt(fread("./data/sleep.csv")) # tbl_dt() from library(dtplyr)
+df3 # fread("./data/sleep.csv")
+class(df3) # fread("./data/sleep.csv")
 ```
 
 How's the output different from the two outputs above?
@@ -104,8 +98,8 @@ Check out the csv (comma separated values) data [here](https://raw.githubusercon
 Most of these read functions can import/read different types of files (e.g., csv, txt, URLs) as long as the raw data are formatted properly (e.g., separated by commas, tabs). But if you're trying to read proprietary data formats (e.g., SPSS datasets, Excel sheets), you'll need to use other libraries (e.g., `readxl`, `foreign`) to read those data into R.
 
 ```{r}
-df_url <- tbl_dt(fread("https://raw.githubusercontent.com/hauselin/rtutorialsite/master/data/sleep.csv"))
-df_url # print data to console; same dataset as tbl_dt(fread("./data/sleep.csv"))
+df_url <- fread("https://raw.githubusercontent.com/hauselin/rtutorialsite/master/data/sleep.csv")
+df_url # print data to console; same dataset fread("./data/sleep.csv")
 ```
 
 ## Summarizing objects
@@ -121,7 +115,7 @@ glimpse(df1)
 head(df1)
 head(df3, n = 3) # what does this do?
 tail(df3, n = 2)
-print(df3, n = Inf) # Inf is infinte (so print all rows)
+df3
 ```
 
 Use pipes `%>%` to summarize objects
@@ -129,15 +123,10 @@ Use pipes `%>%` to summarize objects
 ```{r}
 df3 %>% head(n = 2)
 df3 %>% head(2) # why does this work?
-df3 %>% print(Inf)
 df3 %>% summary() # does this work? why?
 ```
 
 datatables and `dplyr`'s data_frame are much better because they tell us the class of each variable at the top when you print the object in the console. They also tell you the dimensions of your data.
-
-```{r}
-df3 # data_frame (dplyr) + data.table + tibble
-```
 
 ## Using `$` and `[]` to extract elements using their names
 
@@ -215,13 +204,12 @@ Load tidyverse packages (I'm running this line here for educational purposes; th
 Read in data from a csv file (stored in "./data/simpsonsParadox.csv"). Right-click to download and save the data [here](https://raw.githubusercontent.com/hauselin/rtutorialsite/master/data/simpsonsParadox.csv) (you can also use the `fread()` function to read and download it directly from the URL; see code below)
 
 * `fread()`: a function from `data.table` (fast-read, hence fread) that is **VERY** fast and powerful, and much better than `read.csv()` or `read.table()` from base R
-* `tbl_dt()`: converts data to a `tibble` class and `data.table` class
 
 ```{r}
-df4 <- tbl_dt(fread("./data/simpsonsParadox.csv"))
+df4 <- fread("./data/simpsonsParadox.csv")
 # or download data directly from URL
 url <- "https://raw.githubusercontent.com/hauselin/rtutorialsite/master/data/simpsonsParadox.csv"
-df4 <- tbl_dt(fread(url))
+df4 <- fread(url)
 
 df4 # print table in console 
 ```
@@ -251,7 +239,7 @@ glimpse(df4) # have a glimpse of the data (quick summary of data)
 ```
 
 ```{r}
-print(df4, n = Inf) # print all or Inf (infinite) rows
+df4
 ```
 
 <aside>
@@ -424,7 +412,7 @@ nrow(df4) # number of rows; ncol() gives you number of columns
 ```
 
 ```{r}
-mutate(df4, studentNumber = 1:nrow(df4)) %>% print(n = Inf)
+mutate(df4, studentNumber = 1:nrow(df4))
 ```
 
 ### Sorting or arranging data rows with `arrange()`
@@ -442,7 +430,7 @@ arrange(df4, desc(class)) # descending order of class
 ### Combining functions with pipes `%>%`
 
 ```{r}
-df4 %>% print(n = Inf) # reminder what the dataset looks like
+df4 # reminder what the dataset looks like
 ```
 
 <aside>
@@ -456,7 +444,7 @@ NOTE that comments # are placed AFTER the pipe symbol!
 
 ```{r}
 df4 %>%
-  mutate(gradesRound = round(grades), studentNo = 1:.N) %>% # round grades, add subject number: .N is a shortcut for nrow(df4)
+  mutate(gradesRound = round(grades), studentNo = 1:nrow(df4)) %>% # round grades, add subject number: .N is a shortcut for nrow(df4)
   select(-grades) %>% # remove original grades variable
   select(studentNo, class, iq, gradesRound) %>%  # reorder columns
   rename(intelligence = iq, examGrades = gradesRound, classroom = class) %>% # rename variables
@@ -467,7 +455,7 @@ The code above doesn't save the output as an object. Below we save it as an obje
 
 ```{r}
 df5 <- df4 %>% 
-    mutate(gradesRound = round(grades), studentNo = 1:.N) %>% # round grades, add subject number: .N is a shortcut for nrow(df4)
+    mutate(gradesRound = round(grades), studentNo = 1:nrow(df4)) %>% # round grades, add subject number: .N is a shortcut for nrow(df4)
     select(-grades) %>% # remove original grades variable
     select(studentNo, class, iq, gradesRound) %>%  # reorder columns
     rename(intelligence = iq, examGrades = gradesRound, classroom = class) %>% # rename variables
@@ -479,7 +467,7 @@ You can even pipe the output to any other functions (e.g., plotting functions)
 
 ```{r}
 df4 %>% 
-    mutate(gradesRound = round(grades), studentNo = 1:.N) %>% # round grades, add subject number: .N is a shortcut for nrow(df4)
+    mutate(gradesRound = round(grades), studentNo = 1:nrow(df4)) %>% # round grades, add subject number: .N is a shortcut for nrow(df4)
     select(-grades) %>% # remove original grades variable
     select(studentNo, class, iq, gradesRound) %>%  # reorder columns
     rename(intelligence = iq, examGrades = gradesRound, classroom = class) %>% # rename variables
@@ -531,7 +519,7 @@ df4$gender <- sample(x = c("female", "male"), size = 40, replace = T)
 Because the gender labels are generated randomly, you'll get different values each time you re-run the code.
 
 ```{r}
-print(df4, n = Inf)
+df4
 ```
 
 Compute mean for each class by gender
@@ -556,7 +544,7 @@ For much more information, see the following sites
 
 While the syntax of `tidyverse` and `dplyr` functions are really easy to understand, they sometimes can be quite long-winded. Using pipes `%>%` makes your code readable, but is a bit long to read sometimes. Now we'll see how `data.table()` can shorten all that code while maintaining readability. Also, `data.table()` is MUCH faster, which is especially useful when dealing with bigger datasets (hundreds of MBs and GBs and even TBs).
 
-If you use `tbl_dt(fread('filename'))` to read your dataset into R, then your object is already a `data.table`. Check it with `class(objectName)`.
+If you use `fread('filename')` to read your dataset into R, then your object is already a `data.table`. Check it with `class(objectName)`.
 
 ```{r}
 df4
@@ -565,11 +553,9 @@ df1
 class(df1)
 ```
 
-If your object isn't a `data.table`, you can convert it to one using `tbl_dt()` from the `dtplyr` package. `tbl_dt()` turns your dataset into `tibble` (tbl) and `data.table`.
+If your object isn't a `data.table`, you can convert it to one using `setDT()`.
 
 ```{r}
-df1_dt <- tbl_dt(df1) # preferred approach, especially for datasets with many columns and rows
-class(df1_dt)
 setDT(df1) # setDT() also works (and works without reassignment: no need to use <-)
 class(df1) # but setDT() doesn't convert your dataset to a tibble class at the same time
 ```
@@ -587,7 +573,7 @@ data.table[i, j, by]
 ### Filter data.table via i
 
 ```{r}
-print(df4, n = Inf) # remind yourself what your data look like
+df4
 class(df4) # is it a data.table?
 ```
 

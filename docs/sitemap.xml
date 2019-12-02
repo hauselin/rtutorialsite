@@ -10,19 +10,19 @@
   </url>
   <url>
     <loc>https://hausetutorials.netlify.com/0002_tidyverse_datatable.html</loc>
-    <lastmod>2019-10-06T22:16:18-04:00</lastmod>
+    <lastmod>2019-12-01T22:39:27-05:00</lastmod>
   </url>
   <url>
     <loc>https://hausetutorials.netlify.com/0003_ggplot_modelfitting.html</loc>
-    <lastmod>2019-10-06T22:16:45-04:00</lastmod>
+    <lastmod>2019-12-01T22:41:38-05:00</lastmod>
   </url>
   <url>
     <loc>https://hausetutorials.netlify.com/0004_dataform_join.html</loc>
-    <lastmod>2019-10-06T22:17:13-04:00</lastmod>
+    <lastmod>2019-12-01T22:43:20-05:00</lastmod>
   </url>
   <url>
     <loc>https://hausetutorials.netlify.com/0005_analyze_multi_subject_trial_data.html</loc>
-    <lastmod>2019-10-06T22:17:53-04:00</lastmod>
+    <lastmod>2019-12-01T22:43:47-05:00</lastmod>
   </url>
   <url>
     <loc>https://hausetutorials.netlify.com/articles.html</loc>
@@ -33,12 +33,12 @@
     <lastmod>2019-10-14T12:02:04-04:00</lastmod>
   </url>
   <url>
-    <loc>https://hausetutorials.netlify.com/posts/2019-11-06-parallel-programming-with-foreach-package/</loc>
-    <lastmod>2019-11-06T21:32:08-05:00</lastmod>
+    <loc>https://hausetutorials.netlify.com/posts/2019-12-01-neural-networks-deriving-the-sigmoid-derivative/</loc>
+    <lastmod>2019-12-01T22:44:26-05:00</lastmod>
   </url>
   <url>
     <loc>https://hausetutorials.netlify.com/posts/2019-10-07-outlier-detection-with-median-absolute-deviation/</loc>
-    <lastmod>2019-10-13T10:34:30-04:00</lastmod>
+    <lastmod>2019-12-01T22:22:23-05:00</lastmod>
   </url>
   <url>
     <loc>https://hausetutorials.netlify.com/posts/2019-10-07-resources-for-principal-components-analysis/</loc>
@@ -58,7 +58,7 @@
   </url>
   <url>
     <loc>https://hausetutorials.netlify.com/posts/2019-04-13-logistic-regression/</loc>
-    <lastmod>2019-10-12T22:47:29-04:00</lastmod>
+    <lastmod>2019-12-01T22:13:26-05:00</lastmod>
   </url>
   <url>
     <loc>https://hausetutorials.netlify.com/posts/2019-04-11-datatable-resources/</loc>
@@ -73,15 +73,15 @@
     <lastmod>2019-10-06T22:22:02-04:00</lastmod>
   </url>
   <url>
+    <loc>https://hausetutorials.netlify.com/posts/2019-02-23-random-walks/</loc>
+    <lastmod>2019-12-01T22:22:55-05:00</lastmod>
+  </url>
+  <url>
     <loc>https://hausetutorials.netlify.com/posts/2019-02-22-why-we-should-never-use-barplots-use-geomquasirandom-instead/</loc>
     <lastmod>2019-10-14T11:14:59-04:00</lastmod>
   </url>
   <url>
     <loc>https://hausetutorials.netlify.com/posts/2019-02-18-fit-models-to-every-group/</loc>
     <lastmod>2019-10-06T22:23:17-04:00</lastmod>
-  </url>
-  <url>
-    <loc>https://hausetutorials.netlify.com/posts/2019-12-01-neural-networks-deriving-the-sigmoid-derivative/</loc>
-    <lastmod>2019-12-01T20:43:05-05:00</lastmod>
   </url>
 </urlset>

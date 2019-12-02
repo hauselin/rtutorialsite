@@ -1801,21 +1801,17 @@ class(left_join(wide2, extraInfo2)) # not data.table (no...)</code></pre>
 <pre><code>
 [1] &quot;tbl_df&quot;     &quot;tbl&quot;        &quot;data.frame&quot;</code></pre>
 <pre class="r"><code>
-left_join(wide2, extraInfo2) %&gt;% tbl_dt() # convert to data.table</code></pre>
+left_join(wide2, extraInfo2) %&gt;% as.data.table() # convert to data.table</code></pre>
 <pre><code>
-Source: local data table [4 x 5]
-
-# A tibble: 4 x 5
-  student englishGrades mathGrades physicsGrades chemistryGrades
-  &lt;chr&gt;           &lt;dbl&gt;      &lt;dbl&gt;         &lt;dbl&gt;           &lt;dbl&gt;
-1 Andy                1         10          1000              NA
-2 Mary               -2        -20         -2000              NA
-3 John                5         50            NA             901
-4 Jane               -5        -50            NA             900</code></pre>
+   student englishGrades mathGrades physicsGrades chemistryGrades
+1:    Andy             1         10          1000              NA
+2:    Mary            -2        -20         -2000              NA
+3:    John             5         50            NA             901
+4:    Jane            -5        -50            NA             900</code></pre>
 <pre class="r"><code>
-left_join(wide2, extraInfo2) %&gt;% tbl_dt() %&gt;% class() # check class (data.table! yea!)</code></pre>
+left_join(wide2, extraInfo2) %&gt;% as.data.table() %&gt;% class() # check class (data.table! yea!)</code></pre>
 <pre><code>
-[1] &quot;tbl_dt&quot;     &quot;tbl&quot;        &quot;data.table&quot; &quot;data.frame&quot;</code></pre>
+[1] &quot;data.table&quot; &quot;data.frame&quot;</code></pre>
 </div>
 <h2 id="within-subjects-between-subjects-designs-covariates">Within-subjects, between-subjects designs, covariates</h2>
 <p>Create some data</p>
@@ -1866,30 +1862,26 @@ mean of the differences
 <pre class="r"><code>
 gradesLong &lt;- melt(gradesWide, id.vars = &quot;student&quot;, variable.name = &quot;class&quot;, value.name = &quot;grade&quot;) %&gt;% 
     arrange(student) %&gt;% # sort by student
-    tbl_dt() # convert to data.table and tibble
+    as.data.table() # convert to data.table and tibble
 gradesLong</code></pre>
 <pre><code>
-Source: local data table [16 x 3]
-
-# A tibble: 16 x 3
-   student class           grade
-   &lt;chr&gt;   &lt;fct&gt;           &lt;dbl&gt;
- 1 Andy    englishGrades       1
- 2 Andy    mathGrades         10
- 3 Andy    physicsGrades    1000
- 4 Andy    chemistryGrades    NA
- 5 Jane    englishGrades      -5
- 6 Jane    mathGrades        -50
- 7 Jane    physicsGrades      NA
- 8 Jane    chemistryGrades   900
- 9 John    englishGrades       5
-10 John    mathGrades         50
-11 John    physicsGrades      NA
-12 John    chemistryGrades   901
-13 Mary    englishGrades      -2
-14 Mary    mathGrades        -20
-15 Mary    physicsGrades   -2000
-16 Mary    chemistryGrades    NA</code></pre>
+    student           class grade
+ 1:    Andy   englishGrades     1
+ 2:    Andy      mathGrades    10
+ 3:    Andy   physicsGrades  1000
+ 4:    Andy chemistryGrades    NA
+ 5:    Jane   englishGrades    -5
+ 6:    Jane      mathGrades   -50
+ 7:    Jane   physicsGrades    NA
+ 8:    Jane chemistryGrades   900
+ 9:    John   englishGrades     5
+10:    John      mathGrades    50
+11:    John   physicsGrades    NA
+12:    John chemistryGrades   901
+13:    Mary   englishGrades    -2
+14:    Mary      mathGrades   -20
+15:    Mary   physicsGrades -2000
+16:    Mary chemistryGrades    NA</code></pre>
 </div>
 <p>What if we want to use <code>englishGrades</code> as a covariate? Then the covariate has to be in a separate column/variable.</p>
 <p>Subset data with just covariate and id variable</p>
@@ -1898,15 +1890,11 @@ Source: local data table [16 x 3]
 covariate_englishGrades &lt;- gradesLong[class == &quot;englishGrades&quot;, .(student, grade)]
 covariate_englishGrades</code></pre>
 <pre><code>
-Source: local data table [4 x 2]
-
-# A tibble: 4 x 2
-  student grade
-  &lt;chr&gt;   &lt;dbl&gt;
-1 Andy        1
-2 Jane       -5
-3 John        5
-4 Mary       -2</code></pre>
+   student grade
+1:    Andy     1
+2:    Jane    -5
+3:    John     5
+4:    Mary    -2</code></pre>
 </div>
 <p>Rename covariate</p>
 <div class="layout-chunk" data-layout="l-body">
@@ -1914,65 +1902,53 @@ Source: local data table [4 x 2]
 setnames(covariate_englishGrades, &quot;grade&quot;, &quot;englishGrades&quot;)
 covariate_englishGrades</code></pre>
 <pre><code>
-Source: local data table [4 x 2]
-
-# A tibble: 4 x 2
-  student englishGrades
-  &lt;chr&gt;           &lt;dbl&gt;
-1 Andy                1
-2 Jane               -5
-3 John                5
-4 Mary               -2</code></pre>
+   student englishGrades
+1:    Andy             1
+2:    Jane            -5
+3:    John             5
+4:    Mary            -2</code></pre>
 </div>
 <p>Use <code>left_join()</code> to add covariate to data</p>
 <div class="layout-chunk" data-layout="l-body">
 <pre class="r"><code>
-gradesLong_covariate &lt;- left_join(gradesLong, covariate_englishGrades)
+gradesLong_covariate &lt;- left_join(gradesLong, covariate_englishGrades) %&gt;% as.data.table()
 gradesLong_covariate</code></pre>
 <pre><code>
-Source: local data table [16 x 4]
-
-# A tibble: 16 x 4
-   student class           grade englishGrades
-   &lt;chr&gt;   &lt;fct&gt;           &lt;dbl&gt;         &lt;dbl&gt;
- 1 Andy    englishGrades       1             1
- 2 Andy    mathGrades         10             1
- 3 Andy    physicsGrades    1000             1
- 4 Andy    chemistryGrades    NA             1
- 5 Jane    englishGrades      -5            -5
- 6 Jane    mathGrades        -50            -5
- 7 Jane    physicsGrades      NA            -5
- 8 Jane    chemistryGrades   900            -5
- 9 John    englishGrades       5             5
-10 John    mathGrades         50             5
-11 John    physicsGrades      NA             5
-12 John    chemistryGrades   901             5
-13 Mary    englishGrades      -2            -2
-14 Mary    mathGrades        -20            -2
-15 Mary    physicsGrades   -2000            -2
-16 Mary    chemistryGrades    NA            -2</code></pre>
+    student           class grade englishGrades
+ 1:    Andy   englishGrades     1             1
+ 2:    Andy      mathGrades    10             1
+ 3:    Andy   physicsGrades  1000             1
+ 4:    Andy chemistryGrades    NA             1
+ 5:    Jane   englishGrades    -5            -5
+ 6:    Jane      mathGrades   -50            -5
+ 7:    Jane   physicsGrades    NA            -5
+ 8:    Jane chemistryGrades   900            -5
+ 9:    John   englishGrades     5             5
+10:    John      mathGrades    50             5
+11:    John   physicsGrades    NA             5
+12:    John chemistryGrades   901             5
+13:    Mary   englishGrades    -2            -2
+14:    Mary      mathGrades   -20            -2
+15:    Mary   physicsGrades -2000            -2
+16:    Mary chemistryGrades    NA            -2</code></pre>
 <pre class="r"><code>
 # remove englishGrades from long form data if necessary
 gradesLong_covariate2 &lt;- gradesLong_covariate[class != &quot;englishGrades&quot;] 
 gradesLong_covariate2</code></pre>
 <pre><code>
-Source: local data table [12 x 4]
-
-# A tibble: 12 x 4
-   student class           grade englishGrades
-   &lt;chr&gt;   &lt;fct&gt;           &lt;dbl&gt;         &lt;dbl&gt;
- 1 Andy    mathGrades         10             1
- 2 Andy    physicsGrades    1000             1
- 3 Andy    chemistryGrades    NA             1
- 4 Jane    mathGrades        -50            -5
- 5 Jane    physicsGrades      NA            -5
- 6 Jane    chemistryGrades   900            -5
- 7 John    mathGrades         50             5
- 8 John    physicsGrades      NA             5
- 9 John    chemistryGrades   901             5
-10 Mary    mathGrades        -20            -2
-11 Mary    physicsGrades   -2000            -2
-12 Mary    chemistryGrades    NA            -2</code></pre>
+    student           class grade englishGrades
+ 1:    Andy      mathGrades    10             1
+ 2:    Andy   physicsGrades  1000             1
+ 3:    Andy chemistryGrades    NA             1
+ 4:    Jane      mathGrades   -50            -5
+ 5:    Jane   physicsGrades    NA            -5
+ 6:    Jane chemistryGrades   900            -5
+ 7:    John      mathGrades    50             5
+ 8:    John   physicsGrades    NA             5
+ 9:    John chemistryGrades   901             5
+10:    Mary      mathGrades   -20            -2
+11:    Mary   physicsGrades -2000            -2
+12:    Mary chemistryGrades    NA            -2</code></pre>
 </div>
 <p>Fit model with covariate using <code>lm()</code> (linear model)</p>
 <div class="layout-chunk" data-layout="l-body">

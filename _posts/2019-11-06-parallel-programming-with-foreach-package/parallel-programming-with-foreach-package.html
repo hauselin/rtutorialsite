@@ -19,8 +19,9 @@
  <!--/radix_placeholder_import_source-->
 
   <!--radix_placeholder_meta_tags-->
-  <title>Parallel programming with foreach package</title>
+  <title>Parallel programming</title>
   
+  <meta property="description" itemprop="description" content="test"/>
   
   
   <!--  https://schema.org/Article -->
@@ -29,19 +30,21 @@
   <meta name="article:author" content="Hause Lin"/>
   
   <!--  https://developers.facebook.com/docs/sharing/webmasters#markup -->
-  <meta property="og:title" content="Parallel programming with foreach package"/>
+  <meta property="og:title" content="Parallel programming"/>
   <meta property="og:type" content="article"/>
+  <meta property="og:description" content="test"/>
   <meta property="og:locale" content="en_US"/>
   
   <!--  https://dev.twitter.com/cards/types/summary -->
   <meta property="twitter:card" content="summary"/>
-  <meta property="twitter:title" content="Parallel programming with foreach package"/>
+  <meta property="twitter:title" content="Parallel programming"/>
+  <meta property="twitter:description" content="test"/>
   
   <!--/radix_placeholder_meta_tags-->
   <!--radix_placeholder_rmarkdown_metadata-->
   
   <script type="text/json" id="radix-rmarkdown-metadata">
-  {"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["title","description","preview","author","date","output","draft","categories","repository_url","editor_options"]}},"value":[{"type":"character","attributes":{},"value":["Parallel programming with foreach package"]},{"type":"NULL"},{"type":"character","attributes":{},"value":["https://raw.githubusercontent.com/hauselin/rtutorialsite/master/attachments/plot_dotdist.gif"]},{"type":"list","attributes":{},"value":[{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name"]}},"value":[{"type":"character","attributes":{},"value":["Hause Lin"]}]}]},{"type":"character","attributes":{},"value":["10-06s-2019"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["radix::radix_article"]}},"value":[{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["toc","self_contained"]}},"value":[{"type":"logical","attributes":{},"value":[true]},{"type":"logical","attributes":{},"value":[false]}]}]},{"type":"logical","attributes":{},"value":[false]},{"type":"character","attributes":{},"value":["foreach","parallel"]},{"type":"character","attributes":{},"value":["https://github.com/hauselin/rtutorialsite/blob/master/_posts/2019-02-22-why-we-should-never-use-barplots-use-geomquasirandom-instead/why-we-should-never-use-barplots-use-geomquasirandom-instead.Rmd"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["chunk_output_type"]}},"value":[{"type":"character","attributes":{},"value":["console"]}]}]}
+  {"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["title","description","preview","author","date","output","draft","categories","repository_url","editor_options"]}},"value":[{"type":"character","attributes":{},"value":["Parallel programming"]},{"type":"character","attributes":{},"value":["test"]},{"type":"character","attributes":{},"value":["https://raw.githubusercontent.com/hauselin/rtutorialsite/master/attachments/plot_dotdist.gif"]},{"type":"list","attributes":{},"value":[{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name"]}},"value":[{"type":"character","attributes":{},"value":["Hause Lin"]}]}]},{"type":"character","attributes":{},"value":["10-06s-2019"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["radix::radix_article"]}},"value":[{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["toc","self_contained"]}},"value":[{"type":"logical","attributes":{},"value":[true]},{"type":"logical","attributes":{},"value":[false]}]}]},{"type":"logical","attributes":{},"value":[true]},{"type":"character","attributes":{},"value":["foreach","parallel"]},{"type":"character","attributes":{},"value":["https://github.com/hauselin/rtutorialsite/blob/master/_posts/2019-02-22-why-we-should-never-use-barplots-use-geomquasirandom-instead/why-we-should-never-use-barplots-use-geomquasirandom-instead.Rmd"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["chunk_output_type"]}},"value":[{"type":"character","attributes":{},"value":["console"]}]}]}
   </script>
   <!--/radix_placeholder_rmarkdown_metadata-->
   
@@ -939,7 +942,7 @@
 <!--radix_placeholder_front_matter-->
 
 <script id="distill-front-matter" type="text/json">
-{"title":"Parallel programming with foreach package","authors":[{"author":"Hause Lin","authorURL":"#","affiliation":"&nbsp;","affiliationURL":"#"}],"publishedDate":"2019-10-06T00:00:00.000-04:00","citationText":"Lin, 2019"}
+{"title":"Parallel programming","description":"test","authors":[{"author":"Hause Lin","authorURL":"#","affiliation":"&nbsp;","affiliationURL":"#"}],"publishedDate":"2019-10-06T00:00:00.000-04:00","citationText":"Lin, 2019"}
 </script>
 
 <!--/radix_placeholder_front_matter-->
@@ -949,8 +952,8 @@
 <!--/radix_placeholder_site_before_body-->
 
 <div class="d-title">
-<h1>Parallel programming with foreach package</h1>
-
+<h1>Parallel programming</h1>
+<p>test</p>
 </div>
 
 <div class="d-byline">
@@ -965,6 +968,15 @@
 <ul>
 <li><a href="#consider-being-a-patron-and-supporting-my-work">Consider being a patron and supporting my work?</a></li>
 <li><a href="#load-foreach-library">Load <code>foreach</code> library</a></li>
+<li><a href="#sequential.serial-processing-non-parallel">Sequential.serial processing (non-parallel)</a><ul>
+<li><a href="#basic">Basic</a></li>
+<li><a href="#combining-results">Combining results</a></li>
+<li><a href="#list-comprehension">List comprehension</a></li>
+</ul></li>
+<li><a href="#parallel-processing">Parallel processing</a><ul>
+<li><a href="#dofuture">doFuture</a></li>
+</ul></li>
+<li><a href="#resources">Resources</a></li>
 <li><a href="#support-my-work">Support my work</a></li>
 </ul>
 </nav>
@@ -977,6 +989,97 @@
 <pre class="r"><code>
 library(foreach)</code></pre>
 </div>
+<h2 id="sequential.serial-processing-non-parallel">Sequential.serial processing (non-parallel)</h2>
+<h3 id="basic">Basic</h3>
+<div class="layout-chunk" data-layout="l-body">
+<pre class="r"><code>
+foreach(nvalues = c(1, 2, 3)) %do% rnorm(n = nvalues)</code></pre>
+<pre><code>
+[[1]]
+[1] -0.4447994
+
+[[2]]
+[1]  1.5981275 -0.3620115
+
+[[3]]
+[1]  0.7966834 -0.5636704 -0.9651205</code></pre>
+</div>
+<div class="layout-chunk" data-layout="l-body">
+<pre class="r"><code>
+foreach(nvalues = c(4, 8), meanvalues = c(10, 500), sdvalues = c(1, 500)) %do% 
+  rnorm(n = nvalues, mean = meanvalues, sd = sdvalues)</code></pre>
+<pre><code>
+[[1]]
+[1] 10.066813  9.965573  9.370259  9.473310
+
+[[2]]
+[1]  180.73367  347.70493  984.13152  -51.90467   91.72198 1005.08798
+[7]   74.46042  868.83002</code></pre>
+</div>
+<h3 id="combining-results">Combining results</h3>
+<div class="layout-chunk" data-layout="l-body">
+<pre class="r"><code>
+foreach(nvalues = c(4, 4), meanvalues = c(10, 500), sdvalues = c(1, 500), .combine = rbind) %do% 
+  rnorm(n = nvalues, mean = meanvalues, sd = sdvalues)</code></pre>
+<pre><code>
+              [,1]      [,2]      [,3]       [,4]
+result.1  10.13742  10.03629  10.80047   8.430688
+result.2 491.38979 429.04900 694.21859 522.878720</code></pre>
+</div>
+<div class="layout-chunk" data-layout="l-body">
+<pre class="r"><code>
+foreach(nvalues = c(4, 4), meanvalues = c(10, 500), sdvalues = c(1, 500), .combine = &quot;+&quot;) %do% 
+  rnorm(n = nvalues, mean = meanvalues, sd = sdvalues)</code></pre>
+<pre><code>
+[1] 1426.8064  731.7921  813.3271  508.2981</code></pre>
+</div>
+<h3 id="list-comprehension">List comprehension</h3>
+<div class="layout-chunk" data-layout="l-body">
+<pre class="r"><code>
+foreach(x = sample(1:1000, 10), .combine = c) %:%
+  when(x %% 3 == 0 || x %% 5 == 0) %do%
+  x</code></pre>
+<pre><code>
+[1] 855 900  99 640</code></pre>
+</div>
+<h2 id="parallel-processing">Parallel processing</h2>
+<p><code>doParallel</code>, <code>doFuture</code>, or <code>doSEQ</code>backends</p>
+<div class="layout-chunk" data-layout="l-body">
+<pre class="r"><code>
+library(doParallel)
+clust &lt;- makeCluster(3)
+registerDoParallel(clust)
+foreach(nvalues = c(1, 2, 3)) %dopar% rnorm(n = nvalues)</code></pre>
+<pre><code>
+[[1]]
+[1] 0.9861374
+
+[[2]]
+[1] -1.044656 -1.669332
+
+[[3]]
+[1]  0.6306830  1.8398349 -0.1198561</code></pre>
+</div>
+<h3 id="dofuture">doFuture</h3>
+<div class="layout-chunk" data-layout="l-body">
+<pre class="r"><code>
+library(doFuture)
+registerDoFuture()
+plan(cluster, workers = 2)
+foreach(nvalues = c(1, 2, 3), .combine = c) %dopar% rnorm(n = nvalues)</code></pre>
+<pre><code>
+[1]  1.2083821  1.4668144 -0.1175474  1.0131394 -0.4391375 -1.7177690</code></pre>
+</div>
+<p>multicore plan</p>
+<div class="layout-chunk" data-layout="l-body">
+<pre class="r"><code>
+plan(multicore)
+foreach(nvalues = c(1, 2, 3), .combine = c) %dopar% rnorm(n = nvalues)</code></pre>
+<pre><code>
+[1] 1.3362020 1.0630279 1.7728666 1.2596310 1.3959777 0.4602126</code></pre>
+</div>
+<h2 id="resources">Resources</h2>
+<p><a href="https://privefl.github.io/blog/a-guide-to-parallelism-in-r/" class="uri">https://privefl.github.io/blog/a-guide-to-parallelism-in-r/</a> <a href="https://nceas.github.io/oss-lessons/parallel-computing-in-r/parallel-computing-in-r.html" class="uri">https://nceas.github.io/oss-lessons/parallel-computing-in-r/parallel-computing-in-r.html</a> <a href="https://campus.datacamp.com/courses/parallel-programming-in-r/foreach-futureapply-and-load-balancing?ex=6" class="uri">https://campus.datacamp.com/courses/parallel-programming-in-r/foreach-futureapply-and-load-balancing?ex=6</a> <a href="https://cran.r-project.org/web/packages/foreach/vignettes/nested.pdf" class="uri">https://cran.r-project.org/web/packages/foreach/vignettes/nested.pdf</a></p>
 <h2 id="support-my-work">Support my work</h2>
 <p><a href="https://donorbox.org/support-my-teaching">Support my work and become a patron here</a>!</p>
 <!--radix_placeholder_article_footer-->

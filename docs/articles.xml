@@ -7,15 +7,14 @@
     <description>Data science and analysis tutorials
 </description>
     <generator>Radix</generator>
-    <lastBuildDate>Sun, 06 Oct 2019 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Tue, 01 Oct 2019 00:00:00 +0000</lastBuildDate>
     <item>
-      <title>Parallel programming with foreach package</title>
+      <title>Neural networks: Deriving the sigmoid derivative via chain and quotient rules</title>
       <dc:creator>Hause Lin</dc:creator>
-      <link>https://hausetutorials.netlify.com/posts/2019-11-06-parallel-programming-with-foreach-package</link>
-      <description>Parallel programming with foreach package</description>
-      <guid>https://hausetutorials.netlify.com/posts/2019-11-06-parallel-programming-with-foreach-package</guid>
-      <pubDate>Sun, 06 Oct 2019 00:00:00 +0000</pubDate>
-      <media:content url="https://raw.githubusercontent.com/hauselin/rtutorialsite/master/attachments/plot_dotdist.gif" medium="image" type="image/gif"/>
+      <link>https://hausetutorials.netlify.com/posts/2019-12-01-neural-networks-deriving-the-sigmoid-derivative</link>
+      <description>Deriving the derivative of the sigmoid function for neural networks</description>
+      <guid>https://hausetutorials.netlify.com/posts/2019-12-01-neural-networks-deriving-the-sigmoid-derivative</guid>
+      <pubDate>Tue, 01 Oct 2019 00:00:00 +0000</pubDate>
     </item>
     <item>
       <title>Use median absolute deviation instead of z-score to detect outliers</title>
@@ -96,6 +95,15 @@
       <guid>https://hausetutorials.netlify.com/posts/2019-03-17-dockerize-a-shinyapp-and-host-it-on-your-own-server-with-digitalocean</guid>
       <pubDate>Sat, 16 Mar 2019 00:00:00 +0000</pubDate>
       <media:content url="https://raw.githubusercontent.com/hauselin/rtutorialsite/master/docs/attachments/dockerShinyDigitalOcean.jpg" medium="image" type="image/jpeg"/>
+    </item>
+    <item>
+      <title>random walks</title>
+      <dc:creator>Hause Lin</dc:creator>
+      <link>https://hausetutorials.netlify.com/posts/2019-02-23-random-walks</link>
+      <description>A short description of the post.</description>
+      <guid>https://hausetutorials.netlify.com/posts/2019-02-23-random-walks</guid>
+      <pubDate>Sat, 23 Feb 2019 00:00:00 +0000</pubDate>
+      <media:content url="https://hausetutorials.netlify.com/posts/2019-02-23-random-walks/random-walks_files/figure-html5/unnamed-chunk-1-1.png" medium="image" type="image/png" width="1248" height="768"/>
     </item>
     <item>
       <title>Why bar (dynamite) plots are terrible (use ggbeeswarm instead)</title>

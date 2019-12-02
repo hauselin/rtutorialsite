@@ -1,7 +1,6 @@
 ---
 title: "Use median absolute deviation instead of z-score to detect outliers"
-description: |
-  Why is it bad to use z-scores to detect outliers and why you should use median absolute deviation instead
+description: "Why is it bad to use z-scores to detect outliers and why you should use median absolute deviation instead"
 preview: https://raw.githubusercontent.com/hauselin/rtutorialsite/master/attachments/mad_zscore_outliers.png
 author:
   - name: Hause Lin

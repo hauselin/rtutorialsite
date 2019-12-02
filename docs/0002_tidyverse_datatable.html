@@ -1354,7 +1354,7 @@ Tutorials
 <li><a href="#consider-being-a-patron-and-supporting-my-work">Consider being a patron and supporting my work?</a></li>
 <li><a href="#load-packageslibraries">Load packages/libraries</a></li>
 <li><a href="#reading-data-into-r">Reading data into R</a></li>
-<li><a href="#comparing-the-outputs-of-read.csvx-freadx-and-tbl_dtfreadx">Comparing the outputs of read.csv(x), fread(x), and tbl_dt(fread(x))</a><ul>
+<li><a href="#comparing-the-outputs-of-read.csvx-and-freadx">Comparing the outputs of read.csv(x) and fread(x)</a><ul>
 <li><a href="#reading-urls-and-other-formats">Reading URLs and other formats</a></li>
 </ul></li>
 <li><a href="#summarizing-objects">Summarizing objects</a></li>
@@ -1413,19 +1413,18 @@ df1 &lt;- read.csv(&quot;./data/sleep.csv&quot;)  # base R read.csv() function
 df2 &lt;- fread(&quot;./data/sleep.csv&quot;)  # fread() from library(data.table)
 # same as df2 &lt;- fread(&#39;data/sleep.csv&#39;)
 
-# my favorite way of reading data: combining tbl_dt() and fread()
-df3 &lt;- tbl_dt(fread(&quot;./data/sleep.csv&quot;))  # tbl_dt() from library(dtplyr)
-# same as df3 &lt;- tbl_dt(fread(&#39;data/sleep.csv&#39;))
+# my favourite!
+df3 &lt;- fread(&quot;./data/sleep.csv&quot;)
 
 # or download data from website directly
 url &lt;- &quot;https://raw.githubusercontent.com/hauselin/rtutorialsite/master/data/sleep.csv&quot;
-df_url &lt;- tbl_dt(fread(url))</code></pre>
+df_url &lt;- fread(url)</code></pre>
 </div>
 <aside>
 The <code>sleep</code> dataset is actually a built-in dataset in R. Try typing <code>sleep</code> in your console and <code>?sleep</code> for more info on this dataset. R has a lot of built-in datasets; type <code>data()</code> in the console to see what dataests are available.
 </aside>
 <p>The <code>.</code> in the file path simply refers to the current working directory, so it can be dropped. And <code>..</code> can be used to refer to the parent directory.</p>
-<h2 id="comparing-the-outputs-of-read.csvx-freadx-and-tbl_dtfreadx">Comparing the outputs of read.csv(x), fread(x), and tbl_dt(fread(x))</h2>
+<h2 id="comparing-the-outputs-of-read.csvx-and-freadx">Comparing the outputs of read.csv(x) and fread(x)</h2>
 <div class="layout-chunk" data-layout="l-body">
 <pre class="r"><code>
 df1  # read.csv(&#39;./data/sleep.csv&#39;)</code></pre>
@@ -1456,9 +1455,10 @@ class(df1)  # read.csv(&#39;./data/sleep.csv&#39;)</code></pre>
 <pre><code>
 [1] &quot;data.frame&quot;</code></pre>
 </div>
+<p>How’s the output different from the one above?</p>
 <div class="layout-chunk" data-layout="l-body">
 <pre class="r"><code>
-df2  # fread(&#39;./data/sleep.csv&#39;) # fread() from library(data.table)</code></pre>
+df3  # fread(&#39;./data/sleep.csv&#39;)</code></pre>
 <pre><code>
     extra group ID
  1:   0.7     1  1
@@ -1482,44 +1482,9 @@ df2  # fread(&#39;./data/sleep.csv&#39;) # fread() from library(data.table)</cod
 19:   4.6     2  9
 20:   3.4     2 10</code></pre>
 <pre class="r"><code>
-class(df2)  # fread(&#39;./data/sleep.csv&#39;) # fread() from library(data.table)</code></pre>
+class(df3)  # fread(&#39;./data/sleep.csv&#39;)</code></pre>
 <pre><code>
 [1] &quot;data.table&quot; &quot;data.frame&quot;</code></pre>
-</div>
-<p>How’s the output different from the one above?</p>
-<div class="layout-chunk" data-layout="l-body">
-<pre class="r"><code>
-df3  # tbl_dt(fread(&#39;./data/sleep.csv&#39;)) # tbl_dt() from library(dtplyr)</code></pre>
-<pre><code>
-Source: local data table [20 x 3]
-
-# A tibble: 20 x 3
-   extra group    ID
-   &lt;dbl&gt; &lt;int&gt; &lt;int&gt;
- 1   0.7     1     1
- 2  -1.6     1     2
- 3  -0.2     1     3
- 4  -1.2     1     4
- 5  -0.1     1     5
- 6   3.4     1     6
- 7   3.7     1     7
- 8   0.8     1     8
- 9   0       1     9
-10   2       1    10
-11   1.9     2     1
-12   0.8     2     2
-13   1.1     2     3
-14   0.1     2     4
-15  -0.1     2     5
-16   4.4     2     6
-17   5.5     2     7
-18   1.6     2     8
-19   4.6     2     9
-20   3.4     2    10</code></pre>
-<pre class="r"><code>
-class(df3)  # tbl_dt(fread(&#39;./data/sleep.csv&#39;)) # tbl_dt() from library(dtplyr)</code></pre>
-<pre><code>
-[1] &quot;tbl_dt&quot;     &quot;tbl&quot;        &quot;data.table&quot; &quot;data.frame&quot;</code></pre>
 </div>
 <p>How’s the output different from the two outputs above?</p>
 <h3 id="reading-urls-and-other-formats">Reading URLs and other formats</h3>
@@ -1527,34 +1492,30 @@ class(df3)  # tbl_dt(fread(&#39;./data/sleep.csv&#39;)) # tbl_dt() from library(
 <p>Most of these read functions can import/read different types of files (e.g., csv, txt, URLs) as long as the raw data are formatted properly (e.g., separated by commas, tabs). But if you’re trying to read proprietary data formats (e.g., SPSS datasets, Excel sheets), you’ll need to use other libraries (e.g., <code>readxl</code>, <code>foreign</code>) to read those data into R.</p>
 <div class="layout-chunk" data-layout="l-body">
 <pre class="r"><code>
-df_url &lt;- tbl_dt(fread(&quot;https://raw.githubusercontent.com/hauselin/rtutorialsite/master/data/sleep.csv&quot;))
-df_url  # print data to console; same dataset as tbl_dt(fread(&#39;./data/sleep.csv&#39;))</code></pre>
+df_url &lt;- fread(&quot;https://raw.githubusercontent.com/hauselin/rtutorialsite/master/data/sleep.csv&quot;)
+df_url  # print data to console; same dataset fread(&#39;./data/sleep.csv&#39;)</code></pre>
 <pre><code>
-Source: local data table [20 x 3]
-
-# A tibble: 20 x 3
-   extra group    ID
-   &lt;dbl&gt; &lt;int&gt; &lt;int&gt;
- 1   0.7     1     1
- 2  -1.6     1     2
- 3  -0.2     1     3
- 4  -1.2     1     4
- 5  -0.1     1     5
- 6   3.4     1     6
- 7   3.7     1     7
- 8   0.8     1     8
- 9   0       1     9
-10   2       1    10
-11   1.9     2     1
-12   0.8     2     2
-13   1.1     2     3
-14   0.1     2     4
-15  -0.1     2     5
-16   4.4     2     6
-17   5.5     2     7
-18   1.6     2     8
-19   4.6     2     9
-20   3.4     2    10</code></pre>
+    extra group ID
+ 1:   0.7     1  1
+ 2:  -1.6     1  2
+ 3:  -0.2     1  3
+ 4:  -1.2     1  4
+ 5:  -0.1     1  5
+ 6:   3.4     1  6
+ 7:   3.7     1  7
+ 8:   0.8     1  8
+ 9:   0.0     1  9
+10:   2.0     1 10
+11:   1.9     2  1
+12:   0.8     2  2
+13:   1.1     2  3
+14:   0.1     2  4
+15:  -0.1     2  5
+16:   4.4     2  6
+17:   5.5     2  7
+18:   1.6     2  8
+19:   4.6     2  9
+20:   3.4     2 10</code></pre>
 </div>
 <h2 id="summarizing-objects">Summarizing objects</h2>
 <p>You can summarize objects quickly by using <code>summary()</code>, <code>str()</code>, <code>glimpse()</code>, or <code>print(x, n)</code>.</p>
@@ -1598,103 +1559,55 @@ head(df1)</code></pre>
 <pre class="r"><code>
 head(df3, n = 3)  # what does this do?</code></pre>
 <pre><code>
-Source: local data table [3 x 3]
-
-# A tibble: 3 x 3
-  extra group    ID
-  &lt;dbl&gt; &lt;int&gt; &lt;int&gt;
-1   0.7     1     1
-2  -1.6     1     2
-3  -0.2     1     3</code></pre>
+   extra group ID
+1:   0.7     1  1
+2:  -1.6     1  2
+3:  -0.2     1  3</code></pre>
 <pre class="r"><code>
 tail(df3, n = 2)</code></pre>
 <pre><code>
-Source: local data table [2 x 3]
-
-# A tibble: 2 x 3
-  extra group    ID
-  &lt;dbl&gt; &lt;int&gt; &lt;int&gt;
-1   4.6     2     9
-2   3.4     2    10</code></pre>
+   extra group ID
+1:   4.6     2  9
+2:   3.4     2 10</code></pre>
 <pre class="r"><code>
-print(df3, n = Inf)  # Inf is infinte (so print all rows)</code></pre>
+df3</code></pre>
 <pre><code>
-Source: local data table [20 x 3]
-
-# A tibble: 20 x 3
-   extra group    ID
-   &lt;dbl&gt; &lt;int&gt; &lt;int&gt;
- 1   0.7     1     1
- 2  -1.6     1     2
- 3  -0.2     1     3
- 4  -1.2     1     4
- 5  -0.1     1     5
- 6   3.4     1     6
- 7   3.7     1     7
- 8   0.8     1     8
- 9   0       1     9
-10   2       1    10
-11   1.9     2     1
-12   0.8     2     2
-13   1.1     2     3
-14   0.1     2     4
-15  -0.1     2     5
-16   4.4     2     6
-17   5.5     2     7
-18   1.6     2     8
-19   4.6     2     9
-20   3.4     2    10</code></pre>
+    extra group ID
+ 1:   0.7     1  1
+ 2:  -1.6     1  2
+ 3:  -0.2     1  3
+ 4:  -1.2     1  4
+ 5:  -0.1     1  5
+ 6:   3.4     1  6
+ 7:   3.7     1  7
+ 8:   0.8     1  8
+ 9:   0.0     1  9
+10:   2.0     1 10
+11:   1.9     2  1
+12:   0.8     2  2
+13:   1.1     2  3
+14:   0.1     2  4
+15:  -0.1     2  5
+16:   4.4     2  6
+17:   5.5     2  7
+18:   1.6     2  8
+19:   4.6     2  9
+20:   3.4     2 10</code></pre>
 </div>
 <p>Use pipes <code>%&gt;%</code> to summarize objects</p>
 <div class="layout-chunk" data-layout="l-body">
 <pre class="r"><code>
 df3 %&gt;% head(n = 2)</code></pre>
 <pre><code>
-Source: local data table [2 x 3]
-
-# A tibble: 2 x 3
-  extra group    ID
-  &lt;dbl&gt; &lt;int&gt; &lt;int&gt;
-1   0.7     1     1
-2  -1.6     1     2</code></pre>
+   extra group ID
+1:   0.7     1  1
+2:  -1.6     1  2</code></pre>
 <pre class="r"><code>
 df3 %&gt;% head(2)  # why does this work?</code></pre>
 <pre><code>
-Source: local data table [2 x 3]
-
-# A tibble: 2 x 3
-  extra group    ID
-  &lt;dbl&gt; &lt;int&gt; &lt;int&gt;
-1   0.7     1     1
-2  -1.6     1     2</code></pre>
-<pre class="r"><code>
-df3 %&gt;% print(Inf)</code></pre>
-<pre><code>
-Source: local data table [20 x 3]
-
-# A tibble: 20 x 3
-   extra group    ID
-   &lt;dbl&gt; &lt;int&gt; &lt;int&gt;
- 1   0.7     1     1
- 2  -1.6     1     2
- 3  -0.2     1     3
- 4  -1.2     1     4
- 5  -0.1     1     5
- 6   3.4     1     6
- 7   3.7     1     7
- 8   0.8     1     8
- 9   0       1     9
-10   2       1    10
-11   1.9     2     1
-12   0.8     2     2
-13   1.1     2     3
-14   0.1     2     4
-15  -0.1     2     5
-16   4.4     2     6
-17   5.5     2     7
-18   1.6     2     8
-19   4.6     2     9
-20   3.4     2    10</code></pre>
+   extra group ID
+1:   0.7     1  1
+2:  -1.6     1  2</code></pre>
 <pre class="r"><code>
 df3 %&gt;% summary()  # does this work? why?</code></pre>
 <pre><code>
@@ -1707,36 +1620,6 @@ df3 %&gt;% summary()  # does this work? why?</code></pre>
  Max.   : 5.500   Max.   :2.0   Max.   :10.0  </code></pre>
 </div>
 <p>datatables and <code>dplyr</code>’s data_frame are much better because they tell us the class of each variable at the top when you print the object in the console. They also tell you the dimensions of your data.</p>
-<div class="layout-chunk" data-layout="l-body">
-<pre class="r"><code>
-df3  # data_frame (dplyr) + data.table + tibble</code></pre>
-<pre><code>
-Source: local data table [20 x 3]
-
-# A tibble: 20 x 3
-   extra group    ID
-   &lt;dbl&gt; &lt;int&gt; &lt;int&gt;
- 1   0.7     1     1
- 2  -1.6     1     2
- 3  -0.2     1     3
- 4  -1.2     1     4
- 5  -0.1     1     5
- 6   3.4     1     6
- 7   3.7     1     7
- 8   0.8     1     8
- 9   0       1     9
-10   2       1    10
-11   1.9     2     1
-12   0.8     2     2
-13   1.1     2     3
-14   0.1     2     4
-15  -0.1     2     5
-16   4.4     2     6
-17   5.5     2     7
-18   1.6     2     8
-19   4.6     2     9
-20   3.4     2    10</code></pre>
-</div>
 <h2 id="using-and-to-extract-elements-using-their-names">Using <code>$</code> and <code>[]</code> to extract elements using their names</h2>
 <div class="layout-chunk" data-layout="l-body">
 <pre class="r"><code>
@@ -1827,7 +1710,7 @@ df1[&quot;extra&quot;]</code></pre>
 <pre class="r"><code>
 df3[&quot;extra&quot;]  # fails!!!</code></pre>
 <pre><code>
-Error in `[.data.table`(df3, &quot;extra&quot;): When i is a data.table (or character vector), the columns to join by must be specified either using &#39;on=&#39; argument (see ?data.table) or by keying x (i.e. sorted, and, marked as sorted, see ?setkey). Keyed joins might have further speed benefits on very large data due to x being sorted in RAM.</code></pre>
+Error in `[.data.table`(df3, &quot;extra&quot;): When i is a data.table (or character vector), the columns to join by must be specified using &#39;on=&#39; argument (see ?data.table), by keying x (i.e. sorted, and, marked as sorted, see ?setkey), or by sharing column names between x and i (i.e., a natural join). Keyed joins might have further speed benefits on very large data due to x being sorted in RAM.</code></pre>
 </div>
 <p>If it’s a <code>data.table</code> class, you do it differently (so know the classes of your objects)! More on <code>data.table</code> later on.</p>
 <div class="layout-chunk" data-layout="l-body">
@@ -1866,33 +1749,58 @@ Load tidyverse packages (I’m running this line here for educational purposes; 
 <p>Read in data from a csv file (stored in “./data/simpsonsParadox.csv”). Right-click to download and save the data <a href="https://raw.githubusercontent.com/hauselin/rtutorialsite/master/data/simpsonsParadox.csv">here</a> (you can also use the <code>fread()</code> function to read and download it directly from the URL; see code below)</p>
 <ul>
 <li><code>fread()</code>: a function from <code>data.table</code> (fast-read, hence fread) that is <strong>VERY</strong> fast and powerful, and much better than <code>read.csv()</code> or <code>read.table()</code> from base R</li>
-<li><code>tbl_dt()</code>: converts data to a <code>tibble</code> class and <code>data.table</code> class</li>
 </ul>
 <div class="layout-chunk" data-layout="l-body">
 <pre class="r"><code>
-df4 &lt;- tbl_dt(fread(&quot;./data/simpsonsParadox.csv&quot;))
+df4 &lt;- fread(&quot;./data/simpsonsParadox.csv&quot;)
 # or download data directly from URL
 url &lt;- &quot;https://raw.githubusercontent.com/hauselin/rtutorialsite/master/data/simpsonsParadox.csv&quot;
-df4 &lt;- tbl_dt(fread(url))
+df4 &lt;- fread(url)
 
 df4  # print table in console </code></pre>
 <pre><code>
-Source: local data table [40 x 3]
-
-# A tibble: 40 x 3
-      iq grades class
-   &lt;dbl&gt;  &lt;dbl&gt; &lt;chr&gt;
- 1  94.5   67.9 a    
- 2  95.4   82.5 a    
- 3  97.8   69.1 a    
- 4  98.1   83.3 a    
- 5  96.6   99.1 a    
- 6 102.    89.9 a    
- 7 101.    73.7 a    
- 8  97.1   47.9 a    
- 9  94.2   55.6 a    
-10  94.4   44.5 a    
-# … with 30 more rows</code></pre>
+          iq  grades class
+ 1:  94.5128 67.9295     a
+ 2:  95.4359 82.5449     a
+ 3:  97.7949 69.0833     a
+ 4:  98.1026 83.3141     a
+ 5:  96.5641 99.0833     a
+ 6: 101.5897 89.8526     a
+ 7: 100.8718 73.6987     a
+ 8:  97.0769 47.9295     a
+ 9:  94.2051 55.6218     a
+10:  94.4103 44.4679     a
+11: 103.7436 74.0833     b
+12: 102.8205 59.8526     b
+13: 101.5897 47.9295     b
+14: 105.3846 44.8526     b
+15: 106.4103 60.2372     b
+16: 109.4872 64.8526     b
+17: 107.2308 74.4679     b
+18: 107.2308 49.8526     b
+19: 102.1026 37.9295     b
+20: 100.0513 54.8526     b
+21: 111.0256 56.0064     c
+22: 114.7179 56.0064     c
+23: 112.2564 46.3910     c
+24: 108.6667 43.6987     c
+25: 110.5128 36.3910     c
+26: 114.1026 30.2372     c
+27: 115.0256 39.4679     c
+28: 118.7179 51.0064     c
+29: 112.8718 64.0833     c
+30: 118.0000 55.3000     c
+31: 116.9744 17.5449     d
+32: 121.1795 35.2372     d
+33: 117.6923 29.8526     d
+34: 121.8974 18.3141     d
+35: 123.6410 29.4679     d
+36: 121.3846 53.6987     d
+37: 123.7436 63.6987     d
+38: 124.7692 48.6987     d
+39: 124.8718 38.3141     d
+40: 127.6410 51.7756     d
+          iq  grades class</code></pre>
 </div>
 <aside>
 Tibbles are automatically truncated to facilitate printing. R prints only the first 10 rows and as many columns as your screen can fit.
@@ -1901,7 +1809,7 @@ Tibbles are automatically truncated to facilitate printing. R prints only the fi
 <pre class="r"><code>
 class(df4)  # note the different classes</code></pre>
 <pre><code>
-[1] &quot;tbl_dt&quot;     &quot;tbl&quot;        &quot;data.table&quot; &quot;data.frame&quot;</code></pre>
+[1] &quot;data.table&quot; &quot;data.frame&quot;</code></pre>
 </div>
 <p>Note the information at the top.</p>
 <ul>
@@ -1935,53 +1843,50 @@ $ class  &lt;chr&gt; &quot;a&quot;, &quot;a&quot;, &quot;a&quot;, &quot;a&quot;,
 </div>
 <div class="layout-chunk" data-layout="l-body">
 <pre class="r"><code>
-print(df4, n = Inf)  # print all or Inf (infinite) rows</code></pre>
+df4</code></pre>
 <pre><code>
-Source: local data table [40 x 3]
-
-# A tibble: 40 x 3
-      iq grades class
-   &lt;dbl&gt;  &lt;dbl&gt; &lt;chr&gt;
- 1  94.5   67.9 a    
- 2  95.4   82.5 a    
- 3  97.8   69.1 a    
- 4  98.1   83.3 a    
- 5  96.6   99.1 a    
- 6 102.    89.9 a    
- 7 101.    73.7 a    
- 8  97.1   47.9 a    
- 9  94.2   55.6 a    
-10  94.4   44.5 a    
-11 104.    74.1 b    
-12 103.    59.9 b    
-13 102.    47.9 b    
-14 105.    44.9 b    
-15 106.    60.2 b    
-16 109.    64.9 b    
-17 107.    74.5 b    
-18 107.    49.9 b    
-19 102.    37.9 b    
-20 100.    54.9 b    
-21 111.    56.0 c    
-22 115.    56.0 c    
-23 112.    46.4 c    
-24 109.    43.7 c    
-25 111.    36.4 c    
-26 114.    30.2 c    
-27 115.    39.5 c    
-28 119.    51.0 c    
-29 113.    64.1 c    
-30 118     55.3 c    
-31 117.    17.5 d    
-32 121.    35.2 d    
-33 118.    29.9 d    
-34 122.    18.3 d    
-35 124.    29.5 d    
-36 121.    53.7 d    
-37 124.    63.7 d    
-38 125.    48.7 d    
-39 125.    38.3 d    
-40 128.    51.8 d    </code></pre>
+          iq  grades class
+ 1:  94.5128 67.9295     a
+ 2:  95.4359 82.5449     a
+ 3:  97.7949 69.0833     a
+ 4:  98.1026 83.3141     a
+ 5:  96.5641 99.0833     a
+ 6: 101.5897 89.8526     a
+ 7: 100.8718 73.6987     a
+ 8:  97.0769 47.9295     a
+ 9:  94.2051 55.6218     a
+10:  94.4103 44.4679     a
+11: 103.7436 74.0833     b
+12: 102.8205 59.8526     b
+13: 101.5897 47.9295     b
+14: 105.3846 44.8526     b
+15: 106.4103 60.2372     b
+16: 109.4872 64.8526     b
+17: 107.2308 74.4679     b
+18: 107.2308 49.8526     b
+19: 102.1026 37.9295     b
+20: 100.0513 54.8526     b
+21: 111.0256 56.0064     c
+22: 114.7179 56.0064     c
+23: 112.2564 46.3910     c
+24: 108.6667 43.6987     c
+25: 110.5128 36.3910     c
+26: 114.1026 30.2372     c
+27: 115.0256 39.4679     c
+28: 118.7179 51.0064     c
+29: 112.8718 64.0833     c
+30: 118.0000 55.3000     c
+31: 116.9744 17.5449     d
+32: 121.1795 35.2372     d
+33: 117.6923 29.8526     d
+34: 121.8974 18.3141     d
+35: 123.6410 29.4679     d
+36: 121.3846 53.6987     d
+37: 123.7436 63.6987     d
+38: 124.7692 48.6987     d
+39: 124.8718 38.3141     d
+40: 127.6410 51.7756     d
+          iq  grades class</code></pre>
 </div>
 <aside>
 Tibbles are automatically truncated to facilitate printing. But we can force R to print all rows or a specific number of rows.
@@ -1992,309 +1897,699 @@ Tibbles are automatically truncated to facilitate printing. But we can force R t
 <pre class="r"><code>
 select(df4, iq)  # just prints the output to console without saving</code></pre>
 <pre><code>
-Source: local data table [40 x 1]
-
-# A tibble: 40 x 1
-      iq
-   &lt;dbl&gt;
- 1  94.5
- 2  95.4
- 3  97.8
- 4  98.1
- 5  96.6
- 6 102. 
- 7 101. 
- 8  97.1
- 9  94.2
-10  94.4
-# … with 30 more rows</code></pre>
+          iq
+ 1:  94.5128
+ 2:  95.4359
+ 3:  97.7949
+ 4:  98.1026
+ 5:  96.5641
+ 6: 101.5897
+ 7: 100.8718
+ 8:  97.0769
+ 9:  94.2051
+10:  94.4103
+11: 103.7436
+12: 102.8205
+13: 101.5897
+14: 105.3846
+15: 106.4103
+16: 109.4872
+17: 107.2308
+18: 107.2308
+19: 102.1026
+20: 100.0513
+21: 111.0256
+22: 114.7179
+23: 112.2564
+24: 108.6667
+25: 110.5128
+26: 114.1026
+27: 115.0256
+28: 118.7179
+29: 112.8718
+30: 118.0000
+31: 116.9744
+32: 121.1795
+33: 117.6923
+34: 121.8974
+35: 123.6410
+36: 121.3846
+37: 123.7436
+38: 124.7692
+39: 124.8718
+40: 127.6410
+          iq</code></pre>
 <pre class="r"><code>
 df4_iq &lt;- select(df4, iq)  # if you want to save as a new object
 df4_iq  # print df4_iq</code></pre>
 <pre><code>
-Source: local data table [40 x 1]
-
-# A tibble: 40 x 1
-      iq
-   &lt;dbl&gt;
- 1  94.5
- 2  95.4
- 3  97.8
- 4  98.1
- 5  96.6
- 6 102. 
- 7 101. 
- 8  97.1
- 9  94.2
-10  94.4
-# … with 30 more rows</code></pre>
+          iq
+ 1:  94.5128
+ 2:  95.4359
+ 3:  97.7949
+ 4:  98.1026
+ 5:  96.5641
+ 6: 101.5897
+ 7: 100.8718
+ 8:  97.0769
+ 9:  94.2051
+10:  94.4103
+11: 103.7436
+12: 102.8205
+13: 101.5897
+14: 105.3846
+15: 106.4103
+16: 109.4872
+17: 107.2308
+18: 107.2308
+19: 102.1026
+20: 100.0513
+21: 111.0256
+22: 114.7179
+23: 112.2564
+24: 108.6667
+25: 110.5128
+26: 114.1026
+27: 115.0256
+28: 118.7179
+29: 112.8718
+30: 118.0000
+31: 116.9744
+32: 121.1795
+33: 117.6923
+34: 121.8974
+35: 123.6410
+36: 121.3846
+37: 123.7436
+38: 124.7692
+39: 124.8718
+40: 127.6410
+          iq</code></pre>
 </div>
 <div class="layout-chunk" data-layout="l-body">
 <pre class="r"><code>
 select(df4, class, grades)</code></pre>
 <pre><code>
-Source: local data table [40 x 2]
-
-# A tibble: 40 x 2
-   class grades
-   &lt;chr&gt;  &lt;dbl&gt;
- 1 a       67.9
- 2 a       82.5
- 3 a       69.1
- 4 a       83.3
- 5 a       99.1
- 6 a       89.9
- 7 a       73.7
- 8 a       47.9
- 9 a       55.6
-10 a       44.5
-# … with 30 more rows</code></pre>
+    class  grades
+ 1:     a 67.9295
+ 2:     a 82.5449
+ 3:     a 69.0833
+ 4:     a 83.3141
+ 5:     a 99.0833
+ 6:     a 89.8526
+ 7:     a 73.6987
+ 8:     a 47.9295
+ 9:     a 55.6218
+10:     a 44.4679
+11:     b 74.0833
+12:     b 59.8526
+13:     b 47.9295
+14:     b 44.8526
+15:     b 60.2372
+16:     b 64.8526
+17:     b 74.4679
+18:     b 49.8526
+19:     b 37.9295
+20:     b 54.8526
+21:     c 56.0064
+22:     c 56.0064
+23:     c 46.3910
+24:     c 43.6987
+25:     c 36.3910
+26:     c 30.2372
+27:     c 39.4679
+28:     c 51.0064
+29:     c 64.0833
+30:     c 55.3000
+31:     d 17.5449
+32:     d 35.2372
+33:     d 29.8526
+34:     d 18.3141
+35:     d 29.4679
+36:     d 53.6987
+37:     d 63.6987
+38:     d 48.6987
+39:     d 38.3141
+40:     d 51.7756
+    class  grades</code></pre>
 <pre class="r"><code>
 select(df4, iq, grades)</code></pre>
 <pre><code>
-Source: local data table [40 x 2]
-
-# A tibble: 40 x 2
-      iq grades
-   &lt;dbl&gt;  &lt;dbl&gt;
- 1  94.5   67.9
- 2  95.4   82.5
- 3  97.8   69.1
- 4  98.1   83.3
- 5  96.6   99.1
- 6 102.    89.9
- 7 101.    73.7
- 8  97.1   47.9
- 9  94.2   55.6
-10  94.4   44.5
-# … with 30 more rows</code></pre>
+          iq  grades
+ 1:  94.5128 67.9295
+ 2:  95.4359 82.5449
+ 3:  97.7949 69.0833
+ 4:  98.1026 83.3141
+ 5:  96.5641 99.0833
+ 6: 101.5897 89.8526
+ 7: 100.8718 73.6987
+ 8:  97.0769 47.9295
+ 9:  94.2051 55.6218
+10:  94.4103 44.4679
+11: 103.7436 74.0833
+12: 102.8205 59.8526
+13: 101.5897 47.9295
+14: 105.3846 44.8526
+15: 106.4103 60.2372
+16: 109.4872 64.8526
+17: 107.2308 74.4679
+18: 107.2308 49.8526
+19: 102.1026 37.9295
+20: 100.0513 54.8526
+21: 111.0256 56.0064
+22: 114.7179 56.0064
+23: 112.2564 46.3910
+24: 108.6667 43.6987
+25: 110.5128 36.3910
+26: 114.1026 30.2372
+27: 115.0256 39.4679
+28: 118.7179 51.0064
+29: 112.8718 64.0833
+30: 118.0000 55.3000
+31: 116.9744 17.5449
+32: 121.1795 35.2372
+33: 117.6923 29.8526
+34: 121.8974 18.3141
+35: 123.6410 29.4679
+36: 121.3846 53.6987
+37: 123.7436 63.6987
+38: 124.7692 48.6987
+39: 124.8718 38.3141
+40: 127.6410 51.7756
+          iq  grades</code></pre>
 </div>
 <p>Select multiple columns in sequence with :</p>
 <div class="layout-chunk" data-layout="l-body">
 <pre class="r"><code>
 select(df4, iq:class)</code></pre>
 <pre><code>
-Source: local data table [40 x 3]
-
-# A tibble: 40 x 3
-      iq grades class
-   &lt;dbl&gt;  &lt;dbl&gt; &lt;chr&gt;
- 1  94.5   67.9 a    
- 2  95.4   82.5 a    
- 3  97.8   69.1 a    
- 4  98.1   83.3 a    
- 5  96.6   99.1 a    
- 6 102.    89.9 a    
- 7 101.    73.7 a    
- 8  97.1   47.9 a    
- 9  94.2   55.6 a    
-10  94.4   44.5 a    
-# … with 30 more rows</code></pre>
+          iq  grades class
+ 1:  94.5128 67.9295     a
+ 2:  95.4359 82.5449     a
+ 3:  97.7949 69.0833     a
+ 4:  98.1026 83.3141     a
+ 5:  96.5641 99.0833     a
+ 6: 101.5897 89.8526     a
+ 7: 100.8718 73.6987     a
+ 8:  97.0769 47.9295     a
+ 9:  94.2051 55.6218     a
+10:  94.4103 44.4679     a
+11: 103.7436 74.0833     b
+12: 102.8205 59.8526     b
+13: 101.5897 47.9295     b
+14: 105.3846 44.8526     b
+15: 106.4103 60.2372     b
+16: 109.4872 64.8526     b
+17: 107.2308 74.4679     b
+18: 107.2308 49.8526     b
+19: 102.1026 37.9295     b
+20: 100.0513 54.8526     b
+21: 111.0256 56.0064     c
+22: 114.7179 56.0064     c
+23: 112.2564 46.3910     c
+24: 108.6667 43.6987     c
+25: 110.5128 36.3910     c
+26: 114.1026 30.2372     c
+27: 115.0256 39.4679     c
+28: 118.7179 51.0064     c
+29: 112.8718 64.0833     c
+30: 118.0000 55.3000     c
+31: 116.9744 17.5449     d
+32: 121.1795 35.2372     d
+33: 117.6923 29.8526     d
+34: 121.8974 18.3141     d
+35: 123.6410 29.4679     d
+36: 121.3846 53.6987     d
+37: 123.7436 63.6987     d
+38: 124.7692 48.6987     d
+39: 124.8718 38.3141     d
+40: 127.6410 51.7756     d
+          iq  grades class</code></pre>
 </div>
 <p>Select with numbers</p>
 <div class="layout-chunk" data-layout="l-body">
 <pre class="r"><code>
 select(df4, 1, 3)</code></pre>
 <pre><code>
-Source: local data table [40 x 2]
-
-# A tibble: 40 x 2
-      iq class
-   &lt;dbl&gt; &lt;chr&gt;
- 1  94.5 a    
- 2  95.4 a    
- 3  97.8 a    
- 4  98.1 a    
- 5  96.6 a    
- 6 102.  a    
- 7 101.  a    
- 8  97.1 a    
- 9  94.2 a    
-10  94.4 a    
-# … with 30 more rows</code></pre>
+          iq class
+ 1:  94.5128     a
+ 2:  95.4359     a
+ 3:  97.7949     a
+ 4:  98.1026     a
+ 5:  96.5641     a
+ 6: 101.5897     a
+ 7: 100.8718     a
+ 8:  97.0769     a
+ 9:  94.2051     a
+10:  94.4103     a
+11: 103.7436     b
+12: 102.8205     b
+13: 101.5897     b
+14: 105.3846     b
+15: 106.4103     b
+16: 109.4872     b
+17: 107.2308     b
+18: 107.2308     b
+19: 102.1026     b
+20: 100.0513     b
+21: 111.0256     c
+22: 114.7179     c
+23: 112.2564     c
+24: 108.6667     c
+25: 110.5128     c
+26: 114.1026     c
+27: 115.0256     c
+28: 118.7179     c
+29: 112.8718     c
+30: 118.0000     c
+31: 116.9744     d
+32: 121.1795     d
+33: 117.6923     d
+34: 121.8974     d
+35: 123.6410     d
+36: 121.3846     d
+37: 123.7436     d
+38: 124.7692     d
+39: 124.8718     d
+40: 127.6410     d
+          iq class</code></pre>
 <pre class="r"><code>
 select(df4, 1:3)  # what does 1:3 do?</code></pre>
 <pre><code>
-Source: local data table [40 x 3]
-
-# A tibble: 40 x 3
-      iq grades class
-   &lt;dbl&gt;  &lt;dbl&gt; &lt;chr&gt;
- 1  94.5   67.9 a    
- 2  95.4   82.5 a    
- 3  97.8   69.1 a    
- 4  98.1   83.3 a    
- 5  96.6   99.1 a    
- 6 102.    89.9 a    
- 7 101.    73.7 a    
- 8  97.1   47.9 a    
- 9  94.2   55.6 a    
-10  94.4   44.5 a    
-# … with 30 more rows</code></pre>
+          iq  grades class
+ 1:  94.5128 67.9295     a
+ 2:  95.4359 82.5449     a
+ 3:  97.7949 69.0833     a
+ 4:  98.1026 83.3141     a
+ 5:  96.5641 99.0833     a
+ 6: 101.5897 89.8526     a
+ 7: 100.8718 73.6987     a
+ 8:  97.0769 47.9295     a
+ 9:  94.2051 55.6218     a
+10:  94.4103 44.4679     a
+11: 103.7436 74.0833     b
+12: 102.8205 59.8526     b
+13: 101.5897 47.9295     b
+14: 105.3846 44.8526     b
+15: 106.4103 60.2372     b
+16: 109.4872 64.8526     b
+17: 107.2308 74.4679     b
+18: 107.2308 49.8526     b
+19: 102.1026 37.9295     b
+20: 100.0513 54.8526     b
+21: 111.0256 56.0064     c
+22: 114.7179 56.0064     c
+23: 112.2564 46.3910     c
+24: 108.6667 43.6987     c
+25: 110.5128 36.3910     c
+26: 114.1026 30.2372     c
+27: 115.0256 39.4679     c
+28: 118.7179 51.0064     c
+29: 112.8718 64.0833     c
+30: 118.0000 55.3000     c
+31: 116.9744 17.5449     d
+32: 121.1795 35.2372     d
+33: 117.6923 29.8526     d
+34: 121.8974 18.3141     d
+35: 123.6410 29.4679     d
+36: 121.3846 53.6987     d
+37: 123.7436 63.6987     d
+38: 124.7692 48.6987     d
+39: 124.8718 38.3141     d
+40: 127.6410 51.7756     d
+          iq  grades class</code></pre>
 </div>
 <p>How can we reorder columns with <code>select()</code>?</p>
 <div class="layout-chunk" data-layout="l-body">
 <pre class="r"><code>
 select(df4, 3:1)  # column 3, then 2, then 1</code></pre>
 <pre><code>
-Source: local data table [40 x 3]
-
-# A tibble: 40 x 3
-   class grades    iq
-   &lt;chr&gt;  &lt;dbl&gt; &lt;dbl&gt;
- 1 a       67.9  94.5
- 2 a       82.5  95.4
- 3 a       69.1  97.8
- 4 a       83.3  98.1
- 5 a       99.1  96.6
- 6 a       89.9 102. 
- 7 a       73.7 101. 
- 8 a       47.9  97.1
- 9 a       55.6  94.2
-10 a       44.5  94.4
-# … with 30 more rows</code></pre>
+    class  grades       iq
+ 1:     a 67.9295  94.5128
+ 2:     a 82.5449  95.4359
+ 3:     a 69.0833  97.7949
+ 4:     a 83.3141  98.1026
+ 5:     a 99.0833  96.5641
+ 6:     a 89.8526 101.5897
+ 7:     a 73.6987 100.8718
+ 8:     a 47.9295  97.0769
+ 9:     a 55.6218  94.2051
+10:     a 44.4679  94.4103
+11:     b 74.0833 103.7436
+12:     b 59.8526 102.8205
+13:     b 47.9295 101.5897
+14:     b 44.8526 105.3846
+15:     b 60.2372 106.4103
+16:     b 64.8526 109.4872
+17:     b 74.4679 107.2308
+18:     b 49.8526 107.2308
+19:     b 37.9295 102.1026
+20:     b 54.8526 100.0513
+21:     c 56.0064 111.0256
+22:     c 56.0064 114.7179
+23:     c 46.3910 112.2564
+24:     c 43.6987 108.6667
+25:     c 36.3910 110.5128
+26:     c 30.2372 114.1026
+27:     c 39.4679 115.0256
+28:     c 51.0064 118.7179
+29:     c 64.0833 112.8718
+30:     c 55.3000 118.0000
+31:     d 17.5449 116.9744
+32:     d 35.2372 121.1795
+33:     d 29.8526 117.6923
+34:     d 18.3141 121.8974
+35:     d 29.4679 123.6410
+36:     d 53.6987 121.3846
+37:     d 63.6987 123.7436
+38:     d 48.6987 124.7692
+39:     d 38.3141 124.8718
+40:     d 51.7756 127.6410
+    class  grades       iq</code></pre>
 </div>
 <p>Select with <code>starts_with()</code> or <code>ends_with()</code></p>
 <div class="layout-chunk" data-layout="l-body">
 <pre class="r"><code>
 select(df4, starts_with(&quot;c&quot;))</code></pre>
 <pre><code>
-Source: local data table [40 x 1]
-
-# A tibble: 40 x 1
-   class
-   &lt;chr&gt;
- 1 a    
- 2 a    
- 3 a    
- 4 a    
- 5 a    
- 6 a    
- 7 a    
- 8 a    
- 9 a    
-10 a    
-# … with 30 more rows</code></pre>
+    class
+ 1:     a
+ 2:     a
+ 3:     a
+ 4:     a
+ 5:     a
+ 6:     a
+ 7:     a
+ 8:     a
+ 9:     a
+10:     a
+11:     b
+12:     b
+13:     b
+14:     b
+15:     b
+16:     b
+17:     b
+18:     b
+19:     b
+20:     b
+21:     c
+22:     c
+23:     c
+24:     c
+25:     c
+26:     c
+27:     c
+28:     c
+29:     c
+30:     c
+31:     d
+32:     d
+33:     d
+34:     d
+35:     d
+36:     d
+37:     d
+38:     d
+39:     d
+40:     d
+    class</code></pre>
 <pre class="r"><code>
 select(df4, starts_with(&quot;g&quot;))</code></pre>
 <pre><code>
-Source: local data table [40 x 1]
-
-# A tibble: 40 x 1
-   grades
-    &lt;dbl&gt;
- 1   67.9
- 2   82.5
- 3   69.1
- 4   83.3
- 5   99.1
- 6   89.9
- 7   73.7
- 8   47.9
- 9   55.6
-10   44.5
-# … with 30 more rows</code></pre>
+     grades
+ 1: 67.9295
+ 2: 82.5449
+ 3: 69.0833
+ 4: 83.3141
+ 5: 99.0833
+ 6: 89.8526
+ 7: 73.6987
+ 8: 47.9295
+ 9: 55.6218
+10: 44.4679
+11: 74.0833
+12: 59.8526
+13: 47.9295
+14: 44.8526
+15: 60.2372
+16: 64.8526
+17: 74.4679
+18: 49.8526
+19: 37.9295
+20: 54.8526
+21: 56.0064
+22: 56.0064
+23: 46.3910
+24: 43.6987
+25: 36.3910
+26: 30.2372
+27: 39.4679
+28: 51.0064
+29: 64.0833
+30: 55.3000
+31: 17.5449
+32: 35.2372
+33: 29.8526
+34: 18.3141
+35: 29.4679
+36: 53.6987
+37: 63.6987
+38: 48.6987
+39: 38.3141
+40: 51.7756
+     grades</code></pre>
 <pre class="r"><code>
 select(df4, starts_with(&quot;g&quot;), ends_with(&quot;s&quot;))</code></pre>
 <pre><code>
-Source: local data table [40 x 2]
-
-# A tibble: 40 x 2
-   grades class
-    &lt;dbl&gt; &lt;chr&gt;
- 1   67.9 a    
- 2   82.5 a    
- 3   69.1 a    
- 4   83.3 a    
- 5   99.1 a    
- 6   89.9 a    
- 7   73.7 a    
- 8   47.9 a    
- 9   55.6 a    
-10   44.5 a    
-# … with 30 more rows</code></pre>
+     grades class
+ 1: 67.9295     a
+ 2: 82.5449     a
+ 3: 69.0833     a
+ 4: 83.3141     a
+ 5: 99.0833     a
+ 6: 89.8526     a
+ 7: 73.6987     a
+ 8: 47.9295     a
+ 9: 55.6218     a
+10: 44.4679     a
+11: 74.0833     b
+12: 59.8526     b
+13: 47.9295     b
+14: 44.8526     b
+15: 60.2372     b
+16: 64.8526     b
+17: 74.4679     b
+18: 49.8526     b
+19: 37.9295     b
+20: 54.8526     b
+21: 56.0064     c
+22: 56.0064     c
+23: 46.3910     c
+24: 43.6987     c
+25: 36.3910     c
+26: 30.2372     c
+27: 39.4679     c
+28: 51.0064     c
+29: 64.0833     c
+30: 55.3000     c
+31: 17.5449     d
+32: 35.2372     d
+33: 29.8526     d
+34: 18.3141     d
+35: 29.4679     d
+36: 53.6987     d
+37: 63.6987     d
+38: 48.6987     d
+39: 38.3141     d
+40: 51.7756     d
+     grades class</code></pre>
 </div>
 <p>Dropping columns with <code>-</code></p>
 <div class="layout-chunk" data-layout="l-body">
 <pre class="r"><code>
 select(df4, -grades)  # what should you get?</code></pre>
 <pre><code>
-Source: local data table [40 x 2]
-
-# A tibble: 40 x 2
-      iq class
-   &lt;dbl&gt; &lt;chr&gt;
- 1  94.5 a    
- 2  95.4 a    
- 3  97.8 a    
- 4  98.1 a    
- 5  96.6 a    
- 6 102.  a    
- 7 101.  a    
- 8  97.1 a    
- 9  94.2 a    
-10  94.4 a    
-# … with 30 more rows</code></pre>
+          iq class
+ 1:  94.5128     a
+ 2:  95.4359     a
+ 3:  97.7949     a
+ 4:  98.1026     a
+ 5:  96.5641     a
+ 6: 101.5897     a
+ 7: 100.8718     a
+ 8:  97.0769     a
+ 9:  94.2051     a
+10:  94.4103     a
+11: 103.7436     b
+12: 102.8205     b
+13: 101.5897     b
+14: 105.3846     b
+15: 106.4103     b
+16: 109.4872     b
+17: 107.2308     b
+18: 107.2308     b
+19: 102.1026     b
+20: 100.0513     b
+21: 111.0256     c
+22: 114.7179     c
+23: 112.2564     c
+24: 108.6667     c
+25: 110.5128     c
+26: 114.1026     c
+27: 115.0256     c
+28: 118.7179     c
+29: 112.8718     c
+30: 118.0000     c
+31: 116.9744     d
+32: 121.1795     d
+33: 117.6923     d
+34: 121.8974     d
+35: 123.6410     d
+36: 121.3846     d
+37: 123.7436     d
+38: 124.7692     d
+39: 124.8718     d
+40: 127.6410     d
+          iq class</code></pre>
 <pre class="r"><code>
 select(df4, -ends_with(&quot;s&quot;))  # what should you get?</code></pre>
 <pre><code>
-Source: local data table [40 x 1]
-
-# A tibble: 40 x 1
-      iq
-   &lt;dbl&gt;
- 1  94.5
- 2  95.4
- 3  97.8
- 4  98.1
- 5  96.6
- 6 102. 
- 7 101. 
- 8  97.1
- 9  94.2
-10  94.4
-# … with 30 more rows</code></pre>
+          iq
+ 1:  94.5128
+ 2:  95.4359
+ 3:  97.7949
+ 4:  98.1026
+ 5:  96.5641
+ 6: 101.5897
+ 7: 100.8718
+ 8:  97.0769
+ 9:  94.2051
+10:  94.4103
+11: 103.7436
+12: 102.8205
+13: 101.5897
+14: 105.3846
+15: 106.4103
+16: 109.4872
+17: 107.2308
+18: 107.2308
+19: 102.1026
+20: 100.0513
+21: 111.0256
+22: 114.7179
+23: 112.2564
+24: 108.6667
+25: 110.5128
+26: 114.1026
+27: 115.0256
+28: 118.7179
+29: 112.8718
+30: 118.0000
+31: 116.9744
+32: 121.1795
+33: 117.6923
+34: 121.8974
+35: 123.6410
+36: 121.3846
+37: 123.7436
+38: 124.7692
+39: 124.8718
+40: 127.6410
+          iq</code></pre>
 <pre class="r"><code>
 select(df4, -ends_with(&quot;s&quot;), class, -1)  # what should you get?</code></pre>
 <pre><code>
-Source: local data table [40 x 1]
-
-# A tibble: 40 x 1
-   class
-   &lt;chr&gt;
- 1 a    
- 2 a    
- 3 a    
- 4 a    
- 5 a    
- 6 a    
- 7 a    
- 8 a    
- 9 a    
-10 a    
-# … with 30 more rows</code></pre>
+    class
+ 1:     a
+ 2:     a
+ 3:     a
+ 4:     a
+ 5:     a
+ 6:     a
+ 7:     a
+ 8:     a
+ 9:     a
+10:     a
+11:     b
+12:     b
+13:     b
+14:     b
+15:     b
+16:     b
+17:     b
+18:     b
+19:     b
+20:     b
+21:     c
+22:     c
+23:     c
+24:     c
+25:     c
+26:     c
+27:     c
+28:     c
+29:     c
+30:     c
+31:     d
+32:     d
+33:     d
+34:     d
+35:     d
+36:     d
+37:     d
+38:     d
+39:     d
+40:     d
+    class</code></pre>
 </div>
 <p>Renaming while selecting columns/variables</p>
 <div class="layout-chunk" data-layout="l-body">
 <pre class="r"><code>
 select(df4, intelligence = iq)  # select iq and rename it to intelligence</code></pre>
 <pre><code>
-Source: local data table [40 x 1]
-
-# A tibble: 40 x 1
-   intelligence
-          &lt;dbl&gt;
- 1         94.5
- 2         95.4
- 3         97.8
- 4         98.1
- 5         96.6
- 6        102. 
- 7        101. 
- 8         97.1
- 9         94.2
-10         94.4
-# … with 30 more rows</code></pre>
+    intelligence
+ 1:      94.5128
+ 2:      95.4359
+ 3:      97.7949
+ 4:      98.1026
+ 5:      96.5641
+ 6:     101.5897
+ 7:     100.8718
+ 8:      97.0769
+ 9:      94.2051
+10:      94.4103
+11:     103.7436
+12:     102.8205
+13:     101.5897
+14:     105.3846
+15:     106.4103
+16:     109.4872
+17:     107.2308
+18:     107.2308
+19:     102.1026
+20:     100.0513
+21:     111.0256
+22:     114.7179
+23:     112.2564
+24:     108.6667
+25:     110.5128
+26:     114.1026
+27:     115.0256
+28:     118.7179
+29:     112.8718
+30:     118.0000
+31:     116.9744
+32:     121.1795
+33:     117.6923
+34:     121.8974
+35:     123.6410
+36:     121.3846
+37:     123.7436
+38:     124.7692
+39:     124.8718
+40:     127.6410
+    intelligence</code></pre>
 </div>
 <p>Other options for <code>select()</code> include <code>matches()</code>, <code>contains()</code>. For more information, see tutorial/vignette <a href="https://cran.r-project.org/web/packages/dplyr/vignettes/dplyr.html">here</a>. For official documentation, see <a href="https://cran.r-project.org/web/packages/dplyr/dplyr.pdf">here</a>.</p>
 <h3 id="select-rows-with-slice">Select rows with <code>slice()</code></h3>
@@ -2302,51 +2597,35 @@ Source: local data table [40 x 1]
 <pre class="r"><code>
 slice(df4, 1:5)  # rows 1 to 5</code></pre>
 <pre><code>
-Source: local data table [5 x 3]
-
-# A tibble: 5 x 3
-     iq grades class
-  &lt;dbl&gt;  &lt;dbl&gt; &lt;chr&gt;
-1  94.5   67.9 a    
-2  95.4   82.5 a    
-3  97.8   69.1 a    
-4  98.1   83.3 a    
-5  96.6   99.1 a    </code></pre>
+       iq  grades class
+1 94.5128 67.9295     a
+2 95.4359 82.5449     a
+3 97.7949 69.0833     a
+4 98.1026 83.3141     a
+5 96.5641 99.0833     a</code></pre>
 <pre class="r"><code>
 slice(df4, c(1, 3, 5, 7, 9))  # rows 1, 3, 5, 7, 9</code></pre>
 <pre><code>
-Source: local data table [5 x 3]
-
-# A tibble: 5 x 3
-     iq grades class
-  &lt;dbl&gt;  &lt;dbl&gt; &lt;chr&gt;
-1  94.5   67.9 a    
-2  97.8   69.1 a    
-3  96.6   99.1 a    
-4 101.    73.7 a    
-5  94.2   55.6 a    </code></pre>
+        iq  grades class
+1  94.5128 67.9295     a
+2  97.7949 69.0833     a
+3  96.5641 99.0833     a
+4 100.8718 73.6987     a
+5  94.2051 55.6218     a</code></pre>
 <pre class="r"><code>
 slice(df4, seq(from = 1, to = 10, by = 2))  # same as above, but using sequence function (from 1 to 10, by/in steps of 2)</code></pre>
 <pre><code>
-Source: local data table [5 x 3]
-
-# A tibble: 5 x 3
-     iq grades class
-  &lt;dbl&gt;  &lt;dbl&gt; &lt;chr&gt;
-1  94.5   67.9 a    
-2  97.8   69.1 a    
-3  96.6   99.1 a    
-4 101.    73.7 a    
-5  94.2   55.6 a    </code></pre>
+        iq  grades class
+1  94.5128 67.9295     a
+2  97.7949 69.0833     a
+3  96.5641 99.0833     a
+4 100.8718 73.6987     a
+5  94.2051 55.6218     a</code></pre>
 <pre class="r"><code>
 slice(df4, -c(1:39))  # remove rows 1 to 39</code></pre>
 <pre><code>
-Source: local data table [1 x 3]
-
-# A tibble: 1 x 3
-     iq grades class
-  &lt;dbl&gt;  &lt;dbl&gt; &lt;chr&gt;
-1  128.   51.8 d    </code></pre>
+       iq  grades class
+1 127.641 51.7756     d</code></pre>
 </div>
 <h3 id="filtering-or-subsetting-datarows-with-filter">Filtering or subsetting data/rows with <code>filter()</code></h3>
 <p>While <code>select()</code> acts on columns, <code>filter()</code> acts on rows. It chooses/subsets rows based on criteria you specify.</p>
@@ -2372,58 +2651,46 @@ df4$class %&gt;% unique()  # same as above but with pipes</code></pre>
 <pre class="r"><code>
 filter(df4, class == &quot;a&quot;)  # how many rows of data do we have now?</code></pre>
 <pre><code>
-Source: local data table [10 x 3]
-
-# A tibble: 10 x 3
-      iq grades class
-   &lt;dbl&gt;  &lt;dbl&gt; &lt;chr&gt;
- 1  94.5   67.9 a    
- 2  95.4   82.5 a    
- 3  97.8   69.1 a    
- 4  98.1   83.3 a    
- 5  96.6   99.1 a    
- 6 102.    89.9 a    
- 7 101.    73.7 a    
- 8  97.1   47.9 a    
- 9  94.2   55.6 a    
-10  94.4   44.5 a    </code></pre>
+         iq  grades class
+1   94.5128 67.9295     a
+2   95.4359 82.5449     a
+3   97.7949 69.0833     a
+4   98.1026 83.3141     a
+5   96.5641 99.0833     a
+6  101.5897 89.8526     a
+7  100.8718 73.6987     a
+8   97.0769 47.9295     a
+9   94.2051 55.6218     a
+10  94.4103 44.4679     a</code></pre>
 <pre class="r"><code>
 filter(df4, class == &quot;b&quot;)  # R accepths single or double quotations</code></pre>
 <pre><code>
-Source: local data table [10 x 3]
-
-# A tibble: 10 x 3
-      iq grades class
-   &lt;dbl&gt;  &lt;dbl&gt; &lt;chr&gt;
- 1  104.   74.1 b    
- 2  103.   59.9 b    
- 3  102.   47.9 b    
- 4  105.   44.9 b    
- 5  106.   60.2 b    
- 6  109.   64.9 b    
- 7  107.   74.5 b    
- 8  107.   49.9 b    
- 9  102.   37.9 b    
-10  100.   54.9 b    </code></pre>
+         iq  grades class
+1  103.7436 74.0833     b
+2  102.8205 59.8526     b
+3  101.5897 47.9295     b
+4  105.3846 44.8526     b
+5  106.4103 60.2372     b
+6  109.4872 64.8526     b
+7  107.2308 74.4679     b
+8  107.2308 49.8526     b
+9  102.1026 37.9295     b
+10 100.0513 54.8526     b</code></pre>
 <pre class="r"><code>
 df4_classA &lt;- filter(df4, class == &quot;a&quot;)  # to save filtered data as an object
 df4_classA</code></pre>
 <pre><code>
-Source: local data table [10 x 3]
-
-# A tibble: 10 x 3
-      iq grades class
-   &lt;dbl&gt;  &lt;dbl&gt; &lt;chr&gt;
- 1  94.5   67.9 a    
- 2  95.4   82.5 a    
- 3  97.8   69.1 a    
- 4  98.1   83.3 a    
- 5  96.6   99.1 a    
- 6 102.    89.9 a    
- 7 101.    73.7 a    
- 8  97.1   47.9 a    
- 9  94.2   55.6 a    
-10  94.4   44.5 a    </code></pre>
+         iq  grades class
+1   94.5128 67.9295     a
+2   95.4359 82.5449     a
+3   97.7949 69.0833     a
+4   98.1026 83.3141     a
+5   96.5641 99.0833     a
+6  101.5897 89.8526     a
+7  100.8718 73.6987     a
+8   97.0769 47.9295     a
+9   94.2051 55.6218     a
+10  94.4103 44.4679     a</code></pre>
 </div>
 <p>Filter rows that match multiple criteria</p>
 <div class="layout-chunk" data-layout="l-body">
@@ -2436,125 +2703,116 @@ filter(df4, class == c(&quot;a&quot;, &quot;b&quot;))</code></pre>
 <pre class="r"><code>
 filter(df4, class %in% c(&quot;a&quot;, &quot;b&quot;))  # check number of rows of output</code></pre>
 <pre><code>
-Source: local data table [20 x 3]
-
-# A tibble: 20 x 3
-      iq grades class
-   &lt;dbl&gt;  &lt;dbl&gt; &lt;chr&gt;
- 1  94.5   67.9 a    
- 2  95.4   82.5 a    
- 3  97.8   69.1 a    
- 4  98.1   83.3 a    
- 5  96.6   99.1 a    
- 6 102.    89.9 a    
- 7 101.    73.7 a    
- 8  97.1   47.9 a    
- 9  94.2   55.6 a    
-10  94.4   44.5 a    
-11 104.    74.1 b    
-12 103.    59.9 b    
-13 102.    47.9 b    
-14 105.    44.9 b    
-15 106.    60.2 b    
-16 109.    64.9 b    
-17 107.    74.5 b    
-18 107.    49.9 b    
-19 102.    37.9 b    
-20 100.    54.9 b    </code></pre>
+         iq  grades class
+1   94.5128 67.9295     a
+2   95.4359 82.5449     a
+3   97.7949 69.0833     a
+4   98.1026 83.3141     a
+5   96.5641 99.0833     a
+6  101.5897 89.8526     a
+7  100.8718 73.6987     a
+8   97.0769 47.9295     a
+9   94.2051 55.6218     a
+10  94.4103 44.4679     a
+11 103.7436 74.0833     b
+12 102.8205 59.8526     b
+13 101.5897 47.9295     b
+14 105.3846 44.8526     b
+15 106.4103 60.2372     b
+16 109.4872 64.8526     b
+17 107.2308 74.4679     b
+18 107.2308 49.8526     b
+19 102.1026 37.9295     b
+20 100.0513 54.8526     b</code></pre>
 </div>
 <p>Filter by range</p>
 <div class="layout-chunk" data-layout="l-body">
 <pre class="r"><code>
 filter(df4, iq &gt; 120)  # iq greater than 120</code></pre>
 <pre><code>
-Source: local data table [8 x 3]
-
-# A tibble: 8 x 3
-     iq grades class
-  &lt;dbl&gt;  &lt;dbl&gt; &lt;chr&gt;
-1  121.   35.2 d    
-2  122.   18.3 d    
-3  124.   29.5 d    
-4  121.   53.7 d    
-5  124.   63.7 d    
-6  125.   48.7 d    
-7  125.   38.3 d    
-8  128.   51.8 d    </code></pre>
+        iq  grades class
+1 121.1795 35.2372     d
+2 121.8974 18.3141     d
+3 123.6410 29.4679     d
+4 121.3846 53.6987     d
+5 123.7436 63.6987     d
+6 124.7692 48.6987     d
+7 124.8718 38.3141     d
+8 127.6410 51.7756     d</code></pre>
 <pre class="r"><code>
 filter(df4, iq &gt;= 115)  # iq greater than or equal to 120 (&gt; and =, without space in between)</code></pre>
 <pre><code>
-Source: local data table [13 x 3]
-
-# A tibble: 13 x 3
-      iq grades class
-   &lt;dbl&gt;  &lt;dbl&gt; &lt;chr&gt;
- 1  115.   39.5 c    
- 2  119.   51.0 c    
- 3  118    55.3 c    
- 4  117.   17.5 d    
- 5  121.   35.2 d    
- 6  118.   29.9 d    
- 7  122.   18.3 d    
- 8  124.   29.5 d    
- 9  121.   53.7 d    
-10  124.   63.7 d    
-11  125.   48.7 d    
-12  125.   38.3 d    
-13  128.   51.8 d    </code></pre>
+         iq  grades class
+1  115.0256 39.4679     c
+2  118.7179 51.0064     c
+3  118.0000 55.3000     c
+4  116.9744 17.5449     d
+5  121.1795 35.2372     d
+6  117.6923 29.8526     d
+7  121.8974 18.3141     d
+8  123.6410 29.4679     d
+9  121.3846 53.6987     d
+10 123.7436 63.6987     d
+11 124.7692 48.6987     d
+12 124.8718 38.3141     d
+13 127.6410 51.7756     d</code></pre>
 <pre class="r"><code>
 filter(df4, grades &lt; 20)  # grades less than 20</code></pre>
 <pre><code>
-Source: local data table [2 x 3]
-
-# A tibble: 2 x 3
-     iq grades class
-  &lt;dbl&gt;  &lt;dbl&gt; &lt;chr&gt;
-1  117.   17.5 d    
-2  122.   18.3 d    </code></pre>
+        iq  grades class
+1 116.9744 17.5449     d
+2 121.8974 18.3141     d</code></pre>
 <pre class="r"><code>
 filter(df4, grades &lt;= 30)  # grades less than 30</code></pre>
 <pre><code>
-Source: local data table [4 x 3]
-
-# A tibble: 4 x 3
-     iq grades class
-  &lt;dbl&gt;  &lt;dbl&gt; &lt;chr&gt;
-1  117.   17.5 d    
-2  118.   29.9 d    
-3  122.   18.3 d    
-4  124.   29.5 d    </code></pre>
+        iq  grades class
+1 116.9744 17.5449     d
+2 117.6923 29.8526     d
+3 121.8974 18.3141     d
+4 123.6410 29.4679     d</code></pre>
 <pre class="r"><code>
 filter(df4, grades &lt;= 30 &amp; iq &gt; 120)  # the intelligent but lazy students</code></pre>
 <pre><code>
-Source: local data table [2 x 3]
-
-# A tibble: 2 x 3
-     iq grades class
-  &lt;dbl&gt;  &lt;dbl&gt; &lt;chr&gt;
-1  122.   18.3 d    
-2  124.   29.5 d    </code></pre>
+        iq  grades class
+1 121.8974 18.3141     d
+2 123.6410 29.4679     d</code></pre>
 </div>
 <p>Filter through negating <code>!</code></p>
 <div class="layout-chunk" data-layout="l-body">
 <pre class="r"><code>
 filter(df4, class != &quot;a&quot;)  # class IS NOT &#39;a&#39; (! and =, without space in between)</code></pre>
 <pre><code>
-Source: local data table [30 x 3]
-
-# A tibble: 30 x 3
-      iq grades class
-   &lt;dbl&gt;  &lt;dbl&gt; &lt;chr&gt;
- 1  104.   74.1 b    
- 2  103.   59.9 b    
- 3  102.   47.9 b    
- 4  105.   44.9 b    
- 5  106.   60.2 b    
- 6  109.   64.9 b    
- 7  107.   74.5 b    
- 8  107.   49.9 b    
- 9  102.   37.9 b    
-10  100.   54.9 b    
-# … with 20 more rows</code></pre>
+         iq  grades class
+1  103.7436 74.0833     b
+2  102.8205 59.8526     b
+3  101.5897 47.9295     b
+4  105.3846 44.8526     b
+5  106.4103 60.2372     b
+6  109.4872 64.8526     b
+7  107.2308 74.4679     b
+8  107.2308 49.8526     b
+9  102.1026 37.9295     b
+10 100.0513 54.8526     b
+11 111.0256 56.0064     c
+12 114.7179 56.0064     c
+13 112.2564 46.3910     c
+14 108.6667 43.6987     c
+15 110.5128 36.3910     c
+16 114.1026 30.2372     c
+17 115.0256 39.4679     c
+18 118.7179 51.0064     c
+19 112.8718 64.0833     c
+20 118.0000 55.3000     c
+21 116.9744 17.5449     d
+22 121.1795 35.2372     d
+23 117.6923 29.8526     d
+24 121.8974 18.3141     d
+25 123.6410 29.4679     d
+26 121.3846 53.6987     d
+27 123.7436 63.6987     d
+28 124.7692 48.6987     d
+29 124.8718 38.3141     d
+30 127.6410 51.7756     d</code></pre>
 </div>
 <p>How would you remove values that match “a” and “b”?</p>
 <div class="layout-chunk" data-layout="l-body">
@@ -2570,31 +2828,27 @@ RStudio underlines potential errors for you (like Microsoft Word highlighting ty
 <pre class="r"><code>
 filter(df4, !class %in% c(&quot;a&quot;, &quot;b&quot;))  # correct syntax</code></pre>
 <pre><code>
-Source: local data table [20 x 3]
-
-# A tibble: 20 x 3
-      iq grades class
-   &lt;dbl&gt;  &lt;dbl&gt; &lt;chr&gt;
- 1  111.   56.0 c    
- 2  115.   56.0 c    
- 3  112.   46.4 c    
- 4  109.   43.7 c    
- 5  111.   36.4 c    
- 6  114.   30.2 c    
- 7  115.   39.5 c    
- 8  119.   51.0 c    
- 9  113.   64.1 c    
-10  118    55.3 c    
-11  117.   17.5 d    
-12  121.   35.2 d    
-13  118.   29.9 d    
-14  122.   18.3 d    
-15  124.   29.5 d    
-16  121.   53.7 d    
-17  124.   63.7 d    
-18  125.   48.7 d    
-19  125.   38.3 d    
-20  128.   51.8 d    </code></pre>
+         iq  grades class
+1  111.0256 56.0064     c
+2  114.7179 56.0064     c
+3  112.2564 46.3910     c
+4  108.6667 43.6987     c
+5  110.5128 36.3910     c
+6  114.1026 30.2372     c
+7  115.0256 39.4679     c
+8  118.7179 51.0064     c
+9  112.8718 64.0833     c
+10 118.0000 55.3000     c
+11 116.9744 17.5449     d
+12 121.1795 35.2372     d
+13 117.6923 29.8526     d
+14 121.8974 18.3141     d
+15 123.6410 29.4679     d
+16 121.3846 53.6987     d
+17 123.7436 63.6987     d
+18 124.7692 48.6987     d
+19 124.8718 38.3141     d
+20 127.6410 51.7756     d</code></pre>
 </div>
 <h3 id="operators">Operators</h3>
 <p><code>==</code>, <code>%in%</code>, <code>%between%</code>, <code>&gt;</code>, <code>&gt;=</code>, <code>&lt;</code>, <code>&lt;=</code>, <code>!=</code> are operators. See <a href="https://www.statmethods.net/management/operators.html">here</a> for more information.</p>
@@ -2604,22 +2858,48 @@ Source: local data table [20 x 3]
 df4_renamed &lt;- rename(df4, intelligence = iq, examGrades = grades, classroom = class)  # rename(data, newname = oldname)
 df4_renamed</code></pre>
 <pre><code>
-Source: local data table [40 x 3]
-
-# A tibble: 40 x 3
-   intelligence examGrades classroom
-          &lt;dbl&gt;      &lt;dbl&gt; &lt;chr&gt;    
- 1         94.5       67.9 a        
- 2         95.4       82.5 a        
- 3         97.8       69.1 a        
- 4         98.1       83.3 a        
- 5         96.6       99.1 a        
- 6        102.        89.9 a        
- 7        101.        73.7 a        
- 8         97.1       47.9 a        
- 9         94.2       55.6 a        
-10         94.4       44.5 a        
-# … with 30 more rows</code></pre>
+    intelligence examGrades classroom
+ 1:      94.5128    67.9295         a
+ 2:      95.4359    82.5449         a
+ 3:      97.7949    69.0833         a
+ 4:      98.1026    83.3141         a
+ 5:      96.5641    99.0833         a
+ 6:     101.5897    89.8526         a
+ 7:     100.8718    73.6987         a
+ 8:      97.0769    47.9295         a
+ 9:      94.2051    55.6218         a
+10:      94.4103    44.4679         a
+11:     103.7436    74.0833         b
+12:     102.8205    59.8526         b
+13:     101.5897    47.9295         b
+14:     105.3846    44.8526         b
+15:     106.4103    60.2372         b
+16:     109.4872    64.8526         b
+17:     107.2308    74.4679         b
+18:     107.2308    49.8526         b
+19:     102.1026    37.9295         b
+20:     100.0513    54.8526         b
+21:     111.0256    56.0064         c
+22:     114.7179    56.0064         c
+23:     112.2564    46.3910         c
+24:     108.6667    43.6987         c
+25:     110.5128    36.3910         c
+26:     114.1026    30.2372         c
+27:     115.0256    39.4679         c
+28:     118.7179    51.0064         c
+29:     112.8718    64.0833         c
+30:     118.0000    55.3000         c
+31:     116.9744    17.5449         d
+32:     121.1795    35.2372         d
+33:     117.6923    29.8526         d
+34:     121.8974    18.3141         d
+35:     123.6410    29.4679         d
+36:     121.3846    53.6987         d
+37:     123.7436    63.6987         d
+38:     124.7692    48.6987         d
+39:     124.8718    38.3141         d
+40:     127.6410    51.7756         d
+    intelligence examGrades classroom</code></pre>
 <pre class="r"><code>
 glimpse(df4_renamed)</code></pre>
 <pre><code>
@@ -2640,43 +2920,93 @@ mutate(df4,
        iqMeanCentered = iq - mean(iq, na.rm = T), # substract mean iq from each iq
        gradesRound0dp = round(grades)) # round grades</code></pre>
 <pre><code>
-Source: local data table [40 x 5]
-
-# A tibble: 40 x 5
-      iq grades class iqMeanCentered gradesRound0dp
-   &lt;dbl&gt;  &lt;dbl&gt; &lt;chr&gt;          &lt;dbl&gt;          &lt;dbl&gt;
- 1  94.5   67.9 a             -14.9              68
- 2  95.4   82.5 a             -14.0              83
- 3  97.8   69.1 a             -11.6              69
- 4  98.1   83.3 a             -11.3              83
- 5  96.6   99.1 a             -12.8              99
- 6 102.    89.9 a              -7.82             90
- 7 101.    73.7 a              -8.54             74
- 8  97.1   47.9 a             -12.3              48
- 9  94.2   55.6 a             -15.2              56
-10  94.4   44.5 a             -15.0              44
-# … with 30 more rows</code></pre>
+         iq  grades class iqMeanCentered gradesRound0dp
+1   94.5128 67.9295     a      -14.89489             68
+2   95.4359 82.5449     a      -13.97179             83
+3   97.7949 69.0833     a      -11.61279             69
+4   98.1026 83.3141     a      -11.30509             83
+5   96.5641 99.0833     a      -12.84359             99
+6  101.5897 89.8526     a       -7.81799             90
+7  100.8718 73.6987     a       -8.53589             74
+8   97.0769 47.9295     a      -12.33079             48
+9   94.2051 55.6218     a      -15.20259             56
+10  94.4103 44.4679     a      -14.99739             44
+11 103.7436 74.0833     b       -5.66409             74
+12 102.8205 59.8526     b       -6.58719             60
+13 101.5897 47.9295     b       -7.81799             48
+14 105.3846 44.8526     b       -4.02309             45
+15 106.4103 60.2372     b       -2.99739             60
+16 109.4872 64.8526     b        0.07951             65
+17 107.2308 74.4679     b       -2.17689             74
+18 107.2308 49.8526     b       -2.17689             50
+19 102.1026 37.9295     b       -7.30509             38
+20 100.0513 54.8526     b       -9.35639             55
+21 111.0256 56.0064     c        1.61791             56
+22 114.7179 56.0064     c        5.31021             56
+23 112.2564 46.3910     c        2.84871             46
+24 108.6667 43.6987     c       -0.74099             44
+25 110.5128 36.3910     c        1.10511             36
+26 114.1026 30.2372     c        4.69491             30
+27 115.0256 39.4679     c        5.61791             39
+28 118.7179 51.0064     c        9.31021             51
+29 112.8718 64.0833     c        3.46411             64
+30 118.0000 55.3000     c        8.59231             55
+31 116.9744 17.5449     d        7.56671             18
+32 121.1795 35.2372     d       11.77181             35
+33 117.6923 29.8526     d        8.28461             30
+34 121.8974 18.3141     d       12.48971             18
+35 123.6410 29.4679     d       14.23331             29
+36 121.3846 53.6987     d       11.97691             54
+37 123.7436 63.6987     d       14.33591             64
+38 124.7692 48.6987     d       15.36151             49
+39 124.8718 38.3141     d       15.46411             38
+40 127.6410 51.7756     d       18.23331             52</code></pre>
 </div>
 <div class="layout-chunk" data-layout="l-body">
 <pre class="r"><code>
 mutate(df4, studentNumber = 1:nrow(df4))</code></pre>
 <pre><code>
-Source: local data table [40 x 4]
-
-# A tibble: 40 x 4
-      iq grades class studentNumber
-   &lt;dbl&gt;  &lt;dbl&gt; &lt;chr&gt;         &lt;int&gt;
- 1  94.5   67.9 a                 1
- 2  95.4   82.5 a                 2
- 3  97.8   69.1 a                 3
- 4  98.1   83.3 a                 4
- 5  96.6   99.1 a                 5
- 6 102.    89.9 a                 6
- 7 101.    73.7 a                 7
- 8  97.1   47.9 a                 8
- 9  94.2   55.6 a                 9
-10  94.4   44.5 a                10
-# … with 30 more rows</code></pre>
+         iq  grades class studentNumber
+1   94.5128 67.9295     a             1
+2   95.4359 82.5449     a             2
+3   97.7949 69.0833     a             3
+4   98.1026 83.3141     a             4
+5   96.5641 99.0833     a             5
+6  101.5897 89.8526     a             6
+7  100.8718 73.6987     a             7
+8   97.0769 47.9295     a             8
+9   94.2051 55.6218     a             9
+10  94.4103 44.4679     a            10
+11 103.7436 74.0833     b            11
+12 102.8205 59.8526     b            12
+13 101.5897 47.9295     b            13
+14 105.3846 44.8526     b            14
+15 106.4103 60.2372     b            15
+16 109.4872 64.8526     b            16
+17 107.2308 74.4679     b            17
+18 107.2308 49.8526     b            18
+19 102.1026 37.9295     b            19
+20 100.0513 54.8526     b            20
+21 111.0256 56.0064     c            21
+22 114.7179 56.0064     c            22
+23 112.2564 46.3910     c            23
+24 108.6667 43.6987     c            24
+25 110.5128 36.3910     c            25
+26 114.1026 30.2372     c            26
+27 115.0256 39.4679     c            27
+28 118.7179 51.0064     c            28
+29 112.8718 64.0833     c            29
+30 118.0000 55.3000     c            30
+31 116.9744 17.5449     d            31
+32 121.1795 35.2372     d            32
+33 117.6923 29.8526     d            33
+34 121.8974 18.3141     d            34
+35 123.6410 29.4679     d            35
+36 121.3846 53.6987     d            36
+37 123.7436 63.6987     d            37
+38 124.7692 48.6987     d            38
+39 124.8718 38.3141     d            39
+40 127.6410 51.7756     d            40</code></pre>
 </div>
 <div class="layout-chunk" data-layout="l-body">
 <pre class="r"><code>
@@ -2691,184 +3021,277 @@ nrow(df4)  # number of rows; ncol() gives you number of columns</code></pre>
 </div>
 <div class="layout-chunk" data-layout="l-body">
 <pre class="r"><code>
-mutate(df4, studentNumber = 1:nrow(df4)) %&gt;% print(n = Inf)</code></pre>
+mutate(df4, studentNumber = 1:nrow(df4))</code></pre>
 <pre><code>
-Source: local data table [40 x 4]
-
-# A tibble: 40 x 4
-      iq grades class studentNumber
-   &lt;dbl&gt;  &lt;dbl&gt; &lt;chr&gt;         &lt;int&gt;
- 1  94.5   67.9 a                 1
- 2  95.4   82.5 a                 2
- 3  97.8   69.1 a                 3
- 4  98.1   83.3 a                 4
- 5  96.6   99.1 a                 5
- 6 102.    89.9 a                 6
- 7 101.    73.7 a                 7
- 8  97.1   47.9 a                 8
- 9  94.2   55.6 a                 9
-10  94.4   44.5 a                10
-11 104.    74.1 b                11
-12 103.    59.9 b                12
-13 102.    47.9 b                13
-14 105.    44.9 b                14
-15 106.    60.2 b                15
-16 109.    64.9 b                16
-17 107.    74.5 b                17
-18 107.    49.9 b                18
-19 102.    37.9 b                19
-20 100.    54.9 b                20
-21 111.    56.0 c                21
-22 115.    56.0 c                22
-23 112.    46.4 c                23
-24 109.    43.7 c                24
-25 111.    36.4 c                25
-26 114.    30.2 c                26
-27 115.    39.5 c                27
-28 119.    51.0 c                28
-29 113.    64.1 c                29
-30 118     55.3 c                30
-31 117.    17.5 d                31
-32 121.    35.2 d                32
-33 118.    29.9 d                33
-34 122.    18.3 d                34
-35 124.    29.5 d                35
-36 121.    53.7 d                36
-37 124.    63.7 d                37
-38 125.    48.7 d                38
-39 125.    38.3 d                39
-40 128.    51.8 d                40</code></pre>
+         iq  grades class studentNumber
+1   94.5128 67.9295     a             1
+2   95.4359 82.5449     a             2
+3   97.7949 69.0833     a             3
+4   98.1026 83.3141     a             4
+5   96.5641 99.0833     a             5
+6  101.5897 89.8526     a             6
+7  100.8718 73.6987     a             7
+8   97.0769 47.9295     a             8
+9   94.2051 55.6218     a             9
+10  94.4103 44.4679     a            10
+11 103.7436 74.0833     b            11
+12 102.8205 59.8526     b            12
+13 101.5897 47.9295     b            13
+14 105.3846 44.8526     b            14
+15 106.4103 60.2372     b            15
+16 109.4872 64.8526     b            16
+17 107.2308 74.4679     b            17
+18 107.2308 49.8526     b            18
+19 102.1026 37.9295     b            19
+20 100.0513 54.8526     b            20
+21 111.0256 56.0064     c            21
+22 114.7179 56.0064     c            22
+23 112.2564 46.3910     c            23
+24 108.6667 43.6987     c            24
+25 110.5128 36.3910     c            25
+26 114.1026 30.2372     c            26
+27 115.0256 39.4679     c            27
+28 118.7179 51.0064     c            28
+29 112.8718 64.0833     c            29
+30 118.0000 55.3000     c            30
+31 116.9744 17.5449     d            31
+32 121.1795 35.2372     d            32
+33 117.6923 29.8526     d            33
+34 121.8974 18.3141     d            34
+35 123.6410 29.4679     d            35
+36 121.3846 53.6987     d            36
+37 123.7436 63.6987     d            37
+38 124.7692 48.6987     d            38
+39 124.8718 38.3141     d            39
+40 127.6410 51.7756     d            40</code></pre>
 </div>
 <h3 id="sorting-or-arranging-data-rows-with-arrange">Sorting or arranging data rows with <code>arrange()</code></h3>
 <div class="layout-chunk" data-layout="l-body">
 <pre class="r"><code>
 arrange(df4, iq)  # ascending order of iq</code></pre>
 <pre><code>
-Source: local data table [40 x 3]
-
-# A tibble: 40 x 3
-      iq grades class
-   &lt;dbl&gt;  &lt;dbl&gt; &lt;chr&gt;
- 1  94.2   55.6 a    
- 2  94.4   44.5 a    
- 3  94.5   67.9 a    
- 4  95.4   82.5 a    
- 5  96.6   99.1 a    
- 6  97.1   47.9 a    
- 7  97.8   69.1 a    
- 8  98.1   83.3 a    
- 9 100.    54.9 b    
-10 101.    73.7 a    
-# … with 30 more rows</code></pre>
+         iq  grades class
+1   94.2051 55.6218     a
+2   94.4103 44.4679     a
+3   94.5128 67.9295     a
+4   95.4359 82.5449     a
+5   96.5641 99.0833     a
+6   97.0769 47.9295     a
+7   97.7949 69.0833     a
+8   98.1026 83.3141     a
+9  100.0513 54.8526     b
+10 100.8718 73.6987     a
+11 101.5897 89.8526     a
+12 101.5897 47.9295     b
+13 102.1026 37.9295     b
+14 102.8205 59.8526     b
+15 103.7436 74.0833     b
+16 105.3846 44.8526     b
+17 106.4103 60.2372     b
+18 107.2308 74.4679     b
+19 107.2308 49.8526     b
+20 108.6667 43.6987     c
+21 109.4872 64.8526     b
+22 110.5128 36.3910     c
+23 111.0256 56.0064     c
+24 112.2564 46.3910     c
+25 112.8718 64.0833     c
+26 114.1026 30.2372     c
+27 114.7179 56.0064     c
+28 115.0256 39.4679     c
+29 116.9744 17.5449     d
+30 117.6923 29.8526     d
+31 118.0000 55.3000     c
+32 118.7179 51.0064     c
+33 121.1795 35.2372     d
+34 121.3846 53.6987     d
+35 121.8974 18.3141     d
+36 123.6410 29.4679     d
+37 123.7436 63.6987     d
+38 124.7692 48.6987     d
+39 124.8718 38.3141     d
+40 127.6410 51.7756     d</code></pre>
 <pre class="r"><code>
 arrange(df4, iq, grades)  # ascending order of iq then grades</code></pre>
 <pre><code>
-Source: local data table [40 x 3]
-
-# A tibble: 40 x 3
-      iq grades class
-   &lt;dbl&gt;  &lt;dbl&gt; &lt;chr&gt;
- 1  94.2   55.6 a    
- 2  94.4   44.5 a    
- 3  94.5   67.9 a    
- 4  95.4   82.5 a    
- 5  96.6   99.1 a    
- 6  97.1   47.9 a    
- 7  97.8   69.1 a    
- 8  98.1   83.3 a    
- 9 100.    54.9 b    
-10 101.    73.7 a    
-# … with 30 more rows</code></pre>
+         iq  grades class
+1   94.2051 55.6218     a
+2   94.4103 44.4679     a
+3   94.5128 67.9295     a
+4   95.4359 82.5449     a
+5   96.5641 99.0833     a
+6   97.0769 47.9295     a
+7   97.7949 69.0833     a
+8   98.1026 83.3141     a
+9  100.0513 54.8526     b
+10 100.8718 73.6987     a
+11 101.5897 47.9295     b
+12 101.5897 89.8526     a
+13 102.1026 37.9295     b
+14 102.8205 59.8526     b
+15 103.7436 74.0833     b
+16 105.3846 44.8526     b
+17 106.4103 60.2372     b
+18 107.2308 49.8526     b
+19 107.2308 74.4679     b
+20 108.6667 43.6987     c
+21 109.4872 64.8526     b
+22 110.5128 36.3910     c
+23 111.0256 56.0064     c
+24 112.2564 46.3910     c
+25 112.8718 64.0833     c
+26 114.1026 30.2372     c
+27 114.7179 56.0064     c
+28 115.0256 39.4679     c
+29 116.9744 17.5449     d
+30 117.6923 29.8526     d
+31 118.0000 55.3000     c
+32 118.7179 51.0064     c
+33 121.1795 35.2372     d
+34 121.3846 53.6987     d
+35 121.8974 18.3141     d
+36 123.6410 29.4679     d
+37 123.7436 63.6987     d
+38 124.7692 48.6987     d
+39 124.8718 38.3141     d
+40 127.6410 51.7756     d</code></pre>
 <pre class="r"><code>
 arrange(df4, desc(iq))  # descending order of iq</code></pre>
 <pre><code>
-Source: local data table [40 x 3]
-
-# A tibble: 40 x 3
-      iq grades class
-   &lt;dbl&gt;  &lt;dbl&gt; &lt;chr&gt;
- 1  128.   51.8 d    
- 2  125.   38.3 d    
- 3  125.   48.7 d    
- 4  124.   63.7 d    
- 5  124.   29.5 d    
- 6  122.   18.3 d    
- 7  121.   53.7 d    
- 8  121.   35.2 d    
- 9  119.   51.0 c    
-10  118    55.3 c    
-# … with 30 more rows</code></pre>
+         iq  grades class
+1  127.6410 51.7756     d
+2  124.8718 38.3141     d
+3  124.7692 48.6987     d
+4  123.7436 63.6987     d
+5  123.6410 29.4679     d
+6  121.8974 18.3141     d
+7  121.3846 53.6987     d
+8  121.1795 35.2372     d
+9  118.7179 51.0064     c
+10 118.0000 55.3000     c
+11 117.6923 29.8526     d
+12 116.9744 17.5449     d
+13 115.0256 39.4679     c
+14 114.7179 56.0064     c
+15 114.1026 30.2372     c
+16 112.8718 64.0833     c
+17 112.2564 46.3910     c
+18 111.0256 56.0064     c
+19 110.5128 36.3910     c
+20 109.4872 64.8526     b
+21 108.6667 43.6987     c
+22 107.2308 74.4679     b
+23 107.2308 49.8526     b
+24 106.4103 60.2372     b
+25 105.3846 44.8526     b
+26 103.7436 74.0833     b
+27 102.8205 59.8526     b
+28 102.1026 37.9295     b
+29 101.5897 89.8526     a
+30 101.5897 47.9295     b
+31 100.8718 73.6987     a
+32 100.0513 54.8526     b
+33  98.1026 83.3141     a
+34  97.7949 69.0833     a
+35  97.0769 47.9295     a
+36  96.5641 99.0833     a
+37  95.4359 82.5449     a
+38  94.5128 67.9295     a
+39  94.4103 44.4679     a
+40  94.2051 55.6218     a</code></pre>
 <pre class="r"><code>
 arrange(df4, desc(class))  # descending order of class</code></pre>
 <pre><code>
-Source: local data table [40 x 3]
-
-# A tibble: 40 x 3
-      iq grades class
-   &lt;dbl&gt;  &lt;dbl&gt; &lt;chr&gt;
- 1  117.   17.5 d    
- 2  121.   35.2 d    
- 3  118.   29.9 d    
- 4  122.   18.3 d    
- 5  124.   29.5 d    
- 6  121.   53.7 d    
- 7  124.   63.7 d    
- 8  125.   48.7 d    
- 9  125.   38.3 d    
-10  128.   51.8 d    
-# … with 30 more rows</code></pre>
+         iq  grades class
+1  116.9744 17.5449     d
+2  121.1795 35.2372     d
+3  117.6923 29.8526     d
+4  121.8974 18.3141     d
+5  123.6410 29.4679     d
+6  121.3846 53.6987     d
+7  123.7436 63.6987     d
+8  124.7692 48.6987     d
+9  124.8718 38.3141     d
+10 127.6410 51.7756     d
+11 111.0256 56.0064     c
+12 114.7179 56.0064     c
+13 112.2564 46.3910     c
+14 108.6667 43.6987     c
+15 110.5128 36.3910     c
+16 114.1026 30.2372     c
+17 115.0256 39.4679     c
+18 118.7179 51.0064     c
+19 112.8718 64.0833     c
+20 118.0000 55.3000     c
+21 103.7436 74.0833     b
+22 102.8205 59.8526     b
+23 101.5897 47.9295     b
+24 105.3846 44.8526     b
+25 106.4103 60.2372     b
+26 109.4872 64.8526     b
+27 107.2308 74.4679     b
+28 107.2308 49.8526     b
+29 102.1026 37.9295     b
+30 100.0513 54.8526     b
+31  94.5128 67.9295     a
+32  95.4359 82.5449     a
+33  97.7949 69.0833     a
+34  98.1026 83.3141     a
+35  96.5641 99.0833     a
+36 101.5897 89.8526     a
+37 100.8718 73.6987     a
+38  97.0769 47.9295     a
+39  94.2051 55.6218     a
+40  94.4103 44.4679     a</code></pre>
 </div>
 <p><code>order()</code> is another function (base R function) people often use to arrange rows. See <a href="https://www.statmethods.net/management/sorting.html">here</a> for more information.</p>
 <h3 id="combining-functions-with-pipes">Combining functions with pipes <code>%&gt;%</code></h3>
 <div class="layout-chunk" data-layout="l-body">
 <pre class="r"><code>
-df4 %&gt;% print(n = Inf)  # reminder what the dataset looks like</code></pre>
+df4  # reminder what the dataset looks like</code></pre>
 <pre><code>
-Source: local data table [40 x 3]
-
-# A tibble: 40 x 3
-      iq grades class
-   &lt;dbl&gt;  &lt;dbl&gt; &lt;chr&gt;
- 1  94.5   67.9 a    
- 2  95.4   82.5 a    
- 3  97.8   69.1 a    
- 4  98.1   83.3 a    
- 5  96.6   99.1 a    
- 6 102.    89.9 a    
- 7 101.    73.7 a    
- 8  97.1   47.9 a    
- 9  94.2   55.6 a    
-10  94.4   44.5 a    
-11 104.    74.1 b    
-12 103.    59.9 b    
-13 102.    47.9 b    
-14 105.    44.9 b    
-15 106.    60.2 b    
-16 109.    64.9 b    
-17 107.    74.5 b    
-18 107.    49.9 b    
-19 102.    37.9 b    
-20 100.    54.9 b    
-21 111.    56.0 c    
-22 115.    56.0 c    
-23 112.    46.4 c    
-24 109.    43.7 c    
-25 111.    36.4 c    
-26 114.    30.2 c    
-27 115.    39.5 c    
-28 119.    51.0 c    
-29 113.    64.1 c    
-30 118     55.3 c    
-31 117.    17.5 d    
-32 121.    35.2 d    
-33 118.    29.9 d    
-34 122.    18.3 d    
-35 124.    29.5 d    
-36 121.    53.7 d    
-37 124.    63.7 d    
-38 125.    48.7 d    
-39 125.    38.3 d    
-40 128.    51.8 d    </code></pre>
+          iq  grades class
+ 1:  94.5128 67.9295     a
+ 2:  95.4359 82.5449     a
+ 3:  97.7949 69.0833     a
+ 4:  98.1026 83.3141     a
+ 5:  96.5641 99.0833     a
+ 6: 101.5897 89.8526     a
+ 7: 100.8718 73.6987     a
+ 8:  97.0769 47.9295     a
+ 9:  94.2051 55.6218     a
+10:  94.4103 44.4679     a
+11: 103.7436 74.0833     b
+12: 102.8205 59.8526     b
+13: 101.5897 47.9295     b
+14: 105.3846 44.8526     b
+15: 106.4103 60.2372     b
+16: 109.4872 64.8526     b
+17: 107.2308 74.4679     b
+18: 107.2308 49.8526     b
+19: 102.1026 37.9295     b
+20: 100.0513 54.8526     b
+21: 111.0256 56.0064     c
+22: 114.7179 56.0064     c
+23: 112.2564 46.3910     c
+24: 108.6667 43.6987     c
+25: 110.5128 36.3910     c
+26: 114.1026 30.2372     c
+27: 115.0256 39.4679     c
+28: 118.7179 51.0064     c
+29: 112.8718 64.0833     c
+30: 118.0000 55.3000     c
+31: 116.9744 17.5449     d
+32: 121.1795 35.2372     d
+33: 117.6923 29.8526     d
+34: 121.8974 18.3141     d
+35: 123.6410 29.4679     d
+36: 121.3846 53.6987     d
+37: 123.7436 63.6987     d
+38: 124.7692 48.6987     d
+39: 124.8718 38.3141     d
+40: 127.6410 51.7756     d
+          iq  grades class</code></pre>
 </div>
 <aside>
 same as <code>print(df, n = Inf)</code>
@@ -2878,70 +3301,62 @@ same as <code>print(df, n = Inf)</code>
 <div class="layout-chunk" data-layout="l-body">
 <pre class="r"><code>
 df4 %&gt;%
-  mutate(gradesRound = round(grades), studentNo = 1:.N) %&gt;% # round grades, add subject number: .N is a shortcut for nrow(df4)
+  mutate(gradesRound = round(grades), studentNo = 1:nrow(df4)) %&gt;% # round grades, add subject number: .N is a shortcut for nrow(df4)
   select(-grades) %&gt;% # remove original grades variable
   select(studentNo, class, iq, gradesRound) %&gt;%  # reorder columns
   rename(intelligence = iq, examGrades = gradesRound, classroom = class) %&gt;% # rename variables
   filter(intelligence %between% c(90, 105)) # select only those with intelligence between 90 and 105</code></pre>
 <pre><code>
-Source: local data table [15 x 4]
-
-# A tibble: 15 x 4
    studentNo classroom intelligence examGrades
-       &lt;int&gt; &lt;chr&gt;            &lt;dbl&gt;      &lt;dbl&gt;
- 1         1 a                 94.5         68
- 2         2 a                 95.4         83
- 3         3 a                 97.8         69
- 4         4 a                 98.1         83
- 5         5 a                 96.6         99
- 6         6 a                102.          90
- 7         7 a                101.          74
- 8         8 a                 97.1         48
- 9         9 a                 94.2         56
-10        10 a                 94.4         44
-11        11 b                104.          74
-12        12 b                103.          60
-13        13 b                102.          48
-14        19 b                102.          38
-15        20 b                100.          55</code></pre>
+1          1         a      94.5128         68
+2          2         a      95.4359         83
+3          3         a      97.7949         69
+4          4         a      98.1026         83
+5          5         a      96.5641         99
+6          6         a     101.5897         90
+7          7         a     100.8718         74
+8          8         a      97.0769         48
+9          9         a      94.2051         56
+10        10         a      94.4103         44
+11        11         b     103.7436         74
+12        12         b     102.8205         60
+13        13         b     101.5897         48
+14        19         b     102.1026         38
+15        20         b     100.0513         55</code></pre>
 </div>
 <p>The code above doesn’t save the output as an object. Below we save it as an object.</p>
 <div class="layout-chunk" data-layout="l-body">
 <pre class="r"><code>
 df5 &lt;- df4 %&gt;% 
-    mutate(gradesRound = round(grades), studentNo = 1:.N) %&gt;% # round grades, add subject number: .N is a shortcut for nrow(df4)
+    mutate(gradesRound = round(grades), studentNo = 1:nrow(df4)) %&gt;% # round grades, add subject number: .N is a shortcut for nrow(df4)
     select(-grades) %&gt;% # remove original grades variable
     select(studentNo, class, iq, gradesRound) %&gt;%  # reorder columns
     rename(intelligence = iq, examGrades = gradesRound, classroom = class) %&gt;% # rename variables
     filter(intelligence %between% c(90, 105)) # select only those with intelligence between 90 and 105
 df5 # check output</code></pre>
 <pre><code>
-Source: local data table [15 x 4]
-
-# A tibble: 15 x 4
    studentNo classroom intelligence examGrades
-       &lt;int&gt; &lt;chr&gt;            &lt;dbl&gt;      &lt;dbl&gt;
- 1         1 a                 94.5         68
- 2         2 a                 95.4         83
- 3         3 a                 97.8         69
- 4         4 a                 98.1         83
- 5         5 a                 96.6         99
- 6         6 a                102.          90
- 7         7 a                101.          74
- 8         8 a                 97.1         48
- 9         9 a                 94.2         56
-10        10 a                 94.4         44
-11        11 b                104.          74
-12        12 b                103.          60
-13        13 b                102.          48
-14        19 b                102.          38
-15        20 b                100.          55</code></pre>
+1          1         a      94.5128         68
+2          2         a      95.4359         83
+3          3         a      97.7949         69
+4          4         a      98.1026         83
+5          5         a      96.5641         99
+6          6         a     101.5897         90
+7          7         a     100.8718         74
+8          8         a      97.0769         48
+9          9         a      94.2051         56
+10        10         a      94.4103         44
+11        11         b     103.7436         74
+12        12         b     102.8205         60
+13        13         b     101.5897         48
+14        19         b     102.1026         38
+15        20         b     100.0513         55</code></pre>
 </div>
 <p>You can even pipe the output to any other functions (e.g., plotting functions)</p>
 <div class="layout-chunk" data-layout="l-body">
 <pre class="r"><code>
 df4 %&gt;% 
-    mutate(gradesRound = round(grades), studentNo = 1:.N) %&gt;% # round grades, add subject number: .N is a shortcut for nrow(df4)
+    mutate(gradesRound = round(grades), studentNo = 1:nrow(df4)) %&gt;% # round grades, add subject number: .N is a shortcut for nrow(df4)
     select(-grades) %&gt;% # remove original grades variable
     select(studentNo, class, iq, gradesRound) %&gt;%  # reorder columns
     rename(intelligence = iq, examGrades = gradesRound, classroom = class) %&gt;% # rename variables
@@ -2949,7 +3364,7 @@ df4 %&gt;%
     ggplot(aes(x = intelligence, y = examGrades)) + # note the + sign! (ggplot uses + sign)
     geom_point() + # add each data point
     geom_smooth(method = &#39;lm&#39;, se = T) # fit regression line with standard error (se = TRUE)</code></pre>
-<p><img src="0002_tidyverse_datatable_files/figure-html5/unnamed-chunk-47-1.png" width="624" /></p>
+<p><img src="0002_tidyverse_datatable_files/figure-html5/unnamed-chunk-45-1.png" width="624" /></p>
 </div>
 <p>Higher intelligence, worse grades? What’s going on? We figure out why later on. And more on <code>ggplot2</code> package in future tutorials.</p>
 <h3 id="compute-summary-statistics-with-summarize-or-summarise">Compute summary statistics with <code>summarize()</code> or <code>summarise()</code></h3>
@@ -2959,8 +3374,6 @@ df5 %&gt;%
     group_by(classroom) %&gt;% # grouping by classroom
     summarise(iqMean = mean(intelligence, na.rm = T))</code></pre>
 <pre><code>
-Source: local data table [2 x 2]
-
 # A tibble: 2 x 2
   classroom iqMean
   &lt;chr&gt;      &lt;dbl&gt;
@@ -2974,8 +3387,6 @@ df5 %&gt;%
     summarize(iqClassMean = mean(intelligence, na.rm = T),
               examGradesClassMean = mean(examGrades, na.rm = T))</code></pre>
 <pre><code>
-Source: local data table [2 x 3]
-
 # A tibble: 2 x 3
   classroom iqClassMean examGradesClassMean
   &lt;chr&gt;           &lt;dbl&gt;               &lt;dbl&gt;
@@ -2990,8 +3401,6 @@ df4 %&gt;%
     summarise(iqClassMean = mean(iq, na.rm = T), 
               examGradesClassMean = mean(grades, na.rm = T))</code></pre>
 <pre><code>
-Source: local data table [4 x 3]
-
 # A tibble: 4 x 3
   class iqClassMean examGradesClassMean
   &lt;chr&gt;       &lt;dbl&gt;               &lt;dbl&gt;
@@ -3006,11 +3415,11 @@ Source: local data table [4 x 3]
 <pre class="r"><code>
 sample(x = c(&quot;female&quot;, &quot;male&quot;), size = 40, replace = T)  # what is this doing</code></pre>
 <pre><code>
- [1] &quot;female&quot; &quot;female&quot; &quot;male&quot;   &quot;female&quot; &quot;female&quot; &quot;male&quot;   &quot;male&quot;   &quot;female&quot;
- [9] &quot;female&quot; &quot;female&quot; &quot;female&quot; &quot;male&quot;   &quot;male&quot;   &quot;male&quot;   &quot;female&quot; &quot;female&quot;
-[17] &quot;female&quot; &quot;male&quot;   &quot;female&quot; &quot;male&quot;   &quot;male&quot;   &quot;female&quot; &quot;female&quot; &quot;female&quot;
-[25] &quot;female&quot; &quot;male&quot;   &quot;male&quot;   &quot;female&quot; &quot;female&quot; &quot;male&quot;   &quot;male&quot;   &quot;male&quot;  
-[33] &quot;female&quot; &quot;female&quot; &quot;male&quot;   &quot;male&quot;   &quot;male&quot;   &quot;male&quot;   &quot;female&quot; &quot;female&quot;</code></pre>
+ [1] &quot;male&quot;   &quot;male&quot;   &quot;male&quot;   &quot;male&quot;   &quot;female&quot; &quot;male&quot;   &quot;female&quot; &quot;male&quot;  
+ [9] &quot;female&quot; &quot;female&quot; &quot;male&quot;   &quot;female&quot; &quot;female&quot; &quot;female&quot; &quot;male&quot;   &quot;male&quot;  
+[17] &quot;male&quot;   &quot;female&quot; &quot;male&quot;   &quot;male&quot;   &quot;female&quot; &quot;male&quot;   &quot;female&quot; &quot;male&quot;  
+[25] &quot;male&quot;   &quot;male&quot;   &quot;female&quot; &quot;male&quot;   &quot;male&quot;   &quot;female&quot; &quot;male&quot;   &quot;male&quot;  
+[33] &quot;female&quot; &quot;male&quot;   &quot;female&quot; &quot;male&quot;   &quot;male&quot;   &quot;male&quot;   &quot;male&quot;   &quot;female&quot;</code></pre>
 </div>
 <div class="layout-chunk" data-layout="l-body">
 <pre class="r"><code>
@@ -3021,53 +3430,50 @@ df4$gender &lt;- sample(x = c(&quot;female&quot;, &quot;male&quot;), size = 40, 
 <p>Because the gender labels are generated randomly, you’ll get different values each time you re-run the code.</p>
 <div class="layout-chunk" data-layout="l-body">
 <pre class="r"><code>
-print(df4, n = Inf)</code></pre>
+df4</code></pre>
 <pre><code>
-Source: local data table [40 x 4]
-
-# A tibble: 40 x 4
-      iq grades class gender
-   &lt;dbl&gt;  &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt; 
- 1  94.5   67.9 a     male  
- 2  95.4   82.5 a     female
- 3  97.8   69.1 a     male  
- 4  98.1   83.3 a     male  
- 5  96.6   99.1 a     female
- 6 102.    89.9 a     male  
- 7 101.    73.7 a     male  
- 8  97.1   47.9 a     male  
- 9  94.2   55.6 a     male  
-10  94.4   44.5 a     female
-11 104.    74.1 b     male  
-12 103.    59.9 b     male  
-13 102.    47.9 b     male  
-14 105.    44.9 b     female
-15 106.    60.2 b     female
-16 109.    64.9 b     male  
-17 107.    74.5 b     female
-18 107.    49.9 b     female
-19 102.    37.9 b     female
-20 100.    54.9 b     female
-21 111.    56.0 c     male  
-22 115.    56.0 c     male  
-23 112.    46.4 c     female
-24 109.    43.7 c     female
-25 111.    36.4 c     female
-26 114.    30.2 c     male  
-27 115.    39.5 c     female
-28 119.    51.0 c     female
-29 113.    64.1 c     female
-30 118     55.3 c     female
-31 117.    17.5 d     male  
-32 121.    35.2 d     female
-33 118.    29.9 d     female
-34 122.    18.3 d     male  
-35 124.    29.5 d     male  
-36 121.    53.7 d     female
-37 124.    63.7 d     male  
-38 125.    48.7 d     female
-39 125.    38.3 d     female
-40 128.    51.8 d     male  </code></pre>
+          iq  grades class gender
+ 1:  94.5128 67.9295     a female
+ 2:  95.4359 82.5449     a female
+ 3:  97.7949 69.0833     a female
+ 4:  98.1026 83.3141     a   male
+ 5:  96.5641 99.0833     a   male
+ 6: 101.5897 89.8526     a female
+ 7: 100.8718 73.6987     a   male
+ 8:  97.0769 47.9295     a   male
+ 9:  94.2051 55.6218     a   male
+10:  94.4103 44.4679     a   male
+11: 103.7436 74.0833     b female
+12: 102.8205 59.8526     b female
+13: 101.5897 47.9295     b female
+14: 105.3846 44.8526     b female
+15: 106.4103 60.2372     b   male
+16: 109.4872 64.8526     b   male
+17: 107.2308 74.4679     b female
+18: 107.2308 49.8526     b female
+19: 102.1026 37.9295     b   male
+20: 100.0513 54.8526     b   male
+21: 111.0256 56.0064     c female
+22: 114.7179 56.0064     c female
+23: 112.2564 46.3910     c female
+24: 108.6667 43.6987     c female
+25: 110.5128 36.3910     c   male
+26: 114.1026 30.2372     c female
+27: 115.0256 39.4679     c female
+28: 118.7179 51.0064     c female
+29: 112.8718 64.0833     c female
+30: 118.0000 55.3000     c   male
+31: 116.9744 17.5449     d   male
+32: 121.1795 35.2372     d   male
+33: 117.6923 29.8526     d   male
+34: 121.8974 18.3141     d female
+35: 123.6410 29.4679     d   male
+36: 121.3846 53.6987     d   male
+37: 123.7436 63.6987     d   male
+38: 124.7692 48.6987     d female
+39: 124.8718 38.3141     d female
+40: 127.6410 51.7756     d   male
+          iq  grades class gender</code></pre>
 </div>
 <p>Compute mean for each class by gender</p>
 <div class="layout-chunk" data-layout="l-body">
@@ -3077,20 +3483,18 @@ df4 %&gt;%
     summarise(iqClassMean = mean(iq, na.rm = T), 
               examGradesClassMean = mean(grades, na.rm = T))</code></pre>
 <pre><code>
-Source: local data table [8 x 4]
-Groups: class
-
 # A tibble: 8 x 4
+# Groups:   class [4]
   class gender iqClassMean examGradesClassMean
   &lt;chr&gt; &lt;chr&gt;        &lt;dbl&gt;               &lt;dbl&gt;
-1 a     male          97.7                69.6
-2 a     female        95.5                75.4
-3 b     male         104.                 61.7
-4 b     female       105.                 53.7
-5 c     male         113.                 47.4
-6 c     female       114.                 48.0
-7 d     male         123.                 36.2
-8 d     female       122.                 41.2</code></pre>
+1 a     female        97.3                77.4
+2 a     male          96.9                67.4
+3 b     female       105.                 58.5
+4 b     male         105.                 54.5
+5 c     female       113.                 48.4
+6 c     male         114.                 45.8
+7 d     female       124.                 35.1
+8 d     male         122.                 40.2</code></pre>
 </div>
 <h2 id="more-dplyr-and-tidyverse-information">More <code>dplyr</code> and <code>tidyverse</code> information</h2>
 <p>For much more information, see the following sites</p>
@@ -3101,31 +3505,57 @@ Groups: class
 </ul>
 <h2 id="supercharging-your-workflow-with-data.table">Supercharging your workflow with data.table()</h2>
 <p>While the syntax of <code>tidyverse</code> and <code>dplyr</code> functions are really easy to understand, they sometimes can be quite long-winded. Using pipes <code>%&gt;%</code> makes your code readable, but is a bit long to read sometimes. Now we’ll see how <code>data.table()</code> can shorten all that code while maintaining readability. Also, <code>data.table()</code> is MUCH faster, which is especially useful when dealing with bigger datasets (hundreds of MBs and GBs and even TBs).</p>
-<p>If you use <code>tbl_dt(fread('filename'))</code> to read your dataset into R, then your object is already a <code>data.table</code>. Check it with <code>class(objectName)</code>.</p>
+<p>If you use <code>fread('filename')</code> to read your dataset into R, then your object is already a <code>data.table</code>. Check it with <code>class(objectName)</code>.</p>
 <div class="layout-chunk" data-layout="l-body">
 <pre class="r"><code>
 df4</code></pre>
 <pre><code>
-Source: local data table [40 x 4]
-
-# A tibble: 40 x 4
-      iq grades class gender
-   &lt;dbl&gt;  &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt; 
- 1  94.5   67.9 a     male  
- 2  95.4   82.5 a     female
- 3  97.8   69.1 a     male  
- 4  98.1   83.3 a     male  
- 5  96.6   99.1 a     female
- 6 102.    89.9 a     male  
- 7 101.    73.7 a     male  
- 8  97.1   47.9 a     male  
- 9  94.2   55.6 a     male  
-10  94.4   44.5 a     female
-# … with 30 more rows</code></pre>
+          iq  grades class gender
+ 1:  94.5128 67.9295     a female
+ 2:  95.4359 82.5449     a female
+ 3:  97.7949 69.0833     a female
+ 4:  98.1026 83.3141     a   male
+ 5:  96.5641 99.0833     a   male
+ 6: 101.5897 89.8526     a female
+ 7: 100.8718 73.6987     a   male
+ 8:  97.0769 47.9295     a   male
+ 9:  94.2051 55.6218     a   male
+10:  94.4103 44.4679     a   male
+11: 103.7436 74.0833     b female
+12: 102.8205 59.8526     b female
+13: 101.5897 47.9295     b female
+14: 105.3846 44.8526     b female
+15: 106.4103 60.2372     b   male
+16: 109.4872 64.8526     b   male
+17: 107.2308 74.4679     b female
+18: 107.2308 49.8526     b female
+19: 102.1026 37.9295     b   male
+20: 100.0513 54.8526     b   male
+21: 111.0256 56.0064     c female
+22: 114.7179 56.0064     c female
+23: 112.2564 46.3910     c female
+24: 108.6667 43.6987     c female
+25: 110.5128 36.3910     c   male
+26: 114.1026 30.2372     c female
+27: 115.0256 39.4679     c female
+28: 118.7179 51.0064     c female
+29: 112.8718 64.0833     c female
+30: 118.0000 55.3000     c   male
+31: 116.9744 17.5449     d   male
+32: 121.1795 35.2372     d   male
+33: 117.6923 29.8526     d   male
+34: 121.8974 18.3141     d female
+35: 123.6410 29.4679     d   male
+36: 121.3846 53.6987     d   male
+37: 123.7436 63.6987     d   male
+38: 124.7692 48.6987     d female
+39: 124.8718 38.3141     d female
+40: 127.6410 51.7756     d   male
+          iq  grades class gender</code></pre>
 <pre class="r"><code>
 class(df4)</code></pre>
 <pre><code>
-[1] &quot;tbl_dt&quot;     &quot;tbl&quot;        &quot;data.table&quot; &quot;data.frame&quot;</code></pre>
+[1] &quot;data.table&quot; &quot;data.frame&quot;</code></pre>
 <pre class="r"><code>
 df1</code></pre>
 <pre><code>
@@ -3155,13 +3585,8 @@ class(df1)</code></pre>
 <pre><code>
 [1] &quot;data.frame&quot;</code></pre>
 </div>
-<p>If your object isn’t a <code>data.table</code>, you can convert it to one using <code>tbl_dt()</code> from the <code>dtplyr</code> package. <code>tbl_dt()</code> turns your dataset into <code>tibble</code> (tbl) and <code>data.table</code>.</p>
+<p>If your object isn’t a <code>data.table</code>, you can convert it to one using <code>setDT()</code>.</p>
 <div class="layout-chunk" data-layout="l-body">
-<pre class="r"><code>
-df1_dt &lt;- tbl_dt(df1)  # preferred approach, especially for datasets with many columns and rows
-class(df1_dt)</code></pre>
-<pre><code>
-[1] &quot;tbl_dt&quot;     &quot;tbl&quot;        &quot;data.table&quot; &quot;data.frame&quot;</code></pre>
 <pre class="r"><code>
 setDT(df1)  # setDT() also works (and works without reassignment: no need to use &lt;-)
 class(df1)  # but setDT() doesn&#39;t convert your dataset to a tibble class at the same time</code></pre>
@@ -3179,224 +3604,203 @@ class(df1)  # but setDT() doesn&#39;t convert your dataset to a tibble class at 
 <h3 id="filter-data.table-via-i">Filter data.table via i</h3>
 <div class="layout-chunk" data-layout="l-body">
 <pre class="r"><code>
-print(df4, n = Inf)  # remind yourself what your data look like</code></pre>
+df4</code></pre>
 <pre><code>
-Source: local data table [40 x 4]
-
-# A tibble: 40 x 4
-      iq grades class gender
-   &lt;dbl&gt;  &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt; 
- 1  94.5   67.9 a     male  
- 2  95.4   82.5 a     female
- 3  97.8   69.1 a     male  
- 4  98.1   83.3 a     male  
- 5  96.6   99.1 a     female
- 6 102.    89.9 a     male  
- 7 101.    73.7 a     male  
- 8  97.1   47.9 a     male  
- 9  94.2   55.6 a     male  
-10  94.4   44.5 a     female
-11 104.    74.1 b     male  
-12 103.    59.9 b     male  
-13 102.    47.9 b     male  
-14 105.    44.9 b     female
-15 106.    60.2 b     female
-16 109.    64.9 b     male  
-17 107.    74.5 b     female
-18 107.    49.9 b     female
-19 102.    37.9 b     female
-20 100.    54.9 b     female
-21 111.    56.0 c     male  
-22 115.    56.0 c     male  
-23 112.    46.4 c     female
-24 109.    43.7 c     female
-25 111.    36.4 c     female
-26 114.    30.2 c     male  
-27 115.    39.5 c     female
-28 119.    51.0 c     female
-29 113.    64.1 c     female
-30 118     55.3 c     female
-31 117.    17.5 d     male  
-32 121.    35.2 d     female
-33 118.    29.9 d     female
-34 122.    18.3 d     male  
-35 124.    29.5 d     male  
-36 121.    53.7 d     female
-37 124.    63.7 d     male  
-38 125.    48.7 d     female
-39 125.    38.3 d     female
-40 128.    51.8 d     male  </code></pre>
+          iq  grades class gender
+ 1:  94.5128 67.9295     a female
+ 2:  95.4359 82.5449     a female
+ 3:  97.7949 69.0833     a female
+ 4:  98.1026 83.3141     a   male
+ 5:  96.5641 99.0833     a   male
+ 6: 101.5897 89.8526     a female
+ 7: 100.8718 73.6987     a   male
+ 8:  97.0769 47.9295     a   male
+ 9:  94.2051 55.6218     a   male
+10:  94.4103 44.4679     a   male
+11: 103.7436 74.0833     b female
+12: 102.8205 59.8526     b female
+13: 101.5897 47.9295     b female
+14: 105.3846 44.8526     b female
+15: 106.4103 60.2372     b   male
+16: 109.4872 64.8526     b   male
+17: 107.2308 74.4679     b female
+18: 107.2308 49.8526     b female
+19: 102.1026 37.9295     b   male
+20: 100.0513 54.8526     b   male
+21: 111.0256 56.0064     c female
+22: 114.7179 56.0064     c female
+23: 112.2564 46.3910     c female
+24: 108.6667 43.6987     c female
+25: 110.5128 36.3910     c   male
+26: 114.1026 30.2372     c female
+27: 115.0256 39.4679     c female
+28: 118.7179 51.0064     c female
+29: 112.8718 64.0833     c female
+30: 118.0000 55.3000     c   male
+31: 116.9744 17.5449     d   male
+32: 121.1795 35.2372     d   male
+33: 117.6923 29.8526     d   male
+34: 121.8974 18.3141     d female
+35: 123.6410 29.4679     d   male
+36: 121.3846 53.6987     d   male
+37: 123.7436 63.6987     d   male
+38: 124.7692 48.6987     d female
+39: 124.8718 38.3141     d female
+40: 127.6410 51.7756     d   male
+          iq  grades class gender</code></pre>
 <pre class="r"><code>
 class(df4)  # is it a data.table?</code></pre>
 <pre><code>
-[1] &quot;tbl_dt&quot;     &quot;tbl&quot;        &quot;data.table&quot; &quot;data.frame&quot;</code></pre>
+[1] &quot;data.table&quot; &quot;data.frame&quot;</code></pre>
 </div>
 <p>Different ways to filter via i</p>
 <div class="layout-chunk" data-layout="l-body">
 <pre class="r"><code>
 df4[i = gender == &quot;female&quot;, ]  # just female (j, by are NULL)</code></pre>
 <pre><code>
-Source: local data table [21 x 4]
-
-# A tibble: 21 x 4
-      iq grades class gender
-   &lt;dbl&gt;  &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt; 
- 1  95.4   82.5 a     female
- 2  96.6   99.1 a     female
- 3  94.4   44.5 a     female
- 4 105.    44.9 b     female
- 5 106.    60.2 b     female
- 6 107.    74.5 b     female
- 7 107.    49.9 b     female
- 8 102.    37.9 b     female
- 9 100.    54.9 b     female
-10 112.    46.4 c     female
-# … with 11 more rows</code></pre>
+          iq  grades class gender
+ 1:  94.5128 67.9295     a female
+ 2:  95.4359 82.5449     a female
+ 3:  97.7949 69.0833     a female
+ 4: 101.5897 89.8526     a female
+ 5: 103.7436 74.0833     b female
+ 6: 102.8205 59.8526     b female
+ 7: 101.5897 47.9295     b female
+ 8: 105.3846 44.8526     b female
+ 9: 107.2308 74.4679     b female
+10: 107.2308 49.8526     b female
+11: 111.0256 56.0064     c female
+12: 114.7179 56.0064     c female
+13: 112.2564 46.3910     c female
+14: 108.6667 43.6987     c female
+15: 114.1026 30.2372     c female
+16: 115.0256 39.4679     c female
+17: 118.7179 51.0064     c female
+18: 112.8718 64.0833     c female
+19: 121.8974 18.3141     d female
+20: 124.7692 48.6987     d female
+21: 124.8718 38.3141     d female
+          iq  grades class gender</code></pre>
 <pre class="r"><code>
 df4[i = gender != &quot;female&quot;, ]  # not female </code></pre>
 <pre><code>
-Source: local data table [19 x 4]
-
-# A tibble: 19 x 4
-      iq grades class gender
-   &lt;dbl&gt;  &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt; 
- 1  94.5   67.9 a     male  
- 2  97.8   69.1 a     male  
- 3  98.1   83.3 a     male  
- 4 102.    89.9 a     male  
- 5 101.    73.7 a     male  
- 6  97.1   47.9 a     male  
- 7  94.2   55.6 a     male  
- 8 104.    74.1 b     male  
- 9 103.    59.9 b     male  
-10 102.    47.9 b     male  
-11 109.    64.9 b     male  
-12 111.    56.0 c     male  
-13 115.    56.0 c     male  
-14 114.    30.2 c     male  
-15 117.    17.5 d     male  
-16 122.    18.3 d     male  
-17 124.    29.5 d     male  
-18 124.    63.7 d     male  
-19 128.    51.8 d     male  </code></pre>
+          iq  grades class gender
+ 1:  98.1026 83.3141     a   male
+ 2:  96.5641 99.0833     a   male
+ 3: 100.8718 73.6987     a   male
+ 4:  97.0769 47.9295     a   male
+ 5:  94.2051 55.6218     a   male
+ 6:  94.4103 44.4679     a   male
+ 7: 106.4103 60.2372     b   male
+ 8: 109.4872 64.8526     b   male
+ 9: 102.1026 37.9295     b   male
+10: 100.0513 54.8526     b   male
+11: 110.5128 36.3910     c   male
+12: 118.0000 55.3000     c   male
+13: 116.9744 17.5449     d   male
+14: 121.1795 35.2372     d   male
+15: 117.6923 29.8526     d   male
+16: 123.6410 29.4679     d   male
+17: 121.3846 53.6987     d   male
+18: 123.7436 63.6987     d   male
+19: 127.6410 51.7756     d   male</code></pre>
 <pre class="r"><code>
 df4[gender != &quot;female&quot;, ]  # also works</code></pre>
 <pre><code>
-Source: local data table [19 x 4]
-
-# A tibble: 19 x 4
-      iq grades class gender
-   &lt;dbl&gt;  &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt; 
- 1  94.5   67.9 a     male  
- 2  97.8   69.1 a     male  
- 3  98.1   83.3 a     male  
- 4 102.    89.9 a     male  
- 5 101.    73.7 a     male  
- 6  97.1   47.9 a     male  
- 7  94.2   55.6 a     male  
- 8 104.    74.1 b     male  
- 9 103.    59.9 b     male  
-10 102.    47.9 b     male  
-11 109.    64.9 b     male  
-12 111.    56.0 c     male  
-13 115.    56.0 c     male  
-14 114.    30.2 c     male  
-15 117.    17.5 d     male  
-16 122.    18.3 d     male  
-17 124.    29.5 d     male  
-18 124.    63.7 d     male  
-19 128.    51.8 d     male  </code></pre>
+          iq  grades class gender
+ 1:  98.1026 83.3141     a   male
+ 2:  96.5641 99.0833     a   male
+ 3: 100.8718 73.6987     a   male
+ 4:  97.0769 47.9295     a   male
+ 5:  94.2051 55.6218     a   male
+ 6:  94.4103 44.4679     a   male
+ 7: 106.4103 60.2372     b   male
+ 8: 109.4872 64.8526     b   male
+ 9: 102.1026 37.9295     b   male
+10: 100.0513 54.8526     b   male
+11: 110.5128 36.3910     c   male
+12: 118.0000 55.3000     c   male
+13: 116.9744 17.5449     d   male
+14: 121.1795 35.2372     d   male
+15: 117.6923 29.8526     d   male
+16: 123.6410 29.4679     d   male
+17: 121.3846 53.6987     d   male
+18: 123.7436 63.6987     d   male
+19: 127.6410 51.7756     d   male</code></pre>
 <pre class="r"><code>
 df4[grades &gt; 85, ]  # also works</code></pre>
 <pre><code>
-Source: local data table [2 x 4]
-
-# A tibble: 2 x 4
-     iq grades class gender
-  &lt;dbl&gt;  &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt; 
-1  96.6   99.1 a     female
-2 102.    89.9 a     male  </code></pre>
+         iq  grades class gender
+1:  96.5641 99.0833     a   male
+2: 101.5897 89.8526     a female</code></pre>
 <pre class="r"><code>
 # same as filter(df4, grades &gt; 85), but much more concise
 df4[grades &gt; 85]  # also works</code></pre>
 <pre><code>
-Source: local data table [2 x 4]
-
-# A tibble: 2 x 4
-     iq grades class gender
-  &lt;dbl&gt;  &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt; 
-1  96.6   99.1 a     female
-2 102.    89.9 a     male  </code></pre>
+         iq  grades class gender
+1:  96.5641 99.0833     a   male
+2: 101.5897 89.8526     a female</code></pre>
 <pre class="r"><code>
 df4[i = grades &gt; 85]  # also works</code></pre>
 <pre><code>
-Source: local data table [2 x 4]
-
-# A tibble: 2 x 4
-     iq grades class gender
-  &lt;dbl&gt;  &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt; 
-1  96.6   99.1 a     female
-2 102.    89.9 a     male  </code></pre>
+         iq  grades class gender
+1:  96.5641 99.0833     a   male
+2: 101.5897 89.8526     a female</code></pre>
 <pre class="r"><code>
 df4[grades &lt; 50 &amp; iq &gt; 120]  # smart but (AND &amp;) lazy people (grades &lt; 50 AND iq &gt; 120)</code></pre>
 <pre><code>
-Source: local data table [5 x 4]
-
-# A tibble: 5 x 4
-     iq grades class gender
-  &lt;dbl&gt;  &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt; 
-1  121.   35.2 d     female
-2  122.   18.3 d     male  
-3  124.   29.5 d     male  
-4  125.   48.7 d     female
-5  125.   38.3 d     female</code></pre>
+         iq  grades class gender
+1: 121.1795 35.2372     d   male
+2: 121.8974 18.3141     d female
+3: 123.6410 29.4679     d   male
+4: 124.7692 48.6987     d female
+5: 124.8718 38.3141     d female</code></pre>
 <pre class="r"><code>
 df4[grades &lt; 50 | iq &gt; 120]  # smart but OR lazy people (grades &lt; 50 OR iq &gt; 120)</code></pre>
 <pre><code>
-Source: local data table [21 x 4]
-
-# A tibble: 21 x 4
-      iq grades class gender
-   &lt;dbl&gt;  &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt; 
- 1  97.1   47.9 a     male  
- 2  94.4   44.5 a     female
- 3 102.    47.9 b     male  
- 4 105.    44.9 b     female
- 5 107.    49.9 b     female
- 6 102.    37.9 b     female
- 7 112.    46.4 c     female
- 8 109.    43.7 c     female
- 9 111.    36.4 c     female
-10 114.    30.2 c     male  
-# … with 11 more rows</code></pre>
+          iq  grades class gender
+ 1:  97.0769 47.9295     a   male
+ 2:  94.4103 44.4679     a   male
+ 3: 101.5897 47.9295     b female
+ 4: 105.3846 44.8526     b female
+ 5: 107.2308 49.8526     b female
+ 6: 102.1026 37.9295     b   male
+ 7: 112.2564 46.3910     c female
+ 8: 108.6667 43.6987     c female
+ 9: 110.5128 36.3910     c   male
+10: 114.1026 30.2372     c female
+11: 115.0256 39.4679     c female
+12: 116.9744 17.5449     d   male
+13: 121.1795 35.2372     d   male
+14: 117.6923 29.8526     d   male
+15: 121.8974 18.3141     d female
+16: 123.6410 29.4679     d   male
+17: 121.3846 53.6987     d   male
+18: 123.7436 63.6987     d   male
+19: 124.7692 48.6987     d female
+20: 124.8718 38.3141     d female
+21: 127.6410 51.7756     d   male
+          iq  grades class gender</code></pre>
 </div>
 <p>Slice (select rows) with indices via i</p>
 <div class="layout-chunk" data-layout="l-body">
 <pre class="r"><code>
 df4[1:3]  # rows 1 to 3</code></pre>
 <pre><code>
-Source: local data table [3 x 4]
-
-# A tibble: 3 x 4
-     iq grades class gender
-  &lt;dbl&gt;  &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt; 
-1  94.5   67.9 a     male  
-2  95.4   82.5 a     female
-3  97.8   69.1 a     male  </code></pre>
+        iq  grades class gender
+1: 94.5128 67.9295     a female
+2: 95.4359 82.5449     a female
+3: 97.7949 69.0833     a female</code></pre>
 <pre class="r"><code>
 df4[35:.N]  # rows 35 to last row</code></pre>
 <pre><code>
-Source: local data table [6 x 4]
-
-# A tibble: 6 x 4
-     iq grades class gender
-  &lt;dbl&gt;  &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt; 
-1  124.   29.5 d     male  
-2  121.   53.7 d     female
-3  124.   63.7 d     male  
-4  125.   48.7 d     female
-5  125.   38.3 d     female
-6  128.   51.8 d     male  </code></pre>
+         iq  grades class gender
+1: 123.6410 29.4679     d   male
+2: 121.3846 53.6987     d   male
+3: 123.7436 63.6987     d   male
+4: 124.7692 48.6987     d female
+5: 124.8718 38.3141     d female
+6: 127.6410 51.7756     d   male</code></pre>
 </div>
 <h3 id="selecting-columns-via-j">Selecting columns via j</h3>
 <div class="layout-chunk" data-layout="l-body">
@@ -3438,86 +3842,190 @@ class(df4$grades)  # not a data.table!</code></pre>
 <pre class="r"><code>
 df4[, .(grades)]  # output looks like a table (tibble + local data table)</code></pre>
 <pre><code>
-Source: local data table [40 x 1]
-
-# A tibble: 40 x 1
-   grades
-    &lt;dbl&gt;
- 1   67.9
- 2   82.5
- 3   69.1
- 4   83.3
- 5   99.1
- 6   89.9
- 7   73.7
- 8   47.9
- 9   55.6
-10   44.5
-# … with 30 more rows</code></pre>
+     grades
+ 1: 67.9295
+ 2: 82.5449
+ 3: 69.0833
+ 4: 83.3141
+ 5: 99.0833
+ 6: 89.8526
+ 7: 73.6987
+ 8: 47.9295
+ 9: 55.6218
+10: 44.4679
+11: 74.0833
+12: 59.8526
+13: 47.9295
+14: 44.8526
+15: 60.2372
+16: 64.8526
+17: 74.4679
+18: 49.8526
+19: 37.9295
+20: 54.8526
+21: 56.0064
+22: 56.0064
+23: 46.3910
+24: 43.6987
+25: 36.3910
+26: 30.2372
+27: 39.4679
+28: 51.0064
+29: 64.0833
+30: 55.3000
+31: 17.5449
+32: 35.2372
+33: 29.8526
+34: 18.3141
+35: 29.4679
+36: 53.6987
+37: 63.6987
+38: 48.6987
+39: 38.3141
+40: 51.7756
+     grades</code></pre>
 <pre class="r"><code>
 class(df4[, .(grades)])  # still a data.table!</code></pre>
 <pre><code>
-[1] &quot;tbl_dt&quot;     &quot;tbl&quot;        &quot;data.table&quot; &quot;data.frame&quot;</code></pre>
+[1] &quot;data.table&quot; &quot;data.frame&quot;</code></pre>
 </div>
 <div class="layout-chunk" data-layout="l-body">
 <pre class="r"><code>
 df4[, j = .(grades, gender, iq)]  # select multiple columns</code></pre>
 <pre><code>
-Source: local data table [40 x 3]
-
-# A tibble: 40 x 3
-   grades gender    iq
-    &lt;dbl&gt; &lt;chr&gt;  &lt;dbl&gt;
- 1   67.9 male    94.5
- 2   82.5 female  95.4
- 3   69.1 male    97.8
- 4   83.3 male    98.1
- 5   99.1 female  96.6
- 6   89.9 male   102. 
- 7   73.7 male   101. 
- 8   47.9 male    97.1
- 9   55.6 male    94.2
-10   44.5 female  94.4
-# … with 30 more rows</code></pre>
+     grades gender       iq
+ 1: 67.9295 female  94.5128
+ 2: 82.5449 female  95.4359
+ 3: 69.0833 female  97.7949
+ 4: 83.3141   male  98.1026
+ 5: 99.0833   male  96.5641
+ 6: 89.8526 female 101.5897
+ 7: 73.6987   male 100.8718
+ 8: 47.9295   male  97.0769
+ 9: 55.6218   male  94.2051
+10: 44.4679   male  94.4103
+11: 74.0833 female 103.7436
+12: 59.8526 female 102.8205
+13: 47.9295 female 101.5897
+14: 44.8526 female 105.3846
+15: 60.2372   male 106.4103
+16: 64.8526   male 109.4872
+17: 74.4679 female 107.2308
+18: 49.8526 female 107.2308
+19: 37.9295   male 102.1026
+20: 54.8526   male 100.0513
+21: 56.0064 female 111.0256
+22: 56.0064 female 114.7179
+23: 46.3910 female 112.2564
+24: 43.6987 female 108.6667
+25: 36.3910   male 110.5128
+26: 30.2372 female 114.1026
+27: 39.4679 female 115.0256
+28: 51.0064 female 118.7179
+29: 64.0833 female 112.8718
+30: 55.3000   male 118.0000
+31: 17.5449   male 116.9744
+32: 35.2372   male 121.1795
+33: 29.8526   male 117.6923
+34: 18.3141 female 121.8974
+35: 29.4679   male 123.6410
+36: 53.6987   male 121.3846
+37: 63.6987   male 123.7436
+38: 48.6987 female 124.7692
+39: 38.3141 female 124.8718
+40: 51.7756   male 127.6410
+     grades gender       iq</code></pre>
 <pre class="r"><code>
 df4[, .(grades, gender, iq)]  # same as above and we often omit j =</code></pre>
 <pre><code>
-Source: local data table [40 x 3]
-
-# A tibble: 40 x 3
-   grades gender    iq
-    &lt;dbl&gt; &lt;chr&gt;  &lt;dbl&gt;
- 1   67.9 male    94.5
- 2   82.5 female  95.4
- 3   69.1 male    97.8
- 4   83.3 male    98.1
- 5   99.1 female  96.6
- 6   89.9 male   102. 
- 7   73.7 male   101. 
- 8   47.9 male    97.1
- 9   55.6 male    94.2
-10   44.5 female  94.4
-# … with 30 more rows</code></pre>
+     grades gender       iq
+ 1: 67.9295 female  94.5128
+ 2: 82.5449 female  95.4359
+ 3: 69.0833 female  97.7949
+ 4: 83.3141   male  98.1026
+ 5: 99.0833   male  96.5641
+ 6: 89.8526 female 101.5897
+ 7: 73.6987   male 100.8718
+ 8: 47.9295   male  97.0769
+ 9: 55.6218   male  94.2051
+10: 44.4679   male  94.4103
+11: 74.0833 female 103.7436
+12: 59.8526 female 102.8205
+13: 47.9295 female 101.5897
+14: 44.8526 female 105.3846
+15: 60.2372   male 106.4103
+16: 64.8526   male 109.4872
+17: 74.4679 female 107.2308
+18: 49.8526 female 107.2308
+19: 37.9295   male 102.1026
+20: 54.8526   male 100.0513
+21: 56.0064 female 111.0256
+22: 56.0064 female 114.7179
+23: 46.3910 female 112.2564
+24: 43.6987 female 108.6667
+25: 36.3910   male 110.5128
+26: 30.2372 female 114.1026
+27: 39.4679 female 115.0256
+28: 51.0064 female 118.7179
+29: 64.0833 female 112.8718
+30: 55.3000   male 118.0000
+31: 17.5449   male 116.9744
+32: 35.2372   male 121.1795
+33: 29.8526   male 117.6923
+34: 18.3141 female 121.8974
+35: 29.4679   male 123.6410
+36: 53.6987   male 121.3846
+37: 63.6987   male 123.7436
+38: 48.6987 female 124.7692
+39: 38.3141 female 124.8718
+40: 51.7756   male 127.6410
+     grades gender       iq</code></pre>
 <pre class="r"><code>
 # select(df4, grades, gender, iq) # same as above but with select()
 df4[, grades:gender]  # select grades to gender</code></pre>
 <pre><code>
-Source: local data table [40 x 3]
-
-# A tibble: 40 x 3
-   grades class gender
-    &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt; 
- 1   67.9 a     male  
- 2   82.5 a     female
- 3   69.1 a     male  
- 4   83.3 a     male  
- 5   99.1 a     female
- 6   89.9 a     male  
- 7   73.7 a     male  
- 8   47.9 a     male  
- 9   55.6 a     male  
-10   44.5 a     female
-# … with 30 more rows</code></pre>
+     grades class gender
+ 1: 67.9295     a female
+ 2: 82.5449     a female
+ 3: 69.0833     a female
+ 4: 83.3141     a   male
+ 5: 99.0833     a   male
+ 6: 89.8526     a female
+ 7: 73.6987     a   male
+ 8: 47.9295     a   male
+ 9: 55.6218     a   male
+10: 44.4679     a   male
+11: 74.0833     b female
+12: 59.8526     b female
+13: 47.9295     b female
+14: 44.8526     b female
+15: 60.2372     b   male
+16: 64.8526     b   male
+17: 74.4679     b female
+18: 49.8526     b female
+19: 37.9295     b   male
+20: 54.8526     b   male
+21: 56.0064     c female
+22: 56.0064     c female
+23: 46.3910     c female
+24: 43.6987     c female
+25: 36.3910     c   male
+26: 30.2372     c female
+27: 39.4679     c female
+28: 51.0064     c female
+29: 64.0833     c female
+30: 55.3000     c   male
+31: 17.5449     d   male
+32: 35.2372     d   male
+33: 29.8526     d   male
+34: 18.3141     d female
+35: 29.4679     d   male
+36: 53.6987     d   male
+37: 63.6987     d   male
+38: 48.6987     d female
+39: 38.3141     d female
+40: 51.7756     d   male
+     grades class gender</code></pre>
 <pre class="r"><code>
 # select(df4, grades:gender) # same as above but with select() df4[,
 # .(grades:gender)] # this version doesn&#39;t work at the moment</code></pre>
@@ -3526,101 +4034,231 @@ Source: local data table [40 x 3]
 <pre class="r"><code>
 df4[, c(2, 3, 4)]  # via column index/number</code></pre>
 <pre><code>
-Source: local data table [40 x 3]
-
-# A tibble: 40 x 3
-   grades class gender
-    &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt; 
- 1   67.9 a     male  
- 2   82.5 a     female
- 3   69.1 a     male  
- 4   83.3 a     male  
- 5   99.1 a     female
- 6   89.9 a     male  
- 7   73.7 a     male  
- 8   47.9 a     male  
- 9   55.6 a     male  
-10   44.5 a     female
-# … with 30 more rows</code></pre>
+     grades class gender
+ 1: 67.9295     a female
+ 2: 82.5449     a female
+ 3: 69.0833     a female
+ 4: 83.3141     a   male
+ 5: 99.0833     a   male
+ 6: 89.8526     a female
+ 7: 73.6987     a   male
+ 8: 47.9295     a   male
+ 9: 55.6218     a   male
+10: 44.4679     a   male
+11: 74.0833     b female
+12: 59.8526     b female
+13: 47.9295     b female
+14: 44.8526     b female
+15: 60.2372     b   male
+16: 64.8526     b   male
+17: 74.4679     b female
+18: 49.8526     b female
+19: 37.9295     b   male
+20: 54.8526     b   male
+21: 56.0064     c female
+22: 56.0064     c female
+23: 46.3910     c female
+24: 43.6987     c female
+25: 36.3910     c   male
+26: 30.2372     c female
+27: 39.4679     c female
+28: 51.0064     c female
+29: 64.0833     c female
+30: 55.3000     c   male
+31: 17.5449     d   male
+32: 35.2372     d   male
+33: 29.8526     d   male
+34: 18.3141     d female
+35: 29.4679     d   male
+36: 53.6987     d   male
+37: 63.6987     d   male
+38: 48.6987     d female
+39: 38.3141     d female
+40: 51.7756     d   male
+     grades class gender</code></pre>
 <pre class="r"><code>
 df4[, -c(2, 3, 4)]  # via column index/number (minus/not columns 1, 3, 4)</code></pre>
 <pre><code>
-Source: local data table [40 x 1]
-
-# A tibble: 40 x 1
-      iq
-   &lt;dbl&gt;
- 1  94.5
- 2  95.4
- 3  97.8
- 4  98.1
- 5  96.6
- 6 102. 
- 7 101. 
- 8  97.1
- 9  94.2
-10  94.4
-# … with 30 more rows</code></pre>
+          iq
+ 1:  94.5128
+ 2:  95.4359
+ 3:  97.7949
+ 4:  98.1026
+ 5:  96.5641
+ 6: 101.5897
+ 7: 100.8718
+ 8:  97.0769
+ 9:  94.2051
+10:  94.4103
+11: 103.7436
+12: 102.8205
+13: 101.5897
+14: 105.3846
+15: 106.4103
+16: 109.4872
+17: 107.2308
+18: 107.2308
+19: 102.1026
+20: 100.0513
+21: 111.0256
+22: 114.7179
+23: 112.2564
+24: 108.6667
+25: 110.5128
+26: 114.1026
+27: 115.0256
+28: 118.7179
+29: 112.8718
+30: 118.0000
+31: 116.9744
+32: 121.1795
+33: 117.6923
+34: 121.8974
+35: 123.6410
+36: 121.3846
+37: 123.7436
+38: 124.7692
+39: 124.8718
+40: 127.6410
+          iq</code></pre>
 <pre class="r"><code>
 df4[, 1:3]  # via column index/number (1 to 3)</code></pre>
 <pre><code>
-Source: local data table [40 x 3]
-
-# A tibble: 40 x 3
-      iq grades class
-   &lt;dbl&gt;  &lt;dbl&gt; &lt;chr&gt;
- 1  94.5   67.9 a    
- 2  95.4   82.5 a    
- 3  97.8   69.1 a    
- 4  98.1   83.3 a    
- 5  96.6   99.1 a    
- 6 102.    89.9 a    
- 7 101.    73.7 a    
- 8  97.1   47.9 a    
- 9  94.2   55.6 a    
-10  94.4   44.5 a    
-# … with 30 more rows</code></pre>
+          iq  grades class
+ 1:  94.5128 67.9295     a
+ 2:  95.4359 82.5449     a
+ 3:  97.7949 69.0833     a
+ 4:  98.1026 83.3141     a
+ 5:  96.5641 99.0833     a
+ 6: 101.5897 89.8526     a
+ 7: 100.8718 73.6987     a
+ 8:  97.0769 47.9295     a
+ 9:  94.2051 55.6218     a
+10:  94.4103 44.4679     a
+11: 103.7436 74.0833     b
+12: 102.8205 59.8526     b
+13: 101.5897 47.9295     b
+14: 105.3846 44.8526     b
+15: 106.4103 60.2372     b
+16: 109.4872 64.8526     b
+17: 107.2308 74.4679     b
+18: 107.2308 49.8526     b
+19: 102.1026 37.9295     b
+20: 100.0513 54.8526     b
+21: 111.0256 56.0064     c
+22: 114.7179 56.0064     c
+23: 112.2564 46.3910     c
+24: 108.6667 43.6987     c
+25: 110.5128 36.3910     c
+26: 114.1026 30.2372     c
+27: 115.0256 39.4679     c
+28: 118.7179 51.0064     c
+29: 112.8718 64.0833     c
+30: 118.0000 55.3000     c
+31: 116.9744 17.5449     d
+32: 121.1795 35.2372     d
+33: 117.6923 29.8526     d
+34: 121.8974 18.3141     d
+35: 123.6410 29.4679     d
+36: 121.3846 53.6987     d
+37: 123.7436 63.6987     d
+38: 124.7692 48.6987     d
+39: 124.8718 38.3141     d
+40: 127.6410 51.7756     d
+          iq  grades class</code></pre>
 </div>
 <p>Other ways to select columns</p>
 <div class="layout-chunk" data-layout="l-body">
 <pre class="r"><code>
 df4[, &quot;grades&quot;]  # 1 column (character)</code></pre>
 <pre><code>
-Source: local data table [40 x 1]
-
-# A tibble: 40 x 1
-   grades
-    &lt;dbl&gt;
- 1   67.9
- 2   82.5
- 3   69.1
- 4   83.3
- 5   99.1
- 6   89.9
- 7   73.7
- 8   47.9
- 9   55.6
-10   44.5
-# … with 30 more rows</code></pre>
+     grades
+ 1: 67.9295
+ 2: 82.5449
+ 3: 69.0833
+ 4: 83.3141
+ 5: 99.0833
+ 6: 89.8526
+ 7: 73.6987
+ 8: 47.9295
+ 9: 55.6218
+10: 44.4679
+11: 74.0833
+12: 59.8526
+13: 47.9295
+14: 44.8526
+15: 60.2372
+16: 64.8526
+17: 74.4679
+18: 49.8526
+19: 37.9295
+20: 54.8526
+21: 56.0064
+22: 56.0064
+23: 46.3910
+24: 43.6987
+25: 36.3910
+26: 30.2372
+27: 39.4679
+28: 51.0064
+29: 64.0833
+30: 55.3000
+31: 17.5449
+32: 35.2372
+33: 29.8526
+34: 18.3141
+35: 29.4679
+36: 53.6987
+37: 63.6987
+38: 48.6987
+39: 38.3141
+40: 51.7756
+     grades</code></pre>
 <pre class="r"><code>
 df4[, c(&quot;grades&quot;, &quot;iq&quot;)]  # multiple columns (characters)</code></pre>
 <pre><code>
-Source: local data table [40 x 2]
-
-# A tibble: 40 x 2
-   grades    iq
-    &lt;dbl&gt; &lt;dbl&gt;
- 1   67.9  94.5
- 2   82.5  95.4
- 3   69.1  97.8
- 4   83.3  98.1
- 5   99.1  96.6
- 6   89.9 102. 
- 7   73.7 101. 
- 8   47.9  97.1
- 9   55.6  94.2
-10   44.5  94.4
-# … with 30 more rows</code></pre>
+     grades       iq
+ 1: 67.9295  94.5128
+ 2: 82.5449  95.4359
+ 3: 69.0833  97.7949
+ 4: 83.3141  98.1026
+ 5: 99.0833  96.5641
+ 6: 89.8526 101.5897
+ 7: 73.6987 100.8718
+ 8: 47.9295  97.0769
+ 9: 55.6218  94.2051
+10: 44.4679  94.4103
+11: 74.0833 103.7436
+12: 59.8526 102.8205
+13: 47.9295 101.5897
+14: 44.8526 105.3846
+15: 60.2372 106.4103
+16: 64.8526 109.4872
+17: 74.4679 107.2308
+18: 49.8526 107.2308
+19: 37.9295 102.1026
+20: 54.8526 100.0513
+21: 56.0064 111.0256
+22: 56.0064 114.7179
+23: 46.3910 112.2564
+24: 43.6987 108.6667
+25: 36.3910 110.5128
+26: 30.2372 114.1026
+27: 39.4679 115.0256
+28: 51.0064 118.7179
+29: 64.0833 112.8718
+30: 55.3000 118.0000
+31: 17.5449 116.9744
+32: 35.2372 121.1795
+33: 29.8526 117.6923
+34: 18.3141 121.8974
+35: 29.4679 123.6410
+36: 53.6987 121.3846
+37: 63.6987 123.7436
+38: 48.6987 124.7692
+39: 38.3141 124.8718
+40: 51.7756 127.6410
+     grades       iq</code></pre>
 </div>
 <p>Column names are stored in an object</p>
 <div class="layout-chunk" data-layout="l-body">
@@ -3632,43 +4270,61 @@ Error in `[.data.table`(df4, , colNames): j (the 2nd argument inside [...]) is a
 <pre class="r"><code>
 df4[, ..colNames]  # works! (special syntax)</code></pre>
 <pre><code>
-Source: local data table [40 x 2]
-
-# A tibble: 40 x 2
-   gender class
-   &lt;chr&gt;  &lt;chr&gt;
- 1 male   a    
- 2 female a    
- 3 male   a    
- 4 male   a    
- 5 female a    
- 6 male   a    
- 7 male   a    
- 8 male   a    
- 9 male   a    
-10 female a    
-# … with 30 more rows</code></pre>
+    gender class
+ 1: female     a
+ 2: female     a
+ 3: female     a
+ 4:   male     a
+ 5:   male     a
+ 6: female     a
+ 7:   male     a
+ 8:   male     a
+ 9:   male     a
+10:   male     a
+11: female     b
+12: female     b
+13: female     b
+14: female     b
+15:   male     b
+16:   male     b
+17: female     b
+18: female     b
+19:   male     b
+20:   male     b
+21: female     c
+22: female     c
+23: female     c
+24: female     c
+25:   male     c
+26: female     c
+27: female     c
+28: female     c
+29: female     c
+30:   male     c
+31:   male     d
+32:   male     d
+33:   male     d
+34: female     d
+35:   male     d
+36:   male     d
+37:   male     d
+38: female     d
+39: female     d
+40:   male     d
+    gender class</code></pre>
 </div>
 <h3 id="chaining-with-data.table-piping">Chaining with <code>data.table</code> (“piping”)</h3>
 <div class="layout-chunk" data-layout="l-body">
 <pre class="r"><code>
 df4[1:5, 1:3][grades &lt; 80, ][iq &gt; 95, ]  # data.table chaining (or piping)</code></pre>
 <pre><code>
-Source: local data table [1 x 3]
-
-# A tibble: 1 x 3
-     iq grades class
-  &lt;dbl&gt;  &lt;dbl&gt; &lt;chr&gt;
-1  97.8   69.1 a    </code></pre>
+        iq  grades class
+1: 97.7949 69.0833     a</code></pre>
 <pre class="r"><code>
 df4[1:5, 1:3] %&gt;% filter(grades &lt; 80) %&gt;% filter(iq &gt; 95)  # same result as above</code></pre>
 <pre><code>
-Source: local data table [1 x 3]
-
-# A tibble: 1 x 3
-     iq grades class
-  &lt;dbl&gt;  &lt;dbl&gt; &lt;chr&gt;
-1  97.8   69.1 a    </code></pre>
+       iq  grades class
+1 97.7949 69.0833     a</code></pre>
 </div>
 <h3 id="summarize-data-via-j">Summarize data via j</h3>
 <div class="layout-chunk" data-layout="l-body">
@@ -3676,21 +4332,13 @@ Source: local data table [1 x 3]
 # compute grand mean iq and rename variable as iqGrandMean
 df4[, j = .(iqGrandMean = mean(iq, na.rm = T))]</code></pre>
 <pre><code>
-Source: local data table [1 x 1]
-
-# A tibble: 1 x 1
-  iqGrandMean
-        &lt;dbl&gt;
-1        109.</code></pre>
+   iqGrandMean
+1:    109.4077</code></pre>
 <pre class="r"><code>
 df4[, .(iqGrandMean = mean(iq, na.rm = T))]  # also works</code></pre>
 <pre><code>
-Source: local data table [1 x 1]
-
-# A tibble: 1 x 1
-  iqGrandMean
-        &lt;dbl&gt;
-1        109.</code></pre>
+   iqGrandMean
+1:    109.4077</code></pre>
 <pre class="r"><code>
 # also works, but no renaming and returns a vector (not a data.table!)
 df4[, mean(iq, na.rm = T)]</code></pre>
@@ -3716,12 +4364,8 @@ summary(df4)  # check mean</code></pre>
 df4[, .(iqGrandMean = mean(iq, na.rm = T), iqSD = sd(iq, na.rm = T), gradesGrandMean = mean(grades, 
     na.rm = T), gradesSD = sd(grades, na.rm = T))]</code></pre>
 <pre><code>
-Source: local data table [1 x 4]
-
-# A tibble: 1 x 4
-  iqGrandMean  iqSD gradesGrandMean gradesSD
-        &lt;dbl&gt; &lt;dbl&gt;           &lt;dbl&gt;    &lt;dbl&gt;
-1        109.  10.1            53.7     18.4</code></pre>
+   iqGrandMean     iqSD gradesGrandMean gradesSD
+1:    109.4077 10.05791        53.69067 18.41199</code></pre>
 </div>
 <p>Extra stuff…</p>
 <div class="layout-chunk" data-layout="l-body">
@@ -3778,13 +4422,9 @@ F-statistic: 15.36 on 1 and 38 DF,  p-value: 0.0003592</code></pre>
 <pre class="r"><code>
 df4[, summaryh(lm(formula = grades ~ iq))]</code></pre>
 <pre><code>
-Source: local data table [2 x 2]
-
-# A tibble: 2 x 2
-  term        results                                                 
-  &lt;chr&gt;       &lt;chr&gt;                                                   
-1 (Intercept) b = 161.14, SE = 27.53, t(38) = 5.85, p &lt; .001, r = 0.69
-2 iq          b = −0.98, SE = 0.25, t(38) = −3.92, p &lt; .001, r = 0.54 </code></pre>
+          term                                                  results
+1: (Intercept) b = 161.14, SE = 27.53, t(38) = 5.85, p &lt; .001, r = 0.69
+2:          iq  b = −0.98, SE = 0.25, t(38) = −3.92, p &lt; .001, r = 0.54</code></pre>
 <pre class="r"><code>
 # summaryh(lm(formula = grades ~ iq, data = df4)) # standard way to fit
 # regression models</code></pre>
@@ -3796,35 +4436,25 @@ Source: local data table [2 x 2]
 <pre class="r"><code>
 df4[, .(iqMean = mean(iq, na.rm = T)), by = class]</code></pre>
 <pre><code>
-Source: local data table [4 x 2]
-
-# A tibble: 4 x 2
-  class iqMean
-  &lt;chr&gt;  &lt;dbl&gt;
-1 a       97.1
-2 b      105. 
-3 c      114. 
-4 d      122. </code></pre>
+   class    iqMean
+1:     a  97.05641
+2:     b 104.60514
+3:     c 113.58973
+4:     d 122.37948</code></pre>
 <pre class="r"><code>
 df4[, .(iqMean = mean(iq, na.rm = T)), class]  # also works</code></pre>
 <pre><code>
-Source: local data table [4 x 2]
-
-# A tibble: 4 x 2
-  class iqMean
-  &lt;chr&gt;  &lt;dbl&gt;
-1 a       97.1
-2 b      105. 
-3 c      114. 
-4 d      122. </code></pre>
+   class    iqMean
+1:     a  97.05641
+2:     b 104.60514
+3:     c 113.58973
+4:     d 122.37948</code></pre>
 </div>
 <p><code>dplyr</code> syntax</p>
 <div class="layout-chunk" data-layout="l-body">
 <pre class="r"><code>
 df4 %&gt;% group_by(class) %&gt;% summarize(iqMean = mean(iq, na.rm = T))</code></pre>
 <pre><code>
-Source: local data table [4 x 2]
-
 # A tibble: 4 x 2
   class iqMean
   &lt;chr&gt;  &lt;dbl&gt;
@@ -3838,60 +4468,44 @@ Source: local data table [4 x 2]
 <pre class="r"><code>
 df4[, .(iqMean = mean(iq, na.rm = T)), by = .(class, gender)]</code></pre>
 <pre><code>
-Source: local data table [8 x 3]
-
-# A tibble: 8 x 3
-  class gender iqMean
-  &lt;chr&gt; &lt;chr&gt;   &lt;dbl&gt;
-1 a     male     97.7
-2 a     female   95.5
-3 b     male    104. 
-4 b     female  105. 
-5 c     male    113. 
-6 c     female  114. 
-7 d     male    123. 
-8 d     female  122. </code></pre>
+   class gender    iqMean
+1:     a female  97.33333
+2:     a   male  96.87180
+3:     b female 104.66667
+4:     b   male 104.51285
+5:     c female 113.42306
+6:     c   male 114.25640
+7:     d   male 121.75091
+8:     d female 123.84613</code></pre>
 <pre class="r"><code>
 df4[, .(iqMean = mean(iq, na.rm = T)), keyby = .(gender, class)]  # summarize and sort/arrange by class then gender</code></pre>
 <pre><code>
-Source: local data table [8 x 3]
-
-# A tibble: 8 x 3
-  gender class iqMean
-  &lt;chr&gt;  &lt;chr&gt;  &lt;dbl&gt;
-1 female a       95.5
-2 female b      105. 
-3 female c      114. 
-4 female d      122. 
-5 male   a       97.7
-6 male   b      104. 
-7 male   c      113. 
-8 male   d      123. </code></pre>
+   gender class    iqMean
+1: female     a  97.33333
+2: female     b 104.66667
+3: female     c 113.42306
+4: female     d 123.84613
+5:   male     a  96.87180
+6:   male     b 104.51285
+7:   male     c 114.25640
+8:   male     d 121.75091</code></pre>
 </div>
 <p>Summarize by booleans</p>
 <div class="layout-chunk" data-layout="l-body">
 <pre class="r"><code>
 df4[, .(iqMean = mean(iq, na.rm = T)), by = .(gender == &quot;male&quot;)]</code></pre>
 <pre><code>
-Source: local data table [2 x 2]
-
-# A tibble: 2 x 2
-  gender iqMean
-  &lt;lgl&gt;   &lt;dbl&gt;
-1 TRUE     108.
-2 FALSE    111.</code></pre>
+   gender   iqMean
+1:  FALSE 109.3455
+2:   TRUE 109.4764</code></pre>
 <pre class="r"><code>
 df4[, .(iqMean = mean(iq, na.rm = T)), by = .(gender == &quot;male&quot;, class == &quot;a&quot;)]</code></pre>
 <pre><code>
-Source: local data table [4 x 3]
-
-# A tibble: 4 x 3
-  gender class iqMean
-  &lt;lgl&gt;  &lt;lgl&gt;  &lt;dbl&gt;
-1 TRUE   TRUE    97.7
-2 FALSE  TRUE    95.5
-3 TRUE   FALSE  114. 
-4 FALSE  FALSE  113. </code></pre>
+   gender class    iqMean
+1:  FALSE  TRUE  97.33333
+2:   TRUE  TRUE  96.87180
+3:  FALSE FALSE 112.17194
+4:   TRUE FALSE 115.29389</code></pre>
 </div>
 <p>Combining pipes with <code>data.table</code> and <code>ggplot</code></p>
 <div class="layout-chunk" data-layout="l-body">
@@ -3899,7 +4513,7 @@ Source: local data table [4 x 3]
 df4[, .(iqMean = mean(iq, na.rm = T)), .(class, gender)] %&gt;% # compute class/gender mean
     ggplot(aes(class, iqMean, col = gender)) + # plot mean values
     geom_point(position = position_dodge(0.5)) # plot points and dodge points to avoid overlapping</code></pre>
-<p><img src="0002_tidyverse_datatable_files/figure-html5/unnamed-chunk-77-1.png" width="624" /></p>
+<p><img src="0002_tidyverse_datatable_files/figure-html5/unnamed-chunk-75-1.png" width="624" /></p>
 </div>
 <p>Extra cool stuff again…</p>
 <ul>
@@ -3909,45 +4523,33 @@ df4[, .(iqMean = mean(iq, na.rm = T)), .(class, gender)] %&gt;% # compute class/
 <pre class="r"><code>
 df4[, summaryh(lm(grades ~ iq))]</code></pre>
 <pre><code>
-Source: local data table [2 x 2]
-
-# A tibble: 2 x 2
-  term        results                                                 
-  &lt;chr&gt;       &lt;chr&gt;                                                   
-1 (Intercept) b = 161.14, SE = 27.53, t(38) = 5.85, p &lt; .001, r = 0.69
-2 iq          b = −0.98, SE = 0.25, t(38) = −3.92, p &lt; .001, r = 0.54 </code></pre>
+          term                                                  results
+1: (Intercept) b = 161.14, SE = 27.53, t(38) = 5.85, p &lt; .001, r = 0.69
+2:          iq  b = −0.98, SE = 0.25, t(38) = −3.92, p &lt; .001, r = 0.54</code></pre>
 <pre class="r"><code>
 df4[, summaryh(lm(grades ~ iq)), by = class]  # fit model to each class separately</code></pre>
 <pre><code>
-Source: local data table [8 x 3]
-
-# A tibble: 8 x 3
-  class term        results                                                   
-  &lt;chr&gt; &lt;chr&gt;       &lt;chr&gt;                                                     
-1 a     (Intercept) b = −239.52, SE = 210.07, t(8) = −1.14, p = .287, r = 0.37
-2 a     iq          b = 3.20, SE = 2.16, t(8) = 1.48, p = .177, r = 0.46      
-3 b     (Intercept) b = −105.91, SE = 137.69, t(8) = −0.77, p = .464, r = 0.26
-4 b     iq          b = 1.56, SE = 1.32, t(8) = 1.18, p = .271, r = 0.39      
-5 c     (Intercept) b = −29.07, SE = 129.22, t(8) = −0.22, p = .828, r = 0.08 
-6 c     iq          b = 0.68, SE = 1.14, t(8) = 0.60, p = .568, r = 0.21      
-7 d     (Intercept) b = −301.13, SE = 165.25, t(8) = −1.82, p = .106, r = 0.54
-8 d     iq          b = 2.78, SE = 1.35, t(8) = 2.06, p = .074, r = 0.59      </code></pre>
+   class        term                                                    results
+1:     a (Intercept) b = −239.52, SE = 210.07, t(8) = −1.14, p = .287, r = 0.37
+2:     a          iq       b = 3.20, SE = 2.16, t(8) = 1.48, p = .177, r = 0.46
+3:     b (Intercept) b = −105.91, SE = 137.69, t(8) = −0.77, p = .464, r = 0.26
+4:     b          iq       b = 1.56, SE = 1.32, t(8) = 1.18, p = .271, r = 0.39
+5:     c (Intercept)  b = −29.07, SE = 129.22, t(8) = −0.22, p = .828, r = 0.08
+6:     c          iq       b = 0.68, SE = 1.14, t(8) = 0.60, p = .568, r = 0.21
+7:     d (Intercept) b = −301.13, SE = 165.25, t(8) = −1.82, p = .106, r = 0.54
+8:     d          iq       b = 2.78, SE = 1.35, t(8) = 2.06, p = .074, r = 0.59</code></pre>
 <pre class="r"><code>
 df4[, tidy(lm(grades ~ iq)), by = class]  # another way to summarize model output</code></pre>
 <pre><code>
-Source: local data table [8 x 6]
-
-# A tibble: 8 x 6
-  class term        estimate std.error statistic p.value
-  &lt;chr&gt; &lt;chr&gt;          &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;   &lt;dbl&gt;
-1 a     (Intercept) -240.       210.      -1.14   0.287 
-2 a     iq             3.20       2.16     1.48   0.177 
-3 b     (Intercept) -106.       138.      -0.769  0.464 
-4 b     iq             1.56       1.32     1.18   0.271 
-5 c     (Intercept)  -29.1      129.      -0.225  0.828 
-6 c     iq             0.677      1.14     0.595  0.568 
-7 d     (Intercept) -301.       165.      -1.82   0.106 
-8 d     iq             2.78       1.35     2.06   0.0737</code></pre>
+   class        term     estimate  std.error  statistic    p.value
+1:     a (Intercept) -239.5248083 210.067692 -1.1402268 0.28717612
+2:     a          iq    3.2030586   2.163685  1.4803722 0.17704450
+3:     b (Intercept) -105.9110635 137.688021 -0.7692104 0.46387107
+4:     b          iq    1.5563490   1.315774  1.1828388 0.27083123
+5:     c (Intercept)  -29.0664196 129.224379 -0.2249298 0.82767288
+6:     c          iq    0.6772201   1.137236  0.5954963 0.56797144
+7:     d (Intercept) -301.1306213 165.246330 -1.8223135 0.10587637
+8:     d          iq    2.7765347   1.349841  2.0569339 0.07371019</code></pre>
 </div>
 <p>What we fit just one model to all the data (all 40 rows), what’s the relationship between iq and grades? Positive or negative?</p>
 <p>And what happens when we fit the model to each class separately, what’s the relationship between iq and grades? Positive or negative? We’ll explore these relationships in depth in future tutorials.</p>
@@ -3964,19 +4566,15 @@ df4[, `:=`(iqCopy, iq)]
 df4[iqCopy &lt; 100, `:=`(iqCopy, NA)]  # convert values less than 100 to NA
 df4[is.na(iqCopy)]  # filter via i (show only rows where iqCopy is NA)</code></pre>
 <pre><code>
-Source: local data table [8 x 6]
-
-# A tibble: 8 x 6
-     iq grades class gender sex   iqCopy
-  &lt;dbl&gt;  &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt;  &lt;chr&gt;  &lt;dbl&gt;
-1  94.5   67.9 a     male   m         NA
-2  95.4   82.5 a     female f         NA
-3  97.8   69.1 a     male   m         NA
-4  98.1   83.3 a     male   m         NA
-5  96.6   99.1 a     female f         NA
-6  97.1   47.9 a     male   m         NA
-7  94.2   55.6 a     male   m         NA
-8  94.4   44.5 a     female f         NA</code></pre>
+        iq  grades class gender sex iqCopy
+1: 94.5128 67.9295     a female   f     NA
+2: 95.4359 82.5449     a female   f     NA
+3: 97.7949 69.0833     a female   f     NA
+4: 98.1026 83.3141     a   male   m     NA
+5: 96.5641 99.0833     a   male   m     NA
+6: 97.0769 47.9295     a   male   m     NA
+7: 94.2051 55.6218     a   male   m     NA
+8: 94.4103 44.4679     a   male   m     NA</code></pre>
 </div>
 <div class="layout-chunk" data-layout="l-body">
 <pre class="r"><code>

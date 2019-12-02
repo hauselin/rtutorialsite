@@ -1,7 +1,6 @@
 ---
-title: "Neural networks: Deriving the sigmoid derivative"
-description: |
-  Deriving the derivative of the sigmoid function for neural networks
+title: "Neural networks: Deriving the sigmoid derivative via chain and quotient rules"
+description: "Deriving the derivative of the sigmoid function for neural networks"
 author:
   - name: Hause Lin
     url: {}
@@ -15,8 +14,8 @@ output:
   radix::radix_article:
     toc: true
     self_contained: false
-draft: false
-repository_url: "./_posts/2019-12-01-neural-networks-deriving-the-sigmoid-derivative/neural-networks-deriving-the-sigmoid-derivative.Rmd"
+# draft: false
+repository_url: https://github.com/hauselin/rtutorialsite/blob/master/_posts/2019-04-13-logistic-regression/logistic-regression.Rmd
 editor_options: 
   chunk_output_type: console
 ---
@@ -25,7 +24,7 @@ editor_options:
 knitr::opts_chunk$set(echo = TRUE, cache = FALSE, comment = NA, message = FALSE, warning = FALSE)
 ```
 
-Get source code for this RMarkdown script [here](./_posts/2019-12-01-neural-networks-deriving-the-sigmoid-derivative/neural-networks-deriving-the-sigmoid-derivative.Rmd).
+Get source code for this RMarkdown script [here](http://www.google.com).
 
 ## Consider being a patron and supporting my work?
 

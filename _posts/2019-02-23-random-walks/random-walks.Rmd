@@ -1,7 +1,6 @@
 ---
 title: "random walks"
-description: |
-  A short description of the post.
+description: "A short description of the post."
 author:
   - name: Hause Lin
     url: {}

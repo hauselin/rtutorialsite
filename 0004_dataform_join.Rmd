@@ -270,8 +270,8 @@ Also, the output class of join functions are not `data.table`! To convert class,
 
 ```{r}
 class(left_join(wide2, extraInfo2)) # not data.table (no...)
-left_join(wide2, extraInfo2) %>% tbl_dt() # convert to data.table
-left_join(wide2, extraInfo2) %>% tbl_dt() %>% class() # check class (data.table! yea!)
+left_join(wide2, extraInfo2) %>% as.data.table() # convert to data.table
+left_join(wide2, extraInfo2) %>% as.data.table() %>% class() # check class (data.table! yea!)
 ```
 
 ## Within-subjects, between-subjects designs, covariates
@@ -295,7 +295,7 @@ But long-form data is generally preferred
 ```{r}
 gradesLong <- melt(gradesWide, id.vars = "student", variable.name = "class", value.name = "grade") %>% 
     arrange(student) %>% # sort by student
-    tbl_dt() # convert to data.table and tibble
+    as.data.table() # convert to data.table and tibble
 gradesLong
 ```
 
@@ -318,7 +318,7 @@ covariate_englishGrades
 Use `left_join()` to add covariate to data
 
 ```{r}
-gradesLong_covariate <- left_join(gradesLong, covariate_englishGrades)
+gradesLong_covariate <- left_join(gradesLong, covariate_englishGrades) %>% as.data.table()
 gradesLong_covariate
 
 # remove englishGrades from long form data if necessary

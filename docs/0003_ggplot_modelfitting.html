@@ -1413,59 +1413,56 @@ library(hausekeep)</code></pre>
 <p>Read in data from a csv file (stored in “./data/simpsonsParadox.csv”). Right-click to download and save the data <a href="https://raw.githubusercontent.com/hauselin/rtutorialsite/master/data/simpsonsParadox.csv">here</a>. You can also use the <code>fread()</code> function to read and download it directly from the URL (see code below).</p>
 <div class="layout-chunk" data-layout="l-body">
 <pre class="r"><code>
-df1 &lt;- tbl_dt(fread(&quot;data/simpsonsParadox.csv&quot;))  # data.table
+df1 &lt;- fread(&quot;data/simpsonsParadox.csv&quot;)  # data.table
 
 # or download data directly from URL
 url &lt;- &quot;https://raw.githubusercontent.com/hauselin/rtutorialsite/master/data/simpsonsParadox.csv&quot;
-df1 &lt;- tbl_dt(fread(url))
+df1 &lt;- fread(url)
 
-print(df1, n = Inf)</code></pre>
+df1</code></pre>
 <pre><code>
-Source: local data table [40 x 3]
-
-# A tibble: 40 x 3
-      iq grades class
-   &lt;dbl&gt;  &lt;dbl&gt; &lt;chr&gt;
- 1  94.5   67.9 a    
- 2  95.4   82.5 a    
- 3  97.8   69.1 a    
- 4  98.1   83.3 a    
- 5  96.6   99.1 a    
- 6 102.    89.9 a    
- 7 101.    73.7 a    
- 8  97.1   47.9 a    
- 9  94.2   55.6 a    
-10  94.4   44.5 a    
-11 104.    74.1 b    
-12 103.    59.9 b    
-13 102.    47.9 b    
-14 105.    44.9 b    
-15 106.    60.2 b    
-16 109.    64.9 b    
-17 107.    74.5 b    
-18 107.    49.9 b    
-19 102.    37.9 b    
-20 100.    54.9 b    
-21 111.    56.0 c    
-22 115.    56.0 c    
-23 112.    46.4 c    
-24 109.    43.7 c    
-25 111.    36.4 c    
-26 114.    30.2 c    
-27 115.    39.5 c    
-28 119.    51.0 c    
-29 113.    64.1 c    
-30 118     55.3 c    
-31 117.    17.5 d    
-32 121.    35.2 d    
-33 118.    29.9 d    
-34 122.    18.3 d    
-35 124.    29.5 d    
-36 121.    53.7 d    
-37 124.    63.7 d    
-38 125.    48.7 d    
-39 125.    38.3 d    
-40 128.    51.8 d    </code></pre>
+          iq  grades class
+ 1:  94.5128 67.9295     a
+ 2:  95.4359 82.5449     a
+ 3:  97.7949 69.0833     a
+ 4:  98.1026 83.3141     a
+ 5:  96.5641 99.0833     a
+ 6: 101.5897 89.8526     a
+ 7: 100.8718 73.6987     a
+ 8:  97.0769 47.9295     a
+ 9:  94.2051 55.6218     a
+10:  94.4103 44.4679     a
+11: 103.7436 74.0833     b
+12: 102.8205 59.8526     b
+13: 101.5897 47.9295     b
+14: 105.3846 44.8526     b
+15: 106.4103 60.2372     b
+16: 109.4872 64.8526     b
+17: 107.2308 74.4679     b
+18: 107.2308 49.8526     b
+19: 102.1026 37.9295     b
+20: 100.0513 54.8526     b
+21: 111.0256 56.0064     c
+22: 114.7179 56.0064     c
+23: 112.2564 46.3910     c
+24: 108.6667 43.6987     c
+25: 110.5128 36.3910     c
+26: 114.1026 30.2372     c
+27: 115.0256 39.4679     c
+28: 118.7179 51.0064     c
+29: 112.8718 64.0833     c
+30: 118.0000 55.3000     c
+31: 116.9744 17.5449     d
+32: 121.1795 35.2372     d
+33: 117.6923 29.8526     d
+34: 121.8974 18.3141     d
+35: 123.6410 29.4679     d
+36: 121.3846 53.6987     d
+37: 123.7436 63.6987     d
+38: 124.7692 48.6987     d
+39: 124.8718 38.3141     d
+40: 127.6410 51.7756     d
+          iq  grades class</code></pre>
 <pre class="r"><code>
 glimpse(df1)</code></pre>
 <pre><code>
@@ -2041,11 +2038,11 @@ ggplot(df1, aes(class, iq, col = gender)) + # y: iq
 anova_classGender &lt;- aov(grades ~ class * gender, data = df1)
 summary(anova_classGender)</code></pre>
 <pre><code>
-             Df Sum Sq Mean Sq F value  Pr(&gt;F)    
-class         3   5821  1940.4   8.700 0.00023 ***
-gender        1     57    57.4   0.257 0.61542    
-class:gender  3    205    68.5   0.307 0.82019    
-Residuals    32   7137   223.0                    
+             Df Sum Sq Mean Sq F value   Pr(&gt;F)    
+class         3   5821  1940.4   8.695 0.000231 ***
+gender        1     90    90.2   0.404 0.529493    
+class:gender  3    169    56.4   0.253 0.858882    
+Residuals    32   7141   223.1                     
 ---
 Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
 <pre class="r"><code>
@@ -2053,8 +2050,8 @@ summaryh(anova_classGender)</code></pre>
 <pre><code>
            term                             results
 1:        class F(3, 32) = 8.70, p &lt; .001, r = 0.67
-2:       gender F(1, 32) = 0.26, p = .615, r = 0.09
-3: class:gender F(3, 32) = 0.31, p = .820, r = 0.17</code></pre>
+2:       gender F(1, 32) = 0.40, p = .529, r = 0.11
+3: class:gender F(3, 32) = 0.25, p = .859, r = 0.15</code></pre>
 </div>
 <h3 id="specify-contrasts-resources">Specify contrasts resources</h3>
 <ul>
@@ -2090,18 +2087,18 @@ ttest_gender</code></pre>
     Welch Two Sample t-test
 
 data:  iq by gender
-t = 0.6678, df = 30.597, p-value = 0.5093
+t = -0.24455, df = 37.003, p-value = 0.8082
 alternative hypothesis: true difference in means is not equal to 0
 95 percent confidence interval:
- -4.576478  9.028973
+ -7.316000  5.740198
 sample estimates:
 mean in group female   mean in group male 
-            110.6878             108.4615 </code></pre>
+            108.9743             109.7622 </code></pre>
 <pre class="r"><code>
 summaryh(ttest_gender)</code></pre>
 <pre><code>
-                            results
-1: t(31) = 0.67, p = .509, r = 0.12</code></pre>
+                             results
+1: t(37) = −0.24, p = .808, r = 0.04</code></pre>
 </div>
 <p>class a vs. class d</p>
 <div class="layout-chunk" data-layout="l-body">
@@ -2320,31 +2317,26 @@ attr(,&quot;class&quot;)
 <p>Let’s use a different dataset. <code>iris</code>, a famous dataset that comes with R. Type <code>?iris</code> in your console for more information about this dataset.</p>
 <div class="layout-chunk" data-layout="l-body">
 <pre class="r"><code>
-irisDT &lt;- tbl_dt(iris)  # convert to data.table and tibble
+irisDT &lt;- as.data.table(iris)  # convert to data.table and tibble
 irisDT  # wide form data</code></pre>
 <pre><code>
-Source: local data table [150 x 5]
-
-# A tibble: 150 x 5
-   Sepal.Length Sepal.Width Petal.Length Petal.Width Species
-          &lt;dbl&gt;       &lt;dbl&gt;        &lt;dbl&gt;       &lt;dbl&gt; &lt;fct&gt;  
- 1          5.1         3.5          1.4         0.2 setosa 
- 2          4.9         3            1.4         0.2 setosa 
- 3          4.7         3.2          1.3         0.2 setosa 
- 4          4.6         3.1          1.5         0.2 setosa 
- 5          5           3.6          1.4         0.2 setosa 
- 6          5.4         3.9          1.7         0.4 setosa 
- 7          4.6         3.4          1.4         0.3 setosa 
- 8          5           3.4          1.5         0.2 setosa 
- 9          4.4         2.9          1.4         0.2 setosa 
-10          4.9         3.1          1.5         0.1 setosa 
-# … with 140 more rows</code></pre>
+     Sepal.Length Sepal.Width Petal.Length Petal.Width   Species
+  1:          5.1         3.5          1.4         0.2    setosa
+  2:          4.9         3.0          1.4         0.2    setosa
+  3:          4.7         3.2          1.3         0.2    setosa
+  4:          4.6         3.1          1.5         0.2    setosa
+  5:          5.0         3.6          1.4         0.2    setosa
+ ---                                                            
+146:          6.7         3.0          5.2         2.3 virginica
+147:          6.3         2.5          5.0         1.9 virginica
+148:          6.5         3.0          5.2         2.0 virginica
+149:          6.2         3.4          5.4         2.3 virginica
+150:          5.9         3.0          5.1         1.8 virginica</code></pre>
 </div>
 <p>The dataset is in wide form. To visualize easily with <code>ggplot</code>, we need to convert it to long form (more on converting between forms) in future tutorials.</p>
 <div class="layout-chunk" data-layout="l-body">
 <pre class="r"><code>
 gather(irisDT, meaureLength, length, -Species) %&gt;% # convert from wide to long form
-    tbl_dt() %&gt;% # convert to data.table and tibble
     ggplot(aes(Species, length, col = meaureLength)) + # no need to specify data because of piping
     geom_quasirandom(alpha = 0.3, dodge = 0.5) </code></pre>
 <p><img src="0003_ggplot_modelfitting_files/figure-html5/unnamed-chunk-55-1.png" width="624" /></p>
@@ -2391,7 +2383,7 @@ Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&
 <p>Error bars for between- and within-subjects designs have to be calculated differently. There’s much debate on how to compute within-subjects this properly…</p>
 <div class="layout-chunk" data-layout="l-body">
 <pre class="r"><code>
-cw &lt;- tbl_dt(ChickWeight)  # convert built-in ChickWeight data to data.table and tibble</code></pre>
+cw &lt;- as.data.table(ChickWeight)  # convert built-in ChickWeight data to data.table and tibble</code></pre>
 </div>
 <p>data information</p>
 <ul>
@@ -2403,22 +2395,18 @@ cw &lt;- tbl_dt(ChickWeight)  # convert built-in ChickWeight data to data.table 
 <pre class="r"><code>
 cw  # weight of 50 chicks are different times, on different diets</code></pre>
 <pre><code>
-Source: local data table [578 x 4]
-
-# A tibble: 578 x 4
-   weight  Time Chick Diet 
-    &lt;dbl&gt; &lt;dbl&gt; &lt;ord&gt; &lt;fct&gt;
- 1     42     0 1     1    
- 2     51     2 1     1    
- 3     59     4 1     1    
- 4     64     6 1     1    
- 5     76     8 1     1    
- 6     93    10 1     1    
- 7    106    12 1     1    
- 8    125    14 1     1    
- 9    149    16 1     1    
-10    171    18 1     1    
-# … with 568 more rows</code></pre>
+     weight Time Chick Diet
+  1:     42    0     1    1
+  2:     51    2     1    1
+  3:     59    4     1    1
+  4:     64    6     1    1
+  5:     76    8     1    1
+ ---                       
+574:    175   14    50    4
+575:    205   16    50    4
+576:    234   18    50    4
+577:    264   20    50    4
+578:    264   21    50    4</code></pre>
 <pre class="r"><code>
 cw[, unique(Time)]  # time points</code></pre>
 <pre><code>

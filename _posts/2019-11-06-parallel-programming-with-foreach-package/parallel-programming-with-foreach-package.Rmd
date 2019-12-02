@@ -1,6 +1,6 @@
 ---
 title: "Parallel programming"
-description: 
+description: "test"
 preview: https://raw.githubusercontent.com/hauselin/rtutorialsite/master/attachments/plot_dotdist.gif
 author:
   - name: Hause Lin

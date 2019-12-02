@@ -53,13 +53,13 @@ library(hausekeep)
 Read in data from a csv file (stored in "./data/simpsonsParadox.csv"). Right-click to download and save the data [here](https://raw.githubusercontent.com/hauselin/rtutorialsite/master/data/simpsonsParadox.csv). You can also use the `fread()` function to read and download it directly from the URL (see code below).
 
 ```{r}
-df1 <- tbl_dt(fread("data/simpsonsParadox.csv")) # data.table
+df1 <- fread("data/simpsonsParadox.csv") # data.table
 
 # or download data directly from URL
 url <- "https://raw.githubusercontent.com/hauselin/rtutorialsite/master/data/simpsonsParadox.csv"
-df1 <- tbl_dt(fread(url))
+df1 <- fread(url)
 
-print(df1, n = Inf)
+df1
 glimpse(df1)
 ```
 
@@ -644,7 +644,7 @@ coef(m_slope) # check coefficients for each class
 Let's use a different dataset. `iris`, a famous dataset that comes with R. Type `?iris` in your console for more information about this dataset.
 
 ```{r}
-irisDT <- tbl_dt(iris) # convert to data.table and tibble
+irisDT <- as.data.table(iris) # convert to data.table and tibble
 irisDT # wide form data
 ```
 
@@ -652,7 +652,6 @@ The dataset is in wide form. To visualize easily with `ggplot`, we need to conve
 
 ```{r}
 gather(irisDT, meaureLength, length, -Species) %>% # convert from wide to long form
-    tbl_dt() %>% # convert to data.table and tibble
     ggplot(aes(Species, length, col = meaureLength)) + # no need to specify data because of piping
     geom_quasirandom(alpha = 0.3, dodge = 0.5) 
     
@@ -680,7 +679,7 @@ summary.aov(manova_results) # see which outcome variables differ
 Error bars for between- and within-subjects designs have to be calculated differently. There's much debate on how to compute within-subjects this properly...
 
 ```{r}
-cw <- tbl_dt(ChickWeight) # convert built-in ChickWeight data to data.table and tibble
+cw <- as.data.table(ChickWeight) # convert built-in ChickWeight data to data.table and tibble
 ```
 
 data information

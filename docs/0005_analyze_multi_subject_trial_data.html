@@ -1432,7 +1432,7 @@ library(hausekeep)</code></pre>
 [2] &quot;./data/rt_acc_data_raw/subject_35.csv&quot;
 [3] &quot;./data/rt_acc_data_raw/subject_39.csv&quot;</code></pre>
 <pre class="r"><code>
-dt1 &lt;- lapply(files, fread) %&gt;% bind_rows() %&gt;% tbl_dt()  # read data, combine items in list, convert to data.table and tibble</code></pre>
+dt1 &lt;- lapply(files, fread) %&gt;% bind_rows() %&gt;% as.data.table()  # read data, combine items in list, convert to data.table</code></pre>
 </div>
 <p>Note and explanation: <code>lapply</code> loops through each item in <code>files</code> and applies the <code>fread</code> function to each item. <code>bind_rows</code> combines all the dataframes stored as separate items in the list, and <code>tbl_dt()</code> converts the merged dataframe into <code>data.table</code> and <code>tibble</code> class.</p>
 <h2 id="summarize-experimental-design">Summarize experimental design</h2>
@@ -1440,48 +1440,36 @@ dt1 &lt;- lapply(files, fread) %&gt;% bind_rows() %&gt;% tbl_dt()  # read data, 
 <pre class="r"><code>
 dt1[, .N, by = subject]  # rows (trials) per subject</code></pre>
 <pre><code>
-Source: local data table [3 x 2]
-
-# A tibble: 3 x 2
-  subject     N
-    &lt;int&gt; &lt;int&gt;
-1      30    80
-2      35    80
-3      39    80</code></pre>
+   subject  N
+1:      30 80
+2:      35 80
+3:      39 80</code></pre>
 <pre class="r"><code>
 dt1[, .N, keyby = .(subject, block)]  # blocks per subject and rows/trials per block</code></pre>
 <pre><code>
-Source: local data table [6 x 3]
-
-# A tibble: 6 x 3
-  subject block     N
-    &lt;int&gt; &lt;int&gt; &lt;int&gt;
-1      30     1    40
-2      30     2    40
-3      35     1    40
-4      35     2    40
-5      39     1    40
-6      39     2    40</code></pre>
+   subject block  N
+1:      30     1 40
+2:      30     2 40
+3:      35     1 40
+4:      35     2 40
+5:      39     1 40
+6:      39     2 40</code></pre>
 <pre class="r"><code>
 dt1[, .N, keyby = .(subject, instructions, reward)]  # row (trials) per subject for instructions/reward conditions</code></pre>
 <pre><code>
-Source: local data table [12 x 4]
-
-# A tibble: 12 x 4
-   subject instructions reward     N
-     &lt;int&gt; &lt;chr&gt;        &lt;chr&gt;  &lt;int&gt;
- 1      30 caution      high      20
- 2      30 caution      low       20
- 3      30 speed        high      20
- 4      30 speed        low       20
- 5      35 caution      high      20
- 6      35 caution      low       20
- 7      35 speed        high      20
- 8      35 speed        low       20
- 9      39 caution      high      20
-10      39 caution      low       20
-11      39 speed        high      20
-12      39 speed        low       20</code></pre>
+    subject instructions reward  N
+ 1:      30      caution   high 20
+ 2:      30      caution    low 20
+ 3:      30        speed   high 20
+ 4:      30        speed    low 20
+ 5:      35      caution   high 20
+ 6:      35      caution    low 20
+ 7:      35        speed   high 20
+ 8:      35        speed    low 20
+ 9:      39      caution   high 20
+10:      39      caution    low 20
+11:      39        speed   high 20
+12:      39        speed    low 20</code></pre>
 </div>
 <h2 id="remove-outlier-trials">Remove outlier trials</h2>
 <div class="layout-chunk" data-layout="l-body">
@@ -1505,23 +1493,19 @@ dt1_avg &lt;- dt1[, .(rt = mean(rt, na.rm = T), acc = mean(acc, na.rm = T)), key
     instructions, reward)]
 dt1_avg</code></pre>
 <pre><code>
-Source: local data table [12 x 5]
-
-# A tibble: 12 x 5
-   subject instructions reward    rt   acc
-     &lt;int&gt; &lt;chr&gt;        &lt;chr&gt;  &lt;dbl&gt; &lt;dbl&gt;
- 1      30 caution      high   1.22  0.833
- 2      30 caution      low    1.26  0.722
- 3      30 speed        high   0.790 0.778
- 4      30 speed        low    0.602 0.722
- 5      35 caution      high   1.16  0.8  
- 6      35 caution      low    1.25  0.611
- 7      35 speed        high   0.773 0.6  
- 8      35 speed        low    0.736 0.333
- 9      39 caution      high   1.24  0.944
-10      39 caution      low    1.09  0.529
-11      39 speed        high   0.775 0.765
-12      39 speed        low    0.674 0.632</code></pre>
+    subject instructions reward        rt       acc
+ 1:      30      caution   high 1.2225593 0.8333333
+ 2:      30      caution    low 1.2616149 0.7222222
+ 3:      30        speed   high 0.7903719 0.7777778
+ 4:      30        speed    low 0.6023415 0.7222222
+ 5:      35      caution   high 1.1598959 0.8000000
+ 6:      35      caution    low 1.2455745 0.6111111
+ 7:      35        speed   high 0.7732939 0.6000000
+ 8:      35        speed    low 0.7355426 0.3333333
+ 9:      39      caution   high 1.2379130 0.9444444
+10:      39      caution    low 1.0858297 0.5294118
+11:      39        speed   high 0.7753915 0.7647059
+12:      39        speed    low 0.6738280 0.6315789</code></pre>
 </div>
 <h2 id="compute-grand-average-rt-and-acc-and-within-subject-error-bars">Compute grand average RT and ACC (and within-subject error bars)</h2>
 <div class="layout-chunk" data-layout="l-body">
