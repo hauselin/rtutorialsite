@@ -33,7 +33,7 @@ Get source code for this RMarkdown script [here](https://github.com/hauselin/rtu
 
 ## Sigmoid function (aka logistic or inverse logit function)
 
-The sigmoid function $\sigma(x)=\frac{1}{1+e^{-x}}$ is frequently used in neural networks because its derivative is very simple and computationally fast to calculate, mmaking it great for backpropagation. 
+The sigmoid function $\sigma(x)=\frac{1}{1+e^{-x}}$ is frequently used in neural networks because its derivative is very simple and computationally fast to calculate, making it great for backpropagation. 
 
 Let's denote the sigmoid function as the following:
 
@@ -66,7 +66,7 @@ $$ \frac{d}{dx}e^{-3x^2 + 2x} = (-6x + 2)e^{-3x^2 + 2x}$$
 
 ## Sigmoid derivative via chain rule
 
-Chain rule: $\frac{d}{dx}(f(g(x)) = f'(g(x)) * g'(x)$. 
+Chain rule: $\frac{d}{dx} \left[ f(g(x)) \right] = f'\left[g(x) \right] * g'(x)$. 
 
 Example: Find the derivative of $f(x) = (x^2 + 1)^3$:
 
