@@ -15,6 +15,7 @@
       <description>Deriving the derivative of the sigmoid function for neural networks</description>
       <guid>https://hausetutorials.netlify.com/posts/2019-12-01-neural-networks-deriving-the-sigmoid-derivative</guid>
       <pubDate>Tue, 01 Oct 2019 00:00:00 +0000</pubDate>
+      <media:content url="https://hausetutorials.netlify.com/posts/2019-12-01-neural-networks-deriving-the-sigmoid-derivative/./sigmoid.jpg" medium="image" type="image/jpeg"/>
     </item>
     <item>
       <title>Use median absolute deviation instead of z-score to detect outliers</title>
