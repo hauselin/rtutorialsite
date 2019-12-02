@@ -1,5 +1,23 @@
 [
   {
+    "path": "posts/2019-11-06-parallel-programming-with-foreach-package/",
+    "title": "Parallel programming with foreach package",
+    "description": {},
+    "author": [
+      {
+        "name": "Hause Lin",
+        "url": {}
+      }
+    ],
+    "date": "2019-10-06",
+    "categories": [
+      "foreach",
+      "parallel"
+    ],
+    "preview": "https://raw.githubusercontent.com/hauselin/rtutorialsite/master/attachments/plot_dotdist.gif",
+    "last_modified": "2019-11-06T21:32:08-05:00"
+  },
+  {
     "path": "posts/2019-10-07-outlier-detection-with-median-absolute-deviation/",
     "title": "Use median absolute deviation instead of z-score to detect outliers",
     "description": "Why is it bad to use z-scores to detect outliers and why you should use median absolute deviation instead",
@@ -211,5 +229,25 @@
     ],
     "preview": {},
     "last_modified": "2019-10-06T22:23:17-04:00"
+  },
+  {
+    "path": "posts/2019-12-01-neural-networks-deriving-the-sigmoid-derivative/",
+    "title": "Neural networks: Deriving the sigmoid derivative",
+    "description": "Deriving the derivative of the sigmoid function for neural networks",
+    "author": [
+      {
+        "name": "Hause Lin",
+        "url": {}
+      }
+    ],
+    "date": "2019-01-10",
+    "categories": [
+      "neural networks",
+      "logistic regression",
+      "logit",
+      "mathematicss"
+    ],
+    "preview": {},
+    "last_modified": "2019-12-01T20:43:05-05:00"
   }
 ]

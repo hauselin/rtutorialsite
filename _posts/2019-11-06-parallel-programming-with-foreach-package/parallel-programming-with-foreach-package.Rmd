@@ -1,0 +1,124 @@
+---
+title: "Parallel programming"
+description: 
+preview: https://raw.githubusercontent.com/hauselin/rtutorialsite/master/attachments/plot_dotdist.gif
+author:
+  - name: Hause Lin
+date: 10-06s-2019
+output:
+  radix::radix_article:
+    toc: true
+    self_contained: false
+draft: false
+categories: 
+  - foreach
+  - parallel
+repository_url: https://github.com/hauselin/rtutorialsite/blob/master/_posts/2019-02-22-why-we-should-never-use-barplots-use-geomquasirandom-instead/why-we-should-never-use-barplots-use-geomquasirandom-instead.Rmd
+editor_options: 
+  chunk_output_type: console
+---
+
+```{r setup, include=FALSE}
+library(roxygen2)
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+Get source code for this RMarkdown script [here](https://github.com/hauselin/rtutorialsite/blob/master/_posts/2019-02-22-why-we-should-never-use-barplots-use-geomquasirandom-instead/why-we-should-never-use-barplots-use-geomquasirandom-instead.Rmd).
+
+## Consider being a patron and supporting my work?
+
+[Donate and become a patron](https://donorbox.org/support-my-teaching): If you find value in what I do and have learned something from my site, please consider becoming a patron. It takes me many hours to research, learn, and put together tutorials. Your support really matters.
+
+## Load `foreach` library
+
+```{r}
+library(foreach)
+```
+
+
+
+
+
+
+
+
+
+## Sequential.serial processing (non-parallel)
+
+### Basic
+
+```{r}
+foreach(nvalues = c(1, 2, 3)) %do% rnorm(n = nvalues)
+```
+
+
+
+```{r}
+foreach(nvalues = c(4, 8), meanvalues = c(10, 500), sdvalues = c(1, 500)) %do% 
+  rnorm(n = nvalues, mean = meanvalues, sd = sdvalues)
+```
+
+
+### Combining results
+
+```{r}
+foreach(nvalues = c(4, 4), meanvalues = c(10, 500), sdvalues = c(1, 500), .combine = rbind) %do% 
+  rnorm(n = nvalues, mean = meanvalues, sd = sdvalues)
+```
+
+
+```{r}
+foreach(nvalues = c(4, 4), meanvalues = c(10, 500), sdvalues = c(1, 500), .combine = "+") %do% 
+  rnorm(n = nvalues, mean = meanvalues, sd = sdvalues)
+```
+
+### List comprehension
+
+```{r}
+foreach(x = sample(1:1000, 10), .combine = c) %:%
+  when(x %% 3 == 0 || x %% 5 == 0) %do%
+  x
+```
+
+
+## Parallel processing
+
+`doParallel`, `doFuture`, or `doSEQ`backends
+
+```{r}
+library(doParallel)
+clust <- makeCluster(3)
+registerDoParallel(clust)
+foreach(nvalues = c(1, 2, 3)) %dopar% rnorm(n = nvalues)
+```
+
+### doFuture 
+
+```{r}
+library(doFuture)
+registerDoFuture()
+plan(cluster, workers = 2)
+foreach(nvalues = c(1, 2, 3), .combine = c) %dopar% rnorm(n = nvalues)
+```
+
+
+multicore plan
+
+```{r}
+plan(multicore)
+foreach(nvalues = c(1, 2, 3), .combine = c) %dopar% rnorm(n = nvalues)
+```
+
+
+
+## Resources
+
+https://privefl.github.io/blog/a-guide-to-parallelism-in-r/
+https://nceas.github.io/oss-lessons/parallel-computing-in-r/parallel-computing-in-r.html
+https://campus.datacamp.com/courses/parallel-programming-in-r/foreach-futureapply-and-load-balancing?ex=6
+https://cran.r-project.org/web/packages/foreach/vignettes/nested.pdf
+
+
+## Support my work
+
+[Support my work and become a patron here](https://donorbox.org/support-my-teaching)!

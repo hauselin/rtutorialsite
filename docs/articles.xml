@@ -7,7 +7,16 @@
     <description>Data science and analysis tutorials
 </description>
     <generator>Radix</generator>
-    <lastBuildDate>Sat, 07 Sep 2019 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Sun, 06 Oct 2019 00:00:00 +0000</lastBuildDate>
+    <item>
+      <title>Parallel programming with foreach package</title>
+      <dc:creator>Hause Lin</dc:creator>
+      <link>https://hausetutorials.netlify.com/posts/2019-11-06-parallel-programming-with-foreach-package</link>
+      <description>Parallel programming with foreach package</description>
+      <guid>https://hausetutorials.netlify.com/posts/2019-11-06-parallel-programming-with-foreach-package</guid>
+      <pubDate>Sun, 06 Oct 2019 00:00:00 +0000</pubDate>
+      <media:content url="https://raw.githubusercontent.com/hauselin/rtutorialsite/master/attachments/plot_dotdist.gif" medium="image" type="image/gif"/>
+    </item>
     <item>
       <title>Use median absolute deviation instead of z-score to detect outliers</title>
       <dc:creator>Hause Lin</dc:creator>

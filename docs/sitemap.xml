@@ -33,6 +33,10 @@
     <lastmod>2019-10-14T12:02:04-04:00</lastmod>
   </url>
   <url>
+    <loc>https://hausetutorials.netlify.com/posts/2019-11-06-parallel-programming-with-foreach-package/</loc>
+    <lastmod>2019-11-06T21:32:08-05:00</lastmod>
+  </url>
+  <url>
     <loc>https://hausetutorials.netlify.com/posts/2019-10-07-outlier-detection-with-median-absolute-deviation/</loc>
     <lastmod>2019-10-13T10:34:30-04:00</lastmod>
   </url>
@@ -75,5 +79,9 @@
   <url>
     <loc>https://hausetutorials.netlify.com/posts/2019-02-18-fit-models-to-every-group/</loc>
     <lastmod>2019-10-06T22:23:17-04:00</lastmod>
+  </url>
+  <url>
+    <loc>https://hausetutorials.netlify.com/posts/2019-12-01-neural-networks-deriving-the-sigmoid-derivative/</loc>
+    <lastmod>2019-12-01T20:43:05-05:00</lastmod>
   </url>
 </urlset>
