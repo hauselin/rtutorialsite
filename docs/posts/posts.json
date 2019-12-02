@@ -195,23 +195,6 @@
     "last_modified": "2019-10-06T22:22:02-04:00"
   },
   {
-    "path": "posts/2019-02-23-random-walks/",
-    "title": "random walks",
-    "description": "A short description of the post.",
-    "author": [
-      {
-        "name": "Hause Lin",
-        "url": {}
-      }
-    ],
-    "date": "2019-02-23",
-    "categories": [],
-    "preview": "posts/2019-02-23-random-walks/random-walks_files/figure-html5/unnamed-chunk-1-1.png",
-    "last_modified": "2019-12-01T22:22:55-05:00",
-    "preview_width": 1248,
-    "preview_height": 768
-  },
-  {
     "path": "posts/2019-02-22-why-we-should-never-use-barplots-use-geomquasirandom-instead/",
     "title": "Why bar (dynamite) plots are terrible (use ggbeeswarm instead)",
     "description": "Why are barplots or dynamite plots so bad? Comparing four different types of plots: barplot, boxplot, violinplot, and geom_quasirandom plot",
