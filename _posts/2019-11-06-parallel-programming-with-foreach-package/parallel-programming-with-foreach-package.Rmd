@@ -9,7 +9,7 @@ output:
   radix::radix_article:
     toc: true
     self_contained: false
-draft: false
+draft: true
 categories: 
   - foreach
   - parallel

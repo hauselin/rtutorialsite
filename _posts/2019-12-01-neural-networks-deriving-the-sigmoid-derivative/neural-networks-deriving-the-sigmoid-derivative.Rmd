@@ -15,7 +15,7 @@ output:
   radix::radix_article:
     toc: true
     self_contained: false
-draft: true
+draft: false
 repository_url: "./_posts/2019-12-01-neural-networks-deriving-the-sigmoid-derivative/neural-networks-deriving-the-sigmoid-derivative.Rmd"
 editor_options: 
   chunk_output_type: console
