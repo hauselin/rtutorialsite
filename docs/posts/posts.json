@@ -20,6 +20,24 @@
     "last_modified": "2019-12-02T09:06:42-05:00"
   },
   {
+    "path": "posts/2019-12-08-resources-for-making-r-packages/",
+    "title": "Resources for making R packages",
+    "description": "Resources for making R packages",
+    "author": [
+      {
+        "name": "Hause Lin",
+        "url": {}
+      }
+    ],
+    "date": "2019-09-15",
+    "categories": [
+      "resources",
+      "R packagess"
+    ],
+    "preview": "posts/2019-12-08-resources-for-making-r-packages/./rpackages.jpg",
+    "last_modified": "2019-12-08T19:39:15-05:00"
+  },
+  {
     "path": "posts/2019-10-07-outlier-detection-with-median-absolute-deviation/",
     "title": "Use median absolute deviation instead of z-score to detect outliers",
     "description": "Why is it bad to use z-scores to detect outliers and why you should use median absolute deviation instead",

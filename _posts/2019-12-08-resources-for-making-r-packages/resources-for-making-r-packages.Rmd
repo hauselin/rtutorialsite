@@ -1,0 +1,72 @@
+---
+title: "Resources for making R packages"
+description: |
+  Resources for making R packages
+preview: ./rpackages.jpg
+author:
+  - name: Hause Lin
+    url: {}
+date: 09-15-2019
+categories: 
+  - resources
+  - R packagess
+output:
+  radix::radix_article:
+    toc: true
+    self_contained: false
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+```
+
+### Consider being a patron and supporting my work?
+
+[Donate and become a patron](https://donorbox.org/support-my-teaching): If you find value in what I do and have learned something from my site, please consider becoming a patron. It takes me many hours to research, learn, and put together tutorials. Your support really matters.
+
+### Overview
+
+* [R packages](http://r-pkgs.had.co.nz/) by Hadley Wickham
+* [R package primer](https://kbroman.org/pkg_primer/) by Karl Broman
+* [Building R packages](https://bookdown.org/rdpeng/RProgDA/building-r-packages.html) chapter by Roger Peng, Sean Kross, and Brooke Anderson
+
+### Where to begin
+
+* [Create a project/package (see section 3.3.2)](https://bookdown.org/rdpeng/RProgDA/the-devtools-package.html)
+
+### Build documentation for your package
+
+* [`devtools package`](https://devtools.r-lib.org/): `document()`, `use_data()` to include data, `use_travis()` for Travis checking
+
+### Build website for your package
+
+* [`pkgdown` package](https://pkgdown.r-lib.org/index.html): `pkgdown::build_site()`
+
+### Testing and code coverage
+
+* [`testthat` package](https://testthat.r-lib.org/)
+* [`covr` package](https://covr.r-lib.org/)
+
+### Automated checking (continuous integration)
+
+* [`usethis` package](https://usethis.r-lib.org/): `use_travis()`, `use_appveyor()`
+* [Overview YouTube video](https://www.youtube.com/watch?v=As5SM7-F02w)
+* Wickham's [R packages page](http://r-pkgs.had.co.nz/check.html)
+* Continuous integration service [Travis](https://travis-ci.org/)
+* [Automate testing of R package](https://jef.works/blog/2019/02/17/automate-testing-of-your-R-package/)
+
+### Releasing a package
+
+* Wickham's [R package page](http://r-pkgs.had.co.nz/release.html): version number, CRAN policies etc.
+
+### Common issues and bugs
+
+* [Removing all R CMD check warnings](https://www.maxturgeon.ca/check-warnings)
+* [Silence R CMD warning (non-standard file/directory found a top level)](https://github.com/r-lib/pkgdown/issues/709): add file to `.Rbuildignore`
+* [Add dependency on R version](https://github.com/r-lib/usethis/issues/631)
+
+### Support my work
+
+[Support my work and become a patron here](https://donorbox.org/support-my-teaching)!
+
+

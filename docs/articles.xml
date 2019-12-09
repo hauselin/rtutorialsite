@@ -18,6 +18,15 @@
       <media:content url="https://hausetutorials.netlify.com/posts/2019-12-01-neural-networks-deriving-the-sigmoid-derivative/./sigmoid.jpg" medium="image" type="image/jpeg"/>
     </item>
     <item>
+      <title>Resources for making R packages</title>
+      <dc:creator>Hause Lin</dc:creator>
+      <link>https://hausetutorials.netlify.com/posts/2019-12-08-resources-for-making-r-packages</link>
+      <description>Resources for making R packages</description>
+      <guid>https://hausetutorials.netlify.com/posts/2019-12-08-resources-for-making-r-packages</guid>
+      <pubDate>Sun, 15 Sep 2019 00:00:00 +0000</pubDate>
+      <media:content url="https://hausetutorials.netlify.com/posts/2019-12-08-resources-for-making-r-packages/./rpackages.jpg" medium="image" type="image/jpeg"/>
+    </item>
+    <item>
       <title>Use median absolute deviation instead of z-score to detect outliers</title>
       <dc:creator>Hause Lin</dc:creator>
       <link>https://hausetutorials.netlify.com/posts/2019-10-07-outlier-detection-with-median-absolute-deviation</link>
