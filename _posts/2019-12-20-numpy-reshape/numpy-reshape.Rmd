@@ -31,6 +31,8 @@ Get source code for this RMarkdown script [here](https://github.com/hauselin/rtu
 
 [Donate and become a patron](https://donorbox.org/support-my-teaching): If you find value in what I do and have learned something from my site, please consider becoming a patron. It takes me many hours to research, learn, and put together tutorials. Your support really matters.
 
+How does the numpy `reshape()` method reshape arrays? Have you struggled understanding how it works or have you ever been confused? This tutorial will walk you through reshaping in numpy. 
+
 ## Use reticulate R package to run Python in R
 
 ```{r}
@@ -64,7 +66,7 @@ print(a1_2d)
 
 ![reshaping](./pic2.jpg)
 
-If you want to let numpy automatically determine what size/length of the a particular dimension should be, specify the dimension as -1 for that dimension.
+If you want numpy to automatically determine what size/length a particular dimension should be, specify the dimension as -1 for that dimension.
 
 ```{python}
 a1.reshape(3, 4)
@@ -105,7 +107,7 @@ print(a1_1_by_12)  # note the double square brackets!
 print(a1_1_by_12.shape)  # 1_12 array
 ``` 
 
-## Convert/flatten/ravel to 1D arrays with ravel()
+## Flatten/ravel to 1D arrays with ravel()
 
 The `ravel()` method lets you convert multi-dimensional arrays to 1D arrays (see docs [here](https://docs.scipy.org/doc/numpy/reference/generated/numpy.ravel.html)). Our 2D array (3_4) will be flattened or raveled such that they become a 1D array with 12 elements. 
 
@@ -160,7 +162,7 @@ print(stack_long)
 
 ## Create multi-dimensional array (3D)
 
-Create two separate 3 by 4 arrays.
+Create two different 3 by 4 arrays.
 
 ```{python}
 a1 = np.arange(1, 13).reshape(3, -1)  # 3_4
@@ -171,7 +173,7 @@ print(a2)
 
 ![Two 2D arrays](./pic5.jpg)
 
-### Create a 3D array by stacking the arrays along different dimensions
+### Create a 3D array by stacking the arrays along different axes/dimensions
 
 ```{python}
 a3_0 = np.stack((a1, a2))  # default axis=0 (dimension 0)

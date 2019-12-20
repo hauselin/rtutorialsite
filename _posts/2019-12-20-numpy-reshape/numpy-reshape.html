@@ -971,10 +971,10 @@
 <li><a href="#create-a-python-numpy-array">Create a Python numpy array</a></li>
 <li><a href="#reshape-with-reshape-method">Reshape with <code>reshape()</code> method</a></li>
 <li><a href="#reshape-along-different-dimensions">Reshape along different dimensions</a></li>
-<li><a href="#convertflattenravel-to-1d-arrays-with-ravel">Convert/flatten/ravel to 1D arrays with ravel()</a></li>
+<li><a href="#flattenravel-to-1d-arrays-with-ravel">Flatten/ravel to 1D arrays with ravel()</a></li>
 <li><a href="#concatenatestack-arrays-with-np.stack-and-np.hstack">Concatenate/stack arrays with <code>np.stack()</code> and <code>np.hstack()</code></a></li>
 <li><a href="#create-multi-dimensional-array-3d">Create multi-dimensional array (3D)</a><ul>
-<li><a href="#create-a-3d-array-by-stacking-the-arrays-along-different-dimensions">Create a 3D array by stacking the arrays along different dimensions</a></li>
+<li><a href="#create-a-3d-array-by-stacking-the-arrays-along-different-axesdimensions">Create a 3D array by stacking the arrays along different axes/dimensions</a></li>
 </ul></li>
 <li><a href="#flatten-multidimensional-arrays">Flatten multidimensional arrays</a></li>
 <li><a href="#reshape-multidimensional-arrays">Reshape multidimensional arrays</a></li>
@@ -985,6 +985,7 @@
 <p>Get source code for this RMarkdown script <a href="https://github.com/hauselin/rtutorialsite/blob/master/_posts/2019-12-20-numpy-reshape/numpy-reshape.Rmd">here</a>. Download the cheatsheet <a href="https://github.com/hauselin/rtutorialsite/raw/master/_posts/2019-12-20-numpy-reshape/reshape.pdf">here</a>.</p>
 <h2 id="consider-being-a-patron-and-supporting-my-work">Consider being a patron and supporting my work?</h2>
 <p><a href="https://donorbox.org/support-my-teaching">Donate and become a patron</a>: If you find value in what I do and have learned something from my site, please consider becoming a patron. It takes me many hours to research, learn, and put together tutorials. Your support really matters.</p>
+<p>How does the numpy <code>reshape()</code> method reshape arrays? Have you struggled understanding how it works or have you ever been confused? This tutorial will walk you through reshaping in numpy.</p>
 <h2 id="use-reticulate-r-package-to-run-python-in-r">Use reticulate R package to run Python in R</h2>
 <div class="layout-chunk" data-layout="l-body">
 <pre class="r"><code>
@@ -1027,7 +1028,7 @@ print(a1_2d)</code></pre>
 <figure>
 <img src="pic2.jpg" alt="reshaping" /><figcaption>reshaping</figcaption>
 </figure>
-<p>If you want to let numpy automatically determine what size/length of the a particular dimension should be, specify the dimension as -1 for that dimension.</p>
+<p>If you want numpy to automatically determine what size/length a particular dimension should be, specify the dimension as -1 for that dimension.</p>
 <div class="layout-chunk" data-layout="l-body">
 <pre class="python"><code>
 a1.reshape(3, 4)</code></pre>
@@ -1112,7 +1113,7 @@ print(a1_1_by_12.shape)  # 1_12 array</code></pre>
 <pre><code>
 (1, 12)</code></pre>
 </div>
-<h2 id="convertflattenravel-to-1d-arrays-with-ravel">Convert/flatten/ravel to 1D arrays with ravel()</h2>
+<h2 id="flattenravel-to-1d-arrays-with-ravel">Flatten/ravel to 1D arrays with ravel()</h2>
 <p>The <code>ravel()</code> method lets you convert multi-dimensional arrays to 1D arrays (see docs <a href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.ravel.html">here</a>). Our 2D array (3_4) will be flattened or raveled such that they become a 1D array with 12 elements.</p>
 <p>If you don’t specify any parameters, ravel() will flatten/ravel our 2D array along the rows (0th dimension/axis). That is, row 0 [1, 2, 3, 4] + row 1 [5, 6, 7, 8] + row 2 [9, 10, 11, 12].</p>
 <p>If you want to flatten/ravel along the columns (1st dimension), use the order parameter.</p>
@@ -1201,7 +1202,7 @@ print(stack_long)  </code></pre>
 [ 1  2  3  4  5  6  7  8  9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24]</code></pre>
 </div>
 <h2 id="create-multi-dimensional-array-3d">Create multi-dimensional array (3D)</h2>
-<p>Create two separate 3 by 4 arrays.</p>
+<p>Create two different 3 by 4 arrays.</p>
 <div class="layout-chunk" data-layout="l-body">
 <pre class="python"><code>
 a1 = np.arange(1, 13).reshape(3, -1)  # 3_4
@@ -1221,7 +1222,7 @@ print(a2)</code></pre>
 <figure>
 <img src="pic5.jpg" alt="Two 2D arrays" /><figcaption>Two 2D arrays</figcaption>
 </figure>
-<h3 id="create-a-3d-array-by-stacking-the-arrays-along-different-dimensions">Create a 3D array by stacking the arrays along different dimensions</h3>
+<h3 id="create-a-3d-array-by-stacking-the-arrays-along-different-axesdimensions">Create a 3D array by stacking the arrays along different axes/dimensions</h3>
 <div class="layout-chunk" data-layout="l-body">
 <pre class="python"><code>
 a3_0 = np.stack((a1, a2))  # default axis=0 (dimension 0)
