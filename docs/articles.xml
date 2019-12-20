@@ -7,7 +7,16 @@
     <description>Data science and analysis tutorials
 </description>
     <generator>Radix</generator>
-    <lastBuildDate>Tue, 01 Oct 2019 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Sun, 20 Oct 2019 00:00:00 +0000</lastBuildDate>
+    <item>
+      <title>Reshape multi-dimensional arrays in Python numpy</title>
+      <dc:creator>Hause Lin</dc:creator>
+      <link>https://hausetutorials.netlify.com/posts/2019-12-20-numpy-reshape</link>
+      <description>The only tutorial you'll need to understand how Python numpy reshapes multidimensional arrays</description>
+      <guid>https://hausetutorials.netlify.com/posts/2019-12-20-numpy-reshape</guid>
+      <pubDate>Sun, 20 Oct 2019 00:00:00 +0000</pubDate>
+      <media:content url="https://hausetutorials.netlify.com/posts/2019-12-20-numpy-reshape/./reshapecheatsheet.jpg" medium="image" type="image/jpeg"/>
+    </item>
     <item>
       <title>Neural networks: Deriving the sigmoid derivative via chain and quotient rules</title>
       <dc:creator>Hause Lin</dc:creator>
