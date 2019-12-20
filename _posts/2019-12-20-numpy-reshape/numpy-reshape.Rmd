@@ -16,7 +16,7 @@ output:
     toc: true
     self_contained: false
 draft: false
-repository_url: https://github.com/hauselin/rtutorialsite/blob/master/_posts/2019-07-06-interpreting-interaction-regression-coefficients/interpreting-interaction-regression-coefficients.Rmd
+repository_url: https://github.com/hauselin/rtutorialsite/blob/master/_posts/2019-12-20-numpy-reshape/numpy-reshape.Rmd
 editor_options: 
   chunk_output_type: console
 ---
@@ -25,7 +25,7 @@ editor_options:
 knitr::opts_chunk$set(echo = TRUE, cache = FALSE, comment = NA, message = FALSE, warning = FALSE)
 ```
 
-Get source code for this RMarkdown script [here](https://github.com/hauselin/rtutorialsite/blob/master/_posts/2019-07-06-interpreting-interaction-regression-coefficients/interpreting-interaction-regression-coefficients.Rmd).
+Get source code for this RMarkdown script [here](https://github.com/hauselin/rtutorialsite/blob/master/_posts/2019-12-20-numpy-reshape/numpy-reshape.Rmd). Download the cheatsheet [here](https://github.com/hauselin/rtutorialsite/raw/master/_posts/2019-12-20-numpy-reshape/reshape.pdf).
 
 ## Consider being a patron and supporting my work?
 
@@ -42,7 +42,6 @@ use_condaenv("python374")  # python environment
 
 Use `np.arange()` to generate a numpy array containing a sequence of numbers from 1 to 12. See documentation [here](https://docs.scipy.org/doc/numpy/reference/generated/numpy.arange.html).
 
-ˆ
 ```{python}
 import numpy as np
 
