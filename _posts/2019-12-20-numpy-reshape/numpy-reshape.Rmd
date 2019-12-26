@@ -25,7 +25,9 @@ editor_options:
 knitr::opts_chunk$set(echo = TRUE, cache = FALSE, comment = NA, message = FALSE, warning = FALSE)
 ```
 
-Get source code for this RMarkdown script [here](https://github.com/hauselin/rtutorialsite/blob/master/_posts/2019-12-20-numpy-reshape/numpy-reshape.Rmd). Download the cheatsheet [here](https://github.com/hauselin/rtutorialsite/raw/master/_posts/2019-12-20-numpy-reshape/reshape.pdf).
+Get source code for this RMarkdown script [here](https://github.com/hauselin/rtutorialsite/blob/master/_posts/2019-12-20-numpy-reshape/numpy-reshape.Rmd). Download the cheatsheet [here](https://github.com/hauselin/rtutorialsite/blob/master/_posts/2019-12-20-numpy-reshape/reshape.pdf).
+
+This tutorial is also available on [Medium, Towards Data Science](https://towardsdatascience.com/reshaping-numpy-arrays-in-python-a-step-by-step-pictorial-tutorial-aed5f471cf0b?source=friends_link&sk=3dc229066e89cb5bcd4bb86b301f0a5c).
 
 ## Consider being a patron and supporting my work?
 
