@@ -1,7 +1,7 @@
 ---
-title: "Reshape multi-dimensional arrays in Python numpy"
+title: "Reshape and stack multi-dimensional arrays in Python numpy"
 description: |
-  The only tutorial you'll need to understand how Python numpy reshapes multidimensional arrays
+  The only tutorial and cheatsheet you'll need to understand how Python numpy reshapes and stacks multidimensional arrays
 preview: ./reshapecheatsheet.jpg
 author:
   - name: Hause Lin

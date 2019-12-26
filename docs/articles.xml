@@ -9,10 +9,10 @@
     <generator>Radix</generator>
     <lastBuildDate>Sun, 20 Oct 2019 00:00:00 +0000</lastBuildDate>
     <item>
-      <title>Reshape multi-dimensional arrays in Python numpy</title>
+      <title>Reshape and stack multi-dimensional arrays in Python numpy</title>
       <dc:creator>Hause Lin</dc:creator>
       <link>https://hausetutorials.netlify.com/posts/2019-12-20-numpy-reshape</link>
-      <description>The only tutorial you'll need to understand how Python numpy reshapes multidimensional arrays</description>
+      <description>The only tutorial and cheatsheet you'll need to understand how Python numpy reshapes and stacks multidimensional arrays</description>
       <guid>https://hausetutorials.netlify.com/posts/2019-12-20-numpy-reshape</guid>
       <pubDate>Sun, 20 Oct 2019 00:00:00 +0000</pubDate>
       <media:content url="https://hausetutorials.netlify.com/posts/2019-12-20-numpy-reshape/./reshapecheatsheet.jpg" medium="image" type="image/jpeg"/>

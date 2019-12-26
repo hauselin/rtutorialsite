@@ -1,8 +1,8 @@
 [
   {
     "path": "posts/2019-12-20-numpy-reshape/",
-    "title": "Reshape multi-dimensional arrays in Python numpy",
-    "description": "The only tutorial you'll need to understand how Python numpy reshapes multidimensional arrays",
+    "title": "Reshape and stack multi-dimensional arrays in Python numpy",
+    "description": "The only tutorial and cheatsheet you'll need to understand how Python numpy reshapes and stacks multidimensional arrays",
     "author": [
       {
         "name": "Hause Lin",
@@ -16,7 +16,7 @@
       "reticulate"
     ],
     "preview": "posts/2019-12-20-numpy-reshape/./reshapecheatsheet.jpg",
-    "last_modified": "2019-12-25T20:44:14-05:00"
+    "last_modified": "2019-12-25T20:50:51-05:00"
   },
   {
     "path": "posts/2019-12-01-neural-networks-deriving-the-sigmoid-derivative/",
