@@ -1,12 +1,12 @@
 ---
-title: "Data science with R"
-description: Clean, process, and analyse experimental psychology data
-date: Oct 12, 2019
+title: "Data science tutorials"
+description: Data preprocessing and wrangling, tutorials, statistical analyses, modeling, and so on
+date: Jan 12, 2019
 author:
     - name: Hause Lin
-      url: https://scholar.google.ca/citations?user=4_ZopI0AAAAJ&hl=en
+      url: https://www.hauselin.com
       affiliation: University of Toronto
-      affiliation_url: https://www.hauselin.com
+      affiliation_url: https://www.utoronto.ca/
 citation_url: https://hausetutorials.netlify.com/
 slug: lin2019rdatascience
 site: radix::radix_website
@@ -14,7 +14,7 @@ site: radix::radix_website
 
 ## What is this site about? 
 
-This site contains R tutorials as well as relatively advanced data analysis tips/tricks I have used to analyze experimental data. Occasionally, I'll also explain statistical procedures and concepts with code. I have used these tutorials and articles to teach data science in graduate school. In my tutorials and articles, I usually try my best to explain *how* things work.
+This site contains introduction tutorials as well as relatively advanced data analysis tips/tricks I have used to analyze data. Occasionally, I'll also explain statistical procedures and concepts with code. I have used these tutorials and articles to teach data science in graduate school. In my tutorials and articles, I usually try my best to explain *how* things work.
 
 * tutorials: beginner R tutorials ([R programming basics](0001_rbasics.html), [tidyverse, data.table](0002_tidyverse_datatable.html), etc.)
 * [articles](articles.html): more advanced analysis tricks/tips and statistical concepts illustrated with code
