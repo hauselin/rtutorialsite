@@ -22,14 +22,14 @@ output:
     self_contained: false
 editor_options: 
   chunk_output_type: console
-repository_url: ./_posts/2020-04-11-causal-inference-and-lords-paradox-change-score-or-covariate/causal-inference-and-lords-paradox-change-score-or-covariate.Rmd
+repository_url: https://raw.githubusercontent.com/hauselin/rtutorialsite/master/_posts/2020-04-11-causal-inference-and-lords-paradox-change-score-or-covariate/causal-inference-and-lords-paradox-change-score-or-covariate.Rmd
 ---
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE, cache = FALSE, comment = NA, message = FALSE, warning = FALSE)
 ```
 
-Get source code for this RMarkdown script [here](./_posts/2020-04-11-causal-inference-and-lords-paradox-change-score-or-covariate/causal-inference-and-lords-paradox-change-score-or-covariate.Rmd).
+Get source code for this RMarkdown script [here](https://raw.githubusercontent.com/hauselin/rtutorialsite/master/_posts/2020-04-11-causal-inference-and-lords-paradox-change-score-or-covariate/causal-inference-and-lords-paradox-change-score-or-covariate.Rmd).
 
 ## Consider being a patron and supporting my work?
 
