@@ -69,7 +69,7 @@
 <!--/radix_placeholder_rmarkdown_metadata-->
   
   <script type="text/json" id="radix-resource-manifest">
-  {"type":"character","attributes":{},"value":["biblio.bib","causal-inference-and-lords-paradox-change-score-or-covariate_files/bowser-1.9.3/bowser.min.js","causal-inference-and-lords-paradox-change-score-or-covariate_files/distill-2.2.21/template.v2.js","causal-inference-and-lords-paradox-change-score-or-covariate_files/figure-html5/unnamed-chunk-2-1.png","causal-inference-and-lords-paradox-change-score-or-covariate_files/jquery-1.11.3/jquery.min.js","causal-inference-and-lords-paradox-change-score-or-covariate_files/webcomponents-2.0.0/webcomponents.js","dag.key","dag0.png","dag1.png","dag2.png","design.png"]}
+  {"type":"character","attributes":{},"value":["biblio.bib","causal-inference-and-lords-paradox-change-score-or-covariate_files/bowser-1.9.3/bowser.min.js","causal-inference-and-lords-paradox-change-score-or-covariate_files/distill-2.2.21/template.v2.js","causal-inference-and-lords-paradox-change-score-or-covariate_files/figure-html5/unnamed-chunk-2-1.png","causal-inference-and-lords-paradox-change-score-or-covariate_files/jquery-1.11.3/jquery.min.js","causal-inference-and-lords-paradox-change-score-or-covariate_files/webcomponents-2.0.0/webcomponents.js","dag.key","dag0.png","dag1.png","dag2.png","dag3.png","design.png"]}
   </script>
   <!--radix_placeholder_navigation_in_header-->
 
@@ -1406,14 +1406,14 @@ library(data.table); library(lavaan)</code></pre>
 <h2 id="lords-paradox">Lord’s Paradox</h2>
 <p>Here’s a common study for scientific studies: Participants are randomly assigned to either receive a <strong>drug or a placebo (control condition)</strong>. To evaluate the effects of the treatment (drug vs placebo control), you measure participants on some outcome measure <strong>before (pre-intervention)</strong> and <strong>after the intervention (post-intervention)</strong>.</p>
 <figure>
-<img src="design.png" alt="Design" /><figcaption>Design</figcaption>
+<img src="design.png" alt="Study design" /><figcaption>Study design</figcaption>
 </figure>
 <h2 id="how-should-we-analyze-the-data">How should we analyze the data?</h2>
 <ol type="1">
 <li><strong>Change-score approach</strong>: You can subtract the pre score from the post score <code>post - pre</code> and fit a model to this difference or change score. That is, a t-test or linear regression that compares change scores between the drug and control conditions.</li>
 </ol>
 <ul>
-<li>This difference/change-score model gives the <strong>total effect of condition</strong>.</li>
+<li>This difference/change-score model gives the <strong>total effect of condition</strong> (total effect: direct + indirect effects).</li>
 </ul>
 <ol start="2" type="1">
 <li><strong>Covariate approach</strong>: Or you can adjust for the effect of pre score (baseline) by including it as a covariate in your model. That is, you fit an ANCOVA or linear regression that models post score as a function of condition and post score (covariate).</li>
@@ -1421,7 +1421,7 @@ library(data.table); library(lavaan)</code></pre>
 <ul>
 <li>This covariate model gives you the <strong>direct effect of condition</strong>.</li>
 </ul>
-<p>These two approaches often lead to different results, and is known as <strong>Lord’s Paradox</strong>. Judea Pearl<span class="citation" data-cites="Pearl">(Pearl <a href="#ref-Pearl">2016</a>)</span> explains this paradox very well and has “solved” this paradox by showing that both approaches are correct, but they uncover different effects or paths in the causal diagram.</p>
+<p>These two approaches often lead to different results, and is known as <strong>Lord’s Paradox</strong>. Judea Pearl<span class="citation" data-cites="Pearl">(Pearl <a href="#ref-Pearl">2016</a>)</span> explains this paradox very well and has “resolved” this paradox by showing that both approaches are correct, but they uncover different effects or paths in the causal diagram.</p>
 <p>Let’s play with fake data to understand this paradox.</p>
 <h2 id="create-fake-data">Create fake data</h2>
 <p>Experimental design: 2 experimental conditions (drug vs control) (<code>condition</code>); 6 subjects (3 per condition) (<code>id</code>); measure of pre-experiment score (<code>pre</code>); measure of post-experiment score (<code>post</code>)</p>
@@ -1442,6 +1442,9 @@ dt1</code></pre>
 4:  4   control  20   10    -10
 5:  5   control  50   10    -40
 6:  6   control  30   20    -10</code></pre>
+</div>
+<div class="layout-chunk" data-layout="l-body">
+
 </div>
 <p>Mean change score for each condition:</p>
 <div class="layout-chunk" data-layout="l-body">
@@ -1466,11 +1469,19 @@ dt1[, .(change_group_mean = mean(change)), by = condition]</code></pre>
 </ul>
 <p>Other effects that can be computed from these three coefficients:</p>
 <ul>
-<li><code>total effect</code>: direct (pink) + indirect effect (orange); which is also the change score that can be obtained using the change-score approach; also equivalent to <code>+1 * post -1 * pre</code></li>
+<li><p><code>total effect</code>: direct (pink) + indirect effect (orange); which is also the change score that can be obtained using the change-score approach; also equivalent to <code>+1 * post -1 * pre</code></p></li>
+<li><p>indirect effect: <code>a * c - a</code>, which captures the indirect effect of <code>condition</code> on <code>post</code> while subtracting effect of <code>condition</code> on <code>pre</code> (i.e., path <code>a</code>)</p></li>
+</ul>
+<p>Important observations</p>
+<ul>
+<li>If path <code>a</code> or <code>c</code> is 0, then the indirect path of <code>condition</code> on <code>post</code> via <code>pre</code> must be 0. Path <code>a</code> can be 0 if we have <em>perfect</em> experimental control via <em>perfect</em> random assignment (which never happens in real life)—when participants in the two different experimental conditions have exactly the same <code>pre</code> scores. In that case, all effects of <code>condition</code> will be direct (via path <code>b</code>). You can change the fake data above to test the effects of the two conditions having the same <code>pre</code> scores.</li>
 </ul>
 <h2 id="causal-inference-via-structural-equation-model-sem">Causal inference via structural equation model (SEM)</h2>
 <p>Define causal diagram using structural equation model syntax in lavaan package. The details of how to specify the DAG above in lavaan aren’t important here.</p>
-<p>What I’ve done is specified two regression models (see comments in below). I’m telling lavaan to estimate three path coefficients for me <code>a</code>, <code>b</code>, and <code>c</code>, and then deterine other path coefficients (total, direct, indirect) based on these three coefficients.</p>
+<figure>
+<img src="dag3.png" alt="Paths to specify in lavaan" /><figcaption>Paths to specify in lavaan</figcaption>
+</figure>
+<p>I specify two regression models (see comments in below). I’m telling lavaan to estimate three path coefficients for me <code>a</code>, <code>b</code>, and <code>c</code>, and then deterine other path coefficients (total, direct, indirect) based on these three coefficients.</p>
 <div class="layout-chunk" data-layout="l-body">
 <pre class="r"><code>
 model &lt;-&quot; 
@@ -1487,7 +1498,7 @@ post ~ b * condition + c * pre
 total := b + a * c - a  
 # total: lm(change ~ condition, dt1) # condition effect on change score (total effect)
 direct := b
-indirect := a * c - a
+indirect := a * c - a  # or total - direct
 &quot;</code></pre>
 </div>
 <h2 id="fit-the-sem-or-dag-using-lavaans-sem-function">Fit the SEM or DAG using lavaan’s <code>sem</code> function</h2>
@@ -1499,7 +1510,7 @@ sem_results &lt;- sem(model, dt1)</code></pre>
 
 </div>
 <h2 id="interpret-model-results">Interpret model results</h2>
-<p>lavaan’s model output contains a lot of information that isn’t necessary for this tutorial, so I’ve summarized the main path coefficients we care about below. See figure below to see the coefficients on the DAG.</p>
+<p>lavaan’s model output contains a lot of information that isn’t necessary for this tutorial, so I’ve summarized the main path coefficients we care about below.</p>
 <div class="layout-chunk" data-layout="l-body">
 <pre><code>
     outcome    effect effect_label    est                       desc
@@ -1511,13 +1522,13 @@ sem_results &lt;- sem(model, dt1)</code></pre>
 6: indirect     a*c-a     indirect   6.43               total-direct</code></pre>
 </div>
 <p>Rows 1 to 3 contain the estimated path coefficients <code>a</code>, <code>b</code>, <code>c</code> estimated using structural equation modeling (SEM). The last column <code>desc</code> tells you the regression model (e.g., covariate model or change-score model) to obtain that coefficient (which I’ll show below).</p>
-<p>Note that the estimated total effect <code>b + a * c - a</code> is in fact the difference in mean change between the two conditions (70). The total effect is the sum of the direct and indirect effects.</p>
+<p>Note that the estimated total effect <code>b + a * c - a</code> is in fact the difference in mean change between the two conditions (70). The total effect, which is the difference in change score between the two conditions, is the sum of the direct and indirect effects.</p>
 <p><strong>Conclusion</strong>: The DAG and SEM contain all the information of covariate and change-score models!</p>
-<figure>
-<img src="dag2.png" alt="Estimated path coefficients" /><figcaption>Estimated path coefficients</figcaption>
-</figure>
 <h2 id="compare-results-with-covariate-and-change-score-models">Compare results with covariate and change-score models</h2>
-<p>To show you how DAGs and SEMs are just a series of regressions, let’s see how we can compute the coefficients and effects with a series of linear regressions that are just the covariate and change-score models. Only the path coefficients are shown below.</p>
+<p>Let’s fit the covariate model and change-score linear regression models to see how the results form these models map on to the results obtained using SEM.</p>
+<figure>
+<img src="dag2.png" alt="DAG with path coefficients estimated with lavaan" /><figcaption>DAG with path coefficients estimated with lavaan</figcaption>
+</figure>
 <p>Path <code>a</code> is the model we don’t typically fit. It captures the <strong>effect of <code>condition</code> on <code>pre</code> score</strong>.</p>
 <div class="layout-chunk" data-layout="l-body">
 <pre class="r"><code>
@@ -1527,21 +1538,19 @@ round(coef(path_a)[-1], 2) # see row 1 of table above</code></pre>
 conditiondrug 
           -10 </code></pre>
 </div>
-<p>Paths <code>b</code> and <code>c</code> are captured by the <strong>covariate model</strong>. It captures the <strong>effect of <code>condition</code> on <code>post</code> score after adjusting for <code>pre</code> score</strong> (and also effect of <code>pre</code> on <code>post</code> after adjusting for <code>condition</code>).</p>
+<p>Paths <code>b</code> and <code>c</code> are captured by the <strong>covariate model</strong>. It captures the <strong>direct effect of <code>condition</code> on <code>post</code> score after adjusting for <code>pre</code> score</strong> (and also effect of <code>pre</code> on <code>post</code> after adjusting for <code>condition</code>).</p>
 <div class="layout-chunk" data-layout="l-body">
 <pre class="r"><code>
-# paths b (condition) and c (pre)
-paths_bc &lt;- lm(post ~ condition + pre, dt1) # direct effect of condition
+paths_bc &lt;- lm(post ~ condition + pre, dt1) # paths b (condition) and c (pre)
 round(coef(paths_bc)[-1], 2) # see rows 2, 3, and 5 of table above</code></pre>
 <pre><code>
 conditiondrug           pre 
         63.57          0.36 </code></pre>
 </div>
-<p>The <strong>change-score model</strong> captures the total effect. It reflects the <strong>effect of <code>condition</code> on the change or difference score</strong>.</p>
+<p>The <strong>change-score model</strong> captures the total effect (the <strong>effect of <code>condition</code> on the change or difference score</strong>).</p>
 <div class="layout-chunk" data-layout="l-body">
 <pre class="r"><code>
-# total effect (change score): b + a * c - a  
-total &lt;- lm(change ~ condition, dt1)
+total &lt;- lm(change ~ condition, dt1) # total effect (change score): b + a * c - a  
 round(coef(total)[-1], 2) # see row 4 of table above</code></pre>
 <pre><code>
 conditiondrug 
