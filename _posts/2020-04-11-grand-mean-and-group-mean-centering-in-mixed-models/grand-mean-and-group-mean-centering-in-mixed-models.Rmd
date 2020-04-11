@@ -1,0 +1,83 @@
+---
+title: "Grand-mean and group-mean centering in mixed models"
+description: |
+  Understand the effects of grand-mean and group-mean centering in mixed models
+preview: ./dag0.png
+author:
+  - name: Hause Lin
+date: 03-01-2020
+draft: true
+categories: 
+  - regression
+  - mixed models
+  - general linear model
+bibliography: biblio.bib
+output:
+  radix::radix_article:
+    toc: true
+    self_contained: false
+editor_options: 
+  chunk_output_type: console
+repository_url: https://raw.githubusercontent.com/hauselin/rtutorialsite/master/_posts/2020-04-11-causal-inference-and-lords-paradox-change-score-or-covariate/causal-inference-and-lords-paradox-change-score-or-covariate.Rmd
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, cache = FALSE, comment = NA, message = FALSE, warning = FALSE)
+```
+
+Get source code for this RMarkdown script [here](https://raw.githubusercontent.com/hauselin/rtutorialsite/master/_posts/2020-04-11-causal-inference-and-lords-paradox-change-score-or-covariate/causal-inference-and-lords-paradox-change-score-or-covariate.Rmd).
+
+## Consider being a patron and supporting my work?
+
+[Donate and become a patron](https://donorbox.org/support-my-teaching): If you find value in what I do and have learned something from my site, please consider becoming a patron. It takes me many hours to research, learn, and put together tutorials. Your support really matters.
+
+
+```{r}
+# load libraries for analyses
+library(data.table); library(performance); library(multilevel); library(lme4)
+```
+
+```{r}
+
+url <- "https://raw.githubusercontent.com/hauselin/rtutorialsite/master/data/simpsonsParadox.csv"
+dt1 <- fread(url)
+```
+
+```{r centering}
+dt1[, iq_grandc := iq - mean(iq, na.rm = T)]
+
+dt1[, iq_groupc := iq - mean(iq, na.rm = T), by = class]
+
+dt1[, iq_group_mean := mean(iq, na.rm = T), by = class]
+
+dt1[, iq_group_meanc := iq_group_mean - mean(iq_group_mean, na.rm = T)]
+```
+
+
+```{r}
+m0 <- lmer(grades ~ iq + (1 | class), dt1)
+m1 <- lmer(grades ~ iq_grandc + (1 | class), dt1)
+m2 <- lmer(grades ~ iq_groupc + (1 | class), dt1)
+m3 <- lmer(grades ~ iq_groupc + iq_group_meanc + (1 | class), dt1)
+
+compare_performance(m0, m1, m2, m3)
+
+library(sjPlot)
+tab_model(m0, m1)
+```
+
+
+
+
+
+
+
+## Resources
+
+If you want to learn more, read Pearl's[@Pearl] paper and check out the resources below by [Michael Clark](https://m-clark.github.io/).
+
+* [How to center in multilevel models](http://philippmasur.de/blog/2018/05/23/how-to-center-in-multilevel-models/)
+
+## Support my work
+
+[Support my work and become a patron here](https://donorbox.org/support-my-teaching)!

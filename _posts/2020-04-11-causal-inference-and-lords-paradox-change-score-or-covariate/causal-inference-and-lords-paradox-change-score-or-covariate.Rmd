@@ -13,7 +13,6 @@ categories:
   - general linear model
   - paradox
   - regression
-  - mixed models
   - lavaan
 bibliography: biblio.bib
 output:
@@ -45,9 +44,11 @@ library(data.table); library(lavaan)
 
 Here's a common study for scientific studies: Participants are randomly assigned to either receive a **drug or a placebo (control condition)**. To evaluate the effects of the treatment (drug vs placebo control), you measure participants on some outcome measure **before (pre-intervention)** and **after the intervention (post-intervention)**. 
 
+It seems like there are different ways to analyze the data and they sometimes can lead to different and even opposite results. This paradox is known as Lord's Paradox because it was first reported by Frederic Lord (in 1967).
+
 ![Study design](./design.png)
 
-## How should we analyze the data?
+## How can we analyze the data?
 
 1. **Change-score approach**: You can subtract the pre score from the post score `post - pre` and fit a model to this difference or change score. That is, a t-test or linear regression that compares change scores between the drug and control conditions. 
 

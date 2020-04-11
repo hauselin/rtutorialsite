@@ -1,5 +1,5 @@
 #### create new post/article ####
 # library(distill)
-distill::create_post(title = "Causal inference and Lord's Paradox: Change score or covariate?")
+distill::create_post(title = "Grand-mean and group-mean centering in mixed models")
 
 #### create new
