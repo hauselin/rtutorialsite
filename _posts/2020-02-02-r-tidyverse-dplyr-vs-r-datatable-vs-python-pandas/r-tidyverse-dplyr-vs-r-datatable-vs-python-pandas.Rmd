@@ -1,0 +1,200 @@
+---
+title: "R tidyverse dplyr vs. R data.table vs. Python pandas"
+description: |
+  A short description of the post.
+author:
+  - name: Hause Lin
+    url: {}
+date: 11-25-2019
+draft: true
+categories: 
+  - resources
+  - data.table
+  - python
+  - tidyverse
+  - dplyr
+  - pandas
+output:
+  radix::radix_article:
+    toc: true
+    self_contained: false
+editor_options: 
+  chunk_output_type: console
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, cache = FALSE, comment = NA, message = FALSE, warning = FALSE)
+```
+
+
+Get source code for this RMarkdown script [here](https://github.com/hauselin/rtutorialsite/blob/master/_posts/2019-07-06-interpreting-interaction-regression-coefficients/interpreting-interaction-regression-coefficients.Rmd).
+
+## Consider being a patron and supporting my work?
+
+[Donate and become a patron](https://donorbox.org/support-my-teaching): If you find value in what I do and have learned something from my site, please consider becoming a patron. It takes me many hours to research, learn, and put together tutorials. Your support really matters.
+
+
+```{r}
+library(dplyr); library(data.table); library(reticulate)
+# use_condaenv(condaenv = "python376") # conda python environment
+use_condaenv(condaenv = "python376", conda = "/opt/anaconda3/bin/conda")
+```
+
+## Loading data
+
+Load data in R
+
+```{r}
+iris_df <- as_tibble(iris) # tibble from dplyr
+iris_dt <- data.table(iris)  # data.table from data.table
+iris_pd <- r_to_py(iris)  # save iris data as an object that can be called/used by python
+```
+
+Load data in python
+
+```{python}
+import pandas as pd  
+iris_pd = r['iris_pd']
+```
+
+## View data
+
+**dplyr**
+
+```{r}
+iris_df
+```
+
+**data.table**
+
+```{r}
+iris_dt
+```
+
+**pandas**
+
+```{python}
+iris_pd
+```
+
+## Rename selected columns
+
+```{r}
+rename(iris_df, sepal_length = Sepal.Length, sepal_width = Sepal.Width)
+setnames(iris_dt, names(iris_dt)[1:2], c("sepal_length", "sepal_width")) # inplace operation
+```
+
+```{python}
+iris_pd = iris_pd.rename(columns={"Sepal.Length": "sepal_length", "Sepal.Width": "sepal_width"})
+```
+
+## Rename all columns
+
+```{r}
+iris_df <- rename(iris_df, sepal_length = Sepal.Length, sepal_width = Sepal.Width, petal_length = Petal.Length, petal_width = Petal.Width)
+
+new_names <- tolower(gsub(".", "_", names(iris_dt), fixed = TRUE))
+setnames(iris_dt, new_names) # inplace operation
+```
+
+```{python}
+new_names = iris_pd.columns.str.replace(".", "_").str.lower()
+iris_pd.columns = new_names
+```
+
+## Select columns using index
+
+```{r}
+select(iris_df, 1, 3)
+# you can also select and rename at the same time
+# select(iris_df, col1 = 1, col3 = 3)
+iris_dt[, c(1, 3)]
+```
+
+```{python}
+iris_pd.iloc[:, [0, 2]]
+```
+
+## Slice/select rows using index
+
+```{r}
+slice(iris_df, 1, 3)
+iris_dt[c(1, 3)]
+```
+
+```{python}
+iris_pd.iloc[[0, 2]]
+```
+
+## Slice/select last row
+
+```{r}
+slice(iris_df, n())
+iris_dt[.N]
+```
+
+```{python}
+iris_pd.tail(1)
+```
+
+**Score: dplyr: 0, data.table: 0, pandas: 0**
+
+## Select columns using names
+
+```{r}
+select(iris_df, sepal_length, petal_length)
+iris_dt[, c("sepal_length", "petal_length")]
+```
+
+```{python}
+iris_pd.loc[:, ["sepal_length", "petal_length"]]
+iris_pd[["sepal_length", "petal_length"]]
+```
+
+## Select columns with matching names
+
+```{r}
+select(iris_df, starts_with("petal"))
+iris_dt[, startsWith(names(iris_dt), "petal"), with = FALSE]
+```
+
+```{python}
+iris_pd.loc[:, iris_pd.columns.str.startswith("petal")]
+iris_pd[iris_pd.columns[iris_pd.columns.str.startswith("petal")]] # equivalent to above
+```
+
+## Select multiple columns flexibly
+
+```{r}
+# dplyr
+select(iris_df, ends_with("h"), -1, 5) # ends with h, drop col 1, select col 5
+
+# data.table: not possible in one line!
+filt <- endsWith(names(iris_dt), "h")
+filt[1] <- FALSE
+filt[5] <- TRUE
+iris_dt[, filt, with = FALSE]
+```
+
+```{python}
+# pandas: not possible in one line
+filt = iris_pd.columns.str.endswith('h')
+filt[0] = False
+filt[4] = True
+iris_pd.loc[:, filt]
+```
+
+**Score: dplyr: 1, data.table: 0, pandas: 0**
+
+## Subset/filter data
+
+```{r}
+filter(iris_df, sepal_length < 4.5)
+iris_dt[sepal_length < 4.5]
+```
+
+```{python}
+iris_pd[iris_pd['sepal_length'] < 4.5]
+iris_pd.query("sepal_length < 4.5")
+```
+

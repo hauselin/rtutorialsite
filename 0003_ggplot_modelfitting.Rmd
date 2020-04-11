@@ -6,6 +6,8 @@ output:
         toc: true
         toc_depth: 3
 repository_url: https://github.com/hauselin/rtutorialsite/blob/master/0003_ggplot_modelfitting.Rmd
+editor_options: 
+  chunk_output_type: console
 ---
 
 ```{r setup, include=FALSE}
@@ -488,7 +490,7 @@ R uses `1` to refer to the intercept
 
 ```{r}
 modelLinear_intercept <- lm(iq ~ 1, data = df1) # mean iq
-summaryh(modelLinear_intercept)
+# summaryh(modelLinear_intercept)
 df1[, mean(iq)] # matches the intercept term
 mean(df1$iq) # same as above
 ```
@@ -498,7 +500,7 @@ Remove intercept from model (if you ever need to do so...) by specifying `-1`
 ```{r}
 modelLinear_noIntercept <- lm(iq ~ grades - 1, data = df1) # substract intercept
 summary(modelLinear_noIntercept)
-summaryh(modelLinear_noIntercept)
+# summaryh(modelLinear_noIntercept)
 ```
 
 ### Fitting ANOVA with `anova` and `aov`
@@ -521,7 +523,6 @@ Fit ANOVA with `aov()`
 ```{r}
 anova_class <- aov(grades ~ class, data = df1)
 summary(anova_class)
-summaryh(anova_class)
 ```
 
 Class * gender interaction (and main effects)
@@ -536,8 +537,7 @@ ggplot(df1, aes(class, iq, col = gender)) + # y: iq
 
 ```{r}
 anova_classGender <- aov(grades ~ class * gender, data = df1)
-summary(anova_classGender)
-summaryh(anova_classGender)
+anova_classGender
 ```
 
 ### Specify contrasts resources

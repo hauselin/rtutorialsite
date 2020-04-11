@@ -1,5 +1,30 @@
 [
   {
+    "path": "posts/2020-04-11-causal-inference-and-lords-paradox-change-score-or-covariate/",
+    "title": "Causal inference and Lord's Paradox: Change score or covariate?",
+    "description": "Use directed acyclic graphs and structural equation modeling to understand Lord's paradox.",
+    "author": [
+      {
+        "name": "Hause Lin",
+        "url": {}
+      }
+    ],
+    "date": "2020-04-11",
+    "categories": [
+      "causal inference",
+      "directed acyclic graph",
+      "general linear model",
+      "paradox",
+      "regression",
+      "mixed models",
+      "lavaan"
+    ],
+    "preview": "posts/2020-04-11-causal-inference-and-lords-paradox-change-score-or-covariate/./dag0.png",
+    "last_modified": "2020-04-11T16:30:33-04:00",
+    "preview_width": 962,
+    "preview_height": 550
+  },
+  {
     "path": "posts/2019-12-20-numpy-reshape/",
     "title": "Reshape and stack multi-dimensional arrays in Python numpy",
     "description": "The only tutorial and cheatsheet you'll need to understand how Python numpy reshapes and stacks multidimensional arrays",
@@ -16,7 +41,7 @@
       "reticulate"
     ],
     "preview": "posts/2019-12-20-numpy-reshape/./reshapecheatsheet.jpg",
-    "last_modified": "2019-12-26T14:01:00-05:00"
+    "last_modified": "2019-12-25T20:50:51-05:00"
   },
   {
     "path": "posts/2019-12-01-neural-networks-deriving-the-sigmoid-derivative/",
@@ -92,7 +117,7 @@
       "machine learning"
     ],
     "preview": "https://raw.githubusercontent.com/hauselin/rtutorialsite/master/attachments/pca.jpg",
-    "last_modified": "2019-10-14T11:56:21-04:00"
+    "last_modified": "2019-10-13T00:14:11-04:00"
   },
   {
     "path": "posts/2019-10-12-online-classes/",
@@ -169,7 +194,7 @@
       "maximum likelihood"
     ],
     "preview": "posts/2019-04-13-logistic-regression/logistic-regression_files/figure-html5/unnamed-chunk-5-1.png",
-    "last_modified": "2019-12-01T22:13:26-05:00",
+    "last_modified": "2019-10-06T22:20:15-04:00",
     "preview_width": 1248,
     "preview_height": 768
   },

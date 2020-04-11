@@ -19,7 +19,7 @@
  <!--/radix_placeholder_import_source-->
 
   <!--radix_placeholder_meta_tags-->
-  <title>Data science with R: Analyze multi-subject/trial RT data</title>
+  <title>Data science: Analyze multi-subject/trial RT data</title>
   
   <meta property="description" itemprop="description" content="Simple tutorial and workflow for analyzing reaction time (RT) and accuracy data from multiple experimental subjects"/>
   
@@ -27,15 +27,15 @@
   
   
   <!--  https://developers.facebook.com/docs/sharing/webmasters#markup -->
-  <meta property="og:title" content="Data science with R: Analyze multi-subject/trial RT data"/>
+  <meta property="og:title" content="Data science: Analyze multi-subject/trial RT data"/>
   <meta property="og:type" content="article"/>
   <meta property="og:description" content="Simple tutorial and workflow for analyzing reaction time (RT) and accuracy data from multiple experimental subjects"/>
   <meta property="og:locale" content="en_US"/>
-  <meta property="og:site_name" content="Data science with R"/>
+  <meta property="og:site_name" content="Data science"/>
   
   <!--  https://dev.twitter.com/cards/types/summary -->
   <meta property="twitter:card" content="summary"/>
-  <meta property="twitter:title" content="Data science with R: Analyze multi-subject/trial RT data"/>
+  <meta property="twitter:title" content="Data science: Analyze multi-subject/trial RT data"/>
   <meta property="twitter:description" content="Simple tutorial and workflow for analyzing reaction time (RT) and accuracy data from multiple experimental subjects"/>
   
   <!--/radix_placeholder_meta_tags-->
@@ -1298,7 +1298,7 @@
 <header class="header header--fixed" role="banner">
 <nav class="radix-site-nav radix-site-header">
 <div class="nav-left">
-<a href="index.html" class="title">Data science with R</a>
+<a href="index.html" class="title">Data science</a>
 </div>
 <div class="nav-right">
 <a href="index.html">Home</a>
@@ -1412,13 +1412,7 @@ Tutorials
 <h2 id="load-libraries">Load libraries</h2>
 <div class="layout-chunk" data-layout="l-body">
 <pre class="r"><code>
-library(tidyverse)
-library(data.table)
-library(dtplyr)
-library(lme4)
-library(lmerTest)
-library(ggbeeswarm)
-library(hausekeep)</code></pre>
+library(tidyverse); library(data.table); library(dtplyr); library(lme4); library(lmerTest); library(ggbeeswarm); library(hausekeep)</code></pre>
 </div>
 <aside>
 <a href="https://hauselin.github.io/hausekeep/">hausekeep</a> is my package. It contains a few helper functions. You may or may not want to use them. If you want to, install the package by running <code>devtools::install_github(&quot;hauselin/hausekeep&quot;)</code> (you might need to install <code>devtools</code> package first).
@@ -1426,26 +1420,26 @@ library(hausekeep)</code></pre>
 <h2 id="read-all-subjects-data-into-r">Read all subjects’ data into R</h2>
 <div class="layout-chunk" data-layout="l-body">
 <pre class="r"><code>
-(files &lt;- list.files(path = &quot;./data/rt_acc_data_raw&quot;, pattern = &quot;subject_&quot;, full.names = TRUE))  # find matching file names</code></pre>
+(files &lt;- list.files(path = &quot;./data/rt_acc_data_raw&quot;, pattern = &quot;subject_&quot;, full.names = TRUE)) # find matching file names</code></pre>
 <pre><code>
 [1] &quot;./data/rt_acc_data_raw/subject_30.csv&quot;
 [2] &quot;./data/rt_acc_data_raw/subject_35.csv&quot;
 [3] &quot;./data/rt_acc_data_raw/subject_39.csv&quot;</code></pre>
 <pre class="r"><code>
-dt1 &lt;- lapply(files, fread) %&gt;% bind_rows() %&gt;% as.data.table()  # read data, combine items in list, convert to data.table</code></pre>
+dt1 &lt;- lapply(files, fread) %&gt;% bind_rows() %&gt;% as.data.table() # read data, combine items in list, convert to data.table</code></pre>
 </div>
 <p>Note and explanation: <code>lapply</code> loops through each item in <code>files</code> and applies the <code>fread</code> function to each item. <code>bind_rows</code> combines all the dataframes stored as separate items in the list, and <code>tbl_dt()</code> converts the merged dataframe into <code>data.table</code> and <code>tibble</code> class.</p>
 <h2 id="summarize-experimental-design">Summarize experimental design</h2>
 <div class="layout-chunk" data-layout="l-body">
 <pre class="r"><code>
-dt1[, .N, by = subject]  # rows (trials) per subject</code></pre>
+dt1[, .N, by = subject] # rows (trials) per subject</code></pre>
 <pre><code>
    subject  N
 1:      30 80
 2:      35 80
 3:      39 80</code></pre>
 <pre class="r"><code>
-dt1[, .N, keyby = .(subject, block)]  # blocks per subject and rows/trials per block</code></pre>
+dt1[, .N, keyby = .(subject, block)] # blocks per subject and rows/trials per block</code></pre>
 <pre><code>
    subject block  N
 1:      30     1 40
@@ -1455,7 +1449,7 @@ dt1[, .N, keyby = .(subject, block)]  # blocks per subject and rows/trials per b
 5:      39     1 40
 6:      39     2 40</code></pre>
 <pre class="r"><code>
-dt1[, .N, keyby = .(subject, instructions, reward)]  # row (trials) per subject for instructions/reward conditions</code></pre>
+dt1[, .N, keyby = .(subject, instructions, reward)] # row (trials) per subject for instructions/reward conditions</code></pre>
 <pre><code>
     subject instructions reward  N
  1:      30      caution   high 20
@@ -1474,14 +1468,14 @@ dt1[, .N, keyby = .(subject, instructions, reward)]  # row (trials) per subject 
 <h2 id="remove-outlier-trials">Remove outlier trials</h2>
 <div class="layout-chunk" data-layout="l-body">
 <pre class="r"><code>
-dt1[rt &lt; 0.2, `:=`(rt = NA, acc = NA)]  # if rt &lt; 0.2, convert rt and acc to NA (too fast response on that trial)
-dt1[rt &gt; 3, `:=`(rt = NA, acc = NA)]  # if rt &gt; 3.0, convert rt and acc to NA (too slow response on that trial)
-summary(dt1$rt)  # check range and number of NA</code></pre>
+dt1[rt &lt; 0.2, `:=` (rt = NA, acc = NA)] # if rt &lt; 0.2, convert rt and acc to NA (too fast response on that trial)
+dt1[rt &gt; 3.0, `:=` (rt = NA, acc = NA)] # if rt &gt; 3.0, convert rt and acc to NA (too slow response on that trial)
+summary(dt1$rt) # check range and number of NA</code></pre>
 <pre><code>
    Min. 1st Qu.  Median    Mean 3rd Qu.    Max.    NA&#39;s 
  0.3573  0.6123  0.7982  0.9581  1.1328  2.8346      26 </code></pre>
 <pre class="r"><code>
-summary(dt1$acc)  # check range and number of NA</code></pre>
+summary(dt1$acc) # check range and number of NA</code></pre>
 <pre><code>
    Min. 1st Qu.  Median    Mean 3rd Qu.    Max.    NA&#39;s 
  0.0000  0.0000  1.0000  0.6869  1.0000  1.0000      26 </code></pre>
@@ -1489,8 +1483,7 @@ summary(dt1$acc)  # check range and number of NA</code></pre>
 <h2 id="compute-mean-rt-and-acc-for-each-subject-for-each-condition">Compute mean RT and ACC for each subject, for each condition</h2>
 <div class="layout-chunk" data-layout="l-body">
 <pre class="r"><code>
-dt1_avg &lt;- dt1[, .(rt = mean(rt, na.rm = T), acc = mean(acc, na.rm = T)), keyby = .(subject, 
-    instructions, reward)]
+dt1_avg &lt;- dt1[, .(rt = mean(rt, na.rm = T), acc = mean(acc, na.rm = T)), keyby = .(subject, instructions, reward)]
 dt1_avg</code></pre>
 <pre><code>
     subject instructions reward        rt       acc
@@ -1510,8 +1503,7 @@ dt1_avg</code></pre>
 <h2 id="compute-grand-average-rt-and-acc-and-within-subject-error-bars">Compute grand average RT and ACC (and within-subject error bars)</h2>
 <div class="layout-chunk" data-layout="l-body">
 <pre class="r"><code>
-dt1_grdavg &lt;- seWithin(data = dt1_avg, measurevar = c(&quot;rt&quot;, &quot;acc&quot;), withinvars = c(&quot;instructions&quot;, 
-    &quot;reward&quot;), idvar = &quot;subject&quot;)</code></pre>
+dt1_grdavg &lt;- seWithin(data = dt1_avg, measurevar = c(&quot;rt&quot;, &quot;acc&quot;), withinvars = c(&quot;instructions&quot;, &quot;reward&quot;), idvar = &quot;subject&quot;)</code></pre>
 <pre><code>
 Confidence intervals: 0.95Confidence intervals: 0.95$rt
    instructions reward N        rt         sd         se        ci
@@ -1533,21 +1525,23 @@ $acc
 <h2 id="plot-reaction-time">Plot reaction time</h2>
 <div class="layout-chunk" data-layout="l-body">
 <pre class="r"><code>
-plot_rt &lt;- ggplot(dt1_grdavg$rt, aes(instructions, rt, col = reward)) + geom_quasirandom(data = dt1_avg, 
-    alpha = 0.8, dodge = 1, size = 1.5) + geom_point(position = position_dodge(1), 
-    shape = 95, size = 6) + geom_errorbar(aes(ymin = rt - ci, ymax = rt + ci), position = position_dodge(1), 
-    width = 0, size = 1.1) + labs(y = &quot;reaction time (95% CI)&quot;)
+plot_rt &lt;- ggplot(dt1_grdavg$rt, aes(instructions, rt, col = reward)) +
+  geom_quasirandom(data = dt1_avg, alpha = 0.8, dodge = 1, size = 1.5) +
+  geom_point(position = position_dodge(1), shape = 95, size = 6) +
+  geom_errorbar(aes(ymin = rt - ci, ymax = rt + ci), position = position_dodge(1), width = 0, size = 1.1) +
+  labs(y = &quot;reaction time (95% CI)&quot;)
 plot_rt</code></pre>
 <p><img src="0005_analyze_multi_subject_trial_data_files/figure-html5/plot%20rt-1.png" width="624" /></p>
 </div>
 <h2 id="plot-accuracy">Plot accuracy</h2>
 <div class="layout-chunk" data-layout="l-body">
 <pre class="r"><code>
-plot_acc &lt;- ggplot(dt1_grdavg$acc, aes(instructions, acc, col = reward)) + geom_quasirandom(data = dt1_avg, 
-    alpha = 0.8, dodge = 1, size = 1.5) + geom_point(position = position_dodge(1), 
-    shape = 95, size = 6) + geom_errorbar(aes(ymin = acc - ci, ymax = acc + ci), 
-    position = position_dodge(1), width = 0, size = 1.1) + scale_y_continuous(limits = c(0, 
-    1.2), breaks = seq(0, 1, 0.25)) + labs(y = &quot;accuracy (95% CI)&quot;)
+plot_acc &lt;- ggplot(dt1_grdavg$acc, aes(instructions, acc, col = reward)) +
+  geom_quasirandom(data = dt1_avg, alpha = 0.8, dodge = 1, size = 1.5) +
+  geom_point(position = position_dodge(1), shape = 95, size = 6) +
+  geom_errorbar(aes(ymin = acc - ci, ymax = acc + ci), position = position_dodge(1), width = 0, size = 1.1) +
+  scale_y_continuous(limits = c(0, 1.2), breaks = seq(0, 1.0, 0.25)) +
+  labs(y = &quot;accuracy (95% CI)&quot;)
 plot_acc</code></pre>
 <p><img src="0005_analyze_multi_subject_trial_data_files/figure-html5/plot%20acc-1.png" width="624" /></p>
 </div>
@@ -1589,7 +1583,7 @@ rewardlow   -0.579  0.010
 convergence code: 0
 boundary (singular) fit: see ?isSingular</code></pre>
 <pre class="r"><code>
-summaryh(model_rt)  # summary function from my hausekeep package</code></pre>
+summaryh(model_rt) # summary function from my hausekeep package</code></pre>
 <pre><code>
                 term                                                  results
 1:       (Intercept)  b = 1.24, SE = 0.05, t(211) = 22.77, p &lt; .001, r = 0.84
@@ -1630,7 +1624,7 @@ Correlation of Fixed Effects:
 instrctnssp -0.536       
 rewardlow   -0.571  0.061</code></pre>
 <pre class="r"><code>
-summaryh(model_acc)  # summary function from my hausekeep package</code></pre>
+summaryh(model_acc) # summary function from my hausekeep package</code></pre>
 <pre><code>
                 term                                                   results
 1:       (Intercept)    b = 1.59, SE = 0.34, z(210) = 4.66, p &lt; .001, r = 0.40

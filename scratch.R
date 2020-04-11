@@ -1,5 +1,5 @@
 #### create new post/article ####
-library(distill)
-create_post(title = "numpy reshape")
+# library(distill)
+distill::create_post(title = "Causal inference and Lord's Paradox: Change score or covariate?")
 
 #### create new

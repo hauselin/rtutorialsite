@@ -1,13 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <rss xmlns:atom="http://www.w3.org/2005/Atom" xmlns:media="http://search.yahoo.com/mrss/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:dc="http://purl.org/dc/elements/1.1/" version="2.0">
   <channel>
-    <title>Data science with R</title>
+    <title>Data science</title>
     <link>https://hausetutorials.netlify.com/</link>
     <atom:link href="https://hausetutorials.netlify.com/articles.xml" rel="self" type="application/rss+xml"/>
-    <description>Data science and analysis tutorials
+    <description>Data science tutorials
 </description>
     <generator>Radix</generator>
-    <lastBuildDate>Sun, 20 Oct 2019 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Sat, 11 Apr 2020 00:00:00 +0000</lastBuildDate>
+    <item>
+      <title>Causal inference and Lord's Paradox: Change score or covariate?</title>
+      <dc:creator>Hause Lin</dc:creator>
+      <link>https://hausetutorials.netlify.com/posts/2020-04-11-causal-inference-and-lords-paradox-change-score-or-covariate</link>
+      <description>Use directed acyclic graphs and structural equation modeling to understand Lord's paradox.</description>
+      <guid>https://hausetutorials.netlify.com/posts/2020-04-11-causal-inference-and-lords-paradox-change-score-or-covariate</guid>
+      <pubDate>Sat, 11 Apr 2020 00:00:00 +0000</pubDate>
+      <media:content url="https://hausetutorials.netlify.com/posts/2020-04-11-causal-inference-and-lords-paradox-change-score-or-covariate/./dag0.png" medium="image" type="image/png" width="962" height="550"/>
+    </item>
     <item>
       <title>Reshape and stack multi-dimensional arrays in Python numpy</title>
       <dc:creator>Hause Lin</dc:creator>
