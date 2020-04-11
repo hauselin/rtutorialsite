@@ -15,7 +15,7 @@
       <description>Use directed acyclic graphs and structural equation modeling to understand Lord's paradox.</description>
       <guid>https://hausetutorials.netlify.com/posts/2020-04-11-causal-inference-and-lords-paradox-change-score-or-covariate</guid>
       <pubDate>Sat, 11 Apr 2020 00:00:00 +0000</pubDate>
-      <media:content url="https://hausetutorials.netlify.com/posts/2020-04-11-causal-inference-and-lords-paradox-change-score-or-covariate/./dag0.png" medium="image" type="image/png" width="962" height="550"/>
+      <media:content url="https://hausetutorials.netlify.com/posts/2020-04-11-causal-inference-and-lords-paradox-change-score-or-covariate/./dag0.png" medium="image" type="image/png" width="592" height="618"/>
     </item>
     <item>
       <title>Reshape and stack multi-dimensional arrays in Python numpy</title>

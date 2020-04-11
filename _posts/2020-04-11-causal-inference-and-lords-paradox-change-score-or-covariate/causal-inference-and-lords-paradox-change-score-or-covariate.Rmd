@@ -45,6 +45,8 @@ library(data.table); library(lavaan)
 
 Here's a common study for scientific studies: Participants are randomly assigned to either receive a **drug or a placebo (control condition)**. To evaluate the effects of the treatment (drug vs placebo control), you measure participants on some outcome measure **before (pre-intervention)** and **after the intervention (post-intervention)**. 
 
+![Design](./design.png)
+
 ## How should we analyze the data?
 
 1. **Change-score approach**: You can subtract the pre score from the post score `post - pre` and fit a model to this difference or change score. That is, a t-test or linear regression that compares change scores between the drug and control conditions. 

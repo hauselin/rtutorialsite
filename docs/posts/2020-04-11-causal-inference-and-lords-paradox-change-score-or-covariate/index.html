@@ -37,8 +37,8 @@
 <meta property="og:description" content="Use directed acyclic graphs and structural equation modeling to understand Lord&#39;s paradox."/>
 <meta property="og:url" content="https://hausetutorials.netlify.com/posts/2020-04-11-causal-inference-and-lords-paradox-change-score-or-covariate/"/>
 <meta property="og:image" content="https://hausetutorials.netlify.com/posts/2020-04-11-causal-inference-and-lords-paradox-change-score-or-covariate/./dag0.png"/>
-<meta property="og:image:width" content="962"/>
-<meta property="og:image:height" content="550"/>
+<meta property="og:image:width" content="592"/>
+<meta property="og:image:height" content="618"/>
 <meta property="og:locale" content="en_US"/>
 <meta property="og:site_name" content="Data science"/>
 
@@ -48,8 +48,8 @@
 <meta property="twitter:description" content="Use directed acyclic graphs and structural equation modeling to understand Lord&#39;s paradox."/>
 <meta property="twitter:url" content="https://hausetutorials.netlify.com/posts/2020-04-11-causal-inference-and-lords-paradox-change-score-or-covariate/"/>
 <meta property="twitter:image" content="https://hausetutorials.netlify.com/posts/2020-04-11-causal-inference-and-lords-paradox-change-score-or-covariate/./dag0.png"/>
-<meta property="twitter:image:width" content="962"/>
-<meta property="twitter:image:height" content="550"/>
+<meta property="twitter:image:width" content="592"/>
+<meta property="twitter:image:height" content="618"/>
 
 <!--  https://scholar.google.com/intl/en/scholar/inclusion.html#indexing -->
 <meta name="citation_title" content="Data science: Causal inference and Lord&#39;s Paradox: Change score or covariate?"/>
@@ -69,7 +69,7 @@
 <!--/radix_placeholder_rmarkdown_metadata-->
   
   <script type="text/json" id="radix-resource-manifest">
-  {"type":"character","attributes":{},"value":["biblio.bib","causal-inference-and-lords-paradox-change-score-or-covariate_files/bowser-1.9.3/bowser.min.js","causal-inference-and-lords-paradox-change-score-or-covariate_files/distill-2.2.21/template.v2.js","causal-inference-and-lords-paradox-change-score-or-covariate_files/figure-html5/unnamed-chunk-2-1.png","causal-inference-and-lords-paradox-change-score-or-covariate_files/jquery-1.11.3/jquery.min.js","causal-inference-and-lords-paradox-change-score-or-covariate_files/webcomponents-2.0.0/webcomponents.js","dag.key","dag0.png","dag1.png","dag2.png"]}
+  {"type":"character","attributes":{},"value":["biblio.bib","causal-inference-and-lords-paradox-change-score-or-covariate_files/bowser-1.9.3/bowser.min.js","causal-inference-and-lords-paradox-change-score-or-covariate_files/distill-2.2.21/template.v2.js","causal-inference-and-lords-paradox-change-score-or-covariate_files/figure-html5/unnamed-chunk-2-1.png","causal-inference-and-lords-paradox-change-score-or-covariate_files/jquery-1.11.3/jquery.min.js","causal-inference-and-lords-paradox-change-score-or-covariate_files/webcomponents-2.0.0/webcomponents.js","dag.key","dag0.png","dag1.png","dag2.png","design.png"]}
   </script>
   <!--radix_placeholder_navigation_in_header-->
 
@@ -1405,6 +1405,9 @@ library(data.table); library(lavaan)</code></pre>
 </div>
 <h2 id="lords-paradox">Lord’s Paradox</h2>
 <p>Here’s a common study for scientific studies: Participants are randomly assigned to either receive a <strong>drug or a placebo (control condition)</strong>. To evaluate the effects of the treatment (drug vs placebo control), you measure participants on some outcome measure <strong>before (pre-intervention)</strong> and <strong>after the intervention (post-intervention)</strong>.</p>
+<figure>
+<img src="design.png" alt="Design" /><figcaption>Design</figcaption>
+</figure>
 <h2 id="how-should-we-analyze-the-data">How should we analyze the data?</h2>
 <ol type="1">
 <li><strong>Change-score approach</strong>: You can subtract the pre score from the post score <code>post - pre</code> and fit a model to this difference or change score. That is, a t-test or linear regression that compares change scores between the drug and control conditions.</li>
