@@ -1016,7 +1016,7 @@ myApp_docker
     - app.R</code></pre>
 <ol start="5" type="1">
 <li><p>Build the docker image. In terminal (bash), navigate to your <code>myApp_docker</code> directory and run <code>docker build -t myApp_docker .</code> You can name the Docker image whatever you like (it’s <code>myApp_docker</code> here, so the directory and Docker image name are identical).</p></li>
-<li><p>Test run your Docker image by running your ShinyApp locally with Docker. In terminal/bash, run <code>docker run -p 80:80 myApp_docker</code> which starts your myApp_docker Docker image. When the image is running, go to your web browser and you can navigate to <a href="http://localhost">http://localhost</a> to run your app. If it works, congrats on creating a self-contained Docker image of your ShinyApp! Make sure your app runs before you continue!</p></li>
+<li><p>Test run your Docker image by running your ShinyApp locally with Docker. In terminal/bash, run <code>docker run -p 80:80 myApp_docker</code> which starts your myApp_docker Docker image. When the image is running, go to your web browser and you can navigate to <code>http://localhost</code> to run your app. If it works, congrats on creating a self-contained Docker image of your ShinyApp! Make sure your app runs before you continue!</p></li>
 <li><p>Save your Docker image as a tar-archive so you can upload it to a web server later on. Run <code>docker save -o myApp_docker.tar myApp_docker</code> which saves your Docker image as a tar-acrhive in your current directory (myApp_docker). Depending on the size of your image (about 1GB for my image), this command might take some time to run.</p></li>
 </ol>
 <h2 id="step-3.-sign-up-to-digitalocean-to-get-a-private-server">Step 3. Sign up to DigitalOcean to get a private server</h2>
@@ -1046,7 +1046,7 @@ ns1.digitalocean.com
 ns2.digitalocean.com
 ns3.digitalocean.com</code></pre>
 <ol start="2" type="1">
-<li>Point your droplet IP to your domain name. Go to your DigitalOcean account and select Networking from the menu. Under “Add a domain”, enter your new domain name (escal.site in my case) and tell it which droplet or project you want to point to. Then manage this domain by creating new records. Create an “A” type to point your droplet IP to your domain name. Create a “CNAME” type to point one URL to another URL (e.g., www.escal.site also points to escal.site in my case). See <a href="https://www.howlthemes.com/point-domain-name-digitalocean-droplet/">here</a> and <a href="https://www.digitalocean.com/docs/networking/dns/how-to/manage-records/">here</a> for more instructions.</li>
+<li>Point your droplet IP to your domain name. Go to your DigitalOcean account and select Networking from the menu. Under “Add a domain”, enter your new domain name (escal.site in my case) and tell it which droplet or project you want to point to. Then manage this domain by creating new records. Create an “A” type to point your droplet IP to your domain name. Create a “CNAME” type to point one URL to another URL (e.g., www.escal.site also points to escal.site in my case). See <a href="https://www.digitalocean.com/docs/networking/dns/how-to/manage-records/">here</a> for more instructions.</li>
 </ol>
 <h2 id="support-my-work">Support my work</h2>
 <p><a href="https://donorbox.org/support-my-teaching">Support my work and become a patron here</a>!</p>

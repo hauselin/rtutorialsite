@@ -37,7 +37,7 @@ knitr::opts_chunk$set(echo = FALSE)
 
 ### Mike X Cohen's Udemy courses
 
-[Linear algebra, neural time series analysis, mathematics, dimension reduction, etc.](https://www.udemy.com/user/mike-x-cohen/)
+[Linear algebra, neural time series analysis, mathematics, dimension reduction, etc.](http://sincxpress.com/)
 
 * I've worked with and learned a lot from Mike. He's an incredible neuroscientist, psychologist, and teacher. He also answers all questions (including life questions!) on his [online forum](https://discuss.sincxpress.com/). 
 

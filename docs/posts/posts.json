@@ -134,7 +134,7 @@
       "moocs"
     ],
     "preview": {},
-    "last_modified": "2019-10-12T22:54:26-04:00"
+    "last_modified": "2020-04-29T19:47:10-04:00"
   },
   {
     "path": "posts/2019-07-24-what-happens-when-you-remove-or-set-the-intercept-to-0-in-regression-models/",
@@ -253,7 +253,7 @@
       "webserver"
     ],
     "preview": "https://raw.githubusercontent.com/hauselin/rtutorialsite/master/docs/attachments/dockerShinyDigitalOcean.jpg",
-    "last_modified": "2020-04-29T19:28:55-04:00"
+    "last_modified": "2020-04-29T19:44:29-04:00"
   },
   {
     "path": "posts/2019-02-22-why-we-should-never-use-barplots-use-geomquasirandom-instead/",
