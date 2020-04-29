@@ -5,7 +5,6 @@ output:
     radix::radix_article:
         toc: true
         toc_depth: 3
-repository_url: https://github.com/hauselin/rtutorialsite/blob/master/0003_ggplot_modelfitting.Rmd
 editor_options: 
   chunk_output_type: console
 ---
@@ -552,7 +551,7 @@ anova_classGender
 ### Plotting and testing simple effects when you have interactions
 
 * `sjPlot` package: see [here](http://www.strengejacke.de/sjPlot/)
-* [more tutorial and packages](https://cran.r-project.org/web/packages/jtools/vignettes/interactions.html)
+* [more tutorial and packages](https://jtools.jacob-long.com/)
 
 ### Fit t-test with `t.test()`
 

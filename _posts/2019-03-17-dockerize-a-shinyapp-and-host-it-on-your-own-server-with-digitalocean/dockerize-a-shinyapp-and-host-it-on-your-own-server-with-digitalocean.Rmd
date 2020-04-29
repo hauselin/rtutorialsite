@@ -16,7 +16,6 @@ categories:
   - docker
   - digitalocean
   - webserver
-repository_url: https://github.com/hauselin/rtutorialsite/blob/master/_posts/2019-03-17-dockerize-a-shinyapp-and-host-it-on-your-own-server-with-digitalocean/dockerize-a-shinyapp-and-host-it-on-your-own-server-with-digitalocean.Rmd
 editor_options: 
   chunk_output_type: console
 ---
@@ -96,11 +95,11 @@ You're getting there! Now you have to transfer your Docker tar-archive image to 
 
 ## Step 5. Load your Docker image on droplet and run your app on our server!
 
-Finally you're at the last step! When your Docker tar-archive is on your droplet, you first load it by running `docker load -i myApp_docker.tar` and then run it with `docker run -d -p 80:80 myApp_docker` (-d or --detach tells the droplet to run the docker image in the background; see [here](http://networkstatic.net/running-docker-machine-on-digital-ocean/) for more info). See [here](http://networkstatic.net/docker-one-liners/) for Docker one-liner tutorial! If everything is working properly, if you go to your web browser and enter your droplet IP address (http://xxx.xxx.xxx.xx), your ShinyApp should be working! Congrats!
+Finally you're at the last step! When your Docker tar-archive is on your droplet, you first load it by running `docker load -i myApp_docker.tar` and then run it with `docker run -d -p 80:80 myApp_docker` (-d or --detach tells the droplet to run the docker image in the background; see [here](http://networkstatic.net/running-docker-machine-on-digital-ocean/) for more info). See [here](http://networkstatic.net/docker-one-liners/) for Docker one-liner tutorial! If everything is working properly, if you go to your web browser and enter your droplet IP address (`http://xxx.xxx.xxx.xx`), your ShinyApp should be working! Congrats!
 
 ## Step 6. (optional but recommended): Get a nice domain name ("URL") for your droplet
 
-I use [NameCheap](http://namecheap.com/) to buy the domain [escal.site](escal.site) for my ShinyApp. After buying your domain, point your droplet IP address to your domain by following the instructions [here](https://www.howlthemes.com/point-domain-name-digitalocean-droplet/), which are summarized below.
+I use [NameCheap](http://namecheap.com/) to buy the domain [escal.site](http://escal.site) for my ShinyApp. After buying your domain, point your droplet IP address to your domain by following the instructions [here](https://www.howlthemes.com/point-domain-name-digitalocean-droplet/), which are summarized below.
 
 1. Manage your domain on NameCheap and search for an option called DNS (Domain Server Name) or just nameServer. Select custom DNS and add the following three nameservers. Then click the green checkmark. DigitalOcean also provides [good tutorials](https://www.digitalocean.com/community/tutorials/how-to-point-to-digitalocean-nameservers-from-common-domain-registrars#registrar-namecheap). It might take between 10 mins and 24 hours for the name server changes to take effect. 
 

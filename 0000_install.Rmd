@@ -5,7 +5,6 @@ output:
     radix::radix_article:
         toc: true
         toc_depth: 3
-repository_url: https://github.com/hauselin/rtutorialsite/blob/master/0000_install.Rmd
 ---
 
 ```{r setup, include=FALSE}

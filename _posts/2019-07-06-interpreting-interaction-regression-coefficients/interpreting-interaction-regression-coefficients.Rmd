@@ -14,7 +14,6 @@ output:
     toc: true
     self_contained: false
 draft: false
-repository_url: https://github.com/hauselin/rtutorialsite/blob/master/_posts/2019-07-06-interpreting-interaction-regression-coefficients/interpreting-interaction-regression-coefficients.Rmd
 editor_options: 
   chunk_output_type: console
 ---

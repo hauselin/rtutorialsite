@@ -15,7 +15,6 @@ output:
     toc: true
     self_contained: false
 draft: false
-repository_url: https://raw.githubusercontent.com/hauselin/rtutorialsite/master/_posts/2019-07-24-what-happens-when-you-remove-or-set-the-intercept-to-0-in-regression-models/what-happens-when-you-remove-or-set-the-intercept-to-0-in-regression-models.Rmd
 editor_options: 
   chunk_output_type: console
 ---

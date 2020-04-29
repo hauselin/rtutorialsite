@@ -213,7 +213,7 @@
       "data.table"
     ],
     "preview": "posts/2019-04-11-datatable-resources/./datatable.jpg",
-    "last_modified": "2019-10-07T09:32:19-04:00"
+    "last_modified": "2020-04-29T19:27:55-04:00"
   },
   {
     "path": "posts/2019-04-09-gentle-and-intuitive-intro-to-markov-chain-monte-carlo-mcmc/",
@@ -253,7 +253,7 @@
       "webserver"
     ],
     "preview": "https://raw.githubusercontent.com/hauselin/rtutorialsite/master/docs/attachments/dockerShinyDigitalOcean.jpg",
-    "last_modified": "2019-10-06T22:22:02-04:00"
+    "last_modified": "2020-04-29T19:28:55-04:00"
   },
   {
     "path": "posts/2019-02-22-why-we-should-never-use-barplots-use-geomquasirandom-instead/",
@@ -272,7 +272,7 @@
       "gganimate"
     ],
     "preview": "https://raw.githubusercontent.com/hauselin/rtutorialsite/master/attachments/plot_dotdist.gif",
-    "last_modified": "2019-10-14T11:14:59-04:00"
+    "last_modified": "2020-04-29T19:19:46-04:00"
   },
   {
     "path": "posts/2019-02-18-fit-models-to-every-group/",
@@ -291,6 +291,6 @@
       "hausekeep"
     ],
     "preview": {},
-    "last_modified": "2019-10-06T22:23:17-04:00"
+    "last_modified": "2020-04-29T19:18:36-04:00"
   }
 ]

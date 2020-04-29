@@ -18,7 +18,6 @@ output:
     self_contained: false
 editor_options: 
   chunk_output_type: console
-repository_url: https://raw.githubusercontent.com/hauselin/rtutorialsite/master/_posts/2020-04-11-causal-inference-and-lords-paradox-change-score-or-covariate/causal-inference-and-lords-paradox-change-score-or-covariate.Rmd
 ---
 
 ```{r setup, include=FALSE}

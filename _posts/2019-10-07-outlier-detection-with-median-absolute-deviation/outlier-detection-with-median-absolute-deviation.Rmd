@@ -6,7 +6,6 @@ author:
   - name: Hause Lin
     url: {}
 date: 09-07-2019
-repository_url: https://github.com/hauselin/rtutorialsite/blob/master/_posts/2019-10-07-outlier-detection-with-median-absolute-deviation/outlier-detection-with-median-absolute-deviation.Rmd
 categories: 
   - outlier detection
   - hausekeep

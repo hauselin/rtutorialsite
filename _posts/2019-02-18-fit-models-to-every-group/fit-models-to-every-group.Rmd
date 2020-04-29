@@ -14,7 +14,6 @@ categories:
   - data.table
   - pooling
   - hausekeep
-repository_url: https://github.com/hauselin/rtutorialsite/blob/master/_posts/2019-02-18-fit-models-to-every-group/fit-models-to-every-group.Rmd
 bibliography: biblio.bib
 editor_options: 
   chunk_output_type: console

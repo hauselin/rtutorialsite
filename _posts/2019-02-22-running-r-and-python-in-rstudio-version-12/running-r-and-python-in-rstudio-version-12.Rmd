@@ -12,7 +12,6 @@ draft: true
 categories: 
   - reticulate
   - python
-repository_url: https://github.com/hauselin/rtutorialsite/blob/master/_posts/2019-02-22-why-we-should-never-use-barplots-use-geomquasirandom-instead/why-we-should-never-use-barplots-use-geomquasirandom-instead.Rmd
 editor_options: 
   chunk_output_type: console
 ---

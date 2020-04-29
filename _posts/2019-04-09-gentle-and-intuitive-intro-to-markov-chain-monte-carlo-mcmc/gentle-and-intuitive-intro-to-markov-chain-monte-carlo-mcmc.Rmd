@@ -14,7 +14,6 @@ draft: false
 categories: 
   - bayes
   - mcmc
-repository_url: https://github.com/hauselin/rtutorialsite/blob/master/_posts/2019-04-09-gentle-and-intuitive-intro-to-markov-chain-monte-carlo-mcmc/gentle-and-intuitive-intro-to-markov-chain-monte-carlo-mcmc.Rmd
 editor_options: 
   chunk_output_type: console
 ---

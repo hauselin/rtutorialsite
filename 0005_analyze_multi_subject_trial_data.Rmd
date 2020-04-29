@@ -5,7 +5,6 @@ output:
     radix::radix_article:
         toc: true
         toc_depth: 3
-repository_url: https://github.com/hauselin/rtutorialsite/blob/master/0005_analyze_multi_subject_trial_data.Rmd
 editor_options: 
   chunk_output_type: console
 ---

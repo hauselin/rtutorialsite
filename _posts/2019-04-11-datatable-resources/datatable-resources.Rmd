@@ -30,8 +30,7 @@ knitr::opts_chunk$set(echo = FALSE)
 * [Intro to `data.table` vignette](https://cran.r-project.org/web/packages/data.table/vignettes/datatable-intro.html)
 * [`data.table` vs `dplyr`](https://atrebas.github.io/post/2019-03-03-datatable-dplyr/)
 * [`data.table` vs Python `pandas`](https://datascience-enthusiast.com/R/pandas_datatable.html)
-* [Datacamp `data.table` tutorials](https://www.datacamp.com/search?q=data.table&tab=courses)
-* [Data analysis the `data.table` way](https://ugoproto.github.io/ugo_r_doc/Data_Analysis_in_R,_the_data.table_Way/)
+* [Datacamp `data.table` tutorials](https://www.datacamp.com/search?q=data.table&tab=courses)s
 * [`data.table` github page with links to basic and advanced tutorials](https://github.com/Rdatatable/data.table/wiki/Articles)
 * [How fast is `data.table`? Benchmarking (`data.table` speed vs other packages and languages)](https://github.com/Rdatatable/data.table/wiki/Benchmarks-:-Grouping)
 
