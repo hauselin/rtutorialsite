@@ -213,7 +213,7 @@
       "data.table"
     ],
     "preview": "posts/2019-04-11-datatable-resources/./datatable.jpg",
-    "last_modified": "2020-04-29T19:27:55-04:00"
+    "last_modified": "2020-04-29T19:27:56-04:00"
   },
   {
     "path": "posts/2019-04-09-gentle-and-intuitive-intro-to-markov-chain-monte-carlo-mcmc/",
@@ -272,7 +272,7 @@
       "gganimate"
     ],
     "preview": "https://raw.githubusercontent.com/hauselin/rtutorialsite/master/attachments/plot_dotdist.gif",
-    "last_modified": "2020-04-29T19:19:46-04:00"
+    "last_modified": "2020-04-29T19:19:47-04:00"
   },
   {
     "path": "posts/2019-02-18-fit-models-to-every-group/",
