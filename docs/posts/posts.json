@@ -40,7 +40,7 @@
       "reticulate"
     ],
     "preview": "posts/2019-12-20-numpy-reshape/./reshapecheatsheet.jpg",
-    "last_modified": "2019-12-25T20:50:51-05:00"
+    "last_modified": "2020-04-29T19:35:47-04:00"
   },
   {
     "path": "posts/2019-12-01-neural-networks-deriving-the-sigmoid-derivative/",
@@ -60,7 +60,7 @@
       "mathematics"
     ],
     "preview": "posts/2019-12-01-neural-networks-deriving-the-sigmoid-derivative/./sigmoid.jpg",
-    "last_modified": "2020-04-28T21:47:31-04:00"
+    "last_modified": "2020-04-29T19:36:20-04:00"
   },
   {
     "path": "posts/2019-12-08-resources-for-making-r-packages/",
@@ -96,7 +96,7 @@
       "hausekeep"
     ],
     "preview": "https://raw.githubusercontent.com/hauselin/rtutorialsite/master/attachments/mad_zscore_outliers.png",
-    "last_modified": "2019-12-01T22:22:23-05:00"
+    "last_modified": "2020-04-29T19:36:45-04:00"
   },
   {
     "path": "posts/2019-10-07-resources-for-principal-components-analysis/",
@@ -170,7 +170,7 @@
       "general linear model"
     ],
     "preview": "posts/2019-07-06-interpreting-interaction-regression-coefficients/interpreting-interaction-regression-coefficients_files/figure-html5/unnamed-chunk-4-1.png",
-    "last_modified": "2019-10-06T22:19:38-04:00",
+    "last_modified": "2020-04-29T19:37:21-04:00",
     "preview_width": 1248,
     "preview_height": 768
   },
@@ -193,7 +193,7 @@
       "maximum likelihood"
     ],
     "preview": "posts/2019-04-13-logistic-regression/logistic-regression_files/figure-html5/unnamed-chunk-5-1.png",
-    "last_modified": "2019-10-06T22:20:15-04:00",
+    "last_modified": "2020-04-29T19:37:50-04:00",
     "preview_width": 1248,
     "preview_height": 768
   },
@@ -231,7 +231,7 @@
       "mcmc"
     ],
     "preview": "posts/2019-04-09-gentle-and-intuitive-intro-to-markov-chain-monte-carlo-mcmc/./gentle-and-intuitive-intro-to-markov-chain-monte-carlo-mcmc_files/figure-html5/unnamed-chunk-19-1.png",
-    "last_modified": "2019-10-06T22:21:32-04:00",
+    "last_modified": "2020-04-29T19:38:18-04:00",
     "preview_width": 1248,
     "preview_height": 768
   },

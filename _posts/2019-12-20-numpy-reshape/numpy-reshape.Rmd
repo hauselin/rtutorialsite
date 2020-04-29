@@ -38,7 +38,7 @@ How does the numpy `reshape()` method reshape arrays? Have you struggled underst
 
 ```{r}
 library(reticulate)
-use_condaenv("python374")  # python environment
+use_condaenv(condaenv = "python376", conda = "/opt/anaconda3/bin/conda") # python environment
 ```
 
 ## Create a Python numpy array
