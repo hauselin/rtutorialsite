@@ -25,6 +25,8 @@ editor_options:
 knitr::opts_chunk$set(echo = TRUE, cache = FALSE, comment = NA, message = FALSE, warning = FALSE)
 ```
 
+<script data-ad-client="ca-pub-4491293927954947" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+
 Get source code for this RMarkdown script [here](https://github.com/hauselin/rtutorialsite/blob/master/_posts/2019-12-01-neural-networks-deriving-the-sigmoid-derivative/neural-networks-deriving-the-sigmoid-derivative.Rmd).
 
 ## Consider being a patron and supporting my work?
