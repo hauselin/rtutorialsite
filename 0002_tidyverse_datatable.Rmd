@@ -51,7 +51,7 @@ library(broom); library(hausekeep)
 
 Read file in a directory and save the data as an object in the environment by using the assignment `<-` operator. `
 
-If you don't have the dataset, right click [here](https://git.io/JfYDM) to download and save `sleep.csv` dataset. If you're following the tutorial step by step, you should also create a data folder in your current folder, and put the sleep.csv file inside the data folder. 
+If you don't have the dataset, right click [here](https://raw.githubusercontent.com/hauselin/rtutorialsite/master/data/sleep.csv) to download and save `sleep.csv` dataset. If you're following the tutorial step by step, you should also create a data folder in your current folder, and put the sleep.csv file inside the data folder. 
 
 ```{r read data, results="hide", message=FALSE, warning=FALSE}
 df1 <- read.csv("./data/sleep.csv") # base R read.csv() function

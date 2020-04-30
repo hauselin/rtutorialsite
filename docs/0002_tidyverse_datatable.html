@@ -1400,7 +1400,7 @@ library(broom); library(hausekeep)</code></pre>
 </div>
 <h2 id="reading-data-into-r">Reading data into R</h2>
 <p>Read file in a directory and save the data as an object in the environment by using the assignment <code>&lt;-</code> operator. `</p>
-<p>If you don’t have the dataset, right click <a href="https://git.io/JfYDM">here</a> to download and save <code>sleep.csv</code> dataset. If you’re following the tutorial step by step, you should also create a data folder in your current folder, and put the sleep.csv file inside the data folder.</p>
+<p>If you don’t have the dataset, right click <a href="https://raw.githubusercontent.com/hauselin/rtutorialsite/master/data/sleep.csv">here</a> to download and save <code>sleep.csv</code> dataset. If you’re following the tutorial step by step, you should also create a data folder in your current folder, and put the sleep.csv file inside the data folder.</p>
 <div class="layout-chunk" data-layout="l-body">
 <pre class="r"><code>
 df1 &lt;- read.csv(&quot;./data/sleep.csv&quot;) # base R read.csv() function
@@ -3412,11 +3412,11 @@ df4 %&gt;%
 <pre class="r"><code>
 sample(x = c(&quot;female&quot;, &quot;male&quot;), size = 40, replace = T) # what is this doing</code></pre>
 <pre><code>
- [1] &quot;female&quot; &quot;female&quot; &quot;male&quot;   &quot;male&quot;   &quot;male&quot;   &quot;male&quot;   &quot;male&quot;   &quot;male&quot;  
- [9] &quot;female&quot; &quot;female&quot; &quot;male&quot;   &quot;male&quot;   &quot;male&quot;   &quot;female&quot; &quot;female&quot; &quot;female&quot;
-[17] &quot;female&quot; &quot;male&quot;   &quot;female&quot; &quot;female&quot; &quot;female&quot; &quot;male&quot;   &quot;female&quot; &quot;male&quot;  
-[25] &quot;male&quot;   &quot;female&quot; &quot;female&quot; &quot;female&quot; &quot;male&quot;   &quot;male&quot;   &quot;female&quot; &quot;male&quot;  
-[33] &quot;female&quot; &quot;female&quot; &quot;female&quot; &quot;male&quot;   &quot;male&quot;   &quot;male&quot;   &quot;male&quot;   &quot;male&quot;  </code></pre>
+ [1] &quot;male&quot;   &quot;female&quot; &quot;male&quot;   &quot;female&quot; &quot;male&quot;   &quot;female&quot; &quot;male&quot;   &quot;male&quot;  
+ [9] &quot;female&quot; &quot;female&quot; &quot;male&quot;   &quot;female&quot; &quot;male&quot;   &quot;female&quot; &quot;male&quot;   &quot;female&quot;
+[17] &quot;female&quot; &quot;female&quot; &quot;female&quot; &quot;female&quot; &quot;male&quot;   &quot;male&quot;   &quot;male&quot;   &quot;female&quot;
+[25] &quot;female&quot; &quot;male&quot;   &quot;female&quot; &quot;female&quot; &quot;male&quot;   &quot;female&quot; &quot;male&quot;   &quot;male&quot;  
+[33] &quot;female&quot; &quot;male&quot;   &quot;male&quot;   &quot;female&quot; &quot;male&quot;   &quot;male&quot;   &quot;male&quot;   &quot;female&quot;</code></pre>
 </div>
 <div class="layout-chunk" data-layout="l-body">
 <pre class="r"><code>
@@ -3433,40 +3433,40 @@ df4</code></pre>
  2:  95.4359 82.5449     a   male
  3:  97.7949 69.0833     a female
  4:  98.1026 83.3141     a female
- 5:  96.5641 99.0833     a   male
- 6: 101.5897 89.8526     a   male
- 7: 100.8718 73.6987     a   male
- 8:  97.0769 47.9295     a   male
+ 5:  96.5641 99.0833     a female
+ 6: 101.5897 89.8526     a female
+ 7: 100.8718 73.6987     a female
+ 8:  97.0769 47.9295     a female
  9:  94.2051 55.6218     a female
 10:  94.4103 44.4679     a female
 11: 103.7436 74.0833     b   male
 12: 102.8205 59.8526     b   male
 13: 101.5897 47.9295     b   male
-14: 105.3846 44.8526     b   male
+14: 105.3846 44.8526     b female
 15: 106.4103 60.2372     b female
-16: 109.4872 64.8526     b   male
+16: 109.4872 64.8526     b female
 17: 107.2308 74.4679     b female
 18: 107.2308 49.8526     b   male
-19: 102.1026 37.9295     b   male
-20: 100.0513 54.8526     b   male
+19: 102.1026 37.9295     b female
+20: 100.0513 54.8526     b female
 21: 111.0256 56.0064     c   male
-22: 114.7179 56.0064     c   male
+22: 114.7179 56.0064     c female
 23: 112.2564 46.3910     c female
-24: 108.6667 43.6987     c   male
-25: 110.5128 36.3910     c female
-26: 114.1026 30.2372     c female
+24: 108.6667 43.6987     c female
+25: 110.5128 36.3910     c   male
+26: 114.1026 30.2372     c   male
 27: 115.0256 39.4679     c   male
-28: 118.7179 51.0064     c   male
+28: 118.7179 51.0064     c female
 29: 112.8718 64.0833     c female
 30: 118.0000 55.3000     c female
 31: 116.9744 17.5449     d   male
 32: 121.1795 35.2372     d   male
-33: 117.6923 29.8526     d female
-34: 121.8974 18.3141     d female
+33: 117.6923 29.8526     d   male
+34: 121.8974 18.3141     d   male
 35: 123.6410 29.4679     d female
 36: 121.3846 53.6987     d female
 37: 123.7436 63.6987     d   male
-38: 124.7692 48.6987     d female
+38: 124.7692 48.6987     d   male
 39: 124.8718 38.3141     d   male
 40: 127.6410 51.7756     d   male
           iq  grades class gender</code></pre>
@@ -3483,14 +3483,14 @@ df4 %&gt;%
 # Groups:   class [4]
   class gender iqClassMean examGradesClassMean
   &lt;chr&gt; &lt;chr&gt;        &lt;dbl&gt;               &lt;dbl&gt;
-1 a     female        95.8                64.1
-2 a     male          98.3                78.6
-3 b     female       107.                 67.4
-4 b     male         104.                 54.3
-5 c     female       114.                 46.5
-6 c     male         114.                 49.2
-7 d     female       122.                 36.0
-8 d     male         123.                 41.3</code></pre>
+1 a     female        97.2                70.1
+2 a     male          95.4                82.5
+3 b     female       105.                 56.2
+4 b     male         104.                 57.9
+5 c     female       114.                 52.7
+6 c     male         113.                 40.5
+7 d     female       123.                 41.6
+8 d     male         122.                 37.9</code></pre>
 </div>
 <h2 id="more-dplyr-and-tidyverse-information">More <code>dplyr</code> and <code>tidyverse</code> information</h2>
 <p>For much more information, see the following sites</p>
@@ -3511,40 +3511,40 @@ df4</code></pre>
  2:  95.4359 82.5449     a   male
  3:  97.7949 69.0833     a female
  4:  98.1026 83.3141     a female
- 5:  96.5641 99.0833     a   male
- 6: 101.5897 89.8526     a   male
- 7: 100.8718 73.6987     a   male
- 8:  97.0769 47.9295     a   male
+ 5:  96.5641 99.0833     a female
+ 6: 101.5897 89.8526     a female
+ 7: 100.8718 73.6987     a female
+ 8:  97.0769 47.9295     a female
  9:  94.2051 55.6218     a female
 10:  94.4103 44.4679     a female
 11: 103.7436 74.0833     b   male
 12: 102.8205 59.8526     b   male
 13: 101.5897 47.9295     b   male
-14: 105.3846 44.8526     b   male
+14: 105.3846 44.8526     b female
 15: 106.4103 60.2372     b female
-16: 109.4872 64.8526     b   male
+16: 109.4872 64.8526     b female
 17: 107.2308 74.4679     b female
 18: 107.2308 49.8526     b   male
-19: 102.1026 37.9295     b   male
-20: 100.0513 54.8526     b   male
+19: 102.1026 37.9295     b female
+20: 100.0513 54.8526     b female
 21: 111.0256 56.0064     c   male
-22: 114.7179 56.0064     c   male
+22: 114.7179 56.0064     c female
 23: 112.2564 46.3910     c female
-24: 108.6667 43.6987     c   male
-25: 110.5128 36.3910     c female
-26: 114.1026 30.2372     c female
+24: 108.6667 43.6987     c female
+25: 110.5128 36.3910     c   male
+26: 114.1026 30.2372     c   male
 27: 115.0256 39.4679     c   male
-28: 118.7179 51.0064     c   male
+28: 118.7179 51.0064     c female
 29: 112.8718 64.0833     c female
 30: 118.0000 55.3000     c female
 31: 116.9744 17.5449     d   male
 32: 121.1795 35.2372     d   male
-33: 117.6923 29.8526     d female
-34: 121.8974 18.3141     d female
+33: 117.6923 29.8526     d   male
+34: 121.8974 18.3141     d   male
 35: 123.6410 29.4679     d female
 36: 121.3846 53.6987     d female
 37: 123.7436 63.6987     d   male
-38: 124.7692 48.6987     d female
+38: 124.7692 48.6987     d   male
 39: 124.8718 38.3141     d   male
 40: 127.6410 51.7756     d   male
           iq  grades class gender</code></pre>
@@ -3607,40 +3607,40 @@ df4</code></pre>
  2:  95.4359 82.5449     a   male
  3:  97.7949 69.0833     a female
  4:  98.1026 83.3141     a female
- 5:  96.5641 99.0833     a   male
- 6: 101.5897 89.8526     a   male
- 7: 100.8718 73.6987     a   male
- 8:  97.0769 47.9295     a   male
+ 5:  96.5641 99.0833     a female
+ 6: 101.5897 89.8526     a female
+ 7: 100.8718 73.6987     a female
+ 8:  97.0769 47.9295     a female
  9:  94.2051 55.6218     a female
 10:  94.4103 44.4679     a female
 11: 103.7436 74.0833     b   male
 12: 102.8205 59.8526     b   male
 13: 101.5897 47.9295     b   male
-14: 105.3846 44.8526     b   male
+14: 105.3846 44.8526     b female
 15: 106.4103 60.2372     b female
-16: 109.4872 64.8526     b   male
+16: 109.4872 64.8526     b female
 17: 107.2308 74.4679     b female
 18: 107.2308 49.8526     b   male
-19: 102.1026 37.9295     b   male
-20: 100.0513 54.8526     b   male
+19: 102.1026 37.9295     b female
+20: 100.0513 54.8526     b female
 21: 111.0256 56.0064     c   male
-22: 114.7179 56.0064     c   male
+22: 114.7179 56.0064     c female
 23: 112.2564 46.3910     c female
-24: 108.6667 43.6987     c   male
-25: 110.5128 36.3910     c female
-26: 114.1026 30.2372     c female
+24: 108.6667 43.6987     c female
+25: 110.5128 36.3910     c   male
+26: 114.1026 30.2372     c   male
 27: 115.0256 39.4679     c   male
-28: 118.7179 51.0064     c   male
+28: 118.7179 51.0064     c female
 29: 112.8718 64.0833     c female
 30: 118.0000 55.3000     c female
 31: 116.9744 17.5449     d   male
 32: 121.1795 35.2372     d   male
-33: 117.6923 29.8526     d female
-34: 121.8974 18.3141     d female
+33: 117.6923 29.8526     d   male
+34: 121.8974 18.3141     d   male
 35: 123.6410 29.4679     d female
 36: 121.3846 53.6987     d female
 37: 123.7436 63.6987     d   male
-38: 124.7692 48.6987     d female
+38: 124.7692 48.6987     d   male
 39: 124.8718 38.3141     d   male
 40: 127.6410 51.7756     d   male
           iq  grades class gender</code></pre>
@@ -3658,127 +3658,120 @@ df4[i = gender == &#39;female&#39;,] # just female (j, by are NULL)</code></pre>
  1:  94.5128 67.9295     a female
  2:  97.7949 69.0833     a female
  3:  98.1026 83.3141     a female
- 4:  94.2051 55.6218     a female
- 5:  94.4103 44.4679     a female
- 6: 106.4103 60.2372     b female
- 7: 107.2308 74.4679     b female
- 8: 112.2564 46.3910     c female
- 9: 110.5128 36.3910     c female
-10: 114.1026 30.2372     c female
-11: 112.8718 64.0833     c female
-12: 118.0000 55.3000     c female
-13: 117.6923 29.8526     d female
-14: 121.8974 18.3141     d female
-15: 123.6410 29.4679     d female
-16: 121.3846 53.6987     d female
-17: 124.7692 48.6987     d female</code></pre>
+ 4:  96.5641 99.0833     a female
+ 5: 101.5897 89.8526     a female
+ 6: 100.8718 73.6987     a female
+ 7:  97.0769 47.9295     a female
+ 8:  94.2051 55.6218     a female
+ 9:  94.4103 44.4679     a female
+10: 105.3846 44.8526     b female
+11: 106.4103 60.2372     b female
+12: 109.4872 64.8526     b female
+13: 107.2308 74.4679     b female
+14: 102.1026 37.9295     b female
+15: 100.0513 54.8526     b female
+16: 114.7179 56.0064     c female
+17: 112.2564 46.3910     c female
+18: 108.6667 43.6987     c female
+19: 118.7179 51.0064     c female
+20: 112.8718 64.0833     c female
+21: 118.0000 55.3000     c female
+22: 123.6410 29.4679     d female
+23: 121.3846 53.6987     d female
+          iq  grades class gender</code></pre>
 <pre class="r"><code>
 df4[i = gender != &#39;female&#39;,] # not female </code></pre>
 <pre><code>
           iq  grades class gender
  1:  95.4359 82.5449     a   male
- 2:  96.5641 99.0833     a   male
- 3: 101.5897 89.8526     a   male
- 4: 100.8718 73.6987     a   male
- 5:  97.0769 47.9295     a   male
- 6: 103.7436 74.0833     b   male
- 7: 102.8205 59.8526     b   male
- 8: 101.5897 47.9295     b   male
- 9: 105.3846 44.8526     b   male
-10: 109.4872 64.8526     b   male
-11: 107.2308 49.8526     b   male
-12: 102.1026 37.9295     b   male
-13: 100.0513 54.8526     b   male
-14: 111.0256 56.0064     c   male
-15: 114.7179 56.0064     c   male
-16: 108.6667 43.6987     c   male
-17: 115.0256 39.4679     c   male
-18: 118.7179 51.0064     c   male
-19: 116.9744 17.5449     d   male
-20: 121.1795 35.2372     d   male
-21: 123.7436 63.6987     d   male
-22: 124.8718 38.3141     d   male
-23: 127.6410 51.7756     d   male
-          iq  grades class gender</code></pre>
+ 2: 103.7436 74.0833     b   male
+ 3: 102.8205 59.8526     b   male
+ 4: 101.5897 47.9295     b   male
+ 5: 107.2308 49.8526     b   male
+ 6: 111.0256 56.0064     c   male
+ 7: 110.5128 36.3910     c   male
+ 8: 114.1026 30.2372     c   male
+ 9: 115.0256 39.4679     c   male
+10: 116.9744 17.5449     d   male
+11: 121.1795 35.2372     d   male
+12: 117.6923 29.8526     d   male
+13: 121.8974 18.3141     d   male
+14: 123.7436 63.6987     d   male
+15: 124.7692 48.6987     d   male
+16: 124.8718 38.3141     d   male
+17: 127.6410 51.7756     d   male</code></pre>
 <pre class="r"><code>
 df4[gender != &#39;female&#39;,] # also works</code></pre>
 <pre><code>
           iq  grades class gender
  1:  95.4359 82.5449     a   male
- 2:  96.5641 99.0833     a   male
- 3: 101.5897 89.8526     a   male
- 4: 100.8718 73.6987     a   male
- 5:  97.0769 47.9295     a   male
- 6: 103.7436 74.0833     b   male
- 7: 102.8205 59.8526     b   male
- 8: 101.5897 47.9295     b   male
- 9: 105.3846 44.8526     b   male
-10: 109.4872 64.8526     b   male
-11: 107.2308 49.8526     b   male
-12: 102.1026 37.9295     b   male
-13: 100.0513 54.8526     b   male
-14: 111.0256 56.0064     c   male
-15: 114.7179 56.0064     c   male
-16: 108.6667 43.6987     c   male
-17: 115.0256 39.4679     c   male
-18: 118.7179 51.0064     c   male
-19: 116.9744 17.5449     d   male
-20: 121.1795 35.2372     d   male
-21: 123.7436 63.6987     d   male
-22: 124.8718 38.3141     d   male
-23: 127.6410 51.7756     d   male
-          iq  grades class gender</code></pre>
+ 2: 103.7436 74.0833     b   male
+ 3: 102.8205 59.8526     b   male
+ 4: 101.5897 47.9295     b   male
+ 5: 107.2308 49.8526     b   male
+ 6: 111.0256 56.0064     c   male
+ 7: 110.5128 36.3910     c   male
+ 8: 114.1026 30.2372     c   male
+ 9: 115.0256 39.4679     c   male
+10: 116.9744 17.5449     d   male
+11: 121.1795 35.2372     d   male
+12: 117.6923 29.8526     d   male
+13: 121.8974 18.3141     d   male
+14: 123.7436 63.6987     d   male
+15: 124.7692 48.6987     d   male
+16: 124.8718 38.3141     d   male
+17: 127.6410 51.7756     d   male</code></pre>
 <pre class="r"><code>
 df4[grades &gt; 85,] # also works</code></pre>
 <pre><code>
          iq  grades class gender
-1:  96.5641 99.0833     a   male
-2: 101.5897 89.8526     a   male</code></pre>
+1:  96.5641 99.0833     a female
+2: 101.5897 89.8526     a female</code></pre>
 <pre class="r"><code>
 # same as filter(df4, grades &gt; 85), but much more concise
 df4[grades &gt; 85] # also works</code></pre>
 <pre><code>
          iq  grades class gender
-1:  96.5641 99.0833     a   male
-2: 101.5897 89.8526     a   male</code></pre>
+1:  96.5641 99.0833     a female
+2: 101.5897 89.8526     a female</code></pre>
 <pre class="r"><code>
 df4[i = grades &gt; 85] # also works</code></pre>
 <pre><code>
          iq  grades class gender
-1:  96.5641 99.0833     a   male
-2: 101.5897 89.8526     a   male</code></pre>
+1:  96.5641 99.0833     a female
+2: 101.5897 89.8526     a female</code></pre>
 <pre class="r"><code>
 df4[grades &lt; 50 &amp; iq &gt; 120] # smart but (AND &amp;) lazy people (grades &lt; 50 AND iq &gt; 120)</code></pre>
 <pre><code>
          iq  grades class gender
 1: 121.1795 35.2372     d   male
-2: 121.8974 18.3141     d female
+2: 121.8974 18.3141     d   male
 3: 123.6410 29.4679     d female
-4: 124.7692 48.6987     d female
+4: 124.7692 48.6987     d   male
 5: 124.8718 38.3141     d   male</code></pre>
 <pre class="r"><code>
 df4[grades &lt; 50 | iq &gt; 120] # smart but OR lazy people (grades &lt; 50 OR iq &gt; 120)</code></pre>
 <pre><code>
           iq  grades class gender
- 1:  97.0769 47.9295     a   male
+ 1:  97.0769 47.9295     a female
  2:  94.4103 44.4679     a female
  3: 101.5897 47.9295     b   male
- 4: 105.3846 44.8526     b   male
+ 4: 105.3846 44.8526     b female
  5: 107.2308 49.8526     b   male
- 6: 102.1026 37.9295     b   male
+ 6: 102.1026 37.9295     b female
  7: 112.2564 46.3910     c female
- 8: 108.6667 43.6987     c   male
- 9: 110.5128 36.3910     c female
-10: 114.1026 30.2372     c female
+ 8: 108.6667 43.6987     c female
+ 9: 110.5128 36.3910     c   male
+10: 114.1026 30.2372     c   male
 11: 115.0256 39.4679     c   male
 12: 116.9744 17.5449     d   male
 13: 121.1795 35.2372     d   male
-14: 117.6923 29.8526     d female
-15: 121.8974 18.3141     d female
+14: 117.6923 29.8526     d   male
+15: 121.8974 18.3141     d   male
 16: 123.6410 29.4679     d female
 17: 121.3846 53.6987     d female
 18: 123.7436 63.6987     d   male
-19: 124.7692 48.6987     d female
+19: 124.7692 48.6987     d   male
 20: 124.8718 38.3141     d   male
 21: 127.6410 51.7756     d   male
           iq  grades class gender</code></pre>
@@ -3799,7 +3792,7 @@ df4[35:.N] # rows 35 to last row</code></pre>
 1: 123.6410 29.4679     d female
 2: 121.3846 53.6987     d female
 3: 123.7436 63.6987     d   male
-4: 124.7692 48.6987     d female
+4: 124.7692 48.6987     d   male
 5: 124.8718 38.3141     d   male
 6: 127.6410 51.7756     d   male</code></pre>
 </div>
@@ -3899,40 +3892,40 @@ df4[, j = .(grades, gender, iq)] # select multiple columns</code></pre>
  2: 82.5449   male  95.4359
  3: 69.0833 female  97.7949
  4: 83.3141 female  98.1026
- 5: 99.0833   male  96.5641
- 6: 89.8526   male 101.5897
- 7: 73.6987   male 100.8718
- 8: 47.9295   male  97.0769
+ 5: 99.0833 female  96.5641
+ 6: 89.8526 female 101.5897
+ 7: 73.6987 female 100.8718
+ 8: 47.9295 female  97.0769
  9: 55.6218 female  94.2051
 10: 44.4679 female  94.4103
 11: 74.0833   male 103.7436
 12: 59.8526   male 102.8205
 13: 47.9295   male 101.5897
-14: 44.8526   male 105.3846
+14: 44.8526 female 105.3846
 15: 60.2372 female 106.4103
-16: 64.8526   male 109.4872
+16: 64.8526 female 109.4872
 17: 74.4679 female 107.2308
 18: 49.8526   male 107.2308
-19: 37.9295   male 102.1026
-20: 54.8526   male 100.0513
+19: 37.9295 female 102.1026
+20: 54.8526 female 100.0513
 21: 56.0064   male 111.0256
-22: 56.0064   male 114.7179
+22: 56.0064 female 114.7179
 23: 46.3910 female 112.2564
-24: 43.6987   male 108.6667
-25: 36.3910 female 110.5128
-26: 30.2372 female 114.1026
+24: 43.6987 female 108.6667
+25: 36.3910   male 110.5128
+26: 30.2372   male 114.1026
 27: 39.4679   male 115.0256
-28: 51.0064   male 118.7179
+28: 51.0064 female 118.7179
 29: 64.0833 female 112.8718
 30: 55.3000 female 118.0000
 31: 17.5449   male 116.9744
 32: 35.2372   male 121.1795
-33: 29.8526 female 117.6923
-34: 18.3141 female 121.8974
+33: 29.8526   male 117.6923
+34: 18.3141   male 121.8974
 35: 29.4679 female 123.6410
 36: 53.6987 female 121.3846
 37: 63.6987   male 123.7436
-38: 48.6987 female 124.7692
+38: 48.6987   male 124.7692
 39: 38.3141   male 124.8718
 40: 51.7756   male 127.6410
      grades gender       iq</code></pre>
@@ -3944,40 +3937,40 @@ df4[, .(grades,gender, iq)] # same as above and we often omit j =</code></pre>
  2: 82.5449   male  95.4359
  3: 69.0833 female  97.7949
  4: 83.3141 female  98.1026
- 5: 99.0833   male  96.5641
- 6: 89.8526   male 101.5897
- 7: 73.6987   male 100.8718
- 8: 47.9295   male  97.0769
+ 5: 99.0833 female  96.5641
+ 6: 89.8526 female 101.5897
+ 7: 73.6987 female 100.8718
+ 8: 47.9295 female  97.0769
  9: 55.6218 female  94.2051
 10: 44.4679 female  94.4103
 11: 74.0833   male 103.7436
 12: 59.8526   male 102.8205
 13: 47.9295   male 101.5897
-14: 44.8526   male 105.3846
+14: 44.8526 female 105.3846
 15: 60.2372 female 106.4103
-16: 64.8526   male 109.4872
+16: 64.8526 female 109.4872
 17: 74.4679 female 107.2308
 18: 49.8526   male 107.2308
-19: 37.9295   male 102.1026
-20: 54.8526   male 100.0513
+19: 37.9295 female 102.1026
+20: 54.8526 female 100.0513
 21: 56.0064   male 111.0256
-22: 56.0064   male 114.7179
+22: 56.0064 female 114.7179
 23: 46.3910 female 112.2564
-24: 43.6987   male 108.6667
-25: 36.3910 female 110.5128
-26: 30.2372 female 114.1026
+24: 43.6987 female 108.6667
+25: 36.3910   male 110.5128
+26: 30.2372   male 114.1026
 27: 39.4679   male 115.0256
-28: 51.0064   male 118.7179
+28: 51.0064 female 118.7179
 29: 64.0833 female 112.8718
 30: 55.3000 female 118.0000
 31: 17.5449   male 116.9744
 32: 35.2372   male 121.1795
-33: 29.8526 female 117.6923
-34: 18.3141 female 121.8974
+33: 29.8526   male 117.6923
+34: 18.3141   male 121.8974
 35: 29.4679 female 123.6410
 36: 53.6987 female 121.3846
 37: 63.6987   male 123.7436
-38: 48.6987 female 124.7692
+38: 48.6987   male 124.7692
 39: 38.3141   male 124.8718
 40: 51.7756   male 127.6410
      grades gender       iq</code></pre>
@@ -3990,40 +3983,40 @@ df4[, grades:gender] # select grades to gender</code></pre>
  2: 82.5449     a   male
  3: 69.0833     a female
  4: 83.3141     a female
- 5: 99.0833     a   male
- 6: 89.8526     a   male
- 7: 73.6987     a   male
- 8: 47.9295     a   male
+ 5: 99.0833     a female
+ 6: 89.8526     a female
+ 7: 73.6987     a female
+ 8: 47.9295     a female
  9: 55.6218     a female
 10: 44.4679     a female
 11: 74.0833     b   male
 12: 59.8526     b   male
 13: 47.9295     b   male
-14: 44.8526     b   male
+14: 44.8526     b female
 15: 60.2372     b female
-16: 64.8526     b   male
+16: 64.8526     b female
 17: 74.4679     b female
 18: 49.8526     b   male
-19: 37.9295     b   male
-20: 54.8526     b   male
+19: 37.9295     b female
+20: 54.8526     b female
 21: 56.0064     c   male
-22: 56.0064     c   male
+22: 56.0064     c female
 23: 46.3910     c female
-24: 43.6987     c   male
-25: 36.3910     c female
-26: 30.2372     c female
+24: 43.6987     c female
+25: 36.3910     c   male
+26: 30.2372     c   male
 27: 39.4679     c   male
-28: 51.0064     c   male
+28: 51.0064     c female
 29: 64.0833     c female
 30: 55.3000     c female
 31: 17.5449     d   male
 32: 35.2372     d   male
-33: 29.8526     d female
-34: 18.3141     d female
+33: 29.8526     d   male
+34: 18.3141     d   male
 35: 29.4679     d female
 36: 53.6987     d female
 37: 63.6987     d   male
-38: 48.6987     d female
+38: 48.6987     d   male
 39: 38.3141     d   male
 40: 51.7756     d   male
      grades class gender</code></pre>
@@ -4040,40 +4033,40 @@ df4[, c(2, 3, 4)] # via column index/number</code></pre>
  2: 82.5449     a   male
  3: 69.0833     a female
  4: 83.3141     a female
- 5: 99.0833     a   male
- 6: 89.8526     a   male
- 7: 73.6987     a   male
- 8: 47.9295     a   male
+ 5: 99.0833     a female
+ 6: 89.8526     a female
+ 7: 73.6987     a female
+ 8: 47.9295     a female
  9: 55.6218     a female
 10: 44.4679     a female
 11: 74.0833     b   male
 12: 59.8526     b   male
 13: 47.9295     b   male
-14: 44.8526     b   male
+14: 44.8526     b female
 15: 60.2372     b female
-16: 64.8526     b   male
+16: 64.8526     b female
 17: 74.4679     b female
 18: 49.8526     b   male
-19: 37.9295     b   male
-20: 54.8526     b   male
+19: 37.9295     b female
+20: 54.8526     b female
 21: 56.0064     c   male
-22: 56.0064     c   male
+22: 56.0064     c female
 23: 46.3910     c female
-24: 43.6987     c   male
-25: 36.3910     c female
-26: 30.2372     c female
+24: 43.6987     c female
+25: 36.3910     c   male
+26: 30.2372     c   male
 27: 39.4679     c   male
-28: 51.0064     c   male
+28: 51.0064     c female
 29: 64.0833     c female
 30: 55.3000     c female
 31: 17.5449     d   male
 32: 35.2372     d   male
-33: 29.8526     d female
-34: 18.3141     d female
+33: 29.8526     d   male
+34: 18.3141     d   male
 35: 29.4679     d female
 36: 53.6987     d female
 37: 63.6987     d   male
-38: 48.6987     d female
+38: 48.6987     d   male
 39: 38.3141     d   male
 40: 51.7756     d   male
      grades class gender</code></pre>
@@ -4276,40 +4269,40 @@ df4[, ..colNames] # works! (special syntax)</code></pre>
  2:   male     a
  3: female     a
  4: female     a
- 5:   male     a
- 6:   male     a
- 7:   male     a
- 8:   male     a
+ 5: female     a
+ 6: female     a
+ 7: female     a
+ 8: female     a
  9: female     a
 10: female     a
 11:   male     b
 12:   male     b
 13:   male     b
-14:   male     b
+14: female     b
 15: female     b
-16:   male     b
+16: female     b
 17: female     b
 18:   male     b
-19:   male     b
-20:   male     b
+19: female     b
+20: female     b
 21:   male     c
-22:   male     c
+22: female     c
 23: female     c
-24:   male     c
-25: female     c
-26: female     c
+24: female     c
+25:   male     c
+26:   male     c
 27:   male     c
-28:   male     c
+28: female     c
 29: female     c
 30: female     c
 31:   male     d
 32:   male     d
-33: female     d
-34: female     d
+33:   male     d
+34:   male     d
 35: female     d
 36: female     d
 37:   male     d
-38: female     d
+38:   male     d
 39:   male     d
 40:   male     d
     gender class</code></pre>
@@ -4472,26 +4465,26 @@ df4 %&gt;%
 df4[, .(iqMean = mean(iq, na.rm = T)), by = .(class, gender)]</code></pre>
 <pre><code>
    class gender    iqMean
-1:     a female  95.80514
-2:     a   male  98.30768
-3:     b   male 104.05129
-4:     b female 106.82055
-5:     c   male 113.63074
-6:     c female 113.54872
-7:     d   male 122.88206
-8:     d female 121.87690</code></pre>
+1:     a female  97.23647
+2:     a   male  95.43590
+3:     b   male 103.84615
+4:     b female 105.11113
+5:     c   male 112.66665
+6:     c female 114.20512
+7:     d   male 122.34615
+8:     d female 122.51280</code></pre>
 <pre class="r"><code>
 df4[, .(iqMean = mean(iq, na.rm = T)), keyby = .(gender, class)] # summarize and sort/arrange by class then gender</code></pre>
 <pre><code>
    gender class    iqMean
-1: female     a  95.80514
-2: female     b 106.82055
-3: female     c 113.54872
-4: female     d 121.87690
-5:   male     a  98.30768
-6:   male     b 104.05129
-7:   male     c 113.63074
-8:   male     d 122.88206</code></pre>
+1: female     a  97.23647
+2: female     b 105.11113
+3: female     c 114.20512
+4: female     d 122.51280
+5:   male     a  95.43590
+6:   male     b 103.84615
+7:   male     c 112.66665
+8:   male     d 122.34615</code></pre>
 </div>
 <p>Summarize by booleans</p>
 <div class="layout-chunk" data-layout="l-body">
@@ -4499,16 +4492,16 @@ df4[, .(iqMean = mean(iq, na.rm = T)), keyby = .(gender, class)] # summarize and
 df4[, .(iqMean = mean(iq, na.rm = T)), by = .(gender == &quot;male&quot;)]</code></pre>
 <pre><code>
    gender   iqMean
-1:  FALSE 109.9879
-2:   TRUE 108.9788</code></pre>
+1:  FALSE 105.9153
+2:   TRUE 114.1327</code></pre>
 <pre class="r"><code>
 df4[, .(iqMean = mean(iq, na.rm = T)), by = .(gender == &quot;male&quot;, class == &quot;a&quot;)]</code></pre>
 <pre><code>
    gender class    iqMean
-1:  FALSE  TRUE  95.80514
-2:   TRUE  TRUE  98.30768
-3:   TRUE FALSE 111.94302
-4:  FALSE FALSE 115.89743</code></pre>
+1:  FALSE  TRUE  97.23647
+2:   TRUE  TRUE  95.43590
+3:   TRUE FALSE 115.30128
+4:  FALSE FALSE 111.49451</code></pre>
 </div>
 <p>Combining pipes with <code>data.table</code> and <code>ggplot</code></p>
 <div class="layout-chunk" data-layout="l-body">
@@ -4574,8 +4567,8 @@ df4[is.na(iqCopy)] # filter via i (show only rows where iqCopy is NA)</code></pr
 2: 95.4359 82.5449     a   male   m     NA
 3: 97.7949 69.0833     a female   f     NA
 4: 98.1026 83.3141     a female   f     NA
-5: 96.5641 99.0833     a   male   m     NA
-6: 97.0769 47.9295     a   male   m     NA
+5: 96.5641 99.0833     a female   f     NA
+6: 97.0769 47.9295     a female   f     NA
 7: 94.2051 55.6218     a female   f     NA
 8: 94.4103 44.4679     a female   f     NA</code></pre>
 </div>
