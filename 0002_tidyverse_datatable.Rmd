@@ -93,7 +93,7 @@ How's the output different from the two outputs above?
 
 ### Reading URLs and other formats
 
-Check out the csv (comma separated values) data [here](https://raw.githubusercontent.com/hauselin/RdataScience/master/data/sleep.csv). You can read data directly off a website.
+Check out the csv (comma separated values) data [here](https://raw.githubusercontent.com/hauselin/rtutorialsite/master/data/sleep.csv). You can read data directly off a website.
 
 Most of these read functions can import/read different types of files (e.g., csv, txt, URLs) as long as the raw data are formatted properly (e.g., separated by commas, tabs). But if you're trying to read proprietary data formats (e.g., SPSS datasets, Excel sheets), you'll need to use other libraries (e.g., `readxl`, `foreign`) to read those data into R.
 
