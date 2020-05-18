@@ -11,6 +11,8 @@ preview: ./pic1.png
 categories: 
   - python
   - pandas
+  - reshape
+  - reticulate
 output:
   radix::radix_article:
     toc: true

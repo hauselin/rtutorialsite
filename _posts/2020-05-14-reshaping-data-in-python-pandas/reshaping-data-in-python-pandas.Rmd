@@ -11,6 +11,8 @@ preview: ./main_wide2long.png
 categories: 
   - python
   - pandas
+  - reticulate
+  - reshape
 output:
   radix::radix_article:
     toc: true
