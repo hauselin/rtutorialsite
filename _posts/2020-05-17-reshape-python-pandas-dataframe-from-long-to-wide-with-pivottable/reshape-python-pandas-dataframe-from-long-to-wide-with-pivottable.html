@@ -19,37 +19,37 @@
  <!--/radix_placeholder_import_source-->
 
   <!--radix_placeholder_meta_tags-->
-  <title>Reshape Python pandas dataframe from wide to long with pd.melt</title>
+  <title>Reshape Python pandas dataframe from long to wide with pivot_table</title>
   
-  <meta property="description" itemprop="description" content="Learn and visualize how pd.melt reshapes data from wide to long form"/>
+  <meta property="description" itemprop="description" content="Learn and visualize how pd.pivot_table reshapes data from long to wide form"/>
   
   
   <!--  https://schema.org/Article -->
-  <meta property="article:published" itemprop="datePublished" content="2020-05-14"/>
-  <meta property="article:created" itemprop="dateCreated" content="2020-05-14"/>
+  <meta property="article:published" itemprop="datePublished" content="2020-05-17"/>
+  <meta property="article:created" itemprop="dateCreated" content="2020-05-17"/>
   <meta name="article:author" content="Hause Lin"/>
   
   <!--  https://developers.facebook.com/docs/sharing/webmasters#markup -->
-  <meta property="og:title" content="Reshape Python pandas dataframe from wide to long with pd.melt"/>
+  <meta property="og:title" content="Reshape Python pandas dataframe from long to wide with pivot_table"/>
   <meta property="og:type" content="article"/>
-  <meta property="og:description" content="Learn and visualize how pd.melt reshapes data from wide to long form"/>
+  <meta property="og:description" content="Learn and visualize how pd.pivot_table reshapes data from long to wide form"/>
   <meta property="og:locale" content="en_US"/>
   
   <!--  https://dev.twitter.com/cards/types/summary -->
   <meta property="twitter:card" content="summary"/>
-  <meta property="twitter:title" content="Reshape Python pandas dataframe from wide to long with pd.melt"/>
-  <meta property="twitter:description" content="Learn and visualize how pd.melt reshapes data from wide to long form"/>
+  <meta property="twitter:title" content="Reshape Python pandas dataframe from long to wide with pivot_table"/>
+  <meta property="twitter:description" content="Learn and visualize how pd.pivot_table reshapes data from long to wide form"/>
   
   <!--/radix_placeholder_meta_tags-->
   <!--radix_placeholder_rmarkdown_metadata-->
   
   <script type="text/json" id="radix-rmarkdown-metadata">
-  {"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["title","description","author","date","draft","preview","categories","output","editor_options"]}},"value":[{"type":"character","attributes":{},"value":["Reshape Python pandas dataframe from wide to long with pd.melt"]},{"type":"character","attributes":{},"value":["Learn and visualize how pd.melt reshapes data from wide to long form\n"]},{"type":"list","attributes":{},"value":[{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","url"]}},"value":[{"type":"character","attributes":{},"value":["Hause Lin"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":[]}},"value":[]}]}]},{"type":"character","attributes":{},"value":["05-14-2020"]},{"type":"logical","attributes":{},"value":[true]},{"type":"character","attributes":{},"value":["./main_wide2long.png"]},{"type":"character","attributes":{},"value":["python","pandas"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["radix::radix_article"]}},"value":[{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["toc","self_contained"]}},"value":[{"type":"logical","attributes":{},"value":[true]},{"type":"logical","attributes":{},"value":[false]}]}]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["chunk_output_type"]}},"value":[{"type":"character","attributes":{},"value":["console"]}]}]}
+  {"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["title","description","author","date","draft","preview","categories","output","editor_options"]}},"value":[{"type":"character","attributes":{},"value":["Reshape Python pandas dataframe from long to wide with pivot_table"]},{"type":"character","attributes":{},"value":["Learn and visualize how pd.pivot_table reshapes data from long to wide form\n"]},{"type":"list","attributes":{},"value":[{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","url"]}},"value":[{"type":"character","attributes":{},"value":["Hause Lin"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":[]}},"value":[]}]}]},{"type":"character","attributes":{},"value":["05-17-2020"]},{"type":"logical","attributes":{},"value":[true]},{"type":"character","attributes":{},"value":["./pic1.png"]},{"type":"character","attributes":{},"value":["python","pandas"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["radix::radix_article"]}},"value":[{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["toc","self_contained"]}},"value":[{"type":"logical","attributes":{},"value":[true]},{"type":"logical","attributes":{},"value":[false]}]}]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["chunk_output_type"]}},"value":[{"type":"character","attributes":{},"value":["console"]}]}]}
   </script>
   <!--/radix_placeholder_rmarkdown_metadata-->
   
   <script type="text/json" id="radix-resource-manifest">
-  {"type":"character","attributes":{},"value":["main_wide2long.png","pic1.png","pic2.png","pic3.png","pic4.png","pic5.png","reshaping-data-in-python-pandas_files/bowser-1.9.3/bowser.min.js","reshaping-data-in-python-pandas_files/distill-2.2.21/template.v2.js","reshaping-data-in-python-pandas_files/jquery-1.11.3/jquery.min.js","reshaping-data-in-python-pandas_files/webcomponents-2.0.0/webcomponents.js"]}
+  {"type":"character","attributes":{},"value":["pic1.png","pic2.png","reshape-python-pandas-dataframe-from-long-to-wide-with-pivottable_files/bowser-1.9.3/bowser.min.js","reshape-python-pandas-dataframe-from-long-to-wide-with-pivottable_files/distill-2.2.21/template.v2.js","reshape-python-pandas-dataframe-from-long-to-wide-with-pivottable_files/jquery-1.11.3/jquery.min.js","reshape-python-pandas-dataframe-from-long-to-wide-with-pivottable_files/webcomponents-2.0.0/webcomponents.js"]}
   </script>
   <!--radix_placeholder_navigation_in_header-->
   <!--/radix_placeholder_navigation_in_header-->
@@ -927,10 +927,10 @@
   </script>
   
   <!--/radix_placeholder_distill-->
-  <script src="reshaping-data-in-python-pandas_files/jquery-1.11.3/jquery.min.js"></script>
-  <script src="reshaping-data-in-python-pandas_files/bowser-1.9.3/bowser.min.js"></script>
-  <script src="reshaping-data-in-python-pandas_files/webcomponents-2.0.0/webcomponents.js"></script>
-  <script src="reshaping-data-in-python-pandas_files/distill-2.2.21/template.v2.js"></script>
+  <script src="reshape-python-pandas-dataframe-from-long-to-wide-with-pivottable_files/jquery-1.11.3/jquery.min.js"></script>
+  <script src="reshape-python-pandas-dataframe-from-long-to-wide-with-pivottable_files/bowser-1.9.3/bowser.min.js"></script>
+  <script src="reshape-python-pandas-dataframe-from-long-to-wide-with-pivottable_files/webcomponents-2.0.0/webcomponents.js"></script>
+  <script src="reshape-python-pandas-dataframe-from-long-to-wide-with-pivottable_files/distill-2.2.21/template.v2.js"></script>
   <!--radix_placeholder_site_in_header-->
   <!--/radix_placeholder_site_in_header-->
 
@@ -942,7 +942,7 @@
 <!--radix_placeholder_front_matter-->
 
 <script id="distill-front-matter" type="text/json">
-{"title":"Reshape Python pandas dataframe from wide to long with pd.melt","description":"Learn and visualize how pd.melt reshapes data from wide to long form","authors":[{"author":"Hause Lin","authorURL":{},"affiliation":"&nbsp;","affiliationURL":"#"}],"publishedDate":"2020-05-14T00:00:00.000-04:00","citationText":"Lin, 2020"}
+{"title":"Reshape Python pandas dataframe from long to wide with pivot_table","description":"Learn and visualize how pd.pivot_table reshapes data from long to wide form","authors":[{"author":"Hause Lin","authorURL":{},"affiliation":"&nbsp;","affiliationURL":"#"}],"publishedDate":"2020-05-17T00:00:00.000-04:00","citationText":"Lin, 2020"}
 </script>
 
 <!--/radix_placeholder_front_matter-->
@@ -952,14 +952,14 @@
 <!--/radix_placeholder_site_before_body-->
 
 <div class="d-title">
-<h1>Reshape Python pandas dataframe from wide to long with pd.melt</h1>
-<p>Learn and visualize how pd.melt reshapes data from wide to long form</p>
+<h1>Reshape Python pandas dataframe from long to wide with pivot_table</h1>
+<p>Learn and visualize how pd.pivot_table reshapes data from long to wide form</p>
 </div>
 
 <div class="d-byline">
   Hause Lin true 
   
-<br/>05-14-2020
+<br/>05-17-2020
 </div>
 
 <div class="d-article">
@@ -967,26 +967,25 @@
 <nav class="d-toc" id="TOC">
 <ul>
 <li><a href="#consider-being-a-patron-and-supporting-my-work">Consider being a patron and supporting my work?</a></li>
-<li><a href="#wide-data">Wide data</a></li>
-<li><a href="#wide-to-long-with-melt">Wide to long with <code>melt</code></a><ul>
-<li><a href="#melt-example-1">Melt Example 1</a></li>
-<li><a href="#melt-example-2">Melt Example 2</a></li>
-<li><a href="#melt-example-3">Melt Example 3</a></li>
+<li><a href="#long-data">Long data</a></li>
+<li><a href="#long-to-wide-with-pivot_table">Long to wide with <code>pivot_table</code></a><ul>
+<li><a href="#pivot-example-1">Pivot Example 1</a></li>
 </ul></li>
+<li><a href="#resources">Resources</a></li>
 <li><a href="#support-my-work">Support my work</a></li>
 </ul>
 </nav>
 <hr class="d-toc-separator"/>
 <p>Get source code for this RMarkdown script <a href="https://raw.githubusercontent.com/hauselin/rtutorialsite/master/_posts/2020-05-14-reshaping-data-in-python-pandas/reshaping-data-in-python-pandas.Rmd">here</a>.</p>
-<p>This Python tutorial is also available on <a href="https://towardsdatascience.com/reshape-pandas-dataframe-with-melt-in-python-tutorial-and-visualization-29ec1450bb02">Medium, Towards Data Science</a>. Click here if you’re looking for the R version of melt (also the <code>melt</code> function in R).</p>
+<p>This Python tutorial is also available on <a href="https://towardsdatascience.com/reshape-pandas-dataframe-with-melt-in-python-tutorial-and-visualization-29ec1450bb02">Medium, Towards Data Science</a>. Click here if you’re looking for the R version of melt (also the <code>dcast</code> function in R).</p>
 <h2 id="consider-being-a-patron-and-supporting-my-work">Consider being a patron and supporting my work?</h2>
 <p><a href="https://donorbox.org/support-my-teaching">Donate and become a patron</a>: If you find value in what I do and have learned something from my site, please consider becoming a patron. It takes me many hours to research, learn, and put together tutorials. Your support really matters.</p>
-<p>How does the pandas <code>melt()</code> method reshape dataframes? How do you reshape a dataframe from wide to long form? This tutorial will walk you through reshaping dataframes using <code>pd.melt()</code> or the <code>melt</code> method associated with pandas dataframes.</p>
+<p>How does the pandas <code>pivot_table()</code> method reshape dataframes? How do you reshape a dataframe from wide to long form? This tutorial will walk you through reshaping dataframes using <code>pd.pivot_table()</code> or the <code>pivot_table</code> method associated with pandas dataframes.</p>
 <figure>
-<img src="main_wide2long.png" alt="Summary of how pd.melt() works" /><figcaption>Summary of how pd.melt() works</figcaption>
+<img src="pic1.png" alt="Summary of how pd.pivot_table() works" /><figcaption>Summary of how pd.pivot_table() works</figcaption>
 </figure>
 <p>Also, you might want to check out the official pandas documentation and my <a href="https://towardsdatascience.com/reshape-pandas-dataframe-with-melt-in-python-tutorial-and-visualization-29ec1450bb02">numpy reshape tutorial</a>.</p>
-<p>Let’s load the <code>reticulate</code> library in R so we can run Python in RStudio. I’ll then load my conda python environment. I highly recommend you try the code in Python while you read this article. Try running this tutorial on my shared <a href="https://beta.deepnote.com/project/d1350ad6-bcb4-4c3d-857b-c29d01b8a803">DeepNote notebook</a> (you can only run but not edit this notebook).</p>
+<p>Let’s load the <code>reticulate</code> library in R so we can run Python in RStudio. I’ll then load my conda python environment. I highly recommend you try the code in Python while you read this article. Try running this tutorial on my shared <a href="https://beta.deepnote.com/project/b494e5b7-9e5c-4e06-8a4a-43130d27aa3f">DeepNote notebook</a> (you can only run but not edit this notebook).</p>
 <div class="layout-chunk" data-layout="l-body">
 <pre class="r"><code>
 library(reticulate)
@@ -997,54 +996,32 @@ use_condaenv(condaenv = &quot;python376&quot;, conda = &quot;/opt/anaconda3/bin/
 <pre class="python"><code>
 import pandas as pd</code></pre>
 </div>
-<h2 id="wide-data">Wide data</h2>
-<p>It’s easiest to understand what a <strong>wide</strong> dataframe is or looks like if we look at one and compare it with a long dataframe.</p>
+<h2 id="long-data">Long data</h2>
+<p>It’s easiest to understand what a <strong>long</strong> dataframe is or looks like if we look at one and compare it with a wide dataframe.</p>
 <div style="width:300px">
 <figure>
-<img src="pic1.png" alt="Wide pandas dataframe can be melted/stacked using pd.melt()" /><figcaption>Wide pandas dataframe can be melted/stacked using pd.melt()</figcaption>
+<img src="pic1.png" alt="Long pandas dataframe can be “unmelted” using pd.pivot_table()" /><figcaption>Long pandas dataframe can be “unmelted” using pd.pivot_table()</figcaption>
 </figure>
 </div>
 <p>And below is the corresponding dataframe (with the same information) but in the <strong>long</strong> form:</p>
 <div style="width:300px">
 <figure>
-<img src="pic2.png" alt="Long pandas dataframe can be “unmelted” using pd.pivot_table()" /><figcaption>Long pandas dataframe can be “unmelted” using pd.pivot_table()</figcaption>
+<img src="pic2.png" alt="Wide pandas dataframe can be melted/stacked using pd.melt()" /><figcaption>Wide pandas dataframe can be melted/stacked using pd.melt()</figcaption>
 </figure>
 </div>
-<p>Before we begin our <code>pd.melt</code> tutorial, let’s recreate the wide dataframe above in Python with <code>pd.DataFrame</code>.</p>
+<p>Before we begin our <code>pd.pivot_table</code> tutorial, let’s recreate the long dataframe above in Python with <code>pd.DataFrame</code>.</p>
 <div class="layout-chunk" data-layout="l-body">
 <pre class="python"><code>
-df_wide = pd.DataFrame(
-  {&quot;student&quot;: [&quot;Andy&quot;, &quot;Bernie&quot;, &quot;Cindy&quot;, &quot;Deb&quot;],
-   &quot;school&quot;:  [&quot;Z&quot;, &quot;Y&quot;, &quot;Z&quot;, &quot;Y&quot;],
-   &quot;english&quot;: [10, 100, 1000, 10000],  # eng grades
-   &quot;math&quot;:    [20, 200, 2000, 20000],  # math grades
-   &quot;physics&quot;: [30, 300, 3000, 30000]   # physics grades
+df_long = pd.DataFrame(
+  {&quot;student&quot;: [&quot;Andy&quot;, &quot;Bernie&quot;, &quot;Cindy&quot;, &quot;Deb&quot;, &quot;Andy&quot;, &quot;Bernie&quot;, &quot;Cindy&quot;, &quot;Deb&quot;, &quot;Andy&quot;, &quot;Bernie&quot;, &quot;Cindy&quot;, &quot;Deb&quot;],
+   &quot;school&quot;:  [&quot;Z&quot;, &quot;Y&quot;, &quot;Z&quot;, &quot;Y&quot;, &quot;Z&quot;, &quot;Y&quot;, &quot;Z&quot;, &quot;Y&quot;, &quot;Z&quot;, &quot;Y&quot;, &quot;Z&quot;, &quot;Y&quot;],
+   &quot;class&quot;:   [&quot;english&quot;, &quot;english&quot;, &quot;english&quot;, &quot;english&quot;, &quot;math&quot;, &quot;math&quot;, &quot;math&quot;, &quot;math&quot;, &quot;physics&quot;, &quot;physics&quot;, &quot;physics&quot;, &quot;physics&quot;],
+   &quot;grade&quot;:   [10, 100, 1000, 10000, 20, 200, 2000, 20000, 30, 300, 3000, 30000]
   }
 )
-df_wide</code></pre>
+df_long</code></pre>
 <pre><code>
-  student school  english   math  physics
-0    Andy      Z       10     20       30
-1  Bernie      Y      100    200      300
-2   Cindy      Z     1000   2000     3000
-3     Deb      Y    10000  20000    30000</code></pre>
-</div>
-<h2 id="wide-to-long-with-melt">Wide to long with <code>melt</code></h2>
-<p>Common terms for this transformation are melt, unpivot, gather, stack. See <code>pd.melt()</code> documentation <a href="https://pandas.pydata.org/docs/reference/api/pandas.melt.html">here</a>.</p>
-<h3 id="melt-example-1">Melt Example 1</h3>
-<p>We melt the dataframe by specifying the identifier columns via <code>id_vars</code>. The “leftover” non-identifier columns (english, math, physics) will be melted or stacked onto each other into one column.</p>
-<p>A new indicator column will be created (contains values english, math, physics) and we can rename this new column (cLaSs) via <code>var_name</code>. We can also rename the column in which all the actual grades are contained (gRaDe) via <code>value_name</code>.</p>
-<div class="layout-chunk" data-layout="l-body">
-<pre class="python"><code>
-pd.melt(frame=df_wide, 
-        id_vars=[&quot;student&quot;, &quot;school&quot;], 
-        var_name=&quot;cLaSs&quot;, 
-        value_name=&quot;gRaDe&quot;)
-
-# or you can use the melt method associated with a dataframe
-# df_wide.melt(id_vars=[&quot;student&quot;, &quot;school&quot;], var_name=&quot;cLaSs&quot;, value_name=&quot;gRaDe&quot;)</code></pre>
-<pre><code>
-   student school    cLaSs  gRaDe
+   student school    class  grade
 0     Andy      Z  english     10
 1   Bernie      Y  english    100
 2    Cindy      Z  english   1000
@@ -1058,72 +1035,126 @@ pd.melt(frame=df_wide,
 10   Cindy      Z  physics   3000
 11     Deb      Y  physics  30000</code></pre>
 </div>
-<figure>
-<img src="pic3.png" alt="Wide to long: new indicator column “cLaSs” + values melted/stacked “gRaDe” column" /><figcaption>Wide to long: new indicator column “cLaSs” + values melted/stacked “gRaDe” column</figcaption>
-</figure>
-<h3 id="melt-example-2">Melt Example 2</h3>
-<p>You can use <code>value_vars</code> to specify which columns you want to melt or stack into column (here, we exclude physics column, so <code>value_vars=[&quot;english&quot;, &quot;math&quot;]</code>). We also drop the school column from <code>id_vars</code>.</p>
+<h2 id="long-to-wide-with-pivot_table">Long to wide with <code>pivot_table</code></h2>
+<p>Common terms for this transformation are pivot, spread, dcast. See <code>pd.pivot_table()</code> documentation <a href="https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.pivot_table.html">here</a>.</p>
+<p>We’ll use the <code>pivot_table</code> method because it’s very flexible relative to the <code>pivot</code> method (which I won’t explain here since <code>pivot_table</code> does everything <code>pivot</code> can do).</p>
+<h3 id="pivot-example-1">Pivot Example 1</h3>
+<p>Pivot the dataframe by specifying only the index:</p>
 <div class="layout-chunk" data-layout="l-body">
 <pre class="python"><code>
-pd.melt(frame=df_wide, 
-  id_vars=&quot;student&quot;, 
-  value_vars=[&quot;english&quot;,&quot;math&quot;], 
-  var_name=&quot;cLaSs&quot;, 
-  value_name=&quot;gRaDe&quot;)
-
-# or you can use the melt method associated with a dataframe
-# df_wide.melt(id_vars=&quot;student&quot;, value_vars=[&quot;english&quot;,&quot;math&quot;], var_name=&quot;cLaSs&quot;, value_name=&quot;gRaDe&quot;)</code></pre>
+df_long.pivot_table(index=[&quot;student&quot;, &quot;school&quot;])</code></pre>
 <pre><code>
-  student    cLaSs  gRaDe
-0    Andy  english     10
-1  Bernie  english    100
-2   Cindy  english   1000
-3     Deb  english  10000
-4    Andy     math     20
-5  Bernie     math    200
-6   Cindy     math   2000
-7     Deb     math  20000</code></pre>
+                grade
+student school       
+Andy    Z          20
+Bernie  Y         200
+Cindy   Z        2000
+Deb     Y       20000</code></pre>
 </div>
-<figure>
-<img src="pic4.png" alt="Wide to long: original columns school and physics have been dropped" /><figcaption>Wide to long: original columns school and physics have been dropped</figcaption>
-</figure>
-<h3 id="melt-example-3">Melt Example 3</h3>
-<p>Finally, let’s see what happens if we specify only the student column as the identifier column (<code>id_vars=&quot;student&quot;</code>) but do not specify which columns you want to stack via <code>value_vars</code>. As a result, all non-identifier columns (school, english, math, physics) will be stacked into one column.</p>
-<p>The resulting long dataframe looks wrong because now the cLaSs and gRaDe columns contain values that shouldn’t be there. The point here is to show you how <code>pd.melt</code> works.</p>
 <div class="layout-chunk" data-layout="l-body">
 <pre class="python"><code>
-pd.melt(frame=df_wide,
-        id_vars=&quot;student&quot;,
-        var_name=&quot;cLaSs&quot;, 
-        value_name=&quot;gRaDe&quot;)
-
-# or you can use the melt method associated with a dataframe
-# df_wide.melt(id_vars=&quot;student&quot;, var_name=&quot;cLaSs&quot;, value_name=&quot;gRaDe&quot;)</code></pre>
+# same as above
+df_long.pivot_table(index=[&quot;student&quot;, &quot;school&quot;], aggfunc=&#39;mean&#39;) </code></pre>
 <pre><code>
-   student    cLaSs  gRaDe
-0     Andy   school      Z
-1   Bernie   school      Y
-2    Cindy   school      Z
-3      Deb   school      Y
-4     Andy  english     10
-5   Bernie  english    100
-6    Cindy  english   1000
-7      Deb  english  10000
-8     Andy     math     20
-9   Bernie     math    200
-10   Cindy     math   2000
-11     Deb     math  20000
-12    Andy  physics     30
-13  Bernie  physics    300
-14   Cindy  physics   3000
-15     Deb  physics  30000</code></pre>
+                grade
+student school       
+Andy    Z          20
+Bernie  Y         200
+Cindy   Z        2000
+Deb     Y       20000</code></pre>
 </div>
-<p>This table looks wrong because the <code>school</code> column in <code>df_wide</code> doesn’t belong—<code>school</code> should be another identifier column (see Melt 1 above).</p>
-<figure>
-<img src="pic5.png" alt="Wide to long: school column isn’t an identifier column" /><figcaption>Wide to long: school column isn’t an identifier column</figcaption>
-</figure>
+<div class="layout-chunk" data-layout="l-body">
+<pre class="python"><code>
+df_long.pivot_table(index=[&quot;student&quot;, &quot;school&quot;], aggfunc=&#39;sum&#39;).reset_index()</code></pre>
+<pre><code>
+  student school  grade
+0    Andy      Z     60
+1  Bernie      Y    600
+2   Cindy      Z   6000
+3     Deb      Y  60000</code></pre>
+</div>
+<div class="layout-chunk" data-layout="l-body">
+<pre class="python"><code>
+df_long.pivot_table(index=[&quot;student&quot;, &quot;school&quot;]).reset_index()</code></pre>
+<pre><code>
+  student school  grade
+0    Andy      Z     20
+1  Bernie      Y    200
+2   Cindy      Z   2000
+3     Deb      Y  20000</code></pre>
+</div>
+<div class="layout-chunk" data-layout="l-body">
+<pre class="python"><code>
+df_long.pivot_table(index=[&quot;student&quot;, &quot;school&quot;], aggfunc=&#39;max&#39;).reset_index()</code></pre>
+<pre><code>
+  student school    class  grade
+0    Andy      Z  physics     30
+1  Bernie      Y  physics    300
+2   Cindy      Z  physics   3000
+3     Deb      Y  physics  30000</code></pre>
+</div>
+<div class="layout-chunk" data-layout="l-body">
+<pre class="python"><code>
+df_long.pivot_table(index=[&quot;student&quot;, &quot;school&quot;], aggfunc=[&#39;sum&#39;, &#39;last&#39;, &#39;min&#39;]).reset_index()</code></pre>
+<pre><code>
+  student school    sum     last             min       
+                  grade    class  grade    class  grade
+0    Andy      Z     60  physics     30  english     10
+1  Bernie      Y    600  physics    300  english    100
+2   Cindy      Z   6000  physics   3000  english   1000
+3     Deb      Y  60000  physics  30000  english  10000</code></pre>
+</div>
+<div class="layout-chunk" data-layout="l-body">
+<pre class="python"><code>
+df_long.pivot_table(index=[&quot;student&quot;, &quot;school&quot;], columns=&#39;class&#39;, values=&#39;grade&#39;).reset_index()</code></pre>
+<pre><code>
+class student school  english   math  physics
+0        Andy      Z       10     20       30
+1      Bernie      Y      100    200      300
+2       Cindy      Z     1000   2000     3000
+3         Deb      Y    10000  20000    30000</code></pre>
+</div>
+<div class="layout-chunk" data-layout="l-body">
+<pre class="python"><code>
+df_long.pivot_table(index=[&quot;student&quot;, &quot;school&quot;], columns=&#39;class&#39;, values=&#39;grade&#39;, margins=True).reset_index()</code></pre>
+<pre><code>
+class student school  english   math  physics    All
+0        Andy      Z     10.0     20     30.0     20
+1      Bernie      Y    100.0    200    300.0    200
+2       Cindy      Z   1000.0   2000   3000.0   2000
+3         Deb      Y  10000.0  20000  30000.0  20000
+4         All          2777.5   5555   8332.5   5555</code></pre>
+</div>
+<div class="layout-chunk" data-layout="l-body">
+<pre class="python"><code>
+df_long.pivot_table(index=&quot;student&quot;, columns=[&#39;school&#39;, &#39;class&#39;], values=&#39;grade&#39;).reset_index()</code></pre>
+<pre><code>
+school student        Y                         Z                
+class           english     math  physics english    math physics
+0         Andy      NaN      NaN      NaN    10.0    20.0    30.0
+1       Bernie    100.0    200.0    300.0     NaN     NaN     NaN
+2        Cindy      NaN      NaN      NaN  1000.0  2000.0  3000.0
+3          Deb  10000.0  20000.0  30000.0     NaN     NaN     NaN</code></pre>
+</div>
+<div class="layout-chunk" data-layout="l-body">
+<pre class="python"><code>
+df_long.pivot_table(index=&quot;student&quot;, columns=[&#39;school&#39;, &#39;class&#39;], values=&#39;grade&#39;, fill_value=-5)</code></pre>
+<pre><code>
+school        Y                      Z              
+class   english   math physics english  math physics
+student                                             
+Andy         -5     -5      -5      10    20      30
+Bernie      100    200     300      -5    -5      -5
+Cindy        -5     -5      -5    1000  2000    3000
+Deb       10000  20000   30000      -5    -5      -5</code></pre>
+</div>
+<h2 id="resources">Resources</h2>
+<p><a href="https://pbpython.com/pandas-pivot-table-explained.html" class="uri">https://pbpython.com/pandas-pivot-table-explained.html</a></p>
+<p><a href="https://pandas.pydata.org/pandas-docs/stable/user_guide/reshaping.html" class="uri">https://pandas.pydata.org/pandas-docs/stable/user_guide/reshaping.html</a></p>
+<p><a href="https://chrisalbon.com/python/data_wrangling/pandas_pivot_tables/" class="uri">https://chrisalbon.com/python/data_wrangling/pandas_pivot_tables/</a></p>
+<p><a href="https://stackoverflow.com/questions/22798934/pandas-long-to-wide-reshape-by-two-variables" class="uri">https://stackoverflow.com/questions/22798934/pandas-long-to-wide-reshape-by-two-variables</a></p>
 <h2 id="support-my-work">Support my work</h2>
-<p>I hope now you have a better understanding of how <code>pd.melt</code> reshapes dataframes. If you find this post useful, check out my other articles and visit my <a href="https://medium.com/@ausius">Medium page</a>.</p>
+<p>I hope now you have a better understanding of how <code>pd.pivot_table</code> reshapes dataframes. If you find this post useful, check out my other articles and visit my <a href="https://medium.com/@ausius">Medium page</a>.</p>
 <p>If you’ve enjoyed my article, <a href="https://donorbox.org/support-my-teaching">support my work and become a patron here</a>!</p>
 <!--radix_placeholder_article_footer-->
 <!--/radix_placeholder_article_footer-->

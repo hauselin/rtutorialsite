@@ -1,5 +1,5 @@
 ---
-title: "Reshaping Python pandas dataframe from wide to long with pd.melt"
+title: "Reshape Python pandas dataframe from wide to long with pd.melt"
 description: |
   Learn and visualize how pd.melt reshapes data from wide to long form
 author:
@@ -23,7 +23,7 @@ editor_options:
 knitr::opts_chunk$set(echo = TRUE, cache = FALSE, comment = NA, message = FALSE, warning = FALSE)
 ```
 
-Get source code for this RMarkdown script [here](https://github.com/hauselin/rtutorialsite/blob/master/_posts/2019-12-20-numpy-reshape/numpy-reshape.Rmd).
+Get source code for this RMarkdown script [here](https://raw.githubusercontent.com/hauselin/rtutorialsite/master/_posts/2020-05-14-reshaping-data-in-python-pandas/reshaping-data-in-python-pandas.Rmd).
 
 This Python tutorial is also available on [Medium, Towards Data Science](https://towardsdatascience.com/reshape-pandas-dataframe-with-melt-in-python-tutorial-and-visualization-29ec1450bb02). Click here if you're looking for the R version of melt (also the `melt` function in R).
 
@@ -53,13 +53,17 @@ import pandas as pd
 
 It’s easiest to understand what a **wide** dataframe is or looks like if we look at one and compare it with a long dataframe.
 
+<div style="width:300px">
 ![Wide pandas dataframe can be melted/stacked using pd.melt()](./pic1.png)
+</div>
 
 And below is the corresponding dataframe (with the same information) but in the **long** form:
 
-![Wide pandas dataframe can be melted/stacked using pd.melt()](./pic2.png)
+<div style="width:300px">
+![Long pandas dataframe can be “unmelted” using pd.pivot_table()](./pic2.png)
+</div>
 
-Let's create the **wide** dataset.
+Before we begin our `pd.melt` tutorial, let’s recreate the wide dataframe above in Python with `pd.DataFrame`.
 
 ```{python}
 df_wide = pd.DataFrame(
@@ -79,37 +83,50 @@ Common terms for this transformation are melt, unpivot, gather, stack. See `pd.m
 
 ### Melt Example 1
 
+We melt the dataframe by specifying the identifier columns via `id_vars`. The “leftover” non-identifier columns (english, math, physics) will be melted or stacked onto each other into one column.
+
+A new indicator column will be created (contains values english, math, physics) and we can rename this new column (cLaSs) via `var_name`. We can also rename the column in which all the actual grades are contained (gRaDe) via `value_name`.
+
 ```{python}
-pd.melt(frame=df_wide, id_vars=["student", "school"], var_name="cLaSs", value_name="gRaDe")
+pd.melt(frame=df_wide, 
+        id_vars=["student", "school"], 
+        var_name="cLaSs", 
+        value_name="gRaDe")
 
 # or you can use the melt method associated with a dataframe
 # df_wide.melt(id_vars=["student", "school"], var_name="cLaSs", value_name="gRaDe")
 ```
 
+![Wide to long: new indicator column “cLaSs” + values melted/stacked “gRaDe” column](./pic3.png)
+
 ### Melt Example 2
 
-Melt the dataframe (note `school` and `physics` columns aren't specified anywhere):
+You can use `value_vars` to specify which columns you want to melt or stack into column (here, we exclude physics column, so `value_vars=["english", "math"]`). We also drop the school column from `id_vars`.
 
 ```{python}
-pd.melt(frame=df_wide, id_vars="student", value_vars=["english","math"], var_name="cLaSs", value_name="gRaDe")
+pd.melt(frame=df_wide, 
+  id_vars="student", 
+  value_vars=["english","math"], 
+  var_name="cLaSs", 
+  value_name="gRaDe")
 
 # or you can use the melt method associated with a dataframe
 # df_wide.melt(id_vars="student", value_vars=["english","math"], var_name="cLaSs", value_name="gRaDe")
 ```
 
-What happened here? We stacked/melted the `english` and `math` columns.
-
-* `id_vars`: we specify the identifier column as the `student` column (ignoring the other identifier column `school`) 
-* `value_vars`: we melt only two columns, `english` and `math` (ignoring `physics`)
-* `var_name`: we specify a new column name to represent `value_vars`
-* `value_name`: we specify a new column name to represent the contents in `value_vars`
+![Wide to long: original columns school and physics have been dropped](./pic4.png)
 
 ### Melt Example 3
 
-If we leave out the `value_vars` parameter, all columns not in `id_vars` will be stacked/melted. In this case, all columns (from `school` to `physics`) will be melted into a single column.
+Finally, let’s see what happens if we specify only the student column as the identifier column (`id_vars="student"`) but do not specify which columns you want to stack via `value_vars`. As a result, all non-identifier columns (school, english, math, physics) will be stacked into one column.
+
+The resulting long dataframe looks wrong because now the cLaSs and gRaDe columns contain values that shouldn’t be there. The point here is to show you how `pd.melt` works.
 
 ```{python}
-pd.melt(frame=df_wide, id_vars="student", var_name="cLaSs", value_name="gRaDe")
+pd.melt(frame=df_wide,
+        id_vars="student",
+        var_name="cLaSs", 
+        value_name="gRaDe")
 
 # or you can use the melt method associated with a dataframe
 # df_wide.melt(id_vars="student", var_name="cLaSs", value_name="gRaDe")
@@ -117,81 +134,10 @@ pd.melt(frame=df_wide, id_vars="student", var_name="cLaSs", value_name="gRaDe")
 
 This table looks wrong because the `school` column in `df_wide` doesn't belong—`school` should be another identifier column (see Melt 1 above).
 
-## Long data
+![Wide to long: school column isn’t an identifier column](./pic5.png)
 
-Create a simple dataframe in long form.
+## Support my work
 
-```{python}
-df_long = pd.DataFrame(
-  {"student": ["Andy", "Bernie", "Cindy", "Deb", "Andy", "Bernie", "Cindy", "Deb", "Andy", "Bernie", "Cindy", "Deb"],
-   "school":  ["Z", "Y", "Z", "Y", "Z", "Y", "Z", "Y", "Z", "Y", "Z", "Y"],
-   "class":   ["english", "english", "english", "english", "math", "math", "math", "math", "physics", "physics", "physics", "physics"],
-   "grade":   [10, 100, 1000, 10000, 20, 200, 2000, 20000, 30, 300, 3000, 30000]
-  }
-)
-df_long
-```
+I hope now you have a better understanding of how `pd.melt` reshapes dataframes. If you find this post useful, check out my other articles and visit my [Medium page](https://medium.com/@ausius).
 
-
-##s Long to wide with `pivot_table`
-
-Common terms for this transformation are pivot, spread, dcast. See `pd.pivot_table()` documentation [here](https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.pivot_table.html).
-
-We'll use the `pivot_table` method because it's very flexible relative to the `pivot` method (which I won't explain here since `pivot_table` does everything `pivot` can do).
-
-### Pivot 1
-
-Pivot the dataframe by specifying only the index:
-
-```{python}
-df_long.pivot_table(index=["student", "school"])
-```
-
-
-```{python}
-# same as above
-df_long.pivot_table(index=["student", "school"], aggfunc='mean') 
-```
-
-```{python}
-df_long.pivot_table(index=["student", "school"], aggfunc='sum').reset_index()
-```
-
-
-```{python}
-df_long.pivot_table(index=["student", "school"]).reset_index()
-```
-
-```{python}
-df_long.pivot_table(index=["student", "school"], aggfunc='max').reset_index()
-```
-
-```{python}
-df_long.pivot_table(index=["student", "school"], aggfunc=['sum', 'last', 'min']).reset_index()
-```
-
-```{python}
-df_long.pivot_table(index=["student", "school"], columns='class', values='grade').reset_index()
-```
-
-```{python}
-df_long.pivot_table(index=["student", "school"], columns='class', values='grade', margins=True).reset_index()
-```
-
-```{python}
-df_long.pivot_table(index="student", columns=['school', 'class'], values='grade').reset_index()
-```
-
-```{python}
-df_long.pivot_table(index="student", columns=['school', 'class'], values='grade', fill_value=-5)
-```
-
-## Resources
-
-https://pbpython.com/pandas-pivot-table-explained.html
-
-https://pandas.pydata.org/pandas-docs/stable/user_guide/reshaping.html
-
-https://chrisalbon.com/python/data_wrangling/pandas_pivot_tables/
-
-https://stackoverflow.com/questions/22798934/pandas-long-to-wide-reshape-by-two-variables
+If you've enjoyed my article, [support my work and become a patron here](https://donorbox.org/support-my-teaching)!
