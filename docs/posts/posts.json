@@ -1,5 +1,25 @@
 [
   {
+    "path": "posts/2020-05-14-reshaping-data-in-python-pandas/",
+    "title": "Reshape Python pandas dataframe from wide to long with pd.melt",
+    "description": "Learn and visualize how pd.melt reshapes data from wide to long form",
+    "author": [
+      {
+        "name": "Hause Lin",
+        "url": {}
+      }
+    ],
+    "date": "2020-05-14",
+    "categories": [
+      "python",
+      "pandas"
+    ],
+    "preview": "posts/2020-05-14-reshaping-data-in-python-pandas/./main_wide2long.png",
+    "last_modified": "2020-05-17T21:15:37-04:00",
+    "preview_width": 1796,
+    "preview_height": 1312
+  },
+  {
     "path": "posts/2020-04-11-causal-inference-and-lords-paradox-change-score-or-covariate/",
     "title": "Causal inference and Lord's Paradox: Change score or covariate?",
     "description": "Use directed acyclic graphs and structural equation modeling to understand Lord's paradox.",
