@@ -27,7 +27,7 @@ knitr::opts_chunk$set(echo = TRUE, cache = FALSE, comment = NA, message = FALSE,
 
 Get source code for this RMarkdown script [here](https://raw.githubusercontent.com/hauselin/rtutorialsite/master/_posts/2020-05-17-reshape-python-pandas-dataframe-from-long-to-wide-with-pivottable/reshape-python-pandas-dataframe-from-long-to-wide-with-pivottable.Rmd).
 
-This Python tutorial is also available on [Medium, Towards Data Science](https://towardsdatascience.com/reshape-pandas-dataframe-with-melt-in-python-tutorial-and-visualization-29ec1450bb02). Click here if you're looking for the R version of melt (also the `melt` function in R).
+This Python tutorial is on [Medium, Towards Data Science](https://towardsdatascience.com/reshape-pandas-dataframe-with-melt-in-python-tutorial-and-visualization-29ec1450bb02). Click here if you're looking for the tutorial for the R version of melt (also the `melt` function in R).
 
 ## Consider being a patron and supporting my work?
 
@@ -37,7 +37,7 @@ How does the pandas `melt()` method reshape dataframes? How do you reshape a dat
 
 ![Summary of how pd.melt() works](./main_wide2long.png)
 
-Also, you might want to check out the official pandas documentation and my [numpy reshape tutorial](https://towardsdatascience.com/reshape-pandas-dataframe-with-melt-in-python-tutorial-and-visualization-29ec1450bb02).
+Also, you might want to check out the official pandas documentation and my [numpy reshape tutorial](https://towardsdatascience.com/reshaping-numpy-arrays-in-python-a-step-by-step-pictorial-tutorial-aed5f471cf0b?source=friends_link&sk=3dc229066e89cb5bcd4bb86b301f0a5c).
 
 Let's load the `reticulate` library in R so we can run Python in RStudio. I'll then load my conda python environment. I highly recommend you try the code in Python while you read this article. Try running this tutorial on my shared [DeepNote notebook](https://beta.deepnote.com/project/d1350ad6-bcb4-4c3d-857b-c29d01b8a803) (you can only run but not edit this notebook).
 
@@ -83,7 +83,7 @@ df_wide
 
 Common terms for this transformation are melt, unpivot, gather, stack. See `pd.melt()` documentation [here](https://pandas.pydata.org/docs/reference/api/pandas.melt.html).
 
-### Melt Example 1
+### Melt example 1
 
 We melt the dataframe by specifying the identifier columns via `id_vars`. The “leftover” non-identifier columns (english, math, physics) will be melted or stacked onto each other into one column.
 
@@ -101,7 +101,7 @@ pd.melt(frame=df_wide,
 
 ![Wide to long: new indicator column “cLaSs” + values melted/stacked “gRaDe” column](./pic3.png)
 
-### Melt Example 2
+### Melt example 2
 
 You can use `value_vars` to specify which columns you want to melt or stack into column (here, we exclude physics column, so `value_vars=["english", "math"]`). We also drop the school column from `id_vars`.
 
@@ -118,7 +118,7 @@ pd.melt(frame=df_wide,
 
 ![Wide to long: original columns school and physics have been dropped](./pic4.png)
 
-### Melt Example 3
+### Melt example 3
 
 Finally, let’s see what happens if we specify only the student column as the identifier column (`id_vars="student"`) but do not specify which columns you want to stack via `value_vars`. As a result, all non-identifier columns (school, english, math, physics) will be stacked into one column.
 
@@ -140,6 +140,6 @@ This table looks wrong because the `school` column in `df_wide` doesn't belong�
 
 ## Support my work
 
-I hope now you have a better understanding of how `pd.melt` reshapes dataframes. If you find this post useful, check out my other articles and visit my [Medium page](https://medium.com/@ausius).
+I hope now you have a better understanding of how `pd.melt` reshapes dataframes. If you find this post useful, check out my other articles and folow me on [Medium ](https://medium.com/@ausius).
 
 If you've enjoyed my article, [support my work and become a patron here](https://donorbox.org/support-my-teaching)!
