@@ -6,7 +6,7 @@ author:
   - name: Hause Lin
     url: {}
 date: 05-14-2020
-draft: true
+draft: false
 preview: ./main_wide2long.png
 categories: 
   - python
