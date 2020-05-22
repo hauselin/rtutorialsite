@@ -37,7 +37,7 @@ The opposite of `pivot_table` is `melt`, and you can find the tutorial for `melt
 
 How does the pandas `pivot_table()` method reshape dataframes? How do you reshape a dataframe from long to wide form? This tutorial will walk you through reshaping dataframes using `pd.pivot_table()` or the `pivot_table` method associated with pandas dataframes.
 
-![Summary of how pd.pivot_table() works](pic1.png)
+![Summary of how pd.pivot_table() works](main.png)
 
 Also, you might want to check out the official pandas documentation and my [numpy reshape tutorial](https://towardsdatascience.com/reshaping-numpy-arrays-in-python-a-step-by-step-pictorial-tutorial-aed5f471cf0b?source=friends_link&sk=3dc229066e89cb5bcd4bb86b301f0a5c).
 
