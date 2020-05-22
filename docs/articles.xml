@@ -7,7 +7,16 @@
     <description>Data science tutorials
 </description>
     <generator>Radix</generator>
-    <lastBuildDate>Thu, 14 May 2020 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Sun, 17 May 2020 00:00:00 +0000</lastBuildDate>
+    <item>
+      <title>Reshape Python pandas dataframe from long to wide with pivot_table</title>
+      <dc:creator>Hause Lin</dc:creator>
+      <link>https://hausetutorials.netlify.com/posts/2020-05-17-reshape-python-pandas-dataframe-from-long-to-wide-with-pivottable</link>
+      <description>Learn and visualize how pd.pivot_table reshapes data from long to wide form</description>
+      <guid>https://hausetutorials.netlify.com/posts/2020-05-17-reshape-python-pandas-dataframe-from-long-to-wide-with-pivottable</guid>
+      <pubDate>Sun, 17 May 2020 00:00:00 +0000</pubDate>
+      <media:content url="https://hausetutorials.netlify.com/posts/2020-05-17-reshape-python-pandas-dataframe-from-long-to-wide-with-pivottable/./main.png" medium="image" type="image/png" width="1260" height="735"/>
+    </item>
     <item>
       <title>Reshape Python pandas dataframe from wide to long with pd.melt</title>
       <dc:creator>Hause Lin</dc:creator>

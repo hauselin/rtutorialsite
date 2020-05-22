@@ -6,8 +6,8 @@ author:
   - name: Hause Lin
     url: {}
 date: 05-17-2020
-draft: true
-preview: ./pic1.png
+draft: false
+preview: ./main.png
 categories: 
   - python
   - pandas
@@ -27,9 +27,9 @@ knitr::opts_chunk$set(echo = TRUE, cache = FALSE, comment = NA, message = FALSE,
 
 Get source code for this RMarkdown script [here](https://raw.githubusercontent.com/hauselin/rtutorialsite/master/_posts/2020-05-17-reshape-python-pandas-dataframe-from-long-to-wide-with-pivottable/reshape-python-pandas-dataframe-from-long-to-wide-with-pivottable.Rmd).
 
-This Python tutorial is also on [Medium, Towards Data Science](https://towardsdatascience.com/reshape-pandas-dataframe-with-melt-in-python-tutorial-and-visualization-29ec1450bb02). Click here if you're looking for the tutorail for the R version of `pivot_table` (also the `dcast` function in R).
+This Python tutorial is also on [Medium, Towards Data Science](https://towardsdatascience.com/reshape-pandas-dataframe-with-pivot-table-in-python-tutorial-and-visualization-2248c2012a31). Click here if you're looking for the tutorial for the R version of `pivot_table` (also the `dcast` function in R).
 
-The opposite of `pivot_table` is `melt`, and you can find the tutorial for `melt` (wide to long) [here](https://towardsdatascience.com/reshape-pandas-dataframe-with-melt-in-python-tutorial-and-visualization-29ec1450bb02?source=friends_link&sk=5200888fd2030a2ede726c00dec8b610).
+The opposite of `pivot_table` is `melt`, and you can find the tutorial for `melt` (wide to long) [here](https://towardsdatascience.com/reshape-pandas-dataframe-with-melt-in-python-tutorial-and-visualization-29ec1450bb02).
 
 ## Consider being a patron and supporting my work?
 
@@ -58,25 +58,37 @@ import pandas as pd
 It’s easiest to understand what a **long** dataframe is or looks like if we look at one and compare it with a wide dataframe.
 
 <div style="width:300px">
-![Long pandas dataframe can be “unmelted” using pd.pivot_table()](./pic1.png)
+![Long pandas dataframe can be “unmelted” with pd.pivot_table()](./pic1.png)
 </div>
 
-And below is the corresponding dataframe (with the same information) but in the **long** form:
+And below is the corresponding dataframe (with the same information) but in the **wide** form:
 
 <div style="width:300px">
-![Wide pandas dataframe can be melted/stacked using pd.melt()](./pic2.png)
+![Wide pandas dataframe can be melted/stacked with pd.melt()](./pic2.png)
 </div>
 
 Before we begin our `pd.pivot_table` tutorial, let’s recreate the long dataframe above in Python with `pd.DataFrame`.
 
 ```{python}
-df_long = pd.DataFrame(
-  {"student": ["Andy", "Bernie", "Cindy", "Deb", "Andy", "Bernie", "Cindy", "Deb", "Andy", "Bernie", "Cindy", "Deb"],
-   "school":  ["Z", "Y", "Z", "Y", "Z", "Y", "Z", "Y", "Z", "Y", "Z", "Y"],
-   "class":   ["english", "english", "english", "english", "math", "math", "math", "math", "physics", "physics", "physics", "physics"],
-   "grade":   [10, 100, 1000, 10000, 20, 200, 2000, 20000, 30, 300, 3000, 30000]
-  }
-)
+df_long = pd.DataFrame({
+        "student":
+            ["Andy", "Bernie", "Cindy", "Deb",
+             "Andy", "Bernie", "Cindy", "Deb",
+             "Andy", "Bernie", "Cindy", "Deb"],
+        "school":
+            ["Z", "Y", "Z", "Y",
+             "Z", "Y", "Z", "Y",
+             "Z", "Y", "Z", "Y"],
+        "class":
+            ["english", "english", "english", "english",
+             "math", "math", "math", "math",
+             "physics", "physics", "physics", "physics"],
+        "grade":
+            [10, 100, 1000, 10000,
+             20, 200, 2000, 20000,
+             30, 300, 3000, 30000]
+        
+})
 df_long
 ```
 
@@ -87,63 +99,107 @@ Common terms for this transformation are pivot, spread, dcast. See `pd.pivot_tab
 
 We'll use the `pivot_table` method because it's very flexible relative to the `pivot` method (which I won't explain here since `pivot_table` does everything `pivot` can do).
 
-### Pivot Example 1
+### Pivot example 1
 
-Pivot the dataframe by specifying only the index:
+We often want to keep the identifier columns as they are (`index=["student", "school"]`) but pivot or "split" a column's values (`values='grade'`) based on another column (`columns='class'`). Compare the original and pivoted dataframes below and you'll understand what that means.
 
-```{python}
-df_long.pivot_table(index=["student", "school"])
-```
-
+Each unique value in the class column will be a new column (english, math, physics) in the pivoted/wide dataframe. We can also provide a list to the `columns` parameter.
 
 ```{python}
-# same as above
-df_long.pivot_table(index=["student", "school"], aggfunc='mean') 
+df_long.pivot_table(index=["student", "school"], 
+                    columns='class', 
+                    values='grade')
 ```
+
+To get rid of the multi-index, use `.reset_index()`
 
 ```{python}
-df_long.pivot_table(index=["student", "school"], aggfunc='sum').reset_index()
+df_long.pivot_table(index=["student", "school"], 
+                    columns='class', 
+                    values='grade').reset_index()
 ```
 
+![Long to wide: values in grade are split/pivoted into three separate columns](piv1.png)
+
+### Pivot example 2
+
+You can also aggregate each resulting row and column by specifying `margins=True` (default `False`). 
+
+The example below aggregates by computing the sum via `aggfunc='sum'` (default `'mean'`) and there are many other aggregation functions you can use (e.g., `'median'`, `'sum'`, `'max'`). You can also specify multiple functions as a list (e.g., `aggfunc=['mean', 'sum']`)
 
 ```{python}
-df_long.pivot_table(index=["student", "school"]).reset_index()
+df_long.pivot_table(index=["student", "school"], 
+                    columns='class', 
+                    values='grade',
+                    margins=True,
+                    aggfunc='sum').reset_index()
 ```
+
+![Long to wide: margins are included](piv2.png)
+
+### Pivot example 3
+
+If we don't specify any columns via `columns`, **all** remaining non-identifier **numeric** columns (only grade in this dataframe) will be pivoted (long to wide).
 
 ```{python}
-df_long.pivot_table(index=["student", "school"], aggfunc='max').reset_index()
+df_long.pivot_table(index=["student", "school"]) 
+# default aggfunc='mean'
 ```
+
+In the original long data, each student has **four** grades (english, math, physics), yet in the `pivot_table` example above, each student only has **one** grade after pivoting. 
+
+Why and how does it work? If you remember from the example above, the default is `aggfunc='mean'`. Thus, what the function did was it grouped the data by student and school (via `index=["student", "school"]`), and computed the mean value for each group. 
+
+![Long to wide: all non-identifier numeric columns are pivoted](piv3.png)
+
+If you use the `groupby` method associated with the pandas dataframe, you will get the same result as above.
 
 ```{python}
-df_long.pivot_table(index=["student", "school"], aggfunc=['sum', 'last', 'min']).reset_index()
+df_long.groupby(['student', 'school']).mean()
 ```
+
+If you change the default aggregation function (e.g., `aggfunc='max'`), you'll get different results. The examples below show you how to specify different aggregation functions and also show you how `groupby` can be used to perform the same pivot.
+
+Note that you'll also see the class that is associated with each 'max' and 'first' value.
 
 ```{python}
-df_long.pivot_table(index=["student", "school"], columns='class', values='grade').reset_index()
+df_long.pivot_table(index=["student", "school"], 
+                    aggfunc=['max', 'first'])
+
+df_long.groupby(["student", "school"]).agg(['max', 'first'])
 ```
+
+### Pivot example 4
+
+The final example shows you what happens when you pivot multiple columns (`columns=['school', 'class']`) and you can deal with missing values after pivoting. 
+
+Here we're saying, for each student (`index="student"`), split their grades (`values=grade`) into separate columns, based on their school and class (`columns=['school', 'class']`). 
 
 ```{python}
-df_long.pivot_table(index=["student", "school"], columns='class', values='grade', margins=True).reset_index()
+df_long.pivot_table(index="student", 
+                    columns=['school', 'class'], 
+                    values='grade')
 ```
+
+The `NaN` values are expected because each student belongs to only one school (Y or Z). For example, Andy is in school Z and therefore doesn't have grades in the Y columns.
+
+We can replace the `NaN` values with another value (-5 in the example below).
 
 ```{python}
-df_long.pivot_table(index="student", columns=['school', 'class'], values='grade').reset_index()
+df_long.pivot_table(index="student", 
+                    columns=['school', 'class'], 
+                    values='grade', 
+                    fill_value=-5)
 ```
 
-```{python}
-df_long.pivot_table(index="student", columns=['school', 'class'], values='grade', fill_value=-5)
-```
-
+![Long to wide: missing values replaced by -5 (default NaN)](piv4.png)
 
 ## Resources
 
-https://pbpython.com/pandas-pivot-table-explained.html
-
-https://pandas.pydata.org/pandas-docs/stable/user_guide/reshaping.html
-
-https://chrisalbon.com/python/data_wrangling/pandas_pivot_tables/
-
-https://stackoverflow.com/questions/22798934/pandas-long-to-wide-reshape-by-two-variables
+* [Pandas official reshaping documentation](https://pandas.pydata.org/pandas-docs/stable/user_guide/reshaping.html)
+* [Excellent stackoverflow responses](https://stackoverflow.com/questions/22798934/pandas-long-to-wide-reshape-by-two-variables)
+* [Chris Albon's pivot_table examples](https://chrisalbon.com/python/data_wrangling/pandas_pivot_tables/)
+* [Practical Business Python's pivot_table tutorial](https://pbpython.com/pandas-pivot-table-explained.html)
 
 ## Support my work
 
