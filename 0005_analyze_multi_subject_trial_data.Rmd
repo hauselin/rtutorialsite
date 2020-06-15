@@ -68,7 +68,7 @@ This is how my directories/folders/files look like. You should make sure yours l
 ## Load libraries
 
 ```{r libraries}
-library(tidyverse); library(data.table); library(dtplyr); library(lme4); library(lmerTest); library(ggbeeswarm); library(hausekeep)
+library(tidyverse); library(data.table); library(lme4); library(lmerTest); library(ggbeeswarm); library(hausekeep)
 ```
 
 <aside>
@@ -79,10 +79,10 @@ library(tidyverse); library(data.table); library(dtplyr); library(lme4); library
 
 ```{r read data}
 (files <- list.files(path = "./data/rt_acc_data_raw", pattern = "subject_", full.names = TRUE)) # find matching file names
-dt1 <- lapply(files, fread) %>% bind_rows() %>% as.data.table() # read data, combine items in list, convert to data.table
+dt1 <- bind_rows(lapply(files, fread)) %>% as.data.table() # read data, combine items in list, convert to data.table
 ```
 
-Note and explanation: `lapply` loops through each item in `files` and applies the `fread` function to each item. `bind_rows` combines all the dataframes stored as separate items in the list, and `tbl_dt()` converts the merged dataframe into `data.table` and `tibble` class.
+Note and explanation: `lapply` loops through each item in `files` and applies the `fread` function to each item. `bind_rows` combines all the dataframes stored as separate items in the list, and `as.data.table()` converts the merged dataframe into `data.table` class.
 
 ## Summarize experimental design
 

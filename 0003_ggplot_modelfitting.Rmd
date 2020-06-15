@@ -43,8 +43,8 @@ Get source code for this RMarkdown script [here](https://github.com/hauselin/rtu
 Use `library()` to load packages at the top of each R script.
 
 ```{r loading packages, results="hide", message=FALSE, warning=FALSE}
-library(tidyverse); library(data.table); library(broom); library(dtplyr); 
-library(lme4); library(lmerTest); library(ggbeeswarm); library(cowplot)
+library(tidyverse); library(data.table)
+library(lme4); library(lmerTest); library(ggbeeswarm)
 library(hausekeep)
 ```
 
@@ -118,9 +118,9 @@ plot1 # print plot
 
 ## Save a plot to your directory
 
-Save to Figures directory, assuming this directory/folder already exists. You can also change the width/height of your figure and dpi (resolution/quality) of your figure (journals usually expect around 300 dpi).
+Save to Figures directory, assuming this directory/folder already exists. You can also change the width/height of your figure and dpi (resolution/quality) of your figure (since journals often expect around 300 dpi).
 
-```{r, eval=F}
+```{r, eval=FALSE}
 ggsave(plot1, './Figures/iq_grades.png', width = 10, heigth = 10, dpi = 100)
 ```
 
@@ -305,7 +305,7 @@ ggplot(df1, aes(overallClass, iq)) + # y: iq
 ```{r}
 ggplot(df1, aes(class, iq)) + # y: iq
     geom_quasirandom(alpha = 0.3) +
-    stat_summary(fun.y = mean, geom = 'point', size = 3) + # apply mean function to y axis (fun.y = mean)
+    stat_summary(fun = mean, geom = 'point', size = 3) + # apply mean function (fun = mean) (median or other functions work too)
     stat_summary(fun.data = mean_cl_normal, geom = 'errorbar', width = 0, size = 1) # apply mean_cl_normal function to data
 ```
 
@@ -428,9 +428,9 @@ ggplot(df1, aes(iq, grades)) +
 Test the relationship in the plot above
 
 ```{r}
-modelLinear <- lm(formula = iq ~ grades, data = df1)
-summary(modelLinear) # get model results and p values
-summaryh(modelLinear) # generates APA-formmatted results
+model_linear <- lm(formula = iq ~ grades, data = df1)
+summary(model_linear) # get model results and p values
+summaryh(model_linear) # generates APA-formmatted results (requires hausekeep package)
 ```
 
 Note the significant negative relationship between iq and grades.
@@ -450,14 +450,15 @@ ggplot(df1, aes(iq, grades, col = class)) +
 Test the relationship above by "controlling" for class
 
 ```{r}
-modelLinear_class <- lm(iq ~ grades + class, data = df1)
-summary(modelLinear_class) # get model results and p values
-summaryh(modelLinear_class)
+model_linear_class <- lm(iq ~ grades + class, data = df1)
+summary(model_linear_class) # get model results and p values
+summaryh(model_linear_class)
 ```
 
 Note the significantly positive relationship between iq and grades now.
 
 ### Reference groups and releveling (changing reference group) 
+
 R automatically recodes categorical/factor variables into 0s and 1s (i.e., dummy-coding). Alphabets/letters/characters/numbers that come first (a comes before b) will be coded 0, and those that follow will be coded 1.
 
 In our case, class "a" has been coded 0 (reference group) and all other classes ("b", "c", "d") are contrasted against it, hence you have 3 other effects ("classb", "classc", "classd") that reflect the difference between class "a" and each of the other classes.
@@ -478,9 +479,9 @@ summaryh(lm(iq ~ grades + class, data = df1)) # quickly fit model and look at ou
 * concise expression: y ~ x1 * x2 (includes all main effects and interaction) 
 
 ```{r}
-modelLinear_interact <- lm(iq ~ grades + class + grades:class, data = df1)
-summary(modelLinear_interact)
-summaryh(modelLinear_interact)
+model_linear_interact <- lm(iq ~ grades + class + grades:class, data = df1)
+summary(model_linear_interact)
+summaryh(model_linear_interact)
 ```
 
 #### Intercept-only model
@@ -488,19 +489,24 @@ summaryh(modelLinear_interact)
 R uses `1` to refer to the intercept
 
 ```{r}
-modelLinear_intercept <- lm(iq ~ 1, data = df1) # mean iq
-# summaryh(modelLinear_intercept)
+model_linear_intercept <- lm(iq ~ 1, data = df1) # mean iq
+coef(model_linear_intercept) # get coefficients from model
+# summaryh(model_linear_intercept)
 df1[, mean(iq)] # matches the intercept term
 mean(df1$iq) # same as above
 ```
 
-Remove intercept from model (if you ever need to do so...) by specifying `-1`
+Remove intercept from model (if you ever need to do so...) by specifying `-1`. Another way is to specify `0` in the syntax.
 
 ```{r}
-modelLinear_noIntercept <- lm(iq ~ grades - 1, data = df1) # substract intercept
-summary(modelLinear_noIntercept)
-# summaryh(modelLinear_noIntercept)
+model_linear_noIntercept <- lm(iq ~ grades - 1, data = df1) # substract intercept
+summary(model_linear_noIntercept)
+# summaryh(model_linear_noIntercept)
+
+coef(lm(iq ~ 0 + grades, data = df1)) # no intercept
 ```
+
+Be careful when you remove the intercept (or set it to 0). See [my article](https://hausetutorials.netlify.app/posts/2019-07-24-what-happens-when-you-remove-or-set-the-intercept-to-0-in-regression-models/) to learn more.
 
 ### Fitting ANOVA with `anova` and `aov`
 
@@ -511,7 +517,7 @@ Let's test this model with ANOVA.
 ```{r}
 ggplot(df1, aes(class, iq)) + # y: iq
     geom_quasirandom(alpha = 0.3) +
-    stat_summary(fun.y = mean, geom = 'point', size = 3) + # apply mean function to y axis (fun.y = mean)
+    stat_summary(fun = mean, geom = 'point', size = 3) + # apply mean function 
     stat_summary(fun.data = mean_cl_normal, geom = 'errorbar', width = 0, size = 1) # apply mean_cl_normal function to data
 ```
 
@@ -529,7 +535,7 @@ Class * gender interaction (and main effects)
 ```{r}
 ggplot(df1, aes(class, iq, col = gender)) + # y: iq
     geom_quasirandom(alpha = 0.3, dodge = 0.5) +
-    stat_summary(fun.y = mean, geom = 'point', size = 3, position = position_dodge(0.5)) + 
+    stat_summary(fun = mean, geom = 'point', size = 3, position = position_dodge(0.5)) + 
     stat_summary(fun.data = mean_cl_normal, geom = 'errorbar', 
                  width = 0, size = 1, position = position_dodge(0.5))
 ```
@@ -550,6 +556,7 @@ anova_classGender
 
 ### Plotting and testing simple effects when you have interactions
 
+* `interactions` package: see [here](https://interactions.jacob-long.com/) for more info
 * `sjPlot` package: see [here](http://www.strengejacke.de/sjPlot/)
 * [more tutorial and packages](https://jtools.jacob-long.com/)
 
@@ -560,7 +567,7 @@ Fit models for this figure
 ```{r}
 ggplot(df1, aes(class, iq, col = gender)) + # y: iq
     geom_quasirandom(alpha = 0.3, dodge = 0.5) +
-    stat_summary(fun.y = mean, geom = 'point', size = 3, position = position_dodge(0.5)) + 
+    stat_summary(fun = mean, geom = 'point', size = 3, position = position_dodge(0.5)) + 
     stat_summary(fun.data = mean_cl_normal, geom = 'errorbar', 
                  width = 0, size = 1, position = position_dodge(0.5))
 ```
@@ -623,6 +630,15 @@ summaryh(m_interceptSlope)
 coef(m_interceptSlope) # check coefficients for each class
 ```
 
+#### Random intercept and slope model (no correlations between varying slopes and intercepts)
+
+```{r}
+m_interceptSlope_noCor <- lmer(grades ~ iq + (1 + iq || class), data = df1)
+summary(m_interceptSlope_noCor)
+summaryh(m_interceptSlope_noCor)
+coef(m_interceptSlope_noCor) # check coefficients for each class
+```
+
 #### Random slope model (fixed intercept)
 
 ```{r}
@@ -653,7 +669,6 @@ The dataset is in wide form. To visualize easily with `ggplot`, we need to conve
 gather(irisDT, meaureLength, length, -Species) %>% # convert from wide to long form
     ggplot(aes(Species, length, col = meaureLength)) + # no need to specify data because of piping
     geom_quasirandom(alpha = 0.3, dodge = 0.5) 
-    
 ```
 
 MANOVA to test if species predicts length of sepal length and petal length?
@@ -701,7 +716,7 @@ Do different diets lead to different weights? Each chick is only assigned to one
 ```{r}
 ggplot(cw, aes(Diet, weight)) +
     geom_quasirandom(alpha = 0.3) + # this line plots raw data and can be omitted, depending on your plotting preferences
-    stat_summary(fun.y = mean, geom = 'point', size = 5) + # compute mean and plot
+    stat_summary(fun = mean, geom = 'point', size = 5) + # compute mean and plot
     stat_summary(fun.data = mean_cl_normal, geom = 'errorbar', width = 0, size = 1) # compute between-sub confidence intervals
 ```
 
@@ -737,7 +752,7 @@ Plot with between-subjects error bars (WRONG but illustrative purposes)
 ```{r}
 ggplot(cw, aes(Time, weight)) +
     geom_quasirandom(alpha = 0.1) + # this line plots raw data and can be omitted, depending on your plotting preferences
-    stat_summary(fun.y = mean, geom = 'point') + # compute mean and plot
+    stat_summary(fun = mean, geom = 'point') + # compute mean and plot
     stat_summary(fun.data = mean_cl_normal, geom = 'errorbar', width = 0) # compute between-sub confidence intervals
 ```
 

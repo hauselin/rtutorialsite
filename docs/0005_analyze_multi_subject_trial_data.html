@@ -1412,10 +1412,10 @@ Tutorials
 <h2 id="load-libraries">Load libraries</h2>
 <div class="layout-chunk" data-layout="l-body">
 <pre class="r"><code>
-library(tidyverse); library(data.table); library(dtplyr); library(lme4); library(lmerTest); library(ggbeeswarm); library(hausekeep)</code></pre>
+library(tidyverse); library(data.table); library(lme4); library(lmerTest); library(ggbeeswarm); library(hausekeep)</code></pre>
 </div>
 <aside>
-<a href="https://hauselin.github.io/hausekeep/">hausekeep</a> is my package. It contains a few helper functions. You may or may not want to use them. If you want to, install the package by running <code>devtools::install_github(&quot;hauselin/hausekeep&quot;)</code> (you might need to install <code>devtools</code> package first).
+<a href="https://hauselin.github.io/hausekeep/">hausekeep</a> is my package. It contains a few helper functions. You may or may not want to use them. If you want to, install the package by running <code>devtools::install_github("hauselin/hausekeep")</code> (you might need to install <code>devtools</code> package first).
 </aside>
 <h2 id="read-all-subjects-data-into-r">Read all subjects’ data into R</h2>
 <div class="layout-chunk" data-layout="l-body">
@@ -1426,9 +1426,9 @@ library(tidyverse); library(data.table); library(dtplyr); library(lme4); library
 [2] &quot;./data/rt_acc_data_raw/subject_35.csv&quot;
 [3] &quot;./data/rt_acc_data_raw/subject_39.csv&quot;</code></pre>
 <pre class="r"><code>
-dt1 &lt;- lapply(files, fread) %&gt;% bind_rows() %&gt;% as.data.table() # read data, combine items in list, convert to data.table</code></pre>
+dt1 &lt;- bind_rows(lapply(files, fread)) %&gt;% as.data.table() # read data, combine items in list, convert to data.table</code></pre>
 </div>
-<p>Note and explanation: <code>lapply</code> loops through each item in <code>files</code> and applies the <code>fread</code> function to each item. <code>bind_rows</code> combines all the dataframes stored as separate items in the list, and <code>tbl_dt()</code> converts the merged dataframe into <code>data.table</code> and <code>tibble</code> class.</p>
+<p>Note and explanation: <code>lapply</code> loops through each item in <code>files</code> and applies the <code>fread</code> function to each item. <code>bind_rows</code> combines all the dataframes stored as separate items in the list, and <code>as.data.table()</code> converts the merged dataframe into <code>data.table</code> class.</p>
 <h2 id="summarize-experimental-design">Summarize experimental design</h2>
 <div class="layout-chunk" data-layout="l-body">
 <pre class="r"><code>

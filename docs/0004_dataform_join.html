@@ -1353,7 +1353,7 @@ Tutorials
 <ul>
 <li><a href="#consider-being-a-patron-and-supporting-my-work">Consider being a patron and supporting my work?</a></li>
 <li><a href="#load-packageslibraries">Load packages/libraries</a></li>
-<li><a href="#wide-vs.long-data-messy-vs.tidy-data">Wide vs. long data (messy vs. tidy data)</a></li>
+<li><a href="#wide-vs.-long-data-messy-vs.-tidy-data">Wide vs. long data (messy vs. tidy data)</a></li>
 <li><a href="#wide-to-long-with-melt-from-data.table">Wide to long with <code>melt()</code> (from <code>data.table</code>)</a></li>
 <li><a href="#wide-to-long-with-gather-from-tidyverse-and-tidyr">Wide to long with <code>gather()</code> (from <code>tidyverse</code> and <code>tidyr</code>)</a></li>
 <li><a href="#long-to-wide-with-dcast-from-data.table">Long to wide with <code>dcast()</code> (from <code>data.table</code>)</a></li>
@@ -1375,9 +1375,9 @@ Tutorials
 <p>Use <code>library()</code> to load packages at the top of each R script.</p>
 <div class="layout-chunk" data-layout="l-body">
 <pre class="r"><code>
-library(tidyverse); library(data.table); library(dtplyr)</code></pre>
+library(tidyverse); library(data.table)</code></pre>
 </div>
-<h2 id="wide-vs.long-data-messy-vs.tidy-data">Wide vs. long data (messy vs. tidy data)</h2>
+<h2 id="wide-vs.-long-data-messy-vs.-tidy-data">Wide vs. long data (messy vs. tidy data)</h2>
 <p>Manually create wide data</p>
 <div class="layout-chunk" data-layout="l-body">
 <pre class="r"><code>
@@ -1414,7 +1414,7 @@ long</code></pre>
 5 Mary    mathGrades       -20
 6 Mary    physicsGrades  -2000</code></pre>
 </div>
-<p>Compare wide vs long data (“messy” vs. “tidy” data)</p>
+<p>Compare wide vs long data (“messy” vs. “tidy” data)</p>
 <div class="layout-chunk" data-layout="l-body">
 <pre class="r"><code>
 wide # wide/messy</code></pre>
@@ -1565,7 +1565,7 @@ wide # compare with spread() output</code></pre>
 </div>
 <p>Another example</p>
 <figure>
-<img src="attachments/long_to_wide.png" alt="Long to wide form" /><figcaption>Long to wide form</figcaption>
+<img src="attachments/long_to_wide.png" alt="" /><figcaption>Long to wide form</figcaption>
 </figure>
 <h2 id="resources-for-converting-data-forms-and-reshaping">Resources for converting data forms and reshaping</h2>
 <ul>
@@ -1747,12 +1747,12 @@ extraInfo</code></pre>
 bind_cols(wide2, extraInfo)</code></pre>
 <pre><code>
 # A tibble: 4 x 6
-  student englishGrades mathGrades physicsGrades student1 chemistryGrades
-  &lt;chr&gt;           &lt;dbl&gt;      &lt;dbl&gt;         &lt;dbl&gt; &lt;chr&gt;              &lt;dbl&gt;
-1 Andy                1         10          1000 Jane                 900
-2 Mary               -2        -20         -2000 John                 901
-3 John                5         50            NA Mary                 902
-4 Jane               -5        -50            NA Andy                 903</code></pre>
+  student...1 englishGrades mathGrades physicsGrades student...5 chemistryGrades
+  &lt;chr&gt;               &lt;dbl&gt;      &lt;dbl&gt;         &lt;dbl&gt; &lt;chr&gt;                 &lt;dbl&gt;
+1 Andy                    1         10          1000 Jane                    900
+2 Mary                   -2        -20         -2000 John                    901
+3 John                    5         50            NA Mary                    902
+4 Jane                   -5        -50            NA Andy                    903</code></pre>
 </div>
 <p>What’s wrong? How to fix it?</p>
 <div class="layout-chunk" data-layout="l-body">

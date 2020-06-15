@@ -1399,8 +1399,8 @@ Tutorials
 <p>Use <code>library()</code> to load packages at the top of each R script.</p>
 <div class="layout-chunk" data-layout="l-body">
 <pre class="r"><code>
-library(tidyverse); library(data.table); library(broom); library(dtplyr); 
-library(lme4); library(lmerTest); library(ggbeeswarm); library(cowplot)
+library(tidyverse); library(data.table)
+library(lme4); library(lmerTest); library(ggbeeswarm)
 library(hausekeep)</code></pre>
 </div>
 <h2 id="read-data-from-folderdirectory-into-r">Read data from folder/directory into R</h2>
@@ -1460,8 +1460,8 @@ df1</code></pre>
 <pre class="r"><code>
 glimpse(df1)</code></pre>
 <pre><code>
-Observations: 40
-Variables: 3
+Rows: 40
+Columns: 3
 $ iq     &lt;dbl&gt; 94.5128, 95.4359, 97.7949, 98.1026, 96.5641, 101.5897, 100.871…
 $ grades &lt;dbl&gt; 67.9295, 82.5449, 69.0833, 83.3141, 99.0833, 89.8526, 73.6987,…
 $ class  &lt;chr&gt; &quot;a&quot;, &quot;a&quot;, &quot;a&quot;, &quot;a&quot;, &quot;a&quot;, &quot;a&quot;, &quot;a&quot;, &quot;a&quot;, &quot;a&quot;, &quot;a&quot;, &quot;b&quot;, &quot;b&quot;, &quot;b…</code></pre>
@@ -1514,7 +1514,7 @@ plot1 # print plot</code></pre>
 <p><img src="0003_ggplot_modelfitting_files/figure-html5/unnamed-chunk-6-1.png" width="624" /></p>
 </div>
 <h2 id="save-a-plot-to-your-directory">Save a plot to your directory</h2>
-<p>Save to Figures directory, assuming this directory/folder already exists. You can also change the width/height of your figure and dpi (resolution/quality) of your figure (journals usually expect around 300 dpi).</p>
+<p>Save to Figures directory, assuming this directory/folder already exists. You can also change the width/height of your figure and dpi (resolution/quality) of your figure (since journals often expect around 300 dpi).</p>
 <div class="layout-chunk" data-layout="l-body">
 <pre class="r"><code>
 ggsave(plot1, &#39;./Figures/iq_grades.png&#39;, width = 10, heigth = 10, dpi = 100)</code></pre>
@@ -1690,7 +1690,7 @@ ggplot(df1, aes(overallClass, iq)) + # y: iq
 <pre class="r"><code>
 ggplot(df1, aes(class, iq)) + # y: iq
     geom_quasirandom(alpha = 0.3) +
-    stat_summary(fun.y = mean, geom = &#39;point&#39;, size = 3) + # apply mean function to y axis (fun.y = mean)
+    stat_summary(fun = mean, geom = &#39;point&#39;, size = 3) + # apply mean function (fun = mean) (median or other functions work too)
     stat_summary(fun.data = mean_cl_normal, geom = &#39;errorbar&#39;, width = 0, size = 1) # apply mean_cl_normal function to data</code></pre>
 <p><img src="0003_ggplot_modelfitting_files/figure-html5/unnamed-chunk-26-1.png" width="624" /></p>
 </div>
@@ -1808,8 +1808,8 @@ ggplot(df1, aes(iq, grades)) +
 <p>Test the relationship in the plot above</p>
 <div class="layout-chunk" data-layout="l-body">
 <pre class="r"><code>
-modelLinear &lt;- lm(formula = iq ~ grades, data = df1)
-summary(modelLinear) # get model results and p values</code></pre>
+model_linear &lt;- lm(formula = iq ~ grades, data = df1)
+summary(model_linear) # get model results and p values</code></pre>
 <pre><code>
 Call:
 lm(formula = iq ~ grades, data = df1)
@@ -1829,7 +1829,7 @@ Residual standard error: 8.599 on 38 degrees of freedom
 Multiple R-squared:  0.2878,    Adjusted R-squared:  0.2691 
 F-statistic: 15.36 on 1 and 38 DF,  p-value: 0.0003592</code></pre>
 <pre class="r"><code>
-summaryh(modelLinear) # generates APA-formmatted results</code></pre>
+summaryh(model_linear) # generates APA-formmatted results (requires hausekeep package)</code></pre>
 <pre><code>
           term                                                  results
 1: (Intercept) b = 125.14, SE = 4.24, t(38) = 29.52, p &lt; .001, r = 0.98
@@ -1851,8 +1851,8 @@ ggplot(df1, aes(iq, grades, col = class)) +
 <p>Test the relationship above by “controlling” for class</p>
 <div class="layout-chunk" data-layout="l-body">
 <pre class="r"><code>
-modelLinear_class &lt;- lm(iq ~ grades + class, data = df1)
-summary(modelLinear_class) # get model results and p values</code></pre>
+model_linear_class &lt;- lm(iq ~ grades + class, data = df1)
+summary(model_linear_class) # get model results and p values</code></pre>
 <pre><code>
 Call:
 lm(formula = iq ~ grades + class, data = df1)
@@ -1875,7 +1875,7 @@ Residual standard error: 2.796 on 35 degrees of freedom
 Multiple R-squared:  0.9306,    Adjusted R-squared:  0.9227 
 F-statistic: 117.4 on 4 and 35 DF,  p-value: &lt; 2.2e-16</code></pre>
 <pre class="r"><code>
-summaryh(modelLinear_class)</code></pre>
+summaryh(model_linear_class)</code></pre>
 <pre><code>
           term                                                 results
 1: (Intercept) b = 90.75, SE = 2.48, t(35) = 36.56, p &lt; .001, r = 0.99
@@ -1913,8 +1913,8 @@ summaryh(lm(iq ~ grades + class, data = df1)) # quickly fit model and look at ou
 </ul>
 <div class="layout-chunk" data-layout="l-body">
 <pre class="r"><code>
-modelLinear_interact &lt;- lm(iq ~ grades + class + grades:class, data = df1)
-summary(modelLinear_interact)</code></pre>
+model_linear_interact &lt;- lm(iq ~ grades + class + grades:class, data = df1)
+summary(model_linear_interact)</code></pre>
 <pre><code>
 Call:
 lm(formula = iq ~ grades + class + grades:class, data = df1)
@@ -1940,7 +1940,7 @@ Residual standard error: 2.898 on 32 degrees of freedom
 Multiple R-squared:  0.9319,    Adjusted R-squared:  0.917 
 F-statistic: 62.52 on 7 and 32 DF,  p-value: &lt; 2.2e-16</code></pre>
 <pre class="r"><code>
-summaryh(modelLinear_interact)</code></pre>
+summaryh(model_linear_interact)</code></pre>
 <pre><code>
             term                                                  results
 1:   (Intercept) b = 117.56, SE = 2.58, t(32) = 45.57, p &lt; .001, r = 0.99
@@ -1956,8 +1956,13 @@ summaryh(modelLinear_interact)</code></pre>
 <p>R uses <code>1</code> to refer to the intercept</p>
 <div class="layout-chunk" data-layout="l-body">
 <pre class="r"><code>
-modelLinear_intercept &lt;- lm(iq ~ 1, data = df1) # mean iq
-# summaryh(modelLinear_intercept)
+model_linear_intercept &lt;- lm(iq ~ 1, data = df1) # mean iq
+coef(model_linear_intercept) # get coefficients from model</code></pre>
+<pre><code>
+(Intercept) 
+   109.4077 </code></pre>
+<pre class="r"><code>
+# summaryh(model_linear_intercept)
 df1[, mean(iq)] # matches the intercept term</code></pre>
 <pre><code>
 [1] 109.4077</code></pre>
@@ -1966,11 +1971,11 @@ mean(df1$iq) # same as above</code></pre>
 <pre><code>
 [1] 109.4077</code></pre>
 </div>
-<p>Remove intercept from model (if you ever need to do so…) by specifying <code>-1</code></p>
+<p>Remove intercept from model (if you ever need to do so…) by specifying <code>-1</code>. Another way is to specify <code>0</code> in the syntax.</p>
 <div class="layout-chunk" data-layout="l-body">
 <pre class="r"><code>
-modelLinear_noIntercept &lt;- lm(iq ~ grades - 1, data = df1) # substract intercept
-summary(modelLinear_noIntercept)</code></pre>
+model_linear_noIntercept &lt;- lm(iq ~ grades - 1, data = df1) # substract intercept
+summary(model_linear_noIntercept)</code></pre>
 <pre><code>
 Call:
 lm(formula = iq ~ grades - 1, data = df1)
@@ -1989,8 +1994,14 @@ Residual standard error: 41.52 on 39 degrees of freedom
 Multiple R-squared:  0.8607,    Adjusted R-squared:  0.8571 
 F-statistic:   241 on 1 and 39 DF,  p-value: &lt; 2.2e-16</code></pre>
 <pre class="r"><code>
-# summaryh(modelLinear_noIntercept)</code></pre>
+# summaryh(model_linear_noIntercept)
+
+coef(lm(iq ~ 0 + grades, data = df1)) # no intercept</code></pre>
+<pre><code>
+  grades 
+1.797984 </code></pre>
 </div>
+<p>Be careful when you remove the intercept (or set it to 0). See <a href="https://hausetutorials.netlify.app/posts/2019-07-24-what-happens-when-you-remove-or-set-the-intercept-to-0-in-regression-models/">my article</a> to learn more.</p>
 <h3 id="fitting-anova-with-anova-and-aov">Fitting ANOVA with <code>anova</code> and <code>aov</code></h3>
 <p>By default, R uses Type I sum of squares.</p>
 <p>Let’s test this model with ANOVA.</p>
@@ -1998,7 +2009,7 @@ F-statistic:   241 on 1 and 39 DF,  p-value: &lt; 2.2e-16</code></pre>
 <pre class="r"><code>
 ggplot(df1, aes(class, iq)) + # y: iq
     geom_quasirandom(alpha = 0.3) +
-    stat_summary(fun.y = mean, geom = &#39;point&#39;, size = 3) + # apply mean function to y axis (fun.y = mean)
+    stat_summary(fun = mean, geom = &#39;point&#39;, size = 3) + # apply mean function 
     stat_summary(fun.data = mean_cl_normal, geom = &#39;errorbar&#39;, width = 0, size = 1) # apply mean_cl_normal function to data</code></pre>
 <p><img src="0003_ggplot_modelfitting_files/figure-html5/unnamed-chunk-43-1.png" width="624" /></p>
 </div>
@@ -2020,7 +2031,7 @@ Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&
 <pre class="r"><code>
 ggplot(df1, aes(class, iq, col = gender)) + # y: iq
     geom_quasirandom(alpha = 0.3, dodge = 0.5) +
-    stat_summary(fun.y = mean, geom = &#39;point&#39;, size = 3, position = position_dodge(0.5)) + 
+    stat_summary(fun = mean, geom = &#39;point&#39;, size = 3, position = position_dodge(0.5)) + 
     stat_summary(fun.data = mean_cl_normal, geom = &#39;errorbar&#39;, 
                  width = 0, size = 1, position = position_dodge(0.5))</code></pre>
 <p><img src="0003_ggplot_modelfitting_files/figure-html5/unnamed-chunk-45-1.png" width="624" /></p>
@@ -2035,10 +2046,10 @@ Call:
 
 Terms:
                    class   gender class:gender Residuals
-Sum of Squares  5821.086   45.297      170.318  7184.348
+Sum of Squares  5821.086  953.384      164.712  6281.866
 Deg. of Freedom        3        1            3        32
 
-Residual standard error: 14.98369
+Residual standard error: 14.01101
 Estimated effects may be unbalanced</code></pre>
 </div>
 <h3 id="specify-contrasts-resources">Specify contrasts resources</h3>
@@ -2052,6 +2063,7 @@ Estimated effects may be unbalanced</code></pre>
 </ul>
 <h3 id="plotting-and-testing-simple-effects-when-you-have-interactions">Plotting and testing simple effects when you have interactions</h3>
 <ul>
+<li><code>interactions</code> package: see <a href="https://interactions.jacob-long.com/">here</a> for more info</li>
 <li><code>sjPlot</code> package: see <a href="http://www.strengejacke.de/sjPlot/">here</a></li>
 <li><a href="https://jtools.jacob-long.com/">more tutorial and packages</a></li>
 </ul>
@@ -2061,7 +2073,7 @@ Estimated effects may be unbalanced</code></pre>
 <pre class="r"><code>
 ggplot(df1, aes(class, iq, col = gender)) + # y: iq
     geom_quasirandom(alpha = 0.3, dodge = 0.5) +
-    stat_summary(fun.y = mean, geom = &#39;point&#39;, size = 3, position = position_dodge(0.5)) + 
+    stat_summary(fun = mean, geom = &#39;point&#39;, size = 3, position = position_dodge(0.5)) + 
     stat_summary(fun.data = mean_cl_normal, geom = &#39;errorbar&#39;, 
                  width = 0, size = 1, position = position_dodge(0.5))</code></pre>
 <p><img src="0003_ggplot_modelfitting_files/figure-html5/unnamed-chunk-47-1.png" width="624" /></p>
@@ -2075,18 +2087,18 @@ ttest_gender</code></pre>
     Welch Two Sample t-test
 
 data:  iq by gender
-t = 1.0552, df = 36.923, p-value = 0.2982
+t = 0.09099, df = 33.287, p-value = 0.928
 alternative hypothesis: true difference in means is not equal to 0
 95 percent confidence interval:
- -3.088961  9.801220
+ -6.404219  7.004074
 sample estimates:
 mean in group female   mean in group male 
-            111.2536             107.8974 </code></pre>
+            109.5726             109.2727 </code></pre>
 <pre class="r"><code>
 summaryh(ttest_gender)</code></pre>
 <pre><code>
                             results
-1: t(37) = 1.06, p = .298, r = 0.17</code></pre>
+1: t(33) = 0.09, p = .928, r = 0.02</code></pre>
 </div>
 <p>class a vs. class d</p>
 <div class="layout-chunk" data-layout="l-body">
@@ -2150,18 +2162,18 @@ REML criterion at convergence: 326
 
 Scaled residuals: 
      Min       1Q   Median       3Q      Max 
--1.71343 -0.79565  0.03888  0.56708  2.18979 
+-1.71341 -0.79563  0.03887  0.56708  2.18978 
 
 Random effects:
  Groups   Name        Variance Std.Dev.
- class    (Intercept) 895.7    29.93   
- Residual             176.6    13.29   
+ class    (Intercept) 895.5    29.92   
+ Residual             176.7    13.29   
 Number of obs: 40, groups:  class, 4
 
 Fixed effects:
              Estimate Std. Error        df t value Pr(&gt;|t|)  
-(Intercept) -100.7438    74.1321   27.4656  -1.359   0.1852  
-iq             1.4116     0.6634   31.3445   2.128   0.0413 *
+(Intercept) -100.7338    74.1311   27.4649  -1.359   0.1852  
+iq             1.4115     0.6633   31.3429   2.128   0.0413 *
 ---
 Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
 
@@ -2172,17 +2184,17 @@ iq -0.979</code></pre>
 summaryh(m_intercept)</code></pre>
 <pre><code>
           term                                                    results
-1: (Intercept) b = −100.74, SE = 74.13, t(27) = −1.36, p = .185, r = 0.25
+1: (Intercept) b = −100.73, SE = 74.13, t(27) = −1.36, p = .185, r = 0.25
 2:          iq      b = 1.41, SE = 0.66, t(31) = 2.13, p = .041, r = 0.36</code></pre>
 <pre class="r"><code>
 coef(m_intercept) # check coefficients for each class</code></pre>
 <pre><code>
 $class
-  (Intercept)      iq
-d  -133.43968 1.41155
-a   -66.32624 1.41155
-b   -90.95738 1.41155
-c  -112.25181 1.41155
+  (Intercept)       iq
+d  -133.42844 1.411459
+a   -66.31752 1.411459
+b   -90.94789 1.411459
+c  -112.24144 1.411459
 
 attr(,&quot;class&quot;)
 [1] &quot;coef.mer&quot;</code></pre>
@@ -2203,19 +2215,19 @@ REML criterion at convergence: 326
 
 Scaled residuals: 
      Min       1Q   Median       3Q      Max 
--1.71504 -0.77488  0.03495  0.57017  2.20283 
+-1.71457 -0.77510  0.03527  0.57023  2.20255 
 
 Random effects:
  Groups   Name        Variance  Std.Dev. Corr
- class    (Intercept)  51.20361  7.1557      
-          iq            0.04541  0.2131  0.99
- Residual             176.32034 13.2786      
+ class    (Intercept)  51.87048  7.2021      
+          iq            0.04487  0.2118  1.00
+ Residual             176.37727 13.2807      
 Number of obs: 40, groups:  class, 4
 
 Fixed effects:
              Estimate Std. Error        df t value Pr(&gt;|t|)  
-(Intercept) -102.4819    72.9541   30.3777  -1.405   0.1702  
-iq             1.4427     0.6779   11.7465   2.128   0.0552 .
+(Intercept) -102.2620    72.9396   30.3464  -1.402   0.1711  
+iq             1.4407     0.6777   11.9275   2.126   0.0551 .
 ---
 Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
 
@@ -2223,22 +2235,77 @@ Correlation of Fixed Effects:
    (Intr)
 iq -0.978
 convergence code: 0
-Model failed to converge with max|grad| = 0.0391438 (tol = 0.002, component 1)</code></pre>
+boundary (singular) fit: see ?isSingular</code></pre>
 <pre class="r"><code>
 summaryh(m_interceptSlope)</code></pre>
 <pre><code>
           term                                                    results
-1: (Intercept) b = −102.48, SE = 72.95, t(30) = −1.40, p = .170, r = 0.25
-2:          iq      b = 1.44, SE = 0.68, t(12) = 2.13, p = .055, r = 0.53</code></pre>
+1: (Intercept) b = −102.26, SE = 72.94, t(30) = −1.40, p = .171, r = 0.25
+2:          iq      b = 1.44, SE = 0.68, t(12) = 2.13, p = .055, r = 0.52</code></pre>
 <pre class="r"><code>
 coef(m_interceptSlope) # check coefficients for each class</code></pre>
 <pre><code>
 $class
   (Intercept)       iq
-d  -109.95237 1.219693
-a   -93.98509 1.696469
-b  -100.47154 1.502764
-c  -105.51844 1.352012
+d   -109.8130 1.218571
+a    -93.6742 1.693239
+b   -100.2293 1.500443
+c   -105.3316 1.350377
+
+attr(,&quot;class&quot;)
+[1] &quot;coef.mer&quot;</code></pre>
+</div>
+<h4 id="random-intercept-and-slope-model-no-correlations-between-varying-slopes-and-intercepts">Random intercept and slope model (no correlations between varying slopes and intercepts)</h4>
+<div class="layout-chunk" data-layout="l-body">
+<pre class="r"><code>
+m_interceptSlope_noCor &lt;- lmer(grades ~ iq + (1 + iq || class), data = df1)
+summary(m_interceptSlope_noCor)</code></pre>
+<pre><code>
+Linear mixed model fit by REML. t-tests use Satterthwaite&#39;s method [
+lmerModLmerTest]
+Formula: grades ~ iq + (1 + iq || class)
+   Data: df1
+
+REML criterion at convergence: 326
+
+Scaled residuals: 
+     Min       1Q   Median       3Q      Max 
+-1.71319 -0.79539  0.03875  0.56712  2.18967 
+
+Random effects:
+ Groups   Name        Variance  Std.Dev. 
+ class    (Intercept) 8.937e+02 29.895487
+ class.1  iq          1.279e-06  0.001131
+ Residual             1.767e+02 13.292074
+Number of obs: 40, groups:  class, 4
+
+Fixed effects:
+             Estimate Std. Error        df t value Pr(&gt;|t|)  
+(Intercept) -100.6290    74.1208   27.4574  -1.358   0.1856  
+iq             1.4105     0.6633   31.3229   2.127   0.0414 *
+---
+Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+
+Correlation of Fixed Effects:
+   (Intr)
+iq -0.979
+convergence code: 0
+boundary (singular) fit: see ?isSingular</code></pre>
+<pre class="r"><code>
+summaryh(m_interceptSlope_noCor)</code></pre>
+<pre><code>
+          term                                                    results
+1: (Intercept) b = −100.63, SE = 74.12, t(27) = −1.36, p = .186, r = 0.25
+2:          iq      b = 1.41, SE = 0.66, t(31) = 2.13, p = .041, r = 0.36</code></pre>
+<pre class="r"><code>
+coef(m_interceptSlope_noCor) # check coefficients for each class</code></pre>
+<pre><code>
+$class
+  (Intercept)       iq
+d   -133.3096 1.410497
+a    -66.2263 1.410507
+b    -90.8482 1.410503
+c   -112.1320 1.410499
 
 attr(,&quot;class&quot;)
 [1] &quot;coef.mer&quot;</code></pre>
@@ -2327,11 +2394,11 @@ irisDT # wide form data</code></pre>
 gather(irisDT, meaureLength, length, -Species) %&gt;% # convert from wide to long form
     ggplot(aes(Species, length, col = meaureLength)) + # no need to specify data because of piping
     geom_quasirandom(alpha = 0.3, dodge = 0.5) </code></pre>
-<p><img src="0003_ggplot_modelfitting_files/figure-html5/unnamed-chunk-55-1.png" width="624" /></p>
+<p><img src="0003_ggplot_modelfitting_files/figure-html5/unnamed-chunk-56-1.png" width="624" /></p>
 </div>
 <p>MANOVA to test if species predicts length of sepal length and petal length?</p>
 <figure>
-<img src="attachments/sepalPetal.png" alt="Long to wide form" /><figcaption>Long to wide form</figcaption>
+<img src="attachments/sepalPetal.png" alt="" /><figcaption>Long to wide form</figcaption>
 </figure>
 <div class="layout-chunk" data-layout="l-body">
 <pre class="r"><code>
@@ -2415,9 +2482,9 @@ Levels: 1 2 3 4</code></pre>
 <pre class="r"><code>
 ggplot(cw, aes(Diet, weight)) +
     geom_quasirandom(alpha = 0.3) + # this line plots raw data and can be omitted, depending on your plotting preferences
-    stat_summary(fun.y = mean, geom = &#39;point&#39;, size = 5) + # compute mean and plot
+    stat_summary(fun = mean, geom = &#39;point&#39;, size = 5) + # compute mean and plot
     stat_summary(fun.data = mean_cl_normal, geom = &#39;errorbar&#39;, width = 0, size = 1) # compute between-sub confidence intervals</code></pre>
-<p><img src="0003_ggplot_modelfitting_files/figure-html5/unnamed-chunk-59-1.png" width="624" /></p>
+<p><img src="0003_ggplot_modelfitting_files/figure-html5/unnamed-chunk-60-1.png" width="624" /></p>
 </div>
 <h4 id="within-subject-error-bars">Within-subject error bars</h4>
 <p>How does weight change over time (ignoring diet)? Each chick has multiple measurements of time, so we’ll use within-subjects error bars, which we have to calculate ourselves. Use <code>seWithin()</code> from the <code>hausekeep</code> package to compute within-subjects error bars.</p>
@@ -2441,7 +2508,7 @@ ggplot(cw_weight_withinEB, aes(Time, weight)) +
     geom_quasirandom(data = cw, alpha = 0.1) + # this line plots raw data and can be omitted, depending on your plotting
     geom_point() + # add points
     geom_errorbar(aes(ymin = weight - ci, ymax = weight + ci), width = 0) # ymin (lower bound), ymax (upper bound)</code></pre>
-<p><img src="0003_ggplot_modelfitting_files/figure-html5/unnamed-chunk-62-1.png" width="624" /></p>
+<p><img src="0003_ggplot_modelfitting_files/figure-html5/unnamed-chunk-63-1.png" width="624" /></p>
 </div>
 <p>Note the second line <code>geom_quasirandom(data = cw, alpha = 0.1)</code> adds the raw data to the plot (hence <code>data = cw</code>). Depending your data structure and research questions, you might have to compute your “raw data” for the plot differently before specifying it in <code>geom_quasirandom()</code>.</p>
 <p>Plot with between-subjects error bars (WRONG but illustrative purposes)</p>
@@ -2449,9 +2516,9 @@ ggplot(cw_weight_withinEB, aes(Time, weight)) +
 <pre class="r"><code>
 ggplot(cw, aes(Time, weight)) +
     geom_quasirandom(alpha = 0.1) + # this line plots raw data and can be omitted, depending on your plotting preferences
-    stat_summary(fun.y = mean, geom = &#39;point&#39;) + # compute mean and plot
+    stat_summary(fun = mean, geom = &#39;point&#39;) + # compute mean and plot
     stat_summary(fun.data = mean_cl_normal, geom = &#39;errorbar&#39;, width = 0) # compute between-sub confidence intervals</code></pre>
-<p><img src="0003_ggplot_modelfitting_files/figure-html5/unnamed-chunk-63-1.png" width="624" /></p>
+<p><img src="0003_ggplot_modelfitting_files/figure-html5/unnamed-chunk-64-1.png" width="624" /></p>
 </div>
 <h4 id="mixed-between-within-designs">Mixed (between-within) designs</h4>
 <p>Let’s investigate the effects of time (within-subjects) and diet (between-subjects) together.</p>
@@ -2479,7 +2546,7 @@ ggplot(cw_weight_mixed, aes(Time, weight, col = as.factor(Diet))) + # Diet is nu
     geom_point(position = position_dodge(0.7), size = 2.5) + # add points
     geom_errorbar(aes(ymin = weight - ci, ymax = weight + ci), width = 0, position = position_dodge(0.7), size = 1) + # ymin (lower bound), ymax (upper bound)
     labs(col = &quot;Diet&quot;)</code></pre>
-<p><img src="0003_ggplot_modelfitting_files/figure-html5/unnamed-chunk-66-1.png" width="624" /></p>
+<p><img src="0003_ggplot_modelfitting_files/figure-html5/unnamed-chunk-67-1.png" width="624" /></p>
 </div>
 <h2 id="support-my-work">Support my work</h2>
 <p><a href="https://donorbox.org/support-my-teaching">Support my work and become a patron here</a>!</p>
