@@ -1353,7 +1353,9 @@ Tutorials
 <ul>
 <li><a href="#consider-being-a-patron-and-supporting-my-work">Consider being a patron and supporting my work?</a></li>
 <li><a href="#installing-or-updating-r-and-rstudio">Installing (or updating) R and RStudio</a></li>
-<li><a href="#installing-r-packages">Installing R packages</a></li>
+<li><a href="#installing-r-packages">Installing R packages</a><ul>
+<li><a href="#more-about-these-packages">More about these packages</a></li>
+</ul></li>
 <li><a href="#support-my-work">Support my work</a></li>
 </ul>
 </nav>
@@ -1387,9 +1389,7 @@ Tutorials
 <p>Comments are preceded by the # symbol in R, and you can use # or #’ for multi-line comments. R won’t run any code that’s preceded by the # symbol.</p>
 <pre class="r"><code>
 # install packages all at once using c(), which allows you to combine/concatenate stuff
-install.packages(c(&quot;tidyverse&quot;, &quot;data.table&quot;, &quot;broom&quot;, &quot;dtplyr&quot;, &quot;lme4&quot;, 
-                   &quot;lmerTest&quot;, &quot;ggbeeswarm&quot;, &quot;cowplot&quot;, &quot;piecewiseSEM&quot;,
-                   &quot;compute.es&quot;, &quot;sjstats&quot;, &quot;sjPlot&quot;, &quot;Hmisc&quot;))
+install.packages(c(&quot;tidyverse&quot;, &quot;data.table&quot;, &quot;lme4&quot;, &quot;lmerTest&quot;, &quot;ggbeeswarm&quot;))
 
 # install hausekeep package from my github
 # install.packages(&quot;devtools&quot;)
@@ -1405,8 +1405,10 @@ devtools::install_github(&quot;hauselin/hausekeep&quot;) # you might have to ins
 # install.packages(&quot;data.table&quot;)</code></pre>
 <p>Every time I start a new R session in RStudio, I usually run the code below at the top of my R script to load all these libraries all at once using <code>library()</code>.</p>
 <pre class="r"><code>
-library(tidyverse); library(data.table); library(dtplyr); library(lme4); library(lmerTest); library(ggbeeswarm); library(egg); library(glue); library(hausekeep)</code></pre>
-<p>These R packages above are very powerful and it’s worth learning them well.</p>
+library(tidyverse); library(data.table);
+library(lme4); library(lmerTest); library(ggbeeswarm)
+library(egg); library(hausekeep)</code></pre>
+<h3 id="more-about-these-packages">More about these packages</h3>
 <ul>
 <li><a href="https://cran.r-project.org/web/packages/data.table/vignettes/datatable-intro.html">data.table</a>
 <ul>
@@ -1416,10 +1418,6 @@ library(tidyverse); library(data.table); library(dtplyr); library(lme4); library
 <ul>
 <li>manipulate dataframes (and tibbles) easily with tidyr, dplyr</li>
 <li>make beautiful plots with clean syntax (ggplot2)</li>
-</ul></li>
-<li><a href="https://github.com/hadley/dtplyr">dtplyr</a>
-<ul>
-<li><code>tbl_dt()</code> function from this package combines the best of tidyverse and data.table packages</li>
 </ul></li>
 <li><a href="https://www.jaredknowles.com/journal/2013/11/25/getting-started-with-mixed-effect-models-in-r">lme4</a>
 <ul>
@@ -1436,6 +1434,10 @@ library(tidyverse); library(data.table); library(dtplyr); library(lme4); library
 <li><a href="https://hauselin.github.io/hausekeep/">hausekeep</a>
 <ul>
 <li>miscellaneous functions I’ve written over the years</li>
+</ul></li>
+<li><a href="https://cran.r-project.org/web/packages/egg/vignettes/Overview.html">egg</a>
+<ul>
+<li>arrange multiple plots in one ggplot figure</li>
 </ul></li>
 </ul>
 <h2 id="support-my-work">Support my work</h2>

@@ -72,9 +72,7 @@ Comments are preceded by the # symbol in R, and you can use # or #' for multi-li
 
 ```r
 # install packages all at once using c(), which allows you to combine/concatenate stuff
-install.packages(c("tidyverse", "data.table", "broom", "dtplyr", "lme4", 
-                   "lmerTest", "ggbeeswarm", "cowplot", "piecewiseSEM",
-                   "compute.es", "sjstats", "sjPlot", "Hmisc"))
+install.packages(c("tidyverse", "data.table", "lme4", "lmerTest", "ggbeeswarm"))
 
 # install hausekeep package from my github
 # install.packages("devtools")
@@ -93,18 +91,18 @@ devtools::install_github("hauselin/hausekeep") # you might have to install devto
 Every time I start a new R session in RStudio, I usually run the code below at the top of my R script to load all these libraries all at once using `library()`.
 
 ```r
-library(tidyverse); library(data.table); library(dtplyr); library(lme4); library(lmerTest); library(ggbeeswarm); library(egg); library(glue); library(hausekeep)
+library(tidyverse); library(data.table);
+library(lme4); library(lmerTest); library(ggbeeswarm)
+library(egg); library(hausekeep)
 ```
 
-These R packages above are very powerful and it's worth learning them well.
+### More about these packages
 
 - [data.table](https://cran.r-project.org/web/packages/data.table/vignettes/datatable-intro.html)
   - powerful, extremely fast, and simple way to manipulate dataframes/datatables
 - [tidyverse](https://www.tidyverse.org/) packages (e.g., dplyr, tidyr, ggplot2, stringr)
   - manipulate dataframes (and tibbles) easily with tidyr, dplyr
   - make beautiful plots with clean syntax (ggplot2)
-- [dtplyr](https://github.com/hadley/dtplyr)
-  - `tbl_dt()` function from this package combines the best of tidyverse and data.table packages
 - [lme4](https://www.jaredknowles.com/journal/2013/11/25/getting-started-with-mixed-effect-models-in-r)
   - fit linear mixed effects models
 - [lmerTest](https://cran.r-project.org/web/packages/lmerTest/index.html)
@@ -113,6 +111,8 @@ These R packages above are very powerful and it's worth learning them well.
   - produces beautiful and informative ggplots that show distributions of datapoints
 - [hausekeep](https://hauselin.github.io/hausekeep/)
   - miscellaneous functions I've written over the years
+- [egg](https://cran.r-project.org/web/packages/egg/vignettes/Overview.html)
+  - arrange multiple plots in one ggplot figure
 
 ## Support my work
 
