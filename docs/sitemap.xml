@@ -2,7 +2,7 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd" version="1.0">
   <url>
     <loc>https://hausetutorials.netlify.com/0000_install.html</loc>
-    <lastmod>2020-06-15T09:45:41-04:00</lastmod>
+    <lastmod>2020-06-15T09:54:02-04:00</lastmod>
   </url>
   <url>
     <loc>https://hausetutorials.netlify.com/0001_rbasics.html</loc>
@@ -30,7 +30,7 @@
   </url>
   <url>
     <loc>https://hausetutorials.netlify.com/</loc>
-    <lastmod>2020-04-29T20:11:09-04:00</lastmod>
+    <lastmod>2020-06-15T09:48:21-04:00</lastmod>
   </url>
   <url>
     <loc>https://hausetutorials.netlify.com/posts/2020-05-17-reshape-python-pandas-dataframe-from-long-to-wide-with-pivottable/</loc>

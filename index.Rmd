@@ -21,7 +21,7 @@ This site contains introduction tutorials as well as relatively advanced data an
 * tutorials: beginner R tutorials ([R programming basics](0001_rbasics.html), [tidyverse, data.table](0002_tidyverse_datatable.html), etc.)
 * [articles](articles.html): more advanced analysis tricks/tips and statistical concepts illustrated with code
 
-If you want to learn more about who I am, [visit my personal site](https://www.hauselin.com).
+To learn more about me, [visit my personal site](https://www.hauselin.com).
 
 ## Consider being a patron and supporting my work?
 
@@ -37,9 +37,9 @@ If you have any questions or comments, [email me](mailto:hauselin@gmail.com) or 
 
 ## More resources?
 
-* [DataCamp](http://datacamp.com/): mostly R and Python tutorials
-* my [hausekeep R package](https://hauselin.github.io/hausekeep/): contains functions for experimental psychological research
-* [tidyverse](https://www.tidyverse.org/): contains many packages (e.g., dplyr, tidyr, ggplot2, stringr)
-    * manipulate dataframes (and tibbles) easily with tidyr, dplyr; make beautiful plots with clean syntax (ggplot2)
 * [data.table](https://cran.r-project.org/web/packages/data.table/vignettes/datatable-intro.html)
     * powerful, extremely fast, and simple way to manipulate dataframes/datatables
+* [tidyverse](https://www.tidyverse.org/): contains many packages (e.g., dplyr, tidyr, ggplot2, stringr)
+    * manipulate dataframes (and tibbles) easily with tidyr, dplyr; make beautiful plots with clean syntax (ggplot2)
+* [DataCamp](http://datacamp.com/): mostly R and Python tutorials
+* my [hausekeep R package](https://hauselin.github.io/hausekeep/): contains functions for experimental psychological research
