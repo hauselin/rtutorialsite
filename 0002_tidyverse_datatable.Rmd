@@ -804,7 +804,7 @@ df4[is.na(iqCopy)] # filter via i (show only rows where iqCopy is NA)
 df4[iqCopy == NA] # DOESN'T WORK!!! use is.na()
 ```
 
-Remove columns with `NULL`
+Remove a column by assigning a `NULL` to that column
 
 ```{r}
 df4[, iqCopy := NULL]
