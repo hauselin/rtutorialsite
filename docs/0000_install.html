@@ -1359,7 +1359,11 @@ Tutorials
 </nav>
 <hr class="d-toc-separator"/>
 <p>Get source code for this RMarkdown script <a href="https://github.com/hauselin/rtutorialsite/blob/master/0000_install.Rmd">here</a>.</p>
-<p>If you’re new to R, follow the instructions below to install R and RStudio. Otherwise, check out my tutorials and posts. To download all the resources on this site, visit my <a href="https://github.com/hauselin/rtutorialsite">GitHub site</a>. Click the green <strong>Clone or download</strong> button at the top right of the page to download everything. The RMarkdown scripts used to generate all the tutorials and posts have filenames that end with <strong>.Rmd</strong>.</p>
+<p>If you’re new to R, follow the instructions below to install R and RStudio. Otherwise, check out my tutorials and <a href="https://hausetutorials.netlify.app/articles.html">articles</a>.</p>
+<p>To download all the resources on this site, visit my <a href="https://github.com/hauselin/rtutorialsite">GitHub</a>. Click the green <strong>Clone or download</strong> button at the top right of the page to download everything you can find on this site. The RMarkdown scripts used to generate all the tutorials and posts have filenames that end with <strong>.Rmd</strong>.</p>
+<figure>
+<img src="attachments/github.png" alt="" /><figcaption>Download everything from <a href="https://github.com/hauselin/rtutorialsite">GitHub</a></figcaption>
+</figure>
 <h2 id="consider-being-a-patron-and-supporting-my-work">Consider being a patron and supporting my work?</h2>
 <p><a href="https://donorbox.org/support-my-teaching">Donate and become a patron</a>: If you find value in what I do and have learned something from my site, please consider becoming a patron. It takes me many hours to research, learn, and put together tutorials. Your support really matters.</p>
 <h2 id="installing-or-updating-r-and-rstudio">Installing (or updating) R and RStudio</h2>
@@ -1371,12 +1375,12 @@ Tutorials
 </ul>
 <ol start="2" type="1">
 <li><p>Download RStudio <a href="https://www.rstudio.com/products/rstudio/download/">here</a> (the FREE version).</p></li>
-<li><p>After installing both R and RStudio, run RStudio. We usually never use R itself and always run RStudio (RStudio relies on R). R is like your new but empty home (without furnitures and quite unlivable unless you’re a real minimalist) and RStudio are like furniture and decorations added to your house (R), making your house much more livable and even pretty. Thus, RStudio is useless without R, just like furniture and decorations are useless if you don’t already have a house.</p></li>
+<li><p>After installing both R and RStudio, run RStudio. We usually never use R itself and always run RStudio (RStudio relies on R). R is like your new but empty home (without furniture and quite unlivable unless you’re a real minimalist) and RStudio are like furniture and decorations added to your house (R), making your house much more livable and even pretty. Thus, RStudio is useless without R, just like furniture and decorations are useless if you don’t already have a house.</p></li>
 </ol>
 <p><strong>Updating R and RStudio once every few months</strong></p>
 <p>You should check whether there are newer versions of R and RStudio at least once every few months and install them if available. It’s good practice to always use the latest versions. Just go to their websites and download and re-install them again.</p>
 <h2 id="installing-r-packages">Installing R packages</h2>
-<p>Here’s how to install R packages (also called libraries) that extend R’s basic functionalities. Below are packages I use regularly. Make sure you have the latest version of R and RStudio. To install packages, run the following code in RStudio. You only need to install any given package once (but remember to update them when newer versions are available).</p>
+<p>Here’s how to install R packages (also called libraries) that extend R’s basic functionality. Below are a few packages I use regularly. Make sure you have the latest version of R and RStudio. To install packages, run the following code in RStudio. You only need to install any given package once (but remember to update them when newer versions are available).</p>
 <p>I also have my own package <a href="https://hauselin.github.io/hausekeep/">hausekeep</a>, which has functions I use frequently.</p>
 <p>which will also try to install a few of these packages if you don’t already have them). To install all of them, first</p>
 <p>You can install one package at a time or multiple at once. I suggest installing one at a time because it can be can be error-prone if you try to install too many packages at once because the warning/error messages can become difficult quite abstruse (if there are any).</p>
@@ -1401,23 +1405,17 @@ devtools::install_github(&quot;hauselin/hausekeep&quot;) # you might have to ins
 # install.packages(&quot;data.table&quot;)</code></pre>
 <p>Every time I start a new R session in RStudio, I usually run the code below at the top of my R script to load all these libraries all at once using <code>library()</code>.</p>
 <pre class="r"><code>
-library(tidyverse); library(data.table); library(broom); library(dtplyr); 
-library(lme4); library(lmerTest); library(ggbeeswarm); 
-library(cowplot); library(hausekeep)</code></pre>
+library(tidyverse); library(data.table); library(dtplyr); library(lme4); library(lmerTest); library(ggbeeswarm); library(egg); library(glue); library(hausekeep)</code></pre>
 <p>These R packages above are very powerful and it’s worth learning them well.</p>
 <ul>
-<li><a href="https://www.tidyverse.org/">tidyverse</a> packages (e.g., dplyr, tidyr, ggplot2, stringr)
-<ul>
-<li>manipulate dataframes (and tibbles) easily with tidyr, dplyr</li>
-<li>make beautiful plots with clean syntax (ggplot2)</li>
-</ul></li>
 <li><a href="https://cran.r-project.org/web/packages/data.table/vignettes/datatable-intro.html">data.table</a>
 <ul>
 <li>powerful, extremely fast, and simple way to manipulate dataframes/datatables</li>
 </ul></li>
-<li><a href="https://cran.r-project.org/web/packages/broom/vignettes/broom.html">broom</a>
+<li><a href="https://www.tidyverse.org/">tidyverse</a> packages (e.g., dplyr, tidyr, ggplot2, stringr)
 <ul>
-<li>converts model outputs into tidy dataframes</li>
+<li>manipulate dataframes (and tibbles) easily with tidyr, dplyr</li>
+<li>make beautiful plots with clean syntax (ggplot2)</li>
 </ul></li>
 <li><a href="https://github.com/hadley/dtplyr">dtplyr</a>
 <ul>
@@ -1435,13 +1433,9 @@ library(cowplot); library(hausekeep)</code></pre>
 <ul>
 <li>produces beautiful and informative ggplots that show distributions of datapoints</li>
 </ul></li>
-<li><a href="https://cran.r-project.org/web/packages/cowplot/vignettes/introduction.html">cowplot</a>
-<ul>
-<li>combines multiple ggplots into one plot</li>
-</ul></li>
 <li><a href="https://hauselin.github.io/hausekeep/">hausekeep</a>
 <ul>
-<li>miscellaneous functions for psychological research</li>
+<li>miscellaneous functions I’ve written over the years</li>
 </ul></li>
 </ul>
 <h2 id="support-my-work">Support my work</h2>
