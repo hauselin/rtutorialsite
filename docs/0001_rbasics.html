@@ -19,7 +19,7 @@
  <!--/radix_placeholder_import_source-->
 
   <!--radix_placeholder_meta_tags-->
-  <title>Data science: R programming and data science basics</title>
+  <title>Data science: Programming and data science basics</title>
   
   <meta property="description" itemprop="description" content="R, programming, and data science basics"/>
   
@@ -27,7 +27,7 @@
   
   
   <!--  https://developers.facebook.com/docs/sharing/webmasters#markup -->
-  <meta property="og:title" content="Data science: R programming and data science basics"/>
+  <meta property="og:title" content="Data science: Programming and data science basics"/>
   <meta property="og:type" content="article"/>
   <meta property="og:description" content="R, programming, and data science basics"/>
   <meta property="og:locale" content="en_US"/>
@@ -35,14 +35,14 @@
   
   <!--  https://dev.twitter.com/cards/types/summary -->
   <meta property="twitter:card" content="summary"/>
-  <meta property="twitter:title" content="Data science: R programming and data science basics"/>
+  <meta property="twitter:title" content="Data science: Programming and data science basics"/>
   <meta property="twitter:description" content="R, programming, and data science basics"/>
   
   <!--/radix_placeholder_meta_tags-->
   <!--radix_placeholder_rmarkdown_metadata-->
   
   <script type="text/json" id="radix-rmarkdown-metadata">
-  {"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["title","description","output"]}},"value":[{"type":"character","attributes":{},"value":["R programming and data science basics"]},{"type":"character","attributes":{},"value":["R, programming, and data science basics"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["radix::radix_article"]}},"value":[{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["toc","toc_depth"]}},"value":[{"type":"logical","attributes":{},"value":[true]},{"type":"integer","attributes":{},"value":[3]}]}]}]}
+  {"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["title","description","output","editor_options"]}},"value":[{"type":"character","attributes":{},"value":["Programming and data science basics"]},{"type":"character","attributes":{},"value":["R, programming, and data science basics"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["radix::radix_article"]}},"value":[{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["toc","toc_depth"]}},"value":[{"type":"logical","attributes":{},"value":[true]},{"type":"integer","attributes":{},"value":[3]}]}]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["chunk_output_type"]}},"value":[{"type":"character","attributes":{},"value":["console"]}]}]}
   </script>
   <!--/radix_placeholder_rmarkdown_metadata-->
   <!--radix_placeholder_navigation_in_header-->
@@ -1290,7 +1290,7 @@
 <!--radix_placeholder_front_matter-->
 
 <script id="distill-front-matter" type="text/json">
-{"title":"R programming and data science basics","description":"R, programming, and data science basics","authors":[]}
+{"title":"Programming and data science basics","description":"R, programming, and data science basics","authors":[]}
 </script>
 
 <!--/radix_placeholder_front_matter-->
@@ -1342,7 +1342,7 @@ Tutorials
 <!--/radix_placeholder_site_before_body-->
 
 <div class="d-title">
-<h1>R programming and data science basics</h1>
+<h1>Programming and data science basics</h1>
 <p>R, programming, and data science basics</p>
 </div>
 
@@ -1362,11 +1362,15 @@ Tutorials
 <li><a href="#getting-help-via-or-help">Getting help via ? or <code>help()</code></a><ul>
 <li><a href="#which-package-does-a-function-come-from">Which package does a function come from?</a></li>
 </ul></li>
-<li><a href="#objects-variables-and-classes">Objects, variables, and classes</a></li>
+<li><a href="#objects-variables-and-classes">Objects, variables, and classes</a><ul>
+<li><a href="#side-note-variable-naming-conventions">Side note: variable naming conventions</a></li>
+</ul></li>
 <li><a href="#indices-and-indexing-with-i-j">Indices and indexing with [i, j]</a></li>
 <li><a href="#using-functions">Using functions</a></li>
-<li><a href="#piping-with">Piping with <code>%&gt;%</code></a></li>
-<li><a href="#functions-and-argument-order">Functions and argument order</a></li>
+<li><a href="#piping-or-chaining-functions-with">Piping or chaining functions with <code>%&gt;%</code></a></li>
+<li><a href="#functions-and-argument-order">Functions and argument order</a><ul>
+<li><a href="#reading-function-documentation">Reading function documentation</a></li>
+</ul></li>
 <li><a href="#pressing-tab-key-to-autocomplete-tab-will-be-your-best-friend">Pressing Tab key to autocomplete! Tab will be your best friend!</a></li>
 <li><a href="#good-practices-for-reproducible-research">Good practices for reproducible research</a></li>
 <li><a href="#four-step-philosophy">Four-step philosophy</a></li>
@@ -1393,22 +1397,22 @@ Install packages once and you’ll have them on your computer. You only need to 
 </aside>
 <div class="layout-chunk" data-layout="l-body">
 <pre class="r"><code>
-install.packages(c(&quot;tidyverse&quot;, &quot;data.table&quot;, &quot;dtplyr&quot;))</code></pre>
+install.packages(c(&quot;data.table&quot;, &quot;tidyverse&quot;))</code></pre>
 </div>
 <h2 id="usingloading-r-packages-when-you-begin-a-new-rstudio-session-library">Using/loading R packages when you begin a new RStudio session <code>library()</code></h2>
 <p>Use <code>library()</code> to load packages and use semi-colon (;) to load multiple packages in the same line. I always load the packages below whenever I start a new RStudio session. Sometimes you’ll see people using <code>require()</code> instead of <code>library()</code>. Both works!</p>
 <div class="layout-chunk" data-layout="l-body">
 <pre class="r"><code>
-library(tidyverse); library(data.table); library(dtplyr)</code></pre>
+library(data.table); library(tidyverse)</code></pre>
 </div>
 <h2 id="changing-r-default-option-settings">Changing R default option settings</h2>
 <p>I also strongly recommend changing a few default R options. Click on <strong>RStudio -&gt; Preferences -&gt; General Tab</strong> and (un)check the boxes below.</p>
 <ul>
-<li>You might want to change your default working directory at the top. This directory will be where RStudio saves all your work automatically if you don’t manually specify/change your working directory later on (more on directories later on).</li>
-<li>By default, RStudio reloads your previously saved work whenever you reopen it, which can often be disastrous (just like you might not want Microsoft Word to always reopen the document you last worked on every single time you open it). So we are disabling (unchecking) relevant features.</li>
+<li>You might want to change your default working directory at the top (mine is <code>~Dropbox/Working Datasets</code>). This directory will be where RStudio saves all your work automatically if you don’t manually specify/change your working directory later on (more on directories later on).</li>
+<li>By default, RStudio reloads your previously saved work whenever you reopen it, which can often be disastrous (just like you might not want Microsoft Word to always reopen the document you last worked on every single time you open it). So we are disabling (unchecking) relevant features (<strong>uncheck</strong> the highlighted box below and select <strong>Never</strong>).</li>
 </ul>
 <figure>
-<img src="attachments/R_preference_settings.jpg" alt="R options" /><figcaption>R options</figcaption>
+<img src="attachments/R_preference_settings.png" alt="" /><figcaption>Changing RStudio preferences</figcaption>
 </figure>
 <h2 id="workingcurrent-directory-where-are-you-and-where-should-you-be-getwd">Working/current directory: Where are you and where should you be? <code>getwd()</code></h2>
 <p>The <strong>working directory</strong> (also known as current directory) is the folder (also known as directory) you’re currently in. If you’re navigating your computer with your mouse, you’ll be clicking and moving into different folders. Directory is just a different way of saying ‘location’ or where you’re at right now (which folder you’re currently in).</p>
@@ -1423,20 +1427,27 @@ getwd() # prints in the console your current directory </code></pre>
 </aside>
 <p>The path above tells you where your working directory is now. It’s conceptually equivalent to you opening a window and using your mouse to manually navigate to that folder.</p>
 <p>The <code>[1]</code> in the output refers to the element number of your output.</p>
-<p>To change your working directory (to where your project folder is located), use the <code>setwd()</code>. This function is easy to use, but the difficulty for most beginners is getting the path to your folder (e.g., “/Users/Hause/Dropbox/Working Projects/RDataScience”) so you can specify something like <code>setwd(&quot;/Users/Hause/Dropbox/Working Projects/RDataScience&quot;)</code>.</p>
+<p>To change your working directory (to where your project folder is located), use the <code>setwd()</code>. This function is easy to use, but the difficulty for most beginners is getting the path to your folder (e.g., <code>"/Users/Hause/Dropbox/Working Projects/RDataScience"</code>) so you can specify something like <code>setwd("/Users/Hause/Dropbox/Working Projects/RDataScience")</code>.</p>
 <h3 id="two-ways-to-changeset-your-working-directory-both-uses-setwd.">Two ways to change/set your working directory (both uses <code>setwd()</code>).</h3>
 <ol type="1">
-<li><p>Go to your menubar (at the top). Click <strong>Help</strong> and search for <strong>set working directory</strong>. RStudio will tell you how to do it via the <strong>Session</strong> menu. Select <strong>Set Working Directory</strong> and <strong>Choose Directory</strong>. Then navigate to your project directory and you’re done.</p></li>
-<li><p>On one of the RStudio panes, you’ll see a <strong>Files</strong> tab (click on it). Use that pane to navigate to your project directory. When you’re there, click <strong>More</strong> and <strong>Set As Working Directory</strong>.</p></li>
+<li>Go to your menubar (at the top). Click <strong>Help</strong> and search for <strong>set working directory</strong>. RStudio will tell you how to do it via the <strong>Session</strong> menu. Select <strong>Set Working Directory</strong> and <strong>Choose Directory</strong>. Then navigate to your project directory and you’re done.</li>
 </ol>
-<p>Whether you choose method 1 or 2, you should see your new directory being set in the console panel, which should look something like <code>&gt; setwd(&quot;your/path/is/here&quot;)</code>. <strong>COPY AND PASTE THIS OUTPUT (but without the &gt;) to your current script</strong>. So you should be copying something like this:</p>
+<figure>
+<img src="attachments/setdirectory_01.png" alt="" /><figcaption>Set working directory via menubar</figcaption>
+</figure>
+<ol start="2" type="1">
+<li>On one of the RStudio panes, you’ll see a <strong>Files</strong> tab (click on it). Use that pane to navigate to your project directory. When you’re there, click <strong>More</strong> and <strong>Set As Working Directory</strong>.</li>
+</ol>
+<figure>
+<img src="attachments/setdirectory_02.png" alt="" /><figcaption>Set working directory via Files panel</figcaption>
+</figure>
+<p>Whether you choose method 1 or 2, you should see your new directory being set in the console panel, which should look something like <code>&gt; setwd("your/path/is/here")</code>. <strong>COPY AND PASTE THIS OUTPUT (but without the &gt;) to your current script</strong>. So you should be copying something like this:</p>
 <div class="layout-chunk" data-layout="l-body">
 <pre class="r"><code>
 setwd(&quot;your/path/is/here&quot;)</code></pre>
 </div>
 <h2 id="getting-help-via-or-help">Getting help via ? or <code>help()</code></h2>
-<p>To get help and read the documentation for any function, use <code>?</code> or the <code>help()</code> function. Beginners will often find the <strong>Examples</strong> section of the documentation (at the bottom of the document) most useful. Try copying and pasting the code from that section into your script to see how that function works.</p>
-<p>Equivalent ways to get help:</p>
+<p>To get help and read the documentation for any function, use <code>?</code> or the <code>help()</code> function. Equivalent ways to get help:</p>
 <pre class="r"><code>
 # get help for mean function
 help(mean)
@@ -1447,12 +1458,19 @@ help(mean)
 ?setwd
 ?setwd()
 help(setwd)</code></pre>
+<p>Beginners will often find the <strong>Examples</strong> section of the documentation (at the bottom of the document) most useful. Try copying and pasting the code from that section into your script to see how that function works.</p>
+<figure>
+<img src="attachments/read_doc.png" alt="" /><figcaption>Learning to use documentation</figcaption>
+</figure>
 <h3 id="which-package-does-a-function-come-from">Which package does a function come from?</h3>
 <p>If you ask for help using <code>?</code> or <code>help()</code>, at the top left corner of the documentation, you’ll see something that looks like <code>functionName{anotherName}</code>, the name within the <code>{}</code> tells you which package a particular function comes from.</p>
+<figure>
+<img src="attachments/read_doc2.png" alt="" /><figcaption>Learning to read documentation</figcaption>
+</figure>
 <pre class="r"><code>
 ?lm # linear regression, lm{stats} (comes from stats package, which comes with R)
 ?mean # mean, mean{base} (comes from base package, which comes with R)</code></pre>
-<p>To explicitly specify which package to use, you can use the code below. Often we don’t have to explicitly specify which package unless different packages have functions with the same names.</p>
+<p>To explicitly specify which package to use, you use the following syntax: <code>package::function</code>. Usually we don’t need to explicitly specify which package unless different packages have functions with the same names.</p>
 <div class="layout-chunk" data-layout="l-body">
 <pre class="r"><code>
 mean(c(1, 2, 3)) # compute mean</code></pre>
@@ -1483,10 +1501,10 @@ Coefficients:
      37.885       -2.876  </code></pre>
 </div>
 <h2 id="objects-variables-and-classes">Objects, variables, and classes</h2>
-<p>Objects are ‘things’ in your environment. Just like physical objects (e.g., jeans, frying pan) in your physical environment. Different objects have different properties, and thus belong to different categories/classes: jeans belong to clothes and frying pan belongs to utensils. Same with programming language objects: different objects in your environment belong to different categories/classes (often also known as type). And different categories/classes have different properties associated with them. You wear your jeans but not your frying pan; you can fry eggs with your pan but not your jeans. Same with different programming objects, which includes <strong>vectors, lists, dataframes, datatables, matrices, characters (also known as strings), numerics, integers, booleans</strong> (and the list goes on). Different programming objects/classes/categories have different properties and actions associated with them.</p>
-<aside>
-Note (courtesy of John Eusebio): You can fry your jeans on your frying pan. It’s just not recommended. Same thing with some R functions. You can do some things, like use a for loop to iterate through and operate on every element of a matrix, but you shouldn’t. There are tools that are made to do stuff like matrix operations much more smoothly.
-</aside>
+<p>Objects are ‘things’ in your environment. Just like physical objects (e.g., jeans, frying pan) in your physical environment.</p>
+<p>Different objects have different <strong>properties</strong>, and thus belong to different categories/classes: Jeans belong to clothes and frying pan belongs to utensils. Same with programming language objects: different objects in your environment belong to different categories/classes (often also known as <strong>type</strong>).</p>
+<p>Different categories/classes have different <strong>properties</strong> and <strong>actions</strong> associated with them. You wear your jeans but not your frying pan; you can fry eggs with your pan but not your jeans. Same with different programming objects, which includes <strong>vectors, lists, dataframes, datatables, matrices, characters (also known as strings), numerics, integers, booleans</strong> (and the list goes on).</p>
+<p>Different programming objects/classes/categories have different <strong>properties</strong> and <strong>actions</strong> associated with them, just like things in everyday life. Birds have wings (a property/feature) and can fly (an action).</p>
 <p>You can check the class/category/type of an object with the <code>class()</code> function.</p>
 <div class="layout-chunk" data-layout="l-body">
 <pre class="r"><code>
@@ -1494,8 +1512,9 @@ class(mean)  </code></pre>
 <pre><code>
 [1] &quot;function&quot;</code></pre>
 </div>
+<p><strong>Note (courtesy of John Eusebio)</strong>: You can fry your jeans on your frying pan. It’s just not recommended. Same thing with some R functions. You can do some things, like use a for loop to iterate through and operate on every element of a matrix, but you shouldn’t. There are tools that are made to do stuff like matrix operations much more efficiently and effectively.</p>
 <p>Creating objects (specifically vectors) with the <code>&lt;-</code> assignment operator</p>
-<p>Keyboard shortcut for <code>&lt;-</code> is Alt -</p>
+<p>Keyboard shortcut for <code>&lt;-</code> is <code>Alt -</code></p>
 <div class="layout-chunk" data-layout="l-body">
 <pre class="r"><code>
 variable1 &lt;- 10 # assign/store the value 10 in variable1
@@ -1516,6 +1535,9 @@ print(v3) # same as above v3 (print explicitly prints output to console)</code><
 [1] 2010</code></pre>
 </div>
 <p>Check your panes and click on the <strong>Environment</strong> tab. What do you see there right now? What’s new?</p>
+<figure>
+<img src="attachments/environment_pane.png" alt="" /><figcaption>Creating new variables in the environment</figcaption>
+</figure>
 <p>Note that R variable names can only begin with characters/letters, not numbers or other symbols.</p>
 <div class="layout-chunk" data-layout="l-body">
 <pre class="r"><code>
@@ -1561,7 +1583,7 @@ roomsInHouse</code></pre>
 <pre><code>
 [1] &quot;Kitchen&quot; &quot;Bedroom&quot;</code></pre>
 </div>
-<p>Note that all the values in <code>roomsInHouse</code> are in quotation marks &quot;&quot;, meaning that the values are all characters (a category or class of objects in R).</p>
+<p>Note that all the values in <code>roomsInHouse</code> are in quotation marks "", meaning that the values are all characters (a category or class of objects in R).</p>
 <div class="layout-chunk" data-layout="l-body">
 <pre class="r"><code>
 class(&quot;Date of Birth&quot;)</code></pre>
@@ -1642,6 +1664,15 @@ class(c(T, F))</code></pre>
 <pre><code>
 [1] &quot;logical&quot;</code></pre>
 </div>
+<h3 id="side-note-variable-naming-conventions">Side note: variable naming conventions</h3>
+<p>Also, you can use different variable naming conventions. I use both the snake case and camel case (just two of the many conventions).</p>
+<ul>
+<li><a href="https://en.wikipedia.org/wiki/Snake_case">snake case</a>: <code>my_variable</code>, <code>rooms_in_house</code>, <code>model_output</code> (looks like a snake)</li>
+<li><a href="https://en.wikipedia.org/wiki/Camel_case">camel case</a>: <code>myVariable</code>, <code>roomsInHouse</code>, <code>modelOutput</code> (looks like a camel)</li>
+</ul>
+<figure>
+<img src="attachments/camelcase.png" alt="" /><figcaption>Camel case picture from <a href="https://en.wikipedia.org/wiki/Camel_case">Wikipedia</a></figcaption>
+</figure>
 <h2 id="indices-and-indexing-with-i-j">Indices and indexing with [i, j]</h2>
 <table>
 <thead>
@@ -1674,12 +1705,12 @@ class(c(T, F))</code></pre>
 </tbody>
 </table>
 <p>i: row index, j: column index</p>
-<p>Index is just a fancy way of saying numbering or counting.</p>
+<p>Index is just a fancy way of saying numbering or counting. <code>R</code> begins counting from 1 (i.e., indexing begins from 1), whereas many other languages like Python and JavaScript begin from 0.</p>
 <div class="layout-chunk" data-layout="l-body">
 <pre class="r"><code>
 # create a matrix with values 10, 20, 30, 40, and make it 2 rows long
-exampleMatrix &lt;- matrix(c(10, 20, 30, 40), nrow = 2) 
-exampleMatrix</code></pre>
+example_matrix &lt;- matrix(c(10, 20, 30, 40), nrow = 2) 
+example_matrix</code></pre>
 <pre><code>
      [,1] [,2]
 [1,]   10   30
@@ -1689,19 +1720,19 @@ exampleMatrix</code></pre>
 <div class="layout-chunk" data-layout="l-body">
 <pre class="r"><code>
 # what does this return? (&#39;return&#39; is a way to say &quot;output&quot; or &quot;spit/print out&quot;)
-exampleMatrix[1, 2]</code></pre>
+example_matrix[1, 2]</code></pre>
 <pre><code>
 [1] 30</code></pre>
 </div>
 <p>What indices would you use to get the value 20 specifically?</p>
 <div class="layout-chunk" data-layout="l-body">
 <pre class="r"><code>
-exampleMatrix[2, 1]</code></pre>
+example_matrix[2, 1]</code></pre>
 <pre><code>
 [1] 20</code></pre>
 </div>
 <h2 id="using-functions">Using functions</h2>
-<p>Functions take some input, transform that input, and spits out (returns you) some output.</p>
+<p>Functions take some <strong>input</strong>, transform that <strong>input</strong>, and <strong>spits out</strong> (<strong>return</strong> is the technical term) some output.</p>
 <div class="layout-chunk" data-layout="l-body">
 <pre class="r"><code>
 mean(c(10, 20, 30)) # mean function</code></pre>
@@ -1709,6 +1740,12 @@ mean(c(10, 20, 30)) # mean function</code></pre>
 [1] 20</code></pre>
 </div>
 <p>What is the input to the <code>mean()</code> function above? What is the output?</p>
+<ul>
+<li><code>mean()</code> is the function you <strong>call</strong> (technical term)</li>
+<li><code>c(10, 20, 30)</code> is the <strong>input</strong> you provide to the function <code>mean()</code></li>
+<li>the <strong>function call</strong> <code>mean(c(10, 20, 30))</code> <strong>returns</strong> the value 20</li>
+</ul>
+<p>In case you’re more familiar with math notation <span class="math inline">\(y = f(x)\)</span>: <code>x</code> is the input to the function <span class="math inline">\(f()\)</span>, and <code>y</code> is the output of the function <span class="math inline">\(f(x)\)</span>.</p>
 <p>What are the inputs to the <code>matrix()</code> function below? How is the <code>matrix()</code> function transforming your input? What do you think the output will be?</p>
 <div class="layout-chunk" data-layout="l-body">
 <pre class="r"><code>
@@ -1721,6 +1758,31 @@ matrix(c(10, 20, 30, 40, 50, 60), nrow = 6)</code></pre>
 [4,]   40
 [5,]   50
 [6,]   60</code></pre>
+</div>
+<div class="layout-chunk" data-layout="l-body">
+<pre class="r"><code>
+matrix(c(10, 20, 30, 40, 50, 60), ncol = 6)</code></pre>
+<pre><code>
+     [,1] [,2] [,3] [,4] [,5] [,6]
+[1,]   10   20   30   40   50   60</code></pre>
+</div>
+<div class="layout-chunk" data-layout="l-body">
+<pre class="r"><code>
+matrix(c(10, 20, 30, 40, 50, 60), nrow = 2)</code></pre>
+<pre><code>
+     [,1] [,2] [,3]
+[1,]   10   30   50
+[2,]   20   40   60</code></pre>
+</div>
+<div class="layout-chunk" data-layout="l-body">
+<pre class="r"><code>
+matrix(c(10, 20, 30, 40, 50, 60), nrow = 2, byrow = TRUE)</code></pre>
+<pre><code>
+     [,1] [,2] [,3]
+[1,]   10   20   30
+[2,]   40   50   60</code></pre>
+<pre class="r"><code>
+# how does this output differ from the one above?</code></pre>
 </div>
 <div class="layout-chunk" data-layout="l-body">
 <pre class="r"><code>
@@ -1740,8 +1802,8 @@ paste(c(&quot;a&quot;, &quot;b&quot;, &quot;c&quot;), 1:3, sep = &#39;_ _ _&#39;
 <pre><code>
 [1] &quot;a_ _ _1&quot; &quot;b_ _ _2&quot; &quot;c_ _ _3&quot;</code></pre>
 </div>
-<h2 id="piping-with">Piping with <code>%&gt;%</code></h2>
-<p>Often we apply multiple functions in succession. We say we “wrap” or “nest” functions within functions.</p>
+<h2 id="piping-or-chaining-functions-with">Piping or chaining functions with <code>%&gt;%</code></h2>
+<p>Often we apply multiple functions in succession. We say we <strong>wrap</strong> or <strong>nest</strong> functions within functions. Math notation: <span class="math inline">\(y = h(g(f(x)))\)</span>: apply function f to x, then function g to that output, and then function h to that output.</p>
 <div class="layout-chunk" data-layout="l-body">
 <pre class="r"><code>
 x &lt;- c(10.1, 10.1, 20.3, 20.3, 30.2, 30.7, 30.7)
@@ -1818,6 +1880,7 @@ x %&gt;% # one line at a time (press enter after each pipe)
 <pre><code>
 [1] 23</code></pre>
 </div>
+<p>In R, this approach of using pipes <code>%&gt;%</code> is called <strong>piping</strong>. In other languages like Python, it’s called <strong>chaining</strong>.</p>
 <h2 id="functions-and-argument-order">Functions and argument order</h2>
 <p>Make sure to specify your function arguments in the correct order. If not, make sure to specify the name of each argument you’re using!</p>
 <div class="layout-chunk" data-layout="l-body">
@@ -1827,14 +1890,14 @@ numbers</code></pre>
 <pre><code>
 [1]  1  2  3 NA</code></pre>
 </div>
-<p>Argument-value pairs: argument is x, value is <code>numbers</code> (defined above as 1, 2, 3, NA)</p>
+<p><strong>Argument</strong>-<strong>value</strong> pairs: argument is x, value is <code>numbers</code> (defined above as 1, 2, 3, NA)</p>
 <div class="layout-chunk" data-layout="l-body">
 <pre class="r"><code>
 mean(x = numbers) # what happened?</code></pre>
 <pre><code>
 [1] NA</code></pre>
 </div>
-<p>Argument-value pairs</p>
+<p><strong>Argument-value</strong> pairs</p>
 <ul>
 <li>argument1 = x, value = <code>numbers</code></li>
 <li>argument2 = na.rm, value = <code>TRUE</code></li>
@@ -1846,6 +1909,21 @@ mean(x = numbers, na.rm = TRUE) </code></pre>
 <pre><code>
 [1] 2</code></pre>
 </div>
+<h3 id="reading-function-documentation">Reading function documentation</h3>
+<p>To improve as a programmer, you’ll need to learn to read and understand documentation. R’s documentation is quite intuitive once you understand how to read it.</p>
+<div class="layout-chunk" data-layout="l-body">
+<pre class="r"><code>
+?mean  # show help documentation</code></pre>
+</div>
+<p>Decoding the <strong>Usage</strong> and <strong>Arguments</strong> sections</p>
+<p><strong>Usage section</strong></p>
+<p><code>mean(x, ...)</code>: the function <code>mean()</code> can be called/used by providing one argument (<code>x</code>), which has no default values, so some value/object MUST be provided</p>
+<p><code>mean(x, trim=0, na.rm=FALSE, ...)</code>: tells you which arguments have default parameters and what they are (<code>trim</code> parameter has a default value of <code>0</code>, and <code>na.rm</code> parameter has a default value of <code>FALSE</code>—so <code>NA</code> or missing values are not removed by default); because <code>trim</code> and <code>na.rm</code> have default values, you don’t need to supply them when calling the function <code>mean()</code></p>
+<p><strong>Arguments section</strong></p>
+<p>This section provides more details on each parameter of the function.</p>
+<figure>
+<img src="attachments/function_argument_value.png" alt="" /><figcaption>Argument-value pairs</figcaption>
+</figure>
 <p>Note that <code>TRUE</code> can be written simply as <code>T</code> and <code>FALSE</code> can be written as <code>F</code>.</p>
 <div class="layout-chunk" data-layout="l-body">
 <pre class="r"><code>
@@ -1879,11 +1957,12 @@ Error in mean.default(numbers, TRUE): &#39;trim&#39; must be numeric of length o
 <p>Be creative! Tab and autocomplete works in MANY other situations! Explore! (variables, filenames, directory paths etc.)</p>
 <h2 id="good-practices-for-reproducible-research">Good practices for reproducible research</h2>
 <ul>
-<li>One directory/folder per project</li>
-<li>Clear your environment and set your working directory at the top of each script</li>
+<li>One directory/folder per project (create an <a href="https://support.rstudio.com/hc/en-us/articles/200526207-Using-Projects">RProject</a> for each directory/project)</li>
+<li>Ensure your working directory is set properly before you begin (use RProjects!)</li>
+<li>Ensure your environment is cleared before you begin</li>
 <li>Load your libraries at the top of each script</li>
-<li>Save and restore your work with <code>save.image()</code> and <code>load()</code></li>
 <li>Give your variables and objects sensible names</li>
+<li>Optional: save and restore your work with <code>save.image()</code> and <code>load()</code></li>
 </ul>
 <h2 id="four-step-philosophy">Four-step philosophy</h2>
 <ol type="1">
@@ -1896,7 +1975,7 @@ Error in mean.default(numbers, TRUE): &#39;trim&#39; must be numeric of length o
 <ul>
 <li>Not looking at the output in the console (treating R like a black box)</li>
 <li>Console still expects more code: + rather than &gt; (press Escape to get rid of +)</li>
-<li>Naming your variables unsystematically and calling the wrong variable because of typos</li>
+<li>Naming your variables un-systematically and calling the wrong variable because of typos</li>
 <li>Not knowing what data you’re giving a function</li>
 <li>Not knowing what class of data a function expects</li>
 <li>Not knowing what class of data your function returns</li>
@@ -1911,6 +1990,15 @@ Error in mean.default(numbers, TRUE): &#39;trim&#39; must be numeric of length o
 <div class="d-appendix">
 </div>
 
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
 
 <!--radix_placeholder_site_after_body-->
 <!--/radix_placeholder_site_after_body-->
