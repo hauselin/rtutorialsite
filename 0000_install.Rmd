@@ -72,7 +72,9 @@ Comments are preceded by the # symbol in R, and you can use # or #' for multi-li
 
 ```r
 # install packages all at once using c(), which allows you to combine/concatenate stuff
-install.packages(c("tidyverse", "data.table", "lme4", "lmerTest", "ggbeeswarm"))
+install.packages(c("tidyverse", "data.table", 
+                   "lme4", "lmerTest", 
+                   "ggbeeswarm", "egg"))
 
 # install hausekeep package from my github
 # install.packages("devtools")
@@ -92,8 +94,8 @@ Every time I start a new R session in RStudio, I usually run the code below at t
 
 ```r
 library(tidyverse); library(data.table);
-library(lme4); library(lmerTest); library(ggbeeswarm)
-library(egg); library(hausekeep)
+library(lme4); library(lmerTest); 
+library(ggbeeswarm); library(egg); library(hausekeep)
 ```
 
 ### More about these packages

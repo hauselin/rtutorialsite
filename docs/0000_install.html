@@ -1389,7 +1389,9 @@ Tutorials
 <p>Comments are preceded by the # symbol in R, and you can use # or #’ for multi-line comments. R won’t run any code that’s preceded by the # symbol.</p>
 <pre class="r"><code>
 # install packages all at once using c(), which allows you to combine/concatenate stuff
-install.packages(c(&quot;tidyverse&quot;, &quot;data.table&quot;, &quot;lme4&quot;, &quot;lmerTest&quot;, &quot;ggbeeswarm&quot;))
+install.packages(c(&quot;tidyverse&quot;, &quot;data.table&quot;, 
+                   &quot;lme4&quot;, &quot;lmerTest&quot;, 
+                   &quot;ggbeeswarm&quot;, &quot;egg&quot;))
 
 # install hausekeep package from my github
 # install.packages(&quot;devtools&quot;)
@@ -1406,8 +1408,8 @@ devtools::install_github(&quot;hauselin/hausekeep&quot;) # you might have to ins
 <p>Every time I start a new R session in RStudio, I usually run the code below at the top of my R script to load all these libraries all at once using <code>library()</code>.</p>
 <pre class="r"><code>
 library(tidyverse); library(data.table);
-library(lme4); library(lmerTest); library(ggbeeswarm)
-library(egg); library(hausekeep)</code></pre>
+library(lme4); library(lmerTest); 
+library(ggbeeswarm); library(egg); library(hausekeep)</code></pre>
 <h3 id="more-about-these-packages">More about these packages</h3>
 <ul>
 <li><a href="https://cran.r-project.org/web/packages/data.table/vignettes/datatable-intro.html">data.table</a>
