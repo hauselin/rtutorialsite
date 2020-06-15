@@ -609,6 +609,7 @@ Model specification with `lmer()`
 * y ~ x (same as other models)
 * (1 | group): varying intercept (one intercept per group)
 * (1 + x | group): varying intercept and slope (one intercept and slope per group)
+* (1 + x || group): varying intercept and slope but no correlation between them
 
 #### Random intercept model (fixed slope)
 
