@@ -986,7 +986,7 @@
 </figure>
 <p>Common terms for this transformation are melt, pivot-long, unpivot, gather, stack. Many functions have been written to convert data from wide to long form, but I believe <code>melt()</code> from the <code>data.table</code> library is the best. See <code>melt()</code> documentation <a href="https://cran.r-project.org/web/packages/data.table/vignettes/datatable-reshape.html">here</a>.</p>
 <ul>
-<li>other functions like <code>gather</code> and <code>pivot_longer</code> are often just wrapper functions around <code>melt()</code>—these other functions simplify <code>melt</code> and often can’t deal with more complex transformations</li>
+<li>other functions like <code>gather</code> and <code>pivot_longer</code> are often just wrapper functions for <code>melt()</code>—these other functions simplify <code>melt</code> and often can’t deal with more complex transformations</li>
 <li><code>melt</code> is more powerful but isn’t any more complicated than the other functions…</li>
 <li><code>melt</code> alone is often enough for all your wide-to-long transformations; don’t need to learn <code>gather</code>, <code>pivot_longer</code>, and <code>melt</code>; <code>melt</code> alone is enough!</li>
 <li>Python’s <a href="https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.melt.html">pandas</a> library also has the equivalent <code>melt</code> function/method that works the same way (see my pandas melt tutorial <a href="https://towardsdatascience.com/reshape-pandas-dataframe-with-melt-in-python-tutorial-and-visualization-29ec1450bb02">here</a>)</li>
