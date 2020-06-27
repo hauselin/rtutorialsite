@@ -140,6 +140,6 @@ This table looks wrong because the `school` column in `df_wide` doesn't belongâ€
 
 ## Support my work
 
-I hope now you have a better understanding of how `pd.melt` reshapes dataframes. If you find this post useful, check out my other articles and folow me on [Medium ](https://medium.com/@ausius).
+I hope now you have a better understanding of how `pd.melt` reshapes dataframes. If you find this post useful, check out my other articles and follow me on [Medium ](https://medium.com/@ausius).
 
 If you've enjoyed my article, [support my work and become a patron here](https://donorbox.org/support-my-teaching)!

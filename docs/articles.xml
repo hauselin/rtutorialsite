@@ -33,7 +33,7 @@
       <description>Learn and visualize how pd.melt reshapes data from wide to long form</description>
       <guid>https://hausetutorials.netlify.com/posts/2020-05-14-reshaping-data-in-python-pandas</guid>
       <pubDate>Thu, 14 May 2020 00:00:00 +0000</pubDate>
-      <media:content url="https://hausetutorials.netlify.com/posts/2020-05-14-reshaping-data-in-python-pandas/./main_wide2long.png" medium="image" type="image/png" width="1796" height="1312"/>
+      <media:content url="https://hausetutorials.netlify.com/posts/2020-05-14-reshaping-data-in-python-pandas/./main_wide2long.png" medium="image" type="image/png" width="1926" height="1468"/>
     </item>
     <item>
       <title>Causal inference and Lord's Paradox: Change score or covariate?</title>

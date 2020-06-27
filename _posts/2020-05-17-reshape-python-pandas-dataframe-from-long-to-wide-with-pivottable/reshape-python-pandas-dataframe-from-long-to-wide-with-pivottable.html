@@ -953,7 +953,7 @@
 
 <div class="d-title">
 <h1>Reshape Python pandas dataframe from long to wide with pivot_table</h1>
-<p>Learn and visualize how pd.pivot_table reshapes data from long to wide form</p>
+<p><p>Learn and visualize how pd.pivot_table reshapes data from long to wide form</p></p>
 </div>
 
 <div class="d-byline">
@@ -986,7 +986,7 @@
 <p><a href="https://donorbox.org/support-my-teaching">Donate and become a patron</a>: If you find value in what I do and have learned something from my site, please consider becoming a patron. It takes me many hours to research, learn, and put together tutorials. Your support really matters.</p>
 <p>How does the pandas <code>pivot_table()</code> method reshape dataframes? How do you reshape a dataframe from long to wide form? This tutorial will walk you through reshaping dataframes using <code>pd.pivot_table()</code> or the <code>pivot_table</code> method associated with pandas dataframes.</p>
 <figure>
-<img src="main.png" alt="Summary of how pd.pivot_table() works" /><figcaption>Summary of how pd.pivot_table() works</figcaption>
+<img src="main.png" alt="" /><figcaption>Summary of how pd.pivot_table() works</figcaption>
 </figure>
 <p>Also, you might want to check out the official pandas documentation and my <a href="https://towardsdatascience.com/reshaping-numpy-arrays-in-python-a-step-by-step-pictorial-tutorial-aed5f471cf0b?source=friends_link&amp;sk=3dc229066e89cb5bcd4bb86b301f0a5c">numpy reshape tutorial</a>.</p>
 <p>Let’s load the <code>reticulate</code> library in R so we can run Python in RStudio. I’ll then load my conda python environment. I highly recommend you try the code in Python while you read this article. Try running this tutorial on my shared <a href="https://beta.deepnote.com/project/b494e5b7-9e5c-4e06-8a4a-43130d27aa3f">DeepNote notebook</a> (you can only run but not edit this notebook).</p>
@@ -1004,13 +1004,13 @@ import pandas as pd</code></pre>
 <p>It’s easiest to understand what a <strong>long</strong> dataframe is or looks like if we look at one and compare it with a wide dataframe.</p>
 <div style="width:300px">
 <figure>
-<img src="pic1.png" alt="Long pandas dataframe can be “unmelted” with pd.pivot_table()" /><figcaption>Long pandas dataframe can be “unmelted” with pd.pivot_table()</figcaption>
+<img src="pic1.png" alt="" /><figcaption>Long pandas dataframe can be “unmelted” with pd.pivot_table()</figcaption>
 </figure>
 </div>
 <p>And below is the corresponding dataframe (with the same information) but in the <strong>wide</strong> form:</p>
 <div style="width:300px">
 <figure>
-<img src="pic2.png" alt="Wide pandas dataframe can be melted/stacked with pd.melt()" /><figcaption>Wide pandas dataframe can be melted/stacked with pd.melt()</figcaption>
+<img src="pic2.png" alt="" /><figcaption>Wide pandas dataframe can be melted/stacked with pd.melt()</figcaption>
 </figure>
 </div>
 <p>Before we begin our <code>pd.pivot_table</code> tutorial, let’s recreate the long dataframe above in Python with <code>pd.DataFrame</code>.</p>
@@ -1055,7 +1055,7 @@ df_long</code></pre>
 <p>Common terms for this transformation are pivot, spread, dcast. See <code>pd.pivot_table()</code> documentation <a href="https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.pivot_table.html">here</a>.</p>
 <p>We’ll use the <code>pivot_table</code> method because it’s very flexible relative to the <code>pivot</code> method (which I won’t explain here since <code>pivot_table</code> does everything <code>pivot</code> can do).</p>
 <h3 id="pivot-example-1">Pivot example 1</h3>
-<p>We often want to keep the identifier columns as they are (<code>index=[&quot;student&quot;, &quot;school&quot;]</code>) but pivot or “split” a column’s values (<code>values='grade'</code>) based on another column (<code>columns='class'</code>). Compare the original and pivoted dataframes below and you’ll understand what that means.</p>
+<p>We often want to keep the identifier columns as they are (<code>index=["student", "school"]</code>) but pivot or “split” a column’s values (<code>values='grade'</code>) based on another column (<code>columns='class'</code>). Compare the original and pivoted dataframes below and you’ll understand what that means.</p>
 <p>Each unique value in the class column will be a new column (english, math, physics) in the pivoted/wide dataframe. We can also provide a list to the <code>columns</code> parameter.</p>
 <div class="layout-chunk" data-layout="l-body">
 <pre class="python"><code>
@@ -1084,7 +1084,7 @@ class student school  english   math  physics
 3         Deb      Y    10000  20000    30000</code></pre>
 </div>
 <figure>
-<img src="piv1.png" alt="Long to wide: values in grade are split/pivoted into three separate columns" /><figcaption>Long to wide: values in grade are split/pivoted into three separate columns</figcaption>
+<img src="piv1.png" alt="" /><figcaption>Long to wide: values in grade are split/pivoted into three separate columns</figcaption>
 </figure>
 <h3 id="pivot-example-2">Pivot example 2</h3>
 <p>You can also aggregate each resulting row and column by specifying <code>margins=True</code> (default <code>False</code>).</p>
@@ -1105,7 +1105,7 @@ class student school  english   math  physics    All
 4         All           11110  22220    33330  66660</code></pre>
 </div>
 <figure>
-<img src="piv2.png" alt="Long to wide: margins are included" /><figcaption>Long to wide: margins are included</figcaption>
+<img src="piv2.png" alt="" /><figcaption>Long to wide: margins are included</figcaption>
 </figure>
 <h3 id="pivot-example-3">Pivot example 3</h3>
 <p>If we don’t specify any columns via <code>columns</code>, <strong>all</strong> remaining non-identifier <strong>numeric</strong> columns (only grade in this dataframe) will be pivoted (long to wide).</p>
@@ -1122,9 +1122,9 @@ Cindy   Z        2000
 Deb     Y       20000</code></pre>
 </div>
 <p>In the original long data, each student has <strong>four</strong> grades (english, math, physics), yet in the <code>pivot_table</code> example above, each student only has <strong>one</strong> grade after pivoting.</p>
-<p>Why and how does it work? If you remember from the example above, the default is <code>aggfunc='mean'</code>. Thus, what the function did was it grouped the data by student and school (via <code>index=[&quot;student&quot;, &quot;school&quot;]</code>), and computed the mean value for each group.</p>
+<p>Why and how does it work? If you remember from the example above, the default is <code>aggfunc='mean'</code>. Thus, what the function did was it grouped the data by student and school (via <code>index=["student", "school"]</code>), and computed the mean value for each group.</p>
 <figure>
-<img src="piv3.png" alt="Long to wide: all non-identifier numeric columns are pivoted" /><figcaption>Long to wide: all non-identifier numeric columns are pivoted</figcaption>
+<img src="piv3.png" alt="" /><figcaption>Long to wide: all non-identifier numeric columns are pivoted</figcaption>
 </figure>
 <p>If you use the <code>groupby</code> method associated with the pandas dataframe, you will get the same result as above.</p>
 <div class="layout-chunk" data-layout="l-body">
@@ -1165,7 +1165,7 @@ Deb     Y       physics  english  30000  10000</code></pre>
 </div>
 <h3 id="pivot-example-4">Pivot example 4</h3>
 <p>The final example shows you what happens when you pivot multiple columns (<code>columns=['school', 'class']</code>) and you can deal with missing values after pivoting.</p>
-<p>Here we’re saying, for each student (<code>index=&quot;student&quot;</code>), split their grades (<code>values=grade</code>) into separate columns, based on their school and class (<code>columns=['school', 'class']</code>).</p>
+<p>Here we’re saying, for each student (<code>index="student"</code>), split their grades (<code>values=grade</code>) into separate columns, based on their school and class (<code>columns=['school', 'class']</code>).</p>
 <div class="layout-chunk" data-layout="l-body">
 <pre class="python"><code>
 df_long.pivot_table(index=&quot;student&quot;, 
@@ -1198,7 +1198,7 @@ Cindy        -5     -5      -5    1000  2000    3000
 Deb       10000  20000   30000      -5    -5      -5</code></pre>
 </div>
 <figure>
-<img src="piv4.png" alt="Long to wide: missing values replaced by -5 (default NaN)" /><figcaption>Long to wide: missing values replaced by -5 (default NaN)</figcaption>
+<img src="piv4.png" alt="" /><figcaption>Long to wide: missing values replaced by -5 (default NaN)</figcaption>
 </figure>
 <h2 id="resources">Resources</h2>
 <ul>
@@ -1208,7 +1208,7 @@ Deb       10000  20000   30000      -5    -5      -5</code></pre>
 <li><a href="https://pbpython.com/pandas-pivot-table-explained.html">Practical Business Python’s pivot_table tutorial</a></li>
 </ul>
 <h2 id="support-my-work">Support my work</h2>
-<p>I hope now you have a better understanding of how <code>pd.pivot_table</code> reshapes dataframes. If you find this post useful, check out my other articles and folow me on <a href="https://medium.com/@ausius">Medium</a>.</p>
+<p>I hope now you have a better understanding of how <code>pd.pivot_table</code> reshapes dataframes. If you find this post useful, check out my other articles and follow me on <a href="https://medium.com/@ausius">Medium</a>.</p>
 <p>If you’ve enjoyed my article, <a href="https://donorbox.org/support-my-teaching">support my work and become a patron here</a>!</p>
 <!--radix_placeholder_article_footer-->
 <!--/radix_placeholder_article_footer-->

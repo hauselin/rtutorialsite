@@ -37,8 +37,8 @@
 <meta property="og:description" content="Learn and visualize how pd.melt reshapes data from wide to long form"/>
 <meta property="og:url" content="https://hausetutorials.netlify.com/posts/2020-05-14-reshaping-data-in-python-pandas/"/>
 <meta property="og:image" content="https://hausetutorials.netlify.com/posts/2020-05-14-reshaping-data-in-python-pandas/./main_wide2long.png"/>
-<meta property="og:image:width" content="1796"/>
-<meta property="og:image:height" content="1312"/>
+<meta property="og:image:width" content="1926"/>
+<meta property="og:image:height" content="1468"/>
 <meta property="og:locale" content="en_US"/>
 <meta property="og:site_name" content="Data science"/>
 
@@ -48,8 +48,8 @@
 <meta property="twitter:description" content="Learn and visualize how pd.melt reshapes data from wide to long form"/>
 <meta property="twitter:url" content="https://hausetutorials.netlify.com/posts/2020-05-14-reshaping-data-in-python-pandas/"/>
 <meta property="twitter:image" content="https://hausetutorials.netlify.com/posts/2020-05-14-reshaping-data-in-python-pandas/./main_wide2long.png"/>
-<meta property="twitter:image:width" content="1796"/>
-<meta property="twitter:image:height" content="1312"/>
+<meta property="twitter:image:width" content="1926"/>
+<meta property="twitter:image:height" content="1468"/>
 
 <!--  https://scholar.google.com/intl/en/scholar/inclusion.html#indexing -->
 <meta name="citation_title" content="Data science: Reshape Python pandas dataframe from wide to long with pd.melt"/>
@@ -1366,7 +1366,7 @@ Tutorials
 
 <div class="d-title">
 <h1>Reshape Python pandas dataframe from wide to long with pd.melt</h1>
-<p>Learn and visualize how pd.melt reshapes data from wide to long form</p>
+<p><p>Learn and visualize how pd.melt reshapes data from wide to long form</p></p>
 </div>
 
 <div class="d-byline">
@@ -1396,7 +1396,7 @@ Tutorials
 <p><a href="https://donorbox.org/support-my-teaching">Donate and become a patron</a>: If you find value in what I do and have learned something from my site, please consider becoming a patron. It takes me many hours to research, learn, and put together tutorials. Your support really matters.</p>
 <p>How does the pandas <code>melt()</code> method reshape dataframes? How do you reshape a dataframe from wide to long form? This tutorial will walk you through reshaping dataframes using <code>pd.melt()</code> or the <code>melt</code> method associated with pandas dataframes.</p>
 <figure>
-<img src="main_wide2long.png" alt="Summary of how pd.melt() works" /><figcaption>Summary of how pd.melt() works</figcaption>
+<img src="main_wide2long.png" alt="" /><figcaption>Summary of how pd.melt() works</figcaption>
 </figure>
 <p>Also, you might want to check out the official pandas documentation and my <a href="https://towardsdatascience.com/reshaping-numpy-arrays-in-python-a-step-by-step-pictorial-tutorial-aed5f471cf0b?source=friends_link&amp;sk=3dc229066e89cb5bcd4bb86b301f0a5c">numpy reshape tutorial</a>.</p>
 <p>Let’s load the <code>reticulate</code> library in R so we can run Python in RStudio. I’ll then load my conda python environment. I highly recommend you try the code in Python while you read this article. Try running this tutorial on my shared <a href="https://beta.deepnote.com/project/d1350ad6-bcb4-4c3d-857b-c29d01b8a803">DeepNote notebook</a> (you can only run but not edit this notebook).</p>
@@ -1414,13 +1414,13 @@ import pandas as pd</code></pre>
 <p>It’s easiest to understand what a <strong>wide</strong> dataframe is or looks like if we look at one and compare it with a long dataframe.</p>
 <div style="width:300px">
 <figure>
-<img src="pic1.png" alt="Wide pandas dataframe can be melted/stacked using pd.melt()" /><figcaption>Wide pandas dataframe can be melted/stacked using pd.melt()</figcaption>
+<img src="pic1.png" alt="" /><figcaption>Wide pandas dataframe can be melted/stacked using pd.melt()</figcaption>
 </figure>
 </div>
 <p>And below is the corresponding dataframe (with the same information) but in the <strong>long</strong> form:</p>
 <div style="width:300px">
 <figure>
-<img src="pic2.png" alt="Long pandas dataframe can be “unmelted” using pd.pivot_table()" /><figcaption>Long pandas dataframe can be “unmelted” using pd.pivot_table()</figcaption>
+<img src="pic2.png" alt="" /><figcaption>Long pandas dataframe can be “unmelted” using pd.pivot_table()</figcaption>
 </figure>
 </div>
 <p>Before we begin our <code>pd.melt</code> tutorial, let’s recreate the wide dataframe above in Python with <code>pd.DataFrame</code>.</p>
@@ -1472,10 +1472,10 @@ pd.melt(frame=df_wide,
 11     Deb      Y  physics  30000</code></pre>
 </div>
 <figure>
-<img src="pic3.png" alt="Wide to long: new indicator column “cLaSs” + values melted/stacked “gRaDe” column" /><figcaption>Wide to long: new indicator column “cLaSs” + values melted/stacked “gRaDe” column</figcaption>
+<img src="pic3.png" alt="" /><figcaption>Wide to long: new indicator column “cLaSs” + values melted/stacked “gRaDe” column</figcaption>
 </figure>
 <h3 id="melt-example-2">Melt example 2</h3>
-<p>You can use <code>value_vars</code> to specify which columns you want to melt or stack into column (here, we exclude physics column, so <code>value_vars=[&quot;english&quot;, &quot;math&quot;]</code>). We also drop the school column from <code>id_vars</code>.</p>
+<p>You can use <code>value_vars</code> to specify which columns you want to melt or stack into column (here, we exclude physics column, so <code>value_vars=["english", "math"]</code>). We also drop the school column from <code>id_vars</code>.</p>
 <div class="layout-chunk" data-layout="l-body">
 <pre class="python"><code>
 pd.melt(frame=df_wide, 
@@ -1498,10 +1498,10 @@ pd.melt(frame=df_wide,
 7     Deb     math  20000</code></pre>
 </div>
 <figure>
-<img src="pic4.png" alt="Wide to long: original columns school and physics have been dropped" /><figcaption>Wide to long: original columns school and physics have been dropped</figcaption>
+<img src="pic4.png" alt="" /><figcaption>Wide to long: original columns school and physics have been dropped</figcaption>
 </figure>
 <h3 id="melt-example-3">Melt example 3</h3>
-<p>Finally, let’s see what happens if we specify only the student column as the identifier column (<code>id_vars=&quot;student&quot;</code>) but do not specify which columns you want to stack via <code>value_vars</code>. As a result, all non-identifier columns (school, english, math, physics) will be stacked into one column.</p>
+<p>Finally, let’s see what happens if we specify only the student column as the identifier column (<code>id_vars="student"</code>) but do not specify which columns you want to stack via <code>value_vars</code>. As a result, all non-identifier columns (school, english, math, physics) will be stacked into one column.</p>
 <p>The resulting long dataframe looks wrong because now the cLaSs and gRaDe columns contain values that shouldn’t be there. The point here is to show you how <code>pd.melt</code> works.</p>
 <div class="layout-chunk" data-layout="l-body">
 <pre class="python"><code>
@@ -1533,10 +1533,10 @@ pd.melt(frame=df_wide,
 </div>
 <p>This table looks wrong because the <code>school</code> column in <code>df_wide</code> doesn’t belong—<code>school</code> should be another identifier column (see Melt 1 above).</p>
 <figure>
-<img src="pic5.png" alt="Wide to long: school column isn’t an identifier column" /><figcaption>Wide to long: school column isn’t an identifier column</figcaption>
+<img src="pic5.png" alt="" /><figcaption>Wide to long: school column isn’t an identifier column</figcaption>
 </figure>
 <h2 id="support-my-work">Support my work</h2>
-<p>I hope now you have a better understanding of how <code>pd.melt</code> reshapes dataframes. If you find this post useful, check out my other articles and folow me on <a href="https://medium.com/@ausius">Medium</a>.</p>
+<p>I hope now you have a better understanding of how <code>pd.melt</code> reshapes dataframes. If you find this post useful, check out my other articles and follow me on <a href="https://medium.com/@ausius">Medium</a>.</p>
 <p>If you’ve enjoyed my article, <a href="https://donorbox.org/support-my-teaching">support my work and become a patron here</a>!</p>
 <!--radix_placeholder_article_footer-->
 <div class="article-footer">
