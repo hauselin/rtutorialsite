@@ -16,9 +16,9 @@
       "data.table"
     ],
     "preview": "posts/2020-06-27-reshape-r-dataframes-from-wide-to-long-with-melt/./main_wide2long.png",
-    "last_modified": "2020-06-27T18:45:46-04:00",
-    "preview_width": 1796,
-    "preview_height": 1312
+    "last_modified": "2020-06-27T18:50:14-04:00",
+    "preview_width": 1169,
+    "preview_height": 905
   },
   {
     "path": "posts/2020-05-17-reshape-python-pandas-dataframe-from-long-to-wide-with-pivottable/",

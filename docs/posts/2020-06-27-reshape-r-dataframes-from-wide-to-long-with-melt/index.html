@@ -37,8 +37,8 @@
 <meta property="og:description" content="Learn and visualize how melt reshapes dataframes from long to wide"/>
 <meta property="og:url" content="https://hausetutorials.netlify.com/posts/2020-06-27-reshape-r-dataframes-from-wide-to-long-with-melt/"/>
 <meta property="og:image" content="https://hausetutorials.netlify.com/posts/2020-06-27-reshape-r-dataframes-from-wide-to-long-with-melt/./main_wide2long.png"/>
-<meta property="og:image:width" content="1796"/>
-<meta property="og:image:height" content="1312"/>
+<meta property="og:image:width" content="1169"/>
+<meta property="og:image:height" content="905"/>
 <meta property="og:locale" content="en_US"/>
 <meta property="og:site_name" content="Data science"/>
 
@@ -48,8 +48,8 @@
 <meta property="twitter:description" content="Learn and visualize how melt reshapes dataframes from long to wide"/>
 <meta property="twitter:url" content="https://hausetutorials.netlify.com/posts/2020-06-27-reshape-r-dataframes-from-wide-to-long-with-melt/"/>
 <meta property="twitter:image" content="https://hausetutorials.netlify.com/posts/2020-06-27-reshape-r-dataframes-from-wide-to-long-with-melt/./main_wide2long.png"/>
-<meta property="twitter:image:width" content="1796"/>
-<meta property="twitter:image:height" content="1312"/>
+<meta property="twitter:image:width" content="1169"/>
+<meta property="twitter:image:height" content="905"/>
 
 <!--  https://scholar.google.com/intl/en/scholar/inclusion.html#indexing -->
 <meta name="citation_title" content="Data science: Reshape R dataframes from wide to long with melt"/>
@@ -1402,8 +1402,8 @@ Tutorials
 <li>other functions like <code>gather</code> and <code>pivot_long</code> are often just wrapper functions around <code>melt()</code>—these other functions simplify <code>melt</code> and often can’t deal with more complex transformations</li>
 <li><code>melt</code> is more powerful but isn’t any more complicated than the other functions…</li>
 <li><code>melt</code> alone is often enough for all your wide-to-long transformations; don’t need to learn <code>gather</code>, <code>pivot_long</code>, and <code>melt</code>; <code>melt</code> alone is enough!</li>
-<li>Python’s <a href="https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.melt.html">pandas</a> library also the equivalent <code>melt</code> function/method that works exactly the same way (see my pandas melt tutorial <a href="https://towardsdatascience.com/reshape-pandas-dataframe-with-melt-in-python-tutorial-and-visualization-29ec1450bb02">here</a>)</li>
-<li><code>data.table</code> package’s implementation of <code>melt</code>, which is extremely powerful—much more efficient and powerful than the reshape library’s <code>melt</code> function. According to the documentation:</li>
+<li>Python’s <a href="https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.melt.html">pandas</a> library also has the equivalent <code>melt</code> function/method that works the same way (see my pandas melt tutorial <a href="https://towardsdatascience.com/reshape-pandas-dataframe-with-melt-in-python-tutorial-and-visualization-29ec1450bb02">here</a>)</li>
+<li><code>data.table</code> package’s implementation of <code>melt</code>, which is extremely powerful—much more efficient and powerful than the reshape library’s <code>melt</code> function. According to the <a href="https://cran.r-project.org/web/packages/data.table/vignettes/datatable-reshape.html">documentation</a>:</li>
 </ul>
 <blockquote>
 <p>The melt and dcast functions for data.tables are for reshaping wide-to-long and long-to-wide, respectively; the implementations are specifically designed with large in-memory data (e.g. 10Gb) in mind.</p>

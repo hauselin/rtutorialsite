@@ -15,7 +15,7 @@
       <description>Learn and visualize how melt reshapes dataframes from long to wide</description>
       <guid>https://hausetutorials.netlify.com/posts/2020-06-27-reshape-r-dataframes-from-wide-to-long-with-melt</guid>
       <pubDate>Wed, 10 Jun 2020 00:00:00 +0000</pubDate>
-      <media:content url="https://hausetutorials.netlify.com/posts/2020-06-27-reshape-r-dataframes-from-wide-to-long-with-melt/./main_wide2long.png" medium="image" type="image/png" width="1796" height="1312"/>
+      <media:content url="https://hausetutorials.netlify.com/posts/2020-06-27-reshape-r-dataframes-from-wide-to-long-with-melt/./main_wide2long.png" medium="image" type="image/png" width="1169" height="905"/>
     </item>
     <item>
       <title>Reshape Python pandas dataframe from long to wide with pivot_table</title>

@@ -39,8 +39,8 @@ Common terms for this transformation are melt, pivot_long, unpivot, gather, stac
 * other functions like `gather` and `pivot_long` are often just wrapper functions around `melt()`—these other functions simplify `melt` and often can't deal with more complex transformations
 * `melt` is more powerful but isn't any more complicated than the other functions...
 * `melt` alone is often enough for all your wide-to-long transformations; don't need to learn `gather`, `pivot_long`, and `melt`; `melt` alone is enough!
-* Python's [pandas](https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.melt.html) library also the equivalent `melt` function/method that works exactly the same way (see my pandas melt tutorial [here](https://towardsdatascience.com/reshape-pandas-dataframe-with-melt-in-python-tutorial-and-visualization-29ec1450bb02))
-* `data.table` package's implementation of `melt`, which is extremely powerful—much more efficient and powerful than the reshape library's `melt` function. According to the documentation: 
+* Python's [pandas](https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.melt.html) library also has the equivalent `melt` function/method that works the same way (see my pandas melt tutorial [here](https://towardsdatascience.com/reshape-pandas-dataframe-with-melt-in-python-tutorial-and-visualization-29ec1450bb02))
+* `data.table` package's implementation of `melt`, which is extremely powerful—much more efficient and powerful than the reshape library's `melt` function. According to the [documentation](https://cran.r-project.org/web/packages/data.table/vignettes/datatable-reshape.html): 
 
 > The melt and dcast functions for data.tables are for reshaping wide-to-long and long-to-wide, respectively; the implementations are specifically designed with large in-memory data (e.g. 10Gb) in mind.
 
