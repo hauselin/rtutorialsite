@@ -12,10 +12,11 @@
     "date": "2020-06-10",
     "categories": [
       "melt",
-      "reshape"
+      "reshape",
+      "data.table"
     ],
     "preview": "posts/2020-06-27-reshape-r-dataframes-from-wide-to-long-with-melt/./main_wide2long.png",
-    "last_modified": "2020-06-27T18:38:07-04:00",
+    "last_modified": "2020-06-27T18:39:47-04:00",
     "preview_width": 1796,
     "preview_height": 1312
   },
