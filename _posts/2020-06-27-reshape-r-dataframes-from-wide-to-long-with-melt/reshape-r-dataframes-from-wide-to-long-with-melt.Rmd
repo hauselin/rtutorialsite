@@ -34,11 +34,11 @@ How do you reshape a dataframe from wide to long form in R? How does the `melt()
 
 ![Summary of how melt() works](./main_wide2long.png)
 
-Common terms for this transformation are melt, pivot_long, unpivot, gather, stack. Many functions have been written to convert data from wide to long form, but I believe `melt()` from the `data.table` library is the best. See `melt()` documentation [here](https://cran.r-project.org/web/packages/data.table/vignettes/datatable-reshape.html). 
+Common terms for this transformation are melt, pivot-long, unpivot, gather, stack. Many functions have been written to convert data from wide to long form, but I believe `melt()` from the `data.table` library is the best. See `melt()` documentation [here](https://cran.r-project.org/web/packages/data.table/vignettes/datatable-reshape.html). 
 
-* other functions like `gather` and `pivot_long` are often just wrapper functions around `melt()`—these other functions simplify `melt` and often can't deal with more complex transformations
+* other functions like `gather` and `pivot_longer` are often just wrapper functions around `melt()`—these other functions simplify `melt` and often can't deal with more complex transformations
 * `melt` is more powerful but isn't any more complicated than the other functions...
-* `melt` alone is often enough for all your wide-to-long transformations; don't need to learn `gather`, `pivot_long`, and `melt`; `melt` alone is enough!
+* `melt` alone is often enough for all your wide-to-long transformations; don't need to learn `gather`, `pivot_longer`, and `melt`; `melt` alone is enough!
 * Python's [pandas](https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.melt.html) library also has the equivalent `melt` function/method that works the same way (see my pandas melt tutorial [here](https://towardsdatascience.com/reshape-pandas-dataframe-with-melt-in-python-tutorial-and-visualization-29ec1450bb02))
 * `data.table` package's implementation of `melt`, which is extremely powerful—much more efficient and powerful than the reshape library's `melt` function. According to the [documentation](https://cran.r-project.org/web/packages/data.table/vignettes/datatable-reshape.html): 
 
