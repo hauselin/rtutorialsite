@@ -24,6 +24,8 @@ editor_options:
 knitr::opts_chunk$set(echo = TRUE, cache = FALSE, comment = NA, message = FALSE, warning = FALSE)
 ```
 
+This tutorial is also on [Medium, Towards Data Science](https://towardsdatascience.com/reshape-r-dataframes-wide-to-long-with-melt-tutorial-and-visualization-ddf130cd9299). 
+
 Get source code for this RMarkdown script [here](https://raw.githubusercontent.com/hauselin/rtutorialsite/master/_posts/2020-06-27-reshape-r-dataframes-from-wide-to-long-with-melt/reshape-r-dataframes-from-wide-to-long-with-melt.Rmd).
 
 ## Consider being a patron and supporting my work?

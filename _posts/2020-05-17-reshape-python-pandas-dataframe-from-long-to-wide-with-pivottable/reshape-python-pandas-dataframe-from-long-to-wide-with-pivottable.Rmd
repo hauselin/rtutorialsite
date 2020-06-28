@@ -31,6 +31,8 @@ This Python tutorial is also on [Medium, Towards Data Science](https://towardsda
 
 The opposite of `pivot_table` is `melt`, and you can find the tutorial for `melt` (wide to long) [here](https://towardsdatascience.com/reshape-pandas-dataframe-with-melt-in-python-tutorial-and-visualization-29ec1450bb02).
 
+If you're an R user, the [melt](https://towardsdatascience.com/reshape-r-dataframes-wide-to-long-with-melt-tutorial-and-visualization-ddf130cd9299) function in R works just like Python's `melt`.
+
 ## Consider being a patron and supporting my work?
 
 [Donate and become a patron](https://donorbox.org/support-my-teaching): If you find value in what I do and have learned something from my site, please consider becoming a patron. It takes me many hours to research, learn, and put together tutorials. Your support really matters.
