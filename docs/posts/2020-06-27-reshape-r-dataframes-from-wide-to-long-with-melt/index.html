@@ -1398,18 +1398,18 @@ Tutorials
 <figure>
 <img src="main_wide2long.png" alt="" /><figcaption>Summary of how melt() works</figcaption>
 </figure>
-<p>Common terms for this transformation are melt, pivot-long, unpivot, gather, stack. Many functions have been written to convert data from wide to long form, but I believe <code>melt()</code> from the <code>data.table</code> library is the best. See <code>melt()</code> documentation <a href="https://cran.r-project.org/web/packages/data.table/vignettes/datatable-reshape.html">here</a>.</p>
+<p>Common terms for this transformation are melt, pivot-long, unpivot, gather, stack, and reshape. Many functions have been written to convert data from wide to long form, but I believe <code>melt()</code> from the <code>data.table</code> library is the best. See <code>melt()</code> documentation <a href="https://cran.r-project.org/web/packages/data.table/vignettes/datatable-reshape.html">here</a>.</p>
 <ul>
-<li>other functions like <code>gather</code> and <code>pivot_longer</code> are often just wrapper functions for <code>melt()</code>—these other functions simplify <code>melt</code> and often can’t deal with more complex transformations</li>
+<li>Python’s <a href="https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.melt.html">pandas</a> library also has the equivalent <code>melt</code> function/method that works the same way (see my pandas melt tutorial <a href="https://towardsdatascience.com/reshape-pandas-dataframe-with-melt-in-python-tutorial-and-visualization-29ec1450bb02">here</a>)</li>
+<li>other functions like <code>gather</code> and <code>pivot_longer</code> are often just wrapper functions for <code>melt()</code> or <code>reshape()</code>—these other functions simplify <code>melt</code> and often can’t deal with more complex transformations</li>
 <li><code>melt</code> is more powerful but isn’t any more complicated than the other functions…</li>
 <li><code>melt</code> alone is often enough for all your wide-to-long transformations; don’t need to learn <code>gather</code>, <code>pivot_longer</code>, and <code>melt</code>; <code>melt</code> alone is enough!</li>
-<li>Python’s <a href="https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.melt.html">pandas</a> library also has the equivalent <code>melt</code> function/method that works the same way (see my pandas melt tutorial <a href="https://towardsdatascience.com/reshape-pandas-dataframe-with-melt-in-python-tutorial-and-visualization-29ec1450bb02">here</a>)</li>
 <li><code>data.table</code> package’s implementation of <code>melt</code>, which is extremely powerful—much more efficient and powerful than the reshape library’s <code>melt</code> function. According to the <a href="https://cran.r-project.org/web/packages/data.table/vignettes/datatable-reshape.html">documentation</a>:</li>
 </ul>
 <blockquote>
 <p>The melt and dcast functions for data.tables are for reshaping wide-to-long and long-to-wide, respectively; the implementations are specifically designed with large in-memory data (e.g. 10Gb) in mind.</p>
 </blockquote>
-<p>Reminder again: We’re using <code>melt</code> from the <code>data.table</code> library, not <code>reshape</code> library! Compare the documentation of the <code>melt</code> functions from the two libraries to the differences: <code>?data.table::melt</code> and <code>?reshape::melt</code></p>
+<p>Reminder: We’re using <code>melt</code> from the <code>data.table</code> library, not <code>reshape</code> library! Compare the documentation of the <code>melt</code> functions from the two libraries to the differences: <code>?data.table::melt</code> and <code>?reshape::melt</code></p>
 <div class="layout-chunk" data-layout="l-body">
 <pre class="r"><code>
 # load data.table library so we use its melt implementation
